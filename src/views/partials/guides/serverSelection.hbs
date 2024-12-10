@@ -1,0 +1,235 @@
+<aside class="grey dataloader">
+	<div class="chapter">
+		<div class="content egrid egrid-2">
+			<div>
+				<h2>Load data for defined Server</h2>
+				<p>Stakers.space allows to specify server(s) and load custom guides <a href="#prerequisites">based on ther definition</a>.</p>
+			</div>
+			<div class="center-vertical">
+				<div class="user-initializing text-center">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="180" height="60" style="shape-rendering: auto; background: transparent;" xmlns:xlink="http://www.w3.org/1999/xlink"><g>
+<circle r="22" fill="#00ca72" cy="50" cx="32">
+	<animate begin="-0.625s" values="32;68;32" keyTimes="0;0.5;1" dur="1.25s" repeatCount="indefinite" attributeName="cx"></animate>
+</circle>
+<circle r="28" fill="#000000" cy="50" cx="68">
+  <animate begin="0s" values="16;68;16" keyTimes="0;0.5;1" dur="1.25s" repeatCount="indefinite" attributeName="cx"></animate>
+</circle>
+<circle r="28" fill="#00ca72" cy="50" cx="32">
+  <animate begin="-0.625s" values="16;68;16" keyTimes="0;0.5;1" dur="1.25s" repeatCount="indefinite" attributeName="cx"></animate>
+  <animate repeatCount="indefinite" dur="1.25s" keyTimes="0;0.499;0.5;1" calcMode="discrete" values="0;0;1;1" attributeName="fill-opacity"></animate>
+</circle><g></g></g></svg>
+					<p class="mt-0">Initializing user data</p>
+				</div>
+				<div class="user-guest hide">
+					<p><strong>As a guest, you can fill values manually at the right sidebar.</strong> You can also Sign In/Up and load your defined server data.</p>
+					<a href="https://stakers.space/authentization?r={{pathUrl}}" class="btn btn-black btn-rounded">Sign In</a>
+				</div>
+				<div class="user-authentized hide">
+					<div>
+						<label><strong>Data loaded for server </strong></label>
+						<select class="account-servers"></select>
+						<a id="account-server-link" href="#" class="btn btn-rounded" target="_blank">Edit data</a>
+					</div>
+					<div class="text-center mt-5">
+						<input type="text" placeholder="Encryption password" id="decryption-password">
+						<button class="submit btn btn-black btn-rounded" data-decrypt="all" onclick="DecryptPageData()" id="mainDecryptBtn">Decrypt & reload values</button>
+					</div>
+					<div class="mt-20 bt text-center">
+						<a href="/dashboard/server-node/define" class="btn btn-rounded" target="_blank">Define new server</a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	{{> scripts/utils/xmlhttp}}
+	<script>
+		let accounData = {};
+		let serverData = null;
+		document.addEventListener('DOMContentLoaded', RequestAccountData);
+
+		function RequestAccountData(){
+			xmlHttpRequest({type:"GET", url:"/api/account", credentials:true, data:null }, function(err,data){
+				for(const elm of document.getElementsByClassName("user-initializing")){ elm.classList.add("hide");}
+				const pd = JSON.parse(data);
+				console.log("/api/account:", err, pd);
+				if(err || !pd.a){
+					for(const elm of document.getElementsByClassName("user-guest")){ elm.classList.remove("hide");}
+					{{#if chain}}
+					// Update Data directory?
+					{{/if}}
+					// install change listener
+					InstallOnInteractiveInputChangedListener();
+				} else {
+					accounData = pd.d;
+					for(const elm of document.getElementsByClassName("user-authentized")){ elm.classList.remove("hide");}
+					
+					const selectServerElement = document.getElementsByClassName('account-servers');
+					Object.entries(accounData).forEach(([serverId, serverData]) => {
+						const option = document.createElement('option');
+						option.value = serverId;
+						option.text = serverData.serverName; 
+						selectServerElement[0].appendChild(option);
+					});
+					selectServerElement[0].addEventListener("change", OnServerChanged);
+					
+					if(selectServerElement[1]){
+						Object.entries(accounData).forEach(([serverId, serverData]) => {
+							const option = document.createElement('option');
+							option.value = serverId;
+							option.text = serverData.serverName; 
+							selectServerElement[1].appendChild(option);
+						});
+						selectServerElement[1].addEventListener("change", OnServerChanged)
+					}
+					LoadServerDataToDoc();
+				}
+				OnClientChanged("ec_1");
+        		OnClientChanged("cc_1");
+			});
+		}
+
+		function OnServerChanged(e){
+			// remove listeners
+			const selectServerElement = document.getElementsByClassName('account-servers');
+			selectServerElement[0].removeEventListener("change", OnServerChanged);
+			if(selectServerElement[1]) selectServerElement[1].removeEventListener("change", OnServerChanged);
+				// sync data
+			for(const elm of document.getElementsByClassName('account-servers')){ elm.value = e.target.value;}
+					// reactivate liseners
+			selectServerElement[0].addEventListener("change", OnServerChanged);
+			if(selectServerElement[1]) selectServerElement[1].addEventListener("change", OnServerChanged);
+			// Set value to all selectbars with prevent default...
+			LoadServerDataToDoc(e.target.value);
+		}
+
+		function LoadServerDataToDoc(serverSelected = null){
+			const urlParams = new URLSearchParams(window.location.search);
+			if(!serverSelected) serverSelected = urlParams.get('sid');
+			console.log("Load Data for Server option",serverSelected,"from", accounData);
+			
+			if(!serverSelected) return;
+			document.getElementById("account-server-link").href="/dashboard/server-node/define?id="+serverSelected;
+			serverData = accounData[serverSelected];
+			console.log("ServerData:",serverData);
+			
+
+			// update server user
+			UpdateMarks("serverUser", serverData.serverUser, true);
+			UpdateMarks("sshPort", serverData.sshPort, true);
+			if(UpdateInstanceSetup) UpdateInstanceSetup();
+			// client
+			if(serverData.execution.length > 0) {
+				UpdateMarks("ec_1", serverData.execution[0].client);
+				if(serverData.execution[0].ports.length > 0){
+					UpdateMarks("execution_sn", serverData.execution[0].ports[0].service_name);
+					if(serverData.execution[0].ports[0].data_path) UpdateMarks("execution-dp", serverData.execution[0].ports[0].data_path);
+					if(serverData.execution[0].ports[0].port) UpdateMarks("execution-endpoint", serverData.execution[0].ports[0].port);
+					if(serverData.execution[0].ports[0].p2p_port) UpdateMarks("execution-p2p", serverData.execution[0].ports[0].p2p_port);
+					if(serverData.execution[0].ports[0].port2) UpdateMarks("execution-rpc", serverData.execution[0].ports[0].port2);
+				}
+			}
+			if(serverData.consensus.length > 0) {
+				UpdateMarks("cc_1", serverData.consensus[0].client);
+				if(serverData.consensus[0].ports.length > 0){
+					UpdateMarks("consensus_sn", serverData.consensus[0].ports[0].service_name);
+					if(serverData.consensus[0].ports[0].data_path) UpdateMarks("consensus-dp", serverData.consensus[0].ports[0].data_path);
+					if(serverData.consensus[0].ports[0].port) UpdateMarks("consensus-endpoint", serverData.consensus[0].ports[0].port);
+					if(serverData.consensus[0].ports[0].p2p_port) UpdateMarks("consensus-p2p", serverData.consensus[0].ports[0].p2p_port);
+					if(serverData.consensus[0].ports[0].port2) UpdateMarks("consensus-quic", serverData.consensus[0].ports[0].port2);
+				}
+			}
+
+			// Instance update
+			LoadInstanceDataToDocs();
+
+			// decrypt Data
+			document.getElementById("mainDecryptBtn").click();
+			// instance based data
+
+			InstallOnInteractiveInputChangedListener();
+		}
+
+		function OnClientChanged(elmId){
+			console.log("SS | OnClientChanged", elmId);
+			// load client-related data
+			const changedElm =  document.getElementById(elmId);
+            let clientSelected = changedElm.value;
+            // before selected client change
+            for(const elm of document.getElementsByClassName("client-oriented")){
+                console.log(elm, elm.dataset.client, clientSelected);
+                if(elm.dataset.client === clientSelected) {
+                    elm.classList.remove("hide");
+                } else if(!elm.classList.contains("hide")){
+                    elm.classList.add("hide");
+                }
+            }
+			// set values from db / default value
+
+			/*let ethClientElm = document.getElementById("ethereum_"+elmId+"_sn");
+            let gnoCLientElm = document.getElementById("gnosis_"+elmId+"_sn");*/    
+            /*if(elmId === "cc_1") clientSelected += "beacon";
+            console.log("OnClientChanged", elmId, clientSelected);
+            if(ethClientElm.value === "") ethClientElm.value = "eth-"+clientSelected;
+            if(gnoCLientElm.value === "") gnoCLientElm.value = "gno-"+clientSelected;
+            let ethClientPathElm = document.getElementById("ethereum_"+elmId+"_sdp");
+            let gnoCLientPathElm = document.getElementById("gnosis_"+elmId+"_sdp");
+            console.log(ethClientPathElm.value, gnoCLientPathElm.value);
+            if(ethClientPathElm.value === "") ethClientPathElm.value = "/var/lib/ethereum/"+clientSelected;
+            if(gnoCLientPathElm.value === "") gnoCLientPathElm.value = "/var/lib/gnosis/"+clientSelected;*/ 
+
+			if(changedElm.dataset.layer === "execution"){
+				for(const elm of document.getElementsByClassName("ec_name")){ elm.innerHTML = clientSelected; }
+			}
+        }
+
+		function UpdateMarks(className, newValue, encryptedValue = false){
+			console.log("SS | UpdateMarks change:", className, "| new value:", newValue, "| encrypted:", encryptedValue);
+			// get selected client
+			const selectedEC = document.getElementById("ec_1").value;
+			const selectedCC = document.getElementById("cc_1").value;
+			// update value marks
+			var marks = document.getElementsByClassName(className);
+			for(var i=0;i<marks.length;i++){
+				if(encryptedValue) {
+					marks[i].classList.add("encrypted_value");
+				}
+				// prohibit updating serviceName for other clients
+				if(marks[i].dataset.client !== undefined) {
+					if((className === "execution_sn" || className === "execution-dp") && marks[i].dataset.client.indexOf(selectedEC) === -1) continue;
+					if((className === "consensus_sn" || className === "consensus-dp") && marks[i].dataset.client.indexOf(selectedCC) === -1) continue;
+					// if lighthouse beacon path, remove /beacon
+					if(marks[i].dataset.client === "lighthouse" && marks[i].dataset.beacondir && marks[i].dataset.beacondir === "true"){
+						newValue = newValue.substring(0, newValue.lastIndexOf("/"));
+					}
+				}
+				
+				SetValue(marks[i], newValue);
+			}
+
+			function SetValue(elm, value){
+				console.log("Set value:", elm, value);
+				switch(elm.nodeName){
+					case "I":  elm.innerHTML = value; break;
+					case "INPUT": elm.value = value; break;
+					case "TEXTAREA": elm.innerHTML = value; break;
+					case "SPAN":  elm.innerHTML = value; break;
+					case "MARK":  elm.innerHTML = value; break;
+					case "CODE":  elm.innerHTML = value; break;
+					case "SELECT":  elm.value = value; break;
+					default: console.warn("Undefined element:", elm.nodeName);
+				}
+			}
+		}
+
+		function InstallOnInteractiveInputChangedListener(){
+			for (const elm of document.getElementsByClassName("interactive-element")){
+				elm.addEventListener('change', function(e){ 
+					e.preventDefault();
+					UpdateMarks(elm.dataset.class, e.target.value, false); 
+				});
+			}
+		}
+	</script>
+	{{> scripts/cryptography}}
+</aside>

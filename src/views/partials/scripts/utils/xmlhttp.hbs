@@ -1,0 +1,16 @@
+<script>
+    function xmlHttpRequest(req, callback){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function(){ //console.log(xmlhttp.readyState, xmlhttp.status);
+            if(xmlhttp.readyState == 4 && xmlhttp.status === 200){
+                if(callback !== undefined){ return callback(null, this.response); }
+            } else if ((xmlhttp.readyState == 4 && xmlhttp.status === 404) || xmlhttp.readyState == 5){ //server is down     
+                if(callback !== undefined){ return callback(xmlhttp.status, {}); }
+            }
+        };
+        xmlhttp.open(req.type, req.url);
+        if(req.credentials === true) xmlhttp.withCredentials = true;
+        //xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xmlhttp.send(req.data);
+    }
+</script>

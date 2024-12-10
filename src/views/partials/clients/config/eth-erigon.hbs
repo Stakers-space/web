@@ -1,0 +1,20 @@
+<pre><code>[Unit]
+Description=Erigon Execution Client (Ethereum Mainnet)
+After=network.target
+Wants=network.target
+[Service]
+User=<mark class="execution_sn" data-client="erigon">eth-erigon</mark>
+Group=<mark class="execution_sn" data-client="erigon">eth-erigon</mark>
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/erigonlib/erigon \
+  --chain=mainnet \
+  --datadir=<mark class="execution-dp" data-client="erigon">/var/lib{{slashChain}}/erigon</mark> \
+  --authrpc.jwtsecret=/var/lib/jwtsecret/ethereum.hex \
+#  --externalcl \
+  --prune=htcr
+#  --private.api.addr= \
+#  --prune.r.before=11052984 
+[Install]
+WantedBy=default.target</code></pre>

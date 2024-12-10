@@ -1,0 +1,339 @@
+<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+<script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
+<script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+<script async custom-element="amp-fit-text" src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"></script>
+<style>.caption{
+	text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-3);
+    background: hsla(0, 0%, 78.4%, .5);
+    color: var(--color-text-light);
+    font-size: 36px;
+    max-height: 20%;
+    font-weight: 300;
+}</style>
+
+{{> header}}
+<main class="mb-60">
+	<section class="cover grid egrid">
+		<div class="mt-80 mb-0">
+			<h1 class="cover-title">Choosing Hardware, OS & Location <span>for {{chainName}} staking</span></h1>
+			<p><strong>Complete guide to choose proper hardware, operating system and placement for a staking node allowing staking on multiple chains.</strong> This page is part of a <a href="/{{chainUrl}}/full-guide">complete {{chainName}} staking guide</a>.</p>
+			{{!--<p>This guide comes with an interactive way for simple setup of the staking node in the matter of security and services. It's relevant to staking on various chains (this page specifically targets {{chainName}}), anyway the way of installation is not in a conflict with adding any other chain on the same machine - see <a href="/staking-guide">Guide to stake on multiple chains from a single machine</a>.</p>--}}
+		</div>
+	</section>
+
+	<div class="grid-full contents wiki">
+        <div class="content-chapters cta">
+			<div class="sticky mt-80">
+				 <nav>
+					<strong>Staking PC</strong>
+					<ol>
+						<li><a href="#hardware">Hardware</a></li>
+						<li><a href="#location">PC location</a></li>
+						<li><a href="#os">Operating System</a></li>
+						<li><a href="#sample">Node sample</a></li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+		<div class="content-body">
+			<section class="chapter" id="hardware">
+				<div class="content" style="width:100%">
+					<h2 class="mb-10" data-number="1">Staking hardware</h2>
+					<p>Staking can be performed continuously on any type of computer device, as long as the hardware meets the <a href="#minimum-hw-requirements">minimum required specifications</a>. Such device can be called a staking node.</p>
+					<h3>Options for running a staking node</h3>
+					<ol>
+						<li><h4>Running the node on your PC</h4>
+							<p>Staking node can be teoreticaly launched on a PC or laptop you use for a daily work. However, this <strong>option is not recommended </strong> as it comes with many potential security issues.</p>
+						</li>
+						<li><h4>Running a dedicated personal computer for staking</h4>
+							<p><strong>The most affordable secure way of running a staking node.</strong> You can either use some older PC or buy a new one. There is possible to run UI-based Operating system as well as server-based operating system, <a href="#os">see operating systems section</a>.</p>
+						</li>
+						<li><h4>Running on a server device</h4>
+							<p>Running a node on a server hardware.</p>
+						</li>
+					</ol>
+
+					<h3 id="minimum-hw-requirements">Minimum hardware requirements:</h3>
+					<ul>
+						<li>Modern multi-core CPU</li>
+						<li>At least 32GB Ram</li>
+						<li>NVMe SSD of at least 2TB</li>
+					</ul>
+
+					<h3>Sample Hardware: Asus NUC</h3>
+					<h2 class="mb-10" data-number="+">Staking Node Sample - Installing Ubuntu Server on Asus NUC</h2>
+					<h3>Hardware configuration</h3>
+					<ul>
+						<li>ASUS NUC with Intel Core i5 CPU and tall body (for better cooling), ASUS NUC 13 Pro NUC13ANHI5 Tall</li>
+						<li>4 Tb SSD nVME, Kingston SSD KC3000 4TB NVMe</li>
+						<li>64 Gb RAM, Kingston Fury Impact SODIMM DDR4 2x32GB 3200MHz</li>
+					</ul>
+
+					<iframe width="100%" height="500" src="https://www.youtube-nocookie.com/embed/L_JHtu5VoRo?si=LDRN9-hm1Lmjrq7Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+				</div>
+				{{!--<nav class="sticky outler mt-60">
+					<strong class="header">Order Hardware</strong>
+					<ul>
+						<li><a href="#ssd">CPU</a></li>
+						<li><a href="#cpu">SSD</a></li>
+						<li><a href="#ram">RAM</a></li>
+					</ul>
+				</nav>--}}
+            </section>
+
+			<section class="chapter bt" id="hardware-placement">
+				<div class="content" style="width:100%">
+					<h2 class="mb-10" data-number="2">Staking node placement</h2>
+					<p><strong>Staking node can be placed at any location that meets the following criteria:</strong></p>
+					<ul>
+						<li>stable electrical network</li>
+						<li>stable and reliable internet connection of at least 15 MBPs download and upload without strict monthly data allowance</li>
+						<li>reasonable thermal and dusty conditions for PC operation</li>
+						<li>sufficient security against physical theft of the computer</li>
+					</ul>
+					<p>Technically, any computer can be accessed and controlled locally through a directly connected monitor and keyboard as well as remotely through the SSH. From this point of view, based on your options and preferences you can choose from following:</p>
+					<ol>
+						<li><h3>Running own hardware from your Home / Office </h3>
+							<p>Most simple way where you connect your staking node to the electricity and internet right at home / office or any other location you have under your control.</p>
+						</li>
+						<li><h3>Running own hardware located at a Server House</h3>
+							<p>You rent a space on a server house where you connect your staking node to electricity and internet. Server houses has usually certain level of redundancy against power and internet outages.</p>
+						</li>
+						<li><h3>Running rented hardware located at a Cloud</h3>
+							<p>You rent a hardware in a cloud-based service within which you will start a staking node.</p>
+							{{!--<a href="" class="btn btn-black btn-rounded">Rent a remote staking Node</a>--}}
+						</li>
+					</ol>
+					<p>Staking on an appropriately selected device is associated with a very low costs of electricity. Real Staking node location can be hidden from world by <a href="https://vrealmatic.com/ubuntu-server/mullvad-vpn" target="_blank" rel="nofollow noopener noreferrer">using VPN services</a>.</p>
+				</div>
+			</section>
+
+			<section class="chapter bt" id="os">
+				<div class="content" style="width:100%">
+					<h2 class="mb-10" data-number="3">Operating System</h2>
+					<p>Staking can be operated on numerous Operating systems supported by staking clients. <strong>Recommended Operating system for Stakers.space staking guides is Ubuntu</strong>, but you can use also other operating systems including Microsoft Windows.</p>
+
+					<div class="tabselector">
+						<nav class="egrid egrid-2">
+							<button class="tab selected" data-tabpanel="1">Installing OS on local HW</button>
+							<button class="tab" data-tabpanel="2">Installing OS on cloud HW</button>
+						</nav>
+
+						<div class="tabpanel selected" style="position: relative;">
+							<h4 class="mt-0">Get Ubuntu Server OS</h4>
+							<p>Staking is possible from Ubuntu Desktop as well as Ubuntu Server OS. While Ubuntu Desktop comes with a standard User Interface (UI) and may seem to be easier to manage, the Ubuntu Server is usually the better choice as the UI is usually useless as you work with a terminal. Absence of that UI tools associated with Server distribution may save computional resources.</p>
+							<ol>
+								<li>Download <code>Ubuntu 24.04 LTS Server</code> from <a href="https://ubuntu.com/download/server">https://ubuntu.com/download/server</a></li>
+								<li><a href="">Create a bootable USB Stick</a> with the Ubuntu Server distribution image</li>
+							</ol>
+							<h4>Install Ubuntu Server OS to your your node</h4>
+							<p>For this step, you need to </p>
+							<ol>
+								<li>Connect your node to monitor, keyborad, electricity and internet. Stick Ubuntu bootable flash disk to your node.
+									<amp-img src="/img/pages/hw-preparation/nuc-connection-start.webp" layout="responsive" alt="NUC - connected devices"  width="1000" height="600"></amp-img>
+								</li>
+								<li>Turn on the PC while pressing F11 key to load boot selection. If loaded, select your USB stick</li>
+								<li style="position:relative;">Install The Ubuntu Server
+									<amp-carousel id="installation-images" width="1000" height="600" layout="responsive" type="slides" style="position:relative;">
+										<div>
+											<amp-img src="/img/pages/hw-preparation/install-select.webp" layout="fill" alt="product hero 2" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Select "Try or Install Ubuntu Server"
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/installation-load.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Wait for OS preparation
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/timedate.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Wait for timedatectl service
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/os-language.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Select OS language
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/installer-update.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Select "Update to the new installer"
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/keyboard-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Confirm keyboard
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/installation-type.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Select "Ubuntu Server"
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/network-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Confirm network by selecting "Done"
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/proxy-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Skip proxy by pressing "Done"
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/mirror-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Wait till mirror is completed, then press "Done"
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/storage-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Check Storage configuration, then press "Done". Confirm the option by pressing "Continue"
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/storage-configuration-confirm.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Uncheck "Set up this disk as an LVM group to avoid disk fragmentation", then press "Done".
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/profile-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Fill identifiers. Your name may be same as username. Server name is name under which you will see the device in the network.
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/ubuntu-pro.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Skip "Upgrade pro" option
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/ssh-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											You can check Install OpenSSH server option. Anyway, this may be installed later as well (see the guide).
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/server-snaps.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Skip snaps by pressing "Done".
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/installation-complete.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											Wait for Ubuntu server OS installation complete. Then select "Reboot Now".
+											</amp-fit-text>
+										</div>
+									</amp-carousel>
+								</li>
+								<li>Unstick flash
+									<amp-carousel id="flash-stick" width="1000" height="600" layout="responsive" type="slides" style="position:relative;">
+										<div>
+											<amp-img src="/img/pages/hw-preparation/umount.webp" layout="fill" alt="product hero 2" attribution="visualhunt"></amp-img>
+											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+											On request, remove flash.
+											</amp-fit-text>
+										</div>
+										<div>
+											<amp-img src="/img/pages/hw-preparation/umount-hw.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+										</div>
+									</amp-carousel>
+								</li>
+							</ol>
+							<h4>Set proper BIOS settings</h4>
+							<ol>
+								<li>While PC loads ater restart, press F2 to load BiOS settings</li>
+								<li>Set Power delivery after failure and cooling mode</li>
+								<li>Press F10 to save and exit</li>
+							</ol>
+							<amp-carousel id="bios-conf" width="1500" height="1000" layout="responsive" type="slides" style="position:relative;">
+								<div>
+									<amp-img src="/img/pages/hw-preparation/failure-power.webp" layout="fill" alt="product hero 2" attribution="visualhunt"></amp-img>
+									<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+									In "Power,Performance and Cooling", set "After Power Failure" to Power On. This ensure that the node will automatically start after an electricity power failure.
+									</amp-fit-text>
+								</div>
+								<div>
+									<amp-img src="/img/pages/hw-preparation/cooling.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
+									<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
+									Through "Secondary Power Settings" of the same section, you can customize cooling mode.
+									</amp-fit-text>
+								</div>
+							</amp-carousel>
+
+							<h4>First load</h4>
+							<ol>
+								<li>After auto restart, a login window apperas.</li>
+								<li>Past your username and press enter. You will be requested to palce password. Write the password and press enter.</li>
+								<li>After a login, run <code>sudo apt update && sudo apt -y upgrade</code> to update and upgrade your OS to latest available</li>
+								<li>With command <code>which sshd</code>, check is ssh is installed. If it returns empty response, install openssh server:
+									<pre><code>sudo apt install openssh-server</code></pre>
+								</li>
+								<li>Use command <code>poweroff</code> to shut down the server</li>
+								<li>You can unstick monitor and keyboard. Next connections will be remote.</li>
+							</ol>
+						</div>
+						<div class="tabpanel">
+							<h4 class="mt-0">Get Ubuntu Server on Cloud node</h4>
+							<ol>
+								<li>Select a choice with <code>Ubuntu 24.04 LTS Server</code> OS Installed</li>
+							</ol>
+							<h4>Check your server user</h4>
+							<p>As your Ubuntu Server OS was installed automatically, you may face to being logged in as a <code>root</code> user. If that's the case, it's recommended to use a different user for accessing and managing the server.</p>
+							<ul>
+								<li><p>create a new standard user and give it <code>sudo</code> rights.</p>
+									Select name for your new server user: <input type="text" value="myserveruser" id="serverUser">
+									<pre><code>adduser <mark class="serverUser">yourusername</mark>
+usermod -aG sudo <mark class="serverUser">yourusername</mark></code></pre>
+								</li>
+								<li>
+									<p>If you are logged in <code>root</code> through the SSH keys, associate these SSH keys to the newly create user</p>
+									<code>rsync --archive --chown=<mark class="serverUser">yourusername</mark>:<mark class="serverUser">yourusername</mark> ~/.ssh /home/<mark class="serverUser">yourusername</mark></code>
+								</li>
+							</ul>
+							<script>
+								(function(){
+									let serverUserElm = document.getElementById("serverUser");
+									serverUserElm.addEventListener("change", function(){
+										let elms = document.getElementsByClassName("serverUser");
+										for(let elm of elms){
+											elm.value = serverUserElm.value;
+											elm.innerHTML = serverUserElm.value;
+										}
+									});
+								}());
+							</script>
+						</div>
+					</div>
+				</div>
+			</section>
+
+            <section class="chapter" id="next">
+				<div class="content bt" style="width:100%">
+                    <h2>Next step: Securying your server & Installing staking clients</h2>
+                    <a href="/{{chainUrl}}/full-guide" class="btn btn-black btn-rounded">Guide to Secure OS + Configurate & Install staking clients</a>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}

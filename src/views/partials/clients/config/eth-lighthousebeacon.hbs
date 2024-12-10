@@ -1,0 +1,31 @@
+<pre><code>[Unit]
+Description=Lighthouse Consensus Client BN (Ethereum Mainnet)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=<mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>
+Group=<mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/lighthouse bn \
+  --network mainnet \
+  --datadir <mark class="consensus-dp" data-client="lighthouse" data-beacondir="true">/var/lib{{slashChain}}/lighthouse</mark> \
+  --http \
+  --execution-endpoint http://127.0.0.1:<mark class="execution-endpoint">8551</mark> \
+  --execution-jwt /var/lib/jwtsecret/ethereum.hex \
+#  --checkpoint-sync-url https://mainnet.checkpoint.sigp.io \
+  --checkpoint-sync-url=https://beaconstate.info \
+  --port <mark class="consensus-p2p">9000</mark> \
+  --port6 <mark class="cc-port-v6">9090</mark> \
+#  --discovery-port <mark class="consensus-p2p">9000</mark> \
+  --quic-port <mark class="lighthouse-quic-port">9001</mark> \
+  --quic-port6 <mark class="consensus-quic">9091</mark> \
+  --http-port <mark class="consensus-endpoint">5052</mark>
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+<ul>
+    <li><a href="https://eth-clients.github.io/checkpoint-sync-endpoints/" target="_blank" rel="nofollow noopener noreferrer">Checkpoint sync endpoints</a></li>
+</ul>

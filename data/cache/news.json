@@ -1,0 +1,451 @@
+{
+  "all": [
+    {
+      "partitionKey": "news",
+      "t": 1732705416690,
+      "m": "<b>A security issue was discovered</b>: in the deposit tools",
+      "a": "https://github.com/ethereum/staking-deposit-cli/releases/tag/v2.8.0",
+      "c": [
+        "eth",
+        "gno"
+      ],
+      "id": "019fbf72-9772-4ccc-89c3-1f89b49858b2",
+      "_rid": "VPZWAPgLfumtJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumtJQAAAAAAAA==/",
+      "_etag": "\"24020851-0000-1600-0000-6746fcde0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1732705502,
+      "ht": "27.11.2024, 12:03:36",
+      "ta": "10 days ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1731317014257,
+      "m": "<b>Lodestar</b> version 1.23.0 released",
+      "a": "https://github.com/ChainSafe/lodestar/releases/tag/v1.23.0",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "01025f0c-4c57-4f79-a970-32237c96b3b0",
+      "_rid": "VPZWAPgLfulrJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulrJQAAAAAAAA==/",
+      "_etag": "\"84031807-0000-1600-0000-6731cd550000\"",
+      "_attachments": "attachments/",
+      "_ts": 1731317077,
+      "ht": "11.11.2024, 10:23:34",
+      "ta": "26 days ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1730275452555,
+      "m": "<b>Teku</b> version 24.10.3 released",
+      "a": "https://stakers.space/teku#update",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "727cf967-7f19-4c7e-8c15-b2953df7e3e5",
+      "_rid": "VPZWAPgLfukfJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukfJQAAAAAAAA==/",
+      "_etag": "\"8403430a-0000-1600-0000-6731cd600000\"",
+      "_attachments": "attachments/",
+      "_ts": 1731317088,
+      "ht": "30.10.2024, 09:04:12",
+      "ta": "about 1 month ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1730275111994,
+      "m": "<b>Vitalik Buterin:</b> Possible futures of the Ethereum protocol (Part6, The Splurge)",
+      "a": "https://vitalik.eth.limo/general/2024/10/29/futures6.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "7069b207-efab-40e3-bb4c-98d0c51b727e",
+      "_rid": "VPZWAPgLfukeJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukeJQAAAAAAAA==/",
+      "_etag": "\"4600d0d8-0000-1600-0000-6721e7560000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275158,
+      "ht": "30.10.2024, 08:58:31",
+      "ta": "about 1 month ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1730275080948,
+      "m": "<b>Vitalik Buterin:</b> Possible futures of the Ethereum protocol (Part5, The Purge) ",
+      "a": "https://vitalik.eth.limo/general/2024/10/26/futures5.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "2385fcbb-c198-471d-849a-6c69d6e4b10e",
+      "_rid": "VPZWAPgLfukdJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukdJQAAAAAAAA==/",
+      "_etag": "\"460014de-0000-1600-0000-6721e7ac0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275244,
+      "ht": "30.10.2024, 08:58:00",
+      "ta": "about 1 month ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1730275024129,
+      "m": "<b>Vitalik Buterin:</b> Possible futures of the Ethereum protocol (Part4, The Verge) ",
+      "a": "https://vitalik.eth.limo/general/2024/10/23/futures4.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "188dabaf-d2ab-44eb-bc51-1b8bd9a652ae",
+      "_rid": "VPZWAPgLfukcJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukcJQAAAAAAAA==/",
+      "_etag": "\"4600d3d5-0000-1600-0000-6721e7080000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275080,
+      "ht": "30.10.2024, 08:57:04",
+      "ta": "about 1 month ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1729827418000,
+      "m": "<b>Ethereum staking</b> after Pectra upgrade (EIPs 7251, 7002, 6110)",
+      "a": "https://www.kiln.fi/post/next-ethereum-upgrade-how-pectra-will-enhance-the-staking-experience",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "7d472320-a6c2-4ba9-b741-240a7757f1d1",
+      "_rid": "VPZWAPgLfunSJAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunSJAAAAAAAAA==/",
+      "_etag": "\"2e000b84-0000-1600-0000-671b746a0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1729852522,
+      "ht": "25.10.2024, 05:36:58",
+      "ta": "about 1 month ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1729530136000,
+      "m": "<b>Vitalik Buterin:</b> Possible futures of the Ethereum protocol (Part3, The Scourge)",
+      "a": "https://vitalik.eth.limo/general/2024/10/20/futures3.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "f3854085-e663-4e6b-bccd-c5bda30361f0",
+      "_rid": "VPZWAPgLfunNJAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunNJAAAAAAAAA==/",
+      "_etag": "\"460051df-0000-1600-0000-6721e7c70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275271,
+      "ht": "21.10.2024, 19:02:16",
+      "ta": "about 2 months ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1729159260000,
+      "m": "<b>Vitalik Buterin:</b> Possible futures for the Ethereum protocol (Part2, The Surge)",
+      "a": "https://vitalik.eth.limo/general/2024/10/17/futures2.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "1ec55fcb-d858-4712-b657-3b6f1640d70c",
+      "_rid": "VPZWAPgLfunIJAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunIJAAAAAAAAA==/",
+      "_etag": "\"460019e0-0000-1600-0000-6721e7d90000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275289,
+      "ht": "17.10.2024, 12:01:00",
+      "ta": "about 2 months ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1729159220000,
+      "m": "<b>Vitalik Buterin:</b> Possible futures of the Ethereum protocol (Part1, The Merge)",
+      "a": "https://vitalik.eth.limo/general/2024/10/14/futures1.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "c4e32d4b-7692-4110-b040-546451eae2b7",
+      "_rid": "VPZWAPgLfunHJAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunHJAAAAAAAAA==/",
+      "_etag": "\"460082e0-0000-1600-0000-6721e7e90000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275305,
+      "ht": "17.10.2024, 12:00:20",
+      "ta": "about 2 months ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1725891540000,
+      "m": "<b>Erigon</b> version 2.60.7 released",
+      "a": "https://stakers.space/erigon#update",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "cd776738-5102-42c1-b48c-38c62d859304",
+      "_rid": "VPZWAPgLfunTIwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunTIwAAAAAAAA==/",
+      "_etag": "\"460041e8-0000-1600-0000-6721e8e40000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275556,
+      "ht": "09.09.2024, 16:19:00",
+      "ta": "3 months ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1724922438000,
+      "m": "<b>MevBoost</b> version 1.8 released",
+      "a": "https://github.com/flashbots/mev-boost/releases/tag/v1.8",
+      "c": [
+        "eth",
+        "client"
+      ],
+      "id": "016c6b68-6478-46dd-b43a-670c5c7fdd09",
+      "_rid": "VPZWAPgLfunSIwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunSIwAAAAAAAA==/",
+      "_etag": "\"2e009683-0000-1600-0000-671b74510000\"",
+      "_attachments": "attachments/",
+      "_ts": 1729852497,
+      "ht": "29.08.2024, 11:07:18",
+      "ta": "3 months ago",
+      "img": "ethereum"
+    }
+  ],
+  "fundamental": [
+    {
+      "partitionKey": "news",
+      "t": 1730275111994,
+      "m": "<b>Vitalik Buterin:</b> Possible futures of the Ethereum protocol (Part6, The Splurge)",
+      "a": "https://vitalik.eth.limo/general/2024/10/29/futures6.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "7069b207-efab-40e3-bb4c-98d0c51b727e",
+      "_rid": "VPZWAPgLfukeJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukeJQAAAAAAAA==/",
+      "_etag": "\"4600d0d8-0000-1600-0000-6721e7560000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275158,
+      "ht": "30.10.2024, 08:58:31",
+      "ta": "about 1 month ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1730275080948,
+      "m": "<b>Vitalik Buterin:</b> Possible futures of the Ethereum protocol (Part5, The Purge) ",
+      "a": "https://vitalik.eth.limo/general/2024/10/26/futures5.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "2385fcbb-c198-471d-849a-6c69d6e4b10e",
+      "_rid": "VPZWAPgLfukdJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukdJQAAAAAAAA==/",
+      "_etag": "\"460014de-0000-1600-0000-6721e7ac0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275244,
+      "ht": "30.10.2024, 08:58:00",
+      "ta": "about 1 month ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1730275024129,
+      "m": "<b>Vitalik Buterin:</b> Possible futures of the Ethereum protocol (Part4, The Verge) ",
+      "a": "https://vitalik.eth.limo/general/2024/10/23/futures4.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "188dabaf-d2ab-44eb-bc51-1b8bd9a652ae",
+      "_rid": "VPZWAPgLfukcJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukcJQAAAAAAAA==/",
+      "_etag": "\"4600d3d5-0000-1600-0000-6721e7080000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275080,
+      "ht": "30.10.2024, 08:57:04",
+      "ta": "about 1 month ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1729827418000,
+      "m": "<b>Ethereum staking</b> after Pectra upgrade (EIPs 7251, 7002, 6110)",
+      "a": "https://www.kiln.fi/post/next-ethereum-upgrade-how-pectra-will-enhance-the-staking-experience",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "7d472320-a6c2-4ba9-b741-240a7757f1d1",
+      "_rid": "VPZWAPgLfunSJAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunSJAAAAAAAAA==/",
+      "_etag": "\"2e000b84-0000-1600-0000-671b746a0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1729852522,
+      "ht": "25.10.2024, 05:36:58",
+      "ta": "about 1 month ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1729530136000,
+      "m": "<b>Vitalik Buterin:</b> Possible futures of the Ethereum protocol (Part3, The Scourge)",
+      "a": "https://vitalik.eth.limo/general/2024/10/20/futures3.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "f3854085-e663-4e6b-bccd-c5bda30361f0",
+      "_rid": "VPZWAPgLfunNJAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunNJAAAAAAAAA==/",
+      "_etag": "\"460051df-0000-1600-0000-6721e7c70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275271,
+      "ht": "21.10.2024, 19:02:16",
+      "ta": "about 2 months ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1729159260000,
+      "m": "<b>Vitalik Buterin:</b> Possible futures for the Ethereum protocol (Part2, The Surge)",
+      "a": "https://vitalik.eth.limo/general/2024/10/17/futures2.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "1ec55fcb-d858-4712-b657-3b6f1640d70c",
+      "_rid": "VPZWAPgLfunIJAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunIJAAAAAAAAA==/",
+      "_etag": "\"460019e0-0000-1600-0000-6721e7d90000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275289,
+      "ht": "17.10.2024, 12:01:00",
+      "ta": "about 2 months ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1729159220000,
+      "m": "<b>Vitalik Buterin:</b> Possible futures of the Ethereum protocol (Part1, The Merge)",
+      "a": "https://vitalik.eth.limo/general/2024/10/14/futures1.html",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "c4e32d4b-7692-4110-b040-546451eae2b7",
+      "_rid": "VPZWAPgLfunHJAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunHJAAAAAAAAA==/",
+      "_etag": "\"460082e0-0000-1600-0000-6721e7e90000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275305,
+      "ht": "17.10.2024, 12:00:20",
+      "ta": "about 2 months ago",
+      "img": "ethereum"
+    }
+  ],
+  "clients": [
+    {
+      "partitionKey": "news",
+      "t": 1731317014257,
+      "m": "<b>Lodestar</b> version 1.23.0 released",
+      "a": "https://github.com/ChainSafe/lodestar/releases/tag/v1.23.0",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "01025f0c-4c57-4f79-a970-32237c96b3b0",
+      "_rid": "VPZWAPgLfulrJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulrJQAAAAAAAA==/",
+      "_etag": "\"84031807-0000-1600-0000-6731cd550000\"",
+      "_attachments": "attachments/",
+      "_ts": 1731317077,
+      "ht": "11.11.2024, 10:23:34",
+      "ta": "26 days ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1730275452555,
+      "m": "<b>Teku</b> version 24.10.3 released",
+      "a": "https://stakers.space/teku#update",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "727cf967-7f19-4c7e-8c15-b2953df7e3e5",
+      "_rid": "VPZWAPgLfukfJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukfJQAAAAAAAA==/",
+      "_etag": "\"8403430a-0000-1600-0000-6731cd600000\"",
+      "_attachments": "attachments/",
+      "_ts": 1731317088,
+      "ht": "30.10.2024, 09:04:12",
+      "ta": "about 1 month ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1725891540000,
+      "m": "<b>Erigon</b> version 2.60.7 released",
+      "a": "https://stakers.space/erigon#update",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "cd776738-5102-42c1-b48c-38c62d859304",
+      "_rid": "VPZWAPgLfunTIwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunTIwAAAAAAAA==/",
+      "_etag": "\"460041e8-0000-1600-0000-6721e8e40000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275556,
+      "ht": "09.09.2024, 16:19:00",
+      "ta": "3 months ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1724922438000,
+      "m": "<b>MevBoost</b> version 1.8 released",
+      "a": "https://github.com/flashbots/mev-boost/releases/tag/v1.8",
+      "c": [
+        "eth",
+        "client"
+      ],
+      "id": "016c6b68-6478-46dd-b43a-670c5c7fdd09",
+      "_rid": "VPZWAPgLfunSIwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunSIwAAAAAAAA==/",
+      "_etag": "\"2e009683-0000-1600-0000-671b74510000\"",
+      "_attachments": "attachments/",
+      "_ts": 1729852497,
+      "ht": "29.08.2024, 11:07:18",
+      "ta": "3 months ago",
+      "img": "ethereum"
+    }
+  ]
+}

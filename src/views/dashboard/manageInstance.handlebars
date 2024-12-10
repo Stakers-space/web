@@ -1,0 +1,317 @@
+<body id="body">
+{{> header_dashboard}}
+<main class="grid mt-100 mb-100">
+    {{#if editingView}}
+        {{> sections/encryptionPassword }}
+        <p class="text-center"><i>This may be a separated password used only for the instance, as the instance view may be shared with a client you manage the instance for.</i></p>
+    {{/if}}
+    <h1>{{formTitle}}</h1>
+
+    <section class="grey">
+        <form method="post" action="{{forms.metadata.submitLink}}" id="defineInstanceForm">
+            {{#unless editingView}}
+            <div>
+                <h4>Generate credentials for validator instance number <code class="vi_pid">{{instance.vi_pid}}</code></h4>
+                <label for="vi_pid">Validator Instance Numer</label>: <input type="number" name="vi_pid" min="1" value="{{instance.vi_pid}}" required class="interactive-element vi_pid" data-class="vi_pid" onchange="OnPidChanged(this.value)">
+                <i>NOTE: It's required to have unique Instance Number accross all defined instances (it helps in prevention before slashing on moving validator instances between various controlled servers)</i>
+            </div>
+             <div id="name">
+                <label for="name">Instance name</label>
+                <input type="text" name="name" class="instance_name" required="required" value="{{server.consensus.0.client}}-i{{instance.vi_pid}}" maxlength="25">
+            </div>
+            <script>
+                const clientName="{{server.consensus.0.client}}";
+                function OnPidChanged(pid){
+                    for(const elm of document.getElementsByClassName("instance_name")){ elm.value = clientName+"-i"+pid; }
+                    for(const elm of document.getElementsByClassName("vi_pid")){ elm.innerHTML = pid; } 
+                }
+            </script>
+            {{/unless}}
+            {{#if editingView}} 
+            {{!--<div class="tabselector">
+                <nav class="egrid egrid-2">
+                    <button class="tab selected" data-tabpanel="1" type="button">Real instance</button>
+                    <button class="tab" data-tabpanel="2" type="button">Virtual instance</button>
+                </nav>
+            </div>--}}
+            <div class="egrid egrid-2">
+                <div>
+                    <h2>Stakers.space dashboard</h2>
+                    <p><label>Consensus client</label>: <strong><a href="/{{server.consensus.0.client}}" target="_blank">{{server.consensus.0.client}}</a></strong></p>
+                    <div id="name">
+                        <label for="name">Instance name</label>
+                        <input type="text" name="name" class="instance_name" required="required" value="{{instance.instance}}" maxlength="25" placeholder="validators-vi{{instance.vi_pid}}">
+                    </div>
+                    <br>
+                    <div>
+                        <label for="note">Instance Note</label>
+                        <input type="text" name="note" value="{{instance.note}}" maxlength="100" id="note" class="encrypted_value">
+                    </div>
+                </div>
+                <div>
+                    <h2>Configuration on server</h2>
+                    <ul>
+                        <li><label for="fee_recipient">Fee recipient wallet</label>: <input type="text" name="fee_recipient" value="{{instance.fee_recipient}}" id="fee_recipient"  class="encrypted_value"></li>
+                        <li>Instance customizations
+                            <ul>
+                                <li><label>Name</label>: <input type="text" name="vi_sname" value="{{instance.vi_sname}}" class="interactive-element instance_sn" data-class="instance_sn"></li>
+                                <li><label>User</label>:  <input type="text" name="vi_suser" value="{{instance.vi_suser}}" class="interactive-element instance_su" data-class="instance_su"></li>
+                                <li><label>Data</label>: <input type="text" name="vi_sdata" value="{{instance.vi_sdata}}" class="interactive-element instance_dp" data-class="instance_dp"></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {{/if}}
+            {{#if failureCallback}}
+                <p class="login-error">{{{failureCallback}}}</p>
+            {{/if}}
+            <div class="mt-20 text-center">
+                {{#if editingView}} 
+                <label>Encryption password</label>
+                <input type="text" placeholder="Encryption password" class="encryption-password" id="encryption_psw_matadata">
+                {{/if}}
+                <input type="submit" class="submit btn btn-black btn-rounded" id="submitForm" value="{{forms.metadata.submitText}}">
+            </div>
+        </form>
+        <script>
+            document.addEventListener('DOMContentLoaded', ConfigurateDefineInstanceForm);
+            function ConfigurateDefineInstanceForm(){
+                const form = document.getElementById('defineInstanceForm');
+                let cryptPswElm = document.getElementById('encryption_psw_matadata');
+                if(!cryptPswElm) return;
+                form.addEventListener('submit', function (event) {
+                    // prevent sending form
+                    event.preventDefault();
+                    let formData = new FormData(form);
+                    let encryptedNote = formData.get('note');
+                    let freeRecipientWlt = formData.get('fee_recipient');
+                    let cryptPsw = cryptPswElm.value;
+                    // encrypt data
+                    // note
+                    EncryptContent(cryptPsw, formData.get('note'), document.getElementById('note'))
+                        .then(encryptedContent => {
+                            formData.set('note', encryptedContent);
+                            encryptedNote = formData.get('note');
+                            form.submit();
+                        })
+                        .catch(error => { console.error("Encryption failed:", error); });
+
+                    EncryptContent(cryptPsw, formData.get('fee_recipient'), document.getElementById('fee_recipient'))
+                        .then(encryptedContent => {
+                            formData.set('fee_recipient', encryptedContent);
+                            freeRecipientWlt = formData.get('fee_recipient');
+                            form.submit();
+                        })
+                        .catch(error => { console.error("Encryption failed:", error); });
+                });
+            }
+        </script>
+    </section>
+
+    {{#if editingView}} 
+    <section class="grey mt-100 mb-100">
+        <form method="post" action="{{forms.monitor.submitLink}}" id="instanceTrackingForm">
+            <div class="egrid egrid-2">
+                <div>
+                    <h2>Validators monitoring configuration</h2>
+                    <div>
+                        <label>Chain selection</label>
+                        <select name="chain">
+                            <option value="ethereum" selected>Ethereum</option>
+                            <option value="gnosis">Gnosis</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Monitoring</label>:
+                        <label>
+                            <input type="radio" name="pubkey_monitoring" value="1" checked>
+                            Enabled
+                        </label>
+                        <label>
+                            <input type="radio" name="pubkey_monitoring" value="0">
+                            Disabled
+                        </label>
+                    </div>
+                    <p class="mt-15"><strong>Load pubkeys from deposit file for adding / modifying validators data</strong></p>
+                    <div id="deposit-file">
+                        <label for="deposit-file">Deposit file</label>
+                        <input type="file" id="fileInput" accept=".json">
+                    </div>
+                    <input class="hide" type="text" name="dd_filename" id="dd_filename">
+                </div>
+                <div class="mt-20">
+                    <label for="pubkeys">Pubkeys (comma separated pub indexes or deposit file content)</label><br>
+                    <textarea type="text" id="pubkeys" name="pubkeys" rows="3" required class="encrypted_value">{{instance.data}}</textarea>
+                </div>
+            </div>
+            <div class="mt-20 text-center" id="submit-monitoring">
+                <label>Encryption password</label>
+                <input type="text" placeholder="Encryption password" name="psw"  class="encryption-password" id="encryption_psw_pubkeys">
+                <input type="submit" class="submit btn btn-black btn-rounded" id="submitForm" value="{{forms.monitor.submitText}}">
+            </div>
+        </form>
+        <script>
+            document.addEventListener('DOMContentLoaded', ConfigurateMonitoringForm);
+            document.getElementById('fileInput').addEventListener('change', PrintPubkeys);
+            //let sourcePubkeys = false;
+            let keystores = null;
+            function ConfigurateMonitoringForm(){
+                const form = document.getElementById('instanceTrackingForm');
+                form.addEventListener('submit', function (event) {
+                    // prevent sending form
+                    event.preventDefault();
+                    let formData = new FormData(form);
+                    let cryptPsw = document.getElementById('encryption_psw_pubkeys').value;
+                    
+                    console.log("submit form");
+                    /*if(!sourcePubkeys){
+                        EncryptContent(formData.get('psw'), keystores, document.getElementById('pubkeys'))
+                        .then(encryptedContent => {
+                            formData.set('pubkeys', encryptedContent);
+                            keystores = encryptedContent;
+                            form.submit();
+                        })
+                        .catch(error => { console.error("Encryption failed:", error); });
+                    } else {*/
+                        form.submit();
+                    //}
+                });
+            }
+
+            function PrintPubkeys(event){
+                const file = event.target.files[0];
+                //console.log("PrintPubkeys |", file);
+                if (file) {
+                    document.getElementById("dd_filename").value = file.name;
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const json = JSON.parse(e.target.result);
+                            let extractedKeysArr = [];
+
+                            for(const depositObj of json){ extractedKeysArr.push("0x"+depositObj.pubkey); }
+                                if(extractedKeysArr.length !== json.length){
+                                    console.error("Validation error: key counts does not match");
+                                    return;
+                                }
+                                keystores = extractedKeysArr;
+                                document.getElementById('pubkeys').textContent = keystores;//JSON.stringify(extractedKeysArr, null, 1);
+
+                                // add to queue to get ids data
+                                console.log("json processing", json);
+                                //sourcePubkeys = true;
+                        } catch (error) {
+                            document.getElementById('pubkeys').textContent = "Error on processing JSON: " + error.message;
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            }
+
+            function HttpsRequest(options, body, cb){
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function(){ //console.log(xmlhttp.readyState, xmlhttp.status);
+                    if(xmlhttp.readyState == 4 && xmlhttp.status === 200){
+                        if(cb !== undefined){ return cb(null, this.response); }
+                    } else if ((xmlhttp.readyState == 4 && xmlhttp.status === 404) || xmlhttp.readyState == 5){ //server is down     
+                        if(cb !== undefined){ return cb(xmlhttp.status, null); }
+                    }
+                };
+                xmlhttp.open(options.method, options.url);
+                //if(options.credentials === true) xmlhttp.withCredentials = true;
+                // add headers
+                if(options.headers){
+                    Object.entries(options.headers).forEach(([key, value]) => {
+                        xmlhttp.setRequestHeader(key, value);
+                    }); 
+                }
+                xmlhttp.send(body);
+            }
+        </script>
+    </section>
+    <section class="grey mt-60">
+        <h2>Link validators instance to account</h2>
+        <p>Accounts with access: {{#each accountsWithAccess}}<code>{{this.email}}</code>{{/each}}</p>
+        <form method="post" action="{{forms.link.submitLink}}">
+            <div id="email" class="login-item">
+                <div>
+                    <label for="email">Account email</label>
+                    <input type="text" id="email" name="email" value="" required>
+                </div>
+            </div>
+            {{#if failureCallback}}
+                <p class="dashboard-error">{{{failureCallback}}}</p>
+            {{/if}}
+            <div class="login-action mt-20" id="login-action">
+                <input type="submit" class="submit btn btn-black btn-rounded" id="submit" value="{{forms.link.submitText}}">
+            </div>
+        </form>
+    </section>
+    <section class="grey mt-60">
+        <h2>Move instance to different server</h2>
+        <form method="post" action="{{forms.linkserver.submitLink}}">
+            <label>Choose new instance location</label>:
+            <select name="server_id">
+                {{#each servers}}<option value="{{this.id}}">{{this.name}}</option>{{/each}}
+            </select>
+            {{#if failureCallback}}
+                <p class="dashboard-error">{{{failureCallback}}}</p>
+            {{/if}}
+            <div class="login-action mt-20" id="login-action">
+                <input type="submit" class="submit btn btn-black btn-rounded" id="submit" value="{{forms.linkserver.submitText}}">
+            </div>
+        </form>
+    </section>
+    {{/if}}
+</main>
+
+<script>
+    function UpdateMarks(className, newValue, encryptedValue = false){
+		console.log("MI | UpdateMarks change:", className, "| new value:", newValue, "| encrypted:", encryptedValue);
+		// get selected client
+		const selectedEC = document.getElementById("ec_1").value;
+		const selectedCC = document.getElementById("cc_1").value;
+		// update value marks
+		var marks = document.getElementsByClassName(className);
+		for(var i=0;i<marks.length;i++){
+			if(encryptedValue) {
+				marks[i].classList.add("encrypted_value");
+			}
+			 // prohibit updating serviceName for other clients
+			if(marks[i].dataset.client !== undefined) {
+				if((className === "execution_sn" || className === "execution-dp") && marks[i].dataset.client.indexOf(selectedEC) === -1) continue;
+				if((className === "consensus_sn" || className === "consensus-dp") && marks[i].dataset.client.indexOf(selectedCC) === -1) continue;
+			}
+			// if lighthouse beacon path, remove /beacon?
+			SetValue(marks[i], newValue);
+		}
+
+		function SetValue(elm, value){
+			switch(elm.nodeName){
+				case "I":  elm.innerHTML = value; break;
+				case "INPUT": elm.value = value; break;
+				case "TEXTAREA": elm.innerHTML = value; break;
+				case "SPAN":  elm.innerHTML = value; break;
+				case "MARK":  elm.innerHTML = value; break;
+				case "CODE":  elm.innerHTML = value; break;
+				case "SELECT":  elm.value = value; break;
+				default: console.warn("Undefined element:", elm.nodeName);
+			}
+		}
+	}
+
+	function InstallOnInteractiveInputChangedListener(){
+		for (const elm of document.getElementsByClassName("interactive-element")){
+			elm.addEventListener('change', function(e){ 
+				e.preventDefault();
+				UpdateMarks(elm.dataset.class, e.target.value, false); 
+			});
+		}
+	}
+</script>
+{{> scripts/cryptography}}
+{{> scripts/security-guard}}
+{{> scripts/tabselector}}
+{{> footer}}
+</body>

@@ -1,0 +1,21 @@
+<pre><code>[Unit]
+Description=Prysm Consensus Client VC (Mainnet)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=<mark class="instance_su" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid" data-client="prysm">1</span></mark>
+Group=<mark class="instance_su" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid" data-client="prysm">1</span></mark>
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/validator \
+  --datadir=<mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid" data-client="prysm">1</span></mark> \
+  --wallet-dir=<mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid" data-client="prysm">1</span></mark> \
+  --wallet-password-file=<mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid" data-client="prysm">1</span></mark>/password.txt \
+  --suggested-fee-recipient=<mark class="instance_frw" data-client="lighthouse">0xXXXXXXXXXXXXXXXX</mark> \
+  --graffiti="<mark class="ec_name">Nethermind</mark>+Prysm" \
+  --accept-terms-of-use
+
+[Install]
+WantedBy=multi-user.target</code></pre>

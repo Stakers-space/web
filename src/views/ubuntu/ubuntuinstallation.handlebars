@@ -1,0 +1,105 @@
+{{> header}}
+<main class="mb-60">
+	<section class="cover grid egrid">
+		<div class="mt-60 mb-40">
+			<h1 class="cover-title">Guide to <span>Install</span> Ubuntu Server OS</h1>
+			<p>This is Staking related guide. If you need standard guide, check <a href="https://ubuntu.com/tutorials/install-ubuntu-server#1-overview" target="_blank">Official Installation Guide for Installing Ubuntu Server</a></p>
+		</div>
+	</section>
+
+    <div class="grid-full contents">
+        <div class="content-chapters">
+			<div class="sticky">
+				 <nav>
+					<strong>Solo staking guide</strong>
+					<ol>
+						<li><a href="">Hardware & OS</a></li>
+						<li><a href="">Security</a></li>
+						<li><a href="">Basic conf</a></li>
+						<li><a href="">Jwtsecret</a></li>
+						<li><a href="#execution">Execution client</a></li>
+						<li><a href="#consensus">Consensus client</a>
+							<ul>
+								<li><a href="#beacon">Beacon</a></li>
+								<li><a href="#validator">Validator</a></li>
+							</ul>
+						</li>
+					</ol>
+					
+				</nav>
+			</div>
+		</div>
+		<div class="content-body">
+			<section class="chapter" id="prerequisities">
+				<div class="content" style="width:100%">
+                    <h2>You will need for the installation</h2>
+                    <ul>
+                        <li>Staking machine connected to keyboard, monitor, internet and electricity</li>
+                        <li>USB installation stick with <code>Ubuntu Server 24.04 (LTS)</code>
+                            <p>If you do not have bootable installation stick, go to guide <a href="">Create a bootable USB Stick</a></p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section class="chapter mt-60" id="install">
+				<div class="content" style="width:100%">
+                    <h2>Steps to Install Ubuntu Server <code>24.04</code></h2>
+                    <ol>
+                        <li>Connect your staking machine to the internet and electricity.</li>
+                        <li><h2>Boot your staking machine from USB stick with Ubuntu server installation image</h2>
+                            <ul>
+                                <li>.</li>
+                                <li>If needed, you can press <code>F11</code> key for loading a box with Bootable disk selection.</li>
+                            </ul>
+                        </li>
+                        <li><h2>Start the instalation</h2>
+                            <p>You may be prompted to select required option. If so, select <code>Try or Install Ubuntu Server</code>.</p>
+                        </li>
+                        <li><h2>Select your language page</h2>
+                            <p>Keep default option <code>English</code></p>
+                        </li>
+                        <li><h2>Select your keyboard layout page</h2>
+                            <p>Keep default option <code>English (US)</code></p>
+                        </li>
+                        <li>
+                            <h2>Choose the base for your installation</h2>
+                            <p>Keep default <code>Ubuntu Server</code></p>
+                        </li>
+                        <li>
+                            <h2>Configurate at least one interface this server can talk to othr machines... page</h2>
+                            <p>Wait till an IP is loaded (You must be connected to the internet for that) and then continue</p>
+                        </li>
+                        <li><h2>Configurate proxy page</h2>
+                            <p>Leave it blank and continue.</p>
+                        </li>
+                        <li>
+                            <h2>Configurate Ubuntu archive Mirror page</h2>
+                            <p>Let the defautl and continue.</p>
+                        </li>
+                        <li><h2>Guided Storage configuration</h2>
+
+                            <h3>Set up this disk as an LVM group option</h3>
+                            <p>As it's a configuration for use within a single purpose device, it's better choice to uncheck the option for higher amount of free disk space and better performance, see below.</p>
+                            <amp-selector class="tabs-with-flex" role="tablist" keyboard-select-mode="focus">
+  <div id="tab1" role="tab" aria-controls="tabpanel1" option selected>LVM Group unchecked</div>
+  <div id="tabpanel1" role="tabpanel" aria-labelledby="tab1">
+
+  </div>
+  <div id="tab2" role="tab" aria-controls="tabpanel2" option>LVM Group checked</div>
+  <div id="tabpanel2" role="tabpanel" aria-labelledby="tab2">
+
+
+  </div>
+</amp-selector>
+
+                        </li>
+                        <li>
+                            
+                        </li>
+                    </ol>
+                </div>
+            </section>
+        </div>
+
+
+</main>

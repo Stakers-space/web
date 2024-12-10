@@ -1,0 +1,11 @@
+{{> header_amp}}
+<main class="grid">
+	<h1 class="mt-60">{{serviceData.name}}</h1>
+	
+	<div class="egrid egrid-2">
+		{{#if serviceData.chain.ethereum.supported}}<a href="/ethereum-staking/full-guide/{{serviceData.ilink}}" class="btn center box"><span>Configuration guide for <strong>Ethereum</strong></span></a>{{/if}}
+		{{#if serviceData.chain.gnosis.supported}}<a href="/gnosis-staking/full-guide/{{serviceData.ilink}}" class="btn center box"><span>Configuration guide for <strong>Gnosis</strong></span></a>{{/if}}
+	</div>
+</main>
+{{> footer_amp}}
+</body>

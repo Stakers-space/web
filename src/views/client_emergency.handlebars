@@ -1,0 +1,141 @@
+{{> header}}
+<main class="mb-60">
+	<section class="cover grid egrid">
+		<div class="mt-60 mb-40">
+			<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/clients"><span property="name">Clients</span></a>
+					<meta property="position" content="2">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{client}}"><span property="name">{{clientName}} client</span></a>
+					<meta property="position" content="3">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{client}}/emergency"><span property="name" class="intro-label">Emergency</span></a>
+					<meta property="position" content="4">
+				</li>
+			</ul>
+			<h1 class="cover-title">Emergency guide for <span>{{clientName}} client</span></h1>
+			<p>One-page interactive complete emergency guide for {{clientName}} client.</p>
+		</div>
+		<div class="mt-60 mb-40" style="position:relative;padding-left:9rem;font-size:.8rem">
+			<div style="height: fit-content;bottom: 0;position: absolute;">
+				<h3>Disclaimer</h3>
+				<p>This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.</p>
+            </div>
+		</div>
+	</section>
+
+	<div class="grid-full contents serverguide">
+        <div class="content-chapters">
+			<div class="sticky">
+			</div>
+		</div>
+		<div class="content-header">
+			<aside class="mb-60">NOTE: Service name, directory and user name may vary based on your initial configuration.</aside>
+			{{#ifEqual clientName "Nethermind"}}
+			<h2>Database corruption</h2>
+			<p>In a case of database corruption (shortly DB corruption):</p>
+			<aside>NOTE: Service name, directory and user may vary based on your initial configuration.</aside>
+			<ol>
+				<li><h3>Stop Nethermind service</h3>
+					<pre><code>sudo systemctl stop nethermind</code></pre>
+				</li>
+				<li><h3>Delete and recreate Nethermind directory</h3>
+					Delete the directory
+					<pre><code>sudo rm -r /var/lib/nethermind</code></pre>
+					Recreate the directory
+					<pre><code>sudo mkdir -p /var/lib/nethermind</code></pre>
+					Set directory ownership
+					<pre><code>sudo chown -R nethermind:nethermind /var/lib/nethermind</code></pre>
+				</li>
+				<li><h3>Start the service</h3>
+					<pre><code>sudo systemctl start nethermind</code></pre>
+					Check the service
+					<pre><code>systemctl status nethermind</code></pre>
+					<pre><code>journalctl -f -u nethermind</code></pre>
+				</li>
+			</ol>
+			<p>Once the execution chain will get synchronized, your validator will go online again.</p>
+
+			<h2 class="mt-60">Nethermind got stucked</h2>
+			<p>If a Nethermind got stucked, you can simply restart it.</p>
+			<pre><code>sudo systemctl restart nethermind</code></pre>
+			<p>This can be also automated through <a href="https://github.com/Stakers-space/staking-scripts/tree/main/monitor/service_log" target="_blank" rel="nofollow noopener noreferrer">Service Log Monitor</a>.</p>
+
+			<p class="mt-60">There are no other serious issues with Nethermind detected.</p>
+			{{/ifEqual}}
+			
+			{{#ifEqual clientName "Erigon"}}
+			<h2>Database corruption</h2>
+			<p>In a case of database corruption (shortly DB corruption):</p>
+			<ol>
+				<li><h3>Stop Erigon service</h3>
+					<pre><code>sudo systemctl stop erigon</code></pre>
+				</li>
+				<li><h3>Delete and recreate Erigon directory</h3>
+					Delete the directory
+					<pre><code>sudo rm -r /var/lib/erigon</code></pre>
+					Recreate the directory
+					<pre><code>sudo mkdir -p /var/lib/erigon</code></pre>
+					Set directory ownership
+					<pre><code>sudo chown -R erigon:erigon /var/lib/erigon</code></pre>
+				</li>
+				<li><h3>Start the service</h3>
+					<pre><code>sudo systemctl start erigon</code></pre>
+					Check the service
+					<pre><code>systemctl status erigon</code></pre>
+					<pre><code>journalctl -f -u erigon</code></pre>
+				</li>
+			</ol>
+			<p>Once the execution chain will get synchronized, your validator will go online again.</p>
+
+			<h2 class="mt-60">Erigon got stucked</h2>
+			<p>If a Erigon got stucked, you can simply restart it.</p>
+			<pre><code>sudo systemctl restart erigon</code></pre>
+			<p>This can be also automated through <a href="https://github.com/Stakers-space/staking-scripts/tree/main/monitor/service_log" target="_blank" rel="nofollow noopener noreferrer">Service Log Monitor</a>.</p>
+
+			<p class="mt-60">There are no other serious issues with Erigon detected.</p>
+			{{/ifEqual}}
+
+			{{#ifEqual clientName "Lighthouse"}}
+			<h2>ERRO Database write failed</h2>
+			<p>There's any issue with writing to Lighthouse database. To fix that, stop and start the Lighthouse Beacon service.</p>
+			<pre><code>sudo systemctl stop lighthousebeacon</code></pre>
+			<pre><code>sudo systemctl start lighthousebeacon</code></pre>
+			<p>This can be also automated through <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lighthouse/beacon_log_monitor" target="_blank" rel="nofollow noopener noreferrer">Lighthouse Beacon Log Monitor</a>.</p>
+
+			<h2 class="mt-60">status: 503 Service Unavailable</h2>
+			<p>This is an execution client issue - the client got stuck. You can simply restart it.</p>
+			<pre><code>sudo systemctl restart ExecutionService</code></pre>
+
+			<p>This can be also automated through <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lighthouse/beacon_log_monitor" target="_blank" rel="nofollow noopener noreferrer">Lighthouse Beacon Log Monitor</a>.</p>
+			{{/ifEqual}}
+
+			{{#ifEqual clientName "Lodestar"}}
+			<h2>Validators cannot start due to existing lock file</h2>
+			<p>This may occur, for example, in the event of a power failure—when the staking node powers back on, validators cannot start due to existing lock files.</p>
+			<p>The check can be disabled by adding label <code>--force</code> into <a href="/lodestar/add-validator#config">validator service config file</a>.</p>
+			{{/ifEqual}}
+
+			{{#ifEqual clientName "Teku"}}
+			<h2>Validators cannot start due to existing lock file</h2>
+			<p>This may occur, for example, in the event of a power failure—when the staking node powers back on, validators cannot start due to existing lock files.</p>
+			<p>Lock files can be removed with a use of <a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/remove_lock_files" target="_blank" rel="nofollow noopener noreferrer">Remove Lock files util</a>.</p>
+
+			<h2 class="mt-60">Stucked Execution/TekuBeacon client</h2>
+			<p>If a any client got stucked, you can simply restart them.</p>
+			<pre><code>sudo systemctl restart ExecutionService</code></pre>
+			<pre><code>sudo systemctl restart tekubeacon</code></pre>
+			<p>This (and many others) can be also automated through <a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/beacon_log_monitor" target="_blank" rel="nofollow noopener noreferrer">Teku Beacon Log Monitor service</a>.</p>
+			{{/ifEqual}}
+        </div>
+    </div>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}

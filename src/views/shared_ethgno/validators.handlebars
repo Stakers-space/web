@@ -1,0 +1,110 @@
+
+<body id="body">
+
+{{> header}}
+<main>
+	<section class="grid">
+        <ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+			<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{chainName}} staking</span></a>
+					<meta property="position" content="2">
+				</li>
+                <li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}/validators"><span property="name">Validators</span></a>
+					<meta property="position" content="3">
+				</li>
+			</ul>
+		<h1 class="title mt-0">{{chainName}} Validators Overview</h1>
+		<canvas id="ethvalidators_chart" name="lazy-canvas"></canvas>
+	</section>
+
+    <section class="grid">
+		<h1>{{chainName}} Validator Queue</h1>
+        <p>Enterance and exit queues are validators waiting to begin staking or to unstake.</p>
+        <p>Data provided by 
+        {{#if isEthereum}}
+			<a href="https://beaconcha.in/">beaconcha.in</a>.
+		{{else}}
+            <a href="https://gnosischa.in/">gnosischa.in</a>.
+{{/if}} Last Update: {{queue.current.time}}</p>
+	</section>
+
+    <section class="grid">
+        <div class="egrid egrid-2 gap-4">
+            <div id="entry-queue">
+                <h2>Entry Queue</h2>
+                <table>
+                    <tr>
+                        <td>Validators:</td>
+                        <td>{{queue.current.beaconchain_entering}}</td>  
+                    </tr>
+                    <tr>
+                        <td>Wait:</td>
+                        <td>{{queue.current.activation.waitingTimeHours}} hours, {{queue.current.activation.waitingTimeMinutes}} minutes</td>  
+                    </tr>
+                    <tr>
+                        <td>Churn:</td>
+                        <td>{{queue.current.activation.rate_per_epoch}} / epoch</td>  
+                    </tr>
+                </table>
+                <canvas id="entry_queue_chart" name="lazy-canvas"></canvas>
+            </div>
+            <div id="exit-queue">
+                <h2>Exit Queue</h2>
+                <table>
+                    <tr>
+                        <td>Validators:</td>
+                        <td>{{queue.current.beaconchain_exiting}}</td>
+                    </tr>
+                    <tr>
+                        <td>Wait:</td>
+                        <td>{{queue.current.exiting.waitingTimeHours}} hours, {{queue.current.exiting.waitingTimeMinutes}} minutes</td>  
+                    </tr>
+                    <tr>
+                        <td>Churn:</td>
+                        <td>{{queue.current.exiting.rate_per_epoch}} / epoch</td>  
+                    </tr>
+                </table>
+                <canvas id="exit_queue_chart" name="lazy-canvas"></canvas>
+            </div>
+        </div>
+    </section>
+    
+	<section class="grid">
+		<h2>Churn Schedule</h2>
+        <p>The churn is a rate limit on the amount of validators that can enter or exit per epoch and changes based on the amount of active validators. This throttling mechanism help prevent instability in consensus.</p>
+		<table>
+            <thead>
+                <tr>
+                    <th>Active Validators</th>
+                    <th>Churn Per Epoch</th>
+                    <th>Churn Per Day</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each queue.schedule}}
+                <tr {{#ifEqual @index ../queue.rangeIndex}}style="background-color:#bfbfbf;font-weight:bold"{{/ifEqual}}>
+                <td>{{this.min_hr}}</td>
+                <td>{{this.churnEpoch}}</td>
+                <td>{{this.churnDay}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+	</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
+<script>var ethStoreData = {{{ethStoreData}}}, beaconchainData = {{{beaconData}}}, etherchainData = {{{chainData}}}, dashboardData={{{dashboardData}}}, chartsUIconfig = {{{chartsUIconfig}}}, queue = {{{queueChart}}};</script>
+<script type="text/javascript" src="/js/chart-presenter.js"></script>
+<script type="text/javascript" src="/js/charts/{{jsController}}.js"></script>
+<script type="text/javascript" src="/js/charts/queue.js"></script>
+<script>charts.ActivateLazyLoad();</script>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}
+</body>

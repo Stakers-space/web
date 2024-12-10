@@ -1,0 +1,179 @@
+<style>
+.encrypted_value {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+ul.img_marker li {
+    max-height: 75px;
+    overflow-y: clip;
+}
+</style>
+<body id="body">
+{{> header_dashboard}}
+<main class="mt-20">
+    {{> sections/encryptionPassword }}
+    <div class="grid">
+        <div class="overview">
+            Validators: <ul class="img_marker account_validators" style="display:ruby;">
+                <li style="--marker-image: url('/logo/ethereum.svg')" class="f-bold">???</li>
+                <li style="--marker-image: url('/logo/gnosis.svg');margin-left: 50px" class="f-bold">???</li>
+            </ul> | Last Epoch reported: <a href="https://gnosischa.in/epochs" target="_blank" rel="nofollow noopener noreferrer">{{lastEpochReported}}</a> | {{{offlineStateInfo}}}
+        </div>
+        
+        {{#each servers}}
+            <section class="egrid servers-destination">
+                <div class="header">
+                    <h2>{{this.location}}</h2>
+                    <i class="encrypted_value">{{this.location_note}}</i>
+                    <ul>
+                        <li>Network: <span class="encrypted_value">{{this.network}}</span></li>
+                        <li>validators
+                            <ul class="img_marker dest_validators">
+                                <li style="--marker-image: url('/logo/ethereum.svg');">???</li>
+                                <li style="--marker-image: url('/logo/gnosis.svg');">???</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="egrid egrid-2">
+                    {{#each this.servers}}
+                     <div class="destination-server">
+                        <h3 id="{{this.name}}"><a href="/dashboard/server-node/define?id={{this.sid}}">{{this.name}}</a></h3>
+                                <ul>
+                                    {{!<li>Validators: <strong></strong></li>}}
+                                    <li>Clients: {{#each this.cliensList}}
+                                        <code {{#if this.rcm}}style="color:orange" title="{{this.rcm}}"{{/if}}><a href="/{{this.client}}?sid={{../this.sid}}" target="_blank">{{this.client}}</a> ({{this.ver}})</code>
+                                    {{/each}}
+                                    {{!<li>SSD: </li>}}
+                                    {{#if this.brand_name}}<li>Operated by {{#if this.brand_link}}<a href="{{this.brand_link}}" target="_blank">{{this.brand_name}}</a>{{else}}{{this.brand_name}}{{/if}}</li>{{/if}}
+                                    <li>
+                                        <ul class="img_marker server_validators" style="display:flex;">
+                                            <li style="--marker-image: url('/logo/ethereum.svg');">???</li>
+                                            <li style="--marker-image: url('/logo/gnosis.svg');margin-left: 50px;">???</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <h3>Validation instances | </h3>
+                                <ul class="img_marker server_instances">
+                                    {{#each this.instances}}
+                                        <li data-iid="{{this.id}}" data-chain="{{this.chain}}" class="val_instance" style="--marker-image: url('/logo/{{#ifEqual this.chain "gnosis"}}gnosis{{else}}{{#ifEqual this.chain "ethereum"}}ethereum{{/ifEqual}}{{/ifEqual}}.svg');">
+                                            {{#ifEqual isOwner "true"}}<a href="/dashboard/server-node/define-instance?sid={{../this.sid}}&iid={{this.id}}">{{this.instance}}</a>{{else}}<span>{{this.instance}}</span>{{/ifEqual}} | 
+                                            <span class="instance_status"></span><br>
+                                            <i class="encrypted_value instance_note" style="max-width:90%;overflow:hidden;display:block">{{this.note}}</i>
+                                            <i>
+                                                {{#if this.fee_recipient}}Wlt: <a href="#" target="_blank" rel="nofollow noopener noreferrer" class="encrypted_value instance_fwlt">{{this.fee_recipient}}</a> | {{/if}}
+                                                <span class="encrypted_value instance_insight">{{this.data}}</span>
+                                            </i>
+                                        </li>
+                                    {{/each}}
+                                </ul>
+                                {{#ifEqual isOwner "true"}}<a href="/dashboard/server-node/define-instance?sid={{this.sid}}" class="btn btn-black btn-rounded">Add Instance</a>{{/ifEqual}}
+                            </div>
+                    {{/each}}
+                </div>
+            </section>
+        {{/each}}
+    </div>
+    
+    <section class="text-center mt-30 mb-80">
+        <a href="/dashboard/server-node/define" class="btn btn-black btn-rounded">Define own server node</a>
+        <a href="/dashboard/server-node/order" class="btn btn-black btn-rounded">Order server as a service</a>
+        <a href="/dashboard/api" class="btn btn-black btn-rounded">API access</a>
+        <a href="/dashboard/servers-resources" class="btn btn-black btn-rounded">Servers resources</a>
+    </section>
+    {{#if adminPanel}}{{{adminPanel}}}{{/if}}
+</main>
+{{> scripts/cryptography}}
+<script>
+    var offlineStateData = {{{offlineStateData}}};
+    console.log("state data:", offlineStateData);
+    const val_instances = document.getElementsByClassName("val_instance");
+    for(var instance of val_instances){
+        const instanceId = instance.dataset.iid;
+        //console.log(instanceId, instance);
+        let statusElm = instance.children[1];
+        if(offlineStateData[instanceId]){
+            let msg = `Offline: ${offlineStateData[instanceId].o.length} / ${offlineStateData[instanceId].v} \nhttps://gnosischa.in/dashboard?validators=`;
+            for(const obj of offlineStateData[instanceId].o){
+                msg += `<span title="epochs offline:${obj.d}">${obj.i}</span>,`
+            }
+            statusElm.innerHTML = msg.slice(0, -1);
+            statusElm.style.color = "orange";
+        } else {
+            statusElm.innerHTML = "All online";
+            statusElm.style.color = "green";
+        }
+    }
+
+    function OnDecryptionProcessComplted(){
+        let acc_agg_validators = {gnosis:0,ethereum:0}
+        // parse pubkeys
+        for(const serverDestination of document.getElementsByClassName("servers-destination")){
+            console.log("destination:", serverDestination);
+            let dest_agg_validators = {gnosis:0,ethereum:0}
+            for(const server of serverDestination.getElementsByClassName("destination-server")){
+                let srv_agg_validators = {gnosis:0,ethereum:0} 
+                for(const instanceElm of server.getElementsByClassName("val_instance")){
+                    const statusElm = instanceElm.children[1];
+
+                    // update fee wlt
+                    const feeWltC = instanceElm.getElementsByClassName("instance_fwlt");
+                    if(feeWltC.length > 0){
+                        const feeWlt = feeWltC[0];
+                        // set ahref
+                        const explorerurl = (instanceElm.dataset.chain === "gnosis") ? "https://gnosischa.in/address/" : "https://beaconcha.in/address/"
+                        feeWlt.href = explorerurl+feeWlt.innerHTML;
+                        feeWlt.innerHTML = "..."+feeWlt.innerHTML.slice(-3);
+                    }
+
+                    const pubkeyElm = instanceElm.getElementsByClassName("instance_insight")[0]; //instanceElm.children[4];
+
+                    if(pubkeyElm.innerHTML === "") continue;
+                    if(pubkeyElm.innerHTML.indexOf("Processing") > -1) continue;
+                    const pubkeys = pubkeyElm.innerHTML.split(",");
+                    const validators_count = pubkeys.length;
+                    if(statusElm.innerHTML === "All online") statusElm.innerHTML = `${validators_count}/${validators_count} online`;
+                    //console.log("pubkeys:", validators_count);
+                    srv_agg_validators[instanceElm.dataset.chain] += validators_count;
+                    dest_agg_validators[instanceElm.dataset.chain] += validators_count;
+                    acc_agg_validators[instanceElm.dataset.chain] += validators_count;
+                        
+                    const chunks = splitArrayIntoChunks(pubkeys, 100);
+                    let output = "Insight: ";
+                    for(const index in chunks){
+                        const chunk = chunks[index];
+                        output += `<a href="https://gnosischa.in/dashboard?validators=${chunk.toString()}" target="_blank" rel="nofollow noopener noreferrer">${(Number(index)+1)}</a> `;
+                    }
+                    pubkeyElm.innerHTML = output;
+                }
+
+                const srv_agg_ui = server.getElementsByClassName("server_validators")[0];
+                srv_agg_ui.children[0].innerHTML = srv_agg_validators.ethereum;
+                srv_agg_ui.children[1].innerHTML = srv_agg_validators.gnosis;
+            }
+
+            // dest level ui
+            const dest_agg_ui = serverDestination.getElementsByClassName("dest_validators")[0];
+            dest_agg_ui.children[0].innerHTML = dest_agg_validators.ethereum;
+            dest_agg_ui.children[1].innerHTML = dest_agg_validators.gnosis;
+        }
+        const acc_agg_ui = document.getElementsByClassName("account_validators")[0];
+        acc_agg_ui.children[0].innerHTML = acc_agg_validators.ethereum;
+        acc_agg_ui.children[1].innerHTML = acc_agg_validators.gnosis;
+
+        // UI level account
+        
+        function splitArrayIntoChunks(array, chunkSize) {
+            let result = [];
+            for (let i = 0; i < array.length; i += chunkSize) {
+                let chunk = array.slice(i, i + chunkSize);
+                result.push(chunk);
+            }
+            return result;
+        }
+    }
+
+</script>
+{{> scripts/security-guard}}
+{{> footer}}
+</body>

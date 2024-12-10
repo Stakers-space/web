@@ -1,0 +1,99 @@
+{{> header_amp}}
+<main class="grid">
+    <ul class="broadcrumbs mt-60" vocab="https://schema.org/" typeof="BreadcrumbList">
+		<li property="itemListElement" typeof="ListItem">
+			<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+			<meta property="position" content="1">
+		</li>
+		<li property="itemListElement" typeof="ListItem">
+			<a property="item" typeof="Thing" href="/ethereum-staking"><span property="name">Ethereum Staking</span></a>
+			<meta property="position" content="2">
+		</li>
+		<li property="itemListElement" typeof="ListItem">
+			<a property="item" typeof="Thing" href="/ethereum-staking/mev-relay-list"><span property="name" class="intro-label">MEV Relay List</span></a>
+			<meta property="position" content="3">
+		</li>
+	</ul>
+    <h1 class="mt-0">Ethereum MEV Relay List</h1>
+    <table>
+		<thead>
+			<tr>
+				<th>Operator</th>
+                <th>Status</th>
+				<th>Dashboard</th>
+                <th>MEV Strategy/Ethical consideration</th>
+                <th>Filtering/Censorship/Compliance</th>
+                <th>Profit share</th>
+                <th>Builders and searchers</th>
+                <th>Relay software</th>
+                <th>Documentation</th>
+                <th>Social sites</th>
+			</tr>
+		</thead>
+		<tbody>
+            {{#each relays}}
+            <tr>
+				<td><a href="{{name_link}}" target="_blank" rel="nofollow noopener noreferrer">{{name}}</a></td>
+				<td>{{status}}</td>
+                <td><a href="{{dashboard_link}}" target="_blank" rel="nofollow noopener noreferrer">{{dashboard}}</a></td>
+                <td>{{strategy}}</td>
+                <td>{{{filter}}}</td>
+                <td>{{profit_share}}</td>
+                <td>{{builder}}</td>
+                <td><a href="{{software_link}}" target="_blank" rel="nofollow noopener noreferrer">{{software}}</a></td>
+                <td><a href="{{doc_link}}" target="_blank" rel="nofollow noopener noreferrer">{{doc}}</a></td>
+                <td>
+                    {{#if social.x}}
+					<a href="https://discord.gg/RpaxqHRaYT" target="_blank" rel="nofollow noopener noreferrer"><amp-img
+  alt="X (Twitter)"
+  src="/img/icons/x.png"
+  width="25"
+  height="25"
+  layout="fixed"
+>
+</amp-img>
+                    </a>
+					{{/if}}
+                    {{#if social.discord}}
+                    <a href="{{social.discord}}" target="_blank" rel="nofollow noopener noreferrer"><amp-img
+  alt="Discord"
+  src="/img/icons/discord.png"
+  width="25"
+  height="25"
+  layout="fixed"
+>
+</amp-img>
+                    </a>
+                    {{/if}}
+                    {{#if social.email}}
+					<a href="mailto:{{social.email}}" target="_blank" rel="nofollow noopener noreferrer"><amp-img
+  alt="Email"
+  src="/img/icons/email.png"
+  width="25"
+  height="25"
+  layout="fixed"
+>
+</amp-img>
+                    </a>
+                    {{/if}}
+				</td>
+			</tr>
+            {{/each}}
+		</tbody>
+	</table>
+
+    <p class="mt-30">To add a relay to mev-boost configuration, simply get relay url from the relay dashboard link and paste it through <code>-relays</code> flag. There's possible to add multiple relays comma-separated to the -relays flag, like this: -relays https://relay1,https://relay2. If multiple relays is used, the current algorithm for mev-boost will select the relay that offers you the most profit.</p>
+
+    <h2 class="mt-60">Relay Monitors</h2>
+    <ul class="flex flex-wrap gap-2 clean mt-30">
+        {{#each monitors}}
+        <li>
+			<a href="{{link}}" target="_blank" rel="nofollow noopener noreferrer" class="label inline-block rounded-lg border px-5 py-3 text-center leading-none">
+				<h3>{{name}}</h3>
+				<p>by {{developer}}</p>
+			</a>
+		</li>
+        {{/each}}
+	</ul>
+</main>
+{{> footer_amp}}

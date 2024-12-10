@@ -1,0 +1,173 @@
+{{> header}}
+<main class="grid">
+	<section class="egrid egrid-2 gap-8 mt-100 mb-30">
+		<div>
+			<h1 style="font-size:2.4rem;margin-top:.6rem;">Do you feel safe & confident related to staking?</h1>
+			<p><strong>Privacy-focused Stakers.space account helps with both!</strong></p>
+			<div>
+				<a href="/authentization" class="btn btn-black btn-rounded">Sign In</a>
+				<a href="/authentization/new-account" class="btn">Sign Up</a>
+				 <a class="btn" href="/authentization/demo">Demo account</a>
+			</div>
+		</div>
+		<nav>
+			<ul>
+				<li><a href="">Account technology and validators management</a></li>
+				<li><a href="#guides">Tailored staking guides</a></li>
+				<li><a href="#encryption">Client-side encryption</a></li>
+				<li><a href="#features">Numerous features</a>
+					<ul>
+						<li><a href="">Validators Monitoring</a></li>
+						<li><a href="">Alerts - offline states, Client updates and so on</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</section>
+
+	<section class="egrid egrid-2 mt-100 separator-horizontal separator-before" style="padding-top:100px">
+		<div>
+			<h2>All data at one place</h2>
+			<ul>
+				<li>Stakers.space account let's you keep all data related to all your servers and validators under your management at one place.</li>
+				<li>You can use Stakers.space dashboard as a privacy staking hub for you, your friends, family and clients. All see only relevant data for them. It means you can simply share individual instances data with clients or friends you manage them for. They just see only their validators and servers their validators are on.</li>
+			</ul>
+		</div>
+		<div>
+			<div class="tabselector">
+                <nav class="egrid egrid-2">
+                   	<button class="tab selected" data-tabpanel="1" type="button">Server owner view</button>
+                    <button class="tab" data-tabpanel="2" type="button">Client view</button>
+                </nav>
+                <div class="tabpanel selected">
+					<a href="/img/pages/account/home-provider.webp" target="_blank"><img src="/img/pages/account/home-provider.webp" alt="Staking Dashboard - manager" width="100%"></a>
+				</div>
+                <div class="tabpanel">
+					<a href="/img/pages/account/home-client.webp" target="_blank"><img src="/img/pages/account/home-client.webp" alt="Staking Dashboard - client" width="100%"></a>
+				</div>
+            </div>
+		</div>
+	</section>
+
+	<section class="egrid egrid-2 mt-100 separator-horizontal separator-before" style="padding-top:100px">
+		<div>
+			<h2>Privacy-focused dashboard for your staking environment</h2>
+			<ul>
+				
+				<li>You can update any data on the dashbaord through UI or API. You can automatically update validators state, servers state, send alerts and many more.</li>
+				<li>Stakers.space can monitor server data you send (SSD, RAM, SWAP etc. usage) and alert you on reaching a critical value.</li>
+			</ul>
+		</div>
+		<div>
+			<a href="/img/pages/account/ss-api.svg" target="_blank"><img src="/img/pages/account/ss-api.svg" alt="Staking Dashboard - API" width="100%" height="400px"></a>
+		</div>
+	</section>
+
+	<section class="egrid egrid-2 mt-100 separator-horizontal separator-before" style="padding-top:100px">
+		<div>
+			<h2>Senstitive data with browser-side encryption</h2>
+			<ul>
+				<li>Stakers.space keeps data in a privacy-focused way. All sensitive data are client-side encrypted. Encryption is processed in the browser - server side hold data in encrypted form.</li>
+				<li>As you can share individual validator instances with clients, each validator instance can be encrypted with a custom passowrd.</li>
+				<li>No black hole, Stakers.space is <a href="https://github.com/Stakers-space/Web" target="_blank">open-sourced</a>.</li>
+			</ul>
+		</div>
+		<div>
+			<div class="tabselector">
+                <nav class="egrid egrid-2">
+                   	<button class="tab" data-tabpanel="1" type="button">Schema</button>
+                    <button class="tab selected" data-tabpanel="2" type="button">Database view</button>
+                </nav>
+                <div class="tabpanel">
+					
+				</div>
+                <div class="tabpanel selected">
+					<a href="/img/pages/account/home-client.webp" target="_blank"><img src="/img/pages/account/db-encryption.webp" alt="Staking Dashboard - client" width="100%"></a>
+				</div>
+            </div>
+		</div>
+	</section>
+
+	<div class="mt-100 separator-horizontal separator-before" style="padding-top:50px">
+		<h2 class="text-center">Sample Features</h2>
+		<section class="egrid egrid-2"  style="padding-top:50px">
+			<div>
+				<h2>Validators monitoring</h2>
+			</div>
+			<div class="tabselector">
+				<nav class="egrid egrid-2">
+					<button class="tab selected" data-tabpanel="1" type="button">Via Stakers.space</button>
+					<button class="tab" data-tabpanel="2" type="button">Via Own server</button>
+				</nav>
+				<div class="tabpanel selected">
+					<p>You just load all your validator keys to the dashboard either from the deposit file or place your pubkey indexes. Stakers.space monitor all the validatorys for you. All these data are kept in RAM memmory only. However, There's still a link between monitored pubkeys and your account.</p>   
+				</div>
+				<div class="tabpanel">
+					<p>You install a simple script from Github On your machine that monitors all your validator keys. On any issues detection, the script triggers an alert on the dashboard with additional information and email alert, if enabled. As all pubkeys are kept by your server, Stakers.space is not familiar with your public keys not number of validators you operate.</p>
+				</div>
+			</div>
+		</section>
+		<section class="egrid egrid-2"  style="padding-top:50px">
+			<div>
+				<h2>Server resources monitoring</h2>
+				<p>See your SSD, RAM and SWAP usage right at Stakers.space dashboard. Set alerts based on triggers.</p>
+			</div>
+			<div>
+				<a href="/img/pages/account/server-resources.webp" target="_blank"><img src="/img/pages/account/server-resources.webp" alt="Staking Dashboard - Server resources" width="100%"></a>
+			</div>
+		</section>
+		<section class="egrid egrid-2"  style="padding-top:50px">
+			<div>
+				<h2>Tailored staking guides</h2>
+				<p>for <a href="/ethereum-staking">Ethereum</a> and <a href="/gnosis-staking">Gnosis</a> staking</p>
+			</div>
+			<div>
+				<p>Custom interactive guides right for your staking to either fix your current server or launching a new.</p>
+				<div class="egrid egrid-4">
+					<a href="/ethereum-staking/full-guide/solo" class="center text-center box solo">
+						<div>
+							<img src="/logo/ethereum.svg" alt="Ethereum logo" style="height:40px;">
+							<h5>Solo Staking node</h5>
+						</div>
+					</a>
+					<a href="/ethereum-staking/full-guide/rocketpool" class="center text-center box solo">
+						<div>
+							<img src="/logo/rocketpool.webp" alt="" style="height:40px;">
+							<h5>Rocketpool Staking node</h5>
+						</div>
+					</a>
+					<a href="/ethereum-staking/full-guide/stakewise" class="center text-center box solo">
+						<div>
+							<img src="/logo/stakewise.svg" alt="" style="height:40px;">
+							<h5>Stakewise Staking node</h5>
+						</div>
+					</a>
+					<a href="/ethereum-staking/full-guide/lido" class="center text-center box solo">
+						<div>
+							<img src="/logo/lido.png" alt="" style="height:40px;">
+							<h5>Lido Staking node</h5>
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="egrid egrid-2"  style="padding-top:50px">
+			<div>
+				<h2>Automatization tools</h2>
+			</div>
+			<div>
+				See <a href="https://github.com/Stakers-space/staking-scripts" target="_blank">Staking scripts GitHub</a>.
+			</div>
+		</section>
+	</div>
+	<div class="mb-50 text-center">
+		<a href="/authentization" class="btn btn-black btn-rounded">Sign In</a>
+		<a href="/authentization/new-account" class="btn">Sign Up</a>
+		 <a class="btn" href="/authentization/demo">Demo account</a>
+	</div>
+</main>
+<br>
+{{> footer}}
+{{> scripts/tabselector}}
+</body>

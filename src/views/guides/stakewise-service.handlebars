@@ -1,0 +1,337 @@
+{{> header}}
+<main class="mb-60">
+	<section class="cover grid egrid">
+		<div class="mt-60 mb-20">
+			<h1 class="cover-title"><span>Interactive Solo {{chainName}} staking</span> guide for Ubuntu OS</h1>
+			<p>One-page interactive complete guide to stake one as well as thousands of validators in a single staking node. Simply made, well explained, allowing running multiple chains on a single node. Focused on {{chain}}.</p>
+		</div>
+		<div class="disclaimer">
+			<div class="disclaimer-content">
+				<h3>Disclaimer</h3>
+				<p>This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.</p>
+            </div>
+		</div>
+	</section>
+
+	<div class="grid-full contents serverguide">
+        <div class="content-chapters">
+			<div class="sticky">
+				 <nav>
+					<strong>Solo staking guide</strong>
+					<ol>
+						<li><a href="">Hardware & OS</a></li>
+						<li><a href="">Securying server</a></li>
+						<li><a href="">Setting Basic conf</a></li>
+						<li><a href="">Jwtsecret</a></li>
+						<li>Install & configurate clients
+							<ul>
+								<li><a href="#execution">Execution client</a></li>
+								<li><a href="#consensus">Consensus client</a>
+									<ul>
+										<li><a href="#beacon">Beacon</a></li>
+										<li><a href="#validator">Validator</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>Run a Validator</li>
+						<li>Updating clients</li>
+						<li>Exit validators</li>
+					</ol>
+					
+				</nav>
+			</div>
+		</div>
+		<div class="content-header">
+			{{> guides/serverSelection }}
+		</div>
+		<div class="content-panel">
+			<div class="sticky">
+				{{> guides/variablesOverview }}
+			</div>
+		</div>
+
+		<div class="content-body">
+			<section class="chapter" id="prerequisites">
+				<div class="content" style="width:100%;padding-top:10px">
+					<h2 data-number="°">Prerequisites for this guide</h2>
+					<ol>
+						<li>Installed and synced Execution and Consensus client
+							<p><a href="/ethereum-staking/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a></p>
+						</li>
+					</ol>
+				</div>
+            </section>
+			{{!--<section class="chapter" id="hardware">
+				<div class="content" style="width:100%">
+					<h2>Installing StakeVise Operator / Validator</h2>
+					<h2>Vaults parameters</h2>
+					<ul>
+						<li><h3>Vault type</h3>
+							<ul>
+								<li><strong>Public Vaults</strong> can receive staking deposits from any wallet.</li>
+								<li><strong>Private Vaults can only receive deposits from whitelisted wallets by the Vault Admin</strong></li>
+							</ul>
+							<p>Vault type is defined by the Vault creator during Vault setup and <strong>cannot be changed later</strong>.</p>
+						</li>
+						<li>
+							<h3>Vault capacity</h3>
+							<ul>
+								<li>Can range from 32 ETH / 1 GNO to infinity. </li>
+								<li>Setting/choosing an appropriate Vault capacity helps to ensure that the staking infrastructure of the Vault Operator does not carry more validators than it was designed to handle. </li>
+								<li>Vault capacity is defined by the Vault creator during Vault setup and <strong>cannot be changed later</strong>.</li>
+							</ul>
+						</li>
+						<li>
+							<h3>Vault fee</h3>
+							<ul>
+								<li>Sets a percentage fee that will be withheld from the rewards earned by Vault's validators as compensation for staking services. Can range from 0 to 100%.</li>
+								<li>Vault fee is defined by the Vault creator during Vault setup and <strong>cannot be changed later</strong>.</li>
+							</ul>
+						</li>
+						<li>
+							<h3>Vault token</h3>
+							<ul>
+								<li>Defines whether a Vault has an ERC-20 token to represent ETH staked by users in the Vault, or the Vault is tokenless.</li>
+								<li>Vaults that opt into having a Vault Token can set its name and symbol (e.g. mntETH), which will be visible in most portfolio tracking applications.</li>
+								<li>Setting/choosing a Vault with Vault Tokens allows users to transfer their stake in the Vault as long as they don't have osETH minted. It also allows Vault owners to develop a utility & liquidity ecosystem for ETH staked in their Vault.</li>
+								<li>Meanwhile, tokenless Vaults protect users from triggering a tax event when depositing or withdrawing ETH from the Vault. A stake in the tokenless Vault cannot be transferred to another wallet.</li>
+								<li>Presence of Vault Tokens is defined by the Vault creator during Vault setup and <strong>cannot be changed later</strong>.</li>
+							</ul>
+						</li>
+						<li>
+							<h3>Vault block rewards destination</h3>
+							<ul>
+								<li>Smoothing Pool or Own Escrow for collecting the block rewards.</li>
+								<li>Block rewards destination is defined by the Vault creator during Vault setup and <strong>cannot be changed later</strong>.</li>
+							</ul>
+						</li>
+						<li>
+							<h3>Vault branding</h3>
+							<ul>
+								<li>Allows Vault Admins to set the name, description and avatar for their Vault.</li>
+								<li>Vault branding <strong>can be changed at any time</strong>.</li>
+							</ul>
+						</li>
+						<li>
+							<h3>Vault verification</h3>
+							<p>Vault verification provides certainty to Stakers that Vault branding is accurate, i.e. a Vault branded by Operator A is indeed controlled and run by Operator A. Verification is a manual process managed by the core StakeWise team. </p>
+						</li>
+					</ul>
+
+					<h2 class="mt-60"><a href="https://docs.stakewise.io/protocol-overview-in-depth/vaults#solo-vaults" target="_blank">Operator Service</a></h2>
+					<p>Operator Service is primarily responsible for the registration of validators. Operator Service periodically checks whether a Vault has accumulated enough assets for registering new validator(s) and sends a registration transaction to the Vault. The validator registration process consists of the following steps:</p>
+					<ol>
+						<li>Check whether Vault has accumulated enough assets to register a validator (e.g., 32 ETH for Ethereum)</li>
+						<li>Get the next free validator public key from the deposit data file attached to Operator Service. The validators are registered in the same order as specified in the deposit data file.</li>
+						<li>Obtain BLS signature for exit message using local keystores or remote signer.</li>
+						<li>Share the exit signature of the validator with StakeWise Oracles:
+							<ul>
+								<li>Using <a href="https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing" target="_blank">Shamir's secret sharing</a>, split validator's BLS signature. The number of shares is equal to the number of Oracles.</li>
+								<li>Encrypt exit signatures with with Oracles' public keys.</li>
+								<li>Send encrypted exit signatures to all the Oracles and receive registration signatures from them.</li>
+								<li>Send transaction to Vault contract to register the validator.</li>
+							</ul>
+						</li>
+					</ol>
+					<p>Operator Service periodically checks active validators of the Vault and if some exit signatures become outdated, Operator Service will submit a signature update transaction to the Vault.</p>
+				
+					<h2 class="mt-60">Government and management</h2>
+					<p>Every Vault is an independent staking pool and its smart contracts cannot be unilaterally changed or upgraded by the StakeWise DAO. The DAO may implement changes to the Vault contracts to improve their efficiency and safety, in which case a new version of Vault contracts would become available to users. However, Vaults can always choose not to upgrade to the new version. This helps Vault owners preserve control over the staking experience they offer.</p>
+					<p>Every Vault has several key roles for the internal management of the staking process. </p>
+					<ul>
+						<li>
+							<h3>Vault Admin</h3>
+							<ul>
+								<li>Deploys the Vaults and sets the core parameters like the type of Vault and fee. Vault Admins also control the Vault's branding.</li>
+								<li>Vault Admin can be a single wallet, a multisig, or a DAO. Out of security considerations, Vault Admin cannot be changed once the Vault has been deployed.</li>
+								<li>Vault Admin cannot change the core parameters of the Vault once it has been deployed. However, an Admin can assign the Access Manager and Keys Manager roles to other wallets, and change the recipient of the staking fee. </li>
+							</ul>
+						</li>
+						<li>
+							<h3>Access Manager</h3>
+							<ul>
+								<li>Wallet with the power to add and remove wallets from the whitelist of a Private Vault.</li>
+								<li>By default, Vault Admin is also the Access Manager. However, an Admin can assign the Access Manager role to another wallet, and reclaim this role at any moment in the future.</li>
+							</ul>
+						</li>
+						<li>
+							<h3>Keys Manager</h3>
+							<ul>
+								<li>Wallet with the power to add new deposit data to a given Vault.</li>
+								<li>By default, Vault Admin is also the Keys Manager. However, an Admin can assign the Keys Manager role to another wallet, and reclaim this role at any moment in the future.</li>
+							</ul>
+						</li>
+					</ul>
+					<p>Note that StakeWise always checks the validity of deposit data submitted to the Vault to ensure it contains the correct withdrawal address and hasn't been used before.</p>
+
+					<h2 class="mt-60">Operating a vault</h2>
+					<ul>
+						<li><strong>Vault operator(s)</strong> = Entities or individuals who run validators for a Vault
+							<p>Vault Admins determine who the Vault operators are by uploading a deposit data file to the Vault. This file contains the public keys to the validators and the order they will be created when the Vault accumulates enough ETH. These keys are generated by the Vault operators using StakeWise Operator Service, or another keygen software.</p>
+							<p>It is not possible to change an operator who is already running validators for a Vault. However, it is possible to assign new operators for the validators that will be launched in the future by uploading new deposit data.</p>
+							<p>Vault Admin can assign the role of Keys Manager to another wallet to outsource the uploading of new deposit data (and hence the determination of Vault operators) to a third party.</p>
+						</li>
+						<li><strong>Vault state</strong>
+							<p>Every Vault has an internal accounting ledger, saved in the form of a Vault state, that keeps track of the value of stakers' participation in the Vault.</p>
+							<p>Any event that impacts the value of users' stake in the Vault (e.g. new ETH deposit into a Vault, ETH rewards being earned, MEV claimed from a Smoothing Pool etc.) or requires the latest value of users' stake in the Vault (e.g. minting or burning osETH) will require an update to the Vault state to ensure all values are up to date.</p>
+							<p>Any user-driven interaction with the Vault will trigger an update in the Vault state. In the absence of user-driven actions, Vault operator(s) can manually trigger the update whenever they see fit (optional). </p>
+						</li>
+					</ul>
+					<h2 class="mt-60">Whitelist</h2>
+					<ul>
+						<li>Within private Vaults, it allows Vault Admin to control who can deposit and withdraw ETH from the Vault.</li>
+						<li>Once a Private Vault is deployed, Vault Admin can add or remove wallets from the whitelist to manage access to the Vault. Wallets added to the whitelist can stake ETH into the Vault. If a wallet is removed from the whitelist after making a deposit, it will still be able to unstake ETH from that Vault.</li>
+						<li>Vault Admin can also assign the role of Access Manager to another wallet to outsource the management of the whitelist to a third party.</li>
+					</ul>
+
+					<h2 class="mt-60">Handling of Mev</h2>
+					<ul>
+						<li>
+							<h3>Smoothing Pool</h3>
+							<p>Smoothing Pool collects block proposal rewards from all participating validators (Vaults) and periodically distributes rewards to the participants, proportionately to their size.</p>
+							<h4>MEV theft protection</h4>
+							<p>Smoothing Pool system relies on fair contributions from all participants. A Vault that uses the Smoothing Pool to collect block proposal rewards must not engage in any form of MEV theft that lowers its contribution to the Pool. </p>
+							<p>To encourage fair behaviour, StakeWise delays the actual pay-out of ETH rewards from the Smoothing Pool to the Vault until the moment that the Vault contributes the expected amount of rewards for proposing a block. </p>
+							<p>The expected amount is defined as the lowest possible reward that the proposing validator could have received for a block it proposed using one of the StakeWise DAO-approved relays. </p>
+							<p>If the contribution is on par with or exceeds expectations, the rewards accumulated for the Vault in the Smoothing Pool to date are paid out. </p>
+							<p>If the contribution is below the expected amount, the rewards that the Vault expected to receive from the Smoothing Pool are withheld in favour of other Pool participants. The Vault also receives an "MEV thief" status and gets its Vault Score reduced. </p>
+						</li>
+						<li><h3>Own Escrow</h3>
+							<p>Own Escrow allows a Vault to choose an independent approach to earning block production rewards, like using any relay of choice, because it does not rely on sharing such rewards with other Vaults.</p>
+							<p>Using Own Escrow to collect block proposal rewards allows Vaults to build their own blocks or use any relay they see fit. </p>
+						</li>
+					</ul>
+				</div>
+            </section>--}}
+
+			<section class="chapter" id="integration">
+				<div class="content" style="width:100%">
+					<h2>Integration</h2>
+					<ol>
+						<li>
+							<h3>Creating a Vault</h3>
+							<ul>
+								<li>At <a href="https://app.stakewise.io/operate">https://app.stakewise.io/operate</a>, connect your wallet and create a Vault</li>
+							</ul>
+						</li>
+						<li>
+							<h3>Installing StakeWise client on the node server</h3>
+							<ol>
+								<li><h4>Download the binary file for your node</h4>
+									Download the client
+									<pre><code>cd ~/downloads && curl -LO https://github.com/stakewise/v3-operator/releases/download/v<mark>{{serviceLayer.stakewise.latestVer}}</mark>/operator-v<mark>{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
+									Unpack the client and remove its packed file
+									<pre><code>tar xvf operator-v<mark>{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64.tar.gz && rm operator-v<mark>{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
+								</li>
+								<li><h4>Move the client to <code>/usr/local/bin</code></h4>
+									<pre><code>sudo cp ~/downloads/operator-v<mark>{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64/operator /usr/local/bin/stakewise-operator && rm -r ~/downloads/operator-v<mark>{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64</code></pre>
+								</li>
+								<li><h4>Create a directory for <code>stakewise</code> service</h4>
+									<pre><code>sudo mkdir /srv/stakewise</code></pre>
+								</li>
+							</ol>
+						</li>
+						<li><h3>Maua way - Generate validator keys</h3>
+							<div class="tabselector">
+								<nav class="egrid egrid-2">
+									<button class="tab selected" data-tabpanel="1">Through operator</button>
+									<button class="tab" data-tabpanel="2">Manually</button>
+								</nav>
+								<div class="tabpanel selected">
+									<ul>
+										<li><h4>Init</h4>
+											<pre><code>sudo /usr/local/bin/stakewise-operator init --data-dir /srv/stakewise</code></pre>
+											Response is
+											<pre><code>done.
+Successfully initialized configuration for vault 0xXXXX...</code></pre>
+											<p>There's created file <code>config.json</code> at <code>/srv/stakewise/&lt;vaultAddress&gt;/config.json</code>. File content:</p>
+											<pre><code>{"network": "gnosis", "mnemonic_next_index": 0, "first_public_key": "0xXXXXXXX....."}</code></pre>
+										</li>
+										<li><h4>Create keys</h4>
+											<pre><code>sudo /usr/local/bin/stakewise-operator create-keys --data-dir /srv/stakewise</code></pre>
+											Response is:
+											<pre><code>Done. Generated 8 keys for 0xXXXX... vault.
+Keystores saved to /srv/stakewise/0xXXXX.../keystores file
+Deposit data saved to /srv/stakewise/0xXXXX.../deposit_data.json file</code></pre>
+											Keystores password is at <code>nano /srv/stakewise/0xXXXX.../keystores/password.txt</code>
+										</li>
+										<li><h4>Create Hot wallet</h4>
+											<pre><code>sudo /usr/local/bin/stakewise-operator create-wallet --data-dir /srv/stakewise</code></pre>
+											<p>Response is</p>
+											<pre><code>Done. The wallet and password saved to /srv/stakewise/0xXXXX.../wallet directory. The wallet address is: 0xXXXX...</code></pre>
+										</li>
+									</ul>
+								</div>
+								<div class="tabpanel">
+									<ul>
+										<li>On offline PC, generate deposit keys with the Vault withdrawal's address</li>
+										<li>Upload deposit file to the Vault</li>
+										<li>Create Hot wallet...</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li>
+							<h3>Upload deposit file to the vault</h3>
+							<p>Download deposit_data file through <code>scp</code></p>
+							<pre><code>scp -P PORT -i ~/.ssh/file -r userName@IP:/srv/stakewise/0xXXXX.../deposit_data.json deposit_data.json</code></pre>
+							<p>Copy the deposit fril from disk and uplaod it over web - click on "Settings" and open the "Deposit Data" tab.</p>
+						</li>
+						<li>
+							<h3>Create a StakeWise Operator service</h3>
+							<pre><code>sudo useradd --system --no-create-home --shell /bin/false stakewise-v1</code></pre>
+							<pre><code>sudo mkdir -p /var/lib/stakewise/0xXXXX...</code></pre>
+							<pre><code>sudo chown -R stakewise-v1:stakewise-v1 /srv/stakewise/0xXXXX...</code></pre>
+							<pre><code>sudo chown -R stakewise-v1:stakewise-v1 /var/lib/stakewise/0xXXXX...</code></pre>
+							<h4>Configurate the service</h4>
+							<pre><code>sudo nano /etc/systemd/system/stakewise-v1.service</code></pre>
+{{> clients/config/gno-stakewise }}
+							<pre><code>sudo systemctl daemon-reload</code></pre>
+						</li>
+						<li>
+							<h3>Start the service</h3>
+							<pre><code>sudo systemctl start stakewise-v1</code></pre>
+							<h4>Check the service</h4>
+<pre><code>systemctl status stakewise-v1</code></pre>
+<h4>Monitor the service</h4>
+<pre><code>journalctl -fu stakewise-v1</code></pre>
+<p>Output:</p>
+<pre><code>2024-07-27 17:20:45 INFO     Starting operator service, version v<mark>{{serviceLayer.stakewise.latestVer}}</mark>
+INFO     Checking connection to database...
+INFO     Connected to database /var/lib/stakewise/0xXXXX.../operator.db.
+INFO     Checking connection to consensus nodes...
+INFO     Connected to consensus node at http://127.0.0.1:9596. Finalized epoch: 1038841
+INFO     Checking connection to execution nodes...
+INFO     Connected to execution node at http://127.0.0.1:8545. Current block number: 35182233
+INFO     Checking vault address 0xXXXX......
+INFO     Vault withdrawable assets: 0.00 GNO
+INFO     Checking hot wallet balance 0xXXXX... ...
+INFO     Checking connection to ipfs nodes...
+
+INFO     Connected to ipfs nodes at https://stakewise-v3.infura-ipfs.io, http://cloudflare-ipfs.com, https://gateway.pinata.cloud, https://ipfs.io.
+INFO     Checking connection to oracles set...
+INFO     Connected to oracles at https://gno-stakewise-v3-oracle.pn.prod.fcstech.de, https://gnosis-oracle.stakewise.io, https://stakewise-oracle-gnosis.chorus.one, https://stakewise-oracle-gno-mainnet-1.gateway.fm, https://sw-oracle-gno.axol.io, https://stakewise-oracle-gc.gnosischain.com, https://gnosis-oracle.stakewise.dsrvlabs.net, https://gnosis-oracle-b.stakewise.io, https://stakewise-oracle-v3-gnosis.bitfly.at, https://stakewise-oracle-gc-2.gnosischain.com, https://stakewise-oracle-gnosis.senseinode.com
+INFO     Checking deposit data file...
+INFO     Found deposit data file /srv/stakewise/0xXXXX.../deposit_data.json
+INFO     Checking keystores dir...
+INFO     Found keystores dir
+INFO     Loading keys from /srv/stakewise/0xXXXX.../keystores...
+INFO     Loaded 8 keys
+INFO     Loaded deposit data file /srv/stakewise/0xXXXX.../deposit_data.json
+INFO     Syncing network validator events...
+INFO     Updating oracles cache...
+INFO     Started operator service
+</code></pre>
+						</li>
+						<li><h4>Enable auto launch on OS startup</h4>
+							<pre><code>sudo systemctl enable stakewise-v1</code></pre>
+						</li>
+					</ol>
+				</div>
+			</section>
+        </div>
+    </div>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}

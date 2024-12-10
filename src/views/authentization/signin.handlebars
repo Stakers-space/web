@@ -1,0 +1,99 @@
+<body id="body">
+{{> header dashboard=0}}
+<main>
+    <section class="login">
+        <div class="login-wrapper">
+            <div class="login-wrapper_boxes">
+                <div>
+                    <h1>{{formTitle}}</h1>
+                    <p>and get access to multiple benefits of Stakers.space</p>
+                    <ul>
+                        <li>Validators dashboard</li>
+                        <li>Tailored guides</li>
+                        <li>States notifications</li>
+                        <li>... and more</li>
+                    </ul>
+                   
+                </div>
+                <div>
+                    {{#if (and locals.passwordPage successCallback)}}
+                <img src="/img/icons/email-notice.png" alt="Email notice">
+                <p class="login-resetinfo">
+                    <strong>Instructions for setting a new password have been sent to the specified email.</strong> Please <strong>check all sections, including the "spam" folder.</strong>
+                </p>
+                {{else}}
+                <div class="mt-20">
+                    <form method="post" action="/authentization/login"  data-login="/authentization/login" data-forgotpsw="/authentization/reset-password">
+                        <div id="email" class="login-item">
+                            <input type="text" id="email" name="username" required="required">
+                            <label for="email">Email address</label>
+                            <div class="cover"></div>
+                        </div>
+
+
+                        <div id="password" class="login-item {{#if locals.accountPage}}hide{{/if}}">
+                            <div {{#if locals.passwordPage}}class="hide"{{/if}}>
+                                <input type="password" id="pass" {{#if locals.loginPage}}required="required"{{/if}} name="password">
+                                <label for="pass">Password</label>
+                                <div class="cover"></div>
+                            </div>
+                            <p class="login-resetinfo {{#if (or locals.loginPage locals.accountPage)}}hide{{/if}}">
+                                You will get an email with instruction for getting new password after pressing "Submit" button.
+                            </p>
+                        </div>
+                        {{#if locals.accountPage}}
+                            <p class="login-resetinfo">
+                                You will get an email with instruction for creating an account after pressing "Submit" button.
+                            </p>
+                        {{/if}}
+                        {{#if failureCallback}}
+                            <p class="login-error">{{{failureCallback}}}</p>
+                        {{/if}}
+                        <div class="login-action" id="login-action">
+                            <input type="submit" class="submit btn btn-black btn-rounded" id="submit" value="{{locals.btntxt.default}}" data-login="{{locals.btntxt.login}}" data-password="{{locals.btntxt.psw}}">
+                            <a href="{{locals.linktxt.link}}" class="link" id="link" data-login="{{locals.linktxt.login}}" data-password="{{locals.linktxt.psw}}">{{locals.linktxt.default}}</a>
+                        </div>
+                    </form>
+                    {{#if isError}}
+                    <p class="login-error" id="onError">There's no account for filled email address xxx@xxx.mail.</p>
+                    {{/if}}
+                </div>
+                {{/if}}
+                </div>
+            </div>
+            <p class="signup text-center">New to Stakers.space? <span class="btns"><a class="btn btn-black btn-rounded" href="/authentization/new-account">Sign Up</a> <a class="btn" href="/authentization/demo">Demo account</a></span></p>
+        </div>
+    </section>
+    {{> footer}}
+</main>
+<script type="text/javascript">
+    document.getElementById("link").addEventListener("click", function(e){
+        e.preventDefault();
+        var pswElm = document.getElementById("password").children;
+        pswElm[0].classList.toggle("hide");
+        pswElm[1].classList.toggle("hide");
+        var form = document.getElementsByTagName("form")[0];
+        var subElm = document.getElementById("login-action").children;
+        var pass = document.getElementById("pass");
+        if(pswElm[0].classList.contains("hide")){
+            subElm[0].value = subElm[0].dataset.password;
+            subElm[1].innerHTML = subElm[1].dataset.login;
+            form.action = form.dataset.forgotpsw;
+            pass.required = false;
+        } else {
+            subElm[0].value = subElm[0].dataset.login;
+            subElm[1].innerHTML = subElm[1].dataset.password;
+            form.action = form.dataset.login;
+            pass.required = true;
+        }
+        var currLink = (' ' + window.location.pathname).slice(1);
+        var linkElm = document.getElementById("link");
+        window.history.pushState({}, document.title, linkElm.href);
+        linkElm.href = currLink;
+    }, false);
+if(self!==top){
+    document.body.innerHTML = "<h1>Guard</h1><p>Access rejected to prevent Clickjack / UI redress attack.</p>";
+    top.location=self.location;
+}
+</script>
+</body>

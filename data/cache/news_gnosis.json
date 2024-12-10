@@ -1,0 +1,146 @@
+{
+  "all": [
+    {
+      "partitionKey": "news",
+      "t": 1732705416690,
+      "m": "<b>A security issue was discovered</b>: in the deposit tools",
+      "a": "https://github.com/ethereum/staking-deposit-cli/releases/tag/v2.8.0",
+      "c": [
+        "eth",
+        "gno"
+      ],
+      "id": "019fbf72-9772-4ccc-89c3-1f89b49858b2",
+      "_rid": "VPZWAPgLfumtJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumtJQAAAAAAAA==/",
+      "_etag": "\"24020851-0000-1600-0000-6746fcde0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1732705502,
+      "ht": "27.11.2024, 12:03:36",
+      "ta": "10 days ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1731317014257,
+      "m": "<b>Lodestar</b> version 1.23.0 released",
+      "a": "https://github.com/ChainSafe/lodestar/releases/tag/v1.23.0",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "01025f0c-4c57-4f79-a970-32237c96b3b0",
+      "_rid": "VPZWAPgLfulrJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulrJQAAAAAAAA==/",
+      "_etag": "\"84031807-0000-1600-0000-6731cd550000\"",
+      "_attachments": "attachments/",
+      "_ts": 1731317077,
+      "ht": "11.11.2024, 10:23:34",
+      "ta": "26 days ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1730275452555,
+      "m": "<b>Teku</b> version 24.10.3 released",
+      "a": "https://stakers.space/teku#update",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "727cf967-7f19-4c7e-8c15-b2953df7e3e5",
+      "_rid": "VPZWAPgLfukfJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukfJQAAAAAAAA==/",
+      "_etag": "\"8403430a-0000-1600-0000-6731cd600000\"",
+      "_attachments": "attachments/",
+      "_ts": 1731317088,
+      "ht": "30.10.2024, 09:04:12",
+      "ta": "about 1 month ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1725891540000,
+      "m": "<b>Erigon</b> version 2.60.7 released",
+      "a": "https://stakers.space/erigon#update",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "cd776738-5102-42c1-b48c-38c62d859304",
+      "_rid": "VPZWAPgLfunTIwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunTIwAAAAAAAA==/",
+      "_etag": "\"460041e8-0000-1600-0000-6721e8e40000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275556,
+      "ht": "09.09.2024, 16:19:00",
+      "ta": "3 months ago",
+      "img": "gnosis"
+    }
+  ],
+  "fundamental": [],
+  "clients": [
+    {
+      "partitionKey": "news",
+      "t": 1731317014257,
+      "m": "<b>Lodestar</b> version 1.23.0 released",
+      "a": "https://github.com/ChainSafe/lodestar/releases/tag/v1.23.0",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "01025f0c-4c57-4f79-a970-32237c96b3b0",
+      "_rid": "VPZWAPgLfulrJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulrJQAAAAAAAA==/",
+      "_etag": "\"84031807-0000-1600-0000-6731cd550000\"",
+      "_attachments": "attachments/",
+      "_ts": 1731317077,
+      "ht": "11.11.2024, 10:23:34",
+      "ta": "26 days ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1730275452555,
+      "m": "<b>Teku</b> version 24.10.3 released",
+      "a": "https://stakers.space/teku#update",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "727cf967-7f19-4c7e-8c15-b2953df7e3e5",
+      "_rid": "VPZWAPgLfukfJQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukfJQAAAAAAAA==/",
+      "_etag": "\"8403430a-0000-1600-0000-6731cd600000\"",
+      "_attachments": "attachments/",
+      "_ts": 1731317088,
+      "ht": "30.10.2024, 09:04:12",
+      "ta": "about 1 month ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1725891540000,
+      "m": "<b>Erigon</b> version 2.60.7 released",
+      "a": "https://stakers.space/erigon#update",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "cd776738-5102-42c1-b48c-38c62d859304",
+      "_rid": "VPZWAPgLfunTIwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunTIwAAAAAAAA==/",
+      "_etag": "\"460041e8-0000-1600-0000-6721e8e40000\"",
+      "_attachments": "attachments/",
+      "_ts": 1730275556,
+      "ht": "09.09.2024, 16:19:00",
+      "ta": "3 months ago",
+      "img": "gnosis"
+    }
+  ]
+}

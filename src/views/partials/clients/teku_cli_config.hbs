@@ -1,0 +1,76 @@
+    <ul>
+      <li>
+    <h4>Create a user</h4>
+      <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}tekubeacon" class="interactive-element consensus_sn" data-class="consensus_sn" data-client="teku">
+      <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="consensus_sn" data-client="teku">{{servicePrefix}}tekubeacon</mark></code></pre>
+    </li>
+    <li>
+    <h4>Create a folder for Tekubeacon data{{#if chain}} on {{chainName}} chain{{/if}}</h4>
+    <label>Service data directory</label>: <input type="text" value="/var/lib{{slashChain}}/tekubeacon" class="interactive-element consensus-dp" data-class="consensus-dp" data-client="lodestar">
+    <pre><code>sudo mkdir -p <mark class="consensus-dp">/var/lib{{slashChain}}/tekubeacon</mark></code></pre>
+  </li>
+  <li>
+    <h4>Set access permission and ownership for the Teku data folder</h4>
+    <pre><code>sudo chown -R <mark class="consensus_sn" data-client="teku">{{servicePrefix}}tekubeacon</mark>:<mark class="consensus_sn" data-client="teku">{{servicePrefix}}tekubeacon</mark> <mark class="consensus-dp">/var/lib{{slashChain}}/tekubeacon</mark></code></pre>
+  </li>
+    </ul>
+<h3 class="mt-60">Configurate & Run Tekubeacon service</h3>
+
+<ul>
+ {{#if PortSelection}}
+    <li class="mt-15">{{> clients/config/consensusclient-portselection }}</li>
+    {{/if}}
+  <li>
+    <h4>Create configuration file for Tekubeacon service</h4>
+    <ol>
+      <li>
+        <p>Open Tekubeacon configuration file</p>
+        <pre><code>sudo nano /etc/systemd/system/<mark class="consensus_sn" data-client="teku">{{servicePrefix}}tekubeacon</mark>.service</code></pre>
+      </li>
+      <li><p>Copy configuration</p>
+          {{#unless chain}}
+          <div class="tabselector">
+						<nav class="egrid egrid-2">
+							<button class="tab selected" data-tabpanel="1">Ethereum</button>
+							<button class="tab" data-tabpanel="2">Gnosis</button>
+						</nav>
+						<div class="tabpanel selected">
+{{> clients/config/eth-tekubeacon }}
+						</div>
+						<div class="tabpanel">
+{{> clients/config/gno-tekubeacon }}
+						</div>
+					</div>
+          <i>*Note: Update <code>ee-jwt-secret-file</code>, if you use different</i>
+          {{/unless}}
+{{#ifEqual chain "ethereum"}}
+{{> clients/config/eth-tekubeacon }}
+{{/ifEqual}}
+{{#ifEqual chain "gnosis"}}
+{{> clients/config/gno-tekubeacon }}
+{{/ifEqual}}
+      </li>
+      <li>
+        Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config
+        file.
+      </li>
+    </ol>
+  </li>
+  <li>
+    <h4>Load changes</h4>
+    <pre><code>sudo systemctl daemon-reload</code></pre>
+  </li>
+  <li>
+    <h4>Start the Beacon chain service</h4>
+    <pre><code>sudo systemctl start <mark class="consensus_sn">{{servicePrefix}}tekubeacon</mark></code></pre></code></pre>
+  </li>
+  <li>
+    <h4>Check the service</h4>
+    <pre><code>systemctl status <mark class="consensus_sn">{{servicePrefix}}tekubeacon</mark>
+journalctl -fu <mark class="consensus_sn">{{servicePrefix}}tekubeacon</mark></code></pre>
+  </li>
+  <li>
+    <h4>Start the service automatically on system startup</h4>
+    <pre><code>sudo systemctl enable <mark class="consensus_sn">{{servicePrefix}}tekubeacon</mark></code></pre>
+  </li>
+</ul>

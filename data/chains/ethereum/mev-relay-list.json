@@ -1,0 +1,298 @@
+{
+    "relays": [
+        {
+            "name": "Aestus",
+            "name_link": "https://aestus.live/",
+            "dashboard": "mainnet.aestus.live",
+            "dashboard_link": "https://mainnet.aestus.live/",
+            "strategy": "Maximize validator payout by including all available transactions and MEV bundles",
+            "profit_share": "100% to validator",
+            "filter": "No filtering and no censorship",
+            "builder": "Public and permissionless",
+            "software": "Aestus’ fork of mev-boost-relay",
+            "software_link": "https://github.com/aestus-relay/mev-boost-relay",
+            "doc": "medium.com/@aestus_relay",
+            "doc_link": "https://medium.com/@aestus_relay/introducing-the-aestus-relay-4a36f03acc31",
+            "social": {
+                "email": "contact@aestus.live",
+                "x": "https://twitter.com/AestusRelay",
+                "discord": null
+            },
+            "note": ""
+        },
+        {
+            "name": "Agnostic Gnosis",
+            "name_link": "Agnostic Gnosis",
+            "dashboard": "agnostic-relay.net",
+            "dashboard_link": "https://agnostic-relay.net/",
+            "strategy": "Maximize validator payout by including all available transactions and MEV bundles",
+            "profit_share": "100% to validator",
+            "filter": "No filtering and no censorship",
+            "builder": "Public and permissionless",
+            "software": "Gnosis’s fork of mev-boost-relay",
+            "software_link": "https://github.com/gnosis/mev-boost-relay",
+            "doc": "https://www.gnosis.io/blog",
+            "doc_link": "https://www.gnosis.io/blog/agnostic-relay-a-credibly-neutral-tool",
+            "social": {
+                "email": null,
+                "x": null,
+                "discord": "http://discord.gg/gnosischain"
+            },
+            "note": ""
+        },
+        {
+            "name": "bloXroute Max Profit",
+            "name_link": "https://bloxroute.com/",
+            "dashboard": "bloxroute.max-profit.blxrbdn.com",
+            "dashboard_link": "https://bloxroute.max-profit.blxrbdn.com/",
+            "strategy": "Maximize validator payout without including transactions and bundles sent from/to wallet addresses that are sanctioned by OFAC",
+            "profit_share": "Unknown",
+            "filter": "Filters out OFAC sanctioned addresses as of <a href='https://twitter.com/bloXrouteLabs/note/1736819783520092357'  target='_blank' rel='nofollow noopener noreferrer'>Dec 2023</a> (Called Max profit in the <a href='https://docs.bloxroute.com/the-merge-eth2.0/mev-relay-instructions-for-validators' target='_blank' rel='nofollow noopener noreferrer'>documentation</a>)",
+            "builder": "Internal and external builders. External searchers.",
+            "software": "bloXroute’s fork of mev-boost-relay",
+            "software_link": "https://github.com/bloXroute-Labs/mev-relay",
+            "doc": "https://docs.bloxroute.com",
+            "doc_link": "https://docs.bloxroute.com/the-merge-eth2.0/mev-relay-instructions-for-validators#relay-types",
+            "social": {
+                "email": "support@bloxroute.com",
+                "x": null,
+                "discord": "https://discordapp.com/invite/mB95H7s"
+            },
+            "note": ""
+        },
+        {
+            "name": "bloXroute Regulated",
+            "name_link": "https://bloxroute.com/",
+            "dashboard": "bloxroute.regulated.blxrbdn.com",
+            "dashboard_link": "https://bloxroute.regulated.blxrbdn.com/",
+            "strategy": "Maximize validator payout without including transactions and bundles sent from/to wallet addresses that are sanctioned by OFAC",
+            "profit_share": "Unknown",
+            "filter": "Filters out OFAC sanctioned addresses (Called Regulated in the <a href='https://docs.bloxroute.com/the-merge-eth2.0/mev-relay-instructions-for-validators' target='_blank' rel='nofollow noopener noreferrer'>documentation</a>)",
+            "builder": "Internal and external builders. External searchers.",
+            "software": "bloXroute’s fork of mev-boost-relay",
+            "software_link": "https://github.com/bloXroute-Labs/mev-relay",
+            "doc": "https://docs.bloxroute.com",
+            "doc_link": "https://docs.bloxroute.com/the-merge-eth2.0/mev-relay-instructions-for-validators#relay-types",
+            "social": {
+                "email": "support@bloxroute.com",
+                "x": null,
+                "discord": "https://discordapp.com/invite/mB95H7s"
+            },
+            "note": ""
+        },
+        {
+            "name": "Titan Relay",
+            "name_link": "https://docs.titanrelay.xyz/",
+            "dashboard": "titanrelay.xyz",
+            "dashboard_link": "https://titanrelay.xyz/",
+            "strategy": "Maximize validator payout by including all available transactions and MEV bundles",
+            "profit_share": "100% to validator",
+            "filter": "No filtering and no censorship",
+            "builder": "Internal and external builders. Permissionless",
+            "software": "Helix",
+            "software_link": "https://github.com/gattaca-com/helix",
+            "doc": "docs.titanrelay.xyz",
+            "doc_link": "https://docs.titanrelay.xyz/",
+            "social": {
+                "email": null,
+                "x": "https://x.com/titanbuilderxyz",
+                "discord": null
+            },
+            "note": ""
+        },
+        {
+            "name": "Titan Relay Regional",
+            "name_link": "https://docs.titanrelay.xyz/",
+            "dashboard": "regional.titanrelay.xyz",
+            "dashboard_link": "https://regional.titanrelay.xyz/",
+            "strategy": "Maximize validator payout without including transactions and bundles sent from/to wallet addresses that are sanctioned by OFAC",
+            "profit_share": "100% to validator",
+            "filter": "Filters out OFAC sanctioned addresses",
+            "builder": "Internal and external builders. Permissionless",
+            "software": "Helix",
+            "software_link": "https://github.com/gattaca-com/helix",
+            "doc": "docs.titanrelay.xyz",
+            "doc_link": "https://docs.titanrelay.xyz/",
+            "social": {
+                "email": null,
+                "x": "https://x.com/titanbuilderxyz",
+                "discord": null
+            },
+            "note": ""
+        },
+        {
+            "name": "Flashbots",
+            "name_link": "https://boost.flashbots.net/",
+            "dashboard": "boost-relay.flashbots.net",
+            "dashboard_link": "https://boost-relay.flashbots.net/",
+            "strategy": "Maximize validator payout without including transactions and bundles sent from/to wallet addresses that are sanctioned by OFAC",
+            "profit_share": "Specific to builder of bid with highest validator value. 100% to validator from Flashbots builders.",
+            "filter": "Filters out OFAC sanctioned addresses (<a href='https://twitter.com/bantg/note/1559948198508118016' target='_blank' rel='nofollow noopener noreferrer'>Source</a>)",
+            "builder": "Internal and external builders. Permissionless.",
+            "software": "mev-boost-relay",
+            "software_link": "https://github.com/flashbots/mev-boost-relay",
+            "doc": "docs.flashbots.net",
+            "doc_link": "https://docs.flashbots.net/flashbots-mev-boost/introduction",
+            "social": {
+                "email": null,
+                "x": null,
+                "discord": "https://discord.com/invite/3TjWjBerRb"
+            },
+            "note": ""
+        },
+        {
+            "name": "Manifold",
+            "name_link": "https://securerpc.com/",
+            "dashboard": "mainnet-relay.securerpc.com",
+            "dashboard_link": "https://mainnet-relay.securerpc.com/",
+            "strategy": "Maximize validator payout by including all available private transactions and MEV bundles",
+            "profit_share": "Varied",
+            "filter": "No filtering and no censorship",
+            "builder": "Internal and external builders. Permissionless.",
+            "software": "mev-freelay",
+            "software_link": "https://github.com/manifoldfinance/mev-freelay",
+            "doc": "kb.manifoldfinance.com",
+            "doc_link": "https://kb.manifoldfinance.com/",
+            "social": {
+                "email": "sam@manifoldfinance.com",
+                "x": null,
+                "discord": null
+            },
+            "note": "This relay had a major issue on October 15th 2022 (<a href='https://research.lido.fi/t/lido-on-ethereum-relay-voting-proposal/3135/11' target='_blank' rel='nofollow noopener noreferrer'>1</a> , <a href='https://hackmd.io/@manifoldx/2022-10-15' target='_blank' rel='nofollow noopener noreferrer'>2</a>)."
+        },
+        {
+            "name": "Ultra Sound",
+            "name_link": "https://relay.ultrasound.money/",
+            "dashboard": "relay.ultrasound.money",
+            "dashboard_link": "https://relay.ultrasound.money/",
+            "strategy": "Maximize validator payout by including all available transactions and MEV bundles",
+            "profit_share": "100% to validator",
+            "filter": "No filtering and no censorship",
+            "builder": "Public and permissionless.",
+            "software": "mev-boost-relay",
+            "software_link": "https://github.com/flashbots/mev-boost-relay",
+            "doc": "",
+            "doc_link": "",
+            "social": {
+                "email": "contact@ultrasound.money",
+                "x": "https://twitter.com/ultrasoundmoney",
+                "discord": null
+            },
+            "note": ""
+        },
+        {
+            "name": "Wenmerge",
+            "name_link": "https://relay.wenmerge.com/",
+            "dashboard": "relay.wenmerge.com",
+            "dashboard_link": "https://relay.wenmerge.com/",
+            "strategy": "Maximize validator payout by including all available transactions and MEV bundles",
+            "profit_share": "100% to validator from wenmerge builders. Specific to builder of bid with highest validator value.",
+            "filter": "No filtering and no censorship",
+            "builder": "Public and permissionless.",
+            "software": "mev-boost-relay",
+            "software_link": "https://github.com/flashbots/mev-boost-relay",
+            "doc": "",
+            "doc_link": "",
+            "social": {
+                "email": "contact@wenmerge.com",
+                "x": "https://twitter.com/Wenmerge2022",
+                "discord": null
+            },
+            "note": "A relay from Wenmerge to support eth community."
+        }
+        ,
+        {
+            "name": "Proof Relay",
+            "name_link": "https://pon.network/",
+            "dashboard": "proof-relay.ponrelay.com",
+            "dashboard_link": "https://proof-relay.ponrelay.com/relay/config",
+            "strategy": "Open auction - maximum value",
+            "profit_share": "100% to validator",
+            "filter": "Only filtering is availability of ZK Proof for block and validator payment",
+            "builder": "Public and permissionless.",
+            "software": "Proof Relay",
+            "software_link": "https://github.com/pon-pbs/proof-relay",
+            "doc": "docs.pon.network",
+            "doc_link": "https://docs.pon.network/",
+            "social": {
+                "email": null,
+                "x": null,
+                "discord": "https://discord.gg/rXjDArC776"
+            },
+            "note": ""
+        }
+    ],
+    "monitors": [
+        {
+            "name": "MEV Panda",
+            "link": "https://www.mevpanda.com/",
+            "developer": "OreoMev"
+        },
+        {
+            "name": "calldata.pics",
+            "link": "https://calldata.pics/",
+            "developer": "Toni Wahrstätter"
+        },
+        {
+            "name": "censorship.pics",
+            "link": "https://censorship.pics/",
+            "developer": "Toni Wahrstätter"
+        },
+        {
+            "name": "mevboost.pics",
+            "link": "https://www.mevboost.pics/",
+            "developer": "Toni Wahrstätter"
+        },
+        {
+            "name": "timing.pics",
+            "link": "https://timing.pics/",
+            "developer": "Toni Wahrstätter"
+        },
+        {
+            "name": "tornado.pics",
+            "link": "https://tornado.pics/",
+            "developer": "Toni Wahrstätter"
+        },
+        {
+            "name": "MEV Watch",
+            "link": "https://www.mevwatch.info/",
+            "developer": "Labrys"
+        },
+        {
+            "name": "Relays",
+            "link": "https://beaconcha.in/relays",
+            "developer": "beaconcha.in"
+        },
+        {
+            "name": "Relay Scan",
+            "link": "https://www.relayscan.io/",
+            "developer": "Chris Hager"
+        },
+        {
+            "name": "Transparency dashboard",
+            "link": "https://transparency.flashbots.net/",
+            "developer": "Flashbots"
+        },
+        {
+            "name": "Relay Monitor",
+            "link": "https://app.metrika.co/ethereum/dashboard/mev/relay-overview?tr=1d",
+            "developer": "Metrika"
+        },
+        {
+            "name": "Rated Network",
+            "link": "https://www.rated.network/relays?network=mainnet",
+            "developer": "Rated Network"
+        },
+        {
+            "name": "Inclusion Watch",
+            "link": "https://www.inclusion.watch/",
+            "developer": "donnoh.eth and emiliano.eth"
+        },
+        {
+            "name": "Neutrality Watch",
+            "link": "https://eth.neutralitywatch.com/",
+            "developer": " analyses Lido operators"
+        }
+    ]
+}
+

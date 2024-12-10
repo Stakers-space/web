@@ -1,0 +1,28 @@
+{{> header}}
+<main>
+	<section class="grid">
+		<h1>{{chainName}}</h1>
+	</section>
+	
+	
+	<section class="grid">
+		<h2>Execution Clients</h2>
+		<div class="egrid egrid-4">
+			{{#each executionClients}}
+			<a href="{{this.link}}">{{{this.name}}}</a>
+        	{{/each}}
+		</div>
+		<h2>Consensus Clients</h2>
+		<div class="egrid egrid-5">
+			{{#each consensusClients}}
+			<a href="{{this.link}}">{{{this.name}}}</a>
+        	{{/each}}
+		</div>
+	</section>
+
+	<section class="grid">
+		<a href="{{slashChain}}/staking-guide">Full staking guide</a>
+	</section>
+</main>
+{{> footer}}
+</body>

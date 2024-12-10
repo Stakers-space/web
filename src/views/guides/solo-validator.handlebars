@@ -1,0 +1,124 @@
+{{> header}}
+<main class="mb-60">
+	<section class="cover grid egrid">
+		<div class="mt-60 mb-20">
+			<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{clientName}} staking</span></a>
+					<meta property="position" content="2">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}/solo"><span property="name" class="intro-label">Solo staking</span></a>
+					<meta property="position" content="3">
+				</li>
+			</ul>
+			<h1 class="cover-title"><span>Interactive Solo {{chainName}} staking</span> guide for Ubuntu OS</h1>
+			<p>One-page interactive complete guide to stake one as well as thousands of validators in a single staking node. Simply made, well explained, allowing running multiple chains on a single node. Focused on {{chain}}.</p>
+		</div>
+		<div class="disclaimer">
+			<div class="disclaimer-content">
+				<h3>Disclaimer</h3>
+				<p>This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.</p>
+            </div>
+		</div>
+	</section>
+
+	<div class="grid-full contents serverguide">
+        <div class="content-chapters">
+			<div class="sticky">
+				 <nav>
+					<strong>Solo staking guide</strong>
+					<ol>
+						<li><a href="">Hardware & OS</a></li>
+						<li><a href="">Securying server</a></li>
+						<li><a href="">Setting Basic conf</a></li>
+						<li><a href="">Jwtsecret</a></li>
+						<li>Install & configurate clients
+							<ul>
+								<li><a href="#execution">Execution client</a></li>
+								<li><a href="#consensus">Consensus client</a>
+									<ul>
+										<li><a href="#beacon">Beacon</a></li>
+										<li><a href="#validator">Validator</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>Run a Validator</li>
+						<li>Updating clients</li>
+						<li>Exit validators</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+		<div class="content-header">
+			{{> guides/serverSelection }}
+		</div>
+		<div class="content-panel">
+			<div class="sticky">
+				{{> guides/variablesOverview }}
+			</div>
+		</div>
+		<div class="content-body">
+			<section class="chapter" id="prerequisites">
+				<div class="content" style="width:100%;padding-top:10px">
+					<h2 data-number="°">Prerequisites for this guide</h2>
+					<ol>
+						<li>Installed and synced Execution and Consensus client
+							<p><a href="/{{chainUrl}}/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a></p>
+						</li>
+					</ol>
+				</div>
+            </section>
+			<section class="chapter mt-60" id="validator">
+				<div class="content bt">
+					<h2>Run a validator</h2>
+					<p>Stakers.space guide works with a concept of validator instances. You are used to have only one validator service from the other staking guides. However, this one service is just a single instance. This guide supports you to set multiple such validator instances on a single machine (if necessary), which has following benefits:</p>
+					<ul>
+						<li>You are able to keep validators separated - e.g. based on used deposit / withdrawal / fee recipient wallet address</li>
+						<li>Keep logs in smaller size</li>
+						<li>Remove a limitation of thread perofmance - with more instances you are able to you your CPU and threads in a more efficient way that results in option to run more validators on a single machine.</li>
+					</ul>
+					<p>Under 1 validator instance you can run 1 as well as hundreds of validators. We did numerous tests of efficient number of validators per instances and number of instances on a single machine. We can share this experience under a paid serice.</p>
+
+					<p class="mt-30">To configurate an instance of validator service, you need at least one keystore. 1 keystore represents 1 validator. You can generate keystores on an <a href="">offline PC</a> with Validator Data generator tool, <a href="">see the guide</a>.</p>
+					<h3>Get Keystores</h3>
+					<p>The tool generates a directory <code>deposit_keys</code> with keystore json files and 1 deposit json file.</p>
+
+					<h3 class="mt-30">Copy keystores to your machine</h3>
+					{{> copykeystores}}
+					
+					<h3 class="mt-30">Configurate & Run Validator instance</h3>
+					<div class="tabselector">
+						<nav class="egrid egrid-3">
+							<button class="tab selected" data-tabpanel="1" onclick="OnValidatorClientChanged('lighthouse')">Lighthouse</button>
+							<button class="tab" data-tabpanel="2" onclick="OnValidatorClientChanged('lodestar')">Lodestar</button>
+							<button class="tab" data-tabpanel="3" onclick="OnValidatorClientChanged('teku')">Teku</button>
+						</nav>
+						<div class="tabpanel selected">
+{{> clients/lighthouse_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/lighthouse#exit-validator">https://stakers.space/lighthouse#exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/lodestar_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/lodestar#exit-validator">https://stakers.space/lodestar#exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/teku_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/teku#exit-validator">https://stakers.space/teku#exit-validator</a>.</p>
+						</div>
+					</div>
+                </div>
+				<script>
+					function OnValidatorClientChanged(){}
+				</script>
+			</section>
+        </div>
+    </div>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}

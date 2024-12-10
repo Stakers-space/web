@@ -1,0 +1,474 @@
+<body id="body" data-amp-auto-lightbox-disable>
+
+{{> header}}
+<main>
+	<section class="cover">
+		<div class="cover-top">
+			<div class="cover-main egrid egrid-2">
+				<div class="cover-main_left separator-vertical separator-after">
+					<div class="grid-leftpadding cover-main_left-content title-page mb-30">
+						<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+							<li property="itemListElement" typeof="ListItem">
+								<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+								<meta property="position" content="1">
+							</li>
+							<li property="itemListElement" typeof="ListItem">
+								<a property="item" typeof="Thing" href="/gnosis-staking"><span property="name">Gnosis staking</span></a>
+								<meta property="position" content="2">
+							</li>
+						</ul>
+						<h1 class="title">All around<br>Gnosis staking</h1>
+						<p class="subtitle"><strong>Earn 24/7</strong> while <br>securing a new era of  <span class="dynamic" data-text="Internet"></span></p>
+						<a href="#operate" class="btn btn-black btn-rounded">Operate node</a>
+						<a href="#delegate" class="btn btn-black btn-rounded">Delegate funds</a>
+					</div>
+				</div>
+				<div class="cover-main_right">
+					<div class="cover-main_right-news">
+						<div class="tabselector decent">
+							<nav class="egrid egrid-4">
+								<span>News filtration:</span>
+								<button class="tab selected" data-tabpanel="1" type="button">All</button>
+								<button class="tab" data-tabpanel="2" type="button">Fundamentals</button>
+								<button class="tab" data-tabpanel="3" type="button">Clients</button>
+							</nav>
+							<div class="tabpanel selected screen">
+								<ul class="mt-10">
+									{{#each newsfeed.all}}
+									<li>
+										<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer">{{{this.m}}}</a> <span class="date" title="{{{this.ht}}}">{{{this.ta}}}</span>
+									</li>
+									{{/each}}
+								</ul>
+							</div>
+							<div class="tabpanel screen">
+								<ul class="mt-10">
+									{{#each newsfeed.fundamental}}
+									<li>
+										<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer">{{{this.m}}}</a> <span class="date" title="{{{this.ht}}}">{{{this.ta}}}</span>
+									</li>
+									{{/each}}
+								</ul>
+							</div>
+							<div class="tabpanel screen">
+								<ul class="mt-10">
+									{{#each newsfeed.clients}}
+									<li>
+										<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer">{{{this.m}}}</a> <span class="date" title="{{{this.ht}}}">{{{this.ta}}}</span>
+									</li>
+									{{/each}}
+								</ul>
+							</div>
+						</div>
+						<a href="/news" class="btn btn-black btn-rounded">View all news</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cover-middle separator-horizontal separator-before">
+			<div class="egrid egrid-2 mx-2 my-2">
+				<div>
+					<div class="header flex">
+						<h2 class="title f-125 m-0"><a href="/gnosis-staking/validators">{{{queue.current.validatorscount_hr}}} active validators</a></h2>
+						<div class="label dynamic" style="width:170px;height:21px">
+							<span class="item visible">{{{indicators.validators.increments.day}}} in the last day</span>
+							<span class="item hidden">{{{indicators.validators.increments.week}}} in the last week</span>
+							<span class="item hidden">{{{indicators.validators.increments.month}}} in the last month</span>
+							<span class="item hidden">{{{indicators.validators.increments.year}}} in the last year</span>
+						</div>
+					</div>
+					<div class="egrid egrid-66fr gap-4">
+						<div style="position:relative">
+							<canvas id="ethvalidators_chart" name="lazy-canvas" style="max-height:240px;"></canvas>
+							<div class="chart-legend">
+								<span class="black-line">Validators</span>
+								<span class="balance-bar">Daily change</span>
+							</div>
+						</div>
+						<div>
+							<div>
+								<strong>{{queue.current.beaconchain_entering_hr}} Validators in <span style="color:green">Entry Queue</span></strong>
+								<p class="mt-0">Wait Time: {{queue.current.activation.waitingTimeHours}} hours, {{queue.current.activation.waitingTimeMinutes}} minutes</p>
+							</div>
+							<div>
+								<strong>{{queue.current.beaconchain_exiting_hr}} validators in <span style="color:red">Exit Queue</span></strong>
+								<p class="mt-0">Wait time: {{queue.current.exiting.waitingTimeHours}} hours, {{queue.current.exiting.waitingTimeMinutes}} minutes</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="egrid egrid-2 charts-carousel scroll-horizontal">
+					<a href="/charts/gnosis-blocks" class="chart">
+						<div class="header">
+							<h2 class="title">Blocks</h2>
+						</div>
+						<canvas id="blocks_chart" name="lazy-canvas"></canvas>
+						<div class="chart-legend">
+							<span class="red-bar">Missed blocks</span>
+							<span class="green-bar">Proposed blockes</span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="egrid egrid-33fr guidesbar gap-6">
+				<div class="grid-leftpadding">
+					<div>
+						<div class="title-section">
+							<h2><span>What's Gnosis?</span></h2>
+							<p class="f-normal"><a href="https://www.gnosis.io/" target="_blank">Gnosis</a> is a <strong>Layer 1 blockchain compatible with Ethereum, designed to offer efficient, secure, and decentralized solutions.</strong> It supports staking, allowing users to help secure the network and earn rewards. Built for compatibility with Ethereum tools and applications, Gnosis provides a versatile ecosystem for developers and users, while benefiting from the robustness and scalability of its Proof of Stake consensus mechanism.</p>
+						</div>
+					</div>
+				</div>
+				<div class="egrid egrid-3 gap-4" style="margin-right:2rem;">
+					<a href="/charts/gnosis-transactions" class="chart" style="position:relative">
+							<div class="header">
+								<h2 class="title">Transactions & Fees</h2>
+							</div>
+							<canvas id="transactions_chart" name="lazy-canvas"></canvas>
+							<div class="chart-legend">
+								<span class="black-line">Transactions</span>
+								<span class="balance-bar">xDai Fees paid</span>
+							</div>
+					</a>
+					<div class="chart" style="position:relative">
+						<div class="header">
+							<h2 class="title">GNO Price</h2>
+						</div>
+						<canvas id="priceratio_chart" name="lazy-canvas" class="chart"></canvas>
+						<div class="chart-legend">
+							<span class="black-line">Price</span>
+							<span class="balance-bar">Margin Of Safety</span>
+						</div>
+					</div>
+
+					<a href="/charts/gno-circulation-supply" class="chart" style="position:relative">
+						<div class="header">
+							<h2 class="title">{{{indicators.supply.value_formated}}} GNO in circulation</h2>
+						</div>
+						<canvas id="buybacksupply_chart" name="lazy-canvas"></canvas>
+						<div class="chart-legend">
+							<span class="black-line">Circ GNO</span>
+							<span class="green-bar">Buybacks</span>
+						</div>
+					</a>
+					
+				</div>
+			</div>
+	</section>
+	<section class="separator-horizontal separator-after">
+		<div class="egrid egrid-33fr guidesbar gap-6">
+				<div class="grid-leftpadding">
+					<div>
+						<div class="title-section">
+							<h2><span>What's Staking?</span></h2>
+							<p class="f-normal">Staking is the <strong>process of locking up GNO to support the operations and security of a blockchain network. By staking, you help validate transactions and maintain the network's integrity while earning rewards in return.</strong> It’s a key feature of Gnosis’s Proof of Stake system.</p>
+						</div>
+					</div>
+				</div>
+				<div class="egrid egrid-3 gap-4" style="margin-right:2rem;">
+					<a href="/charts/gno-staked" class="chart" style="position:relative">
+						<div class="header">
+							<h2 class="title" title="{{{indicators.stakedTokens.supplyShare}}} of all GNO in circulation">{{{indicators.stakedTokens.hr_value}}} staked GNO</h2>
+							<div class="label dynamic" style="width:170px;height:21px">
+								<span class="item visible">{{{indicators.stakedTokens.increments.day}}} GNO in the last day</span>
+								<span class="item hidden">{{{indicators.stakedTokens.increments.week}}} GNO in the last week</span>
+								<span class="item hidden">{{{indicators.stakedTokens.increments.month}}} GNO in the last month</span>
+								<span class="item hidden">{{{indicators.stakedTokens.increments.year}}} GNO in the last year</span>
+							</div>
+						</div>
+						<canvas id="stakedbalance_chart" name="lazy-canvas"></canvas>
+						<div class="chart-legend">
+							<span class="black-line">Staked GNO</span>
+							<span class="balance-bar">Daily change</span>
+						</div>
+					</a>
+				</div>
+			</div>
+	</section>
+
+	<section class="separator-horizontal separator-after mpadding">
+		<div class="grid-leftpadding mt-40">
+			<h2 class="title-section"><span>Participate in Gnosis staking</span> By using SAAS (Stake As a Service)</h2>
+		</div>
+		<div class="egrid egrid-33fr">
+			<div class="grid-leftpadding">
+				<h2 class="title-section">Liquid Staking</h2>
+				<p style="padding-right:2rem">Stake your Gnosis and get a "confirmation" token in exchange that can be used as colateral.</p>
+				<a href="/gnosis-staking/liquid-staking" class="btn btn-black btn-rounded">Show all</a>
+			</div>
+			<div class="servicetable">
+				<table class="table table-scrollable">
+					<thead>
+						<tr>
+							<th>Service</th>
+							<th>Min Stake</th>
+							<th>Fee</th>
+							<th>Liquid token</th>
+							<th>Pool token</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each vaultServices}}
+							{{#if this.liquid_token}}
+							<tr>
+								<td><a href="{{this.link}}" target="_blank" rel="nofollow noopener">{{this.service}}</a></td>
+								<td>{{this.min_stake}} {{this.stake_unit}}</td>
+								<td>{{this.fee}}{{this.fee_note}}</td>
+								<td>
+									<a href="{{this.liquid_token.link}}" target="_blank" rel="nofollow noopener noreferrer">
+										<img src="{{this.liquid_token.icon}}" alt="{{this.liquid_token.ticker}}" width="20px"> 
+										{{this.liquid_token.ticker}}
+									</a>
+								</td>
+								<td>{{#if this.pool_token}}
+									<a href="{{this.pool_token.link}}" target="_blank" rel="nofollow noopener noreferrer">
+										<img src="{{this.pool_token.icon}}" alt="{{this.pool_token.ticker}}" width="20px"> 
+										{{this.pool_token.ticker}}
+									</a>
+									{{else}}
+									{{this.pool_token}}
+									{{/if}}
+								</td>
+							</tr>
+							{{/if}}
+						{{/each}}
+					</tbody>
+				</table>
+			</div>	
+		</div>
+		<div class="egrid egrid-33fr mt-30">
+			<div class="grid-leftpadding mb-40">
+				<h2 class="title-section">Hosted validator staking</h2>
+				<p style="padding-right:2rem">Launch a solo validator by locking 1 GNO into a smart contract and operate the validator on hosted server.</p>
+				<a href="/gnosis-staking/validators-saas" class="btn btn-black btn-rounded">Show all</a>
+			</div>
+			<div class="servicetable">
+				<table class="table table-scrollable">
+					<thead>
+						<tr>
+							<th>Service</th>
+							<th>Min Stake</th>
+							<th>Fee</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each hostingServices}}
+							<tr>
+								<td><a href="{{this.link}}" target="_blank" rel="nofollow noopener">{{this.service}}</a></td>
+								<td>{{this.min_stake}} {{this.stake_unit}}</td>
+								<td>{{this.fee}}{{this.fee_note}}</td>
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			</div>	
+		</div>
+	</section>
+
+	<section class="mpadding">
+		<div class="egrid egrid-2">
+			<div class="grid-leftpadding sticky">
+				<div class="title-section mt-40">
+					<h2><span>Get Extra revenue</span> by operating own node</h2>
+					<p>Pay no fees to anyone, instead get the fees from the others.</p>
+				</div>
+				<ul>
+					<li>operate various staking services simultaneously within a single staking server</li>
+					<li>perform staking from node at home as well as from a server house or cloud</li>
+				</ul>
+				<div class="title-section">
+					<h3 class="mt-50"><span>Boost</span> the staking node revenue</h3>
+					<p class="f-normal">There's possible to use a "leverage" in a form of bonded staking.</p>
+					<ul class="flex flex-wrap gap-2 clean mt-30">
+						<li>
+							<a href="/bonded-validators" class="label inline-block rounded-lg border px-5 py-3 text-center leading-none">
+								<h3>Bonded Staking</h3>
+								<p class="f-normal">Leverage your stake</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="egrid egrid-2 servers">
+				<div class="servers-option">
+					<div class="servers-option_img">
+						<img src="/devices/customnode.webp" alt="Cloud Node" loading="lazy">
+					</div>
+					<div class="servers-option_overlay">
+						<div>
+							<h3>Build Custom Node</h3>
+							<p>Build your node</p>
+						</div>
+						<a href="/custom-node" class="btn btn-black btn-rounded">Build</a>
+					</div>
+				</div>
+				<div class="servers-option separator-vertical separator-after">
+					<div class="servers-option_img">
+						<img src="/devices/dappnode.webp" alt="Dapp Node" loading="lazy">
+					</div>
+					<div class="servers-option_overlay">
+						<div>
+							<h3>Buy ready-to-use Node</h3>
+							<p>Buy plug-n-play staking node.</p>
+						</div>
+						<a href="/staking-node" class="btn btn-black btn-rounded">Buy</a>
+					</div>
+				</div>
+				<div class="servers-option">
+					<div class="servers-option_img">
+						<img src="/devices/cloudnode.webp" alt="Cloud Node" loading="lazy">
+					</div>
+					<div class="servers-option_overlay">
+						<div>
+							<h3>Cloud Node</h3>
+							<p>Rent ready-to use cloud node</p>
+						</div>
+						<a href="/cloud-node" class="btn btn-black btn-rounded">Rent</a>
+					</div>
+				</div>
+				<div class="servers-option separator-vertical separator-before">
+					<div class="servers-option_img">
+						<img src="/devices/managed-node.webp" alt="Managed Node" loading="lazy" style="filter: opacity(0.5);">
+					</div>
+					<div class="servers-option_overlay">
+						<div>
+							<h3>Managed Node</h3>
+							<p>Order a managed node for placement in your home or in the cloud</p>
+						</div>
+						<a href="/managed-node" class="btn btn-black btn-rounded">Order</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="egrid egrid-33fr guidesbar">
+				<div class="grid-leftpadding egrid egrid-2">
+					<div>
+						<div class="title-section">
+							<h2><span>Solo vs <a href="/bonded-validators">bonded</a></span> validators</h2>
+						</div>
+					</div>
+				</div>
+				<div class="center-vertical">
+					<table class="mt-30">
+						<thead>
+							<tr>
+								<th colspan="2" class="text-center">Option</th>
+								<th>GNO bond</th>
+								<th>GNO matched</th>
+								<th>Non-GNO bond</th>
+								<th>Fee %</th>
+								<th>Note</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th colspan="2" class="text-center">Solo</th>
+								<td>1</td>
+								<td>0</td>
+								<td>None</td>
+								<td>None</td>
+								<td>No bond</td>
+							</tr>
+							<tr>
+								<td><a href="/bonded-validators">Bonded</a></td>
+								<th>StakeWise</th>
+								<td>?</td>
+								<td>?</td>
+								<td>?</td>
+								<td>?</td>
+								<td>?</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="egrid egrid-2 guidesbar mb-60">
+			<div class="grid-leftpadding egrid egrid-2">
+				<div>
+					<div class="title-section">
+						<h2>Full interactive <span>staking guides</span></h2>
+						<p>Build your own custom node from the scratch with our interactive step by step guides.</p>
+					</div>
+					<a href="/gnosis-staking/schema" target="_blank" class="btn btn-black btn-rounded">Staking schema</a>
+				</div>
+				<a href="/gnosis-staking/full-guide" class="btn center box">Operate Execution and consensus layer</a>
+			</div>
+			<div class="egrid egrid-2">
+				<a href="/gnosis-staking/full-guide/solo" class="center text-center box solo">
+					<div>
+						<img src="/logo/gnosis.svg" alt="Gnosis logo" style="width:40px;">
+						<h5>Solo Staking node</h5>
+					</div>
+				</a>
+				<a href="/gnosis-staking/full-guide/stakewise" class="center text-center box solo">
+					<div>
+						<img src="/logo/stakewise.svg" alt="" style="width:40px;">
+						<h5>Stakewise Staking node</h5>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="egrid egrid-25fr guidesbar gap-6 mb-80">
+			<div class="grid-leftpadding">
+				<div>
+					<div class="title-section" style="margin-top:0">
+						<h2>Client-based interactive <span> guides</span></h2>
+						<p>Get help with installation, updates, maintanance and issue-solving for staking clients.</p>
+					</div>
+					<a href="/gnosis-staking/clients" target="_blank" class="btn btn-black btn-rounded">Gnosis clients overview</a>
+				</div>
+			</div>
+			<div style="margin-right:1.5rem">
+				<div class="egrid egrid-6">
+					<h3>Execution clients</h3>
+					<a href="/nethermind" class="btn center box">Nethermind</a> <a href="/erigon" class="btn center box">Erigon</a> <a href="/reth" class="btn center box">Reth</a>
+				</div>
+				<div class="egrid egrid-6">
+					<h3>Consensus clients</h3>
+					<a href="/lighthouse" class="btn center box">Lighthouse</a> <a href="/lodestar" class="btn center box">Lodestar</a> <a href="/teku" class="btn center box">Teku</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="grid">
+		<div style="background:black;color:white;border-radius:1rem;padding:2rem 2rem 4rem 2rem">
+			<h2>Gnosis staking <span style="color:#00ca72">Emergency guide</span></h2>
+			<div>
+				<p><strong>Did something go wrong during Gnosis staking?</strong> Stay calm and open our emergency guide, which will walk you through the situation—from analyzing the issue to choosing the best possible steps to resolve it.</p>
+				<a class="btn btn-rounded" style="background:white" href="/gnosis-staking/emergency"><strong>Gnosis staking Emergency guide</strong></a>
+			</div>
+		</div>
+	</section>
+
+	<section class="mt-60 separator-horizontal separator-before">
+		<div class="grid">
+			<br>
+			<h2 class="mt-20">Airdrop Monitor</h2>
+			<p>There has been associated airdrops adding extra revenue of validating.</p>
+		</div>
+	</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
+<script>var beaconchainData = {{{beaconData}}}, etherchainData = {{{chainData}}}, dashboardData={{{dashboardData}}}, chartsUIconfig = {{{chartsUIconfig}}};</script>
+<script type="text/javascript" src="/js/chart-presenter.js"></script>
+<script type="text/javascript" src="/js/charts/gno-priceratio.js"></script>
+<script type="text/javascript" src="/js/charts/validators.js"></script>
+<script type="text/javascript" src="/js/charts/gno-supply.js"></script>
+<script type="text/javascript" src="/js/charts/staked-balance.js"></script>
+<script type="text/javascript" src="/js/charts/tvl-balance.js"></script>
+<script type="text/javascript" src="/js/charts/marketcap.js"></script>
+<script type="text/javascript" src="/js/charts/transactions.js"></script>
+<script type="text/javascript" src="/js/charts/blocks.js"></script>
+<script>charts.ActivateLazyLoad();</script>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}
+</body>

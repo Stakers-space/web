@@ -1,0 +1,4 @@
+Sitemap: https://stakers.space/sitemap
+User-agent: *
+Disallow: /api/
+Disallow: /dashboard/

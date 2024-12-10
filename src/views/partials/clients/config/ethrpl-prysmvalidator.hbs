@@ -1,0 +1,21 @@
+<pre><code>[Unit]
+Description=Prysm Consensus Client Rocketpool (Mainnet)
+Wants=network-online.target
+After=network-online.target
+[Service]
+User=prysmvalidator-rp
+Group=prysmvalidator-rp
+Type=simple
+Restart=always
+RestartSec=5
+EnvironmentFile=/srv/rocketpool/data/validators/rp-fee-recipient-env.txt
+ExecStart=/usr/local/bin/validator \
+  --datadir=/var/lib/prysm/validator-rp \
+  --wallet-dir=/srv/rocketpool/data/validators/prysm-non-hd \
+  --wallet-password-file=/srv/rocketpool/data/validators/prysm-non-hd/direct/accounts/secret \
+  --graffiti="" \
+  --suggested-fee-recipient ${FEE_RECIPIENT} \
+  --enable-builder \
+  --accept-terms-of-use
+[Install]
+WantedBy=multi-user.target</code></pre>

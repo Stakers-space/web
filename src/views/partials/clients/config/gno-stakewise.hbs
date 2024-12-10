@@ -1,0 +1,22 @@
+<pre><code>[Unit]
+Description=Stakewise service - vault 1 (Gnossis Mainnet)
+After=network.target
+Wants=network.target
+
+[Service]
+User=stakewise-v1
+Group=stakewise-v1
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/stakewise-operator start \
+  --network gnosis \
+  --vault 0x10A2b1CC775eEbF6a7a0A5e733f809626142a3f5 \
+  --data-dir /srv/stakewise \
+  --database-dir /var/lib/stakewise/0xXXXX... \
+  --execution-jwt-secret /var/lib/jwtsecret/jwt.hex \
+  --consensus-endpoints http://127.0.0.1:9596 \
+  --execution-endpoints http://127.0.0.1:8545
+
+[Install]
+WantedBy=default.target</code></pre>

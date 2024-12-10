@@ -1,0 +1,493 @@
+{
+    "executionLayer": {
+        "nethermind": {
+            "name": "Nethermind",
+            "link": "https://nethermind.io/",
+            "github": "https://github.com/NethermindEth/nethermind",
+            "latestVer": "1.29.1-dfea5240",
+            "latestVerClean":"1.29.1",
+            "release_time": "2024-10-16T16:03:00Z",
+            "social":[
+                {
+                "name": "Discord",
+                "icon": "discord.png",
+                "link": "https://discord.gg/RpaxqHRaYT"
+                },
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://twitter.com/nethermindeth"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": true,
+                    "share": null,
+                    "link":"https://docs.gnosischain.com/node/manual/execution/nethermind"
+                }
+            },
+            "language": "C#, .NET",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "dependencies": [
+                { "name": "Libsnappy-dev" },
+                { "name": "Libc6-dev" },
+                { "name": "Libc6" },
+                { "name": "Unzip",  "link": "https://www.cvedetails.com/vulnerability-list/vendor_id-816/product_id-1395/Info-zip-Unzip.html"}
+            ],
+            "ilink":"nethermind"
+        },
+        "erigon": {
+            "name": "Erigon",
+            "link": "https://github.com/ledgerwatch/erigon",
+            "github": "https://github.com/ledgerwatch/erigon",
+            "latestVer": "2.60.10",
+            "release_time": "2024-11-06T13:39:00Z",
+            "social":[
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://twitter.com/erigoneth"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": true,
+                    "share": null,
+                    "link": "https://docs.gnosischain.com/node/manual/execution/erigon"
+                }
+            },
+            "language": "Go",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "ilink":"erigon"
+        },
+        "geth": {
+            "name": "Geth",
+            "link": "https://geth.ethereum.org/",
+            "github": "https://github.com/ethereum/go-ethereum",
+            "latestVer": "1.14.8",
+            "release_time": "2024-10-25T15:30:00Z",
+            "social":[
+                {
+                    "name": "Discord",
+                    "icon": "discord.png",
+                    "link": "https://discord.gg/VNnEHqsHMr"
+                },
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://twitter.com/go_ethereum"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": false,
+                    "share": null,
+                    "link": "https://docs.gnosischain.com/node/manual/execution/geth"
+                }
+            },
+            "language": "Go",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "ilink":"geth"
+        },
+        "besu": {
+            "name": "Besu",
+            "link": "https://besu.hyperledger.org/en/stable/",
+            "github": "https://github.com/hyperledger/besu",
+            "latestVer": "24.10.0",
+            "release_time": "2024-10-18T01:31:00Z",
+            "social":[
+                {
+                    "name": "Discord",
+                    "icon": "discord.png",
+                    "link": "https://discord.gg/invite/hyperledger"
+                },
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://twitter.com/hyperledgerbesu"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": false,
+                    "share": null,
+                    "link": "https://docs.gnosischain.com/node/manual/execution/besu"
+                }
+            },
+            "language": "Java",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "prerequisity": "jdk v21+",
+            "dependencies": [
+                { "name": "Default-jre" },
+                { "name": "Libjemalloc-dev" }
+            ],
+            "ilink":"besu"
+        },
+        "reth":{
+            "name": "Reth",
+            "link": "https://reth.rs/",
+            "github": "https://github.com/paradigmxyz/reth",
+            "latestVer": "1.0.6",
+            "release_time": "2024-10-25T15:30:00Z",
+            "social":[],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": false,
+                    "share": null
+                }
+            },
+            "language": "Rust",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "ilink":"reth"
+        },
+        "ethereumjs": {
+            "name": "EthereumJS",
+            "link": "https://github.com/ethereumjs/ethereumjs-monorepo",
+            "github": "https://github.com/ethereumjs/ethereumjs-monorepo",
+            "latestVer": "8.1.1",
+            "release_time": "2024-09-09T14:21:00Z",
+            "social":[],
+            "chain":{
+                "ethereum":{
+                    "supported": false,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": false,
+                    "share": null
+                }
+            },
+            "language": "TypeScript",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "ilink":"ethereumjs"
+        }
+    },
+    "consensusLayer": {
+        "lighthouse": {
+            "name": "Lighthouse",
+            "link": "https://lighthouse.sigmaprime.io/",
+            "github": "https://github.com/sigp/lighthouse",
+            "latestVer": "6.0.0",
+            "release_time": "2024-12-02T06:57:00Z",
+            "social":[
+                {
+                    "name": "Discord",
+                    "icon": "discord.png",
+                    "link": "https://discord.gg/invite/hyperledger"
+                },
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://twitter.com/hyperledgerbesu"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": true,
+                    "share": null,
+                    "link": "https://docs.gnosischain.com/node/manual/beacon/lighthouse"
+                }
+            },
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "language": "Rust",
+            "ilink":"lighthouse"
+        },
+        "lodestar": {
+            "name": "Lodestar",
+            "link": "https://lodestar.chainsafe.io/",
+            "github": "https://github.com/chainsafe/lodestar",
+            "latestVer": "1.23.1",
+            "nodejsVer": "20.11.0",
+            "nvmVer": "0.40.1",
+            "release_time": "2024-11-29T21:10:00Z",
+            "prerequisity": "NodeJS v20+",
+            "social":[
+                {
+                    "name": "Discord",
+                    "icon": "discord.png",
+                    "link": "https://discord.gg/aMxzVcr"
+                },
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://twitter.com/lodestar_eth"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": true,
+                    "share": null,
+                    "link": "https://docs.gnosischain.com/node/manual/beacon/lodestar"
+                }
+            },
+            "language": "Typescript",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "ilink":"lodestar"
+        },
+        "teku": {
+            "name": "Teku",
+            "link": "https://docs.teku.consensys.net/",
+            "github": "https://github.com/ConsenSys/teku",
+            "latestVer": "24.10.3",
+            "jdkVer": "21",
+            "release_time": "2024-10-28T23:50:00Z",
+            "prerequisity": "jdk v21+",
+            "social":[
+                {
+                    "name": "Discord",
+                    "icon": "discord.png",
+                    "link": "https://discord.gg/7hPv2T6"
+                },
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://twitter.com/Teku_ConsenSys"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": true,
+                    "share": null,
+                    "link": "https://docs.gnosischain.com/node/manual/beacon/teku"
+                }
+            },
+            "language": "Java",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "ilink":"teku"
+        },
+        "prysm": {
+            "name": "Prysm",
+            "link": "https://prysmaticlabs.com/",
+            "github": "https://github.com/prysmaticlabs/prysm",
+            "latestVer": "5.1.2",
+            "release_time": "2024-10-25T15:30:00Z",
+            "social":[
+                {
+                    "name": "Discord",
+                    "icon": "discord.png",
+                    "link": "https://discord.gg/XkyZSSk4My"
+                },
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://twitter.com/prylabs"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": false,
+                    "share": null,
+                    "link": "https://docs.gnosischain.com/node/manual/beacon/prysm"
+                }
+            },
+            "language": "Go",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "ilink":"prysm"
+        },
+        "nimbus": {
+            "name": "Nimbus",
+            "link": "https://nimbus.team/",
+            "github": "https://github.com/status-im/nimbus-eth2",
+            "latestVer": "24.8.0",
+            "release_time": "2024-10-25T15:30:00Z",
+            "social":[
+                {
+                    "name": "Discord",
+                    "icon": "discord.png",
+                    "link": "https://discord.gg/XRxWahP"
+                },
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://twitter.com/ethnimbus"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": true,
+                    "share": null,
+                    "link": "https://docs.gnosischain.com/node/manual/beacon/nimbus"
+                }
+            },
+            "language": "Nim",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "ilink":"nimbus"
+        }
+    },
+    "mevLayer":{
+        "mevboost":{
+            "name": "MEV-Boost",
+            "link": "https://boost.flashbots.net/",
+            "github": "https://github.com/flashbots/mev-boost/releases",
+            "latestVer": "1.8",
+            "release_time": "2024-10-25T15:30:00Z",
+            "social":[
+                {
+                    "name": "Discord",
+                    "icon": "discord.png",
+                    "link": "http://discord.gg/flashbots"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": false,
+                    "share": null
+                }
+            },
+            "language": "Go",
+            "ilink":"mev-boost"
+        }
+    },
+    "serviceLayer":{
+        "rocketpool":{
+            "name": "RocketPool",
+            "link": "https://rocketpool.net/",
+            "github": "https://github.com/rocket-pool/smartnode-install/releases",
+            "latestVer": "1.14.1",
+            "release_time": "2024-10-25T15:30:00Z",
+            "social":[
+                {
+                    "name": "Discord",
+                    "icon": "discord.png",
+                    "link": "https://discord.gg/rocketpool"
+                },
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://twitter.com/Rocket_Pool"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": false,
+                    "share": null
+                }
+            },
+            "language": "Go",
+            "ilink":"rocketpool"
+        },
+        "stakewise":{
+            "name": "StakeWise",
+            "link": "https://www.stakewise.io/",
+            "github": "https://github.com/stakewise/v3-operator/releases/",
+            "latestVer": "2.1.4",
+            "release_time": "2024-11-12T13:02:00Z",
+            "social":[
+                {
+                    "name": "Discord",
+                    "icon": "discord.png",
+                    "link": "https://discord.com/invite/2BSdr2g"
+                },
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://x.com/stakewise_io"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": true,
+                    "share": null
+                }
+            },
+            "language": "",
+            "ilink":"stakewise"
+        }
+    }
+}

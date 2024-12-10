@@ -1,0 +1,84 @@
+{{> header}}
+<main class="mb-60">
+	<section class="cover grid egrid">
+		<div class="mt-60 mb-40">
+			<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{client}}"><span property="name">{{clientName}} client</span></a>
+					<meta property="position" content="2">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{client}}/install"><span property="name" class="intro-label">Installation</span></a>
+					<meta property="position" content="3">
+				</li>
+			</ul>
+			<h1 class="cover-title"><span>Install {{clientName}} client</span></h1>
+			<p><strong>One-page interactive guide to install {{clientName}} client and configurate it for running on supported chain.</strong></p>
+		</div>
+		<div class="mt-60 mb-40" style="position:relative;padding-left:9rem;font-size:.8rem">
+			<div style="height: fit-content;bottom: 0;position: absolute;">
+				<h3>Disclaimer</h3>
+				<p>This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.</p>
+            </div>
+		</div>
+	</section>
+
+	<div class="grid-full contents serverguide">
+        <div class="content-chapters">
+			<div class="sticky">
+				
+			</div>
+		</div>
+		<div class="content-header">
+			<section class="chapter" id="intro">
+				<div class="content">
+					<p>{{clientName}} client can be used for staking on various supported chains. Client installation is always only one, used by services with an individual configuration (different service name, data path and ports in use).</p>
+				</div>
+			</section>
+			{{> guides/serverSelection }}
+		</div>
+		<div class="content-panel">
+			<div class="sticky mt-100">
+				{{> guides/variablesOverview }}
+			</div>
+		</div>
+
+		<div class="content-body">
+            <section class="chapter" id="install">
+				<div class="content">
+					<h2>Install {{clientName}} client</h2>
+{{> (lookup . 'cliPartial') InstallationGuide=true }}
+				</div>
+			</section>
+			{{#if cliConfigPartial}}
+			<section class="chapter" id="service">
+				<div class="content">
+					<h2>Configurate the service</h2>
+{{> (lookup . 'cliConfigPartial') PortSelection=true }}
+				</div>
+			</section>
+			{{/if}}
+
+			{{#if partial2ToLoad}}
+			<section class="chapter mt-60" id="add-validator">
+				<div class="content bt">
+					<h2>Launch validator instance / validator(s)</h2>
+{{> (lookup . 'partial2ToLoad') AddValidator=true }}
+				</div>
+			</section>
+			<section class="chapter mt-60" id="exit-validator">
+				<div class="content bt">
+					<h2>Exit validator instance / validator(s)</h2>
+{{> (lookup . 'partial2ToLoad') AddValidator=false }}
+				</div>
+			</section>
+			{{/if}}
+        </div>
+    </div>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}

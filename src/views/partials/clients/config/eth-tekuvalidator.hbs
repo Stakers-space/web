@@ -1,0 +1,22 @@
+<pre><code>[Unit]
+Description=Teku Validator Instance (Ethereum Mainnet)
+Wants=network-online.target
+After=network-online.target
+[Service]
+User=<mark class="instance_su" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid" data-client="teku">1</span></mark>
+Group=<mark class="instance_su" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid" data-client="teku">1</span></mark>
+Type=simple
+Restart=always
+RestartSec=5
+Environment="JAVA_OPTS=-Xmx8g"
+Environment="TEKU_OPTS=-XX:-HeapDumpOnOutOfMemoryError"
+ExecStart=/usr/local/bin/teku/bin/teku validator-client \
+  --network mainnet \
+  --beacon-node-api-endpoint http://127.0.0.1:<mark class="consensus-endpoint">5052</mark> \
+  #--beacon-node-api-endpoint http://127.0.0.1:5051,http://192.10.10.101:5051,http://192.140.110.44:5051 \
+  --data-path <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span></mark> \
+  --validator-keys <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid" data-client="teku">1</span></mark>/keystores:<mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid" data-client="teku">1</span></mark>/keystores \
+  --validators-proposer-default-fee-recipient <mark class="instance_frw" data-client="teku">0xXXXXXXXXXXXXXXXX</mark> \
+  --validators-graffiti "<mark class="ec_name">Nethermind</mark>+Teku"
+[Install]
+WantedBy=multi-user.target</code></pre>

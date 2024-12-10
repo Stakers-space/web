@@ -1,0 +1,358 @@
+[
+    {
+        "service":"Stakers.space StakeWise Vault",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":true,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":null
+    },
+    {
+        "service":"Ankr Staking",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":true,
+        "pool_token":{
+            "ticker":"ANKR",
+            "link":"https://www.coingecko.com/en/coins/ankr-network",
+            "icon": "https://assets.coingecko.com/coins/images/4324/standard/U85xTl2.png?1696504928"
+        },
+        "liquid_token":{
+            "ticker": "ANKRETH",
+            "link": "https://www.coingecko.com/en/coins/ankr-staked-eth",
+            "icon": "https://assets.coingecko.com/coins/images/13403/standard/aETHc.png?1696513165"
+        },
+        "3rd_party_software":false,
+        "link":"https://www.ankr.com/staking/stake/"
+    },
+    {
+        "service":"Atomic Wallet",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":null,
+        "fee_note":null,
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":false,
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":"https://atomicwallet.io/"
+    },
+    {
+        "service":"Attestant",
+        "min_stake":1000,
+        "stake_unit":"ETH",
+        "fee":12.5,
+        "fee_note":"% of rewards",
+        "key_owner":"User & Service",
+        "withdrawals_key_owner":"User",
+        "no_supermajority_client":true,
+        "pool_token":false,
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":"https://www.attestant.io/"
+    },
+    {
+        "service":"Binance Exchange",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":null,
+        "fee_note":null,
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":false,
+        "pool_token":{
+            "ticker":"BNB",
+            "link":"https://www.coingecko.com/en/coins/bnb",
+            "icon": "https://assets.coingecko.com/coins/images/825/standard/bnb-icon2_2x.png?1696501970"
+        },
+        "liquid_token":{
+            "ticker":"BETH",
+            "link":"https://www.coingecko.com/en/coins/binance-eth-staking",
+            "icon": "https://assets.coingecko.com/coins/images/13804/standard/Binnace.png?1696513551"
+        },
+        "3rd_party_software":false,
+        "link":"https://www.binance.com/en/staking"
+    },
+    {
+        "service":"Bitcoin Suisse Exchange",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":15,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":false,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":"https://www.bitcoinsuisse.com/staking/ethereum-2"
+    },
+    {
+        "service":"Bitfinex Exchange",
+        "min_stake":0.00001,
+        "stake_unit":"ETH",
+        "fee":25,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":false,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":null,
+        "link":"https://staking.bitfinex.com/"
+    },
+    {
+        "service":"Bitfrost",
+        "min_stake":0.1,
+        "stake_unit":"ETH",
+        "fee":15,
+        "fee_note":"% of rewards",
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":"https://bifrost.finance/"
+    },
+    {
+        "service":"Coinbase Exchange",
+        "min_stake": 0.00001,
+        "stake_unit":"ETH",
+        "fee":25,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":false,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":"https://www.coinbase.com/earn/staking/ethereum"
+    },
+    {
+        "service":"Dragonstake",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":null,
+        "fee_note":null,
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":null,
+        "link":"https://dragonstake.io/"
+    },
+    {
+        "service":"Everstake",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":null,
+        "fee_note":null,
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":null,
+        "link":"https://everstake.one/"
+    },
+    {
+        "service":"Guarda Wallet",
+        "min_stake":0.1,
+        "stake_unit":"ETH",
+        "fee":9.99,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":null,
+        "pool_token":{
+            "ticker":"???",
+            "link":"#",
+            "icon": "#"
+        },
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":"https://guarda.com/"
+    },
+    {
+        "service":"Kraken Exchange",
+        "min_stake":0.00001,
+        "stake_unit":"ETH",
+        "fee":15,
+        "fee_note":"% of rewards",
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":false,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":"https://www.kraken.com/en-us/features/staking-coins"
+    },
+    {
+        "service":"Kiln",
+        "min_stake":0.00001,
+        "stake_unit":"ETH",
+        "fee":8,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"User",
+        "no_supermajority_client":false,
+        "pool_token":{
+            "ticker":"???",
+            "link":"#",
+            "icon": "#"
+        },
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":"https://www.kiln.fi/kiln-on-chain"
+    },
+    {
+        "service":"Lido Finance",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":false,
+        "pool_token":{
+            "ticker":"LDO",
+            "link":"https://www.coingecko.com/en/coins/lido-dao",
+            "icon": "https://assets.coingecko.com/coins/images/13573/standard/Lido_DAO.png?1696513326"
+        },
+        "liquid_token":{
+            "ticker":"STETH",
+            "link":"https://www.coingecko.com/en/coins/lido-staked-ether",
+            "icon": "https://assets.coingecko.com/coins/images/13442/standard/steth_logo.png?1696513206"
+        },
+        "3rd_party_software":false,
+        "link":"https://www.lido.fi/"
+    },
+    {
+        "service":"MyContainer",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":2.27,
+        "fee_note":"% of rewards",
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":"https://www.mycointainer.com/"
+    },
+    {
+        "service":"Rocket Pool (Pool)",
+        "min_stake":0.01,
+        "stake_unit":"ETH",
+        "fee":15,
+        "fee_note":"% of rewards",
+        "key_owner":"User",
+        "withdrawals_key_owner":"Smart Contract",
+        "no_supermajority_client":true,
+        "pool_token":{
+            "ticker":"RPL",
+            "link":"https://www.coingecko.com/en/coins/rocket-pool",
+            "icon": "https://assets.coingecko.com/coins/images/2090/standard/rocket_pool_%28RPL%29.png?1696503058"
+        },
+        "liquid_token":{
+            "ticker":"RETH",
+            "link":"https://www.coingecko.com/en/coins/rocket-pool-eth",
+            "icon": "https://assets.coingecko.com/coins/images/20764/standard/reth.png?1696520159"
+        },
+        "3rd_party_software":false,
+        "link":"https://www.rocketpool.net/"
+    },
+    {
+        "service":"StaFi",
+        "min_stake":0.01,
+        "stake_unit":"ETH",
+        "fee":20,
+        "fee_note":"% of rewards",
+        "key_owner": null,
+        "withdrawals_key_owner": null,
+        "no_supermajority_client":null,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":true,
+        "link":"https://www.stafi.io/"
+    },
+    {
+        "service":"stakefish",
+        "min_stake":0.1,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner": "Service",
+        "withdrawals_key_owner": "User",
+        "no_supermajority_client":false,
+        "pool_token":false,
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":"https://stake.fish/"
+    },
+    {
+        "service":"Stakewise Pool",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner": "Service",
+        "withdrawals_key_owner": "Smart Contract",
+        "no_supermajority_client":null,
+        "pool_token":{
+            "ticker":"SWISE",
+            "link":"https://www.coingecko.com/en/coins/stakewise",
+            "icon": "https://assets.coingecko.com/coins/images/15044/standard/stakewise200.png?1696514703"
+        },
+        "liquid_token":{
+            "ticker":"OSETH",
+            "link":"https://www.coingecko.com/en/coins/stakewise-staked-eth",
+            "icon": "https://assets.coingecko.com/coins/images/33117/standard/Frame_27513839.png?1700732599"
+        },
+        "3rd_party_software":false,
+        "link":"https://stakewise.io/app/pool"
+    },
+    {
+        "service":"Staking Facilities",
+        "min_stake":null,
+        "stake_unit":"ETH",
+        "fee":null,
+        "fee_note":null,
+        "key_owner": null,
+        "withdrawals_key_owner": null,
+        "no_supermajority_client":null,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":null,
+        "link":"https://stakingfacilities.com/"
+    },
+    {
+        "service":"Swissborg",
+        "min_stake":null,
+        "stake_unit":"ETH",
+        "fee":1,
+        "fee_note":"% of rewards",
+        "key_owner": null,
+        "withdrawals_key_owner": null,
+        "no_supermajority_client":null,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":true,
+        "link":"https://swissborg.com/"
+    }
+]

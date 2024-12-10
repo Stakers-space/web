@@ -1,0 +1,20 @@
+<body id="body">
+{{> header_dashboard}}
+<main>
+	<section class="grid mt-100 mb-100">
+        <h1>Server Resources</h1>
+        <div class="egrid">
+            {{#each resourcesByServer}}
+                <h2>Server ID {{this.[0]}}</h2>
+                <canvas id="srv_{{this.[0]}}" name="lazy-canvas"></canvas>
+            {{/each}}
+        </div>
+    </section>
+</main>
+<script>
+    var resourcesByServer = {{{resourcesByServerJSON}}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
+<script type="text/javascript" src="/js/chart-presenter.js"></script>
+<script type="text/javascript" src="/js/charts/node-monitor.js"></script>

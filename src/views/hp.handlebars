@@ -1,0 +1,327 @@
+<body id="body" data-amp-auto-lightbox-disable>
+{{> header}}
+<main>
+	<section class="cover">
+		<div class="cover-top">
+			<div class="cover-main grid egrid">
+				<div class="cover-main_left separator-vertical separator-after vamhide">
+					<div class="cover-main_left-content title-page">
+						<h1 class="title">One place for<br>all around staking</h1>
+						<p class="subtitle"><strong>Earn 24/7</strong> while <br>securing a new era of  <span class="dynamic" data-text="Internet"></span></p>
+					</div>
+				</div>
+				<div class="cover-main_right">
+					<div class="cover-main_right-news mb-30">
+						<div class="tabselector decent">
+							<nav class="egrid egrid-4">
+								<span>News filtration:</span>
+								<button class="tab selected" data-tabpanel="1" type="button">All</button>
+								<button class="tab" data-tabpanel="2" type="button">Fundamentals</button>
+								<button class="tab" data-tabpanel="3" type="button">Clients</button>
+							</nav>
+							<div class="tabpanel selected screen">
+								<ul class="mt-10">
+									{{#each newsfeed.all}}
+									<li>
+										<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer">{{{this.m}}}</a> <span class="date" title="{{{this.ht}}}">{{{this.ta}}}</span>
+									</li>
+									{{/each}}
+								</ul>
+							</div>
+							<div class="tabpanel screen">
+								<ul class="mt-10">
+									{{#each newsfeed.fundamental}}
+									<li>
+										<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/logo/{{this.img}}.svg" alt="{{this.img}} logo" width="25" height="25"> {{{this.m}}}</a> <span class="date" title="{{{this.ht}}}">{{{this.ta}}}</span>
+									</li>
+									{{/each}}
+								</ul>
+							</div>
+							<div class="tabpanel screen">
+								<ul class="mt-10">
+									{{#each newsfeed.clients}}
+									<li>
+										<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer">{{{this.m}}}</a> <span class="date" title="{{{this.ht}}}">{{{this.ta}}}</span>
+									</li>
+									{{/each}}
+								</ul>
+							</div>
+						</div>
+						<a href="/news" class="btn btn-black btn-rounded">View all news</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cover-middle separator-horizontal separator-before">
+			<nav class="cover-options egrid-2 gap-4">
+				<div class="chain">
+					<div class="gap-4 chain-header">
+						<a class="brand" href="/ethereum-staking">
+							<div class="chain-logo">
+								<img src="/logo/ethereum.svg" alt="Ethereum logo" height="58" width="58">
+							</div>
+							<h2 class="subtitle">Ethereum Staking</h2>
+						</a>
+						<div class="label-bar">
+							<div class="label px-2 py-1 f-8"><a href="/ethereum-staking/validators">{{ethereum.validators}} <span>Validators</span></a></div>
+							<div class="label px-2 py-1 f-8">{{ethereum.stakedRatio}} ETH Staked</div>
+							<div class="label px-2 py-1 f-8">1 ETH = {{ethereum.price}}</div> 
+							<div class="label px-2 py-1 f-8">TVL {{ethereum.tvl}}</div> 
+						</div>
+					</div>
+					<div class="cover-lmargin">
+						<table class="mb-20">
+							<tbody>
+								<tr>
+									<td class="lb0 tb0"><strong><a href="/ethereum-staking#delegate">Delegate ETH</a></strong></td>
+									<td class="tb0">~ {{ethereum.apr.delegator}} pa</td>
+									<td class="tb0 rb0">$1 of ETH minimum investment</td>
+								</tr>
+								<tr>
+									<td class="lb0 bb0">
+										<strong><a href="/ethereum-staking#operate">Operate a staking node</a></strong>
+									</td>
+									<td class="bb0">~ {{ethereum.apr.operator}} pa</td>
+									<td class="bb0 rb0">32 ETH (~ $) minimum investment</td>
+								</tr>
+							</tbody>
+						</table>
+						<a href="/ethereum-staking" class="btn btn-black btn-rounded">Stake Ethereum</a>
+					</div>
+				</div>
+				<div class="chain">
+					<div class="gap-4 chain-header">
+						<a class="brand" href="/gnosis-staking">
+							<div class="chain-logo">
+								<img  src="/logo/gnosis.svg" alt="Gnosis logo" height="58" width="58">
+							</div>
+							<h2 class="subtitle">Gnosis Staking</h2>
+						</a>
+						<div class="label-bar">
+							<div class="label px-2 py-1 f-8"><a href="/gnosis-staking/validators">{{gnosis.validators}} <span>Validators</span></a></div>
+							<div class="label px-2 py-1 f-8">{{gnosis.stakedRatio}} GNO Staked</div>
+							<div class="label px-2 py-1 f-8">1 GNO = {{gnosis.price}}</div> 
+							<div class="label px-2 py-1 f-8">TVL {{gnosis.tvl}}</div> 
+						</div>
+					</div>
+					<div class="cover-lmargin">
+						<table class="mb-20">
+							<tbody>
+								<tr>
+									<td class="lb0 tb0"><strong><a href="/gnosis-staking#delegate">Delegate GNO</a></strong></td>
+									<td class="bb0 tb0">~ 9% pa{{!--~ {{gnosis.apr.delegator}} pa--}}</td>
+									<td class="tb0 rb0">$1 of GNO minimum investment</td>
+								</tr>
+								<tr>
+									<td class="lb0 bb0">
+										<strong><a href="/gnosis-staking#operate">Operate a staking node</a></strong>
+									</td>
+									<td class="bb0">~ 10% pa{{!--~ {{gnosis.apr.operator}} pa--}}</td>
+									<td class="bb0 rb0">1 GNO minimum investment</td>
+								</tr>
+							</tbody>
+						</table>
+						<a href="/gnosis-staking" class="btn btn-black btn-rounded">Stake Gnosis</a>
+					</div>
+				</div>
+
+				{{!--<div class="chain">
+					<div class="egrid gap-4 chain-header">
+						<div class="brand">
+							<img class="chain-logo" src="/logo/hopr.svg" alt="Hopr logo">
+							<h3 class="subtitle"><a href="https://docs.hoprnet.org/node/using-docker">Hopr</a></h3>
+						</div>
+						<div>
+							<div class="label"><span>TVL</span> $98.7b</div>
+							<div class="label"><span>SR</span> 6.1x</div>
+						</div>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th class="lb0 tb0 rb0"></th>
+								<th class="tb0 lb0">APY</th>
+								<th class="tb0 rb0">MI</th>
+								<th class="tb0 rb0 lb0"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="lb0 tb0">
+									Delegate funds
+								</td>
+								<td>≤4%</td>
+								<td>$1</td>
+								<td class="rb0"><a href="" class="btn">Delegate funds</a></td>
+							</tr>
+							<tr>
+								<td class="lb0 bb0">
+									Operate node
+								</td>
+								<td class="bb0">≤4.5%</td>
+								<td class="bb0">$15k</td>
+								<td class="rb0 bb0"><a href="" class="btn">Operate node</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>--}}
+			</nav>
+			{{!--<p class="cover-options_scroll">Scroll down for more info</p>--}}
+		</div>
+	</section>
+
+	<section class="servers separator-horizontal separator-before separator-after egrid egrid-2 mpadding">
+		<div class="grid-leftpadding separator-vertical separator-after vamhide">
+			<div class="sticky mt-40">
+				<h2 class="title-section"><span>Validate on<br>multiple chains</span> from a single staking machine.</h2>
+				<p>Provide a liability in the form of locking a token, launch a staking node and be rewarded for validating transactions on the global public ledger.</p>
+				<p>Staking can be operated throgh a common PC from home, server house as well as cloud.</p>
+				<p class="mt-20">Choose a journy of your preference.</p>
+				<ul>
+					<li>Staking on a plug-n-play device</li>
+					<li>Using UI-based softwares to configurate & run staking node</li>
+					<li>Managed servers with remote assistance</li>
+				</ul>
+				<a href="/ethereum-staking/full-guide" class="btn btn-black btn-rounded">Configurate Ethereum Node</a>
+				<a href="/gnosis-staking/full-guide"  class="btn btn-black btn-rounded">Configurate Gnosis Node</a>
+			</div>
+		</div>
+		<div class="servers-template">
+			{{!--<div class="separator-horizontal separator-after servers-option">
+				<div class="servers-option_img">
+					<img class="chain-logo" src="/devices/dappnode.webp" alt="Dapp Node" loading="lazy">
+				</div>
+				<div class="servers-option_overlay">
+					<div>
+						<h3>Dapp Node</h3>
+						<p>The plug-n-play staking node.</p>
+					</div>
+					<a href="https://dappnode.com/collections/frontpage" target="_blank" rel="nofollow noopener noreferrer" class="btn btn-black btn-rounded">Buy</a>
+				</div>
+			</div>
+			<div class="separator-vertical separator-before servers-option">
+					<div class="servers-option_img">
+						<img class="chain-logo" src="/devices/avado.jpg" alt="Avado Node" loading="lazy">
+					</div>
+					<div class="servers-option_overlay">
+						<div>
+							<h3>Avado Node</h3>
+							<p>The plug-n-play staking node.</p>
+						</div>
+						<a href="https://ava.do/shop/" target="_blank" rel="nofollow noopener noreferrer" class="btn btn-black btn-rounded">Buy</a>
+					</div>
+			</div>--}}
+			<div class="separator-vertical separator-after servers-option vamhide">
+				<div class="servers-option_img">
+					<img class="chain-logo" src="/devices/customnode.webp" alt="Custom Node" loading="lazy">
+				</div>
+				<div class="servers-option_overlay">
+					<div>
+						<h3>Custom Node</h3>
+						<p>Build your custom node from the scratch.</p>
+						<span></span>
+					</div>
+					<a href="/custom-node" class="btn btn-black btn-rounded">Build</a>
+				</div>
+			</div>
+			<div class="separator-horizontal separator-before servers-option hbmhide">
+				<div class="servers-option_img">
+					<img class="chain-logo" src="/devices/cloudnode.webp" alt="Cloud Node" loading="lazy">
+				</div>
+				<div class="servers-option_overlay">
+					<div>
+						<h3>Cloud Node</h3>
+						<p>Rent ready-to use cloud node</p>
+					</div>
+					<a href="/cloud-node" class="btn btn-black btn-rounded">Rent</a>
+				</div>
+			</div>
+			
+			<div class="separator-horizontal separator-before servers-option mn">
+				<div class="servers-option_img">
+					<img class="chain-logo" src="/devices/managed-node.webp" alt="Managed Node" loading="lazy" style="filter: opacity(0.5);">
+				</div>
+				<div class="servers-option_overlay">
+					<div>
+						<h3>Managed Node</h3>
+						<p>Order a managed node for placement in your home or in the cloud</p>
+					</div>
+					<a href="/managed-node" class="btn btn-black btn-rounded">Order</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="servers separator-horizontal separator-after egrid egrid-2 mpadding">
+			<div class="grid-leftpadding">
+				<div class="sticky">
+					<span style="background:#00ca72;padding:.3rem;border-radius:.5rem">Capital efficiency</span>
+					<h2 class="title-section mt-5"><span>Maximize your <br>staking yields</span> while using and securing other L2 protocols.</h2>
+				</div>
+			</div>
+			<div class="center-vertical">
+				<ul class="flex flex-wrap gap-2 clean mt-30">
+					<li>
+						<a href="/staking" class="label inline-block rounded-lg border px-5 py-3 text-center leading-none">
+							<h3>Staking</h3>
+							<p>Operate solo/bonded validators</p>
+						</a>
+					</li>
+					<li>
+						<a href="liquid-staking" class="label inline-block rounded-lg border px-5 py-3 text-center leading-none">
+							<h3>Liquid Staking</h3>
+							<p>Stake and get a liquid token</p>
+						</a>
+					</li>
+					<li>
+						<a href="/restaking" class="label inline-block rounded-lg border px-5 py-3 text-center leading-none">
+							<h3>Re-Staking</h3>
+							<p>Provide Node / Restake the liquid token</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+
+
+	<section class="servers separator-horizontal separator-after egrid egrid-2 mpadding">
+		<div class="grid-leftpadding">
+			<div class="sticky">
+				<span style="background:#00ca72;padding:.3rem;border-radius:.5rem">Stake on your own</span>
+				<h2 class="title-section mt-5"><span>Join the <br>Stakers community</span> and get valuable insight.</h2>
+				<a href="/dashboard" target="_blank" class="btn btn-black btn-rounded">Sign In for Free Trial</a>
+			</div>
+		</div>
+		<div class="center-vertical">
+			<ul>
+				<li>Notifications for updates</li>
+				<li>Notifications and alerts for validator status</li>
+				<li>Validator performance monitoring</li>
+				<li>Useful, helpful and automatization tools</li>
+				<li>Professional support</li>
+				<li>Custom staking guides</li>
+				<li>Special offers</li>
+				<li>B2C services</li>
+			</ul>
+		</div>
+	</section>
+	<section class="servers egrid egrid-2 mpadding">
+		<div class="grid-leftpadding">
+			<div class="sticky">
+				<span style="background:#00ca72;padding:.3rem;border-radius:.5rem">Delegate staking</span>
+				<h2 class="title-section mt-5"><span>Order management<br>of staking nodes</span> and make staking available for your clients.</h2>
+				<a href="/contact" class="btn btn-black btn-rounded">Contact Sales</a>
+			</div>
+		</div>
+		<div class="center-vertical">
+			<ul>
+				<li>Services for funds</li>
+				<li>Services for banks</li>
+				<li>Services for HNWIs</li>
+				<li><a href="/dashboard" target="_blank">Validator Dashboard and Monitor</a> as a service</li>
+			</ul>
+		</div>
+	</section>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}
+</body>

@@ -1,0 +1,62 @@
+{{> header}}
+<main class="mb-60">
+	<section class="cover grid egrid">
+		<div class="mt-60 mb-20">
+			<h1 class="cover-title">Interactive guide for <span>running Lido client</span> on Ubuntu OS</h1>
+			<p>A guide to set <a href="https://docs.rocketpool.net/guides/node/install-modes#the-hybrid-configuration-with-external-clients" target="_blank">hybrid configuration</a> (<a href="https://docs.rocketpool.net/guides/node/native" target="_blank">native mode</a>) for Rocketpool client. This configuration allows to run Rocketpool validators simultaneously with other type of validators (solo, StakeWise and so on.)</p>
+		</div>
+		<div class="disclaimer">
+			<div class="disclaimer-content">
+				<h3>Disclaimer</h3>
+				<p>This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.</p>
+            </div>
+		</div>
+	</section>
+
+	<div class="grid-full contents serverguide">
+        <div class="content-chapters">
+			<div class="sticky">
+				 <nav>
+					<strong>Lido guide</strong>
+					<ol>
+						
+					</ol>
+				</nav>
+			</div>
+		</div>
+		<div class="content-header">
+			{{> guides/serverSelection }}
+		</div>
+		<div class="content-panel">
+			<div class="sticky">
+				{{> guides/variablesOverview }}
+			</div>
+		</div>
+		<div class="content-body">
+            <section class="chapter" id="prerequisites">
+				<div class="content" style="width:100%;padding-top:10px">
+					<h2 data-number="°">Prerequisites for this guide</h2>
+					<ol>
+						<li>Installed and synced Execution and Consensus client
+							<p><a href="/ethereum-staking/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a></p>
+						</li>
+					</ol>
+				</div>
+            </section>
+
+			<section class="chapter mt-60" id="csm">
+				<div class="content" style="width:100%">
+					<h2>Lido CSM</h2>
+					<p>The <a href="https://operatorportal.lido.fi/modules/community-staking-module" target="_blank" rel="nofollow noopener noreferrer">Community Staking Module (CSM)</a> is the <a href="https://lido.fi/" target="_blank" rel="nofollow noopener noreferrer">Lido</a> protocol’s first module with permissionless entry, allowing any node operator to operate validators by providing a token-based bond as security collateral.</p>
+					<p><strong>CSM is supported for <a href="/ethereum-staking">Ethereum staking</a>.</strong></p>
+
+					<p>Guide in progress.</p>
+				</div>
+            </section>
+
+        </div>
+		
+    </div>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}

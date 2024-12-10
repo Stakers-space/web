@@ -1,0 +1,55 @@
+<nav style="width:100%" class="grey">
+	<strong>Interactive variables {{#if chain}}({{chain}}){{/if}}</strong>
+	<ul>
+		<li><span>System</span>: {{> selectElms/os-select }}</li>
+		<li><span>User</span>: <input type="text" value="myserveruser" class="interactive-element serverUser" data-class="serverUser"></li>
+		<li><span>SSH port</span>: <input data-type="number" data-min="1024" data-max="49151" value="22" class="interactive-element sshPort" data-class="sshPort" style="width:75px"></li>
+		<li><span>CPU type</span>: {{> selectElms/cpu-select }}</li>
+	</ul>
+	<strong>Execution layer</strong>
+	<ul class="mt-5">
+		<li><span>Client</span>: {{> selectElms/execution-select }}</li>
+		<li><span>Service</span>: <input type="text" value="{{servicePrefix}}{{executionClient}}" class="interactive-element execution_sn" data-class="execution_sn">
+			<ul>
+				<li><span>Data</span>: <input type="text" value="/var/lib/{{executionClient}}" class="interactive-element execution-dp" data-class="execution-dp"></li>
+				<li><span>Port</span>: <input type="number" min="1024" max="49151" value="8551" class="interactive-element execution-endpoint" data-class="execution-endpoint"></li>
+				<li><span>P2P</span>: <input type="number" min="1024" max="49151" value="30303" class="interactive-element execution-p2p" data-class="execution-p2p"></li>
+				<li><span>RPC</span>: <input type="number" min="1024" max="49151" value="8545" class="interactive-element execution-rpc" data-class="execution-rpc"></li>
+			</ul>
+		</li>
+	</ul>
+	<strong>Consensus layer</strong>
+	<ul class="mt-5">
+		<li><span>Client</span>: {{> selectElms/consensus-select }}</li>
+		<li class="hide client-oriented" data-client="lodestar">
+			<label>NodeJs version</label>: <input data-type="text" value="{{consensusClients.lodestar.nodejsVer}}" class="interactive-element nodejsVer" data-class="nodejsVer" style="width:75px">
+		</li>
+		<li class="hide client-oriented" data-client="teku">
+			<label>jdk ver version</label>: <input data-type="text" value="21" class="interactive-element jdkVer" data-class="jdkVer" style="width:75px">
+		</li>
+		<li><span>Beacon service</span>: <input type="text" value="{{servicePrefix}}{{consensusClient}}beacon" class="interactive-element consensus_sn" data-class="consensus_sn">
+			<ul>
+				<li><span>Data</span>: <input type="text" value="/var/lib/{{consensusClient}}/beacon" class="interactive-element consensus-dp" data-class="consensus-dp"></li>
+				<li><span>Port</span>: <input type="number" min="1024" max="49151" value="5052" class="interactive-element consensus-endpoint" data-class="consensus-endpoint"></li>
+				<li><span>P2P</span>: <input type="number" min="1024" max="49151" value="9000" class="interactive-element consensus-p2p" data-class="consensus-p2p"></li>
+				<li><span>Quic</span>: <input type="number" min="1024" max="49151" value="9001" class="interactive-element consensus-quic" data-class="consensus-quic"></li>
+			</ul>
+		</li>
+	</ul>
+	<div class="hide ethereum-chain">
+		<strong>MEV layer</strong>
+		<ul class="mt-5">
+			<li ><span>Mev</span>: {{> selectElms/mev-select }}</li>
+		</ul>
+	</div>
+	
+	{{#ifEqual chain "ethereum"}}
+		<script>
+			const ethereumOnlyElements = document.getElementsByClassName("ethereum-chain");
+			console.log("displaying following hidden elements:", ethereumOnlyElements);
+			for (const elm of ethereumOnlyElements) {
+				elm.classList.remove("hide");
+			}
+		</script>
+	{{/ifEqual}}
+</nav>

@@ -1,0 +1,27 @@
+<h4>Choose ports for communication</h4>
+<p>Change the default ports below if you are going to stake on more chains simultaneously (e.g. Ethereum and Gnosis
+    at once) on the same machine. If you are going to stake {{chain}} only, you can keep the default ports. If you are
+    changing the default ports, be sure that the newly selected port is not already in used. A port in used may be
+    checked with following code:</p>
+<pre><code>ss -tuln | grep ':PORT'</code></pre>
+<ul>
+    <li>If it returns empty response, the port is free and can be used.</li>
+</ul>
+<h4>Ports selection</h4>
+<ul>
+    <li><label for="np1">P2P network (TCP, UDP):</label>
+        <code><input type="number" class="interactive-element execution-p2p" data-class="execution-p2p" value="30303"/></code>
+        (Default
+        port: <code>30303</code>)
+    </li>
+    <li><label for="np2">JSON-RPC interface (TCP):</label>
+        <code><input type="number" class="interactive-element execution-rpc" data-class="execution-rpc" value="8545"/></code>
+        (Default
+        port: <code>8545</code>)
+    </li>
+    <li><label for="np3">Execution endpoint (TCP):</label>
+        <code><input type="number" class="interactive-element execution-endpoint" data-class="execution-endpoint" value="8551"/></code>
+        (Default
+        port: <code>8551</code>)
+    </li>
+</ul>

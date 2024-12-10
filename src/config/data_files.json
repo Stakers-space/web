@@ -1,0 +1,28 @@
+{
+    "ethereum": {
+        "vaultServices": "data/chains/ethereum/staking-vault-services.json",
+        "validatorHostingServices": "data/chains/ethereum/validator-hosting-services.json",
+        "mevRelayList": "data/chains/ethereum/mev-relay-list.json",
+        "validatorQueue": "data/chains/ethereum/churn-schedule.json"
+    },
+    "gnosis": {
+        "vaultServices": "data/chains/gnosis/staking-vault-services.json",
+        "validatorHostingServices": "data/chains/gnosis/validator-hosting-services.json",
+        "validatorQueue": "data/chains/gnosis/churn-schedule.json"
+    },
+    "pagecache":{
+        "hp":"data/cache/hp.json",
+        "ethereum":"data/cache/ethereum.json",
+        "gnosis":"data/cache/gnosis.json",
+        "charts":"data/cache/charts.json",
+        "news":{
+            "hp":"data/cache/news.json",
+            "ethereum": "data/cache/news_ethereum.json",
+            "gnosis": "data/cache/news_gnosis.json"
+        },
+        "validatorqueue":{
+            "ethereum": "data/cache/ethereum_validatorqueue.json",
+            "gnosis": "data/cache/gnosis_validatorqueue.json"
+        }
+    }
+}

@@ -1,0 +1,80 @@
+<body id="body">
+{{> header_dashboard}}
+<main>
+	<section class="grid mt-100 mb-100">
+        <h1>{{formTitle}}</h1>
+        <ol>
+            {{#each newsList}}
+            <li data-newsid="{{this.id}}" data-time="{{this.t}}" data-category="{{this.c}}">{{this.t}} [{{this.c}}] <a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer">{{{this.m}}}</a> | <button onclick="UpdateNews(this)">Edit</button></li>
+            {{/each}}
+        </ol>
+         
+        <h2 class="mt-40">Add / Update News</h2>
+        <form method="post" action="{{submitLink}}">
+            <div>
+                <label>Message ID (empty for adding new, filled for updating)</label>
+                <input type="text" id="message_id" name="message_id" value="" style="width:250px">
+            </div>
+            <div>
+                <label for="message">Message</label>
+                <textarea type="text" id="message" name="message" rows="2" cols="100" required></textarea>
+            </div>
+            <div>
+                <div>
+                    <label for="link">Link</label>
+                    <input type="text" id="link" name="link" value="" required style="width:250px">
+                </div>
+            </div>
+            <div>
+                <label>Category</label>
+                <label><input {{#if server.ethereum}}checked{{/if}} type="checkbox" name="ethereum" value="eth" id="ethChain"> Ethereum</label>
+                <label><input {{#if server.gnosis}}checked{{/if}} type="checkbox" name="gnosis" value="gno" id="gnoChain"> Gnosis</label>
+                <label><input {{#if server.fundamental}}checked{{/if}} type="checkbox" name="fundamental" value="fundamental" id="fundamental_new"> Fundamental</label>
+                <label><input {{#if server.client}}checked{{/if}} type="checkbox" name="client" value="client" id="client_new"> Client</label>
+            </div>
+            <div>
+                <div>
+                    <label for="link">Time</label>
+                    <input type="text" id="timestamp" name="timestamp" value="{{timestamp}}">
+                </div>
+            </div>
+
+            {{#if failureCallback}}
+                <p class="login-error">{{{failureCallback}}}</p>
+            {{/if}}
+            <div class="mt-20">
+                <input type="submit" class="submit btn btn-black btn-rounded" id="submit" value="Submit">
+            </div>
+        </form>
+    <script>
+        function toggleSelect(selectId) { document.getElementById(selectId).classList.toggle("hide"); }
+
+        function UpdateNews(e){
+            const liElm = e.parentElement;
+            document.getElementById("message_id").value = liElm.dataset.newsid;
+            document.getElementById("message").value = liElm.children[0].innerHTML;
+            document.getElementById("link").value = liElm.children[0].href;
+            document.getElementById("ethChain").checked = (liElm.dataset.category !== null && liElm.dataset.category.indexOf("eth") !== -1);
+            document.getElementById("gnoChain").checked = (liElm.dataset.category !== null && liElm.dataset.category.indexOf("gno") !== -1);
+            document.getElementById("fundamental_new").checked = (liElm.dataset.category !== null && liElm.dataset.category.indexOf("fundamental") !== -1);
+            document.getElementById("client_new").checked = (liElm.dataset.category !== null && liElm.dataset.category.indexOf("client") !== -1);
+            // convert timestamp
+            console.log(liElm.dataset.time);
+            if(typeof liElm.dataset.time === 'number'){
+                document.getElementById("timestamp").value = liElm.dataset.time;
+            } else {
+                document.getElementById("timestamp").value = toTimestamp(liElm.dataset.time);
+            }
+            
+            function toTimestamp(dateString) {
+                const date = new Date(dateString);
+                return Math.floor(date.getTime());
+            }
+        }
+    </script>
+
+    </section>
+</main>
+{{> scripts/security-guard}}
+{{> footer}}
+</body>

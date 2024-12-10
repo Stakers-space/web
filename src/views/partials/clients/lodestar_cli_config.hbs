@@ -1,0 +1,77 @@
+  <ol>
+    <li>
+      <h3>Configuring lodestarbeacon service user and data directory</h3>
+      <ul>
+        <li><h4>Create a service user</h4>
+          <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}lodestarbeacon" class="interactive-element consensus_sn" data-class="consensus_sn" data-client="lodestar">
+          <pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
+        </li>
+        <li><h4>Enable  <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark> user access NodeJs</h4>
+          <label>User with NodeJs</label>: <input type="text" value="myserveruser" class="interactive-element serverUser" data-class="serverUser">
+          <pre><code>sudo usermod -aG <mark class="serverUser">myserveruser</mark> <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
+        </li>
+        <li>
+          <h4>Create a directory for Lodestar Beacon data</h4>
+          <label>Service data directory</label>: <input type="text" value="/var/lib{{slashChain}}/lodestar/beacon" class="interactive-element consensus-dp" data-class="consensus-dp" data-client="lodestar">
+          <pre><code>sudo mkdir -p <mark class="consensus-dp">/var/lib{{slashChain}}/lodestar/beacon</mark></code></pre>
+        </li>
+        <li>
+          <h4>Set directory ownership</h4>
+          <pre><code>sudo chown -R <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark>:<mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark> <mark class="consensus-dp">/var/lib{{slashChain}}/lodestar/beacon</mark></code></pre>
+        </li>
+      </ul>
+    </li>
+    {{#if PortSelection}}
+    <li class="mt-15">{{> clients/config/consensusclient-portselection }}</li>
+    {{/if}}
+    <li><h3>Create configuration file for the Lodestar beacon service</h3>
+      <ul>
+        <li><h4>Open the configuration file</h4>
+          <pre><code>sudo nano /etc/systemd/system/<mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark>.service</code></pre>
+        </li>
+        <li><h4>Copy following configuration to the file</h4>
+            <p><label>Installed NodeJs version on the server</label>: <input data-type="text" value="{{consensusClients.lodestar.nodejsVer}}" class="interactive-element nodejsVer" data-class="nodejsVer" style="width:75px">
+            <br><i>This can be get with command <code>$ node version</code></i></p>
+{{#unless chain}}
+          <div class="tabselector">
+						<nav class="egrid egrid-2">
+							<button class="tab selected" data-tabpanel="1">Ethereum</button>
+							<button class="tab" data-tabpanel="2">Gnosis</button>
+						</nav>
+						<div class="tabpanel selected">
+{{> clients/config/eth-lodestarbeacon }}
+						</div>
+						<div class="tabpanel">
+{{> clients/config/gno-lodestarbeacon }}
+						</div>
+					</div>
+          <i>*Note: Update <code>jwt-secret</code>, if you use different</i>
+          {{/unless}}
+{{#ifEqual chain "ethereum"}}
+{{> clients/config/eth-lodestarbeacon }}
+{{/ifEqual}}
+{{#ifEqual chain "gnosis"}}
+{{> clients/config/gno-lodestarbeacon }}
+{{/ifEqual}}
+            <p>Check <a href="https://chainsafe.github.io/lodestar/run/beacon-management/beacon-cli" target="_blank" rel="noopener">all available flags</a>.</p>
+        </li>
+        <li>Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</li>
+      </ul>
+    </li>
+        <li><h4>Reload daemon</h4>
+          <pre><code>sudo systemctl daemon-reload</code></pre>
+        </li>
+        <li><h4>Run the service</h4>
+          <pre><code>sudo systemctl start <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
+        </li>
+        <li>
+          <h4>Monitor the running lodestar Beacon service</h4>
+<pre><code>systemctl status <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
+<pre><code>journalctl -fu <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
+        </li>
+        <li><h4>Enable auto start on server statup</h4>
+          <pre><code>sudo systemctl enable <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
+        </li>
+      </ul>
+    </li>
+  </ol>

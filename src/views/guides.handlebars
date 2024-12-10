@@ -1,0 +1,64 @@
+<body id="body" data-amp-auto-lightbox-disable>
+{{> header_amp}}
+<main class="grid mb-60">
+	<h1>Staking Guides</h1>
+
+	<h2>Chain-based guides</h2>
+	<div class="egrid egrid-2">
+		<a href="/ethereum-staking/full-guide" class="btn center box"><span>One-page interactive <strong>Ethereum staking guide</strong></span></a>
+		<a href="/gnosis-staking/full-guide" class="btn center box"><span>One-page interactive <strong>Gnosis staking guide</strong></span></a>
+	</div>
+	
+	<h2>Client-based guides</h2>
+	<h3>Execution clients</h3>
+	<div class="egrid egrid-3">
+		{{#each executionClients}}
+		<div class="box center">
+			<a href="/{{this.ilink}}"><h4>{{this.name}}</h4></a> 
+			{{!--<div><a href="/{{this.ilink}}/install" class="btn btn-black btn-rounded">Install</a></div> 
+			<div><a href="/{{this.ilink}}/update" class="btn btn-black btn-rounded">Update</a></div>--}}
+		</div>
+		{{/each}}
+	</div>
+
+	<h3>Consensus clients</h3>
+	<div class="egrid egrid-3">
+		{{#each consensusClients}}
+			<div class="btn center box">
+				<a href="/{{this.ilink}}"><h4>{{this.name}}</h4></a>
+			</div>
+		{{/each}}
+	</div>
+
+	<h3>Mev clients</h3>
+	<div class="egrid egrid-3">
+		{{#each mevClients}}
+			<div class="btn center box">
+				<a href="/{{this.ilink}}"><h4>{{this.name}}</h4></a>
+			</div>
+		{{/each}}
+	</div>
+	
+	<section class="py-6 separator-horizontal separator-after">
+		<h3>Service-based guides</h3>
+		<div class="egrid egrid-3">
+			{{#each serviceClients}}
+				<div class="btn center box">
+					<a href="/{{this.ilink}}"><h4>{{this.name}}</h4></a>
+				</div>
+			{{/each}}
+			<div class="btn center box">
+				<a href="/ethereum-staking/full-guide/lido"><h4>Lido</h4></a>
+			</div>
+		</div>
+	</section>
+	
+	<h3 class="mt-30">Ethdo guides</h3>
+	<div class="egrid egrid-3">
+		<div class="btn center box">
+			<a href="https://github.com/Stakers-space/staking-scripts/tree/main/ethdo/presigned-exit-keys" target="_blank"><h4>Generate and use pre-signed exit keys</h4></a>
+		</div>
+	</div>
+</main>
+{{> footer_amp}}
+</body>

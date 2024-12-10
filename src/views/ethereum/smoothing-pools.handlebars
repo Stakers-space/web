@@ -1,0 +1,74 @@
+{{> header_amp}}
+<main>
+	<section class="grid">
+        <ul class="broadcrumbs mb-20" vocab="https://schema.org/" typeof="BreadcrumbList">
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+				<meta property="position" content="1">
+			</li>
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/ethereum-staking"><span property="name">Ethereum Staking</span></a>
+				<meta property="position" content="2">
+			</li>
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/ethereum-staking/smoothing-pools"><span property="name">Smoothing pools</span></a>
+				<meta property="position" content="3">
+			</li>
+		</ul>
+		<h1>Smoothing Pools on {{chainName}} chain</h1>
+        
+
+    </section>
+    <section class="grid" itemscope itemtype="https://schema.org/FAQPage">
+        <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="mt-30">
+            <h2 itemprop="name">What is a Smoothing Pool?</h2>
+            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+				<div itemprop="text">
+                    <p>A <strong>smoothing pool</strong> is a mechanism designed to reduce the variability of execution layer rewards for Ethereum validators. In traditional solo staking, the rewards a validator earns depend heavily on factors such as block proposals and the inclusion of MEV (Maximal Extractable Value). This variability can lead to inconsistent rewards over time.</p>
+                    <p>By joining a smoothing pool, validators pool their rewards, enabling more consistent payouts over time. The collective approach reduces the reliance on luck and offers a more predictable staking experience.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="mt-30">
+            <h2>Why Use a Smoothing Pool?</h2>
+            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+				<div itemprop="text">
+                    <p>Smoothing pools are especially advantageous for solo stakers who want to optimize their rewards without joining large centralized pools. Analysis has shown that over a 5-year period, validators in a smoothing pool earn <strong>41.6% more</strong> than those staking solo.</p>
+                    <p>Additionally, the likelihood of a validator in a smoothing pool outperforming solo staking is as high as <strong>78%</strong>, making it an effective strategy for improving long-term rewards.</p>
+                    <p>For a detailed exploration of the benefits, see the comprehensive <a href="https://raw.githubusercontent.com/htimsk/SPanalysis/main/report/Analysis%20of%20the%20Smoothing%20Pool.pdf" target="_blank">Analysis of the Smoothing Pool</a> by Ken Smith. Alternatively, watch his explanation on <a href="https://www.youtube.com/watch?v=2NU6pij2OzU" target="_blank">YouTube</a>.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="mt-30">
+            <h2>Key Benefits of Joining a Smoothing Pool</h2>
+            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+				<ul itemprop="text">
+                    <li>
+                        <strong>Increased Rewards:</strong> Over time, pooling rewards ensures higher overall returns compared to staking solo.
+                    </li>
+                    <li>
+                        <strong>Reduced Variability:</strong> Share rewards with other validators to achieve a more consistent payout structure.
+                    </li>
+                    <li>
+                        <strong>Decentralization:</strong> Smoothing pools empower solo stakers, offering an alternative to large, centralized pools.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <p>You can find other resources about staking pools on the <a href="https://docs.rocketpool.net/guides/node/fee-distrib-sp#the-smoothing-pool" target="_blank" rel="nofollow noopener noreferrer">Rocketpool website</a>.</p>
+    </section>
+
+    <section class="grid">
+        <h2 class="mt-60">Available Smoothing pools for Ethereum</h2>
+        <div class="egrid egrid-2">
+			<a href="https://smooth.dappnode.io/" class="btn center box" target="_blank" rel="nofollow noopener noreferrer"><span><strong>Smooth</strong></span></a>
+			<a href="https://app.smoothly.money/" class="btn center box" target="_blank" rel="nofollow noopener noreferrer"><span><strong>Smoothly</strong></span></a>
+            <span class="btn center box" rel="nofollow noopener noreferrer"><span><strong>Stakers.space (on roadmap)</strong></span></span>
+		</div>
+    </section>
+</main>
+{{> footer_amp}}
+</body>

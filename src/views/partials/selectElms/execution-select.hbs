@@ -1,0 +1,6 @@
+<select id="ec_1" name="ec_1" onchange="OnClientChanged('ec_1')" data-layer="execution">
+    <option value="nethermind" {{#ifEqual this.client "nethermind"}}selected{{/ifEqual}}>Nethermind</option>
+    <option value="erigon"{{#ifEqual this.client "erigon"}}selected{{/ifEqual}}>Erigon</option>
+    <option value="geth" {{#ifEqual this.client "geth"}}selected{{/ifEqual}} class="hide ethereum-chain">Geth (Ethereum only)</option>
+    <option value="reth" {{#ifEqual this.client "reth"}}selected{{/ifEqual}} class="hide ethereum-chain">Reth (Ethereum only)</option>
+</select>

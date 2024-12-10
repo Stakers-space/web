@@ -1,0 +1,3 @@
+node_modules/*
+src/config/config.secret.json
+src/services/customMailing.js

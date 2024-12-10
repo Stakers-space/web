@@ -1,0 +1,225 @@
+<script>
+const config = {
+    iterations: 50000, // PBKDF2 interactions
+    hash: "SHA-256", // hash algorithm
+    iv: GetFromHex('a1610a63834cbe32688a652c'), // window.crypto.getRandomValues(new Uint8Array(12)) // Initialize vector
+    salt: GetFromHex('7663193683bdf4215a4cb3c886bb4d12'), // window.crypto.getRandomValues(new Uint8Array(16)); // Salt
+    elements: {
+        content: 'cryptography_content',
+        password: 'cryptography_password',
+        btn: {
+            encrypt: 'encrypt_btn',
+            decrypt: 'decrypt_btn'
+        }
+    }
+}
+
+async function GetKey(password){
+    //const salt = window.crypto.getRandomValues(new Uint8Array(16)); // Salt
+
+    const passwordBuffer = new TextEncoder().encode(password);
+    const keyMaterial = await window.crypto.subtle.importKey(
+        "raw",
+        passwordBuffer,
+        { name: "PBKDF2" },
+        false,
+        ["deriveKey"]
+    );
+
+    const key = await window.crypto.subtle.deriveKey(
+        {
+            name: "PBKDF2",
+            salt: config.salt,
+            iterations: config.iterations,
+            hash: config.hash
+        },
+        keyMaterial,
+        { name: "AES-GCM", length: 256 },
+        true,
+        ["encrypt", "decrypt"]
+    );
+    return key;
+}
+
+/** Generates salt, iv */
+async function DecryptContent(password, content, elm){
+    content = hexToBuffer(content);
+    const decrypted = await window.crypto.subtle.decrypt(
+        { name: "AES-GCM", iv: config.iv },
+        await GetKey(password),
+        content
+    );
+    let value = new TextDecoder().decode(decrypted);
+    SetElementValue(elm, value);
+    return value;
+}
+
+async function isEncrypted(content, password) {
+    try {
+        await DecryptContent(password, content, {});
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+/* Requires salt, iv */
+async function EncryptContent(password, content, elm){
+    try {
+        const encrypted = await isEncrypted(content, password);
+        if(encrypted) {
+            console.log(content, "already encrypted");
+            return content;  
+        }
+        var key = await GetKey(password);
+        //console.log(decodeBase64AndDecrypt(content, await GetKey(password)));
+        //console.log(password, GetKey(password));
+        config.encrypted = await window.crypto.subtle.encrypt(
+            { name: "AES-GCM", iv: config.iv },
+            key,
+            new TextEncoder().encode(content)
+        );
+        let encryptedContent = bufferToHex(config.encrypted);
+        //console.log("Encrypt!", password, content, key, "→", encryptedContent);
+        SetElementValue(elm, encryptedContent);
+        return encryptedContent;
+    } catch (error) {
+        console.error("Encryption failed:", error);
+        throw error; 
+    }
+}
+
+function bufferToHex(buffer) {
+  return Array.from(new Uint8Array(buffer))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+function hexToBuffer(hexString) {
+  const bytes = new Uint8Array(hexString.length / 2);
+  for (let i = 0; i < bytes.length; i++) {
+    bytes[i] = parseInt(hexString.substr(i * 2, 2), 16);
+  }
+  return bytes.buffer;
+}
+
+function GetHex(iv){
+    return Array.from(iv).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function GetFromHex(ivHex){
+    return new Uint8Array(ivHex.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));;
+}
+function GetElementValue(elm){
+    switch(elm.nodeName){
+        case "I":  return elm.innerHTML; break;
+        case "INPUT": return elm.value; break;
+        case "TEXTAREA": return elm.innerHTML; break;
+        case "SPAN": return elm.innerHTML; break;
+        case "MARK": return elm.innerHTML; break;
+        case "CODE": return elm.innerHTML; break;
+        case "A": return elm.innerHTML; break;
+        default: console.warn("Undefined element:", elm.nodeName); return null;
+    }
+}
+function SetElementValue(elm, value){
+    //console.log(GetElementValue(elm),"→",value);
+    switch(elm.nodeName){
+        case "I":  elm.innerHTML = value; break;
+        case "INPUT": elm.value = value; break;
+        case "TEXTAREA": elm.innerHTML = value; break;
+        case "SPAN":  elm.innerHTML = value; break;
+        case "MARK":  elm.innerHTML = value; break;
+        case "CODE":  elm.innerHTML = value; break;
+        case "A":  elm.innerHTML = value; break;
+        default: console.warn("Undefined element:", elm.nodeName);
+    }
+}
+</script>
+
+<script>
+    let pswStorage = (localStorage) ? localStorage.getItem("stakersspace_cryptPsw") : null;
+    if(!pswStorage) {
+        if(localStorage) localStorage.setItem("stakersspace_cryptPsw", JSON.stringify([]));
+        pswStorage = []; // no storage
+    } else {
+        try {
+            pswStorage = GetPsws();
+        } catch(e){
+            console.log(e);
+            pswStorage = [ localStorage.getItem("stakersspace_cryptPsw") ];
+            localStorage.setItem("stakersspace_cryptPsw", JSON.stringify(pswStorage));
+        }
+    }
+
+    let scheduledtasks = 0;
+    // convert cryptPsw to array
+
+    function DecryptPageData(){
+        let encryptedElements = document.getElementsByClassName("encrypted_value");
+        let encryptedElements_count = encryptedElements.length;
+
+        let inputPswElm = document.getElementById('decryption-password');
+        if(!inputPswElm) return;
+        let inputPsw = inputPswElm.value;
+        if(inputPsw !== "") pswStorage.push(inputPsw);
+
+        //console.log("Decrypt elements:", encryptedElements);
+        for(const psw of pswStorage){
+            DecryptWithPassword(encryptedElements, encryptedElements_count, psw);
+        }
+    }
+
+    function DecryptWithPassword(elms, elmsL, psw){
+        //console.log("DecryptWithPassword", psw, elms, elmsL);
+        scheduledtasks += elmsL;
+        for(var i=0;i<elmsL;i++){
+            var elm = elms[i];
+            const value = GetElementValue(elm);
+            DecryptContent(psw, value, elm)
+                .then(decryptedContent => { 
+                    let succPsws = GetPsws();
+                    const pswIndex = (localStorage) ? succPsws.indexOf(psw) : 0;
+                    //console.log("Decrypted cnt:",decryptedContent, "pswIndex:",pswIndex);
+                    if(pswIndex === -1) {
+                        console.log("Password storage extended for new psw", psw);
+                        succPsws.push(psw);
+                        localStorage.setItem("stakersspace_cryptPsw", JSON.stringify(succPsws));
+                        UpdateKeystoreUI();
+                    }
+                    OnDecryptionCompleted();
+                })
+                .catch(error => {
+                    console.error(error);
+                    OnDecryptionCompleted();
+                });
+        }
+    }
+
+    function OnDecryptionCompleted(){
+        scheduledtasks--;
+        if(scheduledtasks === 0 && window.OnDecryptionProcessComplted) window.OnDecryptionProcessComplted();
+    }
+    
+    if(pswStorage.length > 0) {
+        console.log("Encryption password taken from local storage", pswStorage);
+        UpdateKeystoreUI();
+        DecryptPageData();
+
+        // place password to encryption password forms
+        for(const elm of document.getElementsByClassName("encryption-password")){ elm.value = pswStorage[0]; }
+    }
+
+    function UpdateKeystoreUI(){
+        if(!localStorage) return;
+        let psws = "";
+        for(const psw of GetPsws()){
+            psws += `<code style="padding:.2rem">${psw}</code>`;
+        }
+        const pswElm = document.getElementById("decryption-passwords");
+        if(pswElm) pswElm.innerHTML = psws;
+    }
+
+    function GetPsws(){
+        return JSON.parse(localStorage.getItem("stakersspace_cryptPsw"));
+    }
+</script>

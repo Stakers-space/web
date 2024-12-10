@@ -1,0 +1,24 @@
+<body id="body" data-amp-auto-lightbox-disable>
+{{> header}}
+<main>
+	<section class="grid">
+		<h1 class="title">Ethereum staking<br>Charts</h1>
+	</section>
+	<section class="grid">
+		<canvas id="ethstore_chart" name="lazy-canvas"></canvas>
+	</section>
+	<section class="grid">
+		<canvas id="ethvalidators_chart" name="lazy-canvas"></canvas>
+	</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
+<script>var ethstore = {{{ethStore}}}, validators={{{validators}}};</script>
+<script type="text/javascript" src="/js/chart-presenter.js"></script>
+<script type="text/javascript" src="/js/charts/ethstore.js"></script>
+<script type="text/javascript" src="/js/charts/eth-validators.js"></script>
+<script>charts.ActivateLazyLoad();</script>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}
+</body>

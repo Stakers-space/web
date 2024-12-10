@@ -1,0 +1,70 @@
+{{#if InstallationGuide}}
+<h3>Installing Erigon client</h3>
+{{else}}
+<h3>Updating Erigon client</h3>
+{{/if}}
+
+<p>Erigon documentation: <a href="https://erigon.gitbook.io/erigon" target="_blank" rel="nofollow noopener noreferrer">https://erigon.gitbook.io/erigon</a></p>
+
+{{#unless InstallationGuide}}
+<h4>Check current version of Erigon running on the server:</h4>
+<pre><code>$ /usr/local/bin/erigonlib/erigon -v</code></pre>
+{{/unless}}
+
+<ol>
+    <li><h4>Find the latest stable version of Erigon on Github</h4>
+        <ul>
+            <li>Find latest Erigon version at <a href="https://github.com/ledgerwatch/erigon/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/ledgerwatch/erigon/releases</a>. AMD64 v1/v2 links at <a href="https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels" target="_blank" rel="nofollow noopener">Microarchitecture levels</a>.</li>
+            <li>Write latest stable Erigon version:  </strong> <input type="text" value="{{executionClients.erigon.latestVer}}" class="erigonVer-input" style="width:100%"></li>
+        </ul>
+    </li>
+    <li>
+        <h4>Download Erigon version <code class="erigonVer">{{executionClients.erigon.latestVer}}</code></h4>
+        <pre><code>cd ~/downloads && curl -LO https://github.com/erigontech/erigon/releases/download/v<mark class="erigonVer">{{executionClients.erigon.latestVer}}</mark>/erigon_v<mark class="erigonVer">{{executionClients.erigon.latestVer}}</mark>_linux_amd64v2.tar.gz</code></pre>
+    </li>
+    <li><h4>Verify hash of donwnloaded file</h4>
+        Get hash of downloaded file and compare it with official hashes
+        <pre><code>sha256sum erigon_v<mark class="erigonVer">{{executionClients.erigon.latestVer}}</mark>_linux_amd64v2.tar.gz</code></pre>
+        And check it compare to the provided hash for the file from <a href="https://github.com/erigontech/erigon/releases/download/v{{executionClients.erigon.latestVer}}/erigon_v{{executionClients.erigon.latestVer}}_checksums.txt" target="_blank">https://github.com/erigontech/erigon/releases/download/v<mark class="erigonVer">{{executionClients.erigon.latestVer}}</mark>/erigon_v<mark class="erigonVer">{{executionClients.erigon.latestVer}}</mark>_checksums.txt</a> (Note: The link links at {{executionClients.erigon.latestVer}} version )
+    </li>
+    <li>
+        <h4>Extract the downloaded package</h4>
+        <pre><code>tar xvf erigon_v<mark class="erigonVer">{{executionClients.erigon.latestVer}}</mark>_linux_amd64v2.tar.gz</code></pre>
+    </li>
+    {{#unless InstallationGuide}}
+    <li><h4>Stop Erigon client</h4>
+        <pre><code>journalctl -fu <mark class="execution_sn" data-client="erigon">erigon</mark>
+$ sudo systemctl stop <mark class="execution_sn" data-client="erigon">erigon</mark> && systemctl status <mark class="execution_sn" data-client="erigon">erigon</mark></code></pre>
+    </li>
+    <li>
+        <h4>Remove old library</h4>
+        <pre><code>sudo rm -r /usr/local/bin/erigonlib</code></pre>
+    </li>
+    {{/unless}}
+    <li>
+        <h4>Copy extracted Erigon library</h4>
+        <pre><code>sudo cp -a erigon_v<mark class="erigonVer">{{executionClients.erigon.latestVer}}</mark>_linux_amd64v2 /usr/local/bin/erigonlib</code></pre>
+    </li>
+    {{#unless InstallationGuide}}
+    <li><h4>Start Erigon client and check its status</h4>
+        <pre><code>$ sudo systemctl start <mark class="execution_sn" data-client="erigon">erigon</mark> && systemctl status <mark class="execution_sn" data-client="erigon">erigon</mark></code></pre>
+    </li>   
+    <li><h4>Monitor Erigon client</h4>
+        <pre><code>$ journalctl -fu <mark class="execution_sn" data-client="erigon">erigon</mark></code></pre>
+    </li>
+    {{/unless}}
+    <li>
+        <h4>Remove downloaded files</h4>
+        <pre><code>cd ~/downloads && rm -r erigon_v<mark class="erigonVer">{{executionClients.erigon.latestVer}}</mark>_linux_amd64v2.tar.gz && rm -r erigon_v<mark class="erigonVer">{{executionClients.erigon.latestVer}}</mark>_linux_amd64v2</code></pre>
+    </li>
+</ol>
+<script>
+    for (const erigonVer of document.getElementsByClassName("erigonVer-input")) {
+        erigonVer.addEventListener('change', UpdateErigon);
+    }
+    function UpdateErigon(e){
+        const value = e.target.value;
+        for (const elm of document.getElementsByClassName("erigonVer-input")) { elm.innerHTML = value; };
+        for (const elm of document.getElementsByClassName("erigonVer")) { elm.innerHTML = value; };
+    }
+</script>

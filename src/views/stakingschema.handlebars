@@ -1,0 +1,209 @@
+<body id="body" data-amp-auto-lightbox-disable>
+
+{{> header_amp}}
+<main>
+	<style>
+		.schema {
+			position:relative;
+		}
+		.schema .box {
+			background: #f6f6f6;
+			padding:1rem;
+			position:relative;
+			/*color:black;*/
+			display:block;
+		}
+		.schema .tag {
+			/*background: #2e2e2e;
+			padding:0.5rem 0.7rem;
+			color:white;
+			border-radius:0.5rem;*/
+			/*color:black;*/
+		}
+		.schema.pc .title {
+			position: absolute;
+			top: -23px;
+			right: 0px;
+		}
+		.schema .diagram {
+			border: 3px solid #2e2e2e;
+			border-radius: 12px;
+			padding:0.5rem;
+			display:grid;
+			grid-gap: 7px;
+		}
+
+		.diagram .el {
+			display:grid;
+			grid-template-columns: 0.9fr 1fr 1fr;
+		}
+
+		.diagram .vc {
+			display:grid;
+			grid-template-columns: 1.5fr 1fr;
+			/*grid-gap: 7px;*/
+		}
+
+		.diagram .vc .vc-solo {
+			padding-right: 7rem;
+		}
+		.diagram .vc .vc-services {
+			margin: 20px -11px 20px -7rem;
+			position: relative;
+			background: #dddddd;
+			border-top-left-radius: 1rem;
+			border-bottom-left-radius: 1rem;
+			background: #141414;
+			color: white;
+		}
+		.diagram .vc .vc-services .overlay {
+			position: absolute;
+			left: 0%;
+			top: 0px;
+			width: 100px;
+			height: calc(100% - 8px);
+			border: 4px dashed transparent;
+			border-bottom-color: #f6f6f6;
+			border-left-color: #f6f6f6;
+			border-top-color: #f6f6f6;
+			pointer-events: none;
+			z-index: 1;
+			border-top-left-radius: 1rem;
+			border-bottom-left-radius: 1rem;
+		}
+		.diagram .vc .vc-services .brands {
+			display:grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			text-align: center;
+		}
+		.diagram .vc .vc-services .brands a {
+			color:white;
+		}
+		.diagram .vc .vc-services .brands a img {
+			width: 40px;
+		}
+
+		.tag-black {
+			background: #2e2e2e;
+			padding:0.3rem 0.5rem;
+			color:white;
+			border-radius:0.5rem;
+			font-size:0.8rem;
+			width: max-content;
+    		height: fit-content;
+			display: inline;
+		}
+
+		.tag-black.link {
+			text-decoration: none;
+		}
+		.tag-black.link:hover {
+			text-decoration: underline;
+			color:white;
+		}
+	</style>
+
+	<section class="grid">
+		<div class="schema mt-60">
+			<h1>Staking node Schema</h1>
+			<div class="schema pc">
+				<span class="title">Within a single PC (or numerous)</span>
+				<div class="diagram">
+					<div class="el box">
+						<div>
+							<h4>Execution client</h4>
+							<p>Responsible for processing transactions, executing smart contracts, and maintaining account records on the Ethereum network.</p>
+						</div>
+						<div>
+							<h5>Functions:</h5>
+							<ul>
+								<li>Processes and verifies transactions.</li>
+								<li>Executes smart contracts.</li>
+								<li>Maintains account states and balances.</li>
+								<li>Interacts with user applications (dApps).</li>
+							</ul>
+						</div>
+						<div>
+							<h5>Available Execution clients</h5>
+							<ul>
+								<li data-share="?"><a href="/nethermind" class="tag">Nethermind</a> | v... | Share: ... | <a href="/nethermind/install" class="tag-black link">Install &gt;</a></li>
+								<li data-share="?"><a href="/erigon" class="tag">Erigon</a> | v... | Share: ... | <a href="/erigon/install" class="tag-black link">Install &gt;</a></li>
+								<li data-share="?"><a href="/geth" class="tag">Geth</a> | v... | Share: ... | <a href="/geth/install" class="tag-black link">Install &gt;</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="el box">
+						<div>
+							<h4>Beaconchain client</h4>
+							<p>Responsible for achieving consensus among all nodes regarding the current state of the blockchain.</p>
+						</div>
+						<div>
+							<h5>Functions:</h5>
+							<ul>
+								<li>Achieves consensus on the blockchain state.</li>
+								<li>Validates new blocks.</li>
+								<li>Manages the staking and block validation process through validator clients.</li>
+								<li>Ensures the security and integrity of the network.</li>
+							</ul>
+						</div>
+						<div>
+							<h5>Available Execution clients</h5>
+							<ul>
+								<li><a href="/lighthouse" class="tag">Lighthouse</a> | v... | Share: ... | <a href="/lighthouse/install" class="tag-black link">Install &gt;</a></li>
+								<li><a href="/lodestar" class="tag">Lodestar</a> | v... | Share: ... | <a href="/lodestar/install" class="tag-black link">Install &gt;</a></li>
+								<li><a href="/teku" class="tag">Teku</a> | v... | Share: ... | <a href="/teku/install" class="tag-black link">Install &gt;</a></li>
+								<li><a href="/prysm" class="tag">Prysm</a> | v... | Share: ... | <a href="/prysm/install" class="tag-black link">Install &gt;</a></li>
+								<li><a href="/nimbus" class="tag">Nimbus</a> | v... | Share: ... | <a href="/nimbus/install" class="tag-black link">Install &gt;</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="vc">
+						<div class="box vc-solo">
+							<h4>Validator Client</h4>
+							<p>Validators play a crucial role in maintaining the security and proper functioning of the Ethereum network through participating in consenus by proposing and validating blocks.</p>
+							<p>Validators are part of Consensus layer and so they use validator-functionalities attached in the beaconchain clients.</p>
+							<div>
+								<a href="/lighthouse" class="tag-black link">Lighthouse &gt;</a>
+								<a href="/lodestar" class="tag-black link">Lodestar &gt;</a>
+								<a href="/teku" class="tag-black link">Teku &gt;</a>
+								<a href="/prysm" class="tag-black link">Prysm &gt;</a>
+								<a href="/nimbus" class="tag-black link">Nimbus &gt;</a>
+							</div>
+						</div>
+						<div class="box vc-services">
+							<h4>Service-based functionality for shared nodes</h4>
+							<p>Validator clients may be connected with a decentralised staking protocols for using certain part of external funds for funding validators.</p>
+							<div class="brands">
+								<a href="">
+									<img src="/logo/rocketpool.webp" alt="">
+									<h5>Rocketpool</h5>
+								</a>
+								<a href="">
+									<img src="/logo/stakewise.svg" alt="">
+									<h5>StakeWise</h5>
+								</a>
+								<a href="">
+									<img src="/logo/lido.png" alt="">
+									<h5>Lido</h5>
+								</a>
+							</div>
+							<div class="overlay"></div>
+						</div>
+						
+					</div>
+					<div class="mb box">
+						<h4>Mev boost client</h4>
+						<p>MEV-Boost (Maximal Extractable Value Boost) client is a tool designed to optimize earnings by capturing additional value from the transactions included in the proposed blocks. It is part of the broader infrastructure aimed at enabling more efficient and profitable block production by leveraging MEV opportunities.</p>
+					</div>
+				</div>
+				<div class="explanation">
+					<div>Security layer</div>
+					<div>Base layer</div>
+					<div>Managed validators</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+{{> footer_amp}}
+</body>

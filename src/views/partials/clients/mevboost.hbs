@@ -1,0 +1,20 @@
+<h2>Update Mev Boost</h2>
+<div>
+Check current version
+<pre><code>cd /usr/local/bin
+./mev-boost --version</code></pre>
+
+<pre><code>cd ~/downloads
+curl -LO https://github.com/flashbots/mev-boost/releases/download/v1.8/mev-boost_1.8_linux_amd64.tar.gz</code></pre>
+<pre><code>sha256sum mev-boost_1.8_linux_amd64.tar.gz</code></pre>
+<pre><code>tar xvf mev-boost_1.8_linux_amd64.tar.gz
+rm LICENSE README.md mev-boost_1.8_linux_amd64.tar.gz</code></pre>
+<pre><code>sudo systemctl stop mevboost</code></pre>
+Rewrite original mev-boost client
+<pre><code>sudo cp ~/downloads/mev-boost /usr/local/bin</code></pre>
+<pre><code>sudo chown mevboost:mevboost /usr/local/bin/mev-boost</code></pre>
+<pre><code>sudo systemctl start mevboost</code></pre>
+<h3>Monitor</h3>
+<pre><code>systemctl status mevboost
+journalctl -fu mevboost.service</code></pre>
+</div>

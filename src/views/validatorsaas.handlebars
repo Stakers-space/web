@@ -1,0 +1,41 @@
+<body id="body" data-amp-auto-lightbox-disable>
+{{> header}}
+<main>
+	<div class="mt-60 mb-40">
+		<h1 class="grid title">Hosted {{chainName}} validator staking</h1>
+	</div>
+	
+	<section>
+		<table>
+					<thead>
+						<tr>
+							<th>Service</th>
+							<th>Min Stake</th>
+							<th>Fee</th>
+							<th>Validator key owner</th>
+							<th>Withdrawal wallet owner</th>
+							<th>No Supermajority client</th>
+							{{!--<th>Pool token</th>
+							<th>3rd Party Software</th>--}}
+						</tr>
+					</thead>
+					<tbody>
+						{{#each hostingServices}}
+							<tr>
+								<td><a href="{{this.link}}" target="_blank" rel="nofollow noopener">{{this.service}}</a></td>
+								<td>{{this.min_stake}} {{this.stake_unit}}</td>
+								<td>{{this.fee}}{{this.fee_note}}</td>
+								<td>{{this.key_owner}}</td>
+								<td>{{this.withdrawals_key_owner}}</td>
+								<td>{{this.no_supermajority_client}}</td>
+								{{!--<td>{{this.pool_token}}</td>
+								<td>{{this.3rd_party_software}}</td>--}}
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+	</section>
+
+</main>
+{{> footer}}
+</body>

@@ -1,0 +1,155 @@
+{{> header}}
+<main class="mb-60">
+	<section class="cover grid egrid">
+		<div class="mt-60 mb-40">
+			<h1 class="cover-title"><span>Interactive Solo {{chainName}} staking</span> guide for Ubuntu OS</h1>
+			<p>One-page interactive complete guide to stake one as well as thousands of validators in a single staking node. Simply made, well explained, allowing running multiple chains on a single node. Focused on {{chain}}.</p>
+		</div>
+	</section>
+
+
+	<div class="grid-full contents wiki">
+        <div class="content-chapters">
+			<div class="sticky">
+				 <nav>
+					<strong>Solo staking guide</strong>
+					<ol>
+						<li><a href="">Hardware & OS</a></li>
+						<li><a href="">Securying server</a></li>
+						<li><a href="">Setting Basic conf</a></li>
+						<li><a href="">Jwtsecret</a></li>
+						<li>Install & configurate clients
+							<ul>
+								<li><a href="#execution">Execution client</a></li>
+								<li><a href="#consensus">Consensus client</a>
+									<ul>
+										<li><a href="#beacon">Beacon</a></li>
+										<li><a href="#validator">Validator</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>Run a Validator</li>
+						<li>Updating clients</li>
+						<li>Exit validators</li>
+					</ol>
+					
+				</nav>
+			</div>
+		</div>
+		<div class="content-body">
+            <section class="chapter mt-60" id="operation">
+				<div class="content">
+					<h2>Operating the validator</h2>
+
+					<h2>Choosing location for your node</h2>
+					<div class="egrid egrid-2">
+						<a href="" style="box-shadow: 0 1px 14px 0 #c9c9c9;margin-right:0.5rem">
+							Home staking
+							<p>Operate node from home (or any other own environment)</p>
+						</a>
+						<a href="" style="box-shadow: 0 1px 14px 0 #c9c9c9;;margin-left:0.5rem">Node housing
+							<p>Rent a space and place your node to a professional server room</p>
+						</a>
+					</div>
+
+
+					<h2>Deposit - Fund the validators</h2>
+				</div>
+			</section>
+
+
+			<section class="chapter mt-60" id="update">
+				<div class="content">
+					<h2>Updating clients</h2>
+
+					<h3 class="mt-40">Updating Execution client</h3>
+					<div class="tabselector">
+						<nav class="egrid egrid-3">
+							<button class="tab selected" data-tabpanel="1">
+								{{!--<div class="mb-10">
+									<img src="/logo/nethermind.webp" alt="Nethermind">
+								</div>--}}
+								Nethermind
+							</button>
+							<button class="tab" data-tabpanel="2">
+								{{!--<div class="mb-10">
+									<img src="/logo/erigon.svg" alt="Erigon">
+								</div>--}}
+								Erigon
+							</button>
+							<button class="tab" data-tabpanel="3">
+								Geth
+							</button>
+						</nav>
+						<div class="tabpanel selected">
+{{> clients/nethermind_cli InstallationGuide=false }}
+						</div>
+						<div class="tabpanel">
+{{> clients/erigon_cli InstallationGuide=false }}
+						</div>
+						<div class="tabpanel">
+							<p>Soon</p>
+						</div>
+					</div>
+
+					<h3 class="mt-60">Updating Consensus client</h3>
+					<div class="tabselector">
+						<nav class="egrid egrid-3">
+							<button class="tab selected" data-tabpanel="1">Lighthouse</button>
+							<button class="tab" data-tabpanel="2">Lodestar</button>
+							<button class="tab" data-tabpanel="3">Teku</button>
+						</nav>
+						<div class="tabpanel selected">
+{{> clients/lighthouse_cli InstallationGuide=false }}
+						</div>
+						<div class="tabpanel">
+{{> clients/lodestar_cli InstallationGuide=false }}
+						</div>
+						<div class="tabpanel">
+{{> clients/teku_cli InstallationGuide=false }}
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="chapter mt-60" id="troubleshooting">
+				<h2>Get Number of peers on execution client</h2>
+				<pre><code>curl -X POST --data '{"jsonrpc":"2.0","method":"net_peerCount","params":[],"id":1}' http://localhost:<mark>8545</mark></code></pre>
+				Example response:
+				<pre><code>{"jsonrpc":"2.0","result":"<mark>0x7</mark>","id":1}</code></pre>
+				Where <code>0x7</code> means 7 peers.
+			</section>
+
+            <section class="chapter mt-60" id="exit">
+				<div class="content">
+					<h2>Exiting validators</h2>
+					<div class="tabselector">
+						<nav class="egrid egrid-3">
+							<button class="tab selected" data-tabpanel="1">Lighthouse</button>
+							<button class="tab" data-tabpanel="2">Lodestar</button>
+							<button class="tab" data-tabpanel="3">Teku</button>
+						</nav>
+						<div class="tabpanel selected">
+
+						</div>
+						<div class="tabpanel">
+
+						</div>
+						<div class="tabpanel">
+
+						</div>
+					</div>
+				</div>
+			</section>
+        </div>
+		<div class="content-chapters">
+			<div class="sticky">
+				{{> guides/variablesOverview }}
+			</div>
+		</div>
+    </div>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}
+</script>

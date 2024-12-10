@@ -1,0 +1,80 @@
+<body id="body">
+{{> header dashboard=0}}
+<main>
+    <section class="login">
+        <div class="login-wrapper">
+            {{#if successCallback}}
+                <h1>Link for completing the registration was sent to {{reg_email}} address</h1>
+                <img src="/img/icons/email-notice.png" alt="Email notice">
+                <p class="login-resetinfo">
+                    <strong>Instructions for setting a new password have been sent to the specified email.</strong> 
+                </p>
+                <p>To continue in registration, process following:</p>
+                <ol>
+                    <li>Go to your {{reg_email}} mailbox</li>
+                    <li>Find an email from Stakers.space (<strong>check all sections, including the "spam" folder.</strong>)</li>
+                    <li>Click at received link to continue in the process</li>
+                </ol>
+            {{else}}
+                <h1 class="text-center">Create a new account</h1>
+                <div class="egrid egrid-2 gap-4">
+                    <div>
+                        <h2>Choose email address for accessing your account and getting notifications</h2>
+                        <aside><strong>Best practice:</strong> Use a privacy-based email that is not associated with your name nor phone number or other personal identificators.</aside>
+                    </div>
+                    <form method="post" action="/authentization/new-account" class="mt-40">
+                            <div id="email" class="login-item">
+                                <input type="text" id="email" name="username" required="required">
+                                <label for="email">Email address</label>
+                                <div class="cover"></div>
+                            </div>
+                            {{!--<div>
+                                Recaptcha
+                            </div>--}}
+                            {{#if failureCallback}}
+                                <p class="login-error">
+                                    {{{failureCallback}}}
+                                </p>
+                            {{/if}}
+                            <div class="login-action" id="login-action">
+                                <input type="submit" class="submit btn btn-black btn-rounded" id="submit" value="{{locals.btntxt.default}}" data-login="{{locals.btntxt.login}}" data-password="{{locals.btntxt.psw}}">
+                            </div>
+                    </form>
+                </div>
+                <p class="signup text-center">Do you have already an account at Stakers.space? <a class="btn btn-black btn-rounded" href="/authentization">Sign In</a></p>
+            {{/if}}
+        </div>
+    </section>
+    {{> footer}}
+</main>
+<script type="text/javascript">
+    document.getElementById("link").addEventListener("click", function(e){
+        e.preventDefault();
+        var pswElm = document.getElementById("password").children;
+        pswElm[0].classList.toggle("hide");
+        pswElm[1].classList.toggle("hide");
+        var form = document.getElementsByTagName("form")[0];
+        var subElm = document.getElementById("login-action").children;
+        var pass = document.getElementById("pass");
+        if(pswElm[0].classList.contains("hide")){
+            subElm[0].value = subElm[0].dataset.password;
+            subElm[1].innerHTML = subElm[1].dataset.login;
+            form.action = form.dataset.forgotpsw;
+            pass.required = false;
+        } else {
+            subElm[0].value = subElm[0].dataset.login;
+            subElm[1].innerHTML = subElm[1].dataset.password;
+            form.action = form.dataset.login;
+            pass.required = true;
+        }
+        var currLink = (' ' + window.location.pathname).slice(1);
+        var linkElm = document.getElementById("link");
+        window.history.pushState({}, document.title, linkElm.href);
+        linkElm.href = currLink;
+    }, false);
+if(self!==top){
+    document.body.innerHTML = "<h1>Guard</h1><p>Access rejected to prevent Clickjack / UI redress attack.</p>";
+    top.location=self.location;
+}
+</script>
+</body>

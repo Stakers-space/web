@@ -1,0 +1,15 @@
+[
+    {
+        "service":"Stakers.space solo validators",
+        "min_stake":1,
+        "stake_unit":"GNO",
+        "fee":15,
+        "fee_note":"% of rewards",
+        "key_owner":"User & Service",
+        "withdrawals_key_owner":"User",
+        "no_supermajority_client":true,
+        "pool_token":null,
+        "3rd_party_software":false,
+        "link":null
+    }
+]

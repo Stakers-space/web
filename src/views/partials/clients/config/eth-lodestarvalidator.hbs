@@ -1,0 +1,21 @@
+<pre><code>[Unit]
+Description=Lodestar Validator Instance (Ethereum Mainnet)
+Wants=network-online.target
+After=network-online.target
+[Service]
+User=<mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid" data-client="lodestar">1</span></mark>
+Group=<mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid" data-client="lodestar">1</span></mark>
+Type=simple
+Restart=always
+RestartSec=5
+WorkingDirectory=/usr/local/bin/lodestar
+Environment="PATH=/home/<mark class="serverUser">myserveruser</mark>/.nvm/versions/node/v<mark class="nodejsVer">{{consensusClients.lodestar.nodejsVer}}</mark>/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ExecStart=/usr/local/bin/lodestar/lodestar validator \
+  --network mainnet \
+  --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/validators/i<span class="instance_pid" data-client="lodestar">1</span></mark> \
+  --suggestedFeeRecipient <mark class="instance_frw" data-client="lodestar">0xXXXXXXXXXXXXXXXX</mark> \
+  # ToDo: Add Beacon API URL
+  --force \
+  --graffiti "<mark class="ec_name">Nethermind</mark>+Lodestar"
+[Install]
+WantedBy=multi-user.target</code></pre>

@@ -1,0 +1,38 @@
+[
+    {
+        "service":"Stakers.space StakeWise Vault",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":true,
+        "pool_token":null,
+        "liquid_token":null,
+        "3rd_party_software":false,
+        "link":null
+    },
+    {
+        "service":"Stakewise Pool",
+        "min_stake":0,
+        "stake_unit":"GNO",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner": "Service",
+        "withdrawals_key_owner": "Smart Contract",
+        "no_supermajority_client":null,
+        "pool_token":{
+            "ticker":"SWISE",
+            "link":"https://www.coingecko.com/en/coins/stakewise",
+            "icon": "https://assets.coingecko.com/coins/images/15044/standard/stakewise200.png?1696514703"
+        },
+        "liquid_token":{
+            "ticker":"OSGNO",
+            "link":"https://www.coingecko.com/en/coins/stakewise-staked-gno-2",
+            "icon": "https://assets.coingecko.com/coins/images/39458/standard/stakewiseosgno_32.webp?1722390395"
+        },
+        "3rd_party_software":false,
+        "link":"https://stakewise.io/app/pool"
+    }
+]

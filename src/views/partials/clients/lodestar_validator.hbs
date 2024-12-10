@@ -1,0 +1,240 @@
+{{> guides/instanceSelection client="lodestar"}}
+{{#if AddValidator}}
+<ol class="mt-30">
+    <li>
+        <p class="mt-20"><strong>Do you want to create a new validation instance or extend exisiting instance for more validators?</strong></p>
+<div class="tabselector">
+	<nav class="egrid egrid-2">
+		<button class="tab selected" data-tabpanel="1">Creating new</button>
+		<button class="tab" data-tabpanel="2">Extend existing</button>
+	</nav>
+	<div class="tabpanel selected">
+		<ul>
+            <li><h4>Create a directory for validator instance data</h4>
+                <pre><code>sudo mkdir -p <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre>
+            </li>
+            <li><h4>Enable accessing <code class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></code> for server user <code class="serverUser">myserveruser</code></h4>
+                <pre><code>sudo chown -R <mark class="serverUser">myserveruser</mark>:<mark class="serverUser">myserveruser</mark> <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre>
+            </li>
+            <li><h4>Load keystores to <code class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></code></h4>
+                <label>Directory with Deposit Data keystores</label>: <input type="text" value="$HOME/keystores/ddk_i1" class="interactive-element ddkeys-path" data-class="ddkeys-path">            
+                <h4>Move to Lodestar client directory</h4>
+                <pre><code>cd /usr/local/bin/lodestar</code></pre>
+{{#unless chain}}
+            <div class="tabselector mt-20">
+						<nav class="egrid egrid-2">
+							<button class="tab selected" data-tabpanel="1">Ethereum</button>
+							<button class="tab" data-tabpanel="2">Gnosis</button>
+						</nav>
+						<div class="tabpanel selected">
+<pre><code>./lodestar validator import --network mainnet --importKeystores <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre></p>
+                        </div>
+						<div class="tabpanel">
+<pre><code>./lodestar validator import --network gnosis --importKeystores <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre></p>
+                        </div>
+			</div>
+{{else}}
+{{#ifEqual chain "ethereum"}}
+<pre><code>./lodestar validator import --network mainnet --importKeystores <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre></p>
+{{/ifEqual}}
+{{#ifEqual chain "gnosis"}}
+<pre><code>./lodestar validator import --network gnosis --importKeystores <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre></p>
+{{/ifEqual}}
+{{/unless}}
+                <ul>
+                    <li>Insert keystores encryption password (the one used during keystores generation) on request</li>
+                    <li>If there are keystores with different encryption password, repeat the process for each encryption password</li>
+                </ul>
+            </li>
+            <li><h4>Create a service user for the validator instance</h4>
+                <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+            </li>
+            <li><h4>Set ownership of <code class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></code> to <code class="instance_su" data-client="lodestar">lodestar-vi<span class="instance_pid">1</span></code> user</h4>
+                <pre><code>sudo chown -R <mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark>:<mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark> <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre>
+            </li>
+            <li><h4>Enable access to <code>NodeJs</code> for user <code class="instance_su" data-client="lodestar">lodestar-vi<span class="instance_pid">1</span></code></h4>
+                <label>User with NodeJs</label>: <input type="text" value="myserveruser" class="interactive-element serverUser" data-class="serverUser">
+                <pre><code>sudo usermod -aG <mark class="serverUser">myserveruser</mark> <mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+            </li>
+            <li><h4>Create configuration service file for <code class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></code> service</h4>
+                <ol>
+                    <li>
+                        <p>Open the configuration file</p>
+                        <pre><code>sudo nano /etc/systemd/system/<mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark>.service</code></pre>
+                    </li>
+                    <li>
+                        <p>Copy the configuration below into the file.</p>
+                        <ul>
+                            <li><p><label>Installed NodeJs version on the server</label>: <input data-type="text" value="{{consensusClients.lodestar.nodejsVer}}" class="interactive-element nodejsVer" data-class="nodejsVer" style="width:75px">
+                                <br><i>This can be get with command <code>$ node version</code></i></p>
+                            </li>
+                            <li><label>What's fee recipient wallet?</label> <input type="text" class="interactive-element instance_frw" data-class="instance_frw" value="0xXXXXXXXXXXXXXXXX"></li>
+                            <li><label>What's your execution client?</label> <input type="text" class="interactive-element ec_name" data-class="ec_name" value="Nethermind"></li>
+                        </ul>
+{{#unless chain}}
+            <div class="tabselector mt-20">
+						<nav class="egrid egrid-2">
+							<button class="tab selected" data-tabpanel="1">Ethereum</button>
+							<button class="tab" data-tabpanel="2">Gnosis</button>
+						</nav>
+						<div class="tabpanel selected">
+{{> clients/config/eth-lodestarvalidator }}
+						</div>
+						<div class="tabpanel">
+{{> clients/config/gno-lodestarvalidator }}
+						</div>
+			</div>
+{{else}}
+{{#ifEqual chain "ethereum"}}
+{{> clients/config/eth-lodestarvalidator }}
+{{/ifEqual}}
+{{#ifEqual chain "gnosis"}}
+{{> clients/config/gno-lodestarvalidator }}
+{{/ifEqual}}
+{{/unless}}
+                    </li>
+                    <li>
+                        Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.
+                    </li>
+                </ol>
+            </li>
+            <li><h4>Adding validator instance to staking services manager</h4>
+                <p>If you use a staking manager client, add the new instance into it.</p>
+                {{!--<pre><code>cd ~/bashscripts</code></pre>
+                <pre><code>sudo nano staking-services.sh</code></pre>
+                <pre><code>sudo nano lodestarServices.sh</code></pre>--}}
+            </li>
+        </ul>
+	</div>
+	<div class="tabpanel">
+		<ul>
+            <li><h4>Stop running validator instance <code class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></code></h4>
+                <pre><code>sudo systemctl stop <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+            </li>
+            <li><h4>Extend <code class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/validators/i<span class="instance_pid">1</span></code> for new keystores</h4>
+{{#unless chain}}
+            <div class="tabselector mt-20">
+						<nav class="egrid egrid-2">
+							<button class="tab selected" data-tabpanel="1">Ethereum</button>
+							<button class="tab" data-tabpanel="2">Gnosis</button>
+						</nav>
+						<div class="tabpanel selected">
+<pre><code>./lodestar validator import --network mainnet --importKeystores <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre></p>
+                        </div>
+						<div class="tabpanel">
+<pre><code>./lodestar validator import --network gnosis --importKeystores <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre></p>
+                        </div>
+			</div>
+{{else}}
+{{#ifEqual chain "ethereum"}}
+<pre><code>./lodestar validator import --network mainnet --importKeystores <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre></p>
+{{/ifEqual}}
+{{#ifEqual chain "gnosis"}}
+<pre><code>./lodestar validator import --network gnosis --importKeystores <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre></p>
+{{/ifEqual}}
+{{/unless}}
+                <ul class="mt-0">
+                    <li>You will be requested to insert keystores encryption password (the one used during keystores generation)</li>
+                    <li>If there are keystores with different encryption password, repeat the process for each encryption password</li>
+                    <li>Already existing keystores in the directory will be skipped</li>
+                </ul>
+            </li>
+        </ul>
+	</div>
+</div>
+    </li>
+    <li><h4>Load processed changes to the system</h4>
+        <pre><code>sudo systemctl daemon-reload</code></pre>
+    </li>
+    <li><h4>Start the validator instance</h4>
+        <pre><code>sudo systemctl start <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+    </li>
+    <li><h4>Check the running validator instance</h4>
+        <pre><code>systemctl status <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+        <pre><code>journalctl -fu <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+    </li>
+    <li><h4>Other configurations</h4>
+        <div class="tabselector mt-20">
+			<nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Standard configuration</button>
+				<button class="tab" data-tabpanel="2">Stakers.space configuration</button>
+			</nav>
+			<div class="tabpanel selected">
+<h4>Activate service to start automatically on OS startup</h4>
+<pre><code>$ sudo systemctl enable <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+			</div>
+			<div class="tabpanel">
+                <ul>
+                    <li><h4>Configurate Lodestar validator Log monitor service</h4>
+                        <p>Log monitor service monitors the service log and process defined action (fixes) in a case of any issue detected.</p>
+                        <ol>
+                            <li>Check, whether the logmonitor util is installed:
+                                <pre><code>/usr/local/bin/logmonitor.sh version</code></pre>
+                                <p>If the util is not installed, <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lodestar/validator_log_monitor" target="_blank">install Lodestar validator Log monitor from GitHub</a>.</p>
+                            </li>
+                            <li>Check defined Errors list for lodestarvalidator service
+                                <pre><code>sudo nano /usr/local/etc/lodestarvalidator_tracking_records.txt</code></pre>
+                                <p>If not available, <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lodestar/validator_log_monitor" target="_blank">download it from GitHub</a>. You can also modifiy it, if needed.</p>
+                            </li>
+                            <li>Configurate the validator log monitor for service <code><mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code>, see <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lodestar/validator_log_monitor" target="_blank">guide on Github</a>.</li>
+                        </ol>
+                    </li>
+                    <li><h4>Activate service to start automatically on OS startup</h4>
+                        <p>Our guide uses a custom util for launching services. It has following benefits:</p>
+                        <ul>
+                            <li>It allows set delay for starting services. It eliminates slashing risk in the following scenario:
+                                <ol>
+                                    <li>A database corruption occures</li>
+                                    <li>Lodestar Log monitor detects it, stopping the validator instance and clearing broken database</li>
+                                    <li>Very quick power failure happens while the staking node starts immediately automatically</li>
+                                    <li>As the database with last attestation is removed now, we need to prevent start of the validator instance to avoid double attestation / block proposal within the same slot.</li>
+                                </ol>
+                            </li>
+                            <li>It allows starting services through a shared script
+                                <p>Starting all services through the <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util and its command <code>/usr/local/bin/staking.sh start execution</code> prevents a human error when there is forgotten set of <code>sudo systemctl enable ...</code> for any staking-related service.</p>
+                            </li>
+                        </ul>
+                        <p>There's a <code>Start with delay</code> util to manage this.</p>
+                        <ol>
+                            <li>Install <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with delay util from GitHub</a>, if not installed yet.</li>
+                            <li>Open Start with delay util
+                                <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
+                            </li>
+                            <li>Place new services (validator isntance and validator instance monitor) into the file
+                                <pre><code><mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+                                <pre><code><mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark>_logmonitor</code></pre>
+                            </li>
+                            <li>Verify, that a service `delayed-start.service` exists and is automatically launched on system start. See <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">GitHub for a guide to do that</a>.</li>
+                        </ol>
+                    </li>
+                    <li><h4>Extend Staking manager clients.conf</h4>
+                        Insert <code><mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code> into clients.conf file that is used by <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a>.
+                        <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
+                    </li>
+                </ul>
+			</div>
+		</div>
+    </li>
+</ol>
+{{else}}
+<p>Bulk exit of all validators under the instance (within a directory)</p>
+<ol>
+    <li>Go to a directory with Lodestar client
+        <pre><code>/usr/local/bin</code></pre>
+    </li>
+    <li>Perform the exit request for validator keystores in certain directory
+        <div class="tabselector mt-20">
+            <nav class="egrid egrid-2">
+                <button class="tab selected" data-tabpanel="1">Ethereum</button>
+                <button class="tab" data-tabpanel="2">Gnosis</button>
+            </nav>
+            <div class="tabpanel selected">
+                <pre><code>./lodestar validator voluntary-exit --network <mark>mainnet</mark> --yes --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre>
+            </div>
+            <div class="tabpanel">
+                <pre><code>./lodestar validator voluntary-exit --network <mark>gnosis</mark> --yes --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre>
+            </div>
+        </div>
+    </li>
+</ol>
+{{/if}}

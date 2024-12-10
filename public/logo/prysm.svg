@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Livello_2" data-name="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 244.79 123.37">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fcf9f5;
+      }
+    </style>
+  </defs>
+ <g xmlns="http://www.w3.org/2000/svg" id="Canvas" transform="translate(451 524)">
+<g id="Prysm">
+<g id="Group 2">
+<g id="Polygon 2">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path0_fill" transform="matrix(-5.5498e-17 -1 1 -5.55243e-17 -449.82 -344)" fill="#00FFFF"/>
+</g>
+<g id="Polygon 2.2">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path0_fill" transform="matrix(5.5498e-17 -1 -1 -5.55243e-17 -298.492 -344)" fill="#009695"/>
+</g>
+<g id="Polygon 2">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path1_fill" transform="matrix(0.939667 -0.342092 0.341949 0.939719 -458 -417.773)" fill="#00FFFF"/>
+</g>
+<g id="Polygon 2.1">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path2_fill" transform="matrix(-0.939667 -0.342092 -0.341949 0.939719 -290 -419.859)" fill="#009695"/>
+</g>
+<g id="Polygon">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path3_fill" transform="translate(-443.004 -524)" fill="#00FFFF"/>
+</g>
+<g id="Polygon">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path4_fill" transform="matrix(-1 -1.22494e-16 1.22436e-16 -1 -315.394 -352.182)" fill="#00C1C1"/>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path5_fill" transform="matrix(-1 -1.22494e-16 1.22436e-16 -1 -315.394 -352.182)" fill="#00C1C1"/>
+</g>
+</g>
+<g id="Polygon">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path6_fill" transform="matrix(0.999848 0.0174524 -0.0174524 0.999848 -436.113 -455.381)" fill="#FFFFFF"/>
+</g>
+<g id="Rectangle 2">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path7_fill" transform="translate(-309.399 -412.182)" fill="#009695"/>
+</g>
+<g id="Rectangle">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path8_fill" transform="translate(-316.215 -421.727)" fill="#009695"/>
+</g>
+</g>
+</g>
+</svg>

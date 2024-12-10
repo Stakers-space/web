@@ -1,0 +1,135 @@
+{{> header}}
+<main class="mb-60">
+	<section class="cover grid egrid">
+		<div class="mt-60 mb-20">
+			<h1 class="cover-title">Interactive guide for <span>running Rocketpool client</span> on Ubuntu OS</h1>
+			<p>A guide to set <a href="https://docs.rocketpool.net/guides/node/install-modes#the-hybrid-configuration-with-external-clients" target="_blank">hybrid configuration</a> (<a href="https://docs.rocketpool.net/guides/node/native" target="_blank">native mode</a>) for Rocketpool client. This configuration allows to run Rocketpool validators simultaneously with other type of validators (solo, StakeWise and so on.)</p>
+		</div>
+		<div class="disclaimer">
+			<div class="disclaimer-content">
+				<h3>Disclaimer</h3>
+				<p>This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.</p>
+            </div>
+		</div>
+	</section>
+
+	<div class="grid-full contents serverguide">
+        <div class="content-chapters">
+			<div class="sticky">
+				 <nav>
+					<strong>Rocketpool guide</strong>
+					<ol>
+						<li><a href="#prerequisites">Prerequisites</a></li>
+						<li><a href="#config">Files structure</a></li>
+						<li><a href="#install">Install Rocketpool</a></li>
+						<li><a href="#update">Update Rocketpool</a></li>
+						<li><a href="#commands">Useful commands</a></li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+		<div class="content-header">
+			<section class="chapter" id="intro">
+				<div class="content" style="width:100%">
+					<h2>Rocketpool service</h2>
+					<p>Rocketpool allows multiple ways of installation, <a href="https://docs.rocketpool.net/guides" target="_blank">see the documentation</a>. Within this guide, there is used a <a href="https://docs.rocketpool.net/guides/node/native" target="_blank"><strong>native type of installation</strong></a> that operates rocketpool clients above standard consensus and execution client you know from <a href="/ethereum-staking/full-guide">Solo Staking guide</a>. It's a type of open implementation within which Rocketpool can be configured simultaneously with other clients (<a href="/ethereum-staking/full-guide/solo">solo validators</a>, <a href="/ethereum-staking/full-guide/stakewise">stakewise validators</a>, and so on). In other words, this implementation allows to get the most out of staking opportunities within a single staking machine.</p>
+				</div>
+			</section>
+			{{> guides/serverSelection }}
+		</div>
+		<div class="content-panel">
+			<div class="sticky">
+				{{> guides/variablesOverview }}
+			</div>
+		</div>
+		<div class="content-body">
+            <section class="chapter" id="prerequisites">
+				<div class="content" style="width:100%;padding-top:10px">
+					<h2 data-number="°">Prerequisites for this guide</h2>
+					<ol>
+						<li>Installed and synced Execution and Consensus client
+							<p><a href="/ethereum-staking/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a></p>
+						</li>
+					</ol>
+				</div>
+            </section>
+			
+			<section class="chapter" id="config">
+				<div class="content" style="width:100%">
+					<h2 class="mt-60">Rocketpool client(s) and file(s) (hybrid configuration, native mode)</h2>
+<aside>
+    <h4>Rocketpool configuration</h4>
+    <ul>
+        <li><label for="rpl-validator-client">Validator client:</label>
+            <select name="rpl-validator-client" id="rpl-validator-client">
+                <option value="prysm">Prysm</option>
+            </select>
+        </li>
+    </ul>
+</aside>
+<pre><code>Rocketpool implementation
+├── Service Users
+│   ├── <input type="text" class="interactive-element rocketpool_su" data-class="rocketpool_su" value="rocketpool"> <label>(Service user)</label>
+│   └── <input type="text" class="interactive-element rpl_validator" data-class="rpl_validator" value="rocketpool-validator"> <label>(Validator user)</label>
+├── clients
+│   ├── /usr/local/bin/rocketpool-cli (rocketpool client)
+│   └── /usr/local/bin/rocketpool-daemon (rocketpool daemond client)
+├── data & companion scripts
+│   ├── /srv/rocketpool (rocketpool service data)
+│   │   ├── data (rocketpool data)
+│   │   ├── node-log.sh (rp-node.service log script)
+│   │   ├── restart-vc.sh (companion script)
+│   │   ├── stop-validator.sh (companion script)
+│   │   ├── user-settings.yml (rocketpool configuration)
+│   │   └── watchtower-log.sh (rp-watchtower.service log script)
+│   └── <input type="text" class="interactive-element validator_snd" data-class="validator_snd" value="/var/lib/ethereum/prysm">/<mark class="rpl_validator">rocketpool-validator</mark> (rocketpool validator data)
+└── services
+    ├── /etc/systemd/system/rp-node.service <label>(<mark class="rocketpool_su">rocketpool</mark> user)</label>
+    ├── /etc/systemd/system/rp-watchtower.service <label>(<mark class="rocketpool_su">rocketpool</mark> user)</label>
+    └── /etc/systemd/system/<input type="text" class="interactive-element validator_sn" data-class="validator_sn" value="rocketpool-validator">.service <label>(<mark class="rpl_validator">rocketpool-validator</mark> user)</label>
+</code></pre>
+				</div>
+			</section>
+
+			<section class="chapter" id="install">
+				<div class="content" style="width:100%">
+					<h2>Install Rocketpool service</h2>
+{{> clients/rocketpool_cli InstallationGuide=true }}
+				</div>
+            </section>
+
+			<section class="chapter" id="update">
+				<div class="content bt" style="width:100%">
+					<h2>Update Rocketpool service</h2>
+{{> clients/rocketpool_cli }}
+				</div>
+            </section>
+
+			<section class="chapter" id="commands">
+				<div class="content bt" style="width:100%">
+					<h2>Other commands</h2>
+					<ul>
+						<li><h3>Check Rocketpool version</h3>
+							<p>$<code>rocketpool -v</code> - check rocketpool client version</p>
+						</li>
+						<li><h3>Check Rocketpool health</h3>
+							<pre><code>rocketpool node status</code></pre>
+						</li>
+						<li><h3>Claim rewards:</h3>
+							<ul>
+								<li>Beacon chain: <code>rocketpool minipool distribute-balance</code></li>
+								<li>Tx Fees: <code>rocketpool node distribute-fees</code></li>
+								<li>RPL: <code>rocketpool node claim-rewards</code></li>
+							</ul>
+						</li>
+						<li><h3>Add another validator</h3>
+							<pre><code>rocketpool node deposit</code></pre>
+						</li>
+					</ul>
+				</div>
+			</section>
+        </div>
+    </div>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}

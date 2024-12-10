@@ -1,0 +1,27 @@
+<pre><code>[Unit]
+Description=Nethermind Execution Client (Ethereum Mainnet)
+After=network.target
+Wants=network.target
+
+[Service]
+User=<mark class="execution_sn" data-client="nethermind">eth-nethermind</mark>
+Group=<mark class="execution_sn" data-client="nethermind">eth-nethermind</mark>
+Type=simple
+Restart=always
+RestartSec=5
+WorkingDirectory=<mark class="execution-dp" data-client="nethermind">/var/lib{{slashChain}}/nethermind</mark>
+Environment="DOTNET_BUNDLE_EXTRACT_BASE_DIR=<mark class="execution-dp" data-client="nethermind">/var/lib{{slashChain}}/nethermind</mark>"
+ExecStart=/usr/local/bin/nethermind/nethermind \
+  --config mainnet \
+  --datadir <mark class="execution-dp" data-client="nethermind">/var/lib{{slashChain}}/nethermind</mark> \
+  --Sync.SnapSync true \
+  --Sync.AncientBodiesBarrier 11052984 \
+  --Sync.AncientReceiptsBarrier 11052984 \
+  --JsonRpc.JwtSecretFile /var/lib/jwtsecret/ethereum.hex \
+  --Network.P2PPort <mark class="execution-p2p">30303</mark> \
+  --Network.DiscoveryPort <mark class="execution-p2p">30303</mark> \
+  --JsonRpc.EnginePort <mark class="execution-endpoint">8551</mark> \
+  --JsonRpc.Port <mark class="execution-rpc">8545</mark>
+
+[Install]
+WantedBy=default.target</code></pre>

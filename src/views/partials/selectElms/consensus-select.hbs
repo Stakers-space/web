@@ -1,0 +1,6 @@
+<select id="cc_1" name="cc_1"  onchange="OnClientChanged('cc_1')" data-layer="consensus">
+    <option value="lighthouse" {{#ifEqual this.client "lighthouse"}}selected{{/ifEqual}}>Lighthouse</option>
+    <option value="lodestar" {{#ifEqual this.client "lodestar"}}selected{{/ifEqual}}>Lodestar</option>
+    <option value="teku" {{#ifEqual this.client "teku"}}selected{{/ifEqual}}>Teku</option>
+    <option value="prysm" {{#ifEqual this.client "prysm"}}selected{{/ifEqual}} class="hide ethereum-chain">Prysm (Ethereum only)</option>
+</select>

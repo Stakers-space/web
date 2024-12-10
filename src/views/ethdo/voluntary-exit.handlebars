@@ -1,0 +1,87 @@
+{{> header_amp}}
+<main class="grid">
+    <h1>Guide to perform a voluntary exit for your validator using EthDO</h1>
+    <p>At some point, you maight want to exit your validator and obtain your initial deposit plus remaining rewards back to your wallet (assuming you have a withdrawal address associated with your validator). This guide show how to perform the exit using <a href="https://github.com/wealdtech/ethdo" target="_blank">Ethdo</a> tool.</p>
+    <p>Ethdo tool is usually used on both side - on the side of staking node to generate offline-preparation.json file and on the client side to generate exit keys with a use of the offline-preparation.json file. However, as offline-preparation.json file can be downloaded from internet, it's possible to perform the exit externally - without a need to have access to any staking node. This guide sumamrizes both options.</p>
+    <p>Exiting with using ethdo consists of 2 steps:</p>
+    <nav>
+        <ol>
+            <li>Generate Exit keys</li>
+            <li>Broadcast Exit keys</li>
+        </ol>
+    </nav>
+    <ol>
+        <li>
+            <h2>Sources preparation</h2>
+            <ul>
+                <li><h3>Download Ethdo</h3>
+                    <p>ethdo is a command-line tool for managing common tasks in Ethereum. In this guide it will be used to (pre)sign voluntary exit for your validators.</p>
+                    <p>Download the etho archive and the associated checksum file for OS you are going to generate exit keys on. <strong>Note: I recommend to use Linux option, as it allows simplest way to "run" in a secure offline mode (see <a href="#generation">step generation</a>).</strong></p>
+                    <amp-selector class="tabs-with-flex" role="tablist" keyboard-select-mode="focus">
+<div id="tab1" role="tab" aria-controls="tabpanel1" option selected>Desktop UI</div>
+    <div id="tabpanel1" role="tabpanel" aria-labelledby="tab1">
+        <p>Go to <a href="https://github.com/wealdtech/ethdo/releases" target="_blank" rel="nofollow noopener noreferrer">ethdo github</a> and download latest version for Operating system you are going to generate exit keys on.</p>
+    </div>
+<div id="tab2" role="tab" aria-controls="tabpanel2" option selected>Linux</div>
+    <div id="tabpanel2" role="tabpanel" aria-labelledby="tab2">
+        <p>Open terminal and process following steps to get ethdo tool.</p>
+        <h4>Download the etho archive and the associated checksum file</h4>
+<pre><code>wget https://github.com/wealdtech/ethdo/releases/download/v1.36.1/ethdo-1.36.1-linux-amd64.tar.gz
+wget https://github.com/wealdtech/ethdo/releases/download/v1.36.1/ethdo-1.36.1-linux-amd64.tar.gz.sha256</code></pre>
+        <h4>Make sure ethdo checksum matches</h4>
+<pre><code>sha256sum ethdo-1.36.1-linux-amd64.tar.gz
+cat ethdo-1.36.1-linux-amd64.tar.gz.sha256</code></pre>
+        <p>Both of these output values should have matching checksum. If they do not match, there might be a security issue and you should seek further support.</p>
+        <h4>Extract the ethdo archive</h4>
+        <pre><code>tar xvf ethdo-1.36.1-linux-amd64.tar.gz</code></pre>
+    </div>
+<div id="tab3" role="tab" aria-controls="tabpanel3" option>Mac OS</div>
+    <div id="tabpanel3" role="tabpanel" aria-labelledby="tab3">
+        <p>Open terminal and process following steps to get ethdo tool.</p>
+        <h4>Download the etho archive and the associated checksum file</h4>
+<pre><code>curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.36.1/ethdo-1.36.1-darwin-amd64.tar.gz
+curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.36.1/ethdo-1.36.1-darwin-amd64.tar.gz.sha256</code></pre>
+        <h4>Make sure ethdo checksum matches</h4>
+<pre><code>shasum -a 256 ethdo-1.36.1-darwin-amd64.tar.gz
+cat ethdo-1.36.1-darwin-amd64.tar.gz.sha256</code></pre>
+        <p>Both of these output values should have matching checksum. If they do not match, there might be a security issue and you should seek further support.</p>
+        <h4>Extract the ethdo archive</h4>
+        <pre><code>tar xvf ethdo-1.36.1-darwin-amd64.tar.gz</code></pre>
+    </div>
+<div id="tab4" role="tab" aria-controls="tabpanel4" option>Windows</div>
+    <div id="tabpanel4" role="tabpanel" aria-labelledby="tab4">
+        <p>Open terminal and process following steps to get ethdo tool.</p>
+    </div>
+</amp-selector>
+                </li>
+                <li><h3>Offline preparation file</h3>
+                                        <amp-selector class="tabs-with-flex" role="tablist" keyboard-select-mode="focus">
+<div id="tab1" role="tab" aria-controls="tabpanel1" option selected>Desktop UI</div>
+    <div id="tabpanel1" role="tabpanel" aria-labelledby="tab1">
+        
+    </div>
+<div id="tab2" role="tab" aria-controls="tabpanel2" option selected>Linux</div>
+    <div id="tabpanel2" role="tabpanel" aria-labelledby="tab2">
+       
+    </div>
+<div id="tab3" role="tab" aria-controls="tabpanel3" option>Mac OS</div>
+    <div id="tabpanel3" role="tabpanel" aria-labelledby="tab3">
+        
+    </div>
+</amp-selector>
+                </li>
+                <li id="offline-pc"><h3>Secure offline PC</h3>
+
+                </li>
+            </ul>
+        </li>
+        <li id="generation"><h2>Exit keys generation</h2>
+
+        </li>
+        <li><h3>Broadcasting exit keys to Beacon layer</h3>
+
+        </li>
+    </ol>
+</main>
+{{> footer_amp}}
+</body>

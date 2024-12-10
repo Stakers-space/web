@@ -1,0 +1,18 @@
+<pre><code>[Unit]
+Description=Lighthouse Validator Instance (Gnosis Network)
+Wants=network-online.target
+After=network-online.target
+[Service]
+User=<mark class="instance_su" data-client="lighthouse">{{servicePrefix}}lighthouse-vi<span class="instance_pid" data-client="lighthouse">1</span></mark>
+Group=<mark class="instance_su" data-client="lighthouse">{{servicePrefix}}lighthouse-vi<span class="instance_pid" data-client="lighthouse">1</span></mark>
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/lighthouse vc \
+  --network gnosis \
+  --datadir <mark class="instance_dp" data-client="lighthouse">/var/lib{{slashChain}}/lighthouse/vi<span class="instance_pid" data-client="lighthouse">1</span></mark> \
+  --suggested-fee-recipient <mark class="instance_frw" data-client="lighthouse">0xXXXXXXXXXXXXXXXX</mark> \
+  --beacon-nodes http://localhost:<mark class="consensus-endpoint">5052</mark> \
+  --graffiti "<mark class="ec_name">Nethermind</mark>+Lighthouse"
+[Install]
+WantedBy=multi-user.target</code></pre>

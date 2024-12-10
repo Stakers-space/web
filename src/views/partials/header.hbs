@@ -1,0 +1,20 @@
+<header id="header" class="h grid egrid">
+	<a href="/" class="h-logo center-vertical">Stakers.space</a>
+	<div class="h-bar">
+		<button id="hamburger" class="egrid h-mbtn" onclick="ToggleMenu()"><span></span><span></span><span></span></button>
+		<div class="egrid h-cnt">
+			<nav class="h-nav center-vertical">
+				<a href="/chains">Chains</a>
+				<a href="/guides">Guides</a>
+				<a href="/clients">Clients</a>
+				<a href="/tools">Tools</a>
+				<a href="/pricing">Pricing</a>
+				<a href="/about">About</a>
+			</nav>
+		</div>
+		<a href="/dashboard" class="h-dashboard btn btn-black btn-rounded">My Account</a>
+	</div>
+</header>
+<script>
+	function ToggleMenu(){ document.getElementsByTagName("body")[0].classList.toggle("active-menu"); }
+</script>

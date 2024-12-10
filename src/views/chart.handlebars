@@ -1,0 +1,26 @@
+<body id="body" data-amp-auto-lightbox-disable>
+
+{{> header}}
+<main>
+	{{#if overview}}
+		<section class="grid">
+			{{#each overview}}
+				{{{this}}}
+			{{/each}}
+		</section>
+	{{/if}}
+	<section class="grid">
+		<h1 class="title">Chart</h1>
+		<canvas id="{{chartId}}" name="lazy-canvas"></canvas>
+	</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
+<script>var ethStoreData = {{{ethStoreData}}}, beaconchainData = {{{beaconData}}}, etherchainData = {{{chainData}}}, dashboardData={{{dashboardData}}}, chartsUIconfig = {{{chartsUIconfig}}};</script>
+<script type="text/javascript" src="/js/chart-presenter.js"></script>
+<script type="text/javascript" src="/js/charts/{{jsController}}.js"></script>
+<script>charts.ActivateLazyLoad();</script>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}
+</body>

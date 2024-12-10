@@ -1,0 +1,77 @@
+<body id="body" data-amp-auto-lightbox-disable>
+{{> header}}
+<main>
+	<section class="cover">
+		<div class="cover-top">
+			<div class="cover-main grid egrid egrid-2">
+				<div class="cover-main_left separator-vertical separator-after">
+					<div class="cover-main_left-content">
+						<h1 class="title">Ethereum staking<br>fundamentals</h1>
+					</div>
+				</div>
+				<div class="cover-main_right">
+					<div class="cover-main_right-news">
+						<span>All News</span>
+						<ul>
+							{{#each newsfeed}}
+							<li>
+								<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer">{{{this.m}}}</a>
+							</li>
+							{{/each}}
+						</ul>
+						<a href="">View more news</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cover-middle separator-horizontal separator-before">
+			<nav class="cover-options egrid egrid-3 gap-4">
+				
+			</nav>
+			<p class="cover-options_scroll">Scroll down for more info</p>
+		</div>
+	</section>
+
+	<section class="chart separator-horizontal separator-before separator-after" style="display:grid;grid-template-columns:400px 1fr">
+		<div>
+			<h1>Number of validators is growing</h1>
+			<p>As you can see on the daily validators count chart, there's currently {{{validators.last}}} active validators in the network.</p>
+			<h2>Changes:</h2>
+			<ul>
+				<li>+ {{{validators.increments.day}}} validators in last day</li>
+				<li>+ {{{validators.increments.week}}}  validators in last week</li>
+				<li>+ {{{validators.increments.month}}}  validators in last month</li>
+				<li>+ {{{validators.increments.year}}}  validators in last year</li>
+			</ul>
+		</div>
+		<div>
+			<canvas id="ethvalidators_chart" name="lazy-canvas"></canvas>
+		</div>
+		
+	</section>
+	
+	<section class="chart separator-horizontal separator-before separator-after" style="display:grid;grid-template-columns:400px 1fr">
+		<div>
+			<h2></h2>
+			<p></p>
+		</div>
+		<div>
+			{{!--<canvas id="ethmarketcap_chart" name="lazy-canvas"></canvas>--}}
+			<canvas id="ethsupply_chart" name="lazy-canvas"></canvas>
+		</div>
+	</section>
+
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
+<script>var beaconchainData = {{{beaconchainData}}};</script>
+<script type="text/javascript" src="/js/chart-presenter.js"></script>
+<script type="text/javascript" src="/js/charts/eth-validators.js"></script>
+<script>charts.ActivateLazyLoad();</script>
+<script>
+	console.log("ethStoreData",ethStoreData);
+	console.log("beaconchainData",beaconchainData);
+	console.log("etherchainData",etherchainData);
+</script>
+{{> footer}}
+</body>

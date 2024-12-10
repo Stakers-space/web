@@ -1,0 +1,83 @@
+{{> header}}
+<main>
+	<section class="grid">
+		<h1>{{chainName}} Validator Queue</h1>
+        <p>Enterance and exit queues are validators waiting to begin staking or to unstake.</p>
+        <p>Data provided by 
+        {{#if isEthereum}}
+			<a href="https://beaconcha.in/">beaconcha.in</a>
+		{{else}}
+            <a href="https://gnosischa.in/">gnosischa.in</a>
+        {{/if}}</p>
+        <p>Last Update: {{currentQueue.time}}</p>
+	</section>
+
+    <section class="grid">
+        <div class="egrid egrid-2 gap-4">
+            <div>
+                <h2>Entry Queue</h2>
+                <table>
+                    <tr>
+                        <td>Validators:</td>
+                        <td>{{currentQueue.beaconchain_entering}}</td>  
+                    </tr>
+                    <tr>
+                        <td>Wait:</td>
+                        <td>{{currentQueue.activation.waitingTimeHours}} hours, {{currentQueue.activation.waitingTimeMinutes}} minutes</td>  
+                    </tr>
+                    <tr>
+                        <td>Churn:</td>
+                        <td>{{currentQueue.activation.rate_per_epoch}} / epoch</td>  
+                    </tr>
+                </table>
+
+                Entry Now
+
+                Entry Historical chart
+            </div>
+            <div>
+                <h2>Exit Queue</h2>
+                <table>
+                    <tr>
+                        <td>Validators:</td>
+                        <td>{{currentQueue.beaconchain_exiting}}</td>
+                    </tr>
+                    <tr>
+                        <td>Wait:</td>
+                        <td>{{currentQueue.exiting.waitingTimeHours}} hours, {{currentQueue.exiting.waitingTimeMinutes}} minutes</td>  
+                    </tr>
+                    <tr>
+                        <td>Churn:</td>
+                        <td>{{currentQueue.exiting.rate_per_epoch}} / epoch</td>  
+                    </tr>
+                </table>
+                Exit Historical chart
+            </div>
+        </div>
+    </section>
+    
+	<section class="grid">
+		<h2>Churn Schedule</h2>
+        <p>The churn is a rate limit on the amount of validators that can enter or exit per epoch and changes based on the amount of active validators. This throttling mechanism help prevent instability in consensus.</p>
+		<table>
+            <thead>
+                <tr>
+                    <th>Active Validators</th>
+                    <th>Churn Per Epoch</th>
+                    <th>Churn Per Day</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each churnSchedule}}
+                <tr {{#ifEqual @index ../rangeIndex}}style="background-color:#bfbfbf;font-weight:bold"{{/ifEqual}}>
+                <td>{{this.min_hr}}</td>
+                <td>{{this.churnEpoch}}</td>
+                <td>{{this.churnDay}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+	</section>
+</main>
+{{> footer}}
+</body>

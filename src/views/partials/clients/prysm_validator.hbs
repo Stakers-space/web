@@ -1,0 +1,177 @@
+{{> guides/instanceSelection client="prysm" }}
+{{#if AddValidator}}
+<ol class="mt-30">
+    <li>
+        <p class="mt-20"><strong>Do you want to create a new validation instance or extend exisiting instance for more validators?</strong></p>
+        <div class="tabselector">
+            <nav class="egrid egrid-2">
+                <button class="tab selected" data-tabpanel="1">Creating new</button>
+                <button class="tab" data-tabpanel="2">Extend existing</button>
+            </nav>
+            <div class="tabpanel selected">
+                <ul>
+                    <li><h4>Create a directory for validator instance data</h4>
+                        <pre><code>sudo mkdir -p <mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid">1</span></mark></code></pre>
+                    </li>
+                    <li>
+                        <h4>Load keystores to <code class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid">1</span></code></h4>
+                        <label>Directory with Deposit Data keystores</label>: <input type="text" value="$HOME/keystores/ddk_i1" class="interactive-element ddkeys-path" data-class="ddkeys-path">
+{{#unless chain}}
+                        <div class="tabselector mt-20">
+                            <nav class="egrid egrid-2">
+                                <button class="tab selected" data-tabpanel="1">Ethereum</button>
+                                <button class="tab" data-tabpanel="2">Gnosis</button>
+                            </nav>
+                            <div class="tabpanel selected">
+<pre><code>sudo /usr/local/bin/validator accounts import --mainnet --keys-dir=<mark class="ddkeys-path">$HOME/keystores/ddk_i1</mark> --wallet-dir=<mark class="instance_dp" data-client="prysm">/var/lib/prysm/vi<span class="instance_pid">1</span></mark> </code></pre>
+                            </div>
+                            <div class="tabpanel">
+<mark>Gnosis chain is not supported by Prysm client</mark>
+                            </div>
+                        </div>
+{{else}}
+    {{#ifEqual chain "ethereum"}}
+    <pre><code>sudo /usr/local/bin/validator accounts import --mainnet --keys-dir=<mark class="ddkeys-path">$HOME/keystores/ddk_i1</mark> --wallet-dir=<mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid">1</span></mark> </code></pre>
+    {{/ifEqual}}
+    {{#ifEqual chain "gnosis"}}
+    <mark>Gnosis chain is not supported by Prysm client</mark>
+    {{/ifEqual}}
+{{/unless}}
+                        <ul>
+                            <li>Accept <a href="https://github.com/prysmaticlabs/prysm/blob/master/TERMS_OF_SERVICE.md" target="_blank" rel="nofollow noopener noreferrer">Terms of Use</a></li>
+                            <li>Set a wallet password. This is different to the validator password you set during keys generation. Prysm will use this to decrypt the validator wallet. Back it up somewhere safe. You will need this later in this section and when configuring the validator.</li>
+                            <li>Provide the validator keys password. This is the password you set when you created the keys during keys generation</li>
+                        </ul>
+                        <p>NOTE: If you have used different passwords for each of your validators you will get an error. Run the process multiple times, providing each of the different passwords until they are all imported. Use the accounts list command to verify.</p>
+                    </li>
+                    <li><h4>Create a Wallet Password File</h4>
+                        <p>Create a file to store the wallet password so the Prysm validator service can access the wallet without you having to supply the password.</p>
+                        <pre><code>sudo nano <mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid">1</span></mark>/password.txt</code></pre>
+                        <p>Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</p>
+                    </li>
+                    <li><h4>Create a service user for the validator instance</h4>
+                        <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="instance_su" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark></code></pre>
+                    </li>
+                    <li><h4>Set ownership of <code class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid">1</span></code> to <code class="instance_su" data-client="prysm">validators-i1</code> user</h4>
+                        <pre><code>sudo chown -R <mark class="instance_su" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark>:<mark class="instance_su" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark> <mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid">1</span></mark></code></pre>
+                    </li>
+                    <li><h4>Create configuration service file for <code class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></code> service</h4>
+                        <ol>
+                            <li>
+                                <p>Open the configuration file</p>
+                                <pre><code>sudo nano /etc/systemd/system/<mark class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark>.service</code></pre>
+                            </li>
+                            <li>
+                                <p>Copy the configuration below into the file.</p>
+                                <ul>
+                                    <li><label>What's fee recipient wallet?</label> <input type="text" class="interactive-element instance_frw" data-class="instance_frw" value="0xXXXXXXXXXXXXXXXX"></li>
+                                    <li><label>What's your execution client?</label> <input type="text" class="interactive-element ec_name" data-class="ec_name" value="Nethermind"></li>
+                                </ul>
+{{#unless chain}}
+                    <div class="tabselector mt-20">
+                                <nav class="egrid egrid-2">
+                                    <button class="tab selected" data-tabpanel="1">Ethereum</button>
+                                    <button class="tab" data-tabpanel="2">Gnosis</button>
+                                </nav>
+                                <div class="tabpanel selected">
+{{> clients/config/eth-prysmvalidator }}
+                                </div>
+                                <div class="tabpanel">
+<p>Gnosis chain is not supported</p>
+                                </div>
+                    </div>
+{{else}}
+    {{#ifEqual chain "ethereum"}}
+{{> clients/config/eth-prysmvalidator }}
+    {{/ifEqual}}
+    {{#ifEqual chain "gnosis"}}
+<p>Gnosis chain is not supported</p>
+    {{/ifEqual}}
+{{/unless}}
+                            </li>
+                            <li>
+                                Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.
+                            </li>
+                        </ol>
+                    </li>
+                    <li><h4>Other configurations</h4>
+                        <div class="tabselector mt-20">
+                            <nav class="egrid egrid-2">
+                                <button class="tab selected" data-tabpanel="1">Standard configuration</button>
+                                <button class="tab" data-tabpanel="2">Stakers.space configuration</button>
+                            </nav>
+                            <div class="tabpanel selected">
+                                Nothing to do. You are ok.
+                            </div>
+                            <div class="tabpanel">
+                                <ul>
+                                    <li><h4>Extend Staking manager clients.conf</h4>
+                                        Insert <code><mark class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark></code> into clients.conf file that is used by <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a>.
+                                        <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="tabpanel">
+                <ul>
+                    <li><h4>Stop running validator instance <code class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></code></h4>
+                        <pre><code>sudo systemctl stop <mark class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark></code></pre>
+                    </li>
+                    <li><h4>Extend <code class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid">1</span></code> for new keystores</h4>
+{{#unless chain}}
+                        <div class="tabselector mt-20">
+                            <nav class="egrid egrid-2">
+                                <button class="tab selected" data-tabpanel="1">Ethereum</button>
+                                <button class="tab" data-tabpanel="2">Gnosis</button>
+                            </nav>
+                            <div class="tabpanel selected">
+<pre><code>sudo /usr/local/bin/validator accounts import --mainnet --keys-dir=<mark class="ddkeys-path">$HOME/keystores/ddk_i1</mark> --wallet-dir=<mark class="instance_dp" data-client="prysm">/var/lib/prysm/vi<span class="instance_pid">1</span></mark> </code></pre>
+                            </div>
+                            <div class="tabpanel">
+<mark>Gnosis chain is not supported by Prysm client</mark>
+                            </div>
+                        </div>
+{{else}}
+    {{#ifEqual chain "ethereum"}}
+    <pre><code>sudo /usr/local/bin/validator accounts import --mainnet --keys-dir=<mark class="ddkeys-path">$HOME/keystores/ddk_i1</mark> --wallet-dir=<mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid">1</span></mark> </code></pre>
+    {{/ifEqual}}
+    {{#ifEqual chain "gnosis"}}
+    <mark>Gnosis chain is not supported by Prysm client</mark>
+    {{/ifEqual}}
+{{/unless}}
+                        <ul>
+                            <li>Accept <a href="https://github.com/prysmaticlabs/prysm/blob/master/TERMS_OF_SERVICE.md" target="_blank" rel="nofollow noopener noreferrer">Terms of Use</a></li>
+                            <li>Set a wallet password. This is different to the validator password you set during keys generation. Prysm will use this to decrypt the validator wallet. Back it up somewhere safe. You will need this later in this section and when configuring the validator.</li>
+                            <li>Provide the validator keys password. This is the password you set when you created the keys during keys generation</li>
+                        </ul>
+                        <p>NOTE: If you have used different passwords for each of your validators you will get an error. Run the process multiple times, providing each of the different passwords until they are all imported. Use the accounts list command to verify.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </li>
+    <li>
+        <h4>Load processed changes to the system</h4>
+        <pre><code>sudo systemctl daemon-reload</code></pre>
+    </li>
+    <li>
+        <h4>Start the validator instance</h4>
+        <pre><code>sudo systemctl start <mark class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark></code></pre>
+    </li>
+    <li>
+        <h4>Check the running validator instance</h4>
+        <pre><code>systemctl status <mark class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark></code></pre>
+        <pre><code>journalctl -fu <mark class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark></code></pre>
+    </li>
+    <li>
+        <h4>Activate service to start automatically on OS startup</h4>
+        <pre><code>$ sudo systemctl enable <mark class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark></code></pre>
+    </li>
+</ol>
+{{else}}
+<pre><code>prysmctl validator exit --wallet-dir=&lt;path/to/wallet&gt; --beacon-rpc-provider=&lt;127.0.0.1:4000&gt;</code></pre>
+<p>See more at <a href="https://docs.prylabs.network/docs/wallet/exiting-a-validator" target="_blank" rel="nofollow noopener">official documentation</a>, if needed.</p>
+{{/if}}

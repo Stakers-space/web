@@ -1,0 +1,28 @@
+{
+  "name": "stakers.space",
+  "version": "0.0.3",
+  "private": true,
+  "scripts": {
+    "start": "node src/app"
+  },
+  "dependencies": {
+    "@azure/cosmos": "^4.0.0",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "date-fns": "^4.1.0",
+    "express": "^4.21.1",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.18.0",
+    "mysql": "^2.18.1",
+    "node-mailjet": "^6.0.4",
+    "nodemailer": "^6.9.14",
+    "numeral": "^2.0.6",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "sanitize-html": "^2.13.0"
+  },
+  "engines": {
+    "node": "20.15.1",
+    "npm": "10.7.0"
+  }
+}

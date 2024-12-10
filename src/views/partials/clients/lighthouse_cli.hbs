@@ -1,0 +1,143 @@
+{{#unless InstallationGuide}}
+<h3>Check current version of Lighthouse running on the server:</h3>
+<div class="tabselector">
+	<nav class="egrid egrid-2">
+		<button class="tab selected" data-tabpanel="1">Via client</button>
+		<button class="tab" data-tabpanel="2">Through the API</button>
+	</nav>
+	<div class="tabpanel selected">
+<pre><code>lighthouse --version</code></pre>
+	</div>
+	<div class="tabpanel">
+<pre><code>curl "http://127.0.0.1:<mark class="consensus-endpoint">5052</mark>/eth/v1/node/version"</code></pre>
+	</div>
+</div>
+{{/unless}}
+<ol>
+    <li>
+        <h3>Find the latest stable version of Lighthouse on Github</h3>
+        <ul>
+            <li>Find latest Lighthouse version at <a href="https://github.com/sigp/lighthouse/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/sigp/lighthouse/releases</a></li>
+            <li><mark>
+                Write latest stable lighthouse version: <input type="text" value="{{consensusClients.lighthouse.latestVer}}" class="lighthouseVer-input"><br>
+                <p>This will update the url links in the guide below.</p>
+            </li>
+        </ul>
+    </li>
+    <li class="mt-15">
+        <h3>Download Lighthouse version <code class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</code> to your node</h3>
+        <pre><code>cd ~/downloads && curl -LO https://github.com/sigp/lighthouse/releases/download/v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>/lighthouse-v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>-x86_64-unknown-linux-gnu.tar.gz</code></pre>
+        <p>Extract downloaded file</p>
+        <pre><code>$ tar xvf lighthouse-v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>-x86_64-unknown-linux-gnu.tar.gz</code></pre>
+    </li>
+
+    {{#unless InstallationGuide}}
+    <li class="mt-15">
+        <h3>Stop Lighthouuse services</h3>
+        <div class="tabselector" data-client="lighthouse">
+		    <nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Standard option</button>
+				<button class="tab" data-tabpanel="2">Staking manager</button>
+			</nav>
+			<div class="tabpanel selected">
+                <p>Stop Lighthouse Beacon service and all validators-based services</p>
+                <pre><code>sudo systemctl stop <mark class="consensus_sn">{{servicePrefix}}lighthousebeacon</mark>
+sudo systemctl stop {{servicePrefix}}lighthouse-vi...
+sudo systemctl stop {{servicePrefix}}lighthouse-vi...
+...</code></pre>
+			</div>
+			<div class="tabpanel">
+                <aside><b>This option requires installed and configured <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking manager</a></b></aside>
+                <p>Stop cosnsensus services</p>
+                <pre><code>/usr/local/bin/staking.sh stop consensus</code></pre>
+                <p>Check cosnsensus services status</p>
+                <pre><code>/usr/local/bin/staking.sh check consensus</code></pre>
+			</div>
+		</div>
+    </li>
+    {{/unless}}
+    <li class="mt-15">
+        <strong>Replace old Lighthouse client for new</strong>
+<pre><code>$ sudo cp ~/downloads/lighthouse /usr/local/bin</code></pre>
+    </li>
+    {{#unless InstallationGuide}}
+    <li class="mt-15">
+        <h3>Start the Lighthouse services</h3>
+        <div class="tabselector" data-client="lighthouse">
+		    <nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Standard option</button>
+				<button class="tab" data-tabpanel="2">Staking manager</button>
+			</nav>
+			<div class="tabpanel selected">
+                <p>Start Lighthouse Beacon service and all validators-based services</p>
+                <pre><code>sudo systemctl start <mark class="consensus_sn">{{servicePrefix}}lighthousebeacon</mark>
+sudo systemctl start {{servicePrefix}}lighthouse-vi...
+sudo systemctl start {{servicePrefix}}lighthouse-vi...
+...</code></pre>
+			</div>
+			<div class="tabpanel">
+                <aside><b>This option requires installed and configured <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking manager</a></b></aside>
+                <pre><code>/usr/local/bin/staking.sh start consensus</code></pre>
+			</div>
+		</div>
+    </li>
+    <li><h3>Monitor</h3>
+        <div class="tabselector" data-client="lighthouse">
+		    <nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Standard option</button>
+				<button class="tab" data-tabpanel="2">Staking manager</button>
+			</nav>
+			<div class="tabpanel selected">
+                <ul>
+                    <li><pre><code>systemctl status <mark class="consensus_sn">{{servicePrefix}}lighthousebeacon</mark> {{servicePrefix}}lighthouse-vi.. {{servicePrefix}}lighthouse-vi..</code></pre></li>
+                    <li><pre><code>journalctl -fu <mark class="consensus_sn">{{servicePrefix}}lighthousebeacon</mark></code></pre></li>
+                    <li><pre><code>journalctl -f -u {{servicePrefix}}lighthouse-vi.. -u {{servicePrefix}}lighthouse-vi...</code></pre></li>
+                </ul>
+			</div>
+			<div class="tabpanel">
+                <aside><b>This option requires installed and configured <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking manager</a></b></aside>
+                <pre><code>/usr/local/bin/staking.sh check consensus</code></pre>
+                <pre><code>/usr/local/bin/staking.sh monitor consensus</code></pre>
+			</div>
+		</div>
+    </li>
+    {{/unless}}
+    <li class="mt-15">
+        <strong>Remove downloaded files</strong>
+<pre><code>$ cd ~/downloads && rm lighthouse-v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>-x86_64-unknown-linux-gnu.tar.gz && rm -r lighthouse</code></pre>
+    </li>
+</ol>
+
+<script>
+    for (const lighthouseVer of document.getElementsByClassName("lighthouseVer-input")) {
+        lighthouseVer.addEventListener('change', UpdateLighthouse);
+    }
+    function UpdateLighthouse(e){
+        const value = e.target.value;
+        for (const elm of document.getElementsByClassName("lighthouseVer-input")) { elm.innerHTML = value; };
+        for (const elm of document.getElementsByClassName("lighthouseVer")) { elm.innerHTML = value; };
+    }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const tabSelectors = document.querySelectorAll('.tabselector[data-client="lighthouse"]');
+    tabSelectors.forEach(tabSelector => {
+        const buttons = tabSelector.querySelectorAll("button.tab");
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                const selectedTabPanel = button.getAttribute("data-tabpanel");
+                tabSelectors.forEach(syncTabSelector => {
+                    // remove selectors
+                    syncTabSelector.querySelectorAll("button.tab, .tabpanel").forEach(el => {
+                        el.classList.remove("selected");
+                    });
+                    // button
+                    syncTabSelector.querySelector(`button.tab[data-tabpanel="${selectedTabPanel}"]`).classList.add("selected");
+                    // panel
+                    syncTabSelector.children[selectedTabPanel].classList.add("selected");
+                });
+            });
+        });
+    });
+});
+</script>

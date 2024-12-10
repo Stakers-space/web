@@ -1,0 +1,52 @@
+<body id="body">
+{{> header_dashboard}}
+<main>
+	<section class="grid mt-100 mb-100">
+        <h1>{{formTitle}}</h1>
+        
+         {{#each newsList}}
+
+         {{/each}}
+
+
+        <h2 class="mt-40">Add News</h2>
+        <form method="post" action="{{submitLink}}">
+            <div id="json">
+                <label for="json" class="hide">JSON</label>
+                <textarea type="text" id="json" name="json" rows="65" cols="100" required>{{{clientsData}}}</textarea>
+            </div>
+            {{#if failureCallback}}
+                <p class="login-error">{{{failureCallback}}}</p>
+            {{/if}}
+            <div class="login-action mt-20" id="login-action">
+                <input type="submit" class="submit btn btn-black btn-rounded" id="submit" value="Submit">
+            </div>
+        </form>
+    <script>
+        form.addEventListener('submit', function (event) {
+                // prevent sending form
+                event.preventDefault();
+
+                // get from data
+                formData = new FormData(form);
+                let clientsData = null;
+                try {
+                    clientsData = JSON.stringify(document.getElementById('json').innerHTML, null, 2);
+                    formData.set('json', clientsData);
+                    try {
+                        let parseAttempt = JSON.parse(clientsData);
+                        form.submit();
+                    } catch(e){
+                        promtp(e);
+                    }
+                } catch(e){
+                    promtp(e);
+                }
+        });
+        </script>
+
+    </section>
+</main>
+{{> scripts/security-guard}}
+{{> footer}}
+</body>

@@ -1,0 +1,89 @@
+{{#if InstallationGuide}}
+<h3>Installing Nethermind client</h3>
+{{else}}
+<h3>Updating Nethermind client</h3>
+{{/if}}
+<p>Nethermind documentation: <a href="https://docs.nethermind.io/" target="_blank"
+    rel="nofollow noopener noreferrer">https://docs.nethermind.io/</a></p>
+
+{{#unless InstallationGuide}}
+<h4>Check current version of Nethermind running on the server</h4>
+<pre><code>$ /usr/local/bin/nethermind/./nethermind-cli
+$ node.switch("127.0.0.1:<mark class="execution-rpc">8545</mark>")
+$ web3.clientVersion</code></pre>
+{{/unless}}
+
+<ol>
+  <li>
+    <h4>Find the latest stable version of Nethermind on Github</h4>
+    <ul>
+      <li>Find latest Nethermind version at <a href="https://github.com/NethermindEth/nethermind/releases"
+          target="_blank" rel="nofollow noopener noreferrer">https://github.com/NethermindEth/nethermind/releases</a>
+      </li>
+      <li>
+        <mark>Write latest stable Nethermind version in format such as
+          <code>{{executionClients.nethermind.latestVer}}</code></mark>:
+        <input type="text" value="{{executionClients.nethermind.latestVer}}" class="nethermind_verhash-input" style="width:100%">
+      </li>
+    </ul>
+  </li>
+  <li class="mt-15">
+    <h4>Download Nethermind version <code class="nethermind_verhash">{{executionClients.nethermind.latestVer}}</code> to
+      your node</h4>
+    <pre><code>cd ~/downloads && curl -LO https://github.com/NethermindEth/nethermind/releases/download/<mark class="nethermind_ver">{{executionClients.nethermind.latestVerClean}}</mark>/nethermind-<mark class="nethermind_verhash">{{executionClients.nethermind.latestVer}}</mark>-linux-x64.zip</code></pre>
+  </li>
+  {{#if InstallationGuide}}
+  <li class="mt-15">
+    <h4>Install package for unzipping</h4>
+    <pre><code>sudo apt-get install -y unzip</code></pre>
+  </li>
+  {{/if}}
+  <li class="mt-15">
+    <h4>Unzip the downloaded file</h4>
+    <pre><code>unzip nethermind-<mark class="nethermind_verhash">{{executionClients.nethermind.latestVer}}</mark>-linux-x64 -d nethermind</code></pre>
+  </li>
+  {{#unless InstallationGuide}}
+  <li class="mt-15">
+    <h4>Stop running clients</h4>
+    <pre><code>$ journalctl -fu <mark class="execution_sn" data-client="nethermind">nethermind</mark>
+$ sudo systemctl stop <mark class="execution_sn" data-client="nethermind">nethermind</mark> && systemctl status <mark class="execution_sn" data-client="nethermind">nethermind</mark></code></pre>
+  </li>
+  <li class="mt-15">
+    <h4>Remove the old client</h4>
+    <pre><code>sudo rm -r /usr/local/bin/nethermind</code></pre>
+  </li>
+  {{/unless}}
+  <li>
+    <h4>Copy the client to <code>/usr/local/bin/</code></h4>
+    <pre><code>sudo cp -a nethermind /usr/local/bin/nethermind</code></pre>
+  </li>
+  {{#unless InstallationGuide}}
+  <li>
+    <h4>Start the client again</h4>
+    <pre><code>$ sudo systemctl start <mark class="execution_sn" data-client="nethermind">nethermind</mark> && systemctl status <mark class="execution_sn" data-client="nethermind">nethermind</mark>
+$ journalctl -fu <mark class="execution_sn" data-client="nethermind">nethermind</mark></code></pre>
+  </li>
+  {{/unless}}
+  <li>
+    <h4>Remove downloaded files</h4>
+    <pre><code>cd ~/downloads && rm <mark class="nethermind_namezip">nethermind-{{executionClients.nethermind.latestVer}}-linux-x64.zip</mark> && rm -r nethermind</code></pre>
+  </li>
+</ol>
+<script>
+  for (const nethermindVerHash of document.getElementsByClassName("nethermind_verhash-input")) {
+    nethermindVerHash.addEventListener('change', UpdateNethermind);
+  }
+  function UpdateNethermind(e) {
+    const value = e.target.value;
+    // all inputs (if more times on the page)
+    for (const elm of document.getElementsByClassName("nethermind_verhash-input")) { elm.innerHTML = value; };
+
+    for (const elm of document.getElementsByClassName("nethermind_verhash")) { elm.innerHTML = value; };
+
+    var nethermindVer = value.split("-")[0];
+    for (const elm of document.getElementsByClassName("nethermind_ver")) { elm.innerHTML = nethermindVer; };
+    console.log("Nethermind |", nethermindVer, value);
+
+    for (const zipNameElm of document.getElementsByClassName("nethermind_namezip")) { zipNameElm.innerHTML = "nethermind-" + value + "-linux-x64.zip"; };
+  }
+</script>

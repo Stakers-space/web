@@ -1,0 +1,72 @@
+<h3>Create a system user and data directory for Erigon service</h3>
+<ul>
+    <li><h4>Create a user</h4>
+        <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}erigon" class="interactive-element execution_sn" data-class="execution_sn" data-client="erigon">
+        <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
+    </li>
+    <li><h4>Create a folder for Erigon data on {{chain}} network</h4>
+        <label>Service data directory</label>: <input type="text" value="/var/lib{{slashChain}}/erigon" class="interactive-element execution-dp" data-class="execution-dp" data-client="erigon">
+        <pre><code>sudo mkdir -p <mark class="execution-dp">/var/lib{{slashChain}}/erigon</mark></code></pre>
+    </li>
+    <li>
+        <h4>Set access permission and ownership for the Erigon data folder</h4>
+        <pre><code>sudo chown -R <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark>:<mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark> <mark class="execution-dp">/var/lib{{slashChain}}/erigon</mark></code></pre>
+    </li>
+</ul>
+<h3 class="mt-60">Configurate & Run Erigon Service</h3>
+<ul>
+    <li>
+        {{> clients/config/execution-ports }}
+    </li>
+    <li><h4>Enable port for P2P communication  (execution client)</h4>
+        <p>To allow execution client synchronization, there's need to enable P2P traffic to TCP (allows the node to connect to peers) and UDP (allows node discovery) port <code>30303</code>. It may be done with following UFW setup:</p>
+		<pre><code>$ sudo ufw allow <mark class="execution-p2p">30303</mark></code></pre>
+    </li>
+    <li><h4>Create configuration file for Erigon service</h4>
+        <ol>
+            <li>Open configuration file
+                <pre><code>sudo nano /etc/systemd/system/<mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark>.service</code></pre>
+            </li>
+            <li>Copy the configuration below into the file
+{{#unless chain}}
+          <div class="tabselector">
+						<nav class="egrid egrid-2">
+							<button class="tab selected" data-tabpanel="1">Ethereum</button>
+							<button class="tab" data-tabpanel="2">Gnosis</button>
+						</nav>
+						<div class="tabpanel selected">
+{{> clients/config/eth-erigon }}
+						</div>
+						<div class="tabpanel">
+{{> clients/config/gno-erigon }}
+						</div>
+					</div>
+          <i>*Note: Update <code>JsonRpc.JwtSecretFile</code>, if you use different</i>
+          {{/unless}}
+{{#ifEqual chain "ethereum"}}
+{{> clients/config/eth-erigon }}
+{{/ifEqual}}
+{{#ifEqual chain "gnosis"}}
+{{> clients/config/gno-erigon }}
+{{/ifEqual}}
+            </li>
+            <li>Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</li>
+        </ol>
+    </li>
+    <li><h4>Start the service</h4>
+<pre><code>sudo systemctl daemon-reload
+sudo systemctl start <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
+    </li>
+    <li><h4>Check the service</h4>
+        <pre><code>systemctl status <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark>
+journalctl -fu <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
+    </li>
+    <li><h4>Start the service on system startup</h4>
+        <pre><code>sudo systemctl enable <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
+    </li>
+</ul>
+<script>
+  function OnErigonSelected(){
+    console.log("Set Erigon ports");
+  }
+</script>

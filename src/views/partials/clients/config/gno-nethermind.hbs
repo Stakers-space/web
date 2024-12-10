@@ -1,0 +1,27 @@
+<pre><code>[Unit]
+Description=Nethermind Execution Client (Gnosis chain)
+After=network.target
+Wants=network.target
+[Service]
+User=<mark class="execution_sn" data-client="nethermind">gno-nethermind</mark>
+Group=<mark class="execution_sn" data-client="nethermind">gno-nethermind</mark>
+Type=simple
+Restart=always
+RestartSec=5
+WorkingDirectory=<mark class="execution-dp">/var/lib{{slashChain}}/nethermind</mark>
+Environment="DOTNET_BUNDLE_EXTRACT_BASE_DIR=<mark class="execution-dp">/var/lib{{slashChain}}/nethermind</mark>"
+ExecStart=/usr/local/bin/nethermind/nethermind \
+  --config gnosis \
+  --datadir <mark class="execution-dp">/var/lib{{slashChain}}/nethermind</mark> \
+  --JsonRpc.JwtSecretFile /var/lib/jwtsecret/gnosis.hex \
+  #--Sync.SnapSync false \ Supported since v 1.28
+  #--Sync.FastSync true \
+  --Sync.SnapSync true \
+  --Network.P2PPort <mark class="execution-p2p">30303</mark> \
+  --Network.DiscoveryPort <mark class="execution-p2p">30303</mark> \
+  --JsonRpc.EnginePort <mark class="execution-endpoint">8551</mark> \
+  --JsonRpc.Port <mark class="execution-rpc">8545</mark>
+  #--Network.ActivePeersMaxCount 25 \
+  #--Blocks.TargetBlockGasLimit 17000000
+[Install]
+WantedBy=default.target</code></pre>

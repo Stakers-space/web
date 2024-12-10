@@ -1,0 +1,409 @@
+<body id="body">
+{{> header_dashboard}}
+<main>
+    {{#if failureCallback}}
+        <p>{{{failureCallback}}}</p>
+    {{/if}}
+
+    {{> sections/encryptionPassword }}
+
+    {{#if isOwner}}
+    <div class="grid egrid egrid-2">
+        <section class="mb-100 grey">
+            <h1 class="mt-60">{{formTitle}}</h1>
+            <form method="post" action="{{submitLink}}" id="serverDefinition">
+                <ul>
+                    <li>
+                        <label for="server-name">Server name</label>
+                        <input type="text" id="server-name" name="server-name" required="required" value="{{server.serverName}}">
+                    </li>
+                    {{#if editingView}}
+                    <li>
+                        <label for="server-location">Server Location (Optional).</label>
+                        <input type="text" id="server-location" name="server-location" value="{{server.serverLocation}}"><br>
+                        <label for="server-location">Server Location Note (Optional, Encrypted).</label>
+                        <input type="text" id="server-location" name="server-location-note" class="encrypted_value" value="{{server.serverLocation_note}}">
+                    </li>
+                    <li>
+                        <label for="server-network">Server Network (Optional, encrypted).</label>
+                        <input type="text" id="server-network" name="server-network" class="encrypted_value" value="{{server.serverNetwork}}">
+                    </li>
+                    <li>
+                        <label for="server-cpu">Server CPU Type</label>
+                        <select id="server-cpu" name="server-cpu">
+                            <option value="amd" selected>Amd</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="server-user">Server User (Optional, encrypted)</label>
+                        <input type="text" id="server-user" name="server-user" value="{{server.serverUser}}" class="encrypted_value">
+                    </li>
+                    <li>
+                        <label for="ssh-port">SSH Port (Optional, encrypted)</label>
+                        <input type="text" id="ssh-port" name="ssh-port" value="{{server.sshPort}}" class="encrypted_value">
+                    </li>
+                    <li>
+                        <label for="operation-start">Operation Start:</label>
+                        <input type="date" name="operation-start" id="operation-start" value="{{server.operationStart}}">
+                    </li>
+                    <li>
+                        <label for="vpn-id">VPN ID.</label>
+                        <input type="text" id="vpn-id" name="vpn-id" value="{{server.vpnId}}">
+                        <label for="vpn-expiration">Expiration:</label>
+                        <input type="date" name="vpn-expiration" id="vpn-expiration" value="{{server.vpnExpiration}}">
+                    </li>
+                    {{/if}}
+                </ul>
+                {{#if editingView}}
+                <div><h4>Staking clients selection</h4>
+                    <ul>
+                        <li>Execution client(s)
+                            <ol>
+                                {{#each server.execution}}
+                                <li><label for="ec_1">Execution Client</label>
+                                    <select id="ec_1" name="ec_1" onchange="OnClientChanged('ec_1')">
+                                        <option value="nethermind" {{#ifEqual this.client "nethermind"}}selected{{/ifEqual}}>Nethermind</option>
+                                        <option value="erigon"{{#ifEqual this.client "erigon"}}selected{{/ifEqual}}>Erigon</option>
+                                        <option value="geth" {{#ifEqual this.client "geth"}}selected{{/ifEqual}} class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">Geth (Ethereum only)</option>
+                                    </select>
+                                    {{#if ../editingView}}<label for="ec_1_ver">Version </label> <input type="text" id="ec_1_ver" name="ec_1_ver" placeholder="1.25" value="{{this.ver}}" style="width:50px">{{/if}}
+                                </li>
+                                {{/each}}
+                            </ol>
+                            <p><i>* Support for defining more consensus clients will be added later</i></p>
+                        </li>
+                        <li>Consensus client(s)
+                            <ol>
+                                {{#each server.consensus}}
+                                <li>
+                                    <label for="cc_1">Consensus Client</label>
+                                    <select id="cc_1" name="cc_1" onchange="OnClientChanged('cc_1')">
+                                        <option value="lighthouse" {{#ifEqual this.client "lighthouse"}}selected{{/ifEqual}}>Lighthouse</option>
+                                        <option value="lodestar" {{#ifEqual this.client "lodestar"}}selected{{/ifEqual}}>Lodestar</option>
+                                        <option value="teku" {{#ifEqual this.client "teku"}}selected{{/ifEqual}}>Teku</option>
+                                        <option value="prysm" {{#ifEqual this.client "prysm"}}selected{{/ifEqual}} class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">Prysm (Ethereum only)</option>
+                                    </select>
+                                    <label for="cc_1_ver">Version</label> <input type="text" id="cc_1_ver" name="cc_1_ver" placeholder="5.3.0" value="{{this.ver}}" style="width:50px">
+                                </li>
+                                {{/each}}
+                            </ol>
+                            <p><i>* Support for defining more consensus clients will be added later</i></p>
+                        </li>
+                        <li><h4>Client-based technologies</h4>
+                            <div class="client-oriented" data-client="lighthouse">
+                                <p>No technology required</p>
+                            </div>
+                            <div class="hide client-oriented" data-client="lodestar">
+                                <label for="nodejs_ver">NodeJs ver</label>
+                                <input type="text" id="nodejs_ver" name="nodejs_ver" value="{{../server.nodejs_ver}}">
+                            </div>
+                            <div class="hide client-oriented" data-client="teku">
+                                <label for="jdk_ver">jdk ver</label>
+                                <input type="number" id="jdk_ver" name="jdk_ver" value="{{../server.jdk_ver}}">
+                            </div>
+                        </li>
+                        <li>
+                            <h4>Chains configuration</h4>
+                            <div class="tabselector">
+                                <nav class="egrid egrid-2">
+                                    <button class="tab selected" data-tabpanel="1" type="button">Ethereum chain</button>
+                                    <button class="tab" data-tabpanel="2" type="button">Gnosis chain</button>
+                                </nav>
+                                <div class="tabpanel selected">
+                                    <label>
+                                        <input {{#if server.chains.ethereum}}checked{{/if}} type="checkbox" name="ethereum" value="ethereum" onclick="toggleSelect('ethereum-chain')" class="checkbox-required" data-checkbox="chain"> Active
+                                    </label>
+                                    {{#each server.execution}}
+                                    {{!--#each this.ports--}}
+                                    <div class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
+                                        <h4>Execution client service (Ethereum)</h4>
+                                        <label for="ethereum_ec_1_sn">Execution client Service name for Ethereum</label>
+                                        <input type="text" id="ethereum_ec_1_sn" name="ethereum_ec_1_sn" value="{{../server.portsByChain.execution.ethereum.0.service_name}}"><br>
+                                        <label for="ethereum_cc_1_sn">Execution client Data for Ethereum</label>
+                                        <input type="text" id="ethereum_ec_1_sdp" name="ethereum_ec_1_sdp" value="{{../server.portsByChain.execution.ethereum.0.data_path}}">
+                                        <h5>Ports for Ethereum chain</h5>
+                                        <label for="ethereum_ec_1_p">Main port</label>
+                                        <input type="number" id="ethereum_ec_1_p" name="ethereum_ec_1_p" value="{{../server.portsByChain.execution.ethereum.0.port}}"><br>
+                                        <label for="ethereum_ec_1_p_c">P2P port</label>
+                                        <input type="number" id="ethereum_ec_1_p_c" name="ethereum_ec_1_p_c" value="{{../server.portsByChain.execution.ethereum.0.p2p_port}}"><br>
+                                        <label for="ethereum_ec_1_p_r">RCP port</label>
+                                        <input type="number" id="ethereum_ec_1_p_r" name="ethereum_ec_1_p_r" value="{{../server.portsByChain.execution.ethereum.0.port_2}}">
+                                    </div>
+                                    {{!--/each--}}
+                                    {{/each}}
+                                    {{#each server.consensus}}
+                                    {{!--#each this.ports--}}
+                                    <div class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
+                                        <h4>Consensus client service (Ethereum)</h4>
+                                        <label for="ethereum_cc_1_sn">Consensus client Service name for Ethereum</label>
+                                        <input type="text" id="ethereum_cc_1_sn" name="ethereum_cc_1_sn" value="{{../server.portsByChain.consensus.ethereum.0.service_name}}"><br>
+                                        <label for="ethereum_cc_1_sn">Consensus client Data for Ethereum</label>
+                                        <input type="text" id="ethereum_cc_1_sdp" name="ethereum_cc_1_sdp" value="{{../server.portsByChain.consensus.ethereum.0.data_path}}">
+                                        <h5>Ports for Ethereum chain</h5>
+                                        <label for="ethereum_cc_1_p">Main port</label>
+                                        <input type="number" id="ethereum_cc_1_p" name="ethereum_cc_1_p" value="{{../server.portsByChain.consensus.ethereum.0.port}}"><br>
+                                        <label for="ethereum_cc_1_p_c">P2P port</label>
+                                        <input type="number" id="ethereum_cc_1_p_c" name="ethereum_cc_1_p_c" value="{{../server.portsByChain.consensus.ethereum.0.p2p_port}}"><br>
+                                        <label for="ethereum_cc_1_p_q">Quic port</label>
+                                        <input type="number" id="ethereum_cc_1_p_q" name="ethereum_cc_1_p_q" value="{{../server.portsByChain.consensus.ethereum.port_2}}">
+                                    </div>
+                                    {{!--/each--}}
+                                    {{/each}}
+                                </div>
+                                <div class="tabpanel">
+                                    <label>
+                                        <input {{#if server.chains.gnosis}}checked{{/if}} type="checkbox" name="gnosis" value="gnosis" onclick="toggleSelect('gnosis-chain')" class="checkbox-required" data-checkbox="chain"> Active
+                                    </label>
+                                    {{#each server.execution}}
+                                    {{!--#each this.ports--}}
+                                    <div class="{{#ifEqual ../server.chains.gnosis "true"}}{{else}}hide{{/ifEqual}} gnosis-chain">
+                                        <h4>Execution client service (Gnosis)</h4>
+                                        <label for="gnosis_ec_1_sn">Execution client Service name for Gnosis</label>
+                                        <input type="text" id="gnosis_ec_1_sn" name="gnosis_ec_1_sn" value="{{../server.portsByChain.execution.gnosis.0.service_name}}"><br>
+                                        <label for="gnosis_cc_1_sn">Execution client Data for Gnosis</label>
+                                        <input type="text" id="gnosis_ec_1_sdp" name="gnosis_ec_1_sdp" value="{{../server.portsByChain.execution.gnosis.0.data_path}}">
+                                        <h5>Ports for Gnosis chain</h5>
+                                        <label for="gnosis_ec_1_p">Main port</label>
+                                        <input type="number" id="gnosis_ec_1_p" name="gnosis_ec_1_p" value="{{../server.portsByChain.execution.gnosis.0.port}}"><br>
+                                        <label for="ec_1_p_c">P2P port</label>
+                                        <input type="number" id="gnosis_ec_1_p_c" name="gnosis_ec_1_p_c" value="{{../server.portsByChain.execution.gnosis.0.p2p_port}}"><br>
+                                        <label for="gnosis_ec_1_p_r">RCP port</label>
+                                        <input type="number" id="gnosis_ec_1_p_r" name="gnosis_ec_1_p_r" value="{{../server.portsByChain.execution.gnosis.0.port_2}}">
+                                    </div>
+                                    {{!--/each--}}
+                                    {{/each}}
+                                    {{#each server.consensus}}
+                                    <div class="{{#ifEqual ../server.chains.gnosis "true"}}{{else}}hide{{/ifEqual}} gnosis-chain">
+                                        <h4>Consensus client service (Gnosis)</h4>
+                                        <label for="gnosis_cc_1_sn">Consensus client Service name for Gnosis</label>
+                                        <input type="text" id="gnosis_cc_1_sn" name="gnosis_cc_1_sn" value="{{../server.portsByChain.consensus.gnosis.0.service_name}}"><br>
+                                        <label for="gnosis_cc_1_sn">Consensus client Data for Gnosis</label>
+                                        <input type="text" id="gnosis_cc_1_sdp" name="gnosis_cc_1_sdp" value="{{../server.portsByChain.consensus.gnosis.0.data_path}}">
+                                        <h5>Ports for Gnosis chain</h5>
+                                        <label for="gnosis_cc_1_p">Main port</label>
+                                        <input type="number" id="gnosis_cc_1_p" name="gnosis_cc_1_p" value="{{../server.portsByChain.consensus.gnosis.0.port}}"><br>
+                                        <label for="gnosis_cc_1_p_c">P2P port</label>
+                                        <input type="number" id="gnosis_cc_1_p_c" name="gnosis_cc_1_p_c" value="{{../server.portsByChain.consensus.gnosis.0.p2p_port}}"><br>
+                                        <label for="gnosis_cc_1_p_q">Quic port</label>
+                                        <input type="number" id="gnosis_cc_1_p_q" name="gnosis_cc_1_p_q" value="{{../server.portsByChain.consensus.gnosis.0.port_2}}">
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </li>
+                        <li><h4>Service-based clients</h4>
+                            <ul>
+                                <li class="{{#ifEqual server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
+                                    <label for="mb_1">MEV Client</label>
+                                    <select id="mb_1" name="mb_1">
+                                        <option value="mevboost" selected>MEV-Boost (Ethereum only)</option>
+                                    </select>
+                                    <label for="mb_1_ver">Ver </label><input type="text" id="mb_1_ver" name="mb_1_ver" placeholder="1.8" value="{{server.mev.0.ver}}">
+                                </li>
+                                <li class="{{#ifEqual server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
+                                    <label>Rocketpool</label>: <input type="text" name="sc_rocketpool_ver" placeholder="" value="{{server.service_obj.rocketpool.ver}}">
+                                </li>
+                                <li>
+                                    <label>Stakewise</label>: <input type="text" name="sc_stakewise_ver" placeholder="" value="{{server.service_obj.stakewise.ver}}">
+                                </li>
+                                <li class="{{#ifEqual server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
+                                    <label>Lido</label>: <input type="text" name="sc_lido_ver" value="{{server.service_obj.lido.ver}}">
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                {{/if}} {{! Editing view end}}
+                <div class="mt-20 text-center">
+                    {{#if editingView}}
+                    <label>Encryption password</label>
+                    <input type="text" placeholder="Encryption password" class="encryption-password" id="encryption_psw_metadata">
+                    {{/if}}
+                    <input type="submit" class="submit btn btn-black btn-rounded" id="submit-server" value="{{formSubmit}}">
+                </div>
+            </form>
+
+            <script>
+                /* Activate Ethereum / Gnosis options */
+                function toggleSelect(selectId) {
+                    console.log("toggleSelect", selectId);
+                    var elms = document.getElementsByClassName(selectId);
+                    for(var elm of elms){
+                        console.log("toggleSelect elements:", elm);
+                        elm.classList.toggle("hide");
+                    }
+                }
+                const clientsDB = {{{clients}}};
+                function OnClientChanged(elmId){
+                    let clientSelected = document.getElementById(elmId).value;
+                    let ethClientElm = document.getElementById("ethereum_"+elmId+"_sn");
+                    let gnoCLientElm = document.getElementById("gnosis_"+elmId+"_sn");
+                    // before selected client change
+                    for(const elm of document.getElementsByClassName("client-oriented")){
+                        console.log(elm, elm.dataset.client, clientSelected);
+                        if(elm.dataset.client === clientSelected) {
+                            elm.classList.remove("hide");
+                        } else if(!elm.classList.contains("hide")){
+                            elm.classList.add("hide");
+                        }
+                    }
+
+                    try {
+                        let verElement = null;
+                        let placeholder = "";
+                        // change version placehodler
+                        switch(clientSelected){
+                            case "nethermind":
+                                verElement = "ec_1_ver";
+                                placeholder = clientsDB.executionLayer.nethermind.latestVerClean;
+                            break;
+                            case "erigon":
+                                verElement = "ec_1_ver";
+                                placeholder = clientsDB.executionLayer.erigon.latestVer;
+                            break;
+                            case "geth":
+                                verElement = "ec_1_ver";
+                                placeholder = clientsDB.executionLayer.geth.latestVer;
+                            break;
+                            case "lighthouse":
+                                verElement = "cc_1_ver";
+                                placeholder = clientsDB.consensusLayer.lighthouse.latestVer;
+                            break;
+                            case "lodestar":
+                                verElement = "cc_1_ver";
+                                placeholder = clientsDB.consensusLayer.lodestar.latestVer;
+                            break;
+                            case "teku":
+                                verElement = "cc_1_ver";
+                                placeholder = clientsDB.consensusLayer.teku.latestVer;
+                            break;
+                            case "prysm":
+                                verElement = "cc_1_ver";
+                                placeholder = clientsDB.consensusLayer.prysm.latestVer;
+                            break;
+                            case "mevboost":
+                                verElement = "mb_1_ver";
+                                placeholder = clientsDB.mevLayer.mevboost.latestVer;
+                            break;
+                        }
+                        document.getElementById(verElement).placeholder = placeholder;
+                    } catch(e) {
+                        console.log(e);
+                    }
+                    
+                    if(elmId === "cc_1") clientSelected += "beacon";
+                    console.log("MS | OnClientChanged", elmId, clientSelected);
+                    if(ethClientElm.value === "") ethClientElm.value = "eth-"+clientSelected;
+                    if(gnoCLientElm.value === "") gnoCLientElm.value = "gno-"+clientSelected;
+                    let ethClientPathElm = document.getElementById("ethereum_"+elmId+"_sdp");
+                    let gnoCLientPathElm = document.getElementById("gnosis_"+elmId+"_sdp");
+                    console.log(ethClientPathElm.value, gnoCLientPathElm.value);
+                    if(ethClientPathElm.value === "") ethClientPathElm.value = "/var/lib/ethereum/"+clientSelected;
+                    if(gnoCLientPathElm.value === "") gnoCLientPathElm.value = "/var/lib/gnosis/"+clientSelected;
+                }
+                OnClientChanged("ec_1");
+                OnClientChanged("cc_1");
+
+                function EditServerLoad(){
+                    let scheduledEncryptions = 0;
+                    let editServerForm = document.getElementById('serverDefinition');
+                    editServerForm.addEventListener('submit', function (event) {
+                        // prevent sending form
+                        event.preventDefault();
+                        let cryptPsw = document.getElementById('encryption_psw_metadata').value;
+                        let formData = new FormData(editServerForm);
+                        let encryptedElements = document.getElementsByClassName("encrypted_value");
+                        const encryptedElementsL = encryptedElements.length;
+                        scheduledEncryptions = encryptedElementsL;
+                        for(var i=0;i<encryptedElementsL;i++){
+                            var elm = encryptedElements[i];
+                            //const value = GetElementValue(elm);
+                            const submitData = formData.get(elm.name);
+                            // if already encryted (it was not decrypted, skip)
+                            console.log("Encrypting content", submitData);
+                            EncryptContent(cryptPsw, submitData, elm)
+                            .then(encryptedContent => {
+                                console.log("Encrypted Note:", encryptedContent, encryptedContent.length);
+                                formData.set(elm.name, encryptedContent);
+                                OnEncryptionCompleted();
+                            })
+                            .catch(error => {
+                                console.error("Encryption failed:", error);
+                            })
+                        }
+                    });
+
+                    function OnEncryptionCompleted(){
+                        scheduledEncryptions--;
+                        if(scheduledEncryptions === 0) editServerForm.submit();
+                    }
+                }
+                document.addEventListener('DOMContentLoaded', EditServerLoad);
+            </script>
+        </section>
+
+        {{#if editingView}}
+        <section>
+            <h2 class="mt-60">Server notes (internal, encrypted)</h2>
+            <form method="post" action="{{submitNoteLink}}" id="editServerNote">
+                <textarea type="text" id="server-note" name="note" rows="20" cols="100" class="encrypted_value">{{{server.serverNote}}}</textarea>
+                <div class="mt-20 text-center"></div>
+                    <label>Encryption password</label>
+                    <input type="text" placeholder="Encryption password" class="encryption-password" id="encryption_psw_notes">
+                    <input type="submit" class="submit btn btn-black btn-rounded" value="Update">
+                </div>
+            </form>
+            <script>
+                document.addEventListener('DOMContentLoaded', function(){
+                    let serverNoteForm = document.getElementById('editServerNote');
+                    serverNoteForm.addEventListener('submit', function (event) {
+                        // prevent sending form
+                        event.preventDefault();
+                        let cryptPsw = document.getElementById('encryption_psw_notes').value;
+                        let formData = new FormData(serverNoteForm);
+                        const submitData = formData.get('note');
+                        // if already encryted (it was not decrypted, skip)
+                        console.log("Encrypting content", submitData);
+                        EncryptContent(cryptPsw, submitData, document.getElementById('server-note'))
+                        .then(encryptedContent => {
+                            console.log("Encrypted Note:", encryptedContent, encryptedContent.length);
+                            formData.set('note', encryptedContent);
+                            //document.getElementById('server-note').value = encryptedContent;
+                            serverNoteForm.submit();
+                        })
+                        .catch(error => {
+                            console.error("Encryption failed:", error);
+                        })
+                    })
+                });
+            </script>
+        </section>
+        {{/if}}
+    </div>
+    {{/if}}
+	
+    <section class="grid">
+        <h2 class="mt-60">Server Actions (Unencrypted)</h2>
+        <ol>
+             {{#each actions}}
+            <li>[{{this.timestamp}}] {{{this.action}}}</a></li>
+            {{/each}}
+        </ol>
+        {{#if isOwner}}
+        {{!--<h3>Add custom Action</h3>
+        <form method="post" action="/dashboard/custom-server-action">
+            <div id="server-action">
+                <textarea type="text" id="server-action" name="server-action" rows="2" cols="100">{{server.note}}</textarea>
+                <input type="submit" class="submit btn btn-black btn-rounded" id="submit-server-action" value="Add Action">
+            </div>
+        </form>--}}
+        {{/if}}
+    </section>
+
+    {{!-- Server chart --}}
+</main>
+{{> scripts/cryptography}}
+{{> scripts/security-guard}}
+{{> scripts/tabselector}}
+{{> footer}}
+</body>

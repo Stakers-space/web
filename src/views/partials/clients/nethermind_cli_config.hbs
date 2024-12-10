@@ -1,0 +1,95 @@
+
+<h3 class="mt-60">Create a system user and data directory for Nethermind service</h3>
+<ul>
+  <li>
+    <h4>Create a user</h4>
+    <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}nethermind" class="interactive-element execution_sn" data-class="execution_sn" data-client="nethermind">
+    <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
+  </li>
+  <li>
+    <h4>Create a folder for Nethermind data{{#if chain}} on {{chainName}} chain{{/if}}</h4>
+    <label>Service data directory</label>: <input type="text" value="/var/lib{{slashChain}}/nethermind" class="interactive-element execution-dp" data-class="execution-dp" data-client="nethermind">
+    <pre><code>sudo mkdir -p <mark class="execution-dp">/var/lib{{slashChain}}/nethermind</mark></code></pre>
+  </li>
+  <li>
+    <h4>Set access permission and ownership for the Nethermind data folder</h4>
+    <pre><code>sudo chown -R <mark class="execution_sn">{{servicePrefix}}nethermind</mark>:<mark class="execution_sn">{{servicePrefix}}nethermind</mark> <mark class="execution-dp">/var/lib{{slashChain}}/nethermind</mark></code></pre>
+  </li>
+</ul>
+<h3 class="mt-60">Configurate & Run Nethermind service</h3>
+<ul>
+  <li>
+    {{> clients/config/execution-ports }}
+    <p>If needed, check <a href="https://docs.nethermind.io/interacting/json-rpc-server/" target="_blank"
+        rel="nofollow noopener noreferrer">JSON RPC server</a> and <a
+        href="https://docs.nethermind.io/fundamentals/configuration/" target="_blank"
+        rel="nofollow noopener noreferrer">fundamentals</a> in <a href="https://docs.nethermind.io/" target="_blank"
+        rel="nofollow noopener noreferrer">Nethermind documentation</a>.</p>
+  </li>
+  <li>
+    <h4>Enable port for P2P communication (execution client)</h4>
+    <p>To allow execution client synchronization, there's need to enable P2P traffic to TCP (allows the node to connect
+      to peers) and UDP (allows node discovery) port <code>30303</code>. It may be done with following UFW setup:</p>
+    <pre><code>$ sudo ufw allow <mark class="execution-p2p">30303</mark></code></pre>
+  </li>
+  <li>
+    <h4>Create configuration file for Nethermind service</h4>
+    <ol>
+      <li>
+        <p>Open Nethermind configuration file</p>
+        <pre><code>sudo nano /etc/systemd/system/<mark class="execution_sn">{{servicePrefix}}nethermind</mark>.service</code></pre>
+      </li>
+      <li>
+        <p>Copy the configuration below into the file. If needed, check <a
+            href="https://docs.nethermind.io/fundamentals/configuration/#command-line-options" target="_blank"
+            rel="nofollow noopener noreferrer">flags documentation</a>.</p>
+{{#unless chain}}
+          <div class="tabselector">
+						<nav class="egrid egrid-2">
+							<button class="tab selected" data-tabpanel="1">Ethereum</button>
+							<button class="tab" data-tabpanel="2">Gnosis</button>
+						</nav>
+						<div class="tabpanel selected">
+{{> clients/config/eth-nethermind }}
+						</div>
+						<div class="tabpanel">
+{{> clients/config/gno-nethermind }}
+						</div>
+					</div>
+          <i>*Note: Update <code>JsonRpc.JwtSecretFile</code>, if you use different</i>
+          {{/unless}}
+{{#ifEqual chain "ethereum"}}
+{{> clients/config/eth-nethermind }}
+{{/ifEqual}}
+{{#ifEqual chain "gnosis"}}
+{{> clients/config/gno-nethermind }}
+{{/ifEqual}}
+      </li>
+      <li>
+        Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config
+        file.
+      </li>
+    </ol>
+  </li>
+  <li>
+    <h4>Start the Nethermind service</h4>
+    <pre><code>sudo systemctl daemon-reload
+sudo systemctl start <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
+  </li>
+  <li>
+    <h4>Check the service</h4>
+    <pre><code>systemctl status <mark class="execution_sn">{{servicePrefix}}nethermind</mark>
+journalctl -fu <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
+    <p>If you see message "Waiting for Forkchoice message from Consensus Layer to set fresh pivot block", you can move
+      on a Consensis Client setup.</p>
+  </li>
+  <li>
+    <h4>Start the service automatically on system startup</h4>
+    <pre><code>sudo systemctl enable <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
+  </li>
+</ul>
+<script>
+  function OnNethermindSelected(){
+    console.log("Set nethermind ports");
+  }
+</script>

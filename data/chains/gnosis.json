@@ -1,0 +1,16 @@
+{
+    "name": "Gnosis",
+    "token": "gno",
+    "executionClients": {
+        "nethermind": "production",
+        "erigon": "production",
+        "geth": "in development"
+    },
+    "consensusClients": {
+        "lighthouse": "production",
+        "lodestar": "production",
+        "teku": "production",
+        "nimbus": "production"
+    },
+    "otherClients": []
+}
