@@ -1,5 +1,7 @@
-Staking wiki web.
+Stakers.space is a hub for all interested in and active in the staking
 
-Preview: https://stakers.space
+Website: [https://stakers.space](https://stakers.space)
 
-Web in progress. Description will be added later.
+Website architecture:
+├── web (this public repository) = layer for displaying data on [staker.space website](https://stakers.space)
+└── server (private repository) = data collector and updator for stakers.space website and related services.

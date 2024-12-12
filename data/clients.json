@@ -4,9 +4,9 @@
             "name": "Nethermind",
             "link": "https://nethermind.io/",
             "github": "https://github.com/NethermindEth/nethermind",
-            "latestVer": "1.29.1-dfea5240",
-            "latestVerClean":"1.29.1",
-            "release_time": "2024-10-16T16:03:00Z",
+            "latestVer": "1.30.1-2b75a75a",
+            "latestVerClean":"1.30.1",
+            "release_time": "2024-12-12T11:15:00Z",
             "social":[
                 {
                 "name": "Discord",
@@ -288,9 +288,9 @@
             "name": "Teku",
             "link": "https://docs.teku.consensys.net/",
             "github": "https://github.com/ConsenSys/teku",
-            "latestVer": "24.10.3",
+            "latestVer": "24.12.0",
             "jdkVer": "21",
-            "release_time": "2024-10-28T23:50:00Z",
+            "release_time": "2024-12-12T12:19:00Z",
             "prerequisity": "jdk v21+",
             "social":[
                 {
@@ -431,8 +431,8 @@
             "name": "RocketPool",
             "link": "https://rocketpool.net/",
             "github": "https://github.com/rocket-pool/smartnode-install/releases",
-            "latestVer": "1.14.1",
-            "release_time": "2024-10-25T15:30:00Z",
+            "latestVer": "1.15.0",
+            "release_time": "2024-12-11T15:30:00Z",
             "social":[
                 {
                     "name": "Discord",
