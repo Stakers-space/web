@@ -52,9 +52,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
-    <script>var distribution = {{{depositContract.distribution}}}, chart = {{{depositContract.chart}}};</script>
+    <script>var distribution = {{{depositContract.distribution}}}, depositContract = {{{depositContract.chart}}}, chartsUIconfig = {{{chartsUIconfig}}};</script>
     <script type="text/javascript" src="/js/chart-presenter.js"></script>
-    <script type="text/javascript" src="/js/charts/walletsdistribution.js"></script>
+    <script type="text/javascript" src="/js/charts/wallets-distribution.js"></script>
     <script type="text/javascript" src="/js/charts/depositcontractbalance.js"></script>
     <script type="text/javascript" src="/js/charts/queue.js"></script>
     <script>charts.ActivateLazyLoad();</script>

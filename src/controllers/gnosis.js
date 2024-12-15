@@ -71,6 +71,7 @@ GnosisController.prototype.Request = function(req,res, next){
 
             res.locals.depositContract.chart = JSON.stringify(depositContract.historicalChart);
             res.locals.depositContract.distribution = JSON.stringify(depositContract.lastState.distribution);
+            //console.log(res.locals.depositContract);
             
             taskCompleted();
         }
@@ -201,6 +202,13 @@ GnosisController.prototype.DepositContract = function(req,res,next){
             res.locals.depositContract.chart = JSON.stringify(depositContract.historicalChart);
             res.locals.depositContract.distribution = JSON.stringify(depositContract.lastState.distribution);
 
+            res.locals.chartsUIconfig = JSON.stringify({
+                apr:{legend:false,xaxis:false,yaxis:false},
+                validators:{legend:false,xaxis:false,yaxis:false},
+                supply:{legend:false,xaxis:false,yaxis:false},
+                balance:{legend:false,xaxis:false,yaxis:false,detailed:false}
+            });
+
             next();
         }
     });
@@ -253,8 +261,6 @@ GnosisController.prototype.CacheIndexData = function(cb){
             return res.status(500).send({ error: 'Something went wrong!' }); 
         }
 
-        console.log(dbData);
-
         depositContract = {
             lastState: {
                 gno_validators: 0,
@@ -282,13 +288,13 @@ GnosisController.prototype.CacheIndexData = function(cb){
                 depositContract.lastState.gno_contract = numeral(dbData[i].GNO_contract  / 1e9).format('0,0');
                 depositContract.lastState.gno_balance = numeral(dbData[i].bilance / 1e9).format('0,0');
                 
-                console.log(dbData[i].distribution);
+                //console.log(dbData[i].distribution);
                 const entries = Object.entries(dbData[i].distribution);
                 entries.sort((a, b) => parseFloat(a[0]) - parseFloat(b[0]));
 
                 depositContract.lastState.distribution.holdings = entries.map(entry => entry[0]);
                 depositContract.lastState.distribution.validators = entries.map(entry => entry[1]);
-                console.log(depositContract.lastState.distribution);
+                //console.log(depositContract.lastState.distribution);
             }
             depositContract.historicalChart.date.push(dbData[i].date);
             depositContract.historicalChart.gno_validators.push(dbData[i].GNO_validators / 1e9);

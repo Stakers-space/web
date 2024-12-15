@@ -15,33 +15,15 @@ WalletDistributionChart.prototype.Init = function(){
 
 WalletDistributionChart.prototype.ConfigurateChart = function(){
     // convert to array
-    let xAxes = [];
-    let yAxes = [];
 
     var chartdata = {
-        labels: xAxes,
+        labels: distribution.holdings,
         datasets: [
             {
-                label: 'Validators GNO holding ',
-                data: yAxes,
+                label: 'Validators',
+                data: distribution.validators,
                 borderColor: 'black',//'rgb(255, 99, 132)',
                 backgroundColor: 'black',//'rgb(255, 99, 132)',
-                type: 'line',
-                yAxisID: 'y',
-                pointRadius:0,
-                borderWidth: 3,
-                fill: '-1'
-                //stepped: 'after',//true,
-                //stepped:'before'
-                //stepped: 'middle'
-                //fill: false,
-            },
-            {
-                label: 'GNO in Deposit Contract',
-                data: yAxes,
-                borderColor: 'red',//'rgb(255, 99, 132)',
-                backgroundColor: 'red',//'rgb(255, 99, 132)',
-                type: 'line',
                 yAxisID: 'y',
                 pointRadius:0,
                 borderWidth: 3,
@@ -49,7 +31,7 @@ WalletDistributionChart.prototype.ConfigurateChart = function(){
                 //stepped:'before'
                 //stepped: 'middle'
                 //fill: false,
-            },
+            }
         ]
     };
 
@@ -67,9 +49,9 @@ WalletDistributionChart.prototype.ConfigurateChart = function(){
             interaction: charts.GetInteractionOption(),
             scales: {
                 x: {
-                    display: (chartsUIconfig) ? chartsUIconfig.validators.xaxis : true,
+                    display: true,
                     title: {
-                        display: false,
+                        display: true,
                         text: 'GNO holdings'
                     },
                     //type: 'category',
@@ -79,16 +61,14 @@ WalletDistributionChart.prototype.ConfigurateChart = function(){
                     offset: false
                 },
                 y: {
-                    stacked: true
-                  }
+                    type:'logarithmic',
+                    title: {
+                        display: true,
+                        text: 'Validators'
+                    },
+                }
             },
             plugins: {
-                filler: {
-                    propagate: false
-                },
-                'samples-filler-analyser': {
-                    target: 'chart-analyser'
-                },
                 title: {
                   display: false,
                   text: 'GNO holdings across validators'
@@ -97,19 +77,6 @@ WalletDistributionChart.prototype.ConfigurateChart = function(){
                 legend: {
                     position: 'bottom',
                     display: (chartsUIconfig) ? chartsUIconfig.validators.legend : true,
-                },
-                tooltip: {
-                    callbacks: {
-                        /*afterBody: function(context) {
-                            const index = context[0].dataIndex;
-                            return [
-                                `...: ${ethstore.agg....[index]}`,
-                                `...: ${ethstore.agg....[index]}`,
-                                `...: ${ethstore.agg....[index]}`,
-                                `...: ${ethstore.agg....[index]}`,
-                            ];
-                        }*/
-                    }
                 },
                 annotation: {
                     annotations: {

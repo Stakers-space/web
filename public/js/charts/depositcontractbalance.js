@@ -16,35 +16,82 @@ DepositContractBalanceChart.prototype.Init = function(){
 DepositContractBalanceChart.prototype.ConfigurateChart = function(){
     /*....unshift();
     .....push();*/
+    /*depositContract.date.push("2024-12-16");
+    depositContract.gno_validators.push(depositContract.gno_contract[0]);
+    depositContract.gno_contract.push(depositContract.gno_validators[0]);
+    depositContract.gno_balance.push(depositContract.gno_balance[0] * -1);
+
+    depositContract.date.push("2024-12-17");
+    depositContract.gno_validators.push(depositContract.gno_validators[0]);
+    depositContract.gno_contract.push(depositContract.gno_contract[0]);
+    depositContract.gno_balance.push(depositContract.gno_balance[0] * 1);*/
 
     var chartdata = {
-        labels: beaconchainData.date,
+        labels: depositContract.date,
         datasets: [
             {
-                label: 'Validators',
-                data: beaconchainData .validators,
-                borderColor: 'grey',//'rgb(255, 99, 132)',
-                backgroundColor: 'grey',//'rgb(255, 99, 132)',
-                order: 0,
-                type: 'line',
-                yAxisID: 'y2',
+                label: 'GNO assigned to validators',
+                data: depositContract.gno_validators,
+                borderColor: 'black',//'rgb(255, 99, 132)',
+                backgroundColor: 'black',//'rgb(255, 99, 132)',
+                yAxisID: 'y',
                 pointRadius:0,
+                borderWidth: 3,
+                fill: false
+                //fill: '+1',
+            },
+            {
+                label: 'GNO balance in deposit contract',
+                data: depositContract.gno_contract,
+                borderColor: 'grey'/*function(context) {
+                    const value = depositContract.gno_balance[context.dataIndex];
+                    const color = (value < 0) ? 'red' : 'green';
+                    console.log(value, "→", color);
+                    return color;
+                }*/,
+                /*backgroundColor: function(context) {
+                    const value = depositContract.gno_balance[context.dataIndex];
+                    if(!value) return;
+                    const color = (value < 0) ? 'red' : 'green';
+                    console.log(value, "→", color);
+                    return color;
+                },*/
+                yAxisID: 'y',
+                pointRadius: 0,
                 borderWidth: 1,
+                fill: {
+                    target: 0, // Výplň k datasetu 0
+                    above: 'rgba(0, 255, 0, 0.3)', // Zelená výplň
+                    below: 'rgba(255, 0, 0, 0.3)'  // Červená výplň
+                }
+                
+                //fill: false
                 //stepped: 'after',//true,
                 //stepped:'before'
                 //stepped: 'middle'
                 //fill: false,
             },
+            /*{
+                label: 'GNO balance',
+                data: depositContract.gno_balance                ,
+                borderColor: 'grey',//'rgb(255, 99, 132)',
+                backgroundColor: 'grey',//'rgb(255, 99, 132)',
+                order: 0,
+                type: 'line',
+                yAxisID: 'y',
+                pointRadius:0,
+                borderWidth: 1,
+                fill: '-1'
+                //stepped: 'after',//true,
+                //stepped:'before'
+                //stepped: 'middle'
+                //fill: false,
+            },*/
         ]
     };
 
-    /*var annotations = {
-         brand:charts.GetBrandAnotation(this.elementId),                 
-    };*/
-    //charts.PushTextAnotations(this.xLabels, annotations);
-
     this.chartConfig = {
-        type: 'bar',
+        type: 'line',
         data: chartdata,
         options: {
             responsive: true,
@@ -56,48 +103,36 @@ DepositContractBalanceChart.prototype.ConfigurateChart = function(){
                     display: true,
                     title: {
                         display: false,
-                        text: 'Quarter'
+                        text: 'Date'
                     },
-                    //type: 'category',
                     grid: {
                         drawOnChartArea: false, // only want the grid lines for one axis to show up
                     },
                     offset: false
                 },
-                y2: {
-                    //display: false,
-                    type:'linear',//'logarithmic',
-                    position: 'right',
-                    title: {
-                        display: true,
-                        text: 'validators'
-                    },
-                    grid: {
-                        drawOnChartArea: false, // only want the grid lines for one axis to show up
-                    },
-                },
+                y: {
+                    //stacked: true
+                }
             },
             plugins: {
+                filler: {
+                    propagate: false
+                },
                 title: {
                   display: false,
-                  text: 'ETH Validators number'
+                  text: 'Validators number'
                 },
-                //zoom: charts.GetZoomOption(1,this.elementId),
                 legend: {
                     position: 'bottom',
-                    //display:false,
                 },
                 tooltip: {
                     callbacks: {
-                        /*afterBody: function(context) {
+                        afterBody: function(context) {
                             const index = context[0].dataIndex;
                             return [
-                                `...: ${ethstore.agg....[index]}`,
-                                `...: ${ethstore.agg....[index]}`,
-                                `...: ${ethstore.agg....[index]}`,
-                                `...: ${ethstore.agg....[index]}`,
+                                `GNO balance: ${depositContract.gno_balance[index]}`,
                             ];
-                        }*/
+                        }
                     }
                 },
                 annotation: {
@@ -107,7 +142,7 @@ DepositContractBalanceChart.prototype.ConfigurateChart = function(){
                 },
             },
             transitions: charts.GetTransitions(),
-        }
+        },
     };
 };
 
