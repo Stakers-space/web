@@ -31,6 +31,7 @@ class GnosisRouter {
 
         // topic-based
         router.get('/validators', Chain.Gnosis, this.chainController.Validators, this.Response);
+        router.get('/deposit-contract-balance', Chain.Gnosis, this.chainController.DepositContract, this.Response);
 
 
         router.get('/staking-hardware', Chain.Gnosis, this.GuidePage.Hardware, this.Response);

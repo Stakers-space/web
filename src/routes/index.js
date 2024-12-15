@@ -147,8 +147,6 @@ function Response(req,res){
     });
 }
 
-router.use('/api/web/cache', require('./cache'));
-
 /*
 	// Ubuntu
 	this.app.use('/ubuntu-server', require('./routes/ubuntu.js'));

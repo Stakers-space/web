@@ -6,7 +6,6 @@ const mysqlSrv = require('../services/mysqlDB');
 const ServerModel = require('../models/dashboard/server');
 const InstanceModel = require('../models/dashboard/instance');
 const cache = require('../middlewares/cache');
-
 const bodyParser = require('body-parser');
 
 /*router.use(bodyParser.urlencoded({
@@ -35,6 +34,27 @@ router.use(bodyParser.json( {limit: '1mb'} ));
 router.use(cookieParser());
 
 router.post('/validator-state', Controller.UpdateValidatorsState);
+router.use('/web/cache', require('./cache'));
+
+const azureCosmosDB = require('../services/azureCosmosDB');
+const cacheRegenerateToken = require('../config/config.secret.json').cacheRegenerateToken;
+const getDateFormatted = require('../utils/get-date-formatted.js');
+// may be saved right by server, without web assistance...
+router.post('/web/gno-balance', function(req, res){
+    const dateFormat = getDateFormatted();
+    console.log("GnoDistribution", req.query, req.body, dateFormat);
+    if(req.query.st !== cacheRegenerateToken) return res.status(500).send("Unauthorized access");
+
+    let receivedData = req.body;
+    receivedData.id = "gno-distribution-"+dateFormat;
+    receivedData.date = dateFormat;
+    receivedData.partitionKey = "gno-distribution";    
+    console.log("saving", receivedData);
+    new azureCosmosDB().createFamilyItem("data", receivedData, (err,resp) => {
+        console.log(err,resp);
+        res.send("ok");
+    });
+});
 
 router.post('/keystores', function(req, res){
     // if incoming data → process the data

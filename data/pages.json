@@ -40,6 +40,7 @@
     {"url": "https://stakers.space/gnosis-staking/validators"},
     {"url": "https://stakers.space/gnosis-staking/emergency"},
     {"url": "https://stakers.space/gnosis-staking/validator-queue"},
+    {"url": "https://stakers.space/gnosis-staking/deposit-contract-balance"},
     {"url": "https://stakers.space/charts"},
     {"url": "https://stakers.space/charts/ethereum-staking-apy"},
     {"url": "https://stakers.space/charts/ethereum-validators"},

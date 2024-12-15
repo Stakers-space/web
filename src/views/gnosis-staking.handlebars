@@ -98,6 +98,11 @@
 					</div>
 				</div>
 				<div class="egrid egrid-2 charts-carousel scroll-horizontal">
+					<a href="/gnosis-staking/deposit-contract-balance" class="chart">
+						<div class="header">
+							<h2 class="title">{{depositContract.lastState.balance}} in deposit contract balance</h2>
+						</div>
+					</a>
 					<a href="/charts/gnosis-blocks" class="chart">
 						<div class="header">
 							<h2 class="title">Blocks</h2>
@@ -135,7 +140,7 @@
 					</a>
 					<div class="chart" style="position:relative">
 						<div class="header">
-							<h2 class="title">GNO Price</h2>
+							<h2 class="title">{{gnoPrice}} GNO Price</h2>
 						</div>
 						<canvas id="priceratio_chart" name="lazy-canvas" class="chart"></canvas>
 						<div class="chart-legend">

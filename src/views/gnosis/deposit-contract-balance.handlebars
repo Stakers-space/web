@@ -1,0 +1,64 @@
+
+<body id="body">
+
+{{> header}}
+<main>
+	<section class="grid">
+        <ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+			<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{chainName}} staking</span></a>
+					<meta property="position" content="2">
+				</li>
+                <li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}/deposit-contract-balance"><span property="name">Deposit contract balance</span></a>
+					<meta property="position" content="3">
+				</li>
+			</ul>
+		<h1 class="title mt-0">{{chainName}} staking - deposit contract balance</h1>
+        <p>GNO rewards to validators are not paid through a emission of new token, instead, they are paid by GnosisDAO.</p>
+        <p>As the <a href="https://gnosisscan.io/address/0x0b98057ea310f4d31f2a452b414647007d1645d9" target="_blank" rel="nofollow noopener noreferrer">deposit contract</a> processing deposits as wel las withdrawals (including rewards), with each reward (claimed as well as unclaimed), an internal debt is being generated. This debt should be covered by Gnosis DAO to keep all validator funds covered.</p>
+	</section>
+
+    <section class="grid">
+        <h1>Current state of Gnosis deposit contract balance</h1>
+		<div class="egrid egrid-3">
+            <div>
+                <h2>GNO holded by Validators</h2>
+                <div>{{depositContract.lastState.gno_validators}}</div>
+            </div>
+            <div>
+                <h2>GNO in deposit contract</h2>
+                <div>{{depositContract.lastState.gno_contract}}</div>
+            </div>
+            <div>
+                <h2>GNO balance</h2>
+                <div>{{depositContract.lastState.gno_balance}}</div>
+            </div>
+        </div>
+        <h2>GNO distribution over validators</h2>
+        <p>This chart represents GNO value holded by validators, in other words, how many validators hold certain amount of GNO. Holded GNO value is being variable based on receiving and claiming rewardss, as well as paying penalties.</p>
+        <canvas id="walletbalance_chart" name="lazy-canvas"></canvas>
+        <p>* Data Updated on epoch , time ...</p>
+	</section>
+
+    <section class="grid">
+        <h2>Historical course of deposit contract balance</h2>
+        <canvas id="depositcontractbalance_chart" name="lazy-canvas"></canvas>
+	</section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
+    <script>var distribution = {{{depositContract.distribution}}}, chart = {{{depositContract.chart}}};</script>
+    <script type="text/javascript" src="/js/chart-presenter.js"></script>
+    <script type="text/javascript" src="/js/charts/walletsdistribution.js"></script>
+    <script type="text/javascript" src="/js/charts/depositcontractbalance.js"></script>
+    <script type="text/javascript" src="/js/charts/queue.js"></script>
+    <script>charts.ActivateLazyLoad();</script>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}
+</body>
