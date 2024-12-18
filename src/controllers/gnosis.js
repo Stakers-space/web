@@ -230,10 +230,14 @@ GnosisController.prototype.CacheIndexData = function(cb){
 
     fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
         if(!err) {
-            const parsedChartsDataCache = JSON.parse(fileContent).gnosis;
-            beaconData = parsedChartsDataCache.beaconData;
-            chainData = parsedChartsDataCache.chainData;
-            indicators = parsedChartsDataCache.indicators;
+            try {
+                const parsedChartsDataCache = JSON.parse(fileContent).gnosis;
+                beaconData = parsedChartsDataCache.beaconData;
+                chainData = parsedChartsDataCache.chainData;
+                indicators = parsedChartsDataCache.indicators;
+            } catch(e){
+                console.error(e);
+            }
         }
         taskCompleted(err, "chartsCache");
     });

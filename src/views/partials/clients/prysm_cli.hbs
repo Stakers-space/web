@@ -87,11 +87,23 @@ sudo systemctl start prysmbeacon</code></pre>
 			</div>
 		</div>
     </li>
-    <li class="mt-15">
-        <h3>Monitor services using Prysm clients</h3>
-        <pre><code>journalctl -fu prysmbeacon.service</code></pre>
-        <pre><code>journalctl -f -u prysmvalidator.service -u prysmvalidator2.service</code></pre>
-        <pre><code>...</code></pre>
+    <li class="mt-15"><h3>Monitor</h3>
+        <div class="tabselector" data-client="lighthouse">
+		    <nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Standard option</button>
+				<button class="tab" data-tabpanel="2">Staking manager</button>
+			</nav>
+			<div class="tabpanel selected">
+                <pre><code>journalctl -fu prysmbeacon.service</code></pre>
+                <pre><code>journalctl -f -u prysmvalidator.service -u prysmvalidator2.service</code></pre>
+                <pre><code>...</code></pre>
+			</div>
+			<div class="tabpanel">
+                <aside><b>This option requires installed and configured <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking manager</a></b></aside>
+                <pre><code>/usr/local/bin/staking.sh check consensus</code></pre>
+                <pre><code>/usr/local/bin/staking.sh monitor consensus</code></pre>
+			</div>
+		</div>
     </li>
     <li class="mt-15">
         <h3>Remove downloaded files</h3>

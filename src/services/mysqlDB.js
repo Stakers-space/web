@@ -170,8 +170,10 @@ MySqlDBplatform.prototype.AttachPortsToClient = function(clientresults, clientsD
                 return cb(null, taskResults);
             }
             for(const port of ports){
+                //console.log("AttachPortsToClient | Attaching port", port);
                 scheduledTasks++;
                 const query = '`clients_ports` (client_id, chain, service_name, port, port_p2p, port_p2pd, port_2, data_path) VALUES ('+MC.escape(clientId)+','+MC.escape(port.chain)+','+MC.escape(port.service_name)+','+MC.escape(port.port)+','+MC.escape(port.p2p_port)+','+MC.escape(port.p2p_discovery_port)+','+MC.escape(port.port_2)+','+MC.escape(port.data_path)+')'
+                //console.log(query);
                 MC.query('INSERT INTO '+query, function(err, results) {
                     if (err) { MC.end(); return cb(err, results); }
                     OnTaskCompleted(results); 

@@ -211,8 +211,8 @@
             "name": "Lighthouse",
             "link": "https://lighthouse.sigmaprime.io/",
             "github": "https://github.com/sigp/lighthouse",
-            "latestVer": "6.0.0",
-            "release_time": "2024-12-02T06:57:00Z",
+            "latestVer": "6.0.1",
+            "release_time": "2024-12-16T07:37:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -327,8 +327,8 @@
             "name": "Prysm",
             "link": "https://prysmaticlabs.com/",
             "github": "https://github.com/prysmaticlabs/prysm",
-            "latestVer": "5.1.2",
-            "release_time": "2024-10-25T15:30:00Z",
+            "latestVer": "5.2.0",
+            "release_time": "2024-12-16T20:42:00Z",
             "social":[
                 {
                     "name": "Discord",

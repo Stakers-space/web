@@ -97,24 +97,30 @@ exports.DefineServer = (req, res, next) => {
 exports.AddOrUpdateServer = (req, res) => {
     if(res.locals.isDemoAccount) return ThrowError("Action restricted for demo account",res);
     var serverData = new ServerModel(req.body['server-name'], req.body['server-location'], req.body['server-location-note'], req.body['server-network'], req.body['server-cpu'], req.body["server-user"], req.body["ssh-port"], req.body["operation-start"], req.body["vpn-id"], req.body["vpn-expiration"], req.body["nodejs_ver"], req.body["jdk_ver"]);
+    //console.log("AddOrUpdateServer", req.body);
     serverData.AddClient(null, "execution", req.body["ec_1"], req.body["ec_1_ver"]);
     serverData.AddClient(null, "consensus", req.body["cc_1"], req.body["cc_1_ver"]);
     if(req.body['ethereum']) {
         if(req.body["mb_1_ver"] !== '') serverData.AddClient(null, "mev", req.body["mb_1"], req.body["mb_1_ver"]);
         
-        serverData.AddClientPorts("execution",0,"ethereum", req.body["ethereum_ec_1_sn"], req.body["ethereum_ec_1_p"], req.body["ethereum_ec_1_p_c"], req.body["ethereum_ec_1_p_r"], null, req.body["ethereum_ec_1_sdp"]);
-        serverData.AddClientPorts("consensus",0,"ethereum", req.body["ethereum_cc_1_sn"], req.body["ethereum_cc_1_p"], req.body["ethereum_cc_1_p_c"], req.body["ethereum_cc_1_p_q"], null, req.body["ethereum_cc_1_sdp"]);
+        serverData.AddClientPorts("execution",0,"ethereum", req.body["ethereum_ec_1_sn"], req.body["ethereum_ec_1_p"], req.body["ethereum_ec_1_p_c"], null, req.body["ethereum_ec_1_p_r"], req.body["ethereum_ec_1_sdp"]);
+        serverData.AddClientPorts("consensus",0,"ethereum", req.body["ethereum_cc_1_sn"], req.body["ethereum_cc_1_p"], req.body["ethereum_cc_1_p_c"], null, req.body["ethereum_cc_1_p_q"], req.body["ethereum_cc_1_sdp"]);
     
         if(req.body["sc_rocketpool_ver"] !== "") serverData.AddClient(null,"service","rocketpool", req.body["sc_rocketpool_ver"]);
         if(req.body["sc_lido_ver"] !== "") serverData.AddClient(null,"service","lido", req.body["sc_lido_ver"]);
     }
     if(req.body['gnosis']) {
-        serverData.AddClientPorts("execution",0,"gnosis", req.body["gnosis_ec_1_sn"], req.body["gnosis_ec_1_p"], req.body["gnosis_ec_1_p_c"], req.body["gnosis_ec_1_p_r"], null, req.body["gnosis_ec_1_sdp"]);
-        serverData.AddClientPorts("consensus",0,"gnosis", req.body["gnosis_cc_1_sn"], req.body["gnosis_cc_1_p"], req.body["gnosis_cc_1_p_c"], req.body["gnosis_cc_1_p_q"], null, req.body["gnosis_cc_1_sdp"]);
+        serverData.AddClientPorts("execution",0,"gnosis", req.body["gnosis_ec_1_sn"], req.body["gnosis_ec_1_p"], req.body["gnosis_ec_1_p_c"], null, req.body["gnosis_ec_1_p_r"], req.body["gnosis_ec_1_sdp"]);
+        serverData.AddClientPorts("consensus",0,"gnosis", req.body["gnosis_cc_1_sn"], req.body["gnosis_cc_1_p"], req.body["gnosis_cc_1_p_c"], null, req.body["gnosis_cc_1_p_q"], req.body["gnosis_cc_1_sdp"]);
     }
     if(req.body["sc_stakewise_ver"] && req.body["sc_stakewise_ver"] !== '') serverData.AddClient(null,"service","stakewise", req.body["sc_stakewise_ver"]);
 
-    console.log("POST: AddOrUpdateServer", req.body, serverData);
+    /*console.log("POST: AddOrUpdateServer", req.body, serverData);
+    try {
+        console.log(serverData.execution[0].ports, serverData.consensus[0].ports);
+    } catch(e){
+        console.log(e);
+    }*/
 
     const mysqlInst = new mysqlSrv();
     const userId = req.user.id;
