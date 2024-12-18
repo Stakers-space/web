@@ -288,9 +288,9 @@
             "name": "Teku",
             "link": "https://docs.teku.consensys.net/",
             "github": "https://github.com/ConsenSys/teku",
-            "latestVer": "24.12.0",
+            "latestVer": "24.12.1",
             "jdkVer": "21",
-            "release_time": "2024-12-12T12:19:00Z",
+            "release_time": "2024-12-18T12:04:00Z",
             "prerequisity": "jdk v21+",
             "social":[
                 {

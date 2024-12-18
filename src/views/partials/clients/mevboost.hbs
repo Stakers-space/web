@@ -1,20 +1,160 @@
-<h2>Update Mev Boost</h2>
-<div>
+{{#unless InstallationGuide}}
 Check current version
 <pre><code>cd /usr/local/bin
 ./mev-boost --version</code></pre>
-
+{{/unless}}
+<ul>
+    <li>
+Download Mevboost
 <pre><code>cd ~/downloads
-curl -LO https://github.com/flashbots/mev-boost/releases/download/v1.8/mev-boost_1.8_linux_amd64.tar.gz</code></pre>
-<pre><code>sha256sum mev-boost_1.8_linux_amd64.tar.gz</code></pre>
-<pre><code>tar xvf mev-boost_1.8_linux_amd64.tar.gz
-rm LICENSE README.md mev-boost_1.8_linux_amd64.tar.gz</code></pre>
+curl -LO https://github.com/flashbots/mev-boost/releases/download/v<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>/mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
+    </li>
+    <li>
+Verifz hash of downloaded file
+<pre><code>sha256sum mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
+    </li>
+    <li>
+Unpack mevboost
+<pre><code>tar xvf mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
+    </li>
+    <li>
+Remove original packed file
+<pre><code>rm LICENSE README.md mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
+    </li>
+{{#if InstallationGuide}}
+<li>Create the mevboost systemd unit file
+<pre><code>sudo nano /etc/systemd/system/mevboost.service</code></pre>
+Sample configuration
+<pre><code>[Unit]
+Description=MEV-Boost Service for Ethereum Mainnet
+Wants=network-online.target
+After=network-online.target
+Documentation=https://www.coincashew.com
+
+[Service]
+User=mevboost
+Group=mevboost
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/mev-boost \
+  -mainnet \
+  -min-bid 0.03 \
+  -relay-check \
+  -addr 127.0.0.1:18550 \
+  -relay https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net \
+  -relay https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money \
+  -relay https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live \
+  -relay https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com \
+  -relay https://0x8c7d33605ecef85403f8b7289c8058f440cbb6bf72b055dfe2f3e2c6695b6a1ea5a9cd0eb3a7982927a463feb4c3dae2@relay.wenmerge.com
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+<p>Note: Replace ralyes for your preferred rallyes from <a href="/ethereum-staking/mev-relay-list">MEV relay list</a></p>
+</li>
+<li>Create a service user for Mev Boost
+<pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="mevboost_su">mevboost</mark></code></pre>
+</li>
+<li>Restart daemon
+<pre><code>sudo systemctl daemon-reload</code></pre>
+</li>
+<li>
+Copy mev-boost client to <code>/usr/local/bin</code>
+{{else}}
+<li>Stop mevboost client
 <pre><code>sudo systemctl stop mevboost</code></pre>
-Rewrite original mev-boost client
+</li>
+<li>Rewrite original mev-boost client
+{{/if}}
 <pre><code>sudo cp ~/downloads/mev-boost /usr/local/bin</code></pre>
+</li>
+<li>Set proper ownership
 <pre><code>sudo chown mevboost:mevboost /usr/local/bin/mev-boost</code></pre>
+</li>
+<li>Start Mev boost service
 <pre><code>sudo systemctl start mevboost</code></pre>
-<h3>Monitor</h3>
-<pre><code>systemctl status mevboost
-journalctl -fu mevboost.service</code></pre>
-</div>
+</li>
+<li>Monitor Mev-boost running
+<pre><code>systemctl status mevboost</code></pre>
+<pre><code>journalctl -fu mevboost.service</code></pre>
+</li>
+{{#if InstallationGuide}}
+<li>Set auto start of Mev boost service on system startup
+<pre><code>sudo systemctl enable mevboost</code></pre>
+</li>
+<li>Link Beacon service to Mevboost client
+<pre><code>sudo nano /etc/systemd/system/<mark>consensus-beacon</mark>.service</code></pre> 
+<p>NOTE: Replace <code>consensus-beacon</code> for your beacon service name</p>
+Extend its <code>ExecStart</code> for following flag:
+<div class="tabselector mt-20">
+                        <nav class="egrid egrid-5">
+                            <button class="tab selected" data-tabpanel="1">Lighthoue</button>
+                            <button class="tab" data-tabpanel="2">Teku</button>
+                            <button class="tab" data-tabpanel="3">Lodestar</button>
+                            <button class="tab" data-tabpanel="4">Nimbus</button>
+                            <button class="tab" data-tabpanel="5">Prysm</button>
+                        </nav>
+                        <div class="tabpanel selected">
+                           <pre><code>--builder http://127.0.0.1:18550</code></pre>
+                        </div>
+                        <div class="tabpanel">
+                            <pre><code>--validators-builder-registration-default-enabled=true \
+--builder-endpoint=http://127.0.0.1:18550</code></pre>
+                        </div>
+                        <div class="tabpanel">
+                            <pre><code>--builder \
+--builder.urls http://127.0.0.1:18550</code></pre>
+                        </div>
+                        <div class="tabpanel">
+<pre><code>--payload-builder=true \
+--payload-builder-url=http://127.0.0.1:18550</code></pre>
+                        </div>
+                        <div class="tabpanel">
+                            <pre><code>--http-mev-relay=http://127.0.0.1:18550</code></pre>
+                        </div>
+                    </div>
+    Restart Daemon
+    <pre><code>sudo systemctl daemon-reload</code></pre>
+    Restart the service
+    <pre><code>sudo systemctl restart <mark>consensus-beacon</mark>.service && systemctl status <mark>consensus-beacon</mark>.service</code></pre> 
+    Monitor the service
+    <pre><code>journalctl -f -u <mark>consensus-beacon</mark>.service</code></pre>
+</li>
+<li>Link each Validator service to Mevboost client
+<pre><code>sudo nano /etc/systemd/system/<mark>validator</mark>.service</code></pre> 
+<p>NOTE: Replace <code>validator</code> for your validator service name</p>
+Extend its <code>ExecStart</code> for following flag:
+<div class="tabselector mt-20">
+                        <nav class="egrid egrid-5">
+                            <button class="tab selected" data-tabpanel="1">Lighthoue</button>
+                            <button class="tab" data-tabpanel="2">Teku</button>
+                            <button class="tab" data-tabpanel="3">Lodestar</button>
+                            <button class="tab" data-tabpanel="4">Nimbus</button>
+                            <button class="tab" data-tabpanel="5">Prysm</button>
+                        </nav>
+                        <div class="tabpanel selected">
+                           <pre><code>--builder-proposals</code></pre>
+                        </div>
+                        <div class="tabpanel">
+                            <pre><code>--validators-builder-registration-default-enabled=true</code></pre>
+                        </div>
+                        <div class="tabpanel">
+                            <pre><code>--builder</code></pre>
+                        </div>
+                        <div class="tabpanel">
+<pre><code>--payload-builder=true</code></pre>
+                        </div>
+                        <div class="tabpanel">
+                            <pre><code>--enable-builder</code></pre>
+                        </div>
+                    </div>
+                    Restart Daemon
+    <pre><code>sudo systemctl daemon-reload</code></pre>
+    Restart the service
+    <pre><code>sudo systemctl restart <mark>consensus-beacon</mark>.service && systemctl status <mark>consensus-beacon</mark>.service</code></pre>
+    Monitor the service
+    <pre><code>journalctl -f -u <mark>consensus-beacon</mark>.service</code></pre>
+</li>
+
+{{/if}}
+</ul>

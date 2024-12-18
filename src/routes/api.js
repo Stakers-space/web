@@ -30,7 +30,7 @@ router.use(passport.authenticate('session'));
 router.use(passport.session());
 
 router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json( {limit: '1mb'} ));
+router.use(bodyParser.json( {limit: '2mb'} ));
 router.use(cookieParser());
 
 router.post('/validator-state', Controller.UpdateValidatorsState);
