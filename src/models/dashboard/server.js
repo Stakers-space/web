@@ -58,7 +58,7 @@ class ServerModel {
             port_2: ((port_2 !== '') ? port_2 : null),
             data_path: ((data_path !== '') ? data_path : null)
         });
-        console.log("AddedClientPort", this[layer][clientIndex].ports[this[layer][clientIndex].ports.length -1]);
+        //console.log("AddedClientPort", this[layer][clientIndex].ports[this[layer][clientIndex].ports.length -1]);
         //return this[layer][clientIndex].ports[this[layer][clientIndex].ports.length -1];
     }
 

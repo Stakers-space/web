@@ -59,6 +59,10 @@ exports.DefineServer = (req, res, next) => {
                 serverObj.AddNote(data[0].note);
                 accessibleServerIds.push(serverId);
             }
+            /*console.log(serverObj, "PortsByChain | e:",serverObj.portsByChain.execution, "c:",serverObj.portsByChain.consensus);
+            try {
+                console.log("serverObj.consensus[0].ports", serverObj.consensus[0].ports, "serverObj.execution[0].ports:", serverObj.execution[0].ports);
+            } catch(e){console.error(e);}*/
             res.locals.server = serverObj;
             OnTaskCompleted();
     });
@@ -115,8 +119,8 @@ exports.AddOrUpdateServer = (req, res) => {
     }
     if(req.body["sc_stakewise_ver"] && req.body["sc_stakewise_ver"] !== '') serverData.AddClient(null,"service","stakewise", req.body["sc_stakewise_ver"]);
 
-    /*console.log("POST: AddOrUpdateServer", req.body, serverData);
-    try {
+    console.log("POST: AddOrUpdateServer", /*req.body,*/ serverData);
+    /*try {
         console.log(serverData.execution[0].ports, serverData.consensus[0].ports);
     } catch(e){
         console.log(e);
