@@ -33,8 +33,19 @@ exports.DefineServer = (req, res, next) => {
     //console.log("Edit ServerId ", req.query.id);
     // Get Server data
     let accessibleServerIds = [];
-    let scheduledTasks = 4;
+    let scheduledTasks = 5;
     const mysqlInst = new mysqlSrv();
+    // fet API credentials info
+    mysqlInst.GetAccountContact(req.user.id, function(err, accountData){
+        if(err) { res.locals.err = err; return next(); }
+        //console.log("accountData:", accountData);
+        if(accountData.length > 0) res.locals.account = {
+            id: req.user.id,
+            api_token: accountData[0].api_token
+        };
+        OnTaskCompleted();
+    });
+    
     // allow common users to access servers where they have an instance
     mysqlInst.GetValidatorsForAccount(req.user.id, function(err, data_instances){
         if(err){ res.locals.err = err; next(); }
@@ -54,6 +65,7 @@ exports.DefineServer = (req, res, next) => {
             serverObj.GetDefinedChains();
             serverObj.AggregatePortsbyChain();
             serverObj.ConvertServicesToObject();
+            serverObj.id = serverId;
             //console.log(data,"→",serverObj, serverObj.mev);
             if(res.locals.isOwner) {
                 serverObj.AddNote(data[0].note);

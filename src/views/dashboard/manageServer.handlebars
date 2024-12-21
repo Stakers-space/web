@@ -9,8 +9,8 @@
 
     {{#if isOwner}}
     <div class="grid egrid egrid-2">
-        <section class="mb-100 grey">
-            <h1 class="mt-60">{{formTitle}}</h1>
+        <section class="mb-100 grey" style="margin-top:1rem">
+            <h1>{{formTitle}}</h1>
             <form method="post" action="{{submitLink}}" id="serverDefinition">
                 <ul>
                     <li>
@@ -344,39 +344,54 @@
 
         {{#if editingView}}
         <section>
-            <h2 class="mt-60">Server notes (internal, encrypted)</h2>
-            <form method="post" action="{{submitNoteLink}}" id="editServerNote">
-                <textarea type="text" id="server-note" name="note" rows="20" cols="100" class="encrypted_value">{{{server.serverNote}}}</textarea>
-                <div class="mt-20 text-center"></div>
-                    <label>Encryption password</label>
-                    <input type="text" placeholder="Encryption password" class="encryption-password" id="encryption_psw_notes">
-                    <input type="submit" class="submit btn btn-black btn-rounded" value="Update">
-                </div>
-            </form>
-            <script>
-                document.addEventListener('DOMContentLoaded', function(){
-                    let serverNoteForm = document.getElementById('editServerNote');
-                    serverNoteForm.addEventListener('submit', function (event) {
-                        // prevent sending form
-                        event.preventDefault();
-                        let cryptPsw = document.getElementById('encryption_psw_notes').value;
-                        let formData = new FormData(serverNoteForm);
-                        const submitData = formData.get('note');
-                        // if already encryted (it was not decrypted, skip)
-                        console.log("Encrypting content", submitData);
-                        EncryptContent(cryptPsw, submitData, document.getElementById('server-note'))
-                        .then(encryptedContent => {
-                            console.log("Encrypted Note:", encryptedContent, encryptedContent.length);
-                            formData.set('note', encryptedContent);
-                            //document.getElementById('server-note').value = encryptedContent;
-                            serverNoteForm.submit();
+            <div style="margin:1rem;" class="grey">
+                <h2>API credentials</h2>
+                <ul>
+                    <li>Account ID: <code>{{account.id}}</code></li>
+                    <li>SERVER ID: <code>{{server.id}}</code></li>
+                    <li>API TOKEN: {{#if account.api_token}}
+                        <code>{{account.api_token}}</code>
+                        {{else}}
+                        <button><a href="/contact" target="_blank">Get Token</a></button>
+                        {{/if}}
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-60" style="margin:1rem">
+                <h2>Server notes (internal, encrypted)</h2>
+                <form method="post" action="{{submitNoteLink}}" id="editServerNote">
+                    <textarea type="text" id="server-note" name="note" rows="20" cols="100" class="encrypted_value">{{{server.serverNote}}}</textarea>
+                    <div class="mt-20 text-center"></div>
+                        <label>Encryption password</label>
+                        <input type="text" placeholder="Encryption password" class="encryption-password" id="encryption_psw_notes">
+                        <input type="submit" class="submit btn btn-black btn-rounded" value="Update">
+                    </div>
+                </form>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function(){
+                        let serverNoteForm = document.getElementById('editServerNote');
+                        serverNoteForm.addEventListener('submit', function (event) {
+                            // prevent sending form
+                            event.preventDefault();
+                            let cryptPsw = document.getElementById('encryption_psw_notes').value;
+                            let formData = new FormData(serverNoteForm);
+                            const submitData = formData.get('note');
+                            // if already encryted (it was not decrypted, skip)
+                            console.log("Encrypting content", submitData);
+                            EncryptContent(cryptPsw, submitData, document.getElementById('server-note'))
+                            .then(encryptedContent => {
+                                console.log("Encrypted Note:", encryptedContent, encryptedContent.length);
+                                formData.set('note', encryptedContent);
+                                //document.getElementById('server-note').value = encryptedContent;
+                                serverNoteForm.submit();
+                            })
+                            .catch(error => {
+                                console.error("Encryption failed:", error);
+                            })
                         })
-                        .catch(error => {
-                            console.error("Encryption failed:", error);
-                        })
-                    })
-                });
-            </script>
+                    });
+                </script>
+            </div>
         </section>
         {{/if}}
     </div>

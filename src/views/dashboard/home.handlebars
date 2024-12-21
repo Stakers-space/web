@@ -45,7 +45,7 @@ ul.img_marker li {
                                         <code {{#if this.rcm}}style="color:orange" title="{{this.rcm}}"{{/if}}><a href="/{{this.client}}?sid={{../this.sid}}" target="_blank">{{this.client}}</a> ({{this.ver}})</code>
                                     {{/each}}
                                     {{!<li>SSD: </li>}}
-                                    {{#if this.brand_name}}<li>Operated by {{#if this.brand_link}}<a href="{{this.brand_link}}" target="_blank">{{this.brand_name}}</a>{{else}}{{this.brand_name}}{{/if}}</li>{{/if}}
+                                    <li>{{#if this.brand_name}}Operated by {{#if this.brand_link}}<a href="{{this.brand_link}}" target="_blank">{{this.brand_name}}</a>{{else}}{{this.brand_name}}{{/if}}{{/if}} | Last Login <code style="color:{{this.login.color}}">{{this.login.time}}</code></li>
                                     <li>
                                         <ul class="img_marker server_validators" style="display:flex;">
                                             <li style="--marker-image: url('/logo/ethereum.svg');">???</li>

@@ -20,11 +20,19 @@ exports.Dashboard = (req,res,next) => {
     // get servers under management
     let scheduledTasks = 2;
     let ownedServersIdsArray = [],
+        lastLoginOnServer = {},
         instances_arr = [];
 
     mysqlInst.GetOwnedServers(user.id, function(err, owned_servers){
         if(err){ res.locals.err = err; next(); }
-        for(const server of owned_servers){ ownedServersIdsArray.push(server.id); }
+        for(const server of owned_servers){ 
+            ownedServersIdsArray.push(server.id); 
+            lastLoginOnServer[server.id] = {
+                time: server.last_login_time,
+                state: server.last_login_state,
+                color: (server.last_login_state <= 2) ? 'green' : 'red'
+            };
+        }
         OnTaskCompleted();
     });
 
@@ -117,6 +125,7 @@ exports.Dashboard = (req,res,next) => {
                     ver: row.ver,
                     rcm: row.rcm
                 });
+                serverData.login = lastLoginOnServer[server_id];
 
                 servers.set(server_id, serverData);
             }

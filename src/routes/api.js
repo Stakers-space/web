@@ -35,6 +35,7 @@ router.use(cookieParser());
 
 router.post('/validator-state', Controller.UpdateValidatorsState);
 router.use('/web/cache', require('./cache'));
+router.use('/alert', require('./alert'));
 
 const azureCosmosDB = require('../services/azureCosmosDB');
 const gnoDistributionToken = require('../config/config.secret.json').gnoDistributionToken;

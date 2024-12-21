@@ -35,7 +35,7 @@ MySqlDBplatform.prototype.GetAccountData = function(email, cb){
 MySqlDBplatform.prototype.GetAccountContact = function(accountId, cb){
     //console.log("MySQL Service | Get account data:", email);
     var MC = mySql.createConnection(mySqlCredentials);
-    MC.query('SELECT `email`,`email_subscriptions`,`email_alerts` FROM accounts WHERE id = '+MC.escape(accountId)+' LIMIT 1',
+    MC.query('SELECT `email`,`email_subscriptions`,`email_alerts`, `api_token` FROM accounts WHERE id = '+MC.escape(accountId)+' LIMIT 1',
         function(err,rows) {
             MC.end();
             return cb(err, rows);
@@ -103,6 +103,30 @@ MySqlDBplatform.prototype.UpdateServer = function(serverId, ownerId, serverData,
         return cb(err, result);
     });
 };
+
+MySqlDBplatform.prototype.UpdateLoginMark = function(serverId, ownerId, loginStatus, cb){
+    let status = 0; // unknown
+    switch(loginStatus){
+        case 'success-ssh':
+            status = 1;
+            break;
+        case 'success-local':
+            status = 2;
+            break;
+        case 'failure':
+            status = 3;
+            break;
+        case 'failure-password':
+            status = 4;
+            break;
+    };
+
+    var MC = mySql.createConnection(mySqlCredentials);
+    MC.query('UPDATE servers SET last_login_state = ?, last_login_time = ? WHERE `id` = ? AND owner = ?',  [status, new Date(), serverId, ownerId], function(err, result) {
+        MC.end();
+        return cb(err, result);
+    });
+}
 
 MySqlDBplatform.prototype.AttachClientToServer = function(serverId, layer, clientsData, cb){
     let taskResults = [];
@@ -207,7 +231,7 @@ MySqlDBplatform.prototype.AttachUserAccessToServer = function(accountId, serverI
 
 MySqlDBplatform.prototype.GetOwnedServers = function(ownerId, cb){
     var MC = mySql.createConnection(mySqlCredentials);
-    MC.query('SELECT `id`,`name` FROM `servers` WHERE owner = '+MC.escape(ownerId),
+    MC.query('SELECT `id`,`name`, `last_login_time`, `last_login_state` FROM `servers` WHERE owner = '+MC.escape(ownerId),
         function(err,rows) {
             MC.end();
             return cb(err, rows);
