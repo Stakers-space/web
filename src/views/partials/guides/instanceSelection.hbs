@@ -40,22 +40,58 @@
         </div>
     </div>
     <script>
+    /*
+        Update Instance Numbers based on manual change
+    */
+    var instance_id_elms = document.getElementsByClassName("instance_pid");
+    for(const elm of instance_id_elms){ 
+        elm.onchange = function(e){
+            const targetedInstanceId = Number(e.target.value);
+            console.log("On instance_pid change | instance_pid:", targetedInstanceId);
+            //serverData.instances[targetedInstanceId - 1];
+            console.log("targetedInstanceId",targetedInstanceId);
+            if(!serverData) serverData = {instances: []};
+
+            serverData.instances[targetedInstanceId - 1] = {
+                vi_pid: targetedInstanceId,
+                vi_sname: replaceNumberAtEnd(document.getElementsByClassName("instance_sn")[0].value, targetedInstanceId),
+                vi_suser: replaceNumberAtEnd(document.getElementsByClassName("instance_sn")[0].value, targetedInstanceId),
+                vi_sdata: replaceNumberAtEnd(document.getElementsByClassName("instance_dp")[0].value, targetedInstanceId),
+                fee_recipient: document.getElementsByClassName("instance_frw")[0].value
+            }
+            
+            // update data keystores directory
+            const datakeystoresElms = document.querySelectorAll('[data-class="ddkeys-path"]');
+            datakeystoresElms.forEach(element => {
+                element.value = replaceNumberAtEnd(element.value, targetedInstanceId);
+            });
+
+            LoadInstanceDataToDocs({target: {value: targetedInstanceId}});
+        }; 
+    }
+
+    function replaceNumberAtEnd(str, newNumber) {
+        return str.replace(/\d+$/, newNumber);
+    }
+
     function LoadInstanceDataToDocs(e){
-        if(!e) return;
-        const instanceData = serverData.instances[Number(e.target.value) - 1];
-        console.log("LoadInstanceDataToDocs", e.target.value, instanceData);
+        if(!e) { e = {target: {value: 0}}; }
+        const instanceData = serverData.instances[Number(e.target.value)];
+        console.log("LoadInstanceDataToDocs", serverData, e.target.value, instanceData);
+         if(!instanceData) return;
         for(const elm of document.getElementsByClassName("instance_pid")){ elm.value = instanceData.vi_pid; }
         for(const elm of document.getElementsByClassName("instance_sn")){ elm.value = instanceData.vi_sname; }
         for(const elm of document.getElementsByClassName("instance_su")){ elm.value = instanceData.vi_suser; }
-        for(const elm of document.getElementsByClassName("instance_sd")){ elm.value = instanceData.vi_sdata; }
+        for(const elm of document.getElementsByClassName("instance_dp")){ elm.value = instanceData.vi_sdata; }
         for(const elm of document.getElementsByClassName("instance_frw")){ elm.value = instanceData.fee_recipient; }
 	}
     function UpdateInstanceSetup(){
         const selectInstanceElement = document.getElementById('account-servers-instances');
 		selectInstanceElement.innerHTML = "";
-		for(const instance of serverData.instances){
+		for(let i = 0; i < serverData.instances.length; i++){
+            const instance = serverData.instances[i];
 			const ioption = document.createElement('option');
-			ioption.value = instance.instance_id;
+			ioption.value = i;
 			ioption.text = instance.instance; 
 			selectInstanceElement.appendChild(ioption);
 		}
@@ -67,7 +103,7 @@
             const sn =  clientNamePage+"-vi1";
             const dp = `/var/lib/${clientNamePage}/vi1`
             for(const elm of document.getElementsByClassName("instance_sn")){
-                console.log("instance_sn", elm, "{{client}}");
+                //console.log("instance_sn", elm, "{{client}}");
                 if(elm.dataset.client === "{{client}}") {
                     elm.innerHTML = sn; elm.value = sn; 
                 }

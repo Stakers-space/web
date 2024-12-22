@@ -18,7 +18,7 @@
                 <label>Directory with Deposit Data keystores</label>: <input type="text" value="$HOME/keystores/ddk_i1" class="interactive-element ddkeys-path" data-class="ddkeys-path">
                 <ul>
                     <li>Display files in the directory
-                        <pre><code>cd <mark class="ddkeys-path">$HOME/keystores/ddk_i1</mark> && ls -lh</code></pre>
+                        <pre><code>cd <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> && ls -lh</code></pre>
                     </li>
                     <li>If there is <code>deposit_data-XXX....json</code> file, remove it
                         <pre><code>rm deposit_data-XXX....json</code></pre>
@@ -27,7 +27,7 @@
             </li>
             <li><h4>Copy keystores dedicated for instance <code class="instance_sn" data-client="teku"></code> into <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</span></code> folder</h4>
                 <pre><code>sudo mkdir <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
-                <pre><code>sudo cp -a <mark class="ddkeys-path">$HOME/keystores/ddk_i1</mark>/* <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark> && cd <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
+                <pre><code>sudo cp -a <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark>/* <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark> && cd <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
             </li>
             <li><p>Teku requires a <code>.txt</code> file with encryption password for each <code>.json</code> validator file.</p>
                 <ol>
@@ -123,7 +123,7 @@
                 <label>Directory with Deposit Data keystores</label>: <input type="text" value="$HOME/keystores/ddk_i1" class="interactive-element ddkeys-path" data-class="ddkeys-path">
                 <ul>
                     <li>Display files in the directory
-                        <pre><code>cd <mark class="ddkeys-path">$HOME/keystores/ddk_i1</mark> && ls -lh</code></pre>
+                        <pre><code>cd <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> && ls -lh</code></pre>
                     </li>
                     <li>If there is <code>deposit_data-XXX....json</code> file, remove it
                         <pre><code>rm deposit_data-XXX....json</code></pre>
@@ -133,7 +133,7 @@
             <li>
                 <h4>Copy keystores dedicated for instance <code class="instance_sn" data-client="teku"></code> into <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</span></code> folder</h4>
                 <pre><code>sudo mkdir <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
-                <pre><code>sudo cp -a <mark class="ddkeys-path">$HOME/keystores/ddk_i1</mark>/* <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark>/keystores  && cd <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
+                <pre><code>sudo cp -a <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark>/* <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark>/keystores  && cd <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
             </li>
             <li><p>Teku requires a <code>.txt</code> file with encryption password for each <code>.json</code> validator file.</p>
                 <ol>

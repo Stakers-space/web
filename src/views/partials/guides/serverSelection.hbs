@@ -52,7 +52,7 @@
 			xmlHttpRequest({type:"GET", url:"/api/account", credentials:true, data:null }, function(err,data){
 				for(const elm of document.getElementsByClassName("user-initializing")){ elm.classList.add("hide");}
 				const pd = JSON.parse(data);
-				console.log("/api/account:", err, pd);
+				console.log("On /api/account:", err, pd);
 				if(err || !pd.a){
 					for(const elm of document.getElementsByClassName("user-guest")){ elm.classList.remove("hide");}
 					{{#if chain}}
@@ -62,8 +62,10 @@
 					InstallOnInteractiveInputChangedListener();
 				} else {
 					accounData = pd.d;
+					// hide authentization
 					for(const elm of document.getElementsByClassName("user-authentized")){ elm.classList.remove("hide");}
 					
+					// load data selections
 					const selectServerElement = document.getElementsByClassName('account-servers');
 					Object.entries(accounData).forEach(([serverId, serverData]) => {
 						const option = document.createElement('option');
@@ -106,14 +108,12 @@
 		function LoadServerDataToDoc(serverSelected = null){
 			const urlParams = new URLSearchParams(window.location.search);
 			if(!serverSelected) serverSelected = urlParams.get('sid');
-			console.log("Load Data for Server option",serverSelected,"from", accounData);
+			if(!serverSelected) serverSelected = Object.keys(accounData)[0];//return;
 			
-			if(!serverSelected) return;
 			document.getElementById("account-server-link").href="/dashboard/server-node/define?id="+serverSelected;
 			serverData = accounData[serverSelected];
-			console.log("ServerData:",serverData);
+			console.log("Load Data for Server index", serverSelected, "from", accounData, "→", serverData);
 			
-
 			// update server user
 			UpdateMarks("serverUser", serverData.serverUser, true);
 			UpdateMarks("sshPort", serverData.sshPort, true);
@@ -184,7 +184,7 @@
         }
 
 		function UpdateMarks(className, newValue, encryptedValue = false){
-			console.log("SS | UpdateMarks change:", className, "| new value:", newValue, "| encrypted:", encryptedValue);
+			//console.log("SS | UpdateMarks change:", className, "| new value:", newValue, "| encrypted:", encryptedValue);
 			// get selected client
 			const selectedEC = document.getElementById("ec_1").value;
 			const selectedCC = document.getElementById("cc_1").value;
@@ -208,7 +208,7 @@
 			}
 
 			function SetValue(elm, value){
-				console.log("Set value:", elm, value);
+				//console.log("Set value:", elm, value);
 				switch(elm.nodeName){
 					case "I":  elm.innerHTML = value; break;
 					case "INPUT": elm.value = value; break;
