@@ -52,7 +52,7 @@
             console.log("targetedInstanceId",targetedInstanceId);
             if(!serverData) serverData = {instances: []};
 
-            serverData.instances[targetedInstanceId - 1] = {
+            serverData.instances[targetedInstanceId] = {
                 vi_pid: targetedInstanceId,
                 vi_sname: replaceNumberAtEnd(document.getElementsByClassName("instance_sn")[0].value, targetedInstanceId),
                 vi_suser: replaceNumberAtEnd(document.getElementsByClassName("instance_sn")[0].value, targetedInstanceId),
@@ -78,13 +78,15 @@
         if(!e) { e = {target: {value: 0}}; }
         const instanceData = serverData.instances[Number(e.target.value)];
         console.log("LoadInstanceDataToDocs", serverData, e.target.value, instanceData);
-         if(!instanceData) return;
-        for(const elm of document.getElementsByClassName("instance_pid")){ elm.value = instanceData.vi_pid; }
-        for(const elm of document.getElementsByClassName("instance_sn")){ elm.value = instanceData.vi_sname; }
-        for(const elm of document.getElementsByClassName("instance_su")){ elm.value = instanceData.vi_suser; }
-        for(const elm of document.getElementsByClassName("instance_dp")){ elm.value = instanceData.vi_sdata; }
+        if(!instanceData) return;
+        for(const elm of document.getElementsByClassName("instance_pid")){ elm.value = instanceData.vi_pid; elm.innerHTML = instanceData.vi_pid; }
+         for(const elm of document.getElementsByClassName("instance_sn")){ elm.value = instanceData.vi_sname; elm.innerHTML = instanceData.vi_sname; }
+        for(const elm of document.getElementsByClassName("instance_su")){ elm.value = instanceData.vi_suser; elm.innerHTML = instanceData.vi_suser; }
+        for(const elm of document.getElementsByClassName("instance_dp")){ elm.value = instanceData.vi_sdata; elm.innerHTML = instanceData.vi_sdata; }
         for(const elm of document.getElementsByClassName("instance_frw")){ elm.value = instanceData.fee_recipient; }
 	}
+
+
     function UpdateInstanceSetup(){
         const selectInstanceElement = document.getElementById('account-servers-instances');
 		selectInstanceElement.innerHTML = "";
