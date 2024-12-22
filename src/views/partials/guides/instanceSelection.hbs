@@ -47,18 +47,16 @@
     for(const elm of instance_id_elms){ 
         elm.onchange = function(e){
             const targetedInstanceId = Number(e.target.value);
-            console.log("On instance_pid change | instance_pid:", targetedInstanceId);
-            //serverData.instances[targetedInstanceId - 1];
-            console.log("targetedInstanceId",targetedInstanceId);
+            console.log("On instance_pid change | targeted InstanceId", targetedInstanceId);
             if(!serverData) serverData = {instances: []};
 
-            serverData.instances[targetedInstanceId] = {
+            serverData.instances[0] = {
                 vi_pid: targetedInstanceId,
                 vi_sname: replaceNumberAtEnd(document.getElementsByClassName("instance_sn")[0].value, targetedInstanceId),
                 vi_suser: replaceNumberAtEnd(document.getElementsByClassName("instance_sn")[0].value, targetedInstanceId),
                 vi_sdata: replaceNumberAtEnd(document.getElementsByClassName("instance_dp")[0].value, targetedInstanceId),
                 fee_recipient: document.getElementsByClassName("instance_frw")[0].value
-            }
+            };
             
             // update data keystores directory
             const datakeystoresElms = document.querySelectorAll('[data-class="ddkeys-path"]');
@@ -66,8 +64,8 @@
                 element.value = replaceNumberAtEnd(element.value, targetedInstanceId);
             });
 
-            LoadInstanceDataToDocs({target: {value: targetedInstanceId}});
-        }; 
+            LoadInstanceDataToDocs();
+        };
     }
 
     function replaceNumberAtEnd(str, newNumber) {
