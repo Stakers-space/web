@@ -232,7 +232,7 @@
 				<a href="/ethereum-staking/liquid-staking" class="btn btn-black btn-rounded">Show all</a>
 			</div>
 			<div class="servicetable">
-				<table class="table table-scrollable">
+				<table class="table table-scrollable" id="liquid-vs">
 					<thead>
 						<tr>
 							<th>Service</th>
@@ -245,6 +245,53 @@
 					<tbody>
 						{{#each vaultServices}}
 							{{#if this.liquid_token}}
+							<tr>
+								<td><a href="{{this.link}}" target="_blank" rel="nofollow noopener">{{this.service}}</a></td>
+								<td>{{this.min_stake}} {{this.stake_unit}}</td>
+								<td>{{this.fee}}{{this.fee_note}}</td>
+								<td>
+									<a href="{{this.liquid_token.link}}" target="_blank" rel="nofollow noopener noreferrer">
+										{{#if this.liquid_token.icon}}<img src="{{this.liquid_token.icon}}" alt="{{this.liquid_token.ticker}}" width="20px">{{/if}}
+										{{this.liquid_token.ticker}}
+									</a>
+								</td>
+								<td>{{#if this.pool_token}}
+									<a href="{{this.pool_token.link}}" target="_blank" rel="nofollow noopener noreferrer">
+										{{#if this.pool_token.icon}}<img src="{{this.pool_token.icon}}" alt="{{this.pool_token.ticker}}" width="20px">{{/if}} 
+										{{this.pool_token.ticker}}
+									</a>
+									{{else}}
+									{{this.pool_token}}
+									{{/if}}
+								</td>
+							</tr>
+							{{/if}}
+						{{/each}}
+					</tbody>
+				</table>
+				<button style="width:100%" onclick="Unpack(this)" data-table="liquid-vs">Unpack</button>
+			</div>	
+		</div>
+		<div class="egrid egrid-33fr">
+			<div class="grid-leftpadding">
+				<h2 class="title-section">Community Staking</h2>
+				<p style="padding-right:2rem">Stake your Ether without a need to have 32 ETH.</p>
+				<a href="/ethereum-staking/liquid-staking" class="btn btn-black btn-rounded">Show all</a>
+			</div>
+			<div class="servicetable">
+				<table class="table table-scrollable" id="community-vs">
+					<thead>
+						<tr>
+							<th>Service</th>
+							<th>Min Stake</th>
+							<th>Fee</th>
+							<th>Liquid Token</th>
+							<th>Pool token</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each vaultServices}}
+							{{#unless this.liquid_token}}
 							<tr>
 								<td><a href="{{this.link}}" target="_blank" rel="nofollow noopener">{{this.service}}</a></td>
 								<td>{{this.min_stake}} {{this.stake_unit}}</td>
@@ -265,10 +312,11 @@
 									{{/if}}
 								</td>
 							</tr>
-							{{/if}}
+							{{/unless}}
 						{{/each}}
 					</tbody>
 				</table>
+				<button style="width:100%" onclick="Unpack(this)" data-table="community-vs">Unpack</button>
 			</div>	
 		</div>
 		<div class="egrid egrid-33fr mt-30">
@@ -278,7 +326,7 @@
 				<a href="/ethereum-staking/validators-saas" class="btn btn-black btn-rounded">Show all</a>
 			</div>
 			<div class="servicetable">
-				<table class="table table-scrollable">
+				<table class="table table-scrollable" id="hosted-vs">
 					<thead>
 						<tr>
 							<th>Service</th>
@@ -296,6 +344,7 @@
 						{{/each}}
 					</tbody>
 				</table>
+				<button style="width:100%" onclick="Unpack(this)" data-table="hosted-vs">Unpack</button>
 			</div>	
 		</div>
 	</section>
@@ -510,6 +559,26 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="egrid egrid-25fr guidesbar gap-6 mb-80">
+			<div class="grid-leftpadding">
+				<div>
+					<div class="title-section" style="margin-top:0">
+						<h2>Looking for a <span>simpler way?</span></h2>
+						<p>There are a bunch of toolkits that simplifies the process of setting up and maintaining an Ethereum Node.</p>
+					</div>
+				</div>
+			</div>
+			<div style="margin-right:1.5rem" class="egrid egrid-4">
+				<a href="https://www.stereum.com/" target="_blank" rel="nofollow noopener noreferrer" class="btn center box">Stereum</a> 
+				<a href="https://docs.dappnode.io/docs/user/install/overview/" target="_blank" rel="nofollow noopener noreferrer" class="btn center box">DAppNode OS</a> 
+				<a href="https://ethereum-on-arm-documentation.readthedocs.io/en/latest/quick-guide/about-quick-start.html" target="_blank" rel="nofollow noopener noreferrer" class="btn center box">Ethereum on AMR</a> 
+				<a href="https://github.com/stake-house/eth-wizard" target="_blank" rel="nofollow noopener noreferrer" class="btn center box">ETH-Wizard</a> 
+				<a href="https://docs.sedge.nethermind.io/docs/quickstart/complete-guide" target="_blank" rel="nofollow noopener noreferrer" class="btn center box">Nethermind Sedge</a> 
+				<a href="https://ethdocker.com/" target="_blank" rel="nofollow noopener noreferrer" class="btn center box">ETH Docker</a> 
+				<a href="https://launchnodes.gitbook.io/node-set-up-instructions" target="_blank" rel="nofollow noopener noreferrer" class="btn center box">Launchnodes</a> 
+			</div>
+		</div>
 	</section>
 
 	<section class="grid">
@@ -545,6 +614,13 @@
 <script type="text/javascript" src="/js/charts/transactions.js"></script>
 <script type="text/javascript" src="/js/charts/blocks.js"></script>
 <script>charts.ActivateLazyLoad();</script>
+<script>
+	function Unpack(e){
+		const tableElement = document.getElementById(e.dataset.table);
+		tableElement.querySelector('tbody').style.maxHeight = 'unset';
+		e.style.display = 'none';
+	}
+</script>
 </main>
 {{> footer}}
 {{> scripts/tabselector}}

@@ -6,19 +6,19 @@
       "operator": "3.07%",
       "delegator": "2.76%"
     },
-    "validators": "1,055,727",
+    "validators": "1,057,048",
     "tvl": "$114.09b",
     "stakedRatio": "27.67%"
   },
   "gnosis": {
-    "price": "$263",
+    "price": "$261",
     "apr": {
       "value": "0.00%",
       "operator": "0.00%",
       "delegator": "0.00%"
     },
-    "validators": "318,809",
-    "tvl": "$84.99m",
-    "stakedRatio": "22.53%"
+    "validators": "320,969",
+    "tvl": "$83.13m",
+    "stakedRatio": "22.22%"
   }
 }

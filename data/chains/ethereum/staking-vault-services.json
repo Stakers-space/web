@@ -136,8 +136,12 @@
         "key_owner":"Service",
         "withdrawals_key_owner":"Service",
         "no_supermajority_client":false,
-        "pool_token":null,
-        "liquid_token":null,
+        "pool_token": null,
+        "liquid_token":{
+            "ticker":"cbETH",
+            "link": "https://www.coingecko.com/en/coins/coinbase-wrapped-staked-eth",
+            "icon": "https://assets.coingecko.com/coins/images/27008/standard/cbeth.png?1709186989"
+        },
         "3rd_party_software":false,
         "link":"https://www.coinbase.com/earn/staking/ethereum"
     },
@@ -170,24 +174,6 @@
         "link":"https://everstake.one/"
     },
     {
-        "service":"Guarda Wallet",
-        "min_stake":0.1,
-        "stake_unit":"ETH",
-        "fee":9.99,
-        "fee_note":"% of rewards",
-        "key_owner":"Service",
-        "withdrawals_key_owner":"Service",
-        "no_supermajority_client":null,
-        "pool_token":{
-            "ticker":"???",
-            "link":"#",
-            "icon": "#"
-        },
-        "liquid_token":null,
-        "3rd_party_software":false,
-        "link":"https://guarda.com/"
-    },
-    {
         "service":"Kraken Exchange",
         "min_stake":0.00001,
         "stake_unit":"ETH",
@@ -200,24 +186,6 @@
         "liquid_token":null,
         "3rd_party_software":false,
         "link":"https://www.kraken.com/en-us/features/staking-coins"
-    },
-    {
-        "service":"Kiln",
-        "min_stake":0.00001,
-        "stake_unit":"ETH",
-        "fee":8,
-        "fee_note":"% of rewards",
-        "key_owner":"Service",
-        "withdrawals_key_owner":"User",
-        "no_supermajority_client":false,
-        "pool_token":{
-            "ticker":"???",
-            "link":"#",
-            "icon": "#"
-        },
-        "liquid_token":null,
-        "3rd_party_software":false,
-        "link":"https://www.kiln.fi/kiln-on-chain"
     },
     {
         "service":"Lido Finance",
@@ -354,5 +322,256 @@
         "liquid_token":null,
         "3rd_party_software":true,
         "link":"https://swissborg.com/"
+    },
+    {
+        "service":"Bake",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":false,
+        "3rd_party_software":false,
+        "link":"https://bake.io/"
+    },
+    {
+        "service":"Stakin",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":0,
+        "fee_note":"% of rewards",
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":false,
+        "3rd_party_software":false,
+        "link":"https://stakin.com/"
+    },
+    {
+        "service":"Lantern Finance",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":15,
+        "fee_note":"% of rewards",
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":false,
+        "3rd_party_software":false,
+        "link":"https://lantern.finance/"
+    },
+    {
+        "service":"Chorus One",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":0,
+        "fee_note":"% of rewards",
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":false,
+        "3rd_party_software":false,
+        "link":"https://chorus.one/"
+    },
+    {
+        "service":"Ethermine Staking",
+        "min_stake":0.01,
+        "stake_unit":"ETH",
+        "fee":8,
+        "fee_note":"% of rewards",
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":false,
+        "3rd_party_software":false,
+        "link":"https://staking.ethermine.org/"
+    },
+    {
+        "service":"Stader",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":null,
+        "pool_token":{
+            "ticker":"SD",
+            "link":"https://www.coingecko.com/en/coins/stader",
+            "icon": "https://assets.coingecko.com/coins/images/20658/standard/SD_Token_Logo.png?1696520060"
+        },
+        "liquid_token":{
+            "ticker":"ETHx",
+            "link":"https://www.coingecko.com/en/coins/stader-ethx",
+            "icon": "https://assets.coingecko.com/coins/images/30870/standard/staderx.png?1696529717"
+        },
+        "3rd_party_software":null,
+        "link":"https://www.staderlabs.com/eth/stake/"
+    },
+    {
+        "service":"Ether.fi",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":null,
+        "pool_token":{
+            "ticker":"ETHFI",
+            "link":"https://www.coingecko.com/en/coins/ether-fi",
+            "icon": "https://assets.coingecko.com/coins/images/35958/standard/etherfi.jpeg?1710254562"
+        },
+        "liquid_token":{
+            "ticker":"EETH",
+            "link":"https://www.coingecko.com/en/coins/ether-fi-staked-eth",
+            "icon": "https://assets.coingecko.com/coins/images/33049/standard/ether.fi_eETH.png?1700473063"
+        },
+        "3rd_party_software":null,
+        "link":"https://www.ether.fi/"
+    },
+    {
+        "service":"Swell",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":null,
+        "pool_token":{
+            "ticker":"SWELL",
+            "link":"https://www.coingecko.com/en/coins/swell-network",
+            "icon": "https://assets.coingecko.com/coins/images/28777/standard/swell1.png?1727899715"
+        },
+        "liquid_token":{
+            "ticker":"swETH",
+            "link":"https://www.coingecko.com/en/coins/sweth",
+            "icon": "https://assets.coingecko.com/coins/images/30326/standard/_lB7zEtS_400x400.jpg?1696529227"
+        },
+        "3rd_party_software":null,
+        "link":"https://www.swellnetwork.io/"
+    },
+    {
+        "service":"Stakehouse",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":null,
+        "fee_note":null,
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":null,
+        "pool_token":{
+            "ticker":null,
+            "link":null,
+            "icon": null
+        },
+        "liquid_token":{
+            "ticker":"dETH",
+            "link": "#",
+            "icon": null
+        },
+        "3rd_party_software":null,
+        "link":"https://joinstakehouse.com/"
+    },
+    {
+        "service":"Bedrock",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":null,
+        "pool_token":{
+            "ticker":null,
+            "link":null,
+            "icon": null
+        },
+        "liquid_token":{
+            "ticker":"uniETH",
+            "link": "#",
+            "icon": null
+        },
+        "3rd_party_software":null,
+        "link":"https://www.bedrock.technology/"
+    },
+    {
+        "service":"Frax",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":null,
+        "pool_token":{
+            "ticker":null,
+            "link":null,
+            "icon": null
+        },
+        "liquid_token":{
+            "ticker":"sfrxETH",
+            "link": "#",
+            "icon": null
+        },
+        "3rd_party_software":null,
+        "link":"https://app.frax.finance/frxeth/mint"
+    },
+    {
+        "service":"Guarda",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":10,
+        "fee_note":"% of rewards",
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":null,
+        "pool_token":null,
+        "liquid_token":{
+            "ticker":"GETH",
+            "link": "#",
+            "icon": null
+        },
+        "3rd_party_software":false,
+        "link":"https://guarda.com/"
+    },
+    {
+        "service":"ETH+",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":null,
+        "fee_note":null,
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":null,
+        "pool_token":null,
+        "liquid_token":{
+            "ticker":"ETH+",
+            "link": "#",
+            "icon": null
+        },
+        "3rd_party_software":false,
+        "link":"https://app.reserve.org/#/overview?token=0xE72B141DF173b999AE7c1aDcbF60Cc9833Ce56a8"
+    },
+    {
+        "service":"IndexCoop",
+        "min_stake":0,
+        "stake_unit":"ETH",
+        "fee":null,
+        "fee_note":null,
+        "key_owner":"Service",
+        "withdrawals_key_owner":"Service",
+        "no_supermajority_client":null,
+        "pool_token":null,
+        "liquid_token":{
+            "ticker":"dsETH",
+            "link": "#",
+            "icon": null
+        },
+        "3rd_party_software":false,
+        "link":"https://indexcoop.com/products/diversified-staked-ethereum-index"
     }
 ]

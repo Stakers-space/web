@@ -138,7 +138,11 @@
       "withdrawals_key_owner": "Service",
       "no_supermajority_client": false,
       "pool_token": null,
-      "liquid_token": null,
+      "liquid_token": {
+        "ticker": "cbETH",
+        "link": "https://www.coingecko.com/en/coins/coinbase-wrapped-staked-eth",
+        "icon": "https://assets.coingecko.com/coins/images/27008/standard/cbeth.png?1709186989"
+      },
       "3rd_party_software": false,
       "link": "https://www.coinbase.com/earn/staking/ethereum"
     },
@@ -171,24 +175,6 @@
       "link": "https://everstake.one/"
     },
     {
-      "service": "Guarda Wallet",
-      "min_stake": 0.1,
-      "stake_unit": "ETH",
-      "fee": 9.99,
-      "fee_note": "% of rewards",
-      "key_owner": "Service",
-      "withdrawals_key_owner": "Service",
-      "no_supermajority_client": null,
-      "pool_token": {
-        "ticker": "???",
-        "link": "#",
-        "icon": "#"
-      },
-      "liquid_token": null,
-      "3rd_party_software": false,
-      "link": "https://guarda.com/"
-    },
-    {
       "service": "Kraken Exchange",
       "min_stake": 0.00001,
       "stake_unit": "ETH",
@@ -201,24 +187,6 @@
       "liquid_token": null,
       "3rd_party_software": false,
       "link": "https://www.kraken.com/en-us/features/staking-coins"
-    },
-    {
-      "service": "Kiln",
-      "min_stake": 0.00001,
-      "stake_unit": "ETH",
-      "fee": 8,
-      "fee_note": "% of rewards",
-      "key_owner": "Service",
-      "withdrawals_key_owner": "User",
-      "no_supermajority_client": false,
-      "pool_token": {
-        "ticker": "???",
-        "link": "#",
-        "icon": "#"
-      },
-      "liquid_token": null,
-      "3rd_party_software": false,
-      "link": "https://www.kiln.fi/kiln-on-chain"
     },
     {
       "service": "Lido Finance",
@@ -355,6 +323,257 @@
       "liquid_token": null,
       "3rd_party_software": true,
       "link": "https://swissborg.com/"
+    },
+    {
+      "service": "Bake",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": 10,
+      "fee_note": "% of rewards",
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://bake.io/"
+    },
+    {
+      "service": "Stakin",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": 0,
+      "fee_note": "% of rewards",
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://stakin.com/"
+    },
+    {
+      "service": "Lantern Finance",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": 15,
+      "fee_note": "% of rewards",
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://lantern.finance/"
+    },
+    {
+      "service": "Chorus One",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": 0,
+      "fee_note": "% of rewards",
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://chorus.one/"
+    },
+    {
+      "service": "Ethermine Staking",
+      "min_stake": 0.01,
+      "stake_unit": "ETH",
+      "fee": 8,
+      "fee_note": "% of rewards",
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://staking.ethermine.org/"
+    },
+    {
+      "service": "Stader",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": 10,
+      "fee_note": "% of rewards",
+      "key_owner": "Service",
+      "withdrawals_key_owner": "Service",
+      "no_supermajority_client": null,
+      "pool_token": {
+        "ticker": "SD",
+        "link": "https://www.coingecko.com/en/coins/stader",
+        "icon": "https://assets.coingecko.com/coins/images/20658/standard/SD_Token_Logo.png?1696520060"
+      },
+      "liquid_token": {
+        "ticker": "ETHx",
+        "link": "https://www.coingecko.com/en/coins/stader-ethx",
+        "icon": "https://assets.coingecko.com/coins/images/30870/standard/staderx.png?1696529717"
+      },
+      "3rd_party_software": null,
+      "link": "https://www.staderlabs.com/eth/stake/"
+    },
+    {
+      "service": "Ether.fi",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": 10,
+      "fee_note": "% of rewards",
+      "key_owner": "Service",
+      "withdrawals_key_owner": "Service",
+      "no_supermajority_client": null,
+      "pool_token": {
+        "ticker": "ETHFI",
+        "link": "https://www.coingecko.com/en/coins/ether-fi",
+        "icon": "https://assets.coingecko.com/coins/images/35958/standard/etherfi.jpeg?1710254562"
+      },
+      "liquid_token": {
+        "ticker": "EETH",
+        "link": "https://www.coingecko.com/en/coins/ether-fi-staked-eth",
+        "icon": "https://assets.coingecko.com/coins/images/33049/standard/ether.fi_eETH.png?1700473063"
+      },
+      "3rd_party_software": null,
+      "link": "https://www.ether.fi/"
+    },
+    {
+      "service": "Swell",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": 10,
+      "fee_note": "% of rewards",
+      "key_owner": "Service",
+      "withdrawals_key_owner": "Service",
+      "no_supermajority_client": null,
+      "pool_token": {
+        "ticker": "SWELL",
+        "link": "https://www.coingecko.com/en/coins/swell-network",
+        "icon": "https://assets.coingecko.com/coins/images/28777/standard/swell1.png?1727899715"
+      },
+      "liquid_token": {
+        "ticker": "swETH",
+        "link": "https://www.coingecko.com/en/coins/sweth",
+        "icon": "https://assets.coingecko.com/coins/images/30326/standard/_lB7zEtS_400x400.jpg?1696529227"
+      },
+      "3rd_party_software": null,
+      "link": "https://www.swellnetwork.io/"
+    },
+    {
+      "service": "Stakehouse",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": "Service",
+      "withdrawals_key_owner": "Service",
+      "no_supermajority_client": null,
+      "pool_token": {
+        "ticker": null,
+        "link": null,
+        "icon": null
+      },
+      "liquid_token": {
+        "ticker": "dETH",
+        "link": null,
+        "icon": null
+      },
+      "3rd_party_software": null,
+      "link": "https://joinstakehouse.com/"
+    },
+    {
+      "service": "Bedrock",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": 10,
+      "fee_note": "% of rewards",
+      "key_owner": "Service",
+      "withdrawals_key_owner": "Service",
+      "no_supermajority_client": null,
+      "pool_token": {
+        "ticker": null,
+        "link": null,
+        "icon": null
+      },
+      "liquid_token": {
+        "ticker": "uniETH",
+        "link": null,
+        "icon": null
+      },
+      "3rd_party_software": null,
+      "link": "https://www.bedrock.technology/"
+    },
+    {
+      "service": "Frax",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": 10,
+      "fee_note": "% of rewards",
+      "key_owner": "Service",
+      "withdrawals_key_owner": "Service",
+      "no_supermajority_client": null,
+      "pool_token": {
+        "ticker": null,
+        "link": null,
+        "icon": null
+      },
+      "liquid_token": {
+        "ticker": "sfrxETH",
+        "link": null,
+        "icon": null
+      },
+      "3rd_party_software": null,
+      "link": "https://app.frax.finance/frxeth/mint"
+    },
+    {
+      "service": "Guarda",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": 10,
+      "fee_note": "% of rewards",
+      "key_owner": "Service",
+      "withdrawals_key_owner": "Service",
+      "no_supermajority_client": null,
+      "pool_token": null,
+      "liquid_token": {
+        "ticker": "GETH",
+        "link": null,
+        "icon": null
+      },
+      "3rd_party_software": false,
+      "link": "https://guarda.com/"
+    },
+    {
+      "service": "ETH+",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": "Service",
+      "withdrawals_key_owner": "Service",
+      "no_supermajority_client": null,
+      "pool_token": null,
+      "liquid_token": {
+        "ticker": "ETH+",
+        "link": null,
+        "icon": null
+      },
+      "3rd_party_software": false,
+      "link": "https://app.reserve.org/#/overview?token=0xE72B141DF173b999AE7c1aDcbF60Cc9833Ce56a8"
+    },
+    {
+      "service": "IndexCoop",
+      "min_stake": 0,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": "Service",
+      "withdrawals_key_owner": "Service",
+      "no_supermajority_client": null,
+      "pool_token": null,
+      "liquid_token": {
+        "ticker": "dsETH",
+        "link": null,
+        "icon": null
+      },
+      "3rd_party_software": false,
+      "link": "https://indexcoop.com/products/diversified-staked-ethereum-index"
     }
   ],
   "hostingServices": [
@@ -539,6 +758,128 @@
       "pool_token": false,
       "3rd_party_software": false,
       "link": "https://staked.us/"
+    },
+    {
+      "service": "ssv.network",
+      "min_stake": 32,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://ssv.network/"
+    },
+    {
+      "service": "XHash",
+      "min_stake": 32,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://xhash.com/"
+    },
+    {
+      "service": "RockX",
+      "min_stake": 32,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://stake.rockx.com/"
+    },
+    {
+      "service": "Attestant",
+      "min_stake": 1000,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://stake.rockx.com/"
+    },
+    {
+      "service": "Kiln",
+      "min_stake": 32,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": "Service",
+      "withdrawals_key_owner": "User",
+      "no_supermajority_client": false,
+      "pool_token": {
+        "ticker": "???",
+        "link": "#",
+        "icon": "#"
+      },
+      "liquid_token": null,
+      "3rd_party_software": false,
+      "link": "https://www.kiln.fi/kiln-on-chain"
+    },
+    {
+      "service": "Twinstake",
+      "min_stake": 32,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://www.twinstake.io/"
+    },
+    {
+      "service": "Blockdaemon",
+      "min_stake": 32,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://www.blockdaemon.com/"
+    },
+    {
+      "service": "Serenita",
+      "min_stake": 32,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://serenita.io/"
+    },
+    {
+      "service": "Figment",
+      "min_stake": 32,
+      "stake_unit": "ETH",
+      "fee": null,
+      "fee_note": null,
+      "key_owner": null,
+      "withdrawals_key_owner": null,
+      "no_supermajority_client": null,
+      "pool_token": false,
+      "3rd_party_software": false,
+      "link": "https://figment.io/staking/what-is-staking/"
     }
   ],
   "indicators": {
@@ -548,12 +889,12 @@
       "delegator": "2.76%"
     },
     "validators": {
-      "count": "1,055,727",
+      "count": "1,057,048",
       "increments": {
-        "day": "-1,737",
-        "week": "-9,136",
-        "month": "-13,762",
-        "year": "162,379"
+        "day": "1,321",
+        "week": "-5,607",
+        "month": "-11,759",
+        "year": "163,464"
       }
     },
     "stakedTokens": {
@@ -561,20 +902,20 @@
       "hr_value": "33.78m",
       "supplyShare": "0.00%",
       "increments": {
-        "day": "-33,782,356",
-        "week": "-34,005,077",
-        "month": "-34,200,926",
-        "year": "-28,594,426"
+        "day": "0",
+        "week": "-33,951,861",
+        "month": "-34,242,909",
+        "year": "-28,611,546"
       }
     },
     "tvl": {
       "value": 6720848050.315918,
       "value_hr": "$6.72b",
       "increments": {
-        "day": "-$6,720,848,050",
-        "week": "-$6,841,772,914",
-        "month": "-$7,555,447,691",
-        "year": "-$7,947,774,751"
+        "day": "$0",
+        "week": "-$6,249,657,633",
+        "month": "-$7,322,389,518",
+        "year": "-$8,036,167,312"
       }
     },
     "supply": {
@@ -589,7 +930,6 @@
   },
   "beaconData": {
     "day": [
-      1453,
       1454,
       1455,
       1456,
@@ -618,10 +958,10 @@
       1479,
       1480,
       1481,
-      1482
+      1482,
+      1483
     ],
     "timestamp": [
-      1732320000000,
       1732406400000,
       1732492800000,
       1732579200000,
@@ -650,10 +990,10 @@
       1734566400000,
       1734652800000,
       1734739200000,
-      1734825600000
+      1734825600000,
+      1734912000000
     ],
     "date": [
-      "11/23/2024",
       "11/24/2024",
       "11/25/2024",
       "11/26/2024",
@@ -682,10 +1022,10 @@
       "12/19/2024",
       "12/20/2024",
       "12/21/2024",
-      "12/22/2024"
+      "12/22/2024",
+      "12/23/2024"
     ],
     "validators": [
-      1069489,
       1068807,
       1070119,
       1071142,
@@ -714,10 +1054,10 @@
       1059173,
       1059264,
       1057464,
-      1055727
+      1055727,
+      1057048
     ],
     "validators_change": [
-      -1870,
       -682,
       1312,
       1023,
@@ -746,14 +1086,10 @@
       -1803,
       91,
       -1800,
-      -1737
+      -1737,
+      1321
     ],
     "blocks": [
-      {
-        "proposed": 7169,
-        "missed": 28,
-        "orphaned": 3
-      },
       {
         "proposed": 7166,
         "missed": 32,
@@ -894,10 +1230,10 @@
         "missed": 55,
         "orphaned": 6
       },
+      null,
       null
     ],
     "stakedTokens": [
-      34200926,
       34242909,
       34275639,
       34262423,
@@ -926,10 +1262,10 @@
       33896565,
       33838965,
       33782356,
+      null,
       null
     ],
     "stakedTokens_change": [
-      -23359,
       41983,
       32730,
       -13216,
@@ -958,10 +1294,10 @@
       2912,
       -57600,
       -56609,
-      -33782356
+      -33782356,
+      0
     ],
     "validatorBalance": [
-      32.05917391264,
       32.05911007196445,
       32.05905700373778,
       32.05903120587111,
@@ -990,6 +1326,7 @@
       32.05892723428889,
       32.05897089949778,
       32.058938446266666,
+      null,
       null
     ],
     "networkLiveness": [
@@ -1021,11 +1358,10 @@
       3,
       3,
       3,
-      3,
-      3
+      null,
+      null
     ],
     "participationRate": [
-      0.996545433998108,
       0.996833087073432,
       0.995860646830665,
       0.995996467272441,
@@ -1054,10 +1390,10 @@
       0.995368973414103,
       0.995554337236616,
       0.99365493244595,
+      null,
       null
     ],
     "stakeEffectiveness": [
-      0.9981429439147274,
       0.9981449501772833,
       0.9981464585520853,
       0.9981472239135899,
@@ -1086,14 +1422,10 @@
       0.9981502803026063,
       0.9981489082912782,
       0.9981498790463591,
+      null,
       null
     ],
     "deposits": [
-      {
-        "consensus": 186033,
-        "executionSucceed": 115339,
-        "executionFailed": 0
-      },
       {
         "consensus": 49007,
         "executionSucceed": 46886,
@@ -1234,10 +1566,10 @@
         "executionSucceed": 31186,
         "executionFailed": 0
       },
+      null,
       null
     ],
     "withdrawals": [
-      0.000107913859654563,
       0.000024228211406768,
       0.000086189185659058,
       0.00003221758103643,
@@ -1266,10 +1598,10 @@
       0.000050739072497317,
       0.000041232766771542,
       0.00018401876030414,
+      null,
       null
     ],
     "tvl": [
-      7555447690.939584,
       7322389517.529999,
       7160373787.569374,
       7581146405.142916,
@@ -1298,10 +1630,10 @@
       6257753045.176597,
       6445483908.159374,
       6720848050.315918,
+      0,
       0
     ],
     "tvl_change": [
-      -124781325.55416584,
       -233058173.409585,
       -162015729.9606247,
       420772617.57354164,
@@ -1330,7 +1662,8 @@
       -7798802.741274834,
       187730862.9827776,
       275364142.15654373,
-      -6720848050.315918
+      -6720848050.315918,
+      0
     ]
   },
   "chainData": {
