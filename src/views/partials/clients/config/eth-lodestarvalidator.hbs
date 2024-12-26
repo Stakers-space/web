@@ -9,7 +9,7 @@ Type=simple
 Restart=always
 RestartSec=5
 WorkingDirectory=/usr/local/bin/lodestar
-Environment="PATH=/home/<mark class="serverUser">myserveruser</mark>/.nvm/versions/node/v<mark class="nodejsVer">{{consensusClients.lodestar.nodejsVer}}</mark>/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="PATH=/home/<mark class="nodejsUser">nodejsusr</mark>/.nvm/versions/node/v<mark class="nodejsVer">{{consensusClients.lodestar.nodejsVer}}</mark>/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 ExecStart=/usr/local/bin/lodestar/lodestar validator \
   --network mainnet \
   --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/validators/i<span class="instance_pid" data-client="lodestar">1</span></mark> \

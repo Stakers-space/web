@@ -53,8 +53,8 @@
                 <pre><code>sudo chown -R <mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark>:<mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark> <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre>
             </li>
             <li><h4>Enable access to <code>NodeJs</code> for user <code class="instance_su" data-client="lodestar">lodestar-vi<span class="instance_pid">1</span></code></h4>
-                <label>User with NodeJs</label>: <input type="text" value="myserveruser" class="interactive-element serverUser" data-class="serverUser">
-                <pre><code>sudo usermod -aG <mark class="serverUser">myserveruser</mark> <mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+                <label>User with NodeJs</label>: <input type="text" value="nodejsusr" class="interactive-element nodejsUser" data-class="nodejsUser">
+                <pre><code>sudo usermod -aG <mark class="nodejsUser">nodejsusr</mark> <mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
             </li>
             <li><h4>Create configuration service file for <code class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></code> service</h4>
                 <ol>
@@ -161,8 +161,35 @@
 			</nav>
 			<div class="tabpanel selected">
 <h4>Activate service to start automatically on OS startup</h4>
-<pre><code>$ sudo systemctl enable <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
-			</div>
+<div class="tabselector">
+                <nav class="egrid egrid-2">
+                    <button class="tab selected" data-tabpanel="1">Standard option</button>
+                    <button class="tab" data-tabpanel="2">Delayed start util</button>
+                </nav>
+                <div class="tabpanel selected">
+                    <pre><code>$ sudo systemctl enable <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+                </div>
+                <div class="tabpanel">
+                    <aside>NOTE: This option requires installed <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank" rel="nofollow noopener">Start with Delay util</a>.</aside>
+                    <ul>
+                        <li>Open Delayed Start shell
+                            <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
+                            <p>Configurate service start inside it</p>
+                            <pre><code>systemctl start <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+                        </li>
+                        <li>Be sure, <code>delayed-start.service</code> service controlling <code>delayed-start.sh</code> is enabled for auto start with system startup
+                            <pre><code>sudo systemctl enable delayed-start.service</code></pre>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+			
+            
+            
+            </div>
 			<div class="tabpanel">
                 <ul>
                     <li><h4>Configurate Lodestar validator Log monitor service</h4>

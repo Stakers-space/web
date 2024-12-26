@@ -6,9 +6,9 @@
           <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}lodestarbeacon" class="interactive-element consensus_sn" data-class="consensus_sn" data-client="lodestar">
           <pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
         </li>
-        <li><h4>Enable  <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark> user access NodeJs</h4>
-          <label>User with NodeJs</label>: <input type="text" value="myserveruser" class="interactive-element serverUser" data-class="serverUser">
-          <pre><code>sudo usermod -aG <mark class="serverUser">myserveruser</mark> <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
+        <li><h4>Enable <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark> user access NodeJs</h4>
+          <label>User with NodeJs</label>: <input type="text" value="nodejsusr" class="interactive-element nodejsUser" data-class="nodejsUser">
+          <pre><code>sudo usermod -aG <mark class="nodejsUser">nodejsusr</mark> <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
         </li>
         <li>
           <h4>Create a directory for Lodestar Beacon data</h4>
@@ -70,7 +70,28 @@
 <pre><code>journalctl -fu <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
         </li>
         <li><h4>Enable auto start on server statup</h4>
-          <pre><code>sudo systemctl enable <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
+          <div class="tabselector">
+                <nav class="egrid egrid-2">
+                    <button class="tab selected" data-tabpanel="1">Standard option</button>
+                    <button class="tab" data-tabpanel="2">Delayed start util</button>
+                </nav>
+                <div class="tabpanel selected">
+                    <pre><code>sudo systemctl enable <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
+                </div>
+                <div class="tabpanel">
+                <aside>NOTE: This option requires installed <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank" rel="nofollow noopener">Start with Delay util</a>.</aside>
+                <ul>
+                        <li>Open Delayed Start shell
+                            <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
+                            <p>Configurate service start inside it</p>
+                            <pre><code>systemctl start <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
+                        </li>
+                        <li>Be sure, <code>delayed-start.service</code> service controlling <code>delayed-start.sh</code> is enabled for auto start with system startup
+                            <pre><code>sudo systemctl enable delayed-start.service</code></pre>
+                        </li>
+                </ul>
+              </div>
+            </div>
         </li>
       </ul>
     </li>

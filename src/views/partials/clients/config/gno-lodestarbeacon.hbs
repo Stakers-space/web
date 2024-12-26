@@ -9,7 +9,7 @@ Type=simple
 Restart=always
 RestartSec=5
 WorkingDirectory=/usr/local/bin/lodestar
-Environment="PATH=/home/<mark class="serverUser">myserveruser</mark>/.nvm/versions/node/v<mark class="nodejsVer">20.11.0</mark>/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="PATH=/home/<mark class="nodejsUser">nodejsusr</mark>/.nvm/versions/node/v<mark class="nodejsVer">20.11.0</mark>/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 ExecStart=/usr/local/bin/lodestar/lodestar beacon \
   --network gnosis \
   --dataDir <mark class="consensus-dp">/var/lib{{slashChain}}/lodestar/beacon</mark> \
