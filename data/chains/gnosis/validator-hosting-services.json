@@ -11,5 +11,31 @@
         "pool_token":null,
         "3rd_party_software":false,
         "link":null
+    },
+    {
+        "service":"Serenita",
+        "min_stake":1,
+        "stake_unit":"GNO",
+        "fee":null,
+        "fee_note":null,
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":false,
+        "3rd_party_software":false,
+        "link":"https://serenita.io/#stakingOptions"
+    },
+    {
+        "service":"Allnodes",
+        "min_stake":1,
+        "stake_unit":"GNO",
+        "fee":"From $0.5/month",
+        "fee_note":null,
+        "key_owner":"User & Service",
+        "withdrawals_key_owner":"User",
+        "no_supermajority_client":false,
+        "pool_token":false,
+        "3rd_party_software":false,
+        "link":"https://www.allnodes.com/gno/staking"
     }
 ]

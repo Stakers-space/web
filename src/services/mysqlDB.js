@@ -451,6 +451,7 @@ MySqlDBplatform.prototype.UpdateServerNote = function(serverId, ownerId, note, c
 
 MySqlDBplatform.prototype.UpdateServerIdForInstance = function(instanceId, currentServerId, newServerId, accountId, cb){
     var MC = mySql.createConnection(mySqlCredentials);
+    console.log(`UPDATE instances SET server_id = ${MC.escape(newServerId)} WHERE id = ${MC.escape(instanceId)} AND server_id = ${MC.escape(currentServerId)} AND owner = ${MC.escape(accountId)}`);
     MC.query('UPDATE `instances` SET server_id = '+MC.escape(newServerId)+' WHERE id = '+MC.escape(instanceId)+' AND server_id = '+MC.escape(currentServerId)+' AND owner = '+MC.escape(accountId),
         function(err,rows) {
             MC.end();

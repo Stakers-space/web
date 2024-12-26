@@ -218,7 +218,7 @@
 					</thead>
 					<tbody>
 						{{#each vaultServices}}
-							{{#if this.liquid_token}}
+							{{!--#if this.liquid_token--}}
 							<tr>
 								<td><a href="{{this.link}}" target="_blank" rel="nofollow noopener">{{this.service}}</a></td>
 								<td>{{this.min_stake}} {{this.stake_unit}}</td>
@@ -239,7 +239,7 @@
 									{{/if}}
 								</td>
 							</tr>
-							{{/if}}
+							{{!--/if--}}
 						{{/each}}
 					</tbody>
 				</table>

@@ -2,7 +2,7 @@
     {
         "service":"Stakers.space StakeWise Vault",
         "min_stake":0,
-        "stake_unit":"ETH",
+        "stake_unit":"GNO",
         "fee":10,
         "fee_note":"% of rewards",
         "key_owner":null,
@@ -34,5 +34,44 @@
         },
         "3rd_party_software":false,
         "link":"https://stakewise.io/app/pool"
+    },
+    {
+        "service":"Chorus One",
+        "min_stake":0,
+        "stake_unit":"GNO",
+        "fee":null,
+        "fee_note":null,
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":false,
+        "3rd_party_software":false,
+        "link":"https://chorus.one/crypto-staking-networks/gnosis"
+    },
+    {
+        "service":"Stakeway",
+        "min_stake":0,
+        "stake_unit":"GNO",
+        "fee":null,
+        "fee_note":null,
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":false,
+        "3rd_party_software":false,
+        "link":"https://stakeway.com/"
+    },
+    {
+        "service":"Axol",
+        "min_stake":0,
+        "stake_unit":"GNO",
+        "fee":null,
+        "fee_note":null,
+        "key_owner":null,
+        "withdrawals_key_owner":null,
+        "no_supermajority_client":null,
+        "pool_token":false,
+        "3rd_party_software":false,
+        "link":"https://axol.io/"
     }
 ]

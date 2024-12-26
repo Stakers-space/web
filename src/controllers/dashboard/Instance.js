@@ -247,13 +247,15 @@ exports.OnProcessKeystores = function(req,res){
 
 exports.OnLinkInstance = function(req,res){
     if(res.locals.isDemoAccount) return ThrowError("Action restricted for demo account",res);
-    console.log(req.query, req.body);
-    new mysqlSrv().UpdateServerIdForInstance(req.qurey.iid, req.query.sid, req.body.server_id, req.query.id, function(err,resp){
+    console.log("OnLinkInstance", req.query, req.body, req.user);
+    new mysqlSrv().UpdateServerIdForInstance(req.query.iid, req.query.sid, req.body.server_id, req.user.id, function(err,resp){
         if(err){
             return ThrowError(err,res);
         } else {
-            console.log(resp);
-            res.redirect('/dashboard&success=instanceMoved');
+            console.log(resp, "changed rows:", resp.changedRows);
+            if(resp.changedRows === 1) return res.redirect('/dashboard&success=instanceMoved');
+
+            return res.redirect('/dashboard&success=noactionperformed');
         }
     });
 };

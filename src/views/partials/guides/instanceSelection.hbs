@@ -78,10 +78,11 @@
         console.log("LoadInstanceDataToDocs", serverData, e.target.value, instanceData);
         if(!instanceData) return;
         for(const elm of document.getElementsByClassName("instance_pid")){ elm.value = instanceData.vi_pid; elm.innerHTML = instanceData.vi_pid; }
-         for(const elm of document.getElementsByClassName("instance_sn")){ elm.value = instanceData.vi_sname; elm.innerHTML = instanceData.vi_sname; }
+        for(const elm of document.getElementsByClassName("instance_sn")){ elm.value = instanceData.vi_sname; elm.innerHTML = instanceData.vi_sname; }
         for(const elm of document.getElementsByClassName("instance_su")){ elm.value = instanceData.vi_suser; elm.innerHTML = instanceData.vi_suser; }
         for(const elm of document.getElementsByClassName("instance_dp")){ elm.value = instanceData.vi_sdata; elm.innerHTML = instanceData.vi_sdata; }
         for(const elm of document.getElementsByClassName("instance_frw")){ elm.value = instanceData.fee_recipient; }
+        // update keystores directory
 	}
 
 
