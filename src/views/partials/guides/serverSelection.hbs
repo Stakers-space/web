@@ -62,11 +62,22 @@
 					InstallOnInteractiveInputChangedListener();
 				} else {
 					accounData = pd.d;
+					
 					// hide authentization
 					for(const elm of document.getElementsByClassName("user-authentized")){ elm.classList.remove("hide");}
 					
+					if(Object.keys(accounData).length > 0) accounData[0] = {
+																				serverName: "-",
+																				instances: [],
+																				execution: [],
+																				consensus: []
+																			};
+
+					console.log("Account data loaded", accounData);
+
 					// load data selections
 					const selectServerElement = document.getElementsByClassName('account-servers');
+					// defaulr option (unselected server)
 					Object.entries(accounData).forEach(([serverId, serverData]) => {
 						const option = document.createElement('option');
 						option.value = serverId;
@@ -82,7 +93,7 @@
 							option.text = serverData.serverName; 
 							selectServerElement[1].appendChild(option);
 						});
-						selectServerElement[1].addEventListener("change", OnServerChanged)
+						selectServerElement[1].addEventListener("change", OnServerChanged);
 					}
 					LoadServerDataToDoc();
 				}
