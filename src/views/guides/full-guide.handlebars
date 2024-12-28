@@ -74,17 +74,155 @@ $ sudo apt dist-upgrade && sudo apt autoremove
 $ sudo reboot</code></pre>
 					<p>You can also create a shell script that will do this either on manual request or a schedule, see <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/update-and-restart-linux" target="_blank">Update and Restart Ubuntu server Utility</a>.</p>
 						
+					<div>
+						<h3>Install UFW, configurate <code>deny</code> state for incoming and <code>allow</code> state for outgoing traffic</h3>
+						<ul>
+							<li>Install UFW (if not installed yet)
+								<pre><code>sudo apt install ufw</code></pre></li>
+							<li>Set default Fireall configuration
+        						<pre><code>sudo ufw default deny incoming
+sudo ufw default allow outgoing</code></pre>
+							</li>
+							<li>Check Firewall Ports
+							<pre><code>sudo ufw numbered</code></pre></li>
+						</ul>
+						<p><strong>NOTE: Firewall will be activated later, after adding additional configuration in next steps.</strong></p>
+					</div>
+
+					<div>
+						<h3 class="mt-40" id="securyiing-ssh">Managing the SSH access</h3>
+						<ul>
+							<li>SSH allows to connect to the server either from the local or remote network.</li>
+							<li>If you are going to connect your node locally only (= with monitor and keyboard connected right in the node), you do not need to install SSH or you can simply disable it, if is already installed.</li>
+						</ul>
+
+						<h4 class="mt-20" id="ssh-install">Check, whether <code>SSH</code> is installed on the server</h4>
+						<pre><code>which sshd</code></pre>
+						<p>This command should print directory of the <code>SSH</code> service. If it prints an empty response, <code>SSH</code> is not installed on the server and thus connecting to server over <code>SSH</code> is not possible. If required, <code>SSH</code> can be installed with following command:</p>
+						<pre><code>sudo apt install openssh-server</code></pre>
+
+						<div class="tabselector mt-40">
+							<nav class="egrid egrid-2">
+								<button class="tab selected" data-tabpanel="1">Securying SSH access</button>
+								<button class="tab" data-tabpanel="2">Disabling SSH access</button>
+							</nav>
+
+							<div class="tabpanel selected">
+								<p>With allowed SSH access, you must protect SSH access to your server from attackers. Based on your network confifuration, access may be possible from:</p>
+								<ul>
+									<li>From any network (Your server has public IP)</li>
+									<li>From a local network only (Your server is behind nat)</li>
+									<li>From a VPN network the node is assigned to</li>
+								</ul>
+								<p>Even if you have enabled access from a local netowk only (your node is behind <a href="https://vrealmatic.com/mikrotik-router/firewall/nat">NAT</a>), you should still protect your SSH access as a potential attacker may use a compromised device in your local network to access your node. The defense consists in increasing the number of obstacles that must be overcome to access your node.</p>
+								<ul>
+									<li><a href="#ssh-keys">Configurate SSH keys</a></li>
+									<li><a href="#ssh-port">Modify default SSH port</a></li>
+									<li><a href="#2fa">Configurate 2FA authentization</a></li>
+									<li><a href="#ddos">Configurate Brute-force & DDoS protection</a></li>
+									<li><a href="#remote-access">Additional tips</a></li>
+								</ul>
+								<p><strong>Before configuring security matters and connecting to your node,</strong> take note the basic rule to maintain also the security of the computer(s) you are going to use for connecting to your node (stealing the SSH keys) as well as other devices required for connection (stealing 2FA codes) etc.</p>
+								<ul>
+									<li id="ssh-keys">
+										<h4>Configure SSH keys</h4>
+										<p>By default, SSH connections can be made using a combo of <code>username</code> and <code>password</code>. As <code>password</code> is usually somewhat "short" and thus susceptible to brute-force attacks, key loggers attacks and so on. This is why SSH keys significantly enhances the security of the login process.</p>
+										<a href="https://vrealmatic.com/ubuntu-server/ssh-keys" target="_blank" class="btn btn-black btn-rounded">SSH keys step by step guide.</a>
+									</li>
+									<li class="mt-40" id="ssh-port">
+										<h4>Modify default <code>22</code> SSH port</h4>
+										<p>As port <code>22</code> is default port for SSH connections, it's the first port that a potential attacker tests. Change it to a different free port.</p>
+										<ol>
+											<li>
+												<p>Choose any number between <code>21</code> and <code>49151</code></p>
+												<strong>Choose a port number for SSH:</strong> <input data-type="number" type="text" data-min="21" data-max="49151" value="22" class="interactive-element sshPort" data-class="sshPort">
+											</li>
+											<li class="mt-20">
+												Check whether the selected port for SSH is not already in use
+												<pre><code>sudo ss -tulpn | grep ':<mark class="sshPort">22</mark>'</code></pre>
+												<ul>
+													<li>blank response = port is not in used</li>
+													<li>red text response, the port is already in used. Check availability of a different port number in such case.</li>
+												</ul>
+											</li>
+											<li class="mt-15">Change SSH port from default <code>22</code> to <code class="sshPort">22</code> in the SSH config file
+												<ol>
+													<li class="mt-10">
+														Open <code>sshd_config</code> config file
+														<pre><code>sudo nano /etc/ssh/sshd_config</code></pre>
+													</li>
+													<li class="mt-10">
+														<p>Find mark <code>Port</code>, usually <code>Port 22</code>. The mark specifies currently port used for SSH access.</p>
+														<p><strong>Rewrite the port value for <code>Port <span class="sshPort"></span></code></strong></p>
+													</li>
+													<li class="mt-10">Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</li>
+												</ol>
+											</li>
+											<li class="mt-15">Enable the Port <code class="sshPort">1024</code> for SSH/TCP connection
+												<pre><code>sudo ufw allow <mark class="sshPort">1024</mark>/tcp</code></pre>
+											</li>
+											<li class="mt-15">Restart the SSH service to reflect the changes.
+												<pre><code>sudo systemctl restart ssh</code></pre>
+												<p>After the restart, you will not able to connect through the SSH over port <code>22</code> anymore. Be sure you are connecting over the <code class="sshPort">1024</code> next time.</p>
+											</li>
+											<li class="mt-15">Disable the default <code>22</code> port for SSH/TCP connection
+												<pre><code>sudo ufw deny 22/tcp</code></pre>
+											</li>
+											<li class="mt-15">Check your port settings if needed
+												<pre><code>sudo ufw status numbered</code></pre>
+											</li>
+										</ol>
+									</li>
+									<li class="mt-40" id="2fa">
+										<h4>Configuring 2FA authentization</h4>
+										<p>2FA (2 Factor authentization) comes with additional code you must provide to access your node. You may know 2FA from crypto exchanges. In the same way you can protect loging to your node.</p>
+										<a href="https://vrealmatic.com/ubuntu-server/2fa-google-authenticator" target="_blank" class="btn btn-black btn-rounded">2FA Google Authentication activation guide.</a>
+									</li>
+									<li class="mt-40" id="ddos">
+										<h4>Configuring Brute-force & DDoS protection</h4>
+										<p>To defend against Brute Force and DDoS attacks, one can monitor incoming connections and block IP addresses that repeatedly attempt to log in with incorrect credentials. Installing the Fail2Ban package can assist with this.</p>
+										<a href="https://vrealmatic.com/ubuntu-server/fail2ban" target="_blank"  class="btn btn-black btn-rounded">Guide to activate Fail2Ban.</a>
+									</li>
+								</ul>
+								
+								<h3 class="mt-50" id="remote-access">Securying remote access tips</h3>
+								<ul>
+									<li>Staking node is accessible from public IP:
+										<ul>
+											<li>If you do not need o connect to your node from remote networks, move your node behind the router that prevents accessing the node.</li>
+											<li>If you want to keep this feature, you should still consider move the node behind the router, <a href="https://vrealmatic.com/mikrotik-router/vpn" target="_blank">set VPN on the router</a>, and when connecting to the node, firstly connect to the router VPN and then connect the node from "local" network through its local IP.</li>
+										</ul>
+									</li>
+									<li>Staking node is not accessible from public IP:
+										<ul>
+											<li>If you need connecting your node from remote networks, you must either set a VPN, such as Tailscale (either on the server itself or any other device in your local network), or buy public IP from your ISP and follow the points for server accessible from the public IP.</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+
+							<div class="tabpanel">
+								<p><a href="#ssh-install">If you have <code>SSH</code> installed and running on your server</a>, you must either disable ports for SSH traffic, disable SSH or remove it. If <code>SSH</code> is not installed on your machine, you can skip this step - ssh access is not possible already.</p>
+								<ul>
+									<li><h4>Option 1: Stop and disable the ssh service</h4>
+										<pre><code>sudo systemctl stop ssh
+sudo systemctl disable ssh</code></pre>
+										<p>If preferred, you can remove the SSH server client from the machine</p>
+										<pre><code>sudo apt remove openssh-server</code></pre>
+									</li>
+									<li><h4>Option 2: Disable traffic on SSH port</h4>
+										<p>Check <code>22/tcp</code> port for enabled traffic with command</p>
+										<pre><code>sudo ufw status numbered</code></pre>
+										<p>Note: default <code>22</code> port could be changed, as well as could not be enabled. If there's any <code>tcp</code> traffic enabled, disable it. Code below is for default SSH port <code>22</code>.</p>
+										<pre><code>sudo ufw deny 22/tcp</code></pre>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
 					<h3 class="mt-40">Configure the Firewall</h3>
 					<ul>
-        				<li>Install UFW, configurate <code>deny</code> state for incoming and <code>allow</code> state for outgoing traffic
-        				<pre><code>$ sudo apt install ufw
-$ sudo ufw default deny incoming
-$ sudo ufw default allow outgoing</code></pre>
-						</li>
-						<li>Temporary <a href="#securyiing-ssh">till next step</a> - Enable SSH port for remote access (process only if you are connected through the SSH = you are not connected with a keyboard and monitor right to the node)
-							<pre><code>sudo ufw allow 22/tcp</code></pre>
-						</li>
-						
 						<li>Enable Firewall
 							<pre><code>$ sudo ufw enable</code></pre>
 						</li>
@@ -93,141 +231,11 @@ $ sudo ufw default allow outgoing</code></pre>
 						</li>
 					</ul>
 
-					<h3 class="mt-40" id="securyiing-ssh">Managing the SSH access</h3>
-					<ul>
-						<li>SSH allows to connect to the server either from the local or remote network.</li>
-						<li>If you are going to connect your node locally only (= with monitor and keyboard connected right in the node), you do not need to install SSH or you can simply disable it, if is already installed.</li>
-					</ul>
-
-					<h4 class="mt-20" id="ssh-install">Check, whether <code>SSH</code> is installed on the server</h4>
-					<pre><code>which sshd</code></pre>
-					<p>This command should print directory of the <code>SSH</code> service. If it prints an empty response, <code>SSH</code> is not installed on the server and thus connecting to server over <code>SSH</code> is not possible. If required, <code>SSH</code> can be installed with following command:</p>
-					<pre><code>sudo apt install openssh-server</code></pre>
-
-					<div class="tabselector mt-40">
-						<nav class="egrid egrid-2">
-							<button class="tab selected" data-tabpanel="1">Securying SSH access</button>
-							<button class="tab" data-tabpanel="2">Disabling SSH access</button>
-						</nav>
-
-						<div class="tabpanel selected">
-							<p>With allowed SSH access, you must protect SSH access to your server from attackers. Based on your network confifuration, access may be possible from:</p>
-							<ul>
-								<li>From any network (Your server has public IP)</li>
-								<li>From a local network only (Your server is behind nat)</li>
-								<li>From a VPN network the node is assigned to</li>
-							</ul>
-							<p>Even if you have enabled access from a local netowk only (your node is behind <a href="https://vrealmatic.com/mikrotik-router/firewall/nat">NAT</a>), you should still protect your SSH access as a potential attacker may use a compromised device in your local network to access your node. The defense consists in increasing the number of obstacles that must be overcome to access your node.</p>
-							<ul>
-								<li><a href="#ssh-port">Modify default SSH port</a></li>
-								<li><a href="#ssh-keys">Configurate SSH keys</a></li>
-								<li><a href="#2fa">Configurate 2FA authentization</a></li>
-								<li><a href="#ddos">Configurate Brute-force & DDoS protection</a></li>
-								<li><a href="#remote-access">Additional tips</a></li>
-							</ul>
-							<p><strong>Before configuring security matters and connecting to your node,</strong> take note the basic rule to maintain also the security of the computer(s) you are going to use for connecting to your node (stealing the SSH keys) as well as other devices required for connection (stealing 2FA codes) etc.</p>
-							<ul>
-								<li id="ssh-port">
-									<h4>Modify default <code>22</code> SSH port</h4>
-									<p>As port <code>22</code> is default port for SSH connections, it's the first port that a potential attacker tests. Change it to a different free port.</p>
-									<ol>
-										<li>
-											<p>Choose any number between <code>21</code> and <code>49151</code></p>
-											<strong>Choose a port number for SSH:</strong> <input data-type="number" type="text" data-min="21" data-max="49151" value="22" class="interactive-element sshPort" data-class="sshPort">
-										</li>
-										<li class="mt-20">
-											Check whether the selected port for SSH is not already in use
-											<pre><code>sudo ss -tulpn | grep ':<mark class="sshPort">22</mark>'</code></pre>
-											<ul>
-												<li>blank response = port is not in used</li>
-												<li>red text response, the port is already in used. Check availability of a different port number in such case.</li>
-											</ul>
-										</li>
-										<li class="mt-15">Change SSH port from default <code>22</code> to <code class="sshPort">22</code> in the SSH config file
-											<ol>
-												<li class="mt-10">
-													Open <code>sshd_config</code> config file
-													<pre><code>sudo nano /etc/ssh/sshd_config</code></pre>
-												</li>
-												<li class="mt-10">
-													<p>Find mark <code>Port</code>, usually <code>Port 22</code>. The mark specifies currently port used for SSH access.</p>
-													<p><strong>Rewrite the port value for <code>Port <span class="sshPort"></span></code></strong></p>
-												</li>
-												<li class="mt-10">Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</li>
-											</ol>
-										</li>
-										<li class="mt-15">Enable the Port <code class="sshPort">1024</code> for SSH/TCP connection
-											<pre><code>sudo ufw allow <mark class="sshPort">1024</mark>/tcp</code></pre>
-										</li>
-										<li class="mt-15">Restart the SSH service to reflect the changes.
-											<pre><code>sudo systemctl restart ssh</code></pre>
-											<p>After the restart, you will not able to connect through the SSH over port <code>22</code> anymore. Be sure you are connecting over the <code class="sshPort">1024</code> next time.</p>
-										</li>
-										<li class="mt-15">Disable the default <code>22</code> port for SSH/TCP connection
-											<pre><code>sudo ufw deny 22/tcp</code></pre>
-										</li>
-										<li class="mt-15">Check your port settings if needed
-											<pre><code>sudo ufw status numbered</code></pre>
-										</li>
-									</ol>
-								</li>
-								<li class="mt-40" id="ssh-keys">
-									<h4>Configure SSH keys</h4>
-									<p>By default, SSH connections can be made using a combo of <code>username</code> and <code>password</code>. As <code>password</code> is usually somewhat "short" and thus susceptible to brute-force attacks, key loggers attacks and so on. This is why SSH keys significantly enhances the security of the login process.</p>
-									<a href="https://vrealmatic.com/ubuntu-server/ssh-keys" target="_blank" class="btn btn-black btn-rounded">SSH keys step by step guide.</a>
-									
-								</li>
-								<li class="mt-40" id="2fa">
-									<h4>Configuring 2FA authentization</h4>
-									<p>2FA (2 Factor authentization) comes with additional code you must provide to access your node. You may know 2FA from crypto exchanges. In the same way you can protect loging to your node.</p>
-									<a href="https://vrealmatic.com/ubuntu-server/2fa-google-authenticator" target="_blank" class="btn btn-black btn-rounded">2FA Google Authentication activation guide.</a>
-								</li>
-								<li class="mt-40" id="ddos">
-									<h4>Configuring Brute-force & DDoS protection</h4>
-									<p>To defend against Brute Force and DDoS attacks, one can monitor incoming connections and block IP addresses that repeatedly attempt to log in with incorrect credentials. Installing the Fail2Ban package can assist with this.</p>
-									<a href="https://vrealmatic.com/ubuntu-server/fail2ban" target="_blank"  class="btn btn-black btn-rounded">Guide to activate Fail2Ban.</a>
-								</li>
-							</ul>
-							
-							<h3 class="mt-50" id="remote-access">Securying remote access tips</h3>
-							<ul>
-								<li>Staking node is accessible from public IP:
-									<ul>
-										<li>If you do not need o connect to your node from remote networks, move your node behind the router that prevents accessing the node.</li>
-										<li>If you want to keep this feature, you should still consider move the node behind the router, <a href="https://vrealmatic.com/mikrotik-router/vpn" target="_blank">set VPN on the router</a>, and when connecting to the node, firstly connect to the router VPN and then connect the node from "local" network through its local IP.</li>
-									</ul>
-								</li>
-								<li>Staking node is not accessible from public IP:
-									<ul>
-										<li>If you need connecting your node from remote networks, you must either set a VPN, such as Tailscale (either on the server itself or any other device in your local network), or buy public IP from your ISP and follow the points for server accessible from the public IP.</li>
-									</ul>
-								 </li>
-							</ul>
-						</div>
-
-						<div class="tabpanel">
-							<p><a href="#ssh-install">If you have <code>SSH</code> installed and running on your server</a>, you must either disable ports for SSH traffic, disable SSH or remove it. If <code>SSH</code> is not installed on your machine, you can skip this step - ssh access is not possible already.</p>
-							<ul>
-								<li><h4>Option 1: Stop and disable the ssh service</h4>
-									<pre><code>sudo systemctl stop ssh
-sudo systemctl disable ssh</code></pre>
-									<p>If preferred, you can remove the SSH server client from the machine</p>
-									<pre><code>sudo apt remove openssh-server</code></pre>
-								</li>
-								<li><h4>Option 2: Disable traffic on SSH port</h4>
-									<p>Check <code>22/tcp</code> port for enabled traffic with command</p>
-									<pre><code>sudo ufw status numbered</code></pre>
-									<p>Note: default <code>22</code> port could be changed, as well as could not be enabled. If there's any <code>tcp</code> traffic enabled, disable it. Code below is for default SSH port <code>22</code>.</p>
-									<pre><code>sudo ufw deny 22/tcp</code></pre>
-								</li>
-							</ul>
-						</div>
-					</div>
-
 					<h3 class="mt-50">Consider installing and setting VPN to hide your public IP</h3>
 					<p>VPN allows the server to access the internet through an intermediary in a form of a VPN server. In such case, your server's IP address (and location) is hidden behind the VPN server IP address. The disadvantage is the potential instability of the VPN server, in terms of connection speed and possible crashes into offline state.</p>
 					<a href="https://vrealmatic.com/ubuntu-server/mullvad-vpn" target="_blank"  class="btn btn-black btn-rounded">Complete guide to install, configurate and activate Mullvad VPN on Ubuntu server.</a>
 					<p>Note: If you need to have active Mullvad and Tailscale simultaneously, follow a <a href="https://github.com/Stakers-space/staking-scripts/tree/main/mullvad/enable_tailscale" target="_blank">guide for setting rules for netfilter</a>.</p>
+
 				</div>
             </section>
 
