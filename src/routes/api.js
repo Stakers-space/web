@@ -13,12 +13,13 @@ const bodyParser = require('body-parser');
 }));*/
 router.use(bodyParser.json(  ));
 router.use(express.text());
+const config = require('../config/config.secret.json');
 
 // authentization
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
-const passportConf = require('../config/config.secret.json').passport;
+const passportConf = config.passport;
 router.use(session({
 	secret: passportConf.sessionSecret,
 	resave: false, // don't save session if unmodified
@@ -60,6 +61,12 @@ router.post('/keystores', function(req, res){
     // if incoming data → process the data
     console.log("[API]/keystores", req.query, req.body);
     const chain = req.query.ch;
+    const token = req.query.t;
+
+    if(token !== keystoresUpdatorToken) {
+        console.log("Unauthorized access", req.query, req.body);
+        return res.status(500).send("Unauthorized access"); 
+    }
 
     if(Object.keys(req.body).length !== 0){
         // for loop async

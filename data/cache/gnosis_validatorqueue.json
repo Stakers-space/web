@@ -1,41 +1,54 @@
 {
   "date": [
-    "2024-12-07"
+    "2024-12-07",
+    "2024-12-28"
   ],
   "validators": [
-    320907
+    320907,
+    323349
   ],
   "entry_queue": [
-    1694
+    1694,
+    5588
   ],
   "entry_wait": [
-    12.533333333333333
+    12.533333333333333,
+    41.38333333333333
   ],
   "exit_queue": [
+    0,
     0
   ],
   "exit_wait": [
+    0,
     0
   ],
   "churn": [
+    3,
     3
   ],
   "entry_churn": [
+    null,
     null
   ],
   "exit_churn": [
+    null,
     null
   ],
   "supply": [
+    null,
     null
   ],
   "staked_amount": [
+    null,
     null
   ],
   "staked_percent": [
+    null,
     null
   ],
   "apr": [
+    null,
     null
   ]
 }

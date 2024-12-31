@@ -119,7 +119,7 @@
 		function LoadServerDataToDoc(serverSelected = null){
 			const urlParams = new URLSearchParams(window.location.search);
 			if(!serverSelected) serverSelected = urlParams.get('sid');
-			if(!serverSelected) serverSelected = Object.keys(accounData)[0];//return;
+			if(!serverSelected) return;
 			
 			document.getElementById("account-server-link").href="/dashboard/server-node/define?id="+serverSelected;
 			serverData = accounData[serverSelected];
@@ -128,7 +128,12 @@
 			// update server user
 			UpdateMarks("serverUser", serverData.serverUser, true);
 			UpdateMarks("sshPort", serverData.sshPort, true);
-			if(UpdateInstanceSetup) UpdateInstanceSetup();
+			try {
+				if(typeof UpdateInstanceSetup === 'function') UpdateInstanceSetup();
+			} catch(e) {
+				console.error("Error updating instance setup", e);
+			}
+			
 			// client
 			if(serverData.execution.length > 0) {
 				UpdateMarks("ec_1", serverData.execution[0].client);
