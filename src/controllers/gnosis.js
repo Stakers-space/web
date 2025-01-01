@@ -67,10 +67,8 @@ GnosisController.prototype.Request = function(req,res, next){
             let depositContract = parsedData.depositContract;
             res.locals.depositContract = {};
             res.locals.depositContract.lastState = depositContract.lastState;
-            //res.locals.current.time = 
-
             res.locals.depositContract.chart = JSON.stringify(depositContract.historicalChart);
-            res.locals.depositContract.distribution = JSON.stringify(depositContract.lastState.distribution);
+            //res.locals.depositContract.distribution = JSON.stringify(depositContract.lastState.distribution);
             //console.log(res.locals.depositContract);
             
             taskCompleted();
@@ -200,7 +198,8 @@ GnosisController.prototype.DepositContract = function(req,res,next){
             //res.locals.current.time = 
  
             res.locals.depositContract.chart = JSON.stringify(depositContract.historicalChart);
-            res.locals.depositContract.distribution = JSON.stringify(depositContract.lastState.distribution);
+            res.locals.depositContract.beaconchain_distribution = JSON.stringify(depositContract.lastState.beaconchain_distribution);
+            res.locals.depositContract.unclaimedgno_distribution = JSON.stringify(depositContract.lastState.unclaimedgno_distribution); 
 
             res.locals.chartsUIconfig = JSON.stringify({
                 apr:{legend:false,xaxis:false,yaxis:false},
@@ -259,27 +258,34 @@ GnosisController.prototype.CacheIndexData = function(cb){
     });
 
     // get deposit contract balance data
-    azureCosmosDB.queryContainer("data",'SELECT * FROM c WHERE c.partitionKey = @partitionKey ORDER BY c._ts',"gno-distribution",function(err,dbData){
-        if(err) {
-            console.log(err);
-            return res.status(500).send({ error: 'Something went wrong!' }); 
-        }
-
+    azureCosmosDB.queryContainer("data",'SELECT * FROM c WHERE c.partitionKey = @partitionKey ORDER BY c.time',"gno-distribution", function(err,dbData){
+        if (err)  return console.error("Err: Error querying family item:", err);;
+        if (!dbData) return console.error("No data returned from query");
+        
         depositContract = {
             lastState: {
                 gno_validators: 0,
                 gno_contract: 0,
+                gno_unclaimed: 0,
                 gno_balance: 0,
-                distribution: {
+                gno_24h_difference: 0,
+                beaconchain_distribution: {
                     holdings: [],
-                    validators: []
+                    validators: [],
+                    validators_count: 0
+                },
+                unclaimedgno_distribution: {
+                    holdings: [],
+                    wallets: [],
+                    wallets_count: 0
                 },
                 epoch: 0,
                 time: 0
             },
             historicalChart: {
                 date: [],
-                gno_validators: [],
+                gno_validators: [], // beaconchain
+                gno_unclaimed: [],
                 gno_contract: [],
                 gno_balance: []
             }
@@ -287,25 +293,44 @@ GnosisController.prototype.CacheIndexData = function(cb){
         
         const marks = dbData.length;
         for(var i = 0; i < marks; i++){
-            if(i=== (marks - 1)){
+            if(i === (marks - 1)){
+                // last day
                 depositContract.lastState.gno_validators = numeral(dbData[i].GNO_validators / 1e9).format('0,0');
                 depositContract.lastState.gno_contract = numeral(dbData[i].GNO_contract  / 1e9).format('0,0');
+                depositContract.lastState.gno_unclaimed = numeral(dbData[i].GNO_unclaimed  / 1e9).format('0,0');
                 depositContract.lastState.gno_balance = numeral(dbData[i].bilance / 1e9).format('0,0');
+                depositContract.lastState.epoch = dbData[i].epoch;
                 
-                //console.log(dbData[i].distribution);
-                const entries = Object.entries(dbData[i].distribution);
-                entries.sort((a, b) => parseFloat(a[0]) - parseFloat(b[0]));
+                depositContract.lastState.unclaimedgno_distribution.wallets_count = numeral(dbData[i].wallets).format('0,0');
+                depositContract.lastState.beaconchain_distribution.validators_count = numeral(dbData[i].validators).format('0,0');
 
-                depositContract.lastState.distribution.holdings = entries.map(entry => entry[0]);
-                depositContract.lastState.distribution.validators = entries.map(entry => entry[1]);
-                //console.log(depositContract.lastState.distribution);
-            }
+                // beaconchian holdings
+                const beaconchain_entries = Object.entries(dbData[i].beaconchain_distribution);
+                beaconchain_entries.sort((a, b) => parseFloat(a[0]) - parseFloat(b[0]));
+                depositContract.lastState.beaconchain_distribution.holdings = beaconchain_entries.map(entry => entry[0]);
+                depositContract.lastState.beaconchain_distribution.validators = beaconchain_entries.map(entry => entry[1]);
+
+                // unclaimed gno holdings
+                if(dbData[i].unclaimed_distribution){
+                    const unclaimedgno_entries = Object.entries(dbData[i].unclaimed_distribution);
+                    unclaimedgno_entries.sort((a, b) => parseFloat(a[0]) - parseFloat(b[0]));
+                    depositContract.lastState.unclaimedgno_distribution.holdings = unclaimedgno_entries.map(entry => entry[0]);
+                    depositContract.lastState.unclaimedgno_distribution.wallets = unclaimedgno_entries.map(entry => entry[1]);
+                }
+            } 
+
             depositContract.historicalChart.date.push(dbData[i].date);
             depositContract.historicalChart.gno_validators.push(dbData[i].GNO_validators / 1e9);
+            depositContract.historicalChart.gno_unclaimed.push(dbData[i].GNO_unclaimed / 1e9);
             depositContract.historicalChart.gno_contract.push(dbData[i].GNO_contract / 1e9);
             depositContract.historicalChart.gno_balance.push(dbData[i].bilance / 1e9);
         }
 
+        const days_count = depositContract.historicalChart.gno_balance.length;
+        if(days_count >= 2){
+            depositContract.lastState.gno_24h_difference = numeral(depositContract.historicalChart.gno_balance[days_count - 1] - depositContract.historicalChart.gno_balance[days_count - 2]).format('0,0');
+        }
+        
         taskCompleted(err, "contractbalance");
     });
 

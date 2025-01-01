@@ -24,11 +24,15 @@
 	</section>
 
     <section class="grid">
-        <h1>Current state of Gnosis deposit contract balance</h1>
-		<div class="egrid egrid-3">
+        <h1>State of Gnosis deposit contract balance for epoch {{depositContract.lastState.epoch}}</h1>
+		<div class="egrid egrid-4">
             <div>
-                <h2>GNO holded by Validators</h2>
+                <h2>GNO holded by Validators on Beaconchain</h2>
                 <div>{{depositContract.lastState.gno_validators}}</div>
+            </div>
+            <div>
+                <h2>Unclaimed GNO by Validators</h2>
+                <div>{{depositContract.lastState.gno_unclaimed}}</div>
             </div>
             <div>
                 <h2>GNO in deposit contract</h2>
@@ -37,12 +41,9 @@
             <div>
                 <h2>GNO balance</h2>
                 <div>{{depositContract.lastState.gno_balance}}</div>
+                <span>{{depositContract.lastState.gno_24h_difference}} Last 24 hours</span>
             </div>
         </div>
-        <h2>GNO distribution over validators</h2>
-        <p>This chart represents GNO value holded by validators, in other words, how many validators hold certain amount of GNO. Holded GNO value is being variable based on receiving and claiming rewardss, as well as paying penalties.</p>
-        <canvas id="walletbalance_chart" name="lazy-canvas"></canvas>
-        <p>* Data Updated on epoch , time ...</p>
 	</section>
 
     <section class="grid">
@@ -50,12 +51,26 @@
         <canvas id="depositcontractbalance_chart" name="lazy-canvas"></canvas>
 	</section>
 
+    <section class="grid">
+        <h2>GNO distribution on Beaconchain over {{depositContract.lastState.beaconchain_distribution.validators_count}} validators</h2>
+        <p>This chart represents GNO value holded by validators, in other words, how many validators hold certain amount of GNO. Holded GNO value is being variable based on receiving and claiming rewardss, as well as paying penalties.</p>
+        <canvas id="beaconchainbalance_chart" name="lazy-canvas"></canvas>
+        <p>* Data Updated on epoch , time ...</p>
+    </section>
+
+    <section class="grid">
+        <h2>Unclaimed GNO over {{depositContract.lastState.unclaimedgno_distribution.wallets_count}} Withdrawal wallets</h2>
+        <canvas id="gnodeposit-withdrawalwallets_chart" name="lazy-canvas"></canvas>
+	</section>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
-    <script>var distribution = {{{depositContract.distribution}}}, depositContract = {{{depositContract.chart}}}, chartsUIconfig = {{{chartsUIconfig}}};</script>
+    <script>var beaconchain_distribution = {{{depositContract.beaconchain_distribution}}}, depositContract = {{{depositContract.chart}}}, unclaimedgno_distribution = {{{depositContract.unclaimedgno_distribution}}}, chartsUIconfig = {{{chartsUIconfig}}};</script>
     <script type="text/javascript" src="/js/chart-presenter.js"></script>
-    <script type="text/javascript" src="/js/charts/wallets-distribution.js"></script>
+    
     <script type="text/javascript" src="/js/charts/depositcontractbalance.js"></script>
+    <script type="text/javascript" src="/js/charts/withdrawalwallets-unclaimedgno-distribution.js"></script>
+    <script type="text/javascript" src="/js/charts/beaconchain-distribution.js"></script>
     <script type="text/javascript" src="/js/charts/queue.js"></script>
     <script>charts.ActivateLazyLoad();</script>
 </main>

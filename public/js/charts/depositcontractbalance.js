@@ -26,12 +26,17 @@ DepositContractBalanceChart.prototype.ConfigurateChart = function(){
     depositContract.gno_contract.push(depositContract.gno_contract[0]);
     depositContract.gno_balance.push(depositContract.gno_balance[0] * 1);*/
 
+    const RequiredGNO = [];
+    for (let i = 0; i < depositContract.gno_contract.length; i++) {
+        RequiredGNO.push(depositContract.gno_validators[i] + depositContract.gno_unclaimed[i]);
+    }
+
     var chartdata = {
         labels: depositContract.date,
         datasets: [
             {
-                label: 'GNO assigned to validators',
-                data: depositContract.gno_validators,
+                label: 'GNO on beaconchain + unclaimed GNO',
+                data: RequiredGNO,
                 borderColor: 'black',//'rgb(255, 99, 132)',
                 backgroundColor: 'black',//'rgb(255, 99, 132)',
                 yAxisID: 'y',
@@ -40,6 +45,17 @@ DepositContractBalanceChart.prototype.ConfigurateChart = function(){
                 fill: false
                 //fill: '+1',
             },
+            /*{
+                label: 'Unclaimed GNO by Withdrawal wallets',
+                data: depositContract.gno_unclaimed,
+                borderColor: 'grey',//'rgb(255, 99, 132)',
+                backgroundColor: 'grey',//'rgb(255, 99, 132)',
+                yAxisID: 'y',
+                pointRadius:0,
+                borderWidth: 3,
+                fill: false,
+                //fill: '+1',
+            },*/
             {
                 label: 'GNO balance in deposit contract',
                 data: depositContract.gno_contract,
@@ -130,6 +146,8 @@ DepositContractBalanceChart.prototype.ConfigurateChart = function(){
                         afterBody: function(context) {
                             const index = context[0].dataIndex;
                             return [
+                                `GNO attached to validators on beaconchain: ${depositContract.gno_validators[index]}`,
+                                `Unclaimed GNO: ${depositContract.gno_unclaimed[index]}`,
                                 `GNO balance: ${depositContract.gno_balance[index]}`,
                             ];
                         }

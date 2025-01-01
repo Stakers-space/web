@@ -60,7 +60,7 @@
 					{{/if}}
 					// install change listener
 					InstallOnInteractiveInputChangedListener();
-				} else {
+				} else { // logged user
 					accounData = pd.d;
 					
 					// hide authentization
@@ -119,50 +119,54 @@
 		function LoadServerDataToDoc(serverSelected = null){
 			const urlParams = new URLSearchParams(window.location.search);
 			if(!serverSelected) serverSelected = urlParams.get('sid');
-			if(!serverSelected) return;
-			
-			document.getElementById("account-server-link").href="/dashboard/server-node/define?id="+serverSelected;
-			serverData = accounData[serverSelected];
-			console.log("Load Data for Server index", serverSelected, "from", accounData, "→", serverData);
-			
-			// update server user
-			UpdateMarks("serverUser", serverData.serverUser, true);
-			UpdateMarks("sshPort", serverData.sshPort, true);
-			try {
-				if(typeof UpdateInstanceSetup === 'function') UpdateInstanceSetup();
-			} catch(e) {
-				console.error("Error updating instance setup", e);
-			}
-			
-			// client
-			if(serverData.execution.length > 0) {
-				UpdateMarks("ec_1", serverData.execution[0].client);
-				if(serverData.execution[0].ports.length > 0){
-					UpdateMarks("execution_sn", serverData.execution[0].ports[0].service_name);
-					if(serverData.execution[0].ports[0].data_path) UpdateMarks("execution-dp", serverData.execution[0].ports[0].data_path);
-					if(serverData.execution[0].ports[0].port) UpdateMarks("execution-endpoint", serverData.execution[0].ports[0].port);
-					if(serverData.execution[0].ports[0].p2p_port) UpdateMarks("execution-p2p", serverData.execution[0].ports[0].p2p_port);
-					if(serverData.execution[0].ports[0].port2) UpdateMarks("execution-rpc", serverData.execution[0].ports[0].port2);
-				}
-			}
-			if(serverData.consensus.length > 0) {
-				UpdateMarks("cc_1", serverData.consensus[0].client);
-				if(serverData.consensus[0].ports.length > 0){
-					UpdateMarks("consensus_sn", serverData.consensus[0].ports[0].service_name);
-					if(serverData.consensus[0].ports[0].data_path) UpdateMarks("consensus-dp", serverData.consensus[0].ports[0].data_path);
-					if(serverData.consensus[0].ports[0].port) UpdateMarks("consensus-endpoint", serverData.consensus[0].ports[0].port);
-					if(serverData.consensus[0].ports[0].p2p_port) UpdateMarks("consensus-p2p", serverData.consensus[0].ports[0].p2p_port);
-					if(serverData.consensus[0].ports[0].port2) UpdateMarks("consensus-quic", serverData.consensus[0].ports[0].port2);
-				}
-			}
 
-			// Instance update
-			LoadInstanceDataToDocs();
+			console.log("Account data:",accounData,"| Server selected:", serverSelected);
 
-			// decrypt Data
-			document.getElementById("mainDecryptBtn").click();
+			if(serverSelected) {
+				// set server link
+				document.getElementById("account-server-link").href="/dashboard/server-node/define?id="+serverSelected;
+				serverData = accounData[serverSelected];
+				console.log("Load server data:", serverData);
+				
+				// update server user
+				UpdateMarks("serverUser", serverData.serverUser, true);
+				UpdateMarks("sshPort", serverData.sshPort, true);
+				try {
+					if(typeof UpdateInstanceSetup === 'function') UpdateInstanceSetup();
+				} catch(e) {
+					console.error("Error updating instance setup", e);
+				}
+				
+				// client
+				if(serverData.execution.length > 0) {
+					UpdateMarks("ec_1", serverData.execution[0].client);
+					if(serverData.execution[0].ports.length > 0){
+						UpdateMarks("execution_sn", serverData.execution[0].ports[0].service_name);
+						if(serverData.execution[0].ports[0].data_path) UpdateMarks("execution-dp", serverData.execution[0].ports[0].data_path);
+						if(serverData.execution[0].ports[0].port) UpdateMarks("execution-endpoint", serverData.execution[0].ports[0].port);
+						if(serverData.execution[0].ports[0].p2p_port) UpdateMarks("execution-p2p", serverData.execution[0].ports[0].p2p_port);
+						if(serverData.execution[0].ports[0].port2) UpdateMarks("execution-rpc", serverData.execution[0].ports[0].port2);
+					}
+				}
+				if(serverData.consensus.length > 0) {
+					UpdateMarks("cc_1", serverData.consensus[0].client);
+					if(serverData.consensus[0].ports.length > 0){
+						UpdateMarks("consensus_sn", serverData.consensus[0].ports[0].service_name);
+						if(serverData.consensus[0].ports[0].data_path) UpdateMarks("consensus-dp", serverData.consensus[0].ports[0].data_path);
+						if(serverData.consensus[0].ports[0].port) UpdateMarks("consensus-endpoint", serverData.consensus[0].ports[0].port);
+						if(serverData.consensus[0].ports[0].p2p_port) UpdateMarks("consensus-p2p", serverData.consensus[0].ports[0].p2p_port);
+						if(serverData.consensus[0].ports[0].port2) UpdateMarks("consensus-quic", serverData.consensus[0].ports[0].port2);
+					}
+				}
+
+				// Instance update
+				LoadInstanceDataToDocs();
+
+				// decrypt Data
+				document.getElementById("mainDecryptBtn").click();
+			}
+			
 			// instance based data
-
 			InstallOnInteractiveInputChangedListener();
 		}
 

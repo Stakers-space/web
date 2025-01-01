@@ -1,27 +1,27 @@
-function WalletDistributionChart(){
-    console.log("[WalletBalance chart] registered");
-    this.elementId = 'walletbalance_chart';
+function UnclaimedGnoDistributionChart(){
+    console.log("[UnclaimedGnoDistributionChart chart] registered");
+    this.elementId = 'gnodeposit-withdrawalwallets_chart';
     /*if(!window["pendingRegistrations"]) window["pendingRegistrations"] = [];
     window["pendingRegistrations"].push()*/
     charts[this.elementId] = this;
     this.onScaleChange = this.OnScaleChange;
 }
-WalletDistributionChart.prototype.Init = function(){
+UnclaimedGnoDistributionChart.prototype.Init = function(){
     var app = this;
     console.log("[WalletBalance] Init");
     app.ConfigurateChart();
     charts.Render(app.elementId, app.chartConfig);
 };
 
-WalletDistributionChart.prototype.ConfigurateChart = function(){
+UnclaimedGnoDistributionChart.prototype.ConfigurateChart = function(){
     // convert to array
 
     var chartdata = {
-        labels: distribution.holdings,
+        labels: unclaimedgno_distribution.holdings,
         datasets: [
             {
-                label: 'Validators',
-                data: distribution.validators,
+                label: 'Wallets',
+                data: unclaimedgno_distribution.wallets,
                 borderColor: 'black',//'rgb(255, 99, 132)',
                 backgroundColor: 'black',//'rgb(255, 99, 132)',
                 yAxisID: 'y',
@@ -89,7 +89,7 @@ WalletDistributionChart.prototype.ConfigurateChart = function(){
     };
 };
 
-WalletDistributionChart.prototype.OnScaleChange = function(value){
+UnclaimedGnoDistributionChart.prototype.OnScaleChange = function(value){
     console.log("On Scale Change", value, this, "chart:", charts.charts[this.elementId], "chart data:", charts.charts[this.elementId].data);
     var chart = this;
     /*this.SetData(value,function(){
@@ -106,8 +106,8 @@ WalletDistributionChart.prototype.OnScaleChange = function(value){
 };
 
 
-WalletDistributionChart.prototype.SetData = function(value,cb){
+UnclaimedGnoDistributionChart.prototype.SetData = function(value,cb){
 
 };
 
-new WalletDistributionChart();
+new UnclaimedGnoDistributionChart();

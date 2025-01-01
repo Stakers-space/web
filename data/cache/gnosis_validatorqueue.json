@@ -1,53 +1,66 @@
 {
   "date": [
     "2024-12-07",
-    "2024-12-28"
+    "2024-12-28",
+    "2025-01-01"
   ],
   "validators": [
     320907,
-    323349
+    323349,
+    328567
   ],
   "entry_queue": [
     1694,
-    5588
+    5588,
+    1
   ],
   "entry_wait": [
     12.533333333333333,
-    41.38333333333333
+    41.38333333333333,
+    0
   ],
   "exit_queue": [
     0,
-    0
+    0,
+    13
   ],
   "exit_wait": [
     0,
-    0
+    0,
+    0.08333333333333333
   ],
   "churn": [
+    3,
     3,
     3
   ],
   "entry_churn": [
     null,
+    null,
     null
   ],
   "exit_churn": [
+    null,
     null,
     null
   ],
   "supply": [
     null,
+    null,
     null
   ],
   "staked_amount": [
+    null,
     null,
     null
   ],
   "staked_percent": [
     null,
+    null,
     null
   ],
   "apr": [
+    null,
     null,
     null
   ]

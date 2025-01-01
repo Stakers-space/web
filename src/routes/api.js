@@ -39,20 +39,26 @@ router.use('/web/cache', require('./cache'));
 router.use('/alert', require('./alert'));
 
 const azureCosmosDB = require('../services/azureCosmosDB');
-const gnoDistributionToken = require('../config/config.secret.json').gnoDistributionToken;
+const gnoDistributionToken = config.gnoDistributionToken;
 const getDateFormatted = require('../utils/get-date-formatted.js');
-// may be saved right by server, without web assistance...
+
+// ToDO: may be saved right by server, without web assistance...
 router.post('/web/gno-balance', function(req, res){
+    //console.log("├── /api/web/gno-balance", req.query, req.body);
+    if(req.query.st !== gnoDistributionToken) {
+        console.log("/api/web/gno-balance | Unauthorized access", req.query, req.body);
+        return res.status(500).send("Unauthorized access");
+    }
+
     const dateFormat = getDateFormatted();
-    if(req.query.st !== gnoDistributionToken) return res.status(500).send("Unauthorized access");
 
     let receivedData = req.body;
     receivedData.id = "gno-distribution-"+dateFormat;
     receivedData.date = dateFormat;
     receivedData.partitionKey = "gno-distribution";    
-    console.log("saving", receivedData);
+    console.log("└── saving", receivedData);
     azureCosmosDB.createFamilyItem("data", receivedData, (err,resp) => {
-        console.log(err,resp);
+        if(err) console.log(err,resp);
         res.send("ok");
     });
 });
@@ -63,7 +69,7 @@ router.post('/keystores', function(req, res){
     const chain = req.query.ch;
     const token = req.query.t;
 
-    if(token !== keystoresUpdatorToken) {
+    if(token !== config.keystoresUpdatorToken) {
         console.log("Unauthorized access", req.query, req.body);
         return res.status(500).send("Unauthorized access"); 
     }
