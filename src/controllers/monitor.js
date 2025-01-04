@@ -6,9 +6,12 @@ const MailService = require('../services/customMailing');
 const cache = require('../middlewares/cache');
 const MailMessage = require('../models/emailMessage/validators_alert.js');
 
+let noIncominMessageTimer = null;
+
 exports.UpdateValidatorsState = (req,res) => {
 	/**
 	 * ToDo: Remake - based on server owner. Not account valkeys owner
+	 * ToDo: Add Ethereum support
 	*/
     var decryptedData = null;
 	if (req.is('application/json')) {
@@ -26,7 +29,7 @@ exports.UpdateValidatorsState = (req,res) => {
 	console.log("[API] Validator status | Epoch:", data.e, data);
 	
 	// Update last Epoch Reported Number
-	cache.setLastEpochReported(data.e);
+	cache.setLastEpochReported("gnosis", data.e);
 
 	let instanceReport = {}; // Convert account-based to instance-based (Temporary - accounts will be removed later, it will be based on instanceId with account api_token verification)
 	let accountReport = {};
@@ -91,6 +94,15 @@ exports.UpdateValidatorsState = (req,res) => {
 			} catch(e){console.log(e);}
 		});
 	}
+
+	// no incomming message alert
+	cache.getSetValidatorsStateSynced(true);
+	clearTimeout(noIncominMessageTimer);
+	noIncominMessageTimer = setTimeout(() => {
+		console.log(new Date(), "UpdateValidatorState | No incoming message alert!!!");
+		cache.getSetValidatorsStateSynced(false);
+		if(process.env.PORT !== undefined) MailService.SendMail(null, "stakersspace@proton.me", "No incoming message alert", "No incoming message alert");
+	}, 300000);
 
 	// completing
 	res.send("ok");

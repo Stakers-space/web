@@ -17,7 +17,7 @@ ul.img_marker li {
             Validators: <ul class="img_marker account_validators" style="display:ruby;">
                 <li style="--marker-image: url('/logo/ethereum.svg')" class="f-bold">???</li>
                 <li style="--marker-image: url('/logo/gnosis.svg');margin-left: 50px" class="f-bold">???</li>
-            </ul> | Last Epoch reported: <a href="https://gnosischa.in/epochs" target="_blank" rel="nofollow noopener noreferrer">{{lastEpochReported}}</a> | {{{offlineStateInfo}}}
+            </ul> | Last Epoch reported: <a href="https://gnosischa.in/epochs" target="_blank" rel="nofollow noopener noreferrer" {{#if lastEpochNotSynced}}style="color:red" title="Warning: Data are not up do date"{{/if}}>{{lastEpochReported}}</a> | {{{offlineStateInfo}}}
         </div>
         
         {{#each servers}}

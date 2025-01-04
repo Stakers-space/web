@@ -5,7 +5,6 @@ const InstanceModel = require('../../models/dashboard/instance.js');
 const sanitizeHtml = require('sanitize-html');
 
 const cache = require('../../middlewares/cache');
-cache.setLastEpochReported(0);
 
 exports.DefineInstance = (req, res, next) => {
     // ToDo: Protection - Allow view for accounts with access only

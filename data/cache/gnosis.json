@@ -1228,16 +1228,16 @@
       "total_minted": 3000000,
       "dao_gno_buyback": 184152.97,
       "outstanding_tokens": 1435358.6715516967,
-      "marketCap": 411534350.331635,
-      "bookValueRatio": 0.8198028428415283,
-      "bookValueUsd": 501991855.6334971,
+      "marketCap": 411842537.6029614,
+      "bookValueRatio": 0.818225622712127,
+      "bookValueUsd": 503336153.46565396,
       "formated": {
-        "bookValueUsd": "$ 501,991,855.63",
-        "marketCap": "$ 411,534,350.33",
+        "bookValueUsd": "$ 503,336,153.47",
+        "marketCap": "$ 411,842,537.60",
         "bookValueRatio": "0.82",
         "outstanding_tokens": "1,435,359"
       },
-      "gnoPrice": 286.7118571045,
+      "gnoPrice": 286.92656808749996,
       "gno_in_dao_holdings": 1564641.3284483033
     },
     "buybacks_sum": {

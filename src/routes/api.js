@@ -11,7 +11,6 @@ const bodyParser = require('body-parser');
 /*router.use(bodyParser.urlencoded({
     extended: true
 }));*/
-router.use(bodyParser.json(  ));
 router.use(express.text());
 const config = require('../config/config.secret.json');
 
@@ -30,13 +29,13 @@ router.use(passport.initialize());
 router.use(passport.authenticate('session'));
 router.use(passport.session());
 
-router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.urlencoded({ limit: '15mb', extended: true }));
 router.use(bodyParser.json( {limit: '15mb'} ));
 router.use(cookieParser());
 
 router.post('/validator-state', Controller.UpdateValidatorsState);
 router.use('/web/cache', require('./cache'));
-router.use('/alert', require('./alert'));
+router.use('/alert', require('./alert')); // login to server alert
 
 //const azureCosmosDB = require('../services/azureCosmosDB');
 //const gnoDistributionToken = config.gnoDistributionToken;
@@ -111,12 +110,18 @@ router.get('/account', function(req,res){
 
 router.get('/alert', function(req,res){
     // verify api key, get account instances
-    
     // return: 0 = no notification 
             // 1 = common notification
             // 2 = critical notification 
 
-    res.send(JSON.stringify({"alert":(cache.getOfflineStatesAlertType())}));
+    let responseState = 0;
+    if(!cache.getSetValidatorsStateSynced()) {
+        responseState = 2;
+    } else {
+        responseState = cache.getOfflineStatesAlertType();
+    }
+
+    res.send(JSON.stringify({"alert":responseState}));
 });
 
 

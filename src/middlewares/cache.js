@@ -1,4 +1,4 @@
-let lastEpochReported = null;
+let lastEpochReported = { gnosis: 0, ethereum: 0 };
 let offlineStates = {};
 /**
  * {
@@ -11,6 +11,11 @@ let pubkeysQueue = {
     gnosis: {},
     ethereum: {}
 };
+
+/**
+ * Track whether the app has up to date data about validator states
+ */
+let validatorsStateSynced = true;
 
 function getLastEpochReported() { return lastEpochReported; }
 function getOfflineState(instanceIds){ 
@@ -41,10 +46,9 @@ function getLastReportSent(accountId){
     return (lastReportSent[accountId]) ? lastReportSent : 0;
 }
 
-function setLastEpochReported(value) { lastEpochReported = value; }
+function setLastEpochReported(chain, value) { lastEpochReported[chain] = value; }
 function setOfflineStates(data){ offlineStates = data; console.log("cached offline states:", offlineStates); }
 function setLastReportSent(accountId, timestamp){ lastReportSent[accountId] = timestamp; }
-
 
 function addPubkeystoQueue(chain, instanceId,pubkeys,indexes,password, activateMonitoring=false){
     pubkeysQueue[chain][instanceId] = {
@@ -63,6 +67,11 @@ function getPubkeyFromQueue(chain){
     return firstValue;
 }
 
+function getSetValidatorsStateSynced(state = null){
+    if(state) validatorsStateSynced = state;
+    return validatorsStateSynced;
+}
+
 module.exports = {
     getLastEpochReported,
     setLastEpochReported,
@@ -72,5 +81,6 @@ module.exports = {
     setLastReportSent,
     addPubkeystoQueue,
     getPubkeyFromQueue,
-    getOfflineStatesAlertType
+    getOfflineStatesAlertType,
+    getSetValidatorsStateSynced
 };

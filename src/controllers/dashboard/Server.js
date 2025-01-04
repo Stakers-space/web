@@ -4,7 +4,6 @@ const ServerModel = require('../../models/dashboard/server');
 const sanitizeHtml = require('sanitize-html');
 
 const cache = require('../../middlewares/cache');
-cache.setLastEpochReported(0);
 
 const fs = require('fs'),
     path = require('path');

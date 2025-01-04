@@ -21,8 +21,8 @@ router.use(passport.initialize());
 router.use(passport.authenticate('session'));
 router.use(passport.session());
 
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json( {limit: '1mb'} ));
+router.use(bodyParser.urlencoded({ limit: '15mb', extended: true }));
+router.use(bodyParser.json( {limit: '15mb'} ));
 router.use(cookieParser());
 /**
  * Routes
