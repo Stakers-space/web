@@ -573,10 +573,26 @@ MySqlDBplatform.prototype.Api_PushResourcesData = function(account_id, server_id
 }
 MySqlDBplatform.prototype.GetServersResourcesData = function(account_id, cb){
     var MC = mySql.createConnection(mySqlCredentials);
+    let responseObj = {resources: null, servers: null};
     MC.query('SELECT * FROM server_resources WHERE account_id = '+MC.escape(account_id)+' ORDER BY timestamp',
         function(err,rows) {
-            MC.end();
-            return cb(err, rows);
+            if(err){ MC.end(); return cb(err, responseObj); }
+            responseObj.resources = rows;
+
+            const results = rows.length;
+            if(results === 0){ MC.end(); return cb(err, responseObj); }
+
+            let serverIds = new Set();
+            for (const row of rows) { serverIds.add(row.server_id); }
+            serverIds = Array.from(serverIds);
+            MC.query('SELECT id, name FROM servers WHERE id IN ('+MC.escape(serverIds)+')', function(err, serverNames) {
+                MC.end();
+                responseObj.servers = {};
+                for (const server of serverNames) {
+                    responseObj.servers[server.id] = server.name;
+                }
+                return cb(err, responseObj);
+            });
         }
     );
 };

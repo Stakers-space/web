@@ -3,14 +3,19 @@ const mysqlSrv = require('../../services/mysqlDB');
 exports.ServerResources = function(req,res,next){
     let resourcesByServer = {};
     new mysqlSrv().GetServersResourcesData(req.user.id, function(err,data){
-
+        if(err) return res.status(500).send("Error: "+err);
+        
         // aggregate by servers
-        for (const mark of data) {
-            if(!resourcesByServer[mark.server_id]) resourcesByServer[mark.server_id] = [];
-            resourcesByServer[mark.server_id].push(mark);
+        for (const mark of data.resources) {
+            if(!resourcesByServer[mark.server_id]) resourcesByServer[mark.server_id] = {
+                name: data.servers[mark.server_id],
+                data: []
+            };
+            resourcesByServer[mark.server_id].data.push(mark);
         }
 
         const resourcesByServerArray = Object.entries(resourcesByServer);
+        console.log(resourcesByServerArray);
         res.locals.resourcesByServer = resourcesByServerArray;
 
         res.locals.resourcesByServerJSON = JSON.stringify(resourcesByServer);

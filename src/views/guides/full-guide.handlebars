@@ -83,8 +83,6 @@ $ sudo reboot</code></pre>
         						<pre><code>sudo ufw default deny incoming
 sudo ufw default allow outgoing</code></pre>
 							</li>
-							<li>Check Firewall Ports
-							<pre><code>sudo ufw numbered</code></pre></li>
 						</ul>
 						<p><strong>NOTE: Firewall will be activated later, after adding additional configuration in next steps.</strong></p>
 					</div>
@@ -172,6 +170,7 @@ sudo ufw default allow outgoing</code></pre>
 												<pre><code>sudo ufw status numbered</code></pre>
 											</li>
 										</ol>
+										<p><strong>NOTE: If you are facing an issue to sign in over SSH after changing the port, try reboot the staking node and sign in again.</strong></p>
 									</li>
 									<li class="mt-40" id="2fa">
 										<h4>Configuring 2FA authentization</h4>

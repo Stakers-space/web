@@ -5,7 +5,7 @@
         <h1>Server Resources</h1>
         <div class="egrid">
             {{#each resourcesByServer}}
-                <h2>Server ID {{this.[0]}}</h2>
+                <h2>Server {{this.[1].name}}</h2>
                 <canvas id="srv_{{this.[0]}}" name="lazy-canvas"></canvas>
             {{/each}}
         </div>

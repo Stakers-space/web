@@ -31,19 +31,19 @@ router.use(passport.authenticate('session'));
 router.use(passport.session());
 
 router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json( {limit: '2mb'} ));
+router.use(bodyParser.json( {limit: '15mb'} ));
 router.use(cookieParser());
 
 router.post('/validator-state', Controller.UpdateValidatorsState);
 router.use('/web/cache', require('./cache'));
 router.use('/alert', require('./alert'));
 
-const azureCosmosDB = require('../services/azureCosmosDB');
-const gnoDistributionToken = config.gnoDistributionToken;
-const getDateFormatted = require('../utils/get-date-formatted.js');
+//const azureCosmosDB = require('../services/azureCosmosDB');
+//const gnoDistributionToken = config.gnoDistributionToken;
+//const getDateFormatted = require('../utils/get-date-formatted.js');
 
 // ToDO: may be saved right by server, without web assistance...
-router.post('/web/gno-balance', function(req, res){
+/*router.post('/web/gno-balance', function(req, res){
     //console.log("├── /api/web/gno-balance", req.query, req.body);
     if(req.query.st !== gnoDistributionToken) {
         console.log("/api/web/gno-balance | Unauthorized access", req.query, req.body);
@@ -61,7 +61,7 @@ router.post('/web/gno-balance', function(req, res){
         if(err) console.log(err,resp);
         res.send("ok");
     });
-});
+});*/
 
 router.post('/keystores', function(req, res){
     // if incoming data → process the data

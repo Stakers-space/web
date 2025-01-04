@@ -1,5 +1,6 @@
     const isSmallScreen = (window.innerWidth < 700);
     for (const id in resourcesByServer) {
+        // render servrer data
         if (resourcesByServer.hasOwnProperty(id)) {
             let chartDataFormat = {
                 time: [],
@@ -10,7 +11,8 @@
                 vpn_status: [],
                 vpn_server: []
             }
-            for(const obj of resourcesByServer[id]){
+            
+            for(const obj of resourcesByServer[id].data){
                 chartDataFormat.time.push(obj.timestamp);
                 chartDataFormat.disk.push(obj.disk_usage);
                 chartDataFormat.ram.push(obj.ram_usage);
@@ -19,6 +21,7 @@
                 chartDataFormat.vpn_status.push(obj.vpn);
                 chartDataFormat.vpn_server.push(obj.vpn_server);
             }
+
             console.log(id, chartDataFormat);
 
             // render chart
