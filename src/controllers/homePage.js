@@ -122,7 +122,7 @@ HomePagePresenter.prototype.CacheIndexData = function(cb){
             }
         }
         
-        const gnoPrice = gnosisData.gnoDashboard.generalHealthOverview.gnoPrice;
+        const gnoPrice = 0//;gnosisData.gnoDashboard.generalHealthOverview.gnoPrice;
         let stakedGno;
         index = -1;
         while (!stakedGno) {

@@ -2,8 +2,8 @@
 var app = null;
 const fs = require('fs'),
     path = require('path'),
-    numeral = require('numeral'),
-    httpXmlModule = require('../utils/xmlhttps');
+    numeral = require('numeral');
+    //httpXmlModule = require('../utils/xmlhttps');
 const cache_validatorQueue = require('../middlewares/cache/validatorqueue');
 
 const azureCosmosDB = require('../services/azureCosmosDB');
@@ -53,7 +53,7 @@ GnosisController.prototype.Request = function(req,res, next){
             res.locals.beaconData = JSON.stringify(parsedData.beaconData);
             res.locals.chainData = JSON.stringify(parsedData.chainData);
             //console.log("gno price:", parsedData.gnoDashboard.generalHealthOverview);
-            res.locals.gnoPrice = numeral(parsedData.gnoDashboard.generalHealthOverview.gnoPrice).format('$0,0');
+            res.locals.gnoPrice = numeral(/*parsedData.gnoDashboard.generalHealthOverview.gnoPrice*/0).format('$0,0');
             res.locals.dashboardData = JSON.stringify(parsedData.gnoDashboard);
             //res.locals.ethStoreData = JSON.stringify(parsedData.ethStore);
             res.locals.chartsUIconfig = JSON.stringify({
@@ -217,7 +217,7 @@ GnosisController.prototype.DepositContract = function(req,res,next){
 GnosisController.prototype.CacheIndexData = function(cb){
     //console.log(`${new Date()} GnosisController.prototype.CacheIndexPageData`);
 
-    var callbacks = 6;
+    var callbacks = 5;
     
     var vaultServicesData = null,
         validatorHostingServicesData = null,
@@ -347,7 +347,7 @@ GnosisController.prototype.CacheIndexData = function(cb){
     });*/
 
     // https get req from api
-    new httpXmlModule().HttpsRequest({
+    /*new httpXmlModule().HttpsRequest({
         hostname: 'gnodashboard.azurewebsites.net',
         path: '/api/gnosis-overview',
         method: 'GET',
@@ -365,7 +365,7 @@ GnosisController.prototype.CacheIndexData = function(cb){
             }
         }
         taskCompleted(err, "gnodashboard api");
-    });
+    });*/
 
     // Get Vault services data
     // console.log("Getting vauld services:", app.vaultServicesData);

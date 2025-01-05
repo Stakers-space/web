@@ -98,8 +98,9 @@ exports.UpdateValidatorsState = (req,res) => {
 	// no incomming message alert
 	cache.getSetValidatorsStateSynced(true);
 	clearTimeout(noIncominMessageTimer);
+	console.log("UpdateValidatorsState | Clearing and reActivating noIncominMessageTimer");
 	noIncominMessageTimer = setTimeout(() => {
-		console.log(new Date(), "UpdateValidatorState | No incoming message alert!!!");
+		console.log(new Date(), "UpdateValidatorState | Triggering No incoming message alert!!!");
 		cache.getSetValidatorsStateSynced(false);
 		if(process.env.PORT !== undefined) MailService.SendMail(null, "stakersspace@proton.me", "No incoming message alert", "No incoming message alert");
 	}, 300000);

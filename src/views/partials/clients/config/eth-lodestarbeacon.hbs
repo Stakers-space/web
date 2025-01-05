@@ -15,7 +15,9 @@ ExecStart=/usr/local/bin/lodestar/lodestar beacon \
   --execution.urls http://127.0.0.1:<mark class="execution-endpoint">8551</mark> \
   --jwt-secret /var/lib/jwtsecret/ethereum.hex \
   --port <mark class="consensus-p2p">9000</mark> \
-  --port6 <mark class="consensus-p2p_v6">9090</mark>
+  --discoveryPort <mark class="consensus-p2p">9000</mark> \
+  --rest.port <mark class="consensus-endpoint">9596</mark>
+  #--port6 <mark class="consensus-p2p_v6">9090</mark>
   #--suggestedFeeRecipient 0x.........................
 [Install]
 WantedBy=multi-user.target</code></pre>

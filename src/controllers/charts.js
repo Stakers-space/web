@@ -2,7 +2,7 @@
 var app = null;
 const fs = require('fs'),
       path = require('path'),
-      httpXmlModule = require('../utils/xmlhttps'),
+      //httpXmlModule = require('../utils/xmlhttps'),
       EthStoreDataModel = require('../models/ethstoretable.js'),
       EthBeaconChainData = require('../models/ethbeaconchaintable'),
       GnoBeaconChainData = require('../models/gnobeaconchaintable'),
@@ -134,7 +134,7 @@ ChartsPagePresenter.prototype.Response = function(req,res){
 ChartsPagePresenter.prototype.CacheData = function(cb){
     //console.log(`${new Date()} GnosisController.prototype.CacheIndexPageData`);
 
-    var callbacks = 6;
+    var callbacks = 5;
 
     var ethereum_srcData = {
         storeData: null,
@@ -178,7 +178,7 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
     });
 
     // https get req from api
-    new httpXmlModule().HttpsRequest({
+    /*new httpXmlModule().HttpsRequest({
         hostname: 'gnodashboard.azurewebsites.net',
         path: '/api/gnosis-overview',
         method: 'GET',
@@ -196,7 +196,7 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
             }
         }
         taskCompleted(err, "gnodashboard api");
-    });
+    });*/
 
 
     function taskCompleted(err, taskId){ callbacks--;
@@ -317,8 +317,8 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
                         increments: CalculateTimeChange(gnosis_arrData.beaconData.tvl, '$0,0')*/
                     },
                     supply: {
-                        value: gnosis_srcData.gnoDashboardData.generalHealthOverview.outstanding_tokens,
-                        value_formated: numeral(gnosis_srcData.gnoDashboardData.generalHealthOverview.outstanding_tokens).format('0,0')
+                        value: 0,//gnosis_srcData.gnoDashboardData.generalHealthOverview.outstanding_tokens,
+                        value_formated: numeral(/*gnosis_srcData.gnoDashboardData.generalHealthOverview.outstanding_tokens*/0).format('0,0')
                     }
                 }
             }
