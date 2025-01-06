@@ -348,10 +348,12 @@ sudo systemctl disable ssh</code></pre>
 					</aside>
 					<h3 class="mt-60">Install Consensus client</h3>
 					<div class="tabselector">
-						<nav class="egrid egrid-3">
+						<nav class="egrid egrid-5">
 							<button class="tab selected" data-tabpanel="1" onclick="OnConsensusClientChanged('lighthouse')">Lighthouse</button>
 							<button class="tab" data-tabpanel="2" onclick="OnConsensusClientChanged('lodestar')">Lodestar</button>
 							<button class="tab" data-tabpanel="3" onclick="OnConsensusClientChanged('teku')">Teku</button>
+							<button class="tab" data-tabpanel="4" onclick="OnConsensusClientChanged('nimbus')">Nimbus</button>
+							<button class="tab" data-tabpanel="5" onclick="OnConsensusClientChanged('prysm')">Prysm</button>
 						</nav>
 
 						<div class="tabpanel selected">
@@ -368,6 +370,16 @@ sudo systemctl disable ssh</code></pre>
 {{> clients/teku_cli InstallationGuide=true }}
 <h3 class="mt-60">Configurate Teku Beacon service</h3>
 {{> clients/teku_cli_config PortSelection=false}}
+						</div>
+						<div class="tabpanel">
+{{> clients/nimbus_cli InstallationGuide=true }}
+<h3 class="mt-60">Configurate Nimbus Beacon service</h3>
+{{> clients/nimbus_cli_config PortSelection=false}}
+						</div>
+						<div class="tabpanel">
+{{> clients/prysm_cli InstallationGuide=true }}
+<h3 class="mt-60">Configurate Prysm Beacon service</h3>
+{{> clients/prysm_cli_config PortSelection=false}}
 						</div>
 					</div>
                 </div>

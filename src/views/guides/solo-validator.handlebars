@@ -94,22 +94,32 @@
 					
 					<h3 class="mt-30">Configurate & Run Validator instance</h3>
 					<div class="tabselector">
-						<nav class="egrid egrid-3">
+						<nav class="egrid egrid-5">
 							<button class="tab selected" data-tabpanel="1" onclick="OnValidatorClientChanged('lighthouse')">Lighthouse</button>
 							<button class="tab" data-tabpanel="2" onclick="OnValidatorClientChanged('lodestar')">Lodestar</button>
 							<button class="tab" data-tabpanel="3" onclick="OnValidatorClientChanged('teku')">Teku</button>
+							<button class="tab" data-tabpanel="4" onclick="OnValidatorClientChanged('nimbus')">Nimbus</button>
+							<button class="tab" data-tabpanel="5" onclick="OnValidatorClientChanged('prysm')">Prysm</button>
 						</nav>
 						<div class="tabpanel selected">
 {{> clients/lighthouse_validator AddValidator=true}}
-<p>Guide to exit validator is available at <a href="https://stakers.space/lighthouse#exit-validator">https://stakers.space/lighthouse#exit-validator</a>.</p>
+<p>Guide to exit validator is available at <a href="https://stakers.space/lighthouse/exit-validator">https://stakers.space/lighthouse/exit-validator</a>.</p>
 						</div>
 						<div class="tabpanel">
 {{> clients/lodestar_validator AddValidator=true}}
-<p>Guide to exit validator is available at <a href="https://stakers.space/lodestar#exit-validator">https://stakers.space/lodestar#exit-validator</a>.</p>
+<p>Guide to exit validator is available at <a href="https://stakers.space/lodestar/exit-validator">https://stakers.space/lodestar/exit-validator</a>.</p>
 						</div>
 						<div class="tabpanel">
 {{> clients/teku_validator AddValidator=true}}
-<p>Guide to exit validator is available at <a href="https://stakers.space/teku#exit-validator">https://stakers.space/teku#exit-validator</a>.</p>
+<p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/teku/exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/nimbus_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/nimbus/exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/prysm_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/prysm/exit-validator</a>.</p>
 						</div>
 					</div>
                 </div>

@@ -111,9 +111,10 @@
                                     </ul>
                                 </li>
                                 <li id="timedatectl"><h3>Check server time</h3>
-                                    <p>Check that server time is being siynchronized</p>
+                                    <p>The beacon chain relies on your computer having the correct time set (±0.5 seconds). To fulfill that, check that server time is being siynchronized</p>
                                     <pre><code>timedatectl status</code></pre>
                                     <i><code>System clock synchronized</code> must have value <code>yes</code>. If not, run <code>timedatectl set-ntp true</code>.</i>
+                                    <p>You can also consider install <a href="https://chrony-project.org/" target="_blank" rel="nofollow noopenor noreferrer">Chrony</a> </p>
                                 </li>
                                 <li><h3>Check clients statuses</h3>
                                     <p>Usually, <code>Loaded</code> state instead of <code>Active</code> on a client service may occur after a system reboot with missing autostart setup. Status of any service may be checked with a use of following command:</p>

@@ -2,6 +2,26 @@
   "all": [
     {
       "partitionKey": "news",
+      "t": 1736181707441,
+      "m": "<b>Erigon</b> version 2.61.0 released",
+      "a": "https://stakers.space/erigon#update",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "d42124f9-dad2-4406-b303-591a5133aaba",
+      "_rid": "VPZWAPgLfukcKwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukcKwAAAAAAAA==/",
+      "_etag": "\"2806fe76-0000-1600-0000-677c08160000\"",
+      "_attachments": "attachments/",
+      "_ts": 1736181782,
+      "ht": "06.01.2025, 17:41:47",
+      "ta": "35 minutes ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
       "t": 1732705416690,
       "m": "<b>A security issue was discovered</b>: in the deposit tools",
       "a": "https://github.com/ethereum/staking-deposit-cli/releases/tag/v2.8.0",
@@ -368,6 +388,26 @@
     }
   ],
   "clients": [
+    {
+      "partitionKey": "news",
+      "t": 1736181707441,
+      "m": "<b>Erigon</b> version 2.61.0 released",
+      "a": "https://stakers.space/erigon#update",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "d42124f9-dad2-4406-b303-591a5133aaba",
+      "_rid": "VPZWAPgLfukcKwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukcKwAAAAAAAA==/",
+      "_etag": "\"2806fe76-0000-1600-0000-677c08160000\"",
+      "_attachments": "attachments/",
+      "_ts": 1736181782,
+      "ht": "06.01.2025, 17:41:47",
+      "ta": "35 minutes ago",
+      "img": "gnosis"
+    },
     {
       "partitionKey": "news",
       "t": 1731317014257,

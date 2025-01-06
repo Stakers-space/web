@@ -1,0 +1,20 @@
+<pre><code>[Unit]
+Description=Nimbus Validator Instance (Gnosis Network)
+Wants=network-online.target
+After=network-online.target
+[Service]
+User=<mark class="instance_su" data-client="nimbus">{{servicePrefix}}nimbus-vi<span class="instance_pid" data-client="nimbus">1</span></mark>
+Group=<mark class="instance_su" data-client="nimbus">{{servicePrefix}}nimbus-vi<span class="instance_pid" data-client="nimbus">1</span></mark>
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/nimbus-validator \
+  --network gnosis \
+  --data-dir <mark class="instance_dp" data-client="nimbus">/var/lib{{slashChain}}/nimbus/vi<span class="instance_pid">1</span></mark> \
+  --suggested-fee-recipient <mark class="instance_frw" data-client="teku">0xXXXXXXXXXXXXXXXX</mark> \
+  --graffiti "<mark class="ec_name">Nethermind</mark>+Nimbus"
+  # Beacon Node api endpoint
+  
+[Install]
+WantedBy=multi-user.target</code></pre>
+<p>See more flags at <a href="https://nimbus.guide/options.html" target="_blank" rel="nofollow noopener noreferrer">https://nimbus.guide/options.html</a></p>

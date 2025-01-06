@@ -106,6 +106,15 @@ class ClientPagePresenter {
 				res.locals.partial2ToLoad = "clients/prysm_validator";
 				res.locals.cliLayer = "consensus";
 				break;
+			case 'nimbus':
+				res.locals.client = "nimbus";
+				res.locals.consensusClient = "nimbus";
+				res.locals.clientName = "Nimbus";
+				res.locals.cliPartial = "clients/nimbus_cli";
+				res.locals.cliConfigPartial = "clients/nimbus_cli_config";
+				res.locals.partial2ToLoad = "clients/nimbus_validator";
+				res.locals.cliLayer = "consensus";
+				break;
 			case 'mev-boost':
 				res.locals.clientName = "Mev-boost";
 				res.locals.cliPartial = "clients/mevboost";

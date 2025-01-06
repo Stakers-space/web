@@ -43,7 +43,7 @@ router.use('/ethereumjs', require('./client'));
 router.use('/lighthouse', require('./client'));
 router.use('/lodestar', require('./client'));
 router.use('/teku', require('./client'));
-
+router.use('/nimbus', require('./client'));
 router.use('/prysm', require('./client'));
 router.use('/rocketpool', require('./service'));
 router.use('/stakewise', require('./service'));
