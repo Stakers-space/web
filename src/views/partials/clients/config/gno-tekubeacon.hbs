@@ -17,8 +17,7 @@ ExecStart=/usr/local/bin/teku/bin/teku \
   --ee-jwt-secret-file=/var/lib/jwtsecret/gnosis.hex \
   --metrics-enabled=true \
   --rest-api-enabled=true \
-  --validators-proposer-default-fee-recipient= <mark>0x...</mark> \
-  #--checkpoint-sync-url= \
+  #--validators-proposer-default-fee-recipient=<mark>0x...</mark> \
   --initial-state=https://checkpoint.gnosischain.com/eth/v2/debug/beacon/states/finalized
 [Install]
 WantedBy=multi-user.target</code></pre>

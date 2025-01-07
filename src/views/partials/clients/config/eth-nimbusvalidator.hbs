@@ -8,12 +8,12 @@ Group=<mark class="instance_su" data-client="nimbus">{{servicePrefix}}teku-vi<sp
 Type=simple
 Restart=always
 RestartSec=5
-ExecStart=/usr/local/bin/nimbus-validator \
-  --network mainnet \
-  --data-dir <mark class="instance_dp" data-client="nimbus">/var/lib{{slashChain}}/nimbus/vi<span class="instance_pid">1</span></mark> \
-  --beacon-node http://127.0.0.1:<mark class="consensus-endpoint">5052</mark> \
-  --suggested-fee-recipient <mark class="instance_frw" data-client="teku">0xXXXXXXXXXXXXXXXX</mark> \
-  --graffiti "<mark class="ec_name">Nethermind</mark>+Nimbus"
+ExecStart=/usr/local/bin/nimbus/nimbus_validator_client \
+  --network=mainnet \
+  --data-dir=<mark class="instance_dp" data-client="nimbus">/var/lib{{slashChain}}/nimbus/vi<span class="instance_pid">1</span></mark> \
+  --beacon-node=http://127.0.0.1:<mark class="consensus-endpoint">5052</mark> \
+  --suggested-fee-recipient=<mark class="instance_frw" data-client="teku">0xXXXXXXXXXXXXXXXX</mark> \
+  --graffiti="<mark class="ec_name">Nethermind</mark>+Nimbus"
   # --payload-builder=true --payload-builder-url=https://${HOST}:${PORT}/
  
 [Install]

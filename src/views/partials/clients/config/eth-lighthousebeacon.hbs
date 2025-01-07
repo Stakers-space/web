@@ -16,7 +16,7 @@ ExecStart=/usr/local/bin/lighthouse bn \
   --execution-endpoint http://127.0.0.1:<mark class="execution-endpoint">8551</mark> \
   --execution-jwt /var/lib/jwtsecret/ethereum.hex \
 #  --checkpoint-sync-url https://mainnet.checkpoint.sigp.io \
-  --checkpoint-sync-url=https://beaconstate.info \
+  --checkpoint-sync-url https://beaconstate.info \
   --port <mark class="consensus-p2p">9000</mark> \
   --port6 <mark class="cc-port-v6">9090</mark> \
 #  --discovery-port <mark class="consensus-p2p">9000</mark> \

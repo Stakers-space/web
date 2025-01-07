@@ -9,13 +9,15 @@ Group=<mark class="consensus_sn" data-client="nimbus">{{servicePrefix}}nimbusbea
 Type=simple
 Restart=always
 RestartSec=5
-ExecStart=/usr/local/bin/nimbus-beacon \
+ExecStart=/usr/local/bin/nimbus/nimbus_beacon_node \
   --network=mainnet \
   --data-dir=<mark class="consensus-dp" data-client="nimbus" data-beacondir="true">/var/lib{{slashChain}}/nimbus/beacon</mark> \
   --web3-url=http://127.0.0.1:<mark class="execution-endpoint">8551</mark> \
   --rest \
-  --tcp-port <mark class="consensus-p2p">9000</mark> \
-  --udp-port <mark class="consensus-p2p">9000</mark> \
+  --rest-port=<mark class="consensus-endpoint">5052</mark> \
+  --tcp-port=<mark class="consensus-p2p">9000</mark> \
+  --udp-port=<mark class="consensus-p2p">9000</mark> \
+  --<a href="https://nimbus.guide/trusted-node-sync.html" target="_blank">trusted-node-url</a>=https://beaconstate.info \
   --jwt-secret=/var/lib/jwtsecret/ethereum.hex
 
 [Install]

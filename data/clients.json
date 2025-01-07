@@ -42,6 +42,7 @@
                 { "name": "Libc6" },
                 { "name": "Unzip",  "link": "https://www.cvedetails.com/vulnerability-list/vendor_id-816/product_id-1395/Info-zip-Unzip.html"}
             ],
+            "system-requirements": "https://docs.nethermind.io/nethermind/first-steps-with-nethermind/system-requirements",
             "ilink":"nethermind"
         },
         "erigon": {
@@ -74,6 +75,7 @@
                 "windows": true,
                 "macos": true
             },
+            "system-requirements": "https://github.com/ledgerwatch/erigon#system-requirements",
             "ilink":"erigon"
         },
         "geth": {
@@ -111,6 +113,7 @@
                 "windows": true,
                 "macos": true
             },
+            "system-requirements": "https://geth.ethereum.org/docs/interface/hardware",
             "ilink":"geth"
         },
         "besu": {
@@ -153,6 +156,7 @@
                 { "name": "Default-jre" },
                 { "name": "Libjemalloc-dev" }
             ],
+            "system-requirements": "https://besu.hyperledger.org/en/stable/public-networks/get-started/system-requirements/",
             "ilink":"besu"
         },
         "reth":{
@@ -178,6 +182,7 @@
                 "windows": true,
                 "macos": true
             },
+            "system-requirements": "",
             "ilink":"reth"
         },
         "ethereumjs": {
@@ -203,6 +208,7 @@
                 "windows": true,
                 "macos": true
             },
+            "system-requirements": "",
             "ilink":"ethereumjs"
         }
     },
@@ -242,6 +248,7 @@
                 "macos": true
             },
             "language": "Rust",
+            "system-requirements": "https://lighthouse-book.sigmaprime.io/installation.html#recommended-system-requirements",
             "ilink":"lighthouse"
         },
         "lodestar": {
@@ -282,6 +289,7 @@
                 "windows": true,
                 "macos": true
             },
+            "system-requirements": "https://chainsafe.github.io/lodestar/#specifications",
             "ilink":"lodestar"
         },
         "teku": {
@@ -321,6 +329,7 @@
                 "windows": true,
                 "macos": true
             },
+            "system-requirements": "",
             "ilink":"teku"
         },
         "prysm": {
@@ -358,13 +367,15 @@
                 "windows": true,
                 "macos": true
             },
+            "system-requirements": "https://docs.prylabs.network/docs/install/install-with-script/#step-1-review-prerequisites-and-best-practices",
             "ilink":"prysm"
         },
         "nimbus": {
             "name": "Nimbus",
             "link": "https://nimbus.team/",
             "github": "https://github.com/status-im/nimbus-eth2",
-            "latestVer": "24.12.0",
+            "latestVer": "24.12.0_4e440277",
+            "latestVerClean":"24.12.0",
             "release_time": "2024-12-13T09:13:00Z",
             "social":[
                 {
@@ -395,6 +406,7 @@
                 "windows": true,
                 "macos": true
             },
+            "system-requirements": "https://nimbus.guide/hardware.html",
             "ilink":"nimbus"
         }
     },

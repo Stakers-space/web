@@ -9,27 +9,22 @@
 {{/unless}}
 
 <ol>
-{{#if InstallationGuide}}
+{{!--#if InstallationGuide}}
     <li><h3>Install Nimbus' dependencies</h3>
       <pre><code>sudo apt-get install build-essential git-lfs cmake</code></pre>
     </li>
-{{/if}}
+{{/if--}}
     <li>
        <h3>Find the latest stable version of Nimbus on Github</h3>
         Find latest Nimbus version at Github: <a href="https://github.com/status-im/nimbus-eth2/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/status-im/nimbus-eth2/releases</a><br>
-        <mark>Write latest stable Nimbus version: <input type="text" value="{{consensusClients.nimbus.latestVer}}" class="nimbusVersion-input" style="width:100%"><br>
+        <mark>Write latest stable Nimbus version: <input type="text" value="{{consensusClients.nimbus.latestVer}}" class="nimbus_verhash-input" style="width:100%"><br>
         <p>This will update the url links in the guide below.</p>
     </li>
     <li><h3>Download the latest Nimbus client</h3>
-      <pre><code>cd ~/downloads && curl -LO https://github.com/status-im/nimbus-eth2/releases/download/v<mark class="nimbusVersion">{{consensusClients.nimbus.latestVer}}</mark>/nimbus-beacon-node_<mark class="nimbusVersion">{{consensusClients.nimbus.latestVer}}</mark>_amd64.deb</code></pre>
-      <pre><code>cd ~/downloads && curl -LO https://github.com/status-im/nimbus-eth2/releases/download/v<mark class="nimbusVersion">{{consensusClients.nimbus.latestVer}}</mark>/nimbus-validator-client_<mark class="nimbusVersion">{{consensusClients.nimbus.latestVer}}</mark>_amd64.deb</code></pre>
+      <pre><code>cd ~/downloads && curl -LO https://github.com/status-im/nimbus-eth2/releases/download/v<mark class="nimbusVersion">{{consensusClients.nimbus.latestVerClean}}</mark>/nimbus-eth2_Linux_amd64_<mark class="nimbus_verhash">{{consensusClients.nimbus.latestVer}}</mark>.tar.gz</code></pre>
     </li>
-    <li><h3>Rename downloaded files</h3>
-      <pre><code>mv nimbus-beacon-node_<mark class="nimbusVersion">{{consensusClients.nimbus.latestVer}}</mark>_amd64 nimbus-beacon && mv nimbus-validator-client_<mark class="nimbusVersion">{{consensusClients.nimbus.latestVer}}</mark>_amd64.deb nimbus-validator</code></pre>
-    </li>
-    <li>
-      <h3>Set files permissions</h3>
-      <pre><code>chmod +x nimbus-beacon && chmod +x nimbus-validator</code></pre>
+    <li><h3>Extract the downloaded package</h3>
+      <pre><code>tar xvf nimbus-eth2_Linux_amd64_<mark class="nimbus_verhash">{{consensusClients.nimbus.latestVer}}</mark>.tar.gz</code></pre>
     </li>
     {{#unless InstallationGuide}}
     <li>
@@ -59,14 +54,14 @@ sudo systemctl status {{servicePrefix}}nimbus-vi...; sudo systemctl status {{ser
 			</div>
 		</div>
     </li>
-    <li>
-      <h3>Remove Old Nimbus clients</h3>
-      <pre><code>sudo rm -r /usr/local/bin/nimbus-beacon && sudo rm -r /usr/local/bin/nimbus-validator</code></pre>
-    </li>
     {{/unless}}
-    <li>
-      <h3>Copy Nimbus clients to <code>/usr/local/bin</code></h3>
-      <pre><code>sudo cp -a ~/downloads/nimbus-beacon /usr/local/bin && sudo cp -a ~/downloads/nimbus-validator /usr/local/bin</code></pre>
+    {{#if isGnosis}}
+    {{/if}}
+    <li><h3>Copy Nimbus clients to <code>/usr/local/bin</code></h3>
+      <pre><code>sudo cp -a nimbus-eth2_Linux_amd64_<mark class="nimbus_verhash">{{consensusClients.nimbus.latestVer}}</mark>/build /usr/local/bin/nimbus</code></pre>
+      {{#unless isEthereum}}
+      <aside><strong>If you validate on <code>Gnosis</code> network, do not forget to Update <code><a href="https://github.com/gnosischain/configs/blob/main/mainnet/config.yaml" target="_blank" rel="nofollow noopener noreferrer">config.yaml</a></code> for for Gnosis network, if needed</strong>.</aside>
+      {{/unless}}
     </li>
     {{#unless InstallationGuide}}
     <li>
@@ -96,11 +91,11 @@ sudo systemctl start {{servicePrefix}}nimbus-vi...
 				<button class="tab" data-tabpanel="2">Staking manager</button>
 			</nav>
 			<div class="tabpanel selected">
-                <ul>
-                    <li><pre><code>systemctl status <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark> {{servicePrefix}}nimbus-vi..</code></pre></li>
-                    <li><pre><code>journalctl -fu <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark></code></pre></li>
-                    <li><pre><code>journalctl -f -u nimbus-vi.. -u nimbus-vi..</code></pre></li>
-                </ul>
+          <ul>
+              <li><pre><code>systemctl status <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark> {{servicePrefix}}nimbus-vi..</code></pre></li>
+              <li><pre><code>journalctl -fu <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark></code></pre></li>
+              <li><pre><code>journalctl -f -u nimbus-vi.. -u nimbus-vi..</code></pre></li>
+          </ul>
 			</div>
 			<div class="tabpanel">
           <aside><b>This option requires installed and configured <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking manager</a></b></aside>
@@ -111,17 +106,25 @@ sudo systemctl start {{servicePrefix}}nimbus-vi...
     </li>
     {{/unless}}
     <li><h3>Remove downloaded files</h3>
-  <pre><code>cd ~/downloads && rm nimbus-beacon && rm nimbus-validator</code></pre>
+      <pre><code>rm nimbus-eth2_Linux_amd64_<mark class="nimbus_verhash">{{consensusClients.nimbus.latestVer}}</mark>.tar.gz && rm -r nimbus-eth2_Linux_amd64_<mark class="nimbus_verhash">{{consensusClients.nimbus.latestVer}}</mark></code></pre>
     </li>
 </ol>
 <script>
-    for (const lighthouseVer of document.getElementsByClassName("nimbusVersion-input")) {
-        lighthouseVer.addEventListener('change', UpdateNimbus);
+    for (const nimbusVerHash of document.getElementsByClassName("nimbus_verhash-input")) {
+      nimbusVerHash.addEventListener('change', UpdateNimbus);
     }
     function UpdateNimbus(e){
         const value = e.target.value;
-        for (const elm of document.getElementsByClassName("nimbusVersion-input")) { elm.innerHTML = value; };
-        for (const elm of document.getElementsByClassName("nimbusVersion")) { elm.innerHTML = value; };
+        // all inputs (if more times on the page)
+        for (const elm of document.getElementsByClassName("nimbus_verhash-input")) { elm.innerHTML = value; };
+
+        for (const elm of document.getElementsByClassName("nimbus_verhash")) { elm.innerHTML = value; };
+
+        var nimbusVer = value.split("_")[0];
+        for (const elm of document.getElementsByClassName("nimbusVersion")) { elm.innerHTML = nimbusVer; };
+        console.log("Nimbus |", nimbusVer, value);
+
+        //for (const zipNameElm of document.getElementsByClassName("nethermind_namezip")) { zipNameElm.innerHTML = "nethermind-" + value + "-linux-x64.zip"; };
     }
 </script>
 

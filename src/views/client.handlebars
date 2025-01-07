@@ -18,6 +18,11 @@
 			</ul>
 			<h1 class="cover-title"><span>{{clientName}} client</span> guides and options</h1>
 			<p>One-page interactive complete guide to configurate and operate {{clientName}} client.</p>
+			<ul>
+				{{#if cliData.system-requirements}}
+				<li><a href="{{cliData.system-requirements}}" target="_blank" rel="nofollow noopener noreferrer">{{clientName}} System / Hardware requirements</a></li>
+				{{/if}}
+			</ul>
 		</div>
 		<div class="mt-60 mb-40" style="position:relative;padding-left:9rem;font-size:.8rem">
 			<div style="height: fit-content;bottom: 0;position: absolute;">

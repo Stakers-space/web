@@ -15,6 +15,7 @@ ExecStart=/usr/local/bin/lodestar/lodestar beacon \
   --dataDir <mark class="consensus-dp">/var/lib{{slashChain}}/lodestar/beacon</mark> \
   --execution.urls http://127.0.0.1:<mark class="execution-endpoint">8551</mark> \
   --jwt-secret /var/lib/jwtsecret/gnosis.hex \
+  --checkpointSyncUrl https://checkpoint.gnosischain.com/ \
   --port <mark class="consensus-p2p">9000</mark> \
   --discoveryPort <mark class="consensus-p2p">9000</mark> \
   --rest.port <mark class="consensus-endpoint">9596</mark>
