@@ -1,5 +1,3 @@
-<aside>As Nimbus does not support <code>gnosis</code> in network parameters so far, Gnosis must be configured through the config.yaml file. The file may be get at <a href="https://github.com/gnosischain/configs/blob/main/mainnet/config.yaml" target="_blank" rel="nofollow noopener noreferrer">https://github.com/gnosischain/configs/blob/main/mainnet/config.yaml</a>. As visible below, this file is then loaded to the <code>--network</code> parameter.</aside>
-
 <pre><code>[Unit]
 Description=Nimbus Beacon Consensus Client (Gnosis)
 Wants=network-online.target
@@ -12,16 +10,17 @@ Type=simple
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/nimbus/nimbus_beacon_node \
-  --network=/var/lib/gnosis/config.yaml \
+  --network=gnosis \
   --data-dir=<mark class="consensus-dp" data-client="lighthouse" data-beacondir="true">/var/lib{{slashChain}}/nimbus/beacon</mark> \
   --web3-url=http://127.0.0.1:<mark class="execution-endpoint">8551</mark> \
   --rest \
   --rest-port=<mark class="consensus-endpoint">5052</mark> \
   --tcp-port=<mark class="consensus-p2p">9000</mark> \
   --udp-port=<mark class="consensus-p2p">9000</mark> \
-  --<a href="https://nimbus.guide/trusted-node-sync.html" target="_blank">trusted-node-url</a>=https://checkpoint.gnosischain.com/ \
+  #--<a href="https://nimbus.guide/trusted-node-sync.html" target="_blank">trusted-node-url</a>=https://checkpoint.gnosischain.com/ \
   --jwt-secret=/var/lib/jwtsecret/gnosis.hex
 
 [Install]
 WantedBy=multi-user.target</code></pre>
 <p>See more flags at <a href="https://nimbus.guide/options.html" target="_blank" rel="nofollow noopener noreferrer">https://nimbus.guide/options.html</a></p>
+<p>For an option to start syncing from a snapshot, check  <code>checkpoint-sync-url</code> for a quick synchronization from a checpoint. After enabling it, verify, that you are on on the expected chain, see <a href="https://checkpoint.gnosischain.com/" target="_blank" rel="nofollow noopener noreferrer">https://checkpoint.gnosischain.com/</a> → Get started → Nimbus</p>

@@ -18,6 +18,7 @@ ExecStart=/usr/local/bin/teku/bin/teku \
   --metrics-enabled=true \
   --rest-api-enabled=true \
   #--validators-proposer-default-fee-recipient=<mark>0x...</mark> \
-  --initial-state=https://beaconstate.info
+  --checkpoint-sync-url=https://beaconstate.info
 [Install]
 WantedBy=multi-user.target</code></pre>
+<p>See more arguments at <a href="https://docs.teku.consensys.io/reference/cli" target="_blank" rel="nofollow noopener noreferrer">https://docs.teku.consensys.io/reference/cli</a></p>

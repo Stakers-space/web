@@ -8,18 +8,18 @@
   <pre><code>./nimbus-validator --version</code></pre>
 {{/unless}}
 
-<ol>
-{{!--#if InstallationGuide}}
-    <li><h3>Install Nimbus' dependencies</h3>
-      <pre><code>sudo apt-get install build-essential git-lfs cmake</code></pre>
-    </li>
-{{/if--}}
-    <li>
-       <h3>Find the latest stable version of Nimbus on Github</h3>
-        Find latest Nimbus version at Github: <a href="https://github.com/status-im/nimbus-eth2/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/status-im/nimbus-eth2/releases</a><br>
-        <mark>Write latest stable Nimbus version: <input type="text" value="{{consensusClients.nimbus.latestVer}}" class="nimbus_verhash-input" style="width:100%"><br>
-        <p>This will update the url links in the guide below.</p>
-    </li>
+<h3>Find the latest stable version of Nimbus on Github</h3>
+Find latest Nimbus version at Github: <a href="https://github.com/status-im/nimbus-eth2/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/status-im/nimbus-eth2/releases</a><br>
+<mark>Write latest stable Nimbus version: <input type="text" value="{{consensusClients.nimbus.latestVer}}" class="nimbus_verhash-input" style="width:100%"><br>
+<p>This will update the url links in the guide below.</p>
+
+<div class="tabselector">
+			<nav class="egrid egrid-2">
+        <button class="tab selected" data-tabpanel="1">Through a downloaded client</button>
+				<button class="tab" data-tabpanel="2">Build from source code (Required for Gnosis)</button>
+			</nav>
+      <div class="tabpanel selected">
+          <ol>
     <li><h3>Download the latest Nimbus client</h3>
       <pre><code>cd ~/downloads && curl -LO https://github.com/status-im/nimbus-eth2/releases/download/v<mark class="nimbusVersion">{{consensusClients.nimbus.latestVerClean}}</mark>/nimbus-eth2_Linux_amd64_<mark class="nimbus_verhash">{{consensusClients.nimbus.latestVer}}</mark>.tar.gz</code></pre>
     </li>
@@ -59,9 +59,6 @@ sudo systemctl status {{servicePrefix}}nimbus-vi...; sudo systemctl status {{ser
     {{/if}}
     <li><h3>Copy Nimbus clients to <code>/usr/local/bin</code></h3>
       <pre><code>sudo cp -a nimbus-eth2_Linux_amd64_<mark class="nimbus_verhash">{{consensusClients.nimbus.latestVer}}</mark>/build /usr/local/bin/nimbus</code></pre>
-      {{#unless isEthereum}}
-      <aside><strong>If you validate on <code>Gnosis</code> network, do not forget to Update <code><a href="https://github.com/gnosischain/configs/blob/main/mainnet/config.yaml" target="_blank" rel="nofollow noopener noreferrer">config.yaml</a></code> for for Gnosis network, if needed</strong>.</aside>
-      {{/unless}}
     </li>
     {{#unless InstallationGuide}}
     <li>
@@ -108,7 +105,43 @@ sudo systemctl start {{servicePrefix}}nimbus-vi...
     <li><h3>Remove downloaded files</h3>
       <pre><code>rm nimbus-eth2_Linux_amd64_<mark class="nimbus_verhash">{{consensusClients.nimbus.latestVer}}</mark>.tar.gz && rm -r nimbus-eth2_Linux_amd64_<mark class="nimbus_verhash">{{consensusClients.nimbus.latestVer}}</mark></code></pre>
     </li>
-</ol>
+</ol>    
+			</div>
+
+			<div class="tabpanel">
+          <ol>
+            {{#if InstallationGuide}}
+            <li><h3>Install Nimbus' dependencies</h3>
+                <pre><code>sudo apt-get install build-essential git-lfs cmake</code></pre>
+            </li>
+            {{/if}}
+            <li><h3>Download the latest Nimbus client</h3>
+              <pre><code>cd ~/downloads && curl -LO https://github.com/status-im/nimbus-eth2/archive/refs/tags/v<mark class="nimbusVersion">{{consensusClients.nimbus.latestVerClean}}</mark>.tar.gz</code></pre>
+            </li>
+            <li><h3>Extract the downloaded package</h3>
+              <pre><code>tar xvf v<mark class="nimbusVersion">{{consensusClients.nimbus.latestVerClean}}</mark>.tar.gz</code></pre>
+            </li>
+            <li><h3>Move to the directory</h3>
+              <pre><code>cd nimbus-eth2-<mark class="nimbusVersion">{{consensusClients.nimbus.latestVerClean}}</mark></code></pre>
+            </li>
+            <li><h3>Make a build</h3>
+              <div class="tabselector" data-client="nimbus">
+                <nav class="egrid egrid-2">
+                <button class="tab selected" data-tabpanel="1">Ethereum</button>
+                <button class="tab" data-tabpanel="2">Gnosis</button>
+              </nav>
+              <div class="tabpanel selected">
+                  <pre><code></code></pre>
+              </div>
+              <div class="tabpanel">
+                <pre><code>make gnosis</code></pre>
+              </div>
+            </div>
+            </li>
+          </ol>
+			</div>
+		</div>
+
 <script>
     for (const nimbusVerHash of document.getElementsByClassName("nimbus_verhash-input")) {
       nimbusVerHash.addEventListener('change', UpdateNimbus);
