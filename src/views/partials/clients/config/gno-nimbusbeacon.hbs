@@ -9,7 +9,7 @@ Group=<mark class="consensus_sn" data-client="nimbus">{{servicePrefix}}nimbusbea
 Type=simple
 Restart=always
 RestartSec=5
-ExecStart=/usr/local/bin/nimbus/nimbus_beacon_node \
+ExecStart=/usr/local/bin/nimbus/nimbus_beacon_node_gnosis \
   --network=gnosis \
   --data-dir=<mark class="consensus-dp" data-client="lighthouse" data-beacondir="true">/var/lib{{slashChain}}/nimbus/beacon</mark> \
   --web3-url=http://127.0.0.1:<mark class="execution-endpoint">8551</mark> \
