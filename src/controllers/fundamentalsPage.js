@@ -16,6 +16,7 @@ function FundamentalsPagePresenter(){
 FundamentalsPagePresenter.prototype.Request = function(req, res, next){
 	res.locals.title = `${res.locals.chainName} staking Fundamentals`;
     res.locals.metaDescription = `${res.locals.chainName} staking Fundamentals`;
+	//res.locals.page_hbs = "fundamentals";
 	res.locals.css_file = "hp";
 	// get all charts data
     
@@ -23,16 +24,16 @@ FundamentalsPagePresenter.prototype.Request = function(req, res, next){
 
 	// Recognize page
 	if(pathParts.length > 1){
-		res.locals.page = pathParts[1];
-		res.locals.layout = "standard";
+		res.locals.page_hbs = pathParts[1];
+		res.locals.layout_hbs = "standard";
 		app.getPageData(res.locals, function(err){
 			if(err) return res.status(500).send(err);
 			//console.log(res.locals);
 			next();
 		});
 	} else { // is Category page
-		res.locals.page = "chain";
-		res.locals.layout = "amp";
+		res.locals.page_hbs = "chain";
+		res.locals.layout_hbs = "amp";
 		app.getCategoryData(res.locals, function(err){
 			if(err) return res.status(500).send(err);
 			next();
