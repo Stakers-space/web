@@ -15,7 +15,7 @@ ExecStart=/usr/local/bin/teku/bin/teku \
   --data-path=<mark class="consensus-dp" data-client="teku">/var/lib{{slashChain}}/tekubeacon</mark> \
   --ee-endpoint=http://127.0.0.1:<mark class="execution-endpoint">8551</mark> \
   --ee-jwt-secret-file=/var/lib/jwtsecret/ethereum.hex \
-  --metrics-enabled=true \
+  #--metrics-enabled=true \
   --rest-api-enabled=true \
   #--validators-proposer-default-fee-recipient=<mark>0x...</mark> \
   --checkpoint-sync-url=https://beaconstate.info

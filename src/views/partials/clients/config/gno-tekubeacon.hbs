@@ -17,8 +17,9 @@ ExecStart=/usr/local/bin/teku/bin/teku \
   --ee-jwt-secret-file=/var/lib/jwtsecret/gnosis.hex \
   #--validators-proposer-default-fee-recipient=<mark>0x...</mark> \
   #--checkpoint-sync-url=https://checkpoint.gnosischain.com \
-  --rest-api-enabled=true \
-  --metrics-enabled=true
+  #--metrics-enabled=true \
+  --rest-api-enabled=true
+  
 [Install]
 WantedBy=multi-user.target</code></pre>
 <p>See more arguments at <a href="https://docs.teku.consensys.io/reference/cli" target="_blank" rel="nofollow noopener noreferrer">https://docs.teku.consensys.io/reference/cli</a></p>
