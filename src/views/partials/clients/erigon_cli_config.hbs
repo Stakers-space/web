@@ -82,7 +82,7 @@ journalctl -fu <mark class="execution_sn" data-client="erigon">{{servicePrefix}}
                         <li>Open Delayed Start shell
                             <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
                             <p>Configurate service start inside it</p>
-                            <pre><code>systemctl start <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></pre>
+                            <pre><code>systemctl start <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark>.service</code></pre>
                         </li>
                         <li>Be sure, <code>delayed-start.service</code> service controlling <code>delayed-start.sh</code> is enabled for auto start with system startup
                             <pre><code>sudo systemctl enable delayed-start.service</code></pre>
