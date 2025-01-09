@@ -38,27 +38,27 @@ class GnosisRouter {
         router.get('/full-guide', Chain.Gnosis, this.GuidePage.Base, this.Response); // gudide - run execution and consensus layer clients
         router.get('/full-guide/solo', Chain.Gnosis, this.GuidePage.Solo, this.Response);
         router.get('/full-guide/stakewise', Chain.Gnosis, this.GuidePage.Stakewise, this.Response);
-        router.get('/fundamentals', Chain.Gnosis, this.fundamentals.Request, this.fundamentals.Response); // fundamentals
+        router.get('/fundamentals', Chain.Gnosis, this.fundamentals.Request, this.Response); // fundamentals
         
-        router.get('/schema', Chain.Gnosis, this.StakingSchema.Response);
+        router.get('/schema', Chain.Gnosis, this.StakingSchema.Request, this.Response);
         router.get('/clients', Chain.Gnosis, this.ClientsPage.ClientsOverview, this.Response);
         // charts
         //router.get('/charts', Chain.Gnosis, this.ChartsPage.Request, this.ChartsPage.Response);
         router.get('/gno-circulation-supply', this.ChartsPage.GetData, this.ChartsPage.GnoCirculationSupply, this.ChartsPage.Response);
         router.get('/validators', Chain.Gnosis, this.ChartsPage.GetData, this.ChartsPage.Validators, this.ChartsPage.Response);
-        router.get('/news', Chain.Gnosis, this.NewsPage.Request, this.NewsPage.Response);
+        router.get('/news', Chain.Gnosis, this.NewsPage.Request, this.Response);
 
         router.get('/emergency', Chain.Gnosis, this.GuidePage.Emergency, this.Response);
     }
 
     Response(req,res){
+        if(res.locals.title && res.locals.title.lenght <= 44) res.locals.title += " | Stakers.space";
+
         res.render(res.locals.page_hbs, {
             layout: res.locals.layout_hbs,
             pageUrl: 'https://stakers.space',//('https://' + req.appData.host + req.canonicalUrl),
             alternateUrl: null,//alternateUrl,
             alternateLang: null,//req.appData.meta.alt.lang,
-            title: "Stakers.space",//req.appData.meta.title,
-            metaDescription: null,//req.appData.meta.meta_desc,
             lang: "en",//req.appData.meta.lang,
             js:null,//req.appData.meta.js,
             cssFile: res.locals.css_file,//req.appData.meta.css,

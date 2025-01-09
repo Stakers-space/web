@@ -9,24 +9,24 @@ const BeaconchainDataModel = require('../models/ethbeaconchaintable.js'),
 	  EtherChainDataModel = require('../models/etherchaintable.js');
 
 function FundamentalsPagePresenter(){ 
+	this.dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
 	app = this;
 }
 
 FundamentalsPagePresenter.prototype.Request = function(req, res, next){
-	console.log("FundamentalsPagePresenter.Request");
-
+	res.locals.title = `${res.locals.chainName} staking Fundamentals`;
+    res.locals.metaDescription = `${res.locals.chainName} staking Fundamentals`;
+	res.locals.css_file = "hp";
 	// get all charts data
     
 	const pathParts = req.originalUrl.split('/').filter(Boolean);
-	// Recognize chain
-    res.locals.chain = pathParts[0].split("-")[0];//(pathParts[0] === "ethereum-staking") ? "ethereum" : "gnosis";/* pathParts[0];*/
-	
+
 	// Recognize page
 	if(pathParts.length > 1){
 		res.locals.page = pathParts[1];
 		res.locals.layout = "standard";
 		app.getPageData(res.locals, function(err){
-			if(err) res.status(500).send(err);
+			if(err) return res.status(500).send(err);
 			//console.log(res.locals);
 			next();
 		});
@@ -34,22 +34,21 @@ FundamentalsPagePresenter.prototype.Request = function(req, res, next){
 		res.locals.page = "chain";
 		res.locals.layout = "amp";
 		app.getCategoryData(res.locals, function(err){
-			if(err) res.status(500).send(err);
+			if(err) return res.status(500).send(err);
 			next();
 		});
 	}
 };
 
 FundamentalsPagePresenter.prototype.getPageData = function(locals, cb){
-	console.log("ChainPagePresenter.getPageData");
 	// load data for category page
 	var callbacks = (locals.chain === "ethereum") ? 4 : 2;
 	locals.chainData = null;
-
-	fs.readFile('./data/newsfeed.json', 'utf8', (err, data) => {
+	fs.readFile(path.join(__dirname, '..', '..',  this.dataFile.pagecache.news[locals.chain]), 'utf8', (err, data) => {
 		if(!err) {
 			try {
-				const jsonData = JSON.parse(data);
+				const jsonData = JSON.parse(data).fundamental;
+				
 				locals.newsfeed = jsonData;
 			  } catch (err) {
 				console.error(err);
@@ -164,27 +163,6 @@ FundamentalsPagePresenter.prototype.getCategoryData = function(locals, cb){
 		});
 		return matchedArr;
 	}
-};
-
-FundamentalsPagePresenter.prototype.Response = function(req,res){
-	//console.log("ChainPagePresenter.Response", res.locals);
-	//console.log("ChainPagePresenter.prototype.Response", res.locals);
-    res.render(res.locals.page, {
-		layout: res.locals.layout,
-		pageUrl: 'https://stakers.space',//('https://' + req.appData.host + req.canonicalUrl),
-		alternateUrl: null,//alternateUrl,
-		alternateLang: null,//req.appData.meta.alt.lang,
-		title: "Stakers.space",//req.appData.meta.title,
-		metaDescription: null,//req.appData.meta.meta_desc,
-		lang: "en",//req.appData.meta.lang,
-		js:null,//req.appData.meta.js,
-		cssFile:"hp",//req.appData.meta.css,
-		chain: res.locals.chain,
-		chainData: res.locals.chainData,
-		executionClients: res.locals.executionClients,
-		consensusCLients: res.locals.consensusClients,
-		helpers: {}
-	});
 };
 
 module.exports = FundamentalsPagePresenter;

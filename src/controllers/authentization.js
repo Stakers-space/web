@@ -420,7 +420,7 @@ AuthentizationController.prototype.Render = function(req,res){
 		cssFile: "authentization",
 		pageUrl: 'https://stakers.space'+req.originalUrl,//('https://' + req.appData.host + req.canonicalUrl),
 		title: "Stakers.space Dashboard",//req.appData.meta.title,
-		metaDescription: null,//req.appData.meta.meta_desc,
+		metaDescription: "Sign in To Stakers.space account to manage all your servers and validators owned by you or your clients safely from one place. Client-side encrypted dashboard.",
 		lang: null,//req.appData.meta.lang,
 		js:null,//req.appData.meta.js,
 		css:null,//req.appData.meta.css,

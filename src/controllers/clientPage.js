@@ -126,6 +126,42 @@ class ClientPagePresenter {
 				res.locals.cliLayer = "all";
 		}
 
+		switch(clientSegment) {
+			case 'overview':
+				if(res.locals.clientName){
+					res.locals.title = `${res.locals.clientName} ${res.locals.cliLayer} client | Introduction & Guides`;
+    				res.locals.metaDescription = `Introduction to ${res.locals.clientName} ${res.locals.cliLayer} client and interactive guides to install and use it for staking.`;
+				} else {
+					res.locals.title = `Staking Clients | Introduction & Guides`;
+    				res.locals.metaDescription = `Introduction to consensus, execution, mev and service-based clients as well as interactive guides to install and use them.`;
+				}
+				break;
+			case 'install':
+				res.locals.title = `${res.locals.clientName} client Installation Guide`;
+    			res.locals.metaDescription = `Interactive guide to install ${res.locals.clientName} ${res.locals.cliLayer} client.`;
+				break;
+			case 'update':
+				res.locals.title = `Interactive guide to update ${res.locals.clientName} ${res.locals.cliLayer} client`;
+    			res.locals.metaDescription = `Interactive guide to update ${res.locals.clientName} ${res.locals.cliLayer} client.`;
+				break;
+			case 'emergency':
+				res.locals.title = `Emergency guide for ${res.locals.clientName} ${res.locals.cliLayer} client`;
+    			res.locals.metaDescription = `Interactive emergency guide for ${res.locals.clientName} ${res.locals.cliLayer} client.`;
+				break;
+			case 'add-validator':
+				res.locals.title = `Interactive guide to add validator on ${res.locals.clientName} ${res.locals.cliLayer} client`;
+    			res.locals.metaDescription = `Interactive guide to add validator on ${res.locals.clientName} ${res.locals.cliLayer} client.`;
+				break;
+			case 'exit-validator':
+				res.locals.title = `Interactive guide to exit validator on ${res.locals.clientName} ${res.locals.cliLayer} client`;
+    			res.locals.metaDescription = `Interactive guide to exit validator on ${res.locals.clientName} ${res.locals.cliLayer} client.`;
+				break;
+			default:
+				res.locals.title = `${res.locals.clientName} ${res.locals.cliLayer} client`;
+				res.locals.metaDescription = null;
+				break;
+		}
+
 		fs.readFile(path.join(__dirname, '..', '..', 'data/clients.json'), 'utf8', (err, data) => {
             if(!err) {
                 try {
@@ -169,6 +205,9 @@ class ClientPagePresenter {
 		res.locals.page_hbs = "clients";
 		res.locals.layout_hbs = "amp";
 		res.locals.css_file = "docs";
+		res.locals.title = `${res.locals.clientName} staking clients overview`;
+    	res.locals.metaDescription = `Execution, Consensus, MEV and service-based clients overview for ${res.locals.clientName} staking.`;
+				
 		// load data
 		fs.readFile(path.join(__dirname, '..', '..', 'data/clients.json'), 'utf8', (err, data) => {
             if(!err) {

@@ -25,6 +25,8 @@ GnosisController.prototype.Request = function(req,res, next){
     res.locals.page_hbs = 'gnosis-staking';
     res.locals.layout_hbs = "standard";
     res.locals.css_file = 'chain';
+    res.locals.title = `All around Gnosis Staking at one place.`;
+    res.locals.metaDescription = `Stakers.space is a space full of guides, tools and advices targeted at Gnosis staking.`;
     
     var tasks = 3;
 
@@ -95,6 +97,8 @@ GnosisController.prototype.Request = function(req,res, next){
 };
 
 GnosisController.prototype.RequestLiquid = function(req,res,next){
+    res.locals.title = `${res.locals.chainName} Liquid staking services list`;
+    res.locals.metaDescription = `List of Liquid staking services on ${res.locals.chainName} chain.`;
     fs.readFile(app.cachedDataFile, 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
@@ -110,6 +114,8 @@ GnosisController.prototype.RequestLiquid = function(req,res,next){
     });
 };
 GnosisController.prototype.RequestSaas = function(req,res,next){
+    res.locals.title = `${res.locals.chainName} SAAS (Staking as a service) services list`;
+    res.locals.metaDescription = `List SAAS (Staking as a service) services on ${res.locals.chainName} chain.`;
     fs.readFile(app.cachedDataFile, 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
@@ -129,6 +135,8 @@ GnosisController.prototype.Validators = function(req,res,next){
     res.locals.page_hbs = "shared_ethgno/validators";
     res.locals.layout_hbs = "standard";
     res.locals.css_file = "chain";
+    res.locals.title = `Validator charts on ${res.locals.chainName} chain`;
+    res.locals.metaDescription = `Charts related to validators on  ${res.locals.chainName} chain`;
 
     let tasks = 3;
     // validators count
@@ -186,6 +194,8 @@ GnosisController.prototype.DepositContract = function(req,res,next){
     res.locals.page_hbs = "gnosis/deposit-contract-balance";
     res.locals.layout_hbs = "standard";
     res.locals.css_file = "chain";
+    res.locals.title = `Gnosis Deposit contract tracker`;
+    res.locals.metaDescription = `Gnosis Deposit contract tracker track wealth of the Gnosis chain.`;
     fs.readFile(app.dataFile.pagecache.gnosis, 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);

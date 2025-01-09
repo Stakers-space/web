@@ -15,17 +15,19 @@ class ClientRouter {
     }
 
     Response(req, res){
+		if(res.locals.title && res.locals.title.lenght <= 44) res.locals.title += " | Stakers.space";
+
         res.render(res.locals.hbsTemplate, {
 			layout: "standard",
 			pageUrl: 'https://stakers.space',//('https://' + req.appData.host + req.canonicalUrl),
-			alternateUrl: null,//alternateUrl,
-			alternateLang: null,//req.appData.meta.alt.lang,
-			title: "Stakers.space",//req.appData.meta.title,
-			metaDescription: null,//req.appData.meta.meta_desc,
+			//alternateUrl: null,//alternateUrl,
+			//alternateLang: null,//req.appData.meta.alt.lang,
+			//title: "Stakers.space",//req.appData.meta.title,
+			//metaDescription: null,//req.appData.meta.meta_desc,
 			lang: "en",//req.appData.meta.lang,
 			js:null,//req.appData.meta.js,
 			cssFile:"docs",//req.appData.meta.css,
-			client: res.locals.client,
+			//client: res.locals.client,
 			helpers: {}
 		})
     }

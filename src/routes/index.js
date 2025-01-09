@@ -58,12 +58,16 @@ router.use('/guides', require('./guides'));
 router.use('/about', function(req,res,next){
     res.locals.page_hbs = 'about';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `About Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
 router.use('/chains', function(req,res,next){
     res.locals.page_hbs = 'chains';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `Chains | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
@@ -71,66 +75,88 @@ router.use('/chains', function(req,res,next){
 router.use('/cloud-node', function(req,res,next){
     res.locals.page_hbs = 'cloud-node';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `Cloud staking node | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
 router.use('/custom-node', function(req,res,next){
     res.locals.page_hbs = 'custom-node';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `Custom staking node | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
 router.use('/managed-node', function(req,res,next){
     res.locals.page_hbs = 'managed-node';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `Managed staking node | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
 router.use('/staking-node', function(req,res,next){
     res.locals.page_hbs = 'staking-node';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `Staking node | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
 router.use('/vpn', function(req,res,next){
     res.locals.page_hbs = 'vpn';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `VPN for Staking | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
 router.use('/bonded-validators', function(req,res,next){
     res.locals.page_hbs = 'bonded-validators';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `Bonded validators | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
 router.use('/staking', function(req,res,next){
     res.locals.page_hbs = 'staking';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `About Staking | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
 router.use('/liquid-staking', function(req,res,next){
     res.locals.page_hbs = 'liquid-staking';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `Liquid Staking | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
 router.use('/restaking', function(req,res,next){
     res.locals.page_hbs = 'restaking';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `ReStaking | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
 router.use('/slashing', function(req,res, next){
     res.locals.page_hbs = 'slashing';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `Slashing | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
 router.use('/tools', function(req,res,next){
     res.locals.page_hbs = 'tools';
     res.locals.layout_hbs = 'amp';
+    res.locals.title = `Tools | Stakers.space`;
+    res.locals.metaDescription = null;
     next();
 }, Response);
 
@@ -142,7 +168,6 @@ function Response(req,res){
     res.render(res.locals.page_hbs, {
         layout: res.locals.layout_hbs,
         canonicalUrl: cononicalUrl,
-        title: "Stakers.space",
         cssFile: "chain"
     });
 }

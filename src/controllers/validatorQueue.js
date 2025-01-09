@@ -33,6 +33,8 @@ class ValidatorQueue {
             res.locals.currentQueue = data.current;
             res.locals.churnSchedule = data.schedule;
             res.locals.rangeIndex = data.rangeIndex;
+            res.locals.title = `${res.locals.chainName} staking Validator Queue`;
+            res.locals.metaDescription = `Current as well as historical waiting time for activation / exiting a validator on ${res.locals.chainName} chain`;
             //console.log(data);
             next();
         });

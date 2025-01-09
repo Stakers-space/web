@@ -42,24 +42,23 @@ class EthereumRouter {
         router.get('/full-guide/rocketpool', Chain.Ethereum, this.GuidePage.Rocketpool, this.Response);
         router.get('/full-guide/stakewise', Chain.Ethereum, this.GuidePage.Stakewise, this.Response);
         router.get('/full-guide/lido', Chain.Ethereum, this.GuidePage.Lido, this.Response);
-        router.get('/fundamentals', Chain.Ethereum, this.fundamentals.Request, this.fundamentals.Response); // fundamentals
+        router.get('/fundamentals', Chain.Ethereum, this.fundamentals.Request, this.Response); // fundamentals
         //router.get('/charts', Chain.Ethereum, this.ChartsPage.Request, this.ChartsPage.Response);
-        router.get('/schema', Chain.Ethereum, this.StakingSchema.Response);
+        router.get('/schema', Chain.Ethereum, this.StakingSchema.Request, this.Response);
         router.get('/clients', Chain.Ethereum, this.ClientsPage.ClientsOverview, this.Response);
-        router.get('/news', Chain.Ethereum, this.NewsPage.Request, this.NewsPage.Response);
+        router.get('/news', Chain.Ethereum, this.NewsPage.Request, this.Response);
 
         router.get('/emergency', Chain.Ethereum, this.GuidePage.Emergency, this.Response);
     }
 
     Response(req,res){
+        if(res.locals.title && res.locals.title.lenght <= 44) res.locals.title += " | Stakers.space";
         //console.log(res.locals.page_hbs, "("+res.locals.layout_hbs+")")
         res.render(res.locals.page_hbs, {
             layout: res.locals.layout_hbs,
             pageUrl: 'https://stakers.space',//('https://' + req.appData.host + req.canonicalUrl),
             alternateUrl: null,//alternateUrl,
             alternateLang: null,//req.appData.meta.alt.lang,
-            title: "Stakers.space",//req.appData.meta.title,
-            metaDescription: null,//req.appData.meta.meta_desc,
             lang: "en",//req.appData.meta.lang,
             js:null,//req.appData.meta.js,
             cssFile: res.locals.css_file,//req.appData.meta.css,

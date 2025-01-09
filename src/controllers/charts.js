@@ -56,6 +56,8 @@ ChartsPagePresenter.prototype.Validators = function(req,res,next){
     res.locals.beaconData = JSON.stringify(parsedData.beaconData);
     res.locals.chartId = 'ethvalidators_chart';
     res.locals.jsController = 'validators';
+    res.locals.title = `${res.locals.chainName} Validators count`;
+    res.locals.metaDescription = `View current and historical validators count on ${res.locals.chainName} chain.`;
     next();
 };
 
@@ -64,6 +66,8 @@ ChartsPagePresenter.prototype.StakingApy = function(req,res,next){
     res.locals.ethStoreData = JSON.stringify(parsedData.ethStore);
     res.locals.chartId = 'ethstakingapr_chart';
     res.locals.jsController = 'eth-stakingapr';
+    res.locals.title = `${res.locals.chainName} Staking APR`;
+    res.locals.metaDescription = `View current and historical ${res.locals.chainName} Staking APRs`;
     next();
 };
 ChartsPagePresenter.prototype.StakedTokens = function(req,res,next){
@@ -72,6 +76,8 @@ ChartsPagePresenter.prototype.StakedTokens = function(req,res,next){
     res.locals.chainData = JSON.stringify(parsedData.chainData);
     res.locals.chartId = 'stakedbalance_chart';
     res.locals.jsController = 'staked-balance';
+    res.locals.title = `Amount of staked ${res.locals.chainTokenUpr} on ${res.locals.chainName} chain`;
+    res.locals.metaDescription = `View current and historical amount of staked ${res.locals.chainTokenUpr} on ${res.locals.chainName} chain.`;
     next();
 };
 ChartsPagePresenter.prototype.TVL = function(req,res,next){
@@ -80,6 +86,8 @@ ChartsPagePresenter.prototype.TVL = function(req,res,next){
     res.locals.chainData = JSON.stringify(parsedData.chainData);
     res.locals.chartId = 'tvlbalance_chart';
     res.locals.jsController = 'tvl-balance';
+    res.locals.title = `Total value locked (TVL) in ${res.locals.chainName} staking`;
+    res.locals.metaDescription = `View total current and historical value locked (TVL) in ${res.locals.chainName} staking`;
     next();
 };
 ChartsPagePresenter.prototype.CirculationSupply = function(req,res,next){
@@ -88,6 +96,8 @@ ChartsPagePresenter.prototype.CirculationSupply = function(req,res,next){
     res.locals.chainData = JSON.stringify(parsedData.chainData);
     res.locals.chartId = 'ethsupply_chart';
     res.locals.jsController = 'supply';
+    res.locals.title = `Circulation supply on ${res.locals.chainName} chain`;
+    res.locals.metaDescription = `View current and historical circulation supply on ${res.locals.chainName} chain.`;
     next();
 };
 ChartsPagePresenter.prototype.MarketCap = function(req,res,next){
@@ -96,6 +106,9 @@ ChartsPagePresenter.prototype.MarketCap = function(req,res,next){
     res.locals.chainData = JSON.stringify(parsedData.chainData);
     res.locals.chartId = 'marketcap_chart';
     res.locals.jsController = 'marketcap';
+
+    res.locals.title = `${res.locals.chainTokenUpr} token Market Cap`;
+    res.locals.metaDescription = `View current and historical ${res.locals.chainTokenUpr} token Market Cap.`;
     next();
 };
 ChartsPagePresenter.prototype.Transactions = function(req,res,next){
@@ -103,6 +116,9 @@ ChartsPagePresenter.prototype.Transactions = function(req,res,next){
     res.locals.chainData = JSON.stringify(parsedData.chainData);
     res.locals.chartId = 'transactions_chart';
     res.locals.jsController = 'transactions';
+
+    res.locals.title = `Transactions chart for ${res.locals.chainName} chain`;
+    res.locals.metaDescription = `View current and historical numbers of transactions on ${res.locals.chainName} chain.`;
     next();
 };
 ChartsPagePresenter.prototype.Blocks = function(req,res,next){
@@ -111,6 +127,9 @@ ChartsPagePresenter.prototype.Blocks = function(req,res,next){
     //res.locals.chainData = JSON.stringify(parsedData.chainData);
     res.locals.chartId = 'blocks_chart';
     res.locals.jsController = 'blocks';
+
+    res.locals.title = `Blocks chart for ${res.locals.chainName} chain`;
+    res.locals.metaDescription = `View current and historical numbers of blocks on ${res.locals.chainName} chain.`;
     next();
 };
 
@@ -120,8 +139,8 @@ ChartsPagePresenter.prototype.Response = function(req,res){
 		pageUrl: 'https://stakers.space',//('https://' + req.appData.host + req.canonicalUrl),
 		alternateUrl: null,//alternateUrl,
 		alternateLang: null,//req.appData.meta.alt.lang,
-		title: "Stakers.space",//req.appData.meta.title,
-		metaDescription: null,//req.appData.meta.meta_desc,
+		//title: "Stakers.space",//req.appData.meta.title,
+		//metaDescription: null,//req.appData.meta.meta_desc,
 		lang: "en",//req.appData.meta.lang,
 		js:null,//req.appData.meta.js,
 		cssFile:"chain",//req.appData.meta.css,
