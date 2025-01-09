@@ -58,24 +58,68 @@ $ journalctl -fu <mark class="consensus_sn" data-client="lighthouse">{{servicePr
             <strong>Activate service to start automatically</strong>
             <div class="tabselector">
                 <nav class="egrid egrid-2">
-                    <button class="tab selected" data-tabpanel="1">Standard option</button>
-                    <button class="tab" data-tabpanel="2">Delayed start util</button>
+                <button class="tab selected" data-tabpanel="1">Standard configuration</button>
+                <button class="tab" data-tabpanel="2">StakersSpace configuration</button>
                 </nav>
                 <div class="tabpanel selected">
+                <div class="tabselector">
+                    <nav class="egrid egrid-2">
+                    <button class="tab selected" data-tabpanel="1">Standard option</button>
+                    <button class="tab" data-tabpanel="2">Delayed start util</button>
+                    </nav>
+                    <div class="tabpanel selected">
                     <pre><code>$ sudo systemctl enable <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
+                    </div>
+                    <div class="tabpanel">
+                        <aside>NOTE: This option requires installed <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank" rel="nofollow noopener">Start with Delay util</a>.</aside>
+                        <ul>
+                            <li>Open Delayed Start shell
+                                <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
+                                <p>Configurate service start inside it</p>
+                                <pre><code>systemctl start <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>.service</code></pre>
+                            </li>
+                            <li>Be sure, <code>delayed-start.service</code> service controlling <code>delayed-start.sh</code> is enabled for auto start with system startup
+                                <pre><code>sudo systemctl enable delayed-start.service</code></pre>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 </div>
                 <div class="tabpanel">
-                <aside>NOTE: This option requires installed <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank" rel="nofollow noopener">Start with Delay util</a>.</aside>
-                <ul>
-                        <li>Open Delayed Start shell
+                <aside>NOTE: This option requires following installed utils:
+                    <ul>
+                    <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with Delay util with delayed-start.service</a>.</li>
+                    <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
+                    </ul>
+                    <p>A guide to install each util is attached on the Github.</p>
+                </aside>
+                <ol>
+                    <li><h4>Configurate Staking Manager util</h4>
+                    <ul>
+                        <li>Open the configuration file
+                        <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
+                        <p>If the file is empty, generate it with command <code>sudo /usr/local/bin/staking.sh init</code></p>
+                        </li>
+                        <li>Set link to proper services. It should be as follow:
+                        <pre><code>beaconServices="<mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>.service"</code></pre>
+                        </li>
+                    </ul>
+                    </li>
+                    <li>
+                    <h4>Activate service to start automatically on OS startup</h4>
+                    <ul>
+                        <li>Open Start with delay util
                             <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
-                            <p>Configurate service start inside it</p>
-                            <pre><code>systemctl start <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
                         </li>
-                        <li>Be sure, <code>delayed-start.service</code> service controlling <code>delayed-start.sh</code> is enabled for auto start with system startup
-                            <pre><code>sudo systemctl enable delayed-start.service</code></pre>
+                        <li>Place or uncomment a command to start the Beacon client(s)
+                            <pre><code>/usr/local/bin/staking.sh start beacon</code></pre>
                         </li>
-                </ul>
+                        <li>Verify, that a service `delayed-start.service` exists and is automatically launched on system start.
+                        <pre><code>sudo systemctl enable delayed-start.service</code></pre>
+                        </li>
+                    </ul>
+                    </li>      
+                </ol>
                 </div>
             </div>
         </li>
