@@ -12,7 +12,7 @@
 		<ul>
             <li><h4>Create a directory for validator instance data</h4>
 
-                <pre><code>sudo mkdir -p <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span></mark></code></pre>
+                <pre><code>sudo mkdir -p <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark></code></pre>
             </li>
             <li><h4>If exists, remove <code>deposit_data</code> file from keystores folder</h4>
                 <label>Directory with Deposit Data keystores</label>: <input type="text" value="$HOME/keystores/ddk_i1" class="interactive-element ddkeys-path" data-class="ddkeys-path">
@@ -21,13 +21,13 @@
                         <pre><code>cd <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> && ls -lh</code></pre>
                     </li>
                     <li>If there is <code>deposit_data-XXX....json</code> file, remove it
-                        <pre><code>rm deposit_data-XXX....json</code></pre>
+                        <pre><code>sudo rm deposit_data-XXX....json</code></pre>
                     </li>
                 </ul>
             </li>
-            <li><h4>Copy keystores dedicated for instance <code class="instance_sn" data-client="teku"></code> into <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</span></code> folder</h4>
-                <pre><code>sudo mkdir <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
-                <pre><code>sudo cp -a <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark>/* <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark> && cd <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
+            <li><h4>Copy keystores dedicated for instance <code class="instance_sn" data-client="teku"></code> into <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></span>/keystores</code> folder</h4>
+                <pre><code>sudo mkdir <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark>/keystores</code></pre>
+                <pre><code>sudo cp -a <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark>/* <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark>/keystores && cd <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark>/keystores</code></pre>
             </li>
             <li><p>Teku requires a <code>.txt</code> file with encryption password for each <code>.json</code> validator file.</p>
                 <ol>
@@ -37,8 +37,8 @@
                     </li>
                     <li>
                         <p><label>Whats's the first keystore name?</label> <input type="text" value="keystore-m_12381_3600_X_0_0-XXXXXXXXXX" class="interactive-element keystore_fn" data-class="keystore_fn">.json</p>
-                        <p>Vreate a new <code>.txt</code> file for the <code class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</code>.json keystore file</p>
-                        <pre><code>nano <mark class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</mark>.txt</code></pre>
+                        <p>Create a new <code>.txt</code> file for the <code class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</code>.json keystore file</p>
+                        <pre><code>sudo nano <mark class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</mark>.txt</code></pre>
                         <p>Insert an encryption password for the validator key (the one used during keystores generation) into that file.</p>
                         <p>Press <code>ctrl</code> + <code>x</code>, then <code>y</code> to save and exit</p>
                     </li>
@@ -47,15 +47,15 @@
                     </li>
                 </ol>
                 <p>Now, you can either repeate the process for all other keystores in the folder, or use an automated solution to duplicate the created password file (with modified name) for all remaining keystores, see <a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/create-password-files" target="_blank">Shell Script to generate password files for Teku</a>.</p>
-                <p>With automated process, to generate <code>.txt</code> file with a content of <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span></span>/keystores/<span class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</span>.txt</code> for all remaining keystores in the <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span></span>/keystores/</code> directory, use command 
-                    <pre><code>$HOME/bashscripts/create-teku-pswfiles.sh <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span></mark>/keystores/<mark class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</mark>.txt</code></pre>
+                <p>With automated process, to generate <code>.txt</code> file with a content of <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></span>/keystores/<span class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</span>.txt</code> for all remaining keystores in the <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></span>/keystores/</code> directory, use command 
+                    <pre><code>sudo /opt/teku-create-validator-psw-files.sh <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark>/keystores/<mark class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</mark>.txt</code></pre>
                 </p>
             </li>
             <li><h4>Create a service user for the validator instance</h4>
                 <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="instance_su" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark></code></pre>
             </li>
             <li>Set ownership of validator instance data directory to validator-instance user
-                <pre><code>sudo chown -R <mark class="instance_su" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark>:<mark class="instance_su" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark> <mark class="instance_dp">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span></mark></code></pre>
+                <pre><code>sudo chown -R <mark class="instance_su" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark>:<mark class="instance_su" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark> <mark class="instance_dp">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark></code></pre>
             </li>
             <li><h4>Create configuration service file for <code class="instance_sn" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></code> service</h4>
                 <ol>
@@ -92,26 +92,6 @@
                     </li>
                 </ol>
             </li>
-            <li>
-                <h4>Other configurations</h4>
-                <div class="tabselector mt-20">
-                    <nav class="egrid egrid-2">
-                        <button class="tab selected" data-tabpanel="1">Standard configuration</button>
-                        <button class="tab" data-tabpanel="2">Stakers.space configuration</button>
-                    </nav>
-                    <div class="tabpanel selected">
-                        Nothing to do. You are ok.
-                    </div>
-                    <div class="tabpanel">
-                        <ul>
-                            <li><h4>Extend Staking manager clients.conf</h4>
-                                Insert <code><mark class="instance_sn" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark></code> into clients.conf file that is used by <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a>.
-                                <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
         </ul>
 	</div>
 	<div class="tabpanel">
@@ -131,9 +111,9 @@
                 </ul>
             </li>
             <li>
-                <h4>Copy keystores dedicated for instance <code class="instance_sn" data-client="teku"></code> into <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</span></code> folder</h4>
-                <pre><code>sudo mkdir <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
-                <pre><code>sudo cp -a <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark>/* <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark>/keystores  && cd <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
+                <h4>Copy keystores dedicated for instance <code class="instance_sn" data-client="teku"></code> into <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span>/keystores</span></code> folder</h4>
+                <pre><code>sudo mkdir <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
+                <pre><code>sudo cp -a <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark>/* <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span>/keystores</mark>/keystores  && cd <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
             </li>
             <li><p>Teku requires a <code>.txt</code> file with encryption password for each <code>.json</code> validator file.</p>
                 <ol>
@@ -153,8 +133,8 @@
                     </li>
                 </ol>
                 <p>Now, you can either repeate the process for all other keystores in the folder, or use an automated solution to duplicate the created password file (with modified name) for all remaining keystores, see <a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/create-password-files" target="_blank">Shell Script to generate password files for Teku</a>.</p>
-                <p>With automated process, to generate <code>.txt</code> file with a content of <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span></span>/keystores/<span class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</span>.txt</code> for all remaining keystores in the <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span></span>/keystores/</code> directory, use command 
-                    <pre><code>$HOME/bashscripts/create-teku-pswfiles.sh <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span></mark>/keystores/<mark class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</mark>.txt</code></pre>
+                <p>With automated process, to generate <code>.txt</code> file with a content of <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></span>/keystores/<span class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</span>.txt</code> for all remaining keystores in the <code><span class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku-vi<span class="instance_pid">1</span></span>/keystores/</code> directory, use command 
+                    <pre><code>$HOME/bashscripts/create-teku-pswfiles.sh <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark>/keystores/<mark class="keystore_fn">keystore-m_12381_3600_X_0_0-XXXXXXXXXX</mark>.txt</code></pre>
                 </p>
             </li>
         </ul>
@@ -172,7 +152,13 @@
         <pre><code>journalctl -fu <mark class="instance_sn" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark></code></pre>
     </li>
     <li><h4>Activate service to start automatically</h4>
-    <div class="tabselector">
+        <div class="tabselector">
+            <nav class="egrid egrid-2">
+                <button class="tab selected" data-tabpanel="1">Standard configuration</button>
+                <button class="tab" data-tabpanel="2">StakersSpace configuration</button>
+            </nav>
+            <div class="tabpanel selected">
+                <div class="tabselector">
                 <nav class="egrid egrid-2">
                     <button class="tab selected" data-tabpanel="1">Standard option</button>
                     <button class="tab" data-tabpanel="2">Delayed start util</button>
@@ -181,23 +167,75 @@
                     <pre><code>sudo systemctl enable <mark class="instance_sn" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark></code></pre>
                 </div>
                 <div class="tabpanel">
-                <aside>NOTE: This option requires installed <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank" rel="nofollow noopener">Start with Delay util</a>.</aside>
-                <ul>
+                    <aside>NOTE: This option requires following utils installed: 
+                        <ul>
+                            <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with Delay util with delayed-start.service</a>.</li>
+                            <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/remove_lock_files" target="_blank">Remove Lock files</a> util.</li>
+                        </ul>
+                        <p>A guide to install each util is attached on the Github.</p>
+                    </aside>
+                    <ol>
                         <li>Open Delayed Start shell
                             <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
-                            <p>Configurate service start inside it</p>
-                            <pre><code>systemctl start <mark class="instance_sn" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark></code></pre>
+                        </li>
+                        <li> Attach command to remove lock files (to prevent start the validator in a case of existing lock fiels after a power failure). This must be processed before starting the validator service.
+                            <pre><code>/usr/local/bin/remove-lock-files.sh '<mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark>/keystores'</code></pre>
+                        </li>
+                        <li>Configurate service start inside it
+                            <pre><code>systemctl start <mark class="instance_sn" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark>.service</code></pre>
                         </li>
                         <li>Be sure, <code>delayed-start.service</code> service controlling <code>delayed-start.sh</code> is enabled for auto start with system startup
                             <pre><code>sudo systemctl enable delayed-start.service</code></pre>
                         </li>
-                </ul>
+                    </ol>
+                </div>
                 </div>
             </div>
+            <div class="tabpanel">
+                <aside>NOTE: This option requires following utils installed:
+                    <ul>
+                        <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with Delay util with delayed-start.service</a>.</li>
+                        <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
+                        <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/remove_lock_files" target="_blank">Remove Lock files</a> util.</li>
+                    </ul>
+                    <p>A guide to install each util is attached on the Github.</p>
+                </aside>
+                <ol>
+                    <li><h4>Configurate Staking Manager util</h4>
+                        <ul>
+                            <li>Open the configuration file
+                                <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
+                                <p>If the file is empty, generate it with command <code>sudo /usr/local/bin/staking.sh init</code></p>
+                            </li>
+                            <li>Set link to proper services. It should be as follow:
+                                <pre><code>validatorServices="<mark class="instance_sn" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark>.service"</code></pre>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>Activate service to start automatically on OS startup</h4>
+                        <ul>
+                        <li>Open Start with delay util
+                            <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
+                        </li>
+                        <li>Attach command to remove lock files (to prevent start the validator in a case of existing lock fiels after a power failure).  This must be processed before starting the validator service.
+                            <pre><code>/opt/remove-teku-validator-lock-files.sh '<mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark>/keystores'</code></pre>
+                        </li>
+                        <li>Place or uncomment a command to start the Validator instance(s), if not made yet
+                            <pre><code>/usr/local/bin/staking.sh start validators</code></pre>
+                        </li>
+                        <li>Verify, that the service `delayed-start.service` exists and is automatically launched on system start.
+                            <pre><code>sudo systemctl enable delayed-start.service</code></pre>
+                        </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
     </li>
 </ol>
 {{else}}
     <p>Exit Validator(s) guide in progress.</p>
     <p>Official documentation at <a href="https://docs.teku.consensys.io/reference/cli/subcommands/voluntary-exit" target="_blank" rel="nofollow noopener">https://docs.teku.consensys.io/reference/cli/subcommands/voluntary-exit</a></p>
-    <pre><code>teku voluntary-exit --validator-keys=/var/lib/teku-vi1/keystores_i1:/var/lib/teku-vi1/keystores_i1</code></pre>
+    <pre><code>teku voluntary-exit --validator-keys=<mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark>/keystores:<mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark>/keystores</code></pre>
 {{/if}}

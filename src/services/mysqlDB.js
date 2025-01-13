@@ -522,6 +522,7 @@ MySqlDBplatform.prototype.GetApiCredentials = function(user_id, cb){
 };
 
 MySqlDBplatform.prototype.Api_PushResourcesData = function(account_id, server_id, api_token, disk_usage, ram_usage, swap_usage, vpn_status, vpn_connection, cl_peers, cb){
+    const savedSnapshotMakrsPerServerLimit = 144;
     var MC = mySql.createConnection(mySqlCredentials);
     MC.query( `SELECT 
         a.id,
@@ -552,7 +553,7 @@ MySqlDBplatform.prototype.Api_PushResourcesData = function(account_id, server_id
             }
 
             let query = null;
-            if(rows[0].resource_count < 50){
+            if(rows[0].resource_count < savedSnapshotMakrsPerServerLimit){
                 // INSERT
                 query = 'INSERT INTO server_resources (server_id, account_id, disk_usage, ram_usage, swap_usage, timestamp, vpn, vpn_server, beacon_peers) '+
                         'VALUES ('+MC.escape(server_id)+','+MC.escape(account_id)+', '+MC.escape(disk_usage)+', '+MC.escape(ram_usage)+', '+MC.escape(swap_usage)+', NOW(), '+MC.escape(vpn_status)+', '+MC.escape(vpn_connection)+', '+MC.escape(cl_peers)+')';
@@ -570,7 +571,8 @@ MySqlDBplatform.prototype.Api_PushResourcesData = function(account_id, server_id
             });
 	    }
     );
-}
+};
+
 MySqlDBplatform.prototype.GetServersResourcesData = function(account_id, cb){
     var MC = mySql.createConnection(mySqlCredentials);
     let responseObj = {resources: null, servers: null};
