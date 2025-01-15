@@ -1,7 +1,6 @@
 {{#unless InstallationGuide}}
 <h3>Check current version of Lodestar running on the server:</h3>
-<pre><code>cd /usr/local/bin/lodestar</code></pre>
-<pre><code>./lodestar -v</code></pre>
+<pre><code>cd /usr/local/bin/lodestar && ./lodestar -v</code></pre>
 {{/unless}}
 
 <ol>
@@ -10,7 +9,7 @@
         <h3 class="mt-20">Installing NodeJS through the Node Version Manager</h3>
         <p>Node Version Manager (NVM) is a piece of shell code that allows you to easily install and maintain different versions of Node.js and its associated packages.</p>
         <ol>
-            <li>Check latest verision of <a href="https://github.com/nvm-sh/nvm">NVM on GitHub</a>.</li>
+            <li><h4>Check latest verision of <a href="https://github.com/nvm-sh/nvm">NVM on GitHub</a>.</h4></li>
             <li><h4>View code of NVM ver {{consensusClients.lodestar.nvmVer}}</h4>
                 <pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{consensusClients.lodestar.nvmVer}}/install.sh</code></pre></li>
             <li><h4>Install NVM</h4>
@@ -34,40 +33,83 @@
             </li>
         </ol>
     </li>
-    <li class="mt-20">
-        <h3>Install build-essential tools</h3>
-        <pre><code>sudo apt-get install build-essential -y</code></pre>
-    </li>
-    <li>
-        <h3 class="mt-20">Install Yarn</h3>
-        <pre><code>corepack enable</code></pre>
-        <pre><code>corepack prepare yarn@stable --activate</code></pre>
-        <pre><code>yarn help</code></pre>
-    </li>
-    {{else}}
-    <li>
-        <h3>Remove old repository clone</h3>
-        <pre><code>cd ~/downloads && sudo rm -r lodestar</code></pre>
-    </li>
     {{/if}}
-    <li><h3>Build Lodestar</h3>
-        <ul>
-            <li><h4>Download latest Lodestar client <a href="https://github.com/ChainSafe/lodestar/releases" target="_blank" rel="nofollow noopener noreferrer">from GitHub</a></h4>
-                <pre><code>cd ~/downloads && git clone -b stable https://github.com/chainsafe/lodestar.git</code></pre>
-            </li>
-            <li>
-                <h4>Install yarn</h4>
-                <pre><code>cd lodestar && yarn install</code></pre>
-            </li>
-            <li><h4>Build Lodestart client</h4>
-                <pre><code>yarn run build</code></pre>
-            </li>
-            <li>
-                <h4>Check builded Lodestar version</h4>
-                <pre><code>./lodestar -v</code></pre>
-            </li>
-        </ul>   
+    <li><h3>Get Lodestar Client</h3>
+        <div class="tabselector">
+			<nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Download client</button>
+				<button class="tab" data-tabpanel="2">Build client from GIT source code</button>
+			</nav>
+			<div class="tabpanel selected">
+                <ul>
+                    {{#unless InstallationGuide}}
+                    <li><h4>Remove old client folder</h4>
+                        <pre><code>cd ~/downloads && sudo rm -r lodestarclient && sudo rm -r lodestar</code></pre>
+                    </li>
+                    {{/unless}}
+                    <li>
+                        <h4>Find the latest stable version of Lodestar client on Github</h4>
+                        <ul>
+                            <li>Find latest Lodestar version at <a href="https://github.com/ChainSafe/lodestar/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/ChainSafe/lodestar/releases</a></li>
+                            <li><mark>Write latest stable Lodestar version: <input type="text" value="{{consensusClients.lodestar.latestVer}}" class="lodestarVer-input"><br>
+                                <p>This will update the url links in the guide below.</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mt-15">
+                        <h4>Download Lodestar version <code class="lodestarVer">{{consensusClients.lodestar.latestVer}}</code> to your node</h4>
+                        <pre><code>mkdir ~/downloads/lodestarclient && cd ~/downloads/lodestarclient && curl -LO https://github.com/ChainSafe/lodestar/releases/download/v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>/lodestar-v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
+                    </li>
+                    <li><h4>Extract downloaded file</h4>
+                        <pre><code>$ tar xvf lodestar-v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
+                    </li>
+                    <li><h4>Create lodestar directory and move the client into it</h4>
+                        <pre><code>mkdir ~/downloads/lodestar && mv ~/downloads/lodestarclient/lodestar ~/downloads/lodestar/lodestar</code></pre>
+                    </li>
+                </ul>
+			</div>
+			<div class="tabpanel">
+                <ul>
+                    {{#if InstallationGuide}}
+                    <li>
+                        <h4>Install build-essential tools</h4>
+                        <pre><code>sudo apt-get install build-essential -y</code></pre>
+                    </li>
+                    <li class="mt-20">
+                        <h4>Install Yarn</h4>
+                        <pre><code>corepack enable</code></pre>
+                        <pre><code>corepack prepare yarn@stable --activate</code></pre>
+                        <pre><code>yarn help</code></pre>
+                    </li>
+                    {{else}}
+                    <li>
+                        <h4>Remove old repository clone</h4>
+                        <pre><code>cd ~/downloads && sudo rm -r lodestar</code></pre>
+                    </li>
+                    {{/if}}
+                    <li><h4>Build Lodestar</h4>
+                        <ul>
+                            <li><strong>Download latest Lodestar client <a href="https://github.com/ChainSafe/lodestar/releases" target="_blank" rel="nofollow noopener noreferrer">from GitHub</a></strong>
+                                <pre><code>cd ~/downloads && git clone -b stable https://github.com/chainsafe/lodestar.git</code></pre>
+                            </li>
+                            <li>
+                                <strong>Install yarn</strong>
+                                <pre><code>cd lodestar && yarn install</code></pre>
+                            </li>
+                            <li><strong>Build Lodestart client</strong>
+                                <pre><code>yarn run build</code></pre>
+                            </li>
+                        </ul>   
+                    </li>
+                </ul>
+			</div>
+		</div>
     </li>
+    <li>
+        <h3>Check version of new Lodestar client</h3>
+        <pre><code>~/downloads/lodestar/lodestar -v</code></pre>
+    </li>
+    
     {{#unless InstallationGuide}}
     <li>
         <h3>Stop Lodestar services</h3>
@@ -141,26 +183,37 @@ sudo systemctl start {{servicePrefix}}lodestar-vi...
     </li>
     {{/unless}}
 </ol>
+
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const tabSelectors = document.querySelectorAll('.tabselector[data-client="lodestar"]');
-    tabSelectors.forEach(tabSelector => {
-        const buttons = tabSelector.querySelectorAll("button.tab");
-        buttons.forEach(button => {
-            button.addEventListener("click", () => {
-                const selectedTabPanel = button.getAttribute("data-tabpanel");
-                tabSelectors.forEach(syncTabSelector => {
-                    // remove selectors
-                    syncTabSelector.querySelectorAll("button.tab, .tabpanel").forEach(el => {
-                        el.classList.remove("selected");
+    for (const lighthouseVer of document.getElementsByClassName("lodestarVer-input")) {
+        lighthouseVer.addEventListener('change', UpdateLodestar);
+    }
+    function UpdateLodestar(e){
+        const value = e.target.value;
+        for (const elm of document.getElementsByClassName("lodestarVer-input")) { elm.innerHTML = value; };
+        for (const elm of document.getElementsByClassName("lodestarVer")) { elm.innerHTML = value; };
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const tabSelectors = document.querySelectorAll('.tabselector[data-client="lodestar"]');
+        tabSelectors.forEach(tabSelector => {
+            const buttons = tabSelector.querySelectorAll("button.tab");
+            buttons.forEach(button => {
+                button.addEventListener("click", () => {
+                    const selectedTabPanel = button.getAttribute("data-tabpanel");
+                    tabSelectors.forEach(syncTabSelector => {
+                        // remove selectors
+                        syncTabSelector.querySelectorAll("button.tab, .tabpanel").forEach(el => {
+                            el.classList.remove("selected");
+                        });
+                        // button
+                        syncTabSelector.querySelector(`button.tab[data-tabpanel="${selectedTabPanel}"]`).classList.add("selected");
+                        // panel
+                        syncTabSelector.children[selectedTabPanel].classList.add("selected");
                     });
-                    // button
-                    syncTabSelector.querySelector(`button.tab[data-tabpanel="${selectedTabPanel}"]`).classList.add("selected");
-                    // panel
-                    syncTabSelector.children[selectedTabPanel].classList.add("selected");
                 });
             });
         });
     });
-});
 </script>

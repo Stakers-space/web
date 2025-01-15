@@ -7,6 +7,7 @@ const ServerModel = require('../models/dashboard/server');
 const InstanceModel = require('../models/dashboard/instance');
 const cache = require('../middlewares/cache');
 const bodyParser = require('body-parser');
+const ProtonVPN = require('../controllers/proton-vpn-servers.js');
 
 /*router.use(bodyParser.urlencoded({
     extended: true
@@ -124,9 +125,9 @@ router.get('/alert', function(req,res){
     res.send(JSON.stringify({"alert":responseState}));
 });
 
-
 router.get('/node-snapshot', Controller.UpdateNodeState);
 //router.get('/hw-report', Controller.UpdateNodeState); // obsolete - move to node-status ?
 
+router.get('/get-proton-vpn-servers-load', ProtonVPN.GetServers);
 
 module.exports = router;
