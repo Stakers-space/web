@@ -126,12 +126,21 @@
                                     <pre><code>journalctl -f -u &lt;ServiceName&gt;</code></pre>
                                     <p>Based on the log you may find out several issues such as:</p>
                                     <ul>
-                                        <li><code>No peers</code> → check internet connection issue</li>
+                                        <li><code>No peers</code> → check internet connection issues</li>
                                         <li><code>Stucked client (no execution/consensus client listening)</code> → try restart the client</li>
-                                        <li><code>DB issue/corruption</code> = try stop and start the client. If it does not help, remove client database and resync.</li>
+                                        <li><code>DB issue/corruption</code>
+                                            <p>Try stop and start the client. If it does not help, you will need to remove and resync corrupted database.</p>
+                                            <ul>
+                                                <li>BeaconChain client database can be synced within minutes from a checkpoint.</li>
+                                                <li>Execution client database synchronization is matter of days or weeks. If you run more nodes, you can connect to the execution client running on the second node meanwhile you synchronizing the execution client on the current node.</li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li><h3>Perform the Best possible action</h3>
+                                    <ul>
+                                        <li></li>
+                                    </ul>
                                     <p>You should consider how long it will take you to fix the problem and run the validator(s) again. If you are not to do this within maximally few weeks, you should consider <a href="#exit">exiting your validators</a> and launching new once your staking node will be ready again.</p>
                                 </li>
                             </ol>

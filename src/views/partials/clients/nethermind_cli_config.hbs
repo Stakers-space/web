@@ -27,10 +27,7 @@
         rel="nofollow noopener noreferrer">Nethermind documentation</a>.</p>
   </li>
   <li>
-    <h4>Enable port for P2P communication (execution client)</h4>
-    <p>To allow execution client synchronization, there's need to enable P2P traffic to TCP (allows the node to connect
-      to peers) and UDP (allows node discovery) port <code>30303</code>. It may be done with following UFW setup:</p>
-    <pre><code>$ sudo ufw allow <mark class="execution-p2p">30303</mark></code></pre>
+    {{> clients/config/execution-ports-enable }}
   </li>
   <li>
     <h4>Create configuration file for Nethermind service</h4>

@@ -15,7 +15,7 @@ ExecStart=/usr/local/bin/lighthouse bn \
   --http \
   --execution-endpoint http://127.0.0.1:<mark class="execution-endpoint">8551</mark> \
   --execution-jwt /var/lib/jwtsecret/ethereum.hex \
-#  --checkpoint-sync-url https://mainnet.checkpoint.sigp.io \
+#  --target-peers 80 \
   --checkpoint-sync-url https://beaconstate.info \
   --port <mark class="consensus-p2p">9000</mark> \
   --port6 <mark class="cc-port-v6">9090</mark> \
@@ -26,6 +26,11 @@ ExecStart=/usr/local/bin/lighthouse bn \
 
 [Install]
 WantedBy=multi-user.target</code></pre>
+<h4>Notes:</h4>
 <ul>
-    <li><a href="https://eth-clients.github.io/checkpoint-sync-endpoints/" target="_blank" rel="nofollow noopener noreferrer">Checkpoint sync endpoints</a></li>
+  <li>You can find all available flags at <a href="https://lighthouse-book.sigmaprime.io/help_bn.html" target="_blank" rel="nofollow noopener noreferrer">https://lighthouse-book.sigmaprime.io/help_bn.html</a></li>
+  <li>Update <code>execution-jwt</code>, if you use different</li>
+  <li>You can uncomment <code>--target-peers</code> to reduce bandwidth</li>
+  <li>You can configurate <code><a href="https://lighthouse-book.sigmaprime.io/checkpoint-sync.html?highlight=checkpoint-sync-url#automatic-checkpoint-sync" target="_blank" rel="nofollow noopener noreferrer">checkpoint-sync-url</a></code> for a quick synchronization from a selected <a href="https://eth-clients.github.io/checkpoint-sync-endpoints/" target="_blank" rel="nofollow noopener noreferrer">Checkpoint sync endpoint</a>. After enabling it, verify, that you are on on the expected chain, see <a href="https://beaconstate.info/" target="_blank" rel="nofollow noopener noreferrer">https://beaconstate.info/</a> → Get started → Lighthouse</li>
+  <li>If you operate more nodes in the local network, you can configurate <code>--trusted-peers</a></code> flag. You can get peer_id from <a href="https://github.com/Stakers-space/staking-scripts/tree/main/api_general/beacon-client" target="_blank">BeaconChain API through <code>PROTOCOL://IP:PORT/eth/v1/node/identity</code>` command</a>.</li>
 </ul>

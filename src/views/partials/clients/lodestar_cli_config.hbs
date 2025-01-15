@@ -45,7 +45,6 @@
 {{> clients/config/gno-lodestarbeacon }}
 						</div>
 					</div>
-          <i>*Note: Update <code>jwt-secret</code>, if you use different</i>
           {{/unless}}
 {{#ifEqual chain "ethereum"}}
 {{> clients/config/eth-lodestarbeacon }}
@@ -53,7 +52,6 @@
 {{#ifEqual chain "gnosis"}}
 {{> clients/config/gno-lodestarbeacon }}
 {{/ifEqual}}
-            <p>Check <a href="https://chainsafe.github.io/lodestar/run/beacon-management/beacon-cli" target="_blank" rel="noopener">all available flags</a>.</p>
         </li>
         <li>Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</li>
       </ul>

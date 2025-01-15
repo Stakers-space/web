@@ -126,7 +126,7 @@ router.get('/alert', function(req,res){
 
 
 router.get('/node-snapshot', Controller.UpdateNodeState);
-router.get('/hw-report', Controller.UpdateNodeState); // obsolete - move to node-status ?
+//router.get('/hw-report', Controller.UpdateNodeState); // obsolete - move to node-status ?
 
 
 module.exports = router;

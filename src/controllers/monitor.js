@@ -117,7 +117,7 @@ exports.UpdateNodeState = (req,res) => {
 	if(req.query.disk_usage) disk_usage = req.query.disk_usage.replace('%', '');
     const ram_usage = req.query.ram_usage;
     const swap_usage = req.query.swap_usage;
-	const vpn_status = (req.query.vpn_s && req.query.vpn_s !== "N/A" && req.query.vpn_s !== "unknown") ? req.query.vpn_s.toLowerCase() : null;	
+	const vpn_status = (req.query.vpn_s && req.query.vpn_s !== "N/A" && req.query.vpn_s !== "Unknown") ? req.query.vpn_s.toLowerCase() : null;	
 	const vpn_connection = (req.query.vpn && req.query.vpn !== "N/A") ? req.query.vpn : null; // cz-prg-wg-101
 	const cl_peers = (req.query.peer && req.query.peer !== "N/A") ? req.query.peer : null;
 
