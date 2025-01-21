@@ -69,7 +69,7 @@
 					<p>In the matter of security, you must think about the way you are going to connect to / access your node - see the guide below.</p>
 
 					<h3>Upgrade & update on the latest software and security updates.</h3>
-					<pre><code>$ sudo apt -y update && sudo apt -y upgrade
+					<pre><code>$ sudo apt update && sudo apt -y upgrade
 $ sudo apt dist-upgrade && sudo apt autoremove
 $ sudo reboot</code></pre>
 					<p>You can also create a shell script that will do this either on manual request or a schedule, see <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/update-and-restart-linux" target="_blank">Update and Restart Ubuntu server Utility</a>.</p>
@@ -84,21 +84,20 @@ $ sudo reboot</code></pre>
 sudo ufw default allow outgoing</code></pre>
 							</li>
 						</ul>
-						<p><strong>NOTE: Firewall will be activated later, after adding additional configuration in next steps.</strong></p>
+						<p><strong>NOTE: Installed firewall is required for enabling custom SSH port for remote connection. Firewall activation itself will be processed later, after additional configuration made in next steps.</strong></p>
 					</div>
 
 					<div>
 						<h3 class="mt-40" id="securyiing-ssh">Managing the SSH access</h3>
 						<ul>
-							<li>SSH allows to connect to the server either from the local or remote network.</li>
+							<li>SSH allows to connect to the server remotely either from the local or remote network.</li>
 							<li>If you are going to connect your node locally only (= with monitor and keyboard connected right in the node), you do not need to install SSH or you can simply disable it, if is already installed.</li>
 						</ul>
 
 						<h4 class="mt-20" id="ssh-install">Check, whether <code>SSH</code> is installed on the server</h4>
 						<pre><code>which sshd</code></pre>
-						<p>This command should print directory of the <code>SSH</code> service. If it prints an empty response, <code>SSH</code> is not installed on the server and thus connecting to server over <code>SSH</code> is not possible. If required, <code>SSH</code> can be installed with following command:</p>
-						<pre><code>sudo apt install openssh-server</code></pre>
-
+						<p>This command should print directory of the <code>SSH</code> service. If it prints an empty response, <code>SSH</code> is not installed on the server and thus connecting to server over <code>SSH</code> is not possible.</p>
+						
 						<div class="tabselector mt-40">
 							<nav class="egrid egrid-2">
 								<button class="tab selected" data-tabpanel="1">Securying SSH access</button>
@@ -120,6 +119,13 @@ sudo ufw default allow outgoing</code></pre>
 									<li><a href="#ddos">Configurate Brute-force & DDoS protection</a></li>
 									<li><a href="#remote-access">Additional tips</a></li>
 								</ul>
+
+								If <code>SSH</code> is not installed yet (<code>which sshd</code> returns an empty response), <code>SSH server</code> can be installed with following command:
+								<pre><code>sudo apt install openssh-server</code></pre>
+								<p>After the installation, you can use command <code>poweroff</code> to shut down the server and unstick monitor and keyboard. Next connections can be remote over SSH since now. As there is no SSH key used right now, on Linux/Mac, a remote connection can be made with following command:</p>
+								<pre><code>ssh -o IdentitiesOnly=yes -o PreferredAuthentications=password username@server_id -p 22</code></pre>
+								<p>Remote connection from Windows OS requires installation of SSH client such as e.g. Putty. See more information about remote connections from Windows at <a href="https://vrealmatic.com/ubuntu-server/ssh-keys" target="_blank">this Guide</a>.</p>
+
 								<p><strong>Before configuring security matters and connecting to your node,</strong> take note the basic rule to maintain also the security of the computer(s) you are going to use for connecting to your node (stealing the SSH keys) as well as other devices required for connection (stealing 2FA codes) etc.</p>
 								<ul>
 									<li id="ssh-keys">
@@ -159,15 +165,12 @@ sudo ufw default allow outgoing</code></pre>
 											<li class="mt-15">Enable the Port <code class="sshPort">1024</code> for SSH/TCP connection
 												<pre><code>sudo ufw allow <mark class="sshPort">1024</mark>/tcp</code></pre>
 											</li>
-											<li class="mt-15">Restart the SSH service to reflect the changes.
-												<pre><code>sudo systemctl restart ssh</code></pre>
-												<p>After the restart, you will not able to connect through the SSH over port <code>22</code> anymore. Be sure you are connecting over the <code class="sshPort">1024</code> next time.</p>
-											</li>
 											<li class="mt-15">Disable the default <code>22</code> port for SSH/TCP connection
 												<pre><code>sudo ufw deny 22/tcp</code></pre>
 											</li>
-											<li class="mt-15">Check your port settings if needed
-												<pre><code>sudo ufw status numbered</code></pre>
+											<li class="mt-15">Restart the SSH service and reboot the system to reflect the changes.
+												<pre><code>sudo systemctl restart ssh && sudo reboot</code></pre>
+												<p>After the restart, you will not able to connect through the SSH over port <code>22</code> anymore. Be sure you are connecting over the <code class="sshPort">1024</code> next time.</p>
 											</li>
 										</ol>
 										<p><strong>NOTE: If you are facing an issue to sign in over SSH after changing the port, try reboot the staking node and sign in again.</strong></p>

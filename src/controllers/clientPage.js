@@ -205,8 +205,8 @@ class ClientPagePresenter {
 		res.locals.page_hbs = "clients";
 		res.locals.layout_hbs = "amp";
 		res.locals.css_file = "docs";
-		res.locals.title = `${res.locals.clientName} staking clients overview`;
-    	res.locals.metaDescription = `Execution, Consensus, MEV and service-based clients overview for ${res.locals.clientName} staking.`;
+		res.locals.title = `${res.locals.chainName} staking clients overview`;
+    	res.locals.metaDescription = `Execution, Consensus, MEV and service-based clients overview for ${res.locals.chainName} staking.`;
 				
 		// load data
 		fs.readFile(path.join(__dirname, '..', '..', 'data/clients.json'), 'utf8', (err, data) => {

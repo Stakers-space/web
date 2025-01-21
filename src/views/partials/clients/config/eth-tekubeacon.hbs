@@ -8,7 +8,7 @@ Group=<mark class="consensus_sn" data-client="teku">{{servicePrefix}}tekubeacon<
 Type=simple
 Restart=always
 RestartSec=5
-Environment="JAVA_OPTS=-Xmx5g"
+Environment="JAVA_OPTS=-Xmx12g"
 Environment="TEKU_OPTS=-XX:-HeapDumpOnOutOfMemoryError"
 ExecStart=/usr/local/bin/teku/bin/teku \
   --network=mainnet \

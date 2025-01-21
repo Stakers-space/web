@@ -3,8 +3,8 @@ Description=Erigon Execution Client (Ethereum Mainnet)
 After=network.target
 Wants=network.target
 [Service]
-User=<mark class="execution_sn" data-client="erigon">eth-erigon</mark>
-Group=<mark class="execution_sn" data-client="erigon">eth-erigon</mark>
+User=<mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark>
+Group=<mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark>
 Type=simple
 Restart=always
 RestartSec=5

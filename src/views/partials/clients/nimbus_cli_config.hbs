@@ -19,8 +19,44 @@
 
 <ul>
  {{#if PortSelection}}
-    <li class="mt-15">{{> clients/config/consensusclient-portselection }}</li>
-    {{/if}}
+  <li class="mt-15">{{> clients/config/consensusclient-portselection }}</li>
+  {{/if}}
+  <li>
+    <h4>Creating a checkpoint</h4>
+  {{#unless chain}}
+          <div class="tabselector">
+						<nav class="egrid egrid-2">
+							<button class="tab selected" data-tabpanel="1">Ethereum</button>
+							<button class="tab" data-tabpanel="2">Gnosis</button>
+						</nav>
+						<div class="tabpanel selected">
+<pre><code>sudo /usr/local/bin/nimbus/nimbus_beacon_node trustedNodeSync \
+  --network:mainnet  \
+  --data-dir=<mark class="consensus-dp" data-client="nimbus" data-beacondir="true">/var/lib{{slashChain}}/nimbus/beacon</mark> \
+  --<a href="https://nimbus.guide/trusted-node-sync.html" target="_blank">trusted-node-url</a>=https://beaconstate.info</code></pre>
+						</div>
+						<div class="tabpanel">
+<pre><code>sudo /usr/local/bin/nimbus/nimbus_beacon_node_gnosis trustedNodeSync \
+      --network:gnosis \
+      --data-dir=<mark class="consensus-dp" data-client="lighthouse" data-beacondir="true">/var/lib{{slashChain}}/nimbus/beacon</mark> \
+      --<a href="https://nimbus.guide/trusted-node-sync.html" target="_blank">trusted-node-url</a>=https://checkpoint.gnosischain.com/</code></pre>
+						</div>
+					</div>
+          <i>*Note: Update <code>jwt-secret-file</code>, if you use different</i>
+          {{/unless}}
+{{#ifEqual chain "ethereum"}}
+<pre><code>sudo /usr/local/bin/nimbus/nimbus_beacon_node trustedNodeSync \
+  --network:mainnet  \
+  --data-dir=<mark class="consensus-dp" data-client="nimbus" data-beacondir="true">/var/lib{{slashChain}}/nimbus/beacon</mark> \
+  --<a href="https://nimbus.guide/trusted-node-sync.html" target="_blank">trusted-node-url</a>=https://beaconstate.info</code></pre>
+{{/ifEqual}}
+{{#ifEqual chain "gnosis"}}
+<pre><code>sudo /usr/local/bin/nimbus/nimbus_beacon_node_gnosis trustedNodeSync \
+      --network:gnosis \
+      --data-dir=<mark class="consensus-dp" data-client="lighthouse" data-beacondir="true">/var/lib{{slashChain}}/nimbus/beacon</mark> \
+      --<a href="https://nimbus.guide/trusted-node-sync.html" target="_blank">trusted-node-url</a>=https://checkpoint.gnosischain.com/</code></pre>
+{{/ifEqual}}
+  </li>
   <li>
     <h4>Create configuration file for Tekubeacon service</h4>
     <ol>

@@ -3,8 +3,8 @@ Description=Nethermind Execution Client (Gnosis chain)
 After=network.target
 Wants=network.target
 [Service]
-User=<mark class="execution_sn" data-client="nethermind">gno-nethermind</mark>
-Group=<mark class="execution_sn" data-client="nethermind">gno-nethermind</mark>
+User=<mark class="execution_sn" data-client="nethermind">{{servicePrefix}}nethermind</mark>
+Group=<mark class="execution_sn" data-client="nethermind">{{servicePrefix}}nethermind</mark>
 Type=simple
 Restart=always
 RestartSec=5
