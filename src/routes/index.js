@@ -56,7 +56,7 @@ router.use('/mev-boost', require('./client'));
 router.use('/guides', require('./guides'));
 
 router.use('/about', function(req,res,next){
-    res.locals.page_hbs = 'about';
+    res.locals.page_hbs = 'pages/about';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `About Stakers.space`;
     res.locals.metaDescription = null;
@@ -121,7 +121,7 @@ router.use('/bonded-validators', function(req,res,next){
 }, Response);
 
 router.use('/staking', function(req,res,next){
-    res.locals.page_hbs = 'staking';
+    res.locals.page_hbs = 'wiki/staking';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `About Staking | Stakers.space`;
     res.locals.metaDescription = null;
@@ -129,7 +129,7 @@ router.use('/staking', function(req,res,next){
 }, Response);
 
 router.use('/liquid-staking', function(req,res,next){
-    res.locals.page_hbs = 'liquid-staking';
+    res.locals.page_hbs = 'wiki/liquid-staking';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Liquid Staking | Stakers.space`;
     res.locals.metaDescription = null;
@@ -137,7 +137,7 @@ router.use('/liquid-staking', function(req,res,next){
 }, Response);
 
 router.use('/restaking', function(req,res,next){
-    res.locals.page_hbs = 'restaking';
+    res.locals.page_hbs = 'wiki/restaking';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `ReStaking | Stakers.space`;
     res.locals.metaDescription = null;
@@ -145,7 +145,7 @@ router.use('/restaking', function(req,res,next){
 }, Response);
 
 router.use('/slashing', function(req,res, next){
-    res.locals.page_hbs = 'slashing';
+    res.locals.page_hbs = 'wiki/slashing';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Slashing | Stakers.space`;
     res.locals.metaDescription = null;

@@ -22,7 +22,10 @@
     "2025-01-18",
     "2025-01-19",
     "2025-01-20",
-    "2025-01-21"
+    "2025-01-21",
+    "2025-01-22",
+    "2025-01-23",
+    "2025-01-24"
   ],
   "validators": [
     320907,
@@ -47,7 +50,10 @@
     337001,
     336967,
     338022,
-    338677
+    338677,
+    339635,
+    334700,
+    335342
   ],
   "entry_queue": [
     1694,
@@ -72,6 +78,9 @@
     0,
     0,
     586,
+    0,
+    0,
+    0,
     0
   ],
   "entry_wait": [
@@ -97,6 +106,9 @@
     0,
     0,
     6.5,
+    0,
+    0,
+    0,
     0
   ],
   "exit_queue": [
@@ -122,6 +134,9 @@
     0,
     0,
     0,
+    0,
+    0,
+    5,
     0
   ],
   "exit_wait": [
@@ -147,6 +162,9 @@
     0,
     0,
     0,
+    0,
+    0,
+    0.05,
     0
   ],
   "churn": [
@@ -172,9 +190,15 @@
     2,
     2,
     2,
+    2,
+    2,
+    2,
     2
   ],
   "entry_churn": [
+    null,
+    null,
+    null,
     null,
     null,
     null,
@@ -222,9 +246,15 @@
     null,
     null,
     null,
+    null,
+    null,
+    null,
     null
   ],
   "supply": [
+    null,
+    null,
+    null,
     null,
     null,
     null,
@@ -272,6 +302,9 @@
     null,
     null,
     null,
+    null,
+    null,
+    null,
     null
   ],
   "staked_percent": [
@@ -297,9 +330,15 @@
     null,
     null,
     null,
+    null,
+    null,
+    null,
     null
   ],
   "apr": [
+    null,
+    null,
+    null,
     null,
     null,
     null,

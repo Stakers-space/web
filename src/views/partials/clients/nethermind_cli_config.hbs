@@ -126,8 +126,7 @@ journalctl -fu <mark class="execution_sn">{{servicePrefix}}nethermind</mark></co
                       <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
                       <p>If the file is empty, generate it with command <code>sudo /usr/local/bin/staking.sh init</code></p>
                     </li>
-                    <li>Set link to proper services. It should be as follow:
-                      <pre><code>executionClients="<mark class="execution_sn">{{servicePrefix}}nethermind</mark>"</code></pre>
+                    <li>Set link to proper service. It should be as follow:
                       <pre><code>executionServices="<mark class="execution_sn">{{servicePrefix}}nethermind</mark>.service"</code></pre>
                     </li>
                   </ul>

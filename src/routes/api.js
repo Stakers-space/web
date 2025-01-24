@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Controller = require('../controllers/monitor.js');
+const AlertController = require('../controllers/api/alert.js');
 const mysqlSrv = require('../services/mysqlDB');
 const ServerModel = require('../models/dashboard/server');
 const InstanceModel = require('../models/dashboard/instance');
@@ -30,11 +31,14 @@ router.use(passport.initialize());
 router.use(passport.authenticate('session'));
 router.use(passport.session());
 
+router.use(bodyParser.text({ type: 'text/plain', limit: '10mb' }));
 router.use(bodyParser.urlencoded({ limit: '15mb', extended: true }));
 router.use(bodyParser.json( {limit: '15mb'} ));
+
 router.use(cookieParser());
 
 router.post('/validator-state', Controller.UpdateValidatorsState);
+
 router.use('/web/cache', require('./cache'));
 router.use('/alert', require('./alert')); // login to server alert
 
@@ -109,25 +113,8 @@ router.get('/account', function(req,res){
     function response(){ res.send(JSON.stringify(respObj)); }
 });
 
-router.get('/alert', function(req,res){
-    // verify api key, get account instances
-    // return: 0 = no notification 
-            // 1 = common notification
-            // 2 = critical notification 
-
-    let responseState = 0;
-    if(!cache.getSetValidatorsStateSynced()) {
-        responseState = 2;
-    } else {
-        responseState = cache.getOfflineStatesAlertType();
-    }
-
-    res.send(JSON.stringify({"alert":responseState}));
-});
-
+router.get('/alert', AlertController.ReturnAlertState);
 router.get('/node-snapshot', Controller.UpdateNodeState);
-//router.get('/hw-report', Controller.UpdateNodeState); // obsolete - move to node-status ?
-
 router.get('/get-proton-vpn-servers-load', ProtonVPN.GetServers);
 
 module.exports = router;

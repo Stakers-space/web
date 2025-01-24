@@ -190,7 +190,7 @@ sudo systemctl start {{servicePrefix}}lodestar-vi...
     }
     function UpdateLodestar(e){
         const value = e.target.value;
-        for (const elm of document.getElementsByClassName("lodestarVer-input")) { elm.innerHTML = value; };
+        for (const elm of document.getElementsByClassName("lodestarVer-input")) { elm.innerHTML = value; elm.value = value; };
         for (const elm of document.getElementsByClassName("lodestarVer")) { elm.innerHTML = value; };
     }
 

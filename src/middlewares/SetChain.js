@@ -7,6 +7,7 @@ function Ethereum(req,res,next){
     res.locals.chainName = "Ethereum"
     res.locals.chainUrl = "ethereum-staking";
     res.locals.isEthereum = true;
+    res.locals.network = "mainnet";
     next();
 }
 
@@ -19,6 +20,7 @@ function Gnosis(req,res,next){
     res.locals.chainName = "Gnosis"
     res.locals.chainUrl = "gnosis-staking";
     res.locals.isGnosis = true;
+    res.locals.network = "gnosis";
     next();
 }
 

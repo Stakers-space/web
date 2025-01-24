@@ -74,7 +74,7 @@ $ journalctl -fu <mark class="execution_sn" data-client="nethermind">nethermind<
   function UpdateNethermind(e) {
     const value = e.target.value;
     // all inputs (if more times on the page)
-    for (const elm of document.getElementsByClassName("nethermind_verhash-input")) { elm.innerHTML = value; };
+    for (const elm of document.getElementsByClassName("nethermind_verhash-input")) { elm.innerHTML = value; elm.value = value; };
 
     for (const elm of document.getElementsByClassName("nethermind_verhash")) { elm.innerHTML = value; };
 

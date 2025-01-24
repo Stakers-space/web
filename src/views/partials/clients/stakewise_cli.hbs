@@ -1,0 +1,67 @@
+<p>StakeWise documentation: <a href="https://docs.stakewise.io/" target="_blank" rel="nofollow noopener noreferrer">https://docs.stakewise.io/</a></p>
+<ol>
+    <li>
+		{{#if InstallationGuide}}
+        <h3>Installing StakeWise client</h3>
+        {{else}}
+        <h3>Updating StakeWise client</h3>
+        {{/if}}
+        <ol>
+            <li>
+                <h4>Find the latest stable version of StakeWise client on Github</h4>
+                <ul>
+                    <li>Find latest StakeWise version at <a href="https://github.com/stakewise/v3-operator/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/stakewise/v3-operator/releases</a></li>
+                    <li><mark>Write latest stable StakeWise version: <input type="text" value="{{serviceLayer.stakewise.latestVer}}" class="stakewiseVer-input"><br>
+                        <p>This will update the url links in the guide below.</p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h4>Download the binary file for your node</h4>
+                <pre><code>cd ~/downloads && curl -LO https://github.com/stakewise/v3-operator/releases/download/v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>/operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
+            </li>
+            <li>
+                <h4>Unpack the client and remove its packed file</h4>
+                <pre><code>tar xvf operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64.tar.gz && rm operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
+            </li>
+            {{#unless InstallationGuide}}
+            <li class="mt-15">
+                <h4>Stop running StakeWise clients</h4>
+                <pre><code></code></pre>
+            </li>
+            <li class="mt-15">
+                <h4>Remove the old client</h4>
+                <pre><code>sudo rm /usr/local/bin/stakewise-operator</code></pre>
+            </li>
+            {{/unless}}
+            <li>
+                <h4>Move the client to <code>/usr/local/bin</code></h4>
+                <pre><code>sudo cp ~/downloads/operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64/operator /usr/local/bin/stakewise-operator</code></pre>
+            </li>
+            {{#unless InstallationGuide}}
+            <li>
+                <h4>Start the client again</h4>
+                <pre><code></code></pre>
+            </li>
+            <li>
+                <h4>Monitor</h4>
+                <pre><code></code></pre>
+            </li>
+            {{/unless}}
+            <li>
+                <h4>Remove downloaded files</h4>
+                <pre><code>rm -r ~/downloads/operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64</code></pre>
+            </li>
+        </ol>
+    </li>
+</ol>
+<script>
+    for (const stakewiseVer of document.getElementsByClassName("stakewiseVer-input")) {
+        stakewiseVer.addEventListener('change', UpdateStakewise);
+    }
+    function UpdateStakewise(e){
+        const value = e.target.value;
+        for (const elm of document.getElementsByClassName("stakewiseVer-input")) { elm.innerHTML = value; elm.value = value; };
+        for (const elm of document.getElementsByClassName("stakewise_ver")) { elm.innerHTML = value; };
+    }
+</script>

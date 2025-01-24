@@ -117,7 +117,7 @@ sudo systemctl start prysmbeacon</code></pre>
     }
     function UpdatePrysm(e){
         const value = e.target.value;
-        for (const elm of document.getElementsByClassName("prysmVer-input")) { elm.innerHTML = value; };
+        for (const elm of document.getElementsByClassName("prysmVer-input")) { elm.innerHTML = value; elm.value = value; };
         for (const elm of document.getElementsByClassName("prysmVer")) { elm.innerHTML = value; };
     }
 </script>

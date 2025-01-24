@@ -114,7 +114,7 @@ sudo systemctl start {{servicePrefix}}lighthouse-vi...
     }
     function UpdateLighthouse(e){
         const value = e.target.value;
-        for (const elm of document.getElementsByClassName("lighthouseVer-input")) { elm.innerHTML = value; };
+        for (const elm of document.getElementsByClassName("lighthouseVer-input")) { elm.innerHTML = value; elm.value = value; };
         for (const elm of document.getElementsByClassName("lighthouseVer")) { elm.innerHTML = value; };
     }
 </script>

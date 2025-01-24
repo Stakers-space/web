@@ -9,30 +9,37 @@ const MailMessage = require('../models/emailMessage/validators_alert.js');
 let noIncominMessageTimer = null;
 
 exports.UpdateValidatorsState = (req,res) => {
+	// validate queries
+	if(!req.query.n) return res.status(400).send('Missing network parameter');
+	if(!req.query.t) return res.status(400).send('Missing token parameter');
+	
 	/**
 	 * ToDo: Remake - based on server owner. Not account valkeys owner
-	 * ToDo: Add Ethereum support
 	*/
-    var decryptedData = null;
+    var data = null;
 	if (req.is('application/json')) {
-		decryptedData = req.body;
+		data = req.body;
 	} else if (req.is('text/plain')) {
-		var decipher = crypto.createDecipheriv('aes-256-cbc', cryptoConf.key, cryptoConf.iv),
-		decryptedData = decipher.update(req.body, 'base64', 'utf8');
+		let decipher = crypto.createDecipheriv('aes-256-cbc', cryptoConf.key, cryptoConf.iv),
+			decryptedData = decipher.update(req.body, 'base64', 'utf8');
+
 		decryptedData += decipher.final('utf8');
+		data = JSON.parse(decryptedData);
 	} else {
 		return res.status(415).send('Unsupported Content Type');
 	}
-	
-	var data = JSON.parse(decryptedData);
-	//console.log("/api/validator-state", req.headers['content-type'], decryptedData);
-	console.log("[API] Validator status | Epoch:", data.e, data);
-	
-	// Update last Epoch Reported Number
-	cache.setLastEpochReported("gnosis", data.e);
 
-	let instanceReport = {}; // Convert account-based to instance-based (Temporary - accounts will be removed later, it will be based on instanceId with account api_token verification)
-	let accountReport = {};
+	// check received epoch (same or higher than known)
+	if(data.e < cache.getLastEpochReported()[req.query.n]) {
+		console.log(`[API]/validator-state | Outdated data received from ${req.query.s} | ${req.query.n} | Epoch ${data.e}:`, data, req.query.t);
+		return res.status(200).send("ignored:outdated data");
+	}
+	// Update last Epoch Reported Number
+	cache.updateLastEpochReported(req.query.n, data.e);
+
+	//console.log("/api/validator-state", req.headers['content-type'], decryptedData);
+	console.log(`[API]/validator-state | ${req.query.s} | ${req.query.n} | Epoch ${data.e}:`, data/*, req.query.t*/);
+	
 	// incoming - main key = instanceId (instance StringId as a meta information (Instances ids are known on the dashboard load))
 	/**
 	 * Deposit_keystores file encrypted to data
@@ -40,32 +47,29 @@ exports.UpdateValidatorsState = (req,res) => {
 	 * Choose Either uploading the definition file to own server or Submit monitor definition file to monitor server
 	*/
 
+	let instanceReport = {}; // Convert account-based to instance-based (Temporary - accounts will be removed later, it will be based on instanceId with account api_token verification)
+	let accountReport = {};
+	// iterate through received data
 	for (const [instanceId, instanceData] of Object.entries(data.i)) {
 		console.log(`|  ├─ ${instanceId}`, instanceData);
-		instanceReport[instanceId] = instanceData;
-
-		// instanceId = vi19
-		// instanceData = { v: 750, o: [ { i: '175285', e: 1065742, d: 4 }
-		// if there's more than XY offline validators, consider it as possitive, report it
+		instanceReport[instanceId] = instanceData; // vi1 = { v: 5, o: [ { i: '175285', e: 1065742, d: 4 }
+		
+		// if there's more than 10% offline validators, consider it as possitive, report it
 		const offlineValidators = instanceData.o.length;
-		if(offlineValidators > 100){ accountReport[instanceId] = `${offlineValidators} offline`/*instanceData*/; } // should be variable, based on number of validators in the instance
+		if(offlineValidators / instanceData.v >= 0.1){ accountReport[instanceId] = `${offlineValidators} offline`/*instanceData*/; } // should be variable, based on number of validators in the instance
 	}
+
+	// push instanceReport to DB  (update `instances` - clmn `state`) - is loaded by dashboard - replaced by cache mechanism.
+	cache.updateOfflineStates(instanceReport);
 
 	// What about back online state???
 	const instancesForAlert = Object.keys(accountReport);
-	console.log("Instances alert:", instancesForAlert);
-	
-	// push instanceReport to DB  (update `instances` - clmn `state`) - is loaded by dashboard - replaced by cache mechanism.
-	cache.setOfflineStates(instanceReport);
-
 	if(instancesForAlert.length > 0){ // & email reporting enabled (async action)
+		console.log("Instances alert:", instancesForAlert);
 		// get accounts for instances IN(instancesForAlert)
 		new mysqlSrv().GetAccountsForInstances(instancesForAlert, function(err,data){
-			if(err || data.length === 0) {
-				console.log("err | data:",err, data);
-				return;
-			}
-
+			if(err || data.length === 0) return console.log("err | data:",err, data);;
+			
 			let accounts = {};
 			try {
 				// aggregate instances under accounts
@@ -98,7 +102,7 @@ exports.UpdateValidatorsState = (req,res) => {
 	// no incomming message alert
 	cache.getSetValidatorsStateSynced(true);
 	clearTimeout(noIncominMessageTimer);
-	console.log("UpdateValidatorsState | Clearing and reActivating noIncominMessageTimer");
+	//console.log("UpdateValidatorsState | Clearing and reActivating noIncominMessageTimer");
 	noIncominMessageTimer = setTimeout(() => {
 		console.log(new Date(), "UpdateValidatorState | Triggering No incoming message alert!!!");
 		cache.getSetValidatorsStateSynced(false);

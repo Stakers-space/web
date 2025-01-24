@@ -112,7 +112,7 @@ sudo systemctl start {{servicePrefix}}teku-vi...
     }
     function UpdateTeku(e){
         const value = e.target.value;
-        for (const elm of document.getElementsByClassName("tekuVersion-input")) { elm.innerHTML = value; };
+        for (const elm of document.getElementsByClassName("tekuVersion-input")) { elm.innerHTML = value; elm.value = value; };
         for (const elm of document.getElementsByClassName("tekuVersion")) { elm.innerHTML = value; };
     }
 </script>

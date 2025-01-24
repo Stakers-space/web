@@ -52,7 +52,7 @@ HomePagePresenter.prototype.Request = function(req,res, next){
 };
 
 HomePagePresenter.prototype.Response = function(req,res){
-    res.render("hp", {
+    res.render("pages/hp", {
 		layout: "standard",
 		pageUrl: 'https://stakers.space',//('https://' + req.appData.host + req.canonicalUrl),
 		alternateUrl: null,//alternateUrl,

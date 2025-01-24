@@ -1,5 +1,5 @@
 let lastEpochReported = { gnosis: 0, ethereum: 0 };
-let offlineStates = {};
+let offlineStates = {}; // chain is not needed as is based on instance id
 /**
  * {
     '1': { v: 3, o: [ [Object], [Object] ] },
@@ -45,12 +45,25 @@ function getOfflineStatesAlertType(){
 function getLastReportSent(accountId){
     return (lastReportSent[accountId]) ? lastReportSent : 0;
 }
+/**
+ * Set epoch number of last snapshot
+ * @param {*} chain 
+ * @param {*} value 
+ */
+function updateLastEpochReported(chain, value) { lastEpochReported[chain] = value; }
 
-function setLastEpochReported(chain, value) { lastEpochReported[chain] = value; }
-function setOfflineStates(data){ offlineStates = data; console.log("cached offline states:", offlineStates); }
+
+function updateOfflineStates(data){ 
+    // chain not needed as is based on instance id
+    // iterate and update offline states
+    offlineStates = data;
+    if(Object.keys(offlineStates).length > 0) console.log("cached offline states:", offlineStates); 
+    
+}
 function setLastReportSent(accountId, timestamp){ lastReportSent[accountId] = timestamp; }
 
-function addPubkeystoQueue(chain, instanceId,pubkeys,indexes,password, activateMonitoring=false){
+function updatePubkeystoQueue(chain, instanceId,pubkeys,indexes,password, activateMonitoring=false){
+    console.log("updatePubkeystoQueue | instance:", instanceId, chain, "| activeMonitoring:", activateMonitoring);
     pubkeysQueue[chain][instanceId] = {
         iid:instanceId,
         keys:pubkeys,
@@ -74,12 +87,12 @@ function getSetValidatorsStateSynced(state = null){
 
 module.exports = {
     getLastEpochReported,
-    setLastEpochReported,
+    updateLastEpochReported,
     getOfflineState,
-    setOfflineStates,
+    updateOfflineStates,
     getLastReportSent,
     setLastReportSent,
-    addPubkeystoQueue,
+    updatePubkeystoQueue,
     getPubkeyFromQueue,
     getOfflineStatesAlertType,
     getSetValidatorsStateSynced

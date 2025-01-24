@@ -189,14 +189,15 @@ exports.LinkInstanceToAccount = function(req,res,next){
 
 exports.OnProcessKeystores = function(req,res){
     if(res.locals.isDemoAccount) return ThrowError("Action restricted for demo account",res);
-    console.log("[Instance API] OnProcessKeystores", req.query/*, req.body, req.user*/);
+    console.log("[Instance API] OnProcessKeystores", req.query, req.body.chain/*, req.user*/);
     if(!req.user.id) return ThrowError("Action rejected", res);
 
     const chain = req.body.chain;
 
     const password = sanitizeHtml(req.body.psw);
     const fileName = sanitizeHtml(req.body.dd_filename);
-    const monitor = (req.body.pubkey_monitoring === "1")
+    // enabled monitorung
+    const enabledMonitoring = (req.body.pubkey_monitoring === "1")
     let pubkeysInp = sanitizeHtml(req.body.pubkeys);
     if(pubkeysInp.indexOf("&") !== -1 || pubkeysInp.indexOf("<") !== -1 || pubkeysInp.indexOf(">") !== -1) return ThrowError("Action rejected", res);
     
@@ -238,8 +239,9 @@ exports.OnProcessKeystores = function(req,res){
     new mysqlSrv().UpdateValidatorInstance_Data(req.query.iid, req.user.id, dbStatus, chain, function(err,result){
         if(err) return ThrowError(err, res);
         if(result.affectedRows === 0) return ThrowError("Unauthorized request: Action reserved for instance owner only", res);
-        // push to queue
-        cache.addPubkeystoQueue(chain, req.query.iid, pubKeys, pubIndexes, password, monitor); // what if sent more times? - protected by UI (status processing instead of choose file)
+        // push to queue (data from browser so it manages adding and removal indexes as well)
+        cache.updatePubkeystoQueue(chain, req.query.iid, pubKeys, pubIndexes, password, enabledMonitoring); // what if sent more times? - protected by UI (status processing instead of choose file)
+        
         res.redirect('/dashboard/server-node/define-instance?sid='+req.query.sid+'&iid='+req.query.iid+'&success=processing');
     });
 };

@@ -2,7 +2,7 @@
 const router = require('express').Router();
 
 router.get('/', function(req,res){
-    res.render("contact", {
+    res.render("pages/contact", {
         layout: "amp",
         pageUrl: 'https://stakers.space',//('https://' + req.appData.host + req.canonicalUrl),
         title: "Contact Us | Stakers.space", //req.appData.meta.title,

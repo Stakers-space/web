@@ -149,7 +149,7 @@ sudo systemctl start {{servicePrefix}}nimbus-vi...
     function UpdateNimbus(e){
         const value = e.target.value;
         // all inputs (if more times on the page)
-        for (const elm of document.getElementsByClassName("nimbus_verhash-input")) { elm.innerHTML = value; };
+        for (const elm of document.getElementsByClassName("nimbus_verhash-input")) { elm.innerHTML = value; elm.value = value; };
 
         for (const elm of document.getElementsByClassName("nimbus_verhash")) { elm.innerHTML = value; };
 
