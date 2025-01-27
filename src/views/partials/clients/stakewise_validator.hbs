@@ -6,11 +6,34 @@
 			<li>At <a href="https://app.stakewise.io/operate">https://app.stakewise.io/operate</a>, connect your wallet and create a Vault</li>
 		</ul>
 	</li>
-    <li>
-        <h4>Create a directory for <code>stakewise</code> service, if it does not exists yet</h4>
-        <pre><code>sudo mkdir /srv/stakewise</code></pre>
-    </li>
-    <li><h3>Maua way - Generate validator keys</h3>
+	<li>
+							<h3>Create a StakeWise Operator service</h3>
+							<ul>
+								<li>StakeWise pool address: <input type="text" class="interactive-element stakewise_wlt_address" data-class="stakewise_wlt_address" value="0xXXXX..."></li>
+								<li>StakeWise service name: <input type="text" class="interactive-element stakewise_service" data-class="stakewise_service" value="{{servicePrefix}}stakewise-vi1"></li>
+							</ul>
+							<pre><code>sudo mkdir -p /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark></code></pre>
+							<i>The directory above will be used for saving StakeWise operator client oriented data, such as keystores + wallet data and depost_data.json with operator config file.</i>
+							<pre><code>sudo mkdir -p /var/lib/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark></code></pre>
+							<i>The directory above  will be used for saving operator.db database file.</i>
+							
+							<p>Create a new service user and set direcotries ownership</p>
+							<pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="stakewise_service">{{servicePrefix}}stakewise-v1</mark></code></pre>
+							<pre><code>sudo chown -R <mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark>:<mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark> /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark></code></pre>
+							<pre><code>sudo chown -R <mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark>:<mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark> /var/lib/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark></code></pre>
+							<h4>Configurate the <code class="stakewise_service">{{servicePrefix}}stakewise-vi1</code> service</h4>
+							<pre><code>sudo nano /etc/systemd/system/<mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark>.service</code></pre>
+{{#ifEqual chain "ethereum"}}
+<p>Config file is in preparation</p>
+{{/ifEqual}}
+{{#ifEqual chain "gnosis"}}
+{{> clients/config/gno-stakewise }}
+{{/ifEqual}}
+
+		<p>Reload deamon</p>
+		<pre><code>sudo systemctl daemon-reload</code></pre>
+	</li>
+    <li><h3>Maua way - Generate validator keys for the <code class="stakewise_service">{{servicePrefix}}stakewise-vi1</code> service</h3>
 							<div class="tabselector">
 								<nav class="egrid egrid-2">
 									<button class="tab selected" data-tabpanel="1">Manually</button>
@@ -25,64 +48,46 @@
 								<div class="tabpanel">
 									<ul>
 										<li><h4>Init</h4>
-											<pre><code>sudo /usr/local/bin/stakewise-operator init --data-dir /srv/stakewise</code></pre>
+											<pre><code>sudo /usr/local/bin/stakewise-operator init --data-dir /srv/{{servicePrefix}}stakewise</code></pre>
 											Response is
 											<pre><code>done.
 Successfully initialized configuration for vault 0xXXXX...</code></pre>
-											<p>There's created file <code>config.json</code> at <code>/srv/stakewise/&lt;vaultAddress&gt;/config.json</code>. File content:</p>
+											<p>There's created file <code>config.json</code> at <code>/srv/{{servicePrefix}}stakewise/&lt;vaultAddress&gt;/config.json</code>. File content:</p>
 											<pre><code>{"network": "{{network}}", "mnemonic_next_index": 0, "first_public_key": "0xXXXXXXX....."}</code></pre>
 										</li>
 										<li><h4>Create keys</h4>
-											<pre><code>sudo /usr/local/bin/stakewise-operator create-keys --data-dir /srv/stakewise</code></pre>
+											<pre><code>sudo /usr/local/bin/stakewise-operator create-keys --data-dir /srv/{{servicePrefix}}stakewise</code></pre>
 											Response is:
 											<pre><code>Done. Generated 8 keys for 0xXXXX... vault.
-Keystores saved to /srv/stakewise/0xXXXX.../keystores file
-Deposit data saved to /srv/stakewise/0xXXXX.../deposit_data.json file</code></pre>
-											Keystores password is at <code>nano /srv/stakewise/0xXXXX.../keystores/password.txt</code>
+Keystores saved to /srv/{{servicePrefix}}stakewise/0xXXXX.../keystores file
+Deposit data saved to /srv/{{servicePrefix}}stakewise/0xXXXX.../deposit_data.json file</code></pre>
+											Keystores password is at <code>nano /srv/{{servicePrefix}}stakewise/0xXXXX.../keystores/password.txt</code>
 										</li>
 										<li><h4>Create Hot wallet</h4>
-											<pre><code>sudo /usr/local/bin/stakewise-operator create-wallet --data-dir /srv/stakewise</code></pre>
+											<pre><code>sudo /usr/local/bin/stakewise-operator create-wallet --data-dir /srv/{{servicePrefix}}stakewise</code></pre>
 											<p>Response is</p>
-											<pre><code>Done. The wallet and password saved to /srv/stakewise/0xXXXX.../wallet directory. The wallet address is: 0xXXXX...</code></pre>
+											<pre><code>Done. The wallet and password saved to /srv/{{servicePrefix}}stakewise/0xXXXX.../wallet directory. The wallet address is: 0xXXXX...</code></pre>
 										</li>
 										<li>
 											<h3>Download deposit_data file</h3>
 											<p>Download deposit_data file through <code>scp</code></p>
-											<pre><code>scp -P PORT -i ~/.ssh/file -r userName@IP:/srv/stakewise/0xXXXX.../deposit_data.json deposit_data.json</code></pre>
+											<pre><code>scp -P PORT -i ~/.ssh/file -r userName@IP:/srv/{{servicePrefix}}stakewise/0xXXXX.../deposit_data.json deposit_data.json</code></pre>
 										</li>
 									</ul>
 								</div>
 							</div>
 						</li>
 						<li>
-							<h3>Create a StakeWise Operator service</h3>
-							<pre><code>sudo useradd --system --no-create-home --shell /bin/false stakewise-v1</code></pre>
-							<pre><code>sudo mkdir -p /var/lib/stakewise/0xXXXX...</code></pre>
-							<pre><code>sudo chown -R stakewise-v1:stakewise-v1 /srv/stakewise/0xXXXX...</code></pre>
-							<pre><code>sudo chown -R stakewise-v1:stakewise-v1 /var/lib/stakewise/0xXXXX...</code></pre>
-							<h4>Configurate the service</h4>
-							<pre><code>sudo nano /etc/systemd/system/stakewise-v1.service</code></pre>
-{{#ifEqual chain "ethereum"}}
-<p>Config file is in preparation</p>
-{{/ifEqual}}
-{{#ifEqual chain "gnosis"}}
-{{> clients/config/gno-stakewise }}
-{{/ifEqual}}
-
-
-							<pre><code>sudo systemctl daemon-reload</code></pre>
-						</li>
-						<li>
 							<h3>Start the service</h3>
-							<pre><code>sudo systemctl start stakewise-v1</code></pre>
+							<pre><code>sudo systemctl start <mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark> && systemctl status <mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark></code></pre>
 							<h4>Check the service</h4>
-<pre><code>systemctl status stakewise-v1</code></pre>
+<pre><code>systemctl status <mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark></code></pre>
 <h4>Monitor the service</h4>
-<pre><code>journalctl -fu stakewise-v1</code></pre>
+<pre><code>journalctl -f -u <mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark></code></pre>
 <p>Output:</p>
-<pre><code>2024-07-27 17:20:45 INFO     Starting operator service, version v<mark>{{serviceLayer.stakewise.latestVer}}</mark>
+<pre><code>2024-07-27 17:20:45 INFO     Starting operator service, version v<span>{{serviceLayer.stakewise.latestVer}}</span>
 INFO     Checking connection to database...
-INFO     Connected to database /var/lib/stakewise/0xXXXX.../operator.db.
+INFO     Connected to database /var/lib/{{servicePrefix}}stakewise/0xXXXX.../operator.db.
 INFO     Checking connection to consensus nodes...
 INFO     Connected to consensus node at http://127.0.0.1:9596. Finalized epoch: 1038841
 INFO     Checking connection to execution nodes...
@@ -92,16 +97,16 @@ INFO     Vault withdrawable assets: 0.00 GNO
 INFO     Checking hot wallet balance 0xXXXX... ...
 INFO     Checking connection to ipfs nodes...
 
-INFO     Connected to ipfs nodes at https://stakewise-v3.infura-ipfs.io, http://cloudflare-ipfs.com, https://gateway.pinata.cloud, https://ipfs.io.
+INFO     Connected to ipfs nodes at https://{{servicePrefix}}stakewise-v3.infura-ipfs.io, http://cloudflare-ipfs.com, https://gateway.pinata.cloud, https://ipfs.io.
 INFO     Checking connection to oracles set...
 INFO     Connected to oracles at https://gno-stakewise-v3-oracle.pn.prod.fcstech.de, https://gnosis-oracle.stakewise.io, https://stakewise-oracle-gnosis.chorus.one, https://stakewise-oracle-gno-mainnet-1.gateway.fm, https://sw-oracle-gno.axol.io, https://stakewise-oracle-gc.gnosischain.com, https://gnosis-oracle.stakewise.dsrvlabs.net, https://gnosis-oracle-b.stakewise.io, https://stakewise-oracle-v3-gnosis.bitfly.at, https://stakewise-oracle-gc-2.gnosischain.com, https://stakewise-oracle-gnosis.senseinode.com
 INFO     Checking deposit data file...
-INFO     Found deposit data file /srv/stakewise/0xXXXX.../deposit_data.json
+INFO     Found deposit data file /srv/{{servicePrefix}}stakewise/0xXXXX.../deposit_data.json
 INFO     Checking keystores dir...
 INFO     Found keystores dir
-INFO     Loading keys from /srv/stakewise/0xXXXX.../keystores...
+INFO     Loading keys from /srv/{{servicePrefix}}stakewise/0xXXXX.../keystores...
 INFO     Loaded 8 keys
-INFO     Loaded deposit data file /srv/stakewise/0xXXXX.../deposit_data.json
+INFO     Loaded deposit data file /srv/{{servicePrefix}}stakewise/0xXXXX.../deposit_data.json
 INFO     Syncing network validator events...
 INFO     Updating oracles cache...
 INFO     Started operator service

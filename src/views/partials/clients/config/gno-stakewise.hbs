@@ -1,22 +1,22 @@
 <pre><code>[Unit]
-Description=Stakewise service - vault 1 (Gnossis Mainnet)
+Description=Stakewise service - vault 1 (Gnosis network)
 After=network.target
 Wants=network.target
 
 [Service]
-User=stakewise-v1
-Group=stakewise-v1
+User=<mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark>
+Group=<mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark>
 Type=simple
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/stakewise-operator start \
   --network gnosis \
-  --vault 0xXXXXXXXX \
-  --data-dir /srv/stakewise \
-  --database-dir /var/lib/stakewise/0xXXXX... \
-  --execution-jwt-secret /var/lib/jwtsecret/jwt.hex \
-  --consensus-endpoints http://127.0.0.1:9596 \
-  --execution-endpoints http://127.0.0.1:8545
+  --vault <mark class="stakewise_wlt_address">0xXXXX...</mark> \
+  --data-dir /srv/{{servicePrefix}}stakewise \
+  --database-dir /var/lib/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark> \
+  --execution-jwt-secret /var/lib/jwtsecret/gnosis.hex \
+  --consensus-endpoints http://127.0.0.1:<mark class="consensus-endpoint">9596</mark> \
+  --execution-endpoints http://127.0.0.1:<mark class="execution-rpc">8545</mark>
 
 [Install]
 WantedBy=default.target</code></pre>

@@ -33,6 +33,7 @@ class EthereumRouter {
         
         // topic-based
         router.get('/validators', Chain.Ethereum, this.chainController.Validators, this.Response);
+        router.get('/keystores', Chain.Ethereum, this.chainController.Keystores, this.Response);
 
         router.get('/validator-queue', Chain.Ethereum, this.ValidatorQueue.Page, this.Response);
 

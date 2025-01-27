@@ -224,6 +224,16 @@ GnosisController.prototype.DepositContract = function(req,res,next){
 };
 
 
+GnosisController.prototype.Keystores = function(req,res,next){
+    res.locals.title = `Guide to generate abd deposit Validator keys for ${res.locals.chainName} staking`;
+    res.locals.metaDescription = `Complete indotrduction to validator keystores for staking on ${res.locals.chainName} chain.`;
+    res.locals.page_hbs = "guides/keystores";
+    res.locals.layout_hbs = "standard";
+    res.locals.css_file = "docs";
+    next();
+};
+
+
 GnosisController.prototype.CacheIndexData = function(cb){
     //console.log(`${new Date()} GnosisController.prototype.CacheIndexPageData`);
 

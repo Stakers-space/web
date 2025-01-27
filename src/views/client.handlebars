@@ -76,6 +76,7 @@
 						</li>
 						{{/if}}
 						<li><a href="#update">Update client</a></li>
+						<li><a href="#emergency">Emergency</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -115,6 +116,11 @@
 			<section class="chapter mt-60" id="add-validator">
 				<div class="content bt">
 					<h2>Launch validator instance / validator(s)</h2>
+					<p>Each validator is defined with a validator key.</p>
+					<ul>
+						<li><a href="/ethereum-staking/keystores#generate">Guide to generate validator keystores for Ethereum staking</a></li>
+						<li><a href="/gnosis-staking/keystores#generate">Guide to generate validator keystores for Gnosis staking</a></li>
+					</ul>
 {{> (lookup . 'partial2ToLoad') AddValidator=true }}
 				</div>
 			</section>
@@ -132,7 +138,15 @@
 {{> (lookup . 'cliPartial') }}	
 				</div>
 			</section>
-
+			
+			{{#if client}}
+			<section class="chapter mt-60" id="emergency">
+				<div class="content bt">
+					<h2>Any issue while running {{clientName}} client?</h2>
+					<p>Check <a href="/{{client}}/emergency">{{clientName}} client emergency page</a>.</p>
+				</div>
+			</section>
+			{{/if}}
         </div>
     </div>
 </main>

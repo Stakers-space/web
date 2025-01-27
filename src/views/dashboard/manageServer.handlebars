@@ -252,6 +252,7 @@
                     try {
                         let verElement = null;
                         let placeholder = "";
+                        let api_port = null;
                         // change version placehodler
                         switch(clientSelected){
                             case "nethermind":
@@ -269,18 +270,22 @@
                             case "lighthouse":
                                 verElement = "cc_1_ver";
                                 placeholder = clientsDB.consensusLayer.lighthouse.latestVer;
+                                api_port = 5052;
                             break;
                             case "lodestar":
                                 verElement = "cc_1_ver";
                                 placeholder = clientsDB.consensusLayer.lodestar.latestVer;
+                                api_port = 9596;
                             break;
                             case "teku":
                                 verElement = "cc_1_ver";
                                 placeholder = clientsDB.consensusLayer.teku.latestVer;
+                                api_port = 5051;
                             break;
                             case "prysm":
                                 verElement = "cc_1_ver";
                                 placeholder = clientsDB.consensusLayer.prysm.latestVer;
+                                api_port = 3500;
                             break;
                             case "mevboost":
                                 verElement = "mb_1_ver";
@@ -288,6 +293,7 @@
                             break;
                         }
                         document.getElementById(verElement).placeholder = placeholder;
+                        
                     } catch(e) {
                         console.log(e);
                     }

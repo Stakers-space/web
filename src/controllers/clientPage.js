@@ -17,10 +17,11 @@ class ClientPagePresenter {
 		if (segments.length === 1) {
 			client = segments[0];
 		} else if (segments.length === 2) {
-			// URL has 2 segments - /install, /update, /add-validator, /exit-validator
+			// URL has 2 segments - /install, /update, /add-validator, /exit-validator /emergency
 			client = segments[0];
 			clientSegment = segments[1];
 			res.locals.hbsTemplate = "client_"+clientSegment;
+			if(clientSegment !== "emergency") res.locals.canonicalUrl = `https://stakers.space/${client}`; // use base fir /install, update etc indicvidual pages
 		} else {
 			return res.status(404).send('Requested page does not exists.');
 		}

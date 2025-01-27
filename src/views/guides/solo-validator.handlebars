@@ -68,8 +68,11 @@
 				<div class="content" style="width:100%;padding-top:10px">
 					<h2 data-number="°">Prerequisites for this guide</h2>
 					<ol>
-						<li>Installed and synced Execution and Consensus client
-							<p><a href="/{{chainUrl}}/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a></p>
+						<li><p>Installed and synced Execution and Consensus client</p>
+							<a href="/{{chainUrl}}/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a>
+						</li>
+						<li><p>Generated validator keys</p>
+							<a href="/{{chainUrl}}/keystores#generate" class="btn btn-black btn-rounded">Generate validator keys</a>
 						</li>
 					</ol>
 				</div>
@@ -126,6 +129,14 @@
 				<script>
 					function OnValidatorClientChanged(){}
 				</script>
+			</section>
+
+			<section class="chapter mt-60" id="deposit">
+				<div class="content bt">
+					<h2>Fund the validator keys</h2>
+					<p>If anything works smoothly, you can deposit the validator keys now.</p>
+					<a href="/{{chainUrl}}/keystores#deposit" class="btn btn-black btn-rounded">Deposit validator keys</a>
+				</div>
 			</section>
         </div>
     </div>
