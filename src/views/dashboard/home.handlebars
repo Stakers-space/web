@@ -90,14 +90,31 @@ ul.img_marker li {
     const val_instances = document.getElementsByClassName("val_instance");
     for(var instance of val_instances){
         const instanceId = instance.dataset.iid;
+        const chain = instance.dataset.chain;
         //console.log(instanceId, instance);
         let statusElm = instance.children[1];
         if(offlineStateData[instanceId]){
-            let msg = `Offline: ${offlineStateData[instanceId].o.length} / ${offlineStateData[instanceId].v} \nhttps://gnosischa.in/dashboard?validators=`;
+            const offlineCount = (offlineStateData[instanceId].o) ? offlineStateData[instanceId].o.length : [];
+            const pendingCount = (offlineStateData[instanceId].p) ? offlineStateData[instanceId].p : 0;
+            
+            let offlineIds = [];
             for(const obj of offlineStateData[instanceId].o){
-                msg += `<span title="epochs offline:${obj.d}">${obj.i}</span>,`
+                if(offlineIds.length < 100) {
+                   offlineIds.push(obj.i); 
+                   break;
+                }
             }
-            statusElm.innerHTML = msg.slice(0, -1);
+
+            let msg = "";
+
+            if(offlineIds.length > 0) {
+                let link = (chain === "gnosis") ? "https://gnosischa.in" : "https://beaconcha.in";
+                msg += '<a href="'+link+'/dashboard?validators='+offlineIds.toString()+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids">'+offlineStateData[instanceId].o.length+' Offline</a> ';
+            }
+            if(pendingCount > 0) msg += pendingCount+' Pending ';
+            msg += "| " + offlineStateData[instanceId].v + "Total";
+
+            statusElm.innerHTML = msg/*.slice(0, -1)*/;
             statusElm.style.color = "orange";
         } else {
             statusElm.innerHTML = "All online";

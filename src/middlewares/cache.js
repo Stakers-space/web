@@ -22,7 +22,7 @@ function getOfflineState(instanceIds){
     let stateSnap = {};
     for(const instanceId of instanceIds){ 
         if(offlineStates[instanceId]) {
-            console.log(instanceId, "→", offlineStates[instanceId]);
+            //console.log(instanceId, "→", offlineStates[instanceId]);
             stateSnap[instanceId] = offlineStates[instanceId];
         }
     }

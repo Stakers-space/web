@@ -174,7 +174,21 @@
                     <li>Open Delayed Start shell
                         <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
                         <p>Configurate service start inside it</p>
-                        <pre><code>systemctl start <mark class="instance_sn" data-client="lighthouse">{{servicePrefix}}lighthouse-vi<span class="instance_pid">1</span></mark></code></pre>
+                        
+                        <div class="tabselector">
+                            <nav class="egrid egrid-2">
+                                <button class="tab selected" data-tabpanel="1">Direct option</button>
+                                <button class="tab" data-tabpanel="2">Staking Manager util</button>
+                            </nav>
+                            <div class="tabpanel selected">
+                                <pre><code>systemctl start <mark class="instance_sn" data-client="lighthouse">{{servicePrefix}}lighthouse-vi<span class="instance_pid">1</span></mark></code></pre>
+                            </div>
+                            <div class="tabpanel">
+                                <p>NOTE: This option requires installed <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager util</a>.</p>
+                                Add/Uncomment <code>/usr/local/bin/staking.sh start validators</code> that will automatically launch all defined validator instances.
+                                <pre><code>/usr/local/bin/staking.sh start validators</code></pre>
+                            </div>
+                        </div>
                     </li>
                     <li>Be sure, <code>delayed-start.service</code> service controlling <code>delayed-start.sh</code> is enabled for auto start with system startup
                         <pre><code>sudo systemctl enable delayed-start.service</code></pre>

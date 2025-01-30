@@ -97,7 +97,10 @@ router.get('/account', function(req,res){
     if(!req.user) return response();
 
     new mysqlSrv().GetOwnedServersWithAttachedInstances(req.user.id, function(err,data){
-        if(err) console.log("GetOwnedServersWithAttachedInstances", err);
+        if(err) {
+            console.log("GetOwnedServersWithAttachedInstances", err);
+            return response();
+        }
 
         for(const obj of data){
             // define server object
