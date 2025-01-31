@@ -1,3 +1,4 @@
+<mark>Config under construction. Do not use for production.</mark>
 <pre><code>[Unit]
 Description=Stakewise service - vault 1 (Gnosis network)
 After=network.target
@@ -16,7 +17,11 @@ ExecStart=/usr/local/bin/stakewise-operator start \
   --database-dir /var/lib/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark> \
   --execution-jwt-secret /var/lib/jwtsecret/gnosis.hex \
   --consensus-endpoints http://127.0.0.1:<mark class="consensus-endpoint">9596</mark> \
-  --execution-endpoints http://127.0.0.1:<mark class="execution-rpc">8545</mark>
+  --execution-endpoints http://127.0.0.1:<mark class="execution-rpc">8545</mark> \
+  --hot-wallet-file /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/wallet.txt \
+  --hot-wallet-password-file /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/password.txt \
+  --keystores-dir /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores \
+  --deposit-data-file /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>
 
 [Install]
 WantedBy=default.target</code></pre>

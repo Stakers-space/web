@@ -47,6 +47,7 @@
 {{#ifEqual chain "gnosis"}}
 {{> clients/config/gno-erigon }}
 {{/ifEqual}}
+                <p>NOTE: If you are going to run StakeWise vault, you should set <code>--prune=receipts --prune.to=18470089</code> according to <a href="https://docs.stakewise.io/for-operators/operator-service" target="_blank" rel="nofollow noopener noreferrer">StakeWise operator service guide</a>.</p>
             </li>
             <li>Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</li>
         </ol>

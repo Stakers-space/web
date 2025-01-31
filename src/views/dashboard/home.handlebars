@@ -109,7 +109,7 @@ ul.img_marker li {
 
             if(offlineIds.length > 0) {
                 let link = (chain === "gnosis") ? "https://gnosischa.in" : "https://beaconcha.in";
-                msg += '<a href="'+link+'/dashboard?validators='+offlineIds.toString()+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids">'+offlineStateData[instanceId].o.length+' Offline</a> ';
+                msg += '<a href="'+link+'/dashboard?validators='+offlineIds.toString()+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+offlineStateData[instanceId].o.length+' Offline</a> ';
             }
             if(pendingCount > 0) msg += pendingCount+' Pending ';
             msg += "| " + offlineStateData[instanceId].v + "Total";

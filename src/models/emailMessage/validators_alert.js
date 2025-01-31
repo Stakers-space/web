@@ -11,7 +11,7 @@ exports.OnlineAlert = function(reportData){
 exports.OfflineAlert = function(reportData){
     console.log("Email model | OfflineAlert |",reportData);
     var email = {
-		subject: "Offline validator detected",
+		subject: "Offline validator(s) detected | StakersSpace Monitor",
 		message: JSON.stringify(reportData)
 	};
     return email;

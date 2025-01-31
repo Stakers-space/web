@@ -8,6 +8,9 @@ const MailMessage = require('../models/emailMessage/validators_alert.js');
 
 let noIncominMessageTimer = null;
 
+/**
+ * Update validators state and trigger alert if needed
+*/
 exports.UpdateValidatorsState = (req,res) => {
 	// validate queries
 	if(!req.query.n) return res.status(400).send('Missing network parameter');
@@ -22,7 +25,6 @@ exports.UpdateValidatorsState = (req,res) => {
 	} else if (req.is('text/plain')) {
 		let decipher = crypto.createDecipheriv('aes-256-cbc', cryptoConf.key, cryptoConf.iv),
 			decryptedData = decipher.update(req.body, 'base64', 'utf8');
-
 		decryptedData += decipher.final('utf8');
 		data = JSON.parse(decryptedData);
 	} else {
@@ -79,7 +81,8 @@ exports.UpdateValidatorsState = (req,res) => {
 						accounts[mark.account_id].instances = {};
 					}
 					if(mark.email_subscription === null || mark.email_alerts === null) continue;
-					accounts[mark.account_id].instances[mark.instance_id] = accountReport[mark.instance_id];
+										 		// key = instance name = XY offline
+					accounts[mark.account_id].instances[mark.instance] = accountReport[mark.instance_id];
 				}
 				
 				// send mail to all accounts
@@ -97,6 +100,9 @@ exports.UpdateValidatorsState = (req,res) => {
 				}
 			} catch(e){console.log(e);}
 		});
+
+		// get instances names
+
 	}
 
 	// no incomming message alert

@@ -139,6 +139,7 @@ exports.AddOrUpdateInstanceMetadata = (req, res) => {
         });
 
     } else { // add instance
+        
         mysqlInst.AddValidatorInstance(userId, serverId, instanceData, function(err,resp){
             if(err) return ThrowError(err,res);
 
