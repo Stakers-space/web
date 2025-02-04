@@ -11,7 +11,7 @@
                 <h4>Find the latest stable version of StakeWise client on Github</h4>
                 <ul>
                     <li>Find latest StakeWise version at <a href="https://github.com/stakewise/v3-operator/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/stakewise/v3-operator/releases</a></li>
-                    <li><mark>Write latest stable StakeWise version: <input type="text" value="{{serviceLayer.stakewise.latestVer}}" class="stakewiseVer-input"><br>
+                    <li><mark>Write latest stable StakeWise version: <input type="text" value="{{serviceLayer.stakewise.latestVer}}" class="interactive-element stakewise_ver" data-class="stakewise_ver"><br>
                         <p>This will update the url links in the guide below.</p>
                     </li>
                 </ul>
@@ -27,7 +27,8 @@
             {{#unless InstallationGuide}}
             <li class="mt-15">
                 <h4>Stop running StakeWise clients</h4>
-                <pre><code></code></pre>
+                <pre><code>sudo systemctl stop <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark> && systemctl status <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+                <i>Modify the service names to reflect your used names during StakeWise integration</i>
             </li>
             <li class="mt-15">
                 <h4>Remove the old client</h4>
@@ -41,11 +42,13 @@
             {{#unless InstallationGuide}}
             <li>
                 <h4>Start the client again</h4>
-                <pre><code></code></pre>
+                <pre><code>sudo systemctl start <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark> && systemctl status <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+                <i>Modify the service names to reflect your used names during StakeWise integration</i>
             </li>
             <li>
                 <h4>Monitor</h4>
-                <pre><code></code></pre>
+                <pre><code>journalctl -f -u <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+                <i>Modify the service names to reflect your used names during StakeWise integration</i>
             </li>
             {{/unless}}
             <li>
@@ -55,13 +58,3 @@
         </ol>
     </li>
 </ol>
-<script>
-    for (const stakewiseVer of document.getElementsByClassName("stakewiseVer-input")) {
-        stakewiseVer.addEventListener('change', UpdateStakewise);
-    }
-    function UpdateStakewise(e){
-        const value = e.target.value;
-        for (const elm of document.getElementsByClassName("stakewiseVer-input")) { elm.innerHTML = value; elm.value = value; };
-        for (const elm of document.getElementsByClassName("stakewise_ver")) { elm.innerHTML = value; };
-    }
-</script>

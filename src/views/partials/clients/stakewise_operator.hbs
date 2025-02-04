@@ -1,0 +1,271 @@
+<p>StakeWise Operator is a middleware that connects staked {{chainTokenUpr}} in selected StakeWise Vault with actual validator keys connected to the same Vault. StakeWise operator doesn’t replace a validator client and as so, there's still required to to run standard validator client with the validator keystores simultaneously to perform validator duties.</p>
+<p>StakeWise documentation: <a href="https://docs.stakewise.io/" target="_blank" rel="nofollow noopener noreferrer">https://docs.stakewise.io/</a></p>
+<ol>
+    <li>
+		<h3>Creating a StakeWise Vault</h3>
+		<p>You must have a deployed Vault. You can create a new Vault or use an existing one.</p>
+		<ul>
+			<li>At <a href="https://app.stakewise.io/operate" target="_blank">https://app.stakewise.io/operate</a>, connect your wallet and create a new (or select your existing) Vault</li>
+			<li>Process vault setup step by step.
+				<div class="egrid egrid-3 gap-1">
+					<a href="/img/pages/guides/stakewise/stakewise_vault_creation_step1.webp" target="_blank"><img src="/img/pages/guides/stakewise/stakewise_vault_creation_step1.webp" alt="StakeWise Vault Creation - Step 1" style="width:100%"></a>
+					<a href="/img/pages/guides/stakewise/stakewise_vault_creation_step2.webp" target="_blank"><img src="/img/pages/guides/stakewise/stakewise_vault_creation_step2.webp" alt="StakeWise Vault Creation - Step 2" style="width:100%"></a>
+					<a href="/img/pages/guides/stakewise/stakewise_vault_creation_step3.webp" target="_blank"><img src="/img/pages/guides/stakewise/stakewise_vault_creation_step3.webp" alt="StakeWise Vault Creation - Step 3" style="width:100%"></a>
+				</div>
+				<div class="text-center"><i>Click at image for full size</i></div>
+			</li>
+			<li>Once vault is deployed go to its page.</li>
+		</ul>
+		<p>You will need the vault address. Vault address can be found either in the URL bar or in the "Contract address" field in "Details" section at the bottom of the page. <strong>This Vault contract address will be used as the withdrawal address for <a href="#keystores">validator keystores</a>.</strong></p>
+		<strong>StakeWise Vault address:</strong> <input type="text" class="interactive-element stakewise_wlt_address" data-class="stakewise_wlt_address" value="0xXXXX..."> (lowercased)
+	</li>
+
+    <li><h3 id="keystores">Prepare validators keystores, deposit data file and wallet for StakeWise <code class="stakewise_service">{{servicePrefix}}stakewise-operator</code> service</h3>
+		<p>In order to run Operator Service, you must create keystores and deposit data file for your Vault's validators, and set up a hot wallet for Operator Service to handle validator registrations.</p>
+		<div class="tabselector">
+			<nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Use OS in-built functionality</button>
+				<button class="tab" data-tabpanel="2">Generate manually</button>
+				
+			</nav>
+			<div class="tabpanel selected">
+				<p>Operator Service has in-built functionality to generate all of the above. If needed, you can check also original guide at <a href="https://docs.stakewise.io/for-operators/operator-service" target="_blank" rel="noopener noreferrer">https://docs.stakewise.io/for-operators/operator-service</a>.</p>
+				<ul>
+					<li><h4>Preparation for offline generation</h4>
+						<p>For security reasons, it is recommended to perform configuration and generation strictly offline.</p>
+						<ul>
+							<li><strong>Download latest StakeWise Operator client</strong>
+								<ul>
+									<li>On an online machine, <strong>download the latest stable version of StakeWise Operator client</strong> from StakeWise github page <a href="https://github.com/stakewise/v3-operator/releases" target="_blank">https://github.com/stakewise/v3-operator/releases</a>. Choose a version of the client for operating system you use on the offline machine.</li>
+									<li>Unwrap the downloaded client and move it using USB stick to your offline machine.</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><h4>Offline generation</h4>
+						On offline PC, unsing the StakeWise operator client, process the operations below:
+						<ul>
+							<li><h4>Generate a config.json file</h4>
+						<pre><code>./stakewise-operator init --data-dir ./</code></pre>
+						Example process & output
+						<pre><code>Enter the network name (mainnet, holesky) [mainnet]:
+Enter your vault address: <mark class="stakewise_wlt_address">0xXXXX...</mark>
+Choose your mnemonic language (chinese_simplified, chinese_traditional, czech, english, italian, korean, portuguese, spanish) [english]:
+This is your seed phrase. Write it down and store it safely, it is the ONLY way to recover your validator keys.
+
+pumpkin anxiety private salon inquiry ....
+
+
+Press any key when you have written down your mnemonic.
+
+Please type your mnemonic (separated by spaces) to confirm you have written it down
+
+: pumpkin anxiety private salon inquiry ....
+
+done.
+Successfully initialized configuration for vault <mark class="stakewise_wlt_address">0xXXXX...</mark></code></pre>
+						<p>The Output is <code>config.json</code> file that keeps <code>mnemonic_next_index</code> value that is used for generating next keystores above the same seed.</p>
+					</li>
+					<li><h4>Generate validator keys</h4>
+						<pre><code>./stakewise-operator create-keys --data-dir ./</code></pre>
+											Example process & output
+											<pre><code>Enter the vault address: <mark class="stakewise_wlt_address">0xXXXX...</mark>
+Enter the number of the validator keys to generate: 10
+Enter the mnemonic for generating the validator keys: pumpkin anxiety private salon inquiry ....
+Creating validator keys:    [####################################]  10/10
+Generating deposit data JSON    [####################################]  10/10
+Exporting validator keystores    [####################################]  10/10
+
+Done. Generated 10 keys for <mark class="stakewise_wlt_address">0xXXXX...</mark> vault.
+Keystores saved to ./<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores file
+Deposit data saved to ./<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores/deposit_data.json file</code></pre>
+						<p>Encryption password for keys generation was generated and used automatically and can be found at <code>./<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores/password.txt</code> file.</p>
+						<aside><i>You may not want the operator service to have direct access to the validator keys. Validator keystores do not need to be present directly in the operator. You can check the <a href="https://docs.stakewise.io/for-operators/v3-operator-with-remote-signer" target="_blank">remote signer</a> or <a href="https://docs.stakewise.io/for-operators/v3-operator-with-hashi-vault" target="_blank">Hashicorp Vault</a> guides on how to run Operator Service with them.</i></aside>
+					</li>
+										
+					<li><h4>Create Hot wallet</h4>
+						<p>Run the <code>create-wallet</code> command below to create hot wallet using your mnemonic (note, this mnemonic can be the same as the one used to generate the validator keys, or a new mnemonic if you desire).</p>
+						<pre><code>./stakewise-operator create-wallet --data-dir ./</code></pre>
+						Example process & output
+						<pre><code>Enter the vault address: <mark class="stakewise_wlt_address">0xXXXX...</mark>
+Enter the mnemonic for generating the wallet: pumpkin anxiety private salon inquiry ...
+Done. The wallet and password saved to ./<mark class="stakewise_wlt_address">0xXXXX...</mark>/wallet directory. The wallet address is: 0x239B...e3Cc</code></pre>
+								<p>Within a <code>./<mark class="stakewise_wlt_address">0xXXXX...</mark>/wallet</code> directory, there are 2 files now: <code>wallet.json</code> and <code>password.txt</code>.</p>
+								<p>Note, you must send some {{#if isGnosis}}xDAI{{else}}ETH{{/if}} to the wallet for gas expenses. You must keep an eye on your wallet balance, otherwise validators will stop registering if the balance falls too low.</p>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h4>Moving StakeWise configuration to staking node</h4>
+						<ul>
+							<li><h5>Removing <code>password.txt</code> files for security reason</h5>
+								For security reason, you can write content of following password files on the paper and then remove the passwords from the file.
+								<ul>
+									<li><code>keystores/password.txt</code></li>
+									<li><code>wallet/password.txt</code></li>
+								</ul>
+							</li>
+							<li>Copy <code class="stakewise_wlt_address">0xXXXX...</code> directory from offline PC to your USB stick</li>
+							<li>Copy <code class="stakewise_wlt_address">0xXXXX...</code> directory from your USB stick to staking node. You can use <code>scp</code> protocol for remote transfer</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="tabpanel">
+				<p>Use your preferred methods of generating keystores and deposit data file, such as via <a href="https://github.com/stake-house/wagyu-key-gen" target="_blank" rel="nofollow noopener noreferrer">Wagyu Keygen</a>, and your preferred tool for generating the hot wallet, such as <a href="https://metamask.io/" target="_blank" rel="nofollow noopener noreferrer">MetaMask</a>.</p>
+				<ul>
+					<li>On offline PC, generate deposit keys with the Vault withdrawal's address. See a <a href="/{{#ifEqual chain "ethereum"}}ethereum{{else}}gnosis{{/ifEqual}}-staking/keystores" target="_blank" rel="nofollow noopener noreferrer">keystore guide</a>.</li>
+					<li>Create Hot wallet...</li>
+				</ul>
+			</div>
+		</div>
+	</li>
+	<li>
+		<h3>Create a <code>StakeWise operator</code> service</h3>
+		<p>Create a node operator system service for running StakeWise validators and register keystores into it.</p>
+		<ul>
+			<li>StakeWise instance (node operator) service name: <input type="text" class="interactive-element stakewise_service" data-class="stakewise_service" value="{{servicePrefix}}stakewise-operator"></li>
+			<li>
+				<h4>Create a service user for StakeWise Operator</h4>
+				<pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+			</li>
+			<li><h4>Create a directory for StakeWise operation configuration data</h4>
+				<pre><code>sudo mkdir -p /srv/stakewise{{slashChain}}</code></pre>
+				<ul>
+					<li>Copy your offline-generated <code class="stakewise_wlt_address">0xXXXX...</code> folder to this directory to make the Vault data files available at <code>/srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark></code></li>
+					<li>Do not forget to add correct passwords to the <code>passowrd.txt</code> files, if you removed them for the transfer
+						<ul>
+							<li><code>sudo nano /srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores/password.txt</code></li>
+							<li><code>sudo nano /srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark>/wallet/password.txt</code></li>
+						</ul>
+					</li>
+					<li>Set directory ownership
+						<pre><code>sudo chown -R <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark>:<mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark> /srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark></code></pre>
+					</li>
+					<li>Set Read only by owner permission at the password files
+						<ul>
+							<li><code>sudo chmod 400 /srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores/password.txt</code></li>
+							<li><code>sudo chmod 400 /srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark>/wallet/password.txt</code></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><h4>Create a directory for StakeWise operation database</h4>
+				<pre><code>sudo mkdir -p /var/lib{{slashChain}}/stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark></code></pre>
+				Set directory ownership
+				<pre><code>sudo chown -R <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark>:<mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark> /var/lib{{slashChain}}/stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark></code></pre>
+			</li>
+			<li>
+				<h4>Configurate the <code class="stakewise_service">{{servicePrefix}}stakewise-operator</code> service</h4>
+		<pre><code>sudo nano /etc/systemd/system/<mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark>.service</code></pre>
+{{#ifEqual chain "ethereum"}}
+<p>Config file is in preparation</p>
+{{/ifEqual}}
+{{#ifEqual chain "gnosis"}}
+{{> clients/config/gno-stakewise }}
+{{/ifEqual}}
+				<p>Reload deamon</p>
+				<pre><code>sudo systemctl daemon-reload</code></pre>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<h3>Start the node operator service</h3>
+		<pre><code>sudo systemctl start <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark> && systemctl status <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+		<h4>Check the service</h4>
+<pre><code>systemctl status <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+<h4>Monitor the service</h4>
+<pre><code>journalctl -f -u <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+<p>Output:</p>
+<pre><code>2024-07-27 17:20:45 INFO     Starting operator service, version v<span>{{serviceLayer.stakewise.latestVer}}</span>
+INFO     Checking connection to database...
+INFO     Connected to database /var/lib/{{servicePrefix}}stakewise/0xXXXX.../operator.db.
+INFO     Checking connection to consensus nodes...
+INFO     Connected to consensus node at http://127.0.0.1:9596. Finalized epoch: 1038841
+INFO     Checking connection to execution nodes...
+INFO     Connected to execution node at http://127.0.0.1:8545. Current block number: 35182233
+INFO     Checking vault address <mark class="stakewise_wlt_address">0xXXXX...</mark>
+INFO     Vault withdrawable assets: 0.00 GNO
+INFO     Checking hot wallet balance <mark class="stakewise_wlt_address">0xXXXX...</mark> ...
+INFO     Checking connection to ipfs nodes...
+
+INFO     Connected to ipfs nodes at https://{{servicePrefix}}stakewise-v3.infura-ipfs.io, http://cloudflare-ipfs.com, https://gateway.pinata.cloud, https://ipfs.io.
+INFO     Checking connection to oracles set...
+INFO     Connected to oracles at https://gno-stakewise-v3-oracle.pn.prod.fcstech.de, https://gnosis-oracle.stakewise.io, https://stakewise-oracle-gnosis.chorus.one, https://stakewise-oracle-gno-mainnet-1.gateway.fm, https://sw-oracle-gno.axol.io, https://stakewise-oracle-gc.gnosischain.com, https://gnosis-oracle.stakewise.dsrvlabs.net, https://gnosis-oracle-b.stakewise.io, https://stakewise-oracle-v3-gnosis.bitfly.at, https://stakewise-oracle-gc-2.gnosischain.com, https://stakewise-oracle-gnosis.senseinode.com
+INFO     Checking deposit data file...
+INFO     Found deposit data file /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/deposit_data.json
+INFO     Checking keystores dir...
+INFO     Found keystores dir
+INFO     Loading keys from /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores...
+INFO     Loaded 8 keys
+INFO     Loaded deposit data file /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/deposit_data.json
+INFO     Syncing network validator events...
+INFO     Updating oracles cache...
+INFO     Started operator service
+</code></pre>
+	</li>
+	<li><h4>Enable auto launch on OS startup</h4>
+		<pre><code>sudo systemctl enable <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+	</li>
+	<li><h4>Configurate & Run Validator instance performing validation duties</h4>
+					<div class="tabselector">
+						<nav class="egrid egrid-5">
+							<button class="tab selected" data-tabpanel="1" onclick="OnValidatorClientChanged('lighthouse')">Lighthouse</button>
+							<button class="tab" data-tabpanel="2" onclick="OnValidatorClientChanged('lodestar')">Lodestar</button>
+							<button class="tab" data-tabpanel="3" onclick="OnValidatorClientChanged('teku')">Teku</button>
+							<button class="tab" data-tabpanel="4" onclick="OnValidatorClientChanged('nimbus')">Nimbus</button>
+							<button class="tab" data-tabpanel="5" onclick="OnValidatorClientChanged('prysm')">Prysm</button>
+						</nav>
+						<div class="tabpanel selected">
+{{> clients/lighthouse_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/lighthouse/exit-validator">https://stakers.space/lighthouse/exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/lodestar_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/lodestar/exit-validator">https://stakers.space/lodestar/exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/teku_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/teku/exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/nimbus_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/nimbus/exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/prysm_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/prysm/exit-validator</a>.</p>
+						</div>
+					</div>
+	</li>
+	<li>
+		<h3>Upload deposit file to the <mark class="stakewise_wlt_address">0xXXXX...</mark> vault</h3>
+		<p>Once you have created your validator keys, deposit data file, and hot wallet, you need to upload the deposit data file to the Vault. This process connects your node to the Vault. <strong>Note, if there is more than one node operator in a Vault, you first need to merge all operator deposit data files into a single file</strong> (use the merge-deposit-data command). Uploading the deposit data file can be achieved either through the StakeWise UI or via Operator Service and can only be done by the <a href="https://docs-v3.stakewise.io/protocol-overview-in-depth/vaults#governance-and-management">Vault Admin or Keys Manager</a>.</p>
+		<p><strong>Upload the deposit data file either over the web StakeWise vault web UI or StakeWise operator service</strong></p>
+		<div class="tabselector">
+			<nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">StakeWise vault web UI</button>
+				<button class="tab" data-tabpanel="2">StakeWise operator service</button>
+			</nav>
+			<div class="tabpanel selected">
+				<ol>
+					<li>Connect with your wallet to <a href="https://app.stakewise.io/operate" target="_blank">StakeWise Operate webpage</a></li>
+					<li>Select the Vault you want to upload the deposit data file to.</li>
+					<li>In the upper right corner, click on "Settings" and open the "Deposit Data" tab. The "Settings" button is only visible to the Vault Admin or Keys Manager.</li>
+					<li>Upload the deposit data file either by dragging and dropping the file, or clicking to choose the file via your file browser.</li>
+					<li>Click Save and a transaction will be created to sign using your wallet. The Vault's deposit data file will be uploaded when the transaction is confirmed on the network.</li>
+				</ol>
+			</div>
+			<div class="tabpanel">
+				<p>You can calculate deposit data Merkle tree root with the following command:</p>
+				<pre><code>sudo /usr/local/bin/stakewise-operator get-validators-root --data-dir /srv/{{servicePrefix}}stakewise</code></pre>
+				Example process & output
+				<pre><code>Enter the vault address: <mark class="stakewise_wlt_address">0xXXXX...</mark>
+The validator deposit data Merkle tree root: 0x504...26d7</code></pre>
+				<p>For other steps, check <a href="https://docs.stakewise.io/for-operators/operator-service" target="_blank">StakeWise guide</a>, section Upload deposit data file to Vault, tab Operate Service.</p>
+			</div>
+		</div>
+
+	
+	</li>
+</ol>

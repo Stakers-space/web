@@ -1,27 +1,26 @@
-<mark>Config under construction. Do not use for production.</mark>
 <pre><code>[Unit]
-Description=Stakewise service - vault 1 (Gnosis network)
+Description=Stakewise operator service (Gnosis network)
 After=network.target
 Wants=network.target
 
 [Service]
-User=<mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark>
-Group=<mark class="stakewise_service">{{servicePrefix}}stakewise-vi1</mark>
+User=<mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark>
+Group=<mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark>
 Type=simple
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/stakewise-operator start \
   --network gnosis \
   --vault <mark class="stakewise_wlt_address">0xXXXX...</mark> \
-  --data-dir /srv/{{servicePrefix}}stakewise \
-  --database-dir /var/lib/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark> \
-  --execution-jwt-secret /var/lib/jwtsecret/gnosis.hex \
-  --consensus-endpoints http://127.0.0.1:<mark class="consensus-endpoint">9596</mark> \
+  --data-dir /srv/stakewise/gnosis \
+  --database-dir /var/lib/gnosis/stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark> \
+#  --execution-jwt-secret /var/lib/jwtsecret/gnosis.hex \
+  --consensus-endpoints http://127.0.0.1:<mark class="consensus-endpoint">5052</mark>  \
   --execution-endpoints http://127.0.0.1:<mark class="execution-rpc">8545</mark> \
-  --hot-wallet-file /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/wallet.txt \
-  --hot-wallet-password-file /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/password.txt \
-  --keystores-dir /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores \
-  --deposit-data-file /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>
+  --hot-wallet-file /srv/stakewise/gnosis/<mark class="stakewise_wlt_address">0xXXXX...</mark>/wallet/wallet.json \
+  --hot-wallet-password-file /srv/stakewise/gnosis/<mark class="stakewise_wlt_address">0xXXXX...</mark>/wallet/password.txt \
+  --keystores-dir /srv/stakewise/gnosis/<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores \
+  --deposit-data-file /srv/stakewise/gnosis/<mark class="stakewise_wlt_address">0xXXXX...</mark>/deposit_data.json
 
 [Install]
 WantedBy=default.target</code></pre>

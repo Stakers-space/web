@@ -13,11 +13,20 @@ ul.img_marker li {
 <main class="mt-20">
     {{> sections/encryptionPassword }}
     <div class="grid">
-        <div class="overview">
-            Validators: <ul class="img_marker account_validators" style="display:ruby;">
-                <li style="--marker-image: url('/logo/ethereum.svg')" class="f-bold">???</li>
-                <li style="--marker-image: url('/logo/gnosis.svg');margin-left: 50px" class="f-bold">???</li>
-            </ul> | Last Epoch reported: <a href="https://gnosischa.in/epochs" target="_blank" rel="nofollow noopener noreferrer" {{#if lastEpochNotSynced}}style="color:red" title="Warning: Data are not up do date"{{/if}}>{{lastEpochReported}}</a> | {{{offlineStateInfo}}}
+        
+        <div id="overview" class="egrid egrid-3">
+            <div>Validators: 
+                <ul class="img_marker account_validators" style="display:ruby;">
+                    <li style="--marker-image: url('/logo/ethereum.svg')" class="f-bold">???</li>
+                    <li style="--marker-image: url('/logo/gnosis.svg');margin-left: 50px" class="f-bold">???</li>
+                </ul>
+            </div>
+            <div>
+                {{{offlineStateInfo}}}
+            </div>
+            <div>
+                Last Epoch reported: <a href="https://gnosischa.in/epochs" target="_blank" rel="nofollow noopener noreferrer" {{#if lastEpochNotSynced}}style="color:red" title="Warning: Data are not up do date"{{/if}}>{{lastEpochReported}}</a>
+            </div>
         </div>
         
         {{#each servers}}
@@ -88,6 +97,7 @@ ul.img_marker li {
     var offlineStateData = {{{offlineStateData}}};
     console.log("state data:", offlineStateData);
     const val_instances = document.getElementsByClassName("val_instance");
+    let valcount_aggregated = {offline: 0, pending: 0}; 
     for(var instance of val_instances){
         const instanceId = instance.dataset.iid;
         const chain = instance.dataset.chain;
@@ -96,20 +106,23 @@ ul.img_marker li {
         if(offlineStateData[instanceId]){
             const offlineCount = (offlineStateData[instanceId].o) ? offlineStateData[instanceId].o.length : [];
             const pendingCount = (offlineStateData[instanceId].p) ? offlineStateData[instanceId].p : 0;
-            
+            valcount_aggregated.offline += offlineCount;
+            valcount_aggregated.pending += pendingCount;
+
             let offlineIds = [];
             for(const obj of offlineStateData[instanceId].o){
                 if(offlineIds.length < 100) {
                    offlineIds.push(obj.i); 
-                   break;
+                } else {
+                    break;
                 }
             }
 
             let msg = "";
-
             if(offlineIds.length > 0) {
                 let link = (chain === "gnosis") ? "https://gnosischa.in" : "https://beaconcha.in";
-                msg += '<a href="'+link+'/dashboard?validators='+offlineIds.toString()+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+offlineStateData[instanceId].o.length+' Offline</a> ';
+                let stArr = offlineIds.toString();
+                msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+offlineStateData[instanceId].o.length+' Offline</a> ';
             }
             if(pendingCount > 0) msg += pendingCount+' Pending ';
             msg += "| " + offlineStateData[instanceId].v + "Total";
@@ -174,12 +187,16 @@ ul.img_marker li {
             dest_agg_ui.children[0].innerHTML = dest_agg_validators.ethereum;
             dest_agg_ui.children[1].innerHTML = dest_agg_validators.gnosis;
         }
+
+        // aggregation
         const acc_agg_ui = document.getElementsByClassName("account_validators")[0];
         acc_agg_ui.children[0].innerHTML = acc_agg_validators.ethereum;
         acc_agg_ui.children[1].innerHTML = acc_agg_validators.gnosis;
 
         // UI level account
-        
+        if(valcount_aggregated.offline > 0) document.getElementById("overview").children[1].innerHTML += `| <span style="color:red">Offline: ${valcount_aggregated.offline}</span> `;
+        if(valcount_aggregated.pending > 0) document.getElementById("overview").children[1].innerHTML += `| Pending: ${valcount_aggregated.pending}`;
+
         function splitArrayIntoChunks(array, chunkSize) {
             let result = [];
             for (let i = 0; i < array.length; i += chunkSize) {

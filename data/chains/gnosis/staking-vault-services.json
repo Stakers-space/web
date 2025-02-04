@@ -9,9 +9,13 @@
         "withdrawals_key_owner":null,
         "no_supermajority_client":true,
         "pool_token":null,
-        "liquid_token":null,
+        "liquid_token":{
+            "ticker":"OSGNO",
+            "link":"https://www.coingecko.com/en/coins/stakewise-staked-gno-2",
+            "icon": "https://assets.coingecko.com/coins/images/39458/standard/stakewiseosgno_32.webp?1722390395"
+        },
         "3rd_party_software":false,
-        "link":null
+        "link":"https://app.stakewise.io/vault/gnosis/0x79dbec2d18a758c62d410f9763956d52fbd4a3cc"
     },
     {
         "service":"Stakewise Pool",

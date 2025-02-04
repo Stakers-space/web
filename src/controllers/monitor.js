@@ -86,6 +86,7 @@ exports.UpdateValidatorsState = (req,res) => {
 				}
 				
 				// send mail to all accounts
+				console.log("Email alert?", data, "→", accounts);
 				if (Object.keys(accounts).length === 0) return;
 				for (const key in accounts){
 					if (accounts.hasOwnProperty(key)) {
