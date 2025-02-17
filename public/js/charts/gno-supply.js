@@ -12,30 +12,30 @@ GnoBuybackSupplyChart.prototype.Init = function(){
 };
 
 GnoBuybackSupplyChart.prototype.ConfigurateChart = function(){
-    dashboardData.buybacks.agg.quarter.unshift("");
-    dashboardData.buybacks.agg.quarter.push("");
+    circulationData.buybacks.agg.quarter.unshift("");
+    circulationData.buybacks.agg.quarter.push("");
 
-    dashboardData.buybacks.agg.shares_outstanding.unshift(dashboardData.buybacks.agg.shares_outstanding[0] + dashboardData.buybacks.agg.gnoBought[0]);
-    dashboardData.buybacks.agg.shares_outstanding.push(dashboardData.buybacks.agg.shares_outstanding[dashboardData.buybacks.agg.shares_outstanding.length-1]);
+    circulationData.buybacks.agg.shares_outstanding.unshift(circulationData.buybacks.agg.shares_outstanding[0] + circulationData.buybacks.agg.gnoBought[0]);
+    circulationData.buybacks.agg.shares_outstanding.push(circulationData.buybacks.agg.shares_outstanding[circulationData.buybacks.agg.shares_outstanding.length-1]);
     
-    dashboardData.buybacks.agg.buyback_share_ratio.unshift(0);
-    dashboardData.buybacks.agg.buyback_share_ratio.push(0);
+    circulationData.buybacks.agg.buyback_share_ratio.unshift(0);
+    circulationData.buybacks.agg.buyback_share_ratio.push(0);
 
-    dashboardData.buybacks.agg.purchases.unshift();
-    dashboardData.buybacks.agg.purchases.push();
-    dashboardData.buybacks.agg.gnoBought.unshift();
-    dashboardData.buybacks.agg.gnoBought.push();
-    dashboardData.buybacks.agg.usdPaid.unshift();
-    dashboardData.buybacks.agg.usdPaid.push();
-    dashboardData.buybacks.agg.gnoPrice_calc.unshift();
-    dashboardData.buybacks.agg.gnoPrice_calc.push();
+    circulationData.buybacks.agg.purchases.unshift();
+    circulationData.buybacks.agg.purchases.push();
+    circulationData.buybacks.agg.gnoBought.unshift();
+    circulationData.buybacks.agg.gnoBought.push();
+    circulationData.buybacks.agg.usdPaid.unshift();
+    circulationData.buybacks.agg.usdPaid.push();
+    circulationData.buybacks.agg.gnoPrice_calc.unshift();
+    circulationData.buybacks.agg.gnoPrice_calc.push();
 
     var chartdata = {
-        labels: dashboardData.buybacks.agg.quarter,
+        labels: circulationData.buybacks.agg.quarter,
         datasets: [
             {
                 label: 'Outstanding GNO',
-                data: dashboardData.buybacks.agg.shares_outstanding,
+                data: circulationData.buybacks.agg.shares_outstanding,
                 borderColor: 'black',//'rgb(255, 99, 132)',
                 backgroundColor: 'black',//'rgb(255, 99, 132)',
                 order: 0,
@@ -51,7 +51,7 @@ GnoBuybackSupplyChart.prototype.ConfigurateChart = function(){
             },
             {
                 label: 'Buyback ratio %',
-                data: dashboardData.buybacks.agg.buyback_share_ratio,
+                data: circulationData.buybacks.agg.buyback_share_ratio,
                 borderColor: 'green',//'rgb(255, 99, 132)',
                 backgroundColor: 'green',//'rgb(255, 99, 132)',
                 /*type: 'line',*/
@@ -97,8 +97,8 @@ GnoBuybackSupplyChart.prototype.ConfigurateChart = function(){
                     grid: {
                         drawOnChartArea: false, // only want the grid lines for one axis to show up
                     },
-                    min: Math.round((dashboardData.buybacks.agg.shares_outstanding[dashboardData.buybacks.agg.shares_outstanding.length-1] - 50000) / 50000) * 50000,//1350000,
-                    max: Math.ceil((dashboardData.buybacks.agg.shares_outstanding[0]) / 50000) * 50000,
+                    min: Math.round((circulationData.buybacks.agg.shares_outstanding[circulationData.buybacks.agg.shares_outstanding.length-1] - 50000) / 50000) * 50000,//1350000,
+                    max: Math.ceil((circulationData.buybacks.agg.shares_outstanding[0]) / 50000) * 50000,
                     /*ticks: {
                         beginAtZero: false,
                         min: 1400000
@@ -132,10 +132,10 @@ GnoBuybackSupplyChart.prototype.ConfigurateChart = function(){
                         afterBody: function(context) {
                             const index = context[0].dataIndex;
                             return [
-                                `Purchases: ${dashboardData.buybacks.agg.purchases[index]}`,
-                                `GNO bought: ${dashboardData.buybacks.agg.gnoBought[index]}`,
-                                `USD Paid: ${dashboardData.buybacks.agg.usdPaid[index]}`,
-                                `Avg price: ${dashboardData.buybacks.agg.gnoPrice_calc[index]}`,
+                                `Purchases: ${circulationData.buybacks.agg.purchases[index]}`,
+                                `GNO bought: ${circulationData.buybacks.agg.gnoBought[index]}`,
+                                `USD Paid: ${circulationData.buybacks.agg.usdPaid[index]}`,
+                                `Avg price: ${circulationData.buybacks.agg.gnoPrice_calc[index]}`,
                             ];
                           }
                     }

@@ -63,7 +63,6 @@ class CacheReGenerate {
 
         new NewsController().RegenerateCacheFiles(); // Reload news ()
 
-        console.log("Updating UpdatePageRelatedCacheFiles");
         new ChartController().CacheData(function(err){ // Cache all DB data into file
             console.log((err) ? err : "└── Chart Data were succesfully cached | Caching pages-related data");
             var callbacks = 3;

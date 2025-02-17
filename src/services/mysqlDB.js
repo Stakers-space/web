@@ -2,6 +2,7 @@
 "use strict";
 
 const mySqlCredentials = require('../config/config.secret.json').mysql;
+const mySqlGnoCredentials = require('../config/config.secret.json')["mysql-gnodb"];
 const mySql = require('mysql');
 
 function MySqlDBplatform(){ 
@@ -13,13 +14,6 @@ function MySqlDBplatform(){
         database        : mySqlCredentials.database
     });*/
 }
-/**
- * Set new password for the user
- * @param {*} email 
- * @param {*} psw 
- * @param {*} salt 
- * @param {*} cb 
- */
 
 MySqlDBplatform.prototype.GetAccountData = function(email, cb){
     //console.log("MySQL Service | Get account data:", email);
@@ -296,7 +290,7 @@ MySqlDBplatform.prototype.GetServersByIds = function(serverIdsArr, cb){
 // Remake - based on `instances_access`
 MySqlDBplatform.prototype.GetValidatorsForAccount  = function(accountId, cb){
     var MC = mySql.createConnection(mySqlCredentials);
-    MC.query('SELECT i.* FROM instances i WHERE i.id IN (SELECT ia.instance_id FROM instances_access ia WHERE ia.account_id = '+MC.escape(accountId)+')',
+    MC.query('SELECT i.* FROM instances i WHERE i.id IN (SELECT ia.instance_id FROM instances_access ia WHERE ia.account_id = '+MC.escape(accountId)+') ORDER BY id',
         function(err,rows) {
             MC.end();
             return cb(err, rows);
@@ -374,12 +368,10 @@ MySqlDBplatform.prototype.GetServersClientsInfo  = function(serverIds, cb){
 
 MySqlDBplatform.prototype.GetValidatorInstance  = function(instanceId, cb){
     var MC = mySql.createConnection(mySqlCredentials);
-    MC.query('SELECT * FROM `instances` WHERE id = '+MC.escape(instanceId)+' LIMIT 1',
-        function(err,rows) {
-            MC.end();
-            return cb(err, rows);
-        }
-    );
+    MC.query('SELECT * FROM `instances` WHERE id = '+MC.escape(instanceId)+' LIMIT 1', function(err,rows) {
+        MC.end();
+        return cb(err, rows);
+    });
 };
 
 MySqlDBplatform.prototype.AddValidatorInstance  = function(ownerId, serverId, instanceData, cb){
@@ -389,6 +381,14 @@ MySqlDBplatform.prototype.AddValidatorInstance  = function(ownerId, serverId, in
         function(err, result) {
             MC.end();
             return cb(err, result);
+    });
+};
+
+MySqlDBplatform.prototype.RemoveValidatorInstance  = function(ownerId, serverId, instanceId, cb){
+    var MC = mySql.createConnection(mySqlCredentials);
+    MC.query('DELETE FROM `instances` WHERE id = '+MC.escape(instanceId)+' AND owner='+MC.escape(ownerId)+' AND server_id='+serverId, function(err, result) {
+        MC.end();
+        return cb(err, result);
     });
 };
 
@@ -600,5 +600,14 @@ MySqlDBplatform.prototype.GetServersResourcesData = function(account_id, cb){
     );
 };
 
+MySqlDBplatform.prototype.GetValuationMetrics = function(limit, cb){
+    var MC = mySql.createConnection(mySqlGnoCredentials);
+    MC.query( "SELECT * FROM (SELECT * FROM valuation_metrics ORDER BY id DESC LIMIT "+MC.escape(limit)+") AS subquery ORDER BY id ASC",
+        function(err,data) {
+            MC.end();
+            return cb(err,data);
+	    }
+    );
+};
 
 module.exports = MySqlDBplatform;

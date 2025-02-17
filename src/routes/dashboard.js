@@ -44,7 +44,8 @@ class DashboardRouter {
         router.post('/define-instance/link-account', this.Auth, Controller_Instance.LinkInstanceToAccount);
         router.post('/define-instance/keystores', this.Auth, Controller_Instance.OnProcessKeystores);
         router.post('/define-instance/link-instance', this.Auth, Controller_Instance.OnLinkInstance);
-        
+        router.post('/define-instance/remove', this.Auth, Controller_Instance.OnRemoveInstance);
+
         // news-related
         router.get('/admin/news', this.Auth, Admin.NewsPage, this.Render);
         router.post('/manage-news', this.Auth, Admin.ManageNewsMessage);

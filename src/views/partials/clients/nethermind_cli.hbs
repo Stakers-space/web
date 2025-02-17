@@ -43,8 +43,20 @@
   {{#unless InstallationGuide}}
   <li class="mt-15">
     <h4>Stop running clients</h4>
-    <pre><code>$ journalctl -fu <mark class="execution_sn" data-client="nethermind">nethermind</mark>
-$ sudo systemctl stop <mark class="execution_sn" data-client="nethermind">nethermind</mark> && systemctl status <mark class="execution_sn" data-client="nethermind">nethermind</mark></code></pre>
+    <div class="tabselector" data-client="nethermind">
+		    <nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Standard option</button>
+				<button class="tab" data-tabpanel="2">Staking manager</button>
+			</nav>
+			<div class="tabpanel selected">
+          <pre><code>$ journalctl -fu <mark class="execution_sn" data-client="nethermind">nethermind</mark></code></pre>
+          <pre><code>$ sudo systemctl stop <mark class="execution_sn" data-client="nethermind">nethermind</mark> && systemctl status <mark class="execution_sn" data-client="nethermind">nethermind</mark></code></pre> 
+			</div>
+			<div class="tabpanel">
+          <pre><code>/usr/local/bin/staking.sh monitor execution</code></pre>
+          <pre><code>/usr/local/bin/staking.sh stop execution && /usr/local/bin/staking.sh check execution</code></pre>
+			</div>
+		</div>
   </li>
   <li class="mt-15">
     <h4>Remove the old client</h4>
@@ -58,8 +70,20 @@ $ sudo systemctl stop <mark class="execution_sn" data-client="nethermind">nether
   {{#unless InstallationGuide}}
   <li>
     <h4>Start the client again</h4>
-    <pre><code>$ sudo systemctl start <mark class="execution_sn" data-client="nethermind">nethermind</mark> && systemctl status <mark class="execution_sn" data-client="nethermind">nethermind</mark>
-$ journalctl -fu <mark class="execution_sn" data-client="nethermind">nethermind</mark></code></pre>
+    <div class="tabselector" data-client="nethermind">
+		  <nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Standard option</button>
+				<button class="tab" data-tabpanel="2">Staking manager</button>
+			</nav>
+			<div class="tabpanel selected">
+          <pre><code>$ sudo systemctl start <mark class="execution_sn" data-client="nethermind">nethermind</mark> && systemctl status <mark class="execution_sn" data-client="nethermind">nethermind</mark></mark></code></pre>
+          <pre><code>$ journalctl -fu <mark class="execution_sn" data-client="nethermind">nethermind</mark></mark></code></pre> 
+			</div>
+			<div class="tabpanel">
+          <pre><code>/usr/local/bin/staking.sh start execution && /usr/local/bin/staking.sh check execution</code></pre>
+          <pre><code>/usr/local/bin/staking.sh monitor execution</code></pre>
+			</div>
+		</div>
   </li>
   {{/unless}}
   <li>
@@ -84,4 +108,27 @@ $ journalctl -fu <mark class="execution_sn" data-client="nethermind">nethermind<
 
     for (const zipNameElm of document.getElementsByClassName("nethermind_namezip")) { zipNameElm.innerHTML = "nethermind-" + value + "-linux-x64.zip"; };
   }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const tabSelectors = document.querySelectorAll('.tabselector[data-client="nethermind"]');
+    tabSelectors.forEach(tabSelector => {
+        const buttons = tabSelector.querySelectorAll("button.tab");
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                const selectedTabPanel = button.getAttribute("data-tabpanel");
+                tabSelectors.forEach(syncTabSelector => {
+                    // remove selectors
+                    syncTabSelector.querySelectorAll("button.tab, .tabpanel").forEach(el => {
+                        el.classList.remove("selected");
+                    });
+                    // button
+                    syncTabSelector.querySelector(`button.tab[data-tabpanel="${selectedTabPanel}"]`).classList.add("selected");
+                    // panel
+                    syncTabSelector.children[selectedTabPanel].classList.add("selected");
+                });
+            });
+        });
+    });
+});
 </script>

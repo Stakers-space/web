@@ -1,5 +1,6 @@
 class InstanceModel {
-    constructor(owner, instanceName, instanceNote = null, instanceData = null, serverId = null, state = null, chain = null, fee_recipient = null, vi_sname = null, vi_suser = null, vi_sdata = null, vi_pid = null){
+    constructor(id, owner, instanceName, instanceNote = null, instanceData = null, serverId = null, state = null, chain = null, fee_recipient = null, vi_sname = null, vi_suser = null, vi_sdata = null, vi_pid = null){
+        this.id = id,
         this.owner = owner;
         this.instance = (instanceName !== '') ? instanceName : null;
         this.note = (instanceNote !== '') ? instanceNote : null;

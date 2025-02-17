@@ -1,7 +1,6 @@
 const crypto = require('crypto');
 const cryptoConf = require('../config/config.secret.json').crypto["validator-api"];
 const mysqlSrv = require('../services/mysqlDB');
-//const InstanceModel = require('../models/dashboard/instance.js');
 const MailService = require('../services/customMailing');
 const cache = require('../middlewares/cache');
 const MailMessage = require('../models/emailMessage/validators_alert.js');
@@ -40,7 +39,7 @@ exports.UpdateValidatorsState = (req,res) => {
 	cache.updateLastEpochReported(req.query.n, data.e);
 
 	//console.log("/api/validator-state", req.headers['content-type'], decryptedData);
-	console.log(`[API]/validator-state | ${req.query.s} | ${req.query.n} | Epoch ${data.e}:`, data/*, req.query.t*/);
+	console.log(`[API]/validator-state | ${req.query.s} | ${req.query.n} | Epoch ${data.e}`/*, data, req.query.t*/);
 	
 	// incoming - main key = instanceId (instance StringId as a meta information (Instances ids are known on the dashboard load))
 	/**
@@ -53,11 +52,16 @@ exports.UpdateValidatorsState = (req,res) => {
 	let accountReport = {};
 	// iterate through received data
 	for (const [instanceId, instanceData] of Object.entries(data.i)) {
-		console.log(`|  ├─ ${instanceId}`, instanceData);
+		
 		instanceReport[instanceId] = instanceData; // vi1 = { v: 5, o: [ { i: '175285', e: 1065742, d: 4 }
 		
 		// if there's more than 10% offline validators, consider it as possitive, report it
 		const offlineValidators = instanceData.o.length;
+		if(offlineValidators > 30){
+			console.log(`|  ├─ ${instanceId} | offline: `, offlineValidators, " / ", instanceData.v);
+		} else {
+			console.log(`|  ├─ ${instanceId}: `, instanceData);
+		}
 		if(offlineValidators / instanceData.v >= 0.1){ accountReport[instanceId] = `${offlineValidators} offline`/*instanceData*/; } // should be variable, based on number of validators in the instance
 	}
 
@@ -67,7 +71,7 @@ exports.UpdateValidatorsState = (req,res) => {
 	// What about back online state???
 	const instancesForAlert = Object.keys(accountReport);
 	if(instancesForAlert.length > 0){ // & email reporting enabled (async action)
-		console.log("Instances alert:", instancesForAlert);
+		console.log("ALERT | Get data for instances:", instancesForAlert);
 		// get accounts for instances IN(instancesForAlert)
 		new mysqlSrv().GetAccountsForInstances(instancesForAlert, function(err,data){
 			if(err || data.length === 0) return console.log("err | data:",err, data);;
@@ -86,14 +90,15 @@ exports.UpdateValidatorsState = (req,res) => {
 				}
 				
 				// send mail to all accounts
-				console.log("Email alert?", data, "→", accounts);
 				if (Object.keys(accounts).length === 0) return;
+				console.log("Email alert check", accounts);
 				for (const key in accounts){
 					if (accounts.hasOwnProperty(key)) {
 						const account = accounts[key];
 						let now = new Date().getTime();
 						if (now - cache.getLastReportSent(account.account_id) > 300000) {
 							const msg = MailMessage.OfflineAlert(account.instances);
+							console.log("Sending Email alert to ", account.email_alerts);
 							MailService.SendMail(null, account.email_alerts, msg.subject, msg.message);
 							cache.setLastReportSent(account.account_id, now);
 						}

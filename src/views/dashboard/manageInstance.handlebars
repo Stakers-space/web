@@ -263,6 +263,25 @@
             </div>
         </form>
     </section>
+    <section class="grey mt-60">
+        <h2>Remove instance</h2>
+        <p>This will remove the instance, including all associated data. The action is irreversible.</p>
+        <form method="post" action="{{forms.removeInstance.submitLink}}">
+            <strong>Past "Remove Instance" phrase to confirm the action</strong>:
+            <div id="confirm_phrase" class="login-item">
+                <div>
+                    <label for="confirm_phrase">Confirm phrase</label>
+                    <input type="text" id="confirm_phrase" name="confirm_phrase" value="" required>
+                </div>
+            </div>
+            {{#if failureCallback}}
+                <p class="dashboard-error">{{{failureCallback}}}</p>
+            {{/if}}
+            <div class="login-action mt-20" id="login-action">
+                <input type="submit" class="submit btn btn-black btn-rounded" id="submit" value="{{forms.removeInstance.submitText}}">
+            </div>
+        </form>
+    </section>
     {{/if}}
 </main>
 

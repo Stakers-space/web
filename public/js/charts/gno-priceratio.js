@@ -37,7 +37,7 @@ GnoPriceValueChart.prototype.ConfigurateChart = function(){
             },
             {
                 label: 'GNO Margin Of Safety %',
-                data: dashboardData.bookValueTime.book_ratio,
+                data: dashboardData.bookValueTime.margin_of_safety,
                 borderColor: 'green',//'rgb(255, 99, 132)',
                 backgroundColor: function(context) {
                     const value = context.dataset.data[context.dataIndex];

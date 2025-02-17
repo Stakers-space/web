@@ -54,17 +54,14 @@ GnosisController.prototype.Request = function(req,res, next){
             res.locals.hostingServices = parsedData.hostingServices;
             res.locals.beaconData = JSON.stringify(parsedData.beaconData);
             res.locals.chainData = JSON.stringify(parsedData.chainData);
-            //console.log("gno price:", parsedData.gnoDashboard.generalHealthOverview);
-            res.locals.gnoPrice = numeral(/*parsedData.gnoDashboard.generalHealthOverview.gnoPrice*/0).format('$0,0');
-            res.locals.dashboardData = JSON.stringify(parsedData.gnoDashboard);
+
+            //console.log(parsedData.valuationData);
+            res.locals.gnoPrice = numeral(parsedData.valuationData.gnoPrice.at(-1)).format('$0,0');
+            res.locals.valuationData = JSON.stringify(parsedData.valuationData);
+            res.locals.circulationData = JSON.stringify(parsedData.circulationData);
+
             //res.locals.ethStoreData = JSON.stringify(parsedData.ethStore);
-            res.locals.chartsUIconfig = JSON.stringify({
-                apr:{legend:false,xaxis:false,yaxis:false},
-                validators:{legend:false,xaxis:false,yaxis:false},
-                supply:{legend:false,xaxis:false,yaxis:false},
-                balance:{legend:false,xaxis:false,yaxis:false,detailed:false}
-            });
-        
+            
             // deposit contract
             let depositContract = parsedData.depositContract;
             res.locals.depositContract = {};
@@ -73,6 +70,13 @@ GnosisController.prototype.Request = function(req,res, next){
             //res.locals.depositContract.distribution = JSON.stringify(depositContract.lastState.distribution);
             //console.log(res.locals.depositContract);
             
+            res.locals.chartsUIconfig = JSON.stringify({
+                apr:{legend:false,xaxis:false,yaxis:false},
+                validators:{legend:false,xaxis:false,yaxis:false},
+                supply:{legend:false,xaxis:false,yaxis:false},
+                balance:{legend:false,xaxis:false,yaxis:false,detailed:false}
+            });
+
             taskCompleted();
         }
     });
@@ -151,7 +155,7 @@ GnosisController.prototype.Validators = function(req,res,next){
             res.locals.beaconData = JSON.stringify(null);
             res.locals.chainData = JSON.stringify(null);
             res.locals.chartsUIconfig = JSON.stringify(null);
-            res.locals.dashboardData = JSON.stringify(null);
+            res.locals.valuationData = JSON.stringify(null);
             
             const parsedData = (res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
             res.locals.beaconData = JSON.stringify(parsedData.beaconData);
@@ -243,7 +247,8 @@ GnosisController.prototype.CacheIndexData = function(cb){
         validatorHostingServicesData = null,
         beaconData = null,
         chainData = null,
-        gnoDashboardData = null,
+        valuationData = null,
+        circulationData = null, // Circulation due to BuyBacks from API
         indicators = null,
         depositContract = null;
 
@@ -254,6 +259,8 @@ GnosisController.prototype.CacheIndexData = function(cb){
                 beaconData = parsedChartsDataCache.beaconData;
                 chainData = parsedChartsDataCache.chainData;
                 indicators = parsedChartsDataCache.indicators;
+                valuationData = parsedChartsDataCache.valuationData;
+                circulationData = parsedChartsDataCache.circulationData;
             } catch(e){
                 console.error(e);
             }
@@ -366,26 +373,8 @@ GnosisController.prototype.CacheIndexData = function(cb){
         taskCompleted(err, "chain");
     });*/
 
-    // https get req from api
-    /*new httpXmlModule().HttpsRequest({
-        hostname: 'gnodashboard.azurewebsites.net',
-        path: '/api/gnosis-overview',
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-        }
-    }, null, function(err,jsonData){
-        if(err){
-            console.log(err);
-        } else {
-            gnoDashboardData = JSON.parse(jsonData).data; 
-            // inverse book value (display opportunity) ?
-            for(var i=0;i<gnoDashboardData.bookValueTime.book_ratio.length;i++){
-                gnoDashboardData.bookValueTime.book_ratio[i] = (1 - gnoDashboardData.bookValueTime.book_ratio[i]) * 100;
-            }
-        }
-        taskCompleted(err, "gnodashboard api");
-    });*/
+    // https get req from api → transform to getting from mysql
+    
 
     // Get Vault services data
     // console.log("Getting vauld services:", app.vaultServicesData);
@@ -422,7 +411,8 @@ GnosisController.prototype.CacheIndexData = function(cb){
             //chartData: null
             beaconData: reduceObjectArray(beaconData, -30),
             chainData: reduceObjectArray(chainData, -30),
-            gnoDashboard: gnoDashboardData,
+            valuationData: valuationData,
+            circulationData: circulationData,
             depositContract: depositContract
             /*,
             ethStore: new EthStoreData().ConvertToChartsArray(ethStoreData, -30)*/

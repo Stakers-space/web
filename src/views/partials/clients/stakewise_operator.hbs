@@ -205,7 +205,44 @@ INFO     Started operator service
 </code></pre>
 	</li>
 	<li><h4>Enable auto launch on OS startup</h4>
-		<pre><code>sudo systemctl enable <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+		<div class="tabselector mt-20" data-client="stakewise">
+            <nav class="egrid egrid-2">
+                <button class="tab selected" data-tabpanel="1">Standard configuration</button>
+                <button class="tab" data-tabpanel="2">Stakers.space configuration</button>
+            </nav>
+            <div class="tabpanel selected">
+                <pre><code>sudo systemctl enable <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+            </div>
+            <div class="tabpanel">
+				<aside>NOTE: This option requires following installed utils:
+				<ul>
+					<li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with Delay util with delayed-start.service</a>.</li>
+					<li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
+				</ul>
+				<p>A guide to install each util is attached on the Github.</p>
+				</aside>
+                <ul>
+                    <li><h4>Extend Staking manager clients.conf</h4>
+                        Insert <code><mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code> into clients.conf file, section <code>stakewiseOperators</code>, that is used by <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a>.
+                        <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
+                    </li>
+					<li>
+						<h4>Activate service to start automatically on OS startup</h4>
+						<ul>
+							<li>Open Start with delay util
+								<pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
+							</li>
+							<li>Place or uncomment a command to start the Beacon client(s)
+								<pre><code>/usr/local/bin/staking.sh start stakewise</code></pre>
+							</li>
+							<li>Verify, that a service `delayed-start.service` exists and is automatically launched on system start.
+								<pre><code>sudo systemctl enable delayed-start.service</code></pre>
+							</li>
+						</ul>
+					</li>
+                </ul>
+            </div>
+        </div>
 	</li>
 	<li><h4>Configurate & Run Validator instance performing validation duties</h4>
 					<div class="tabselector">
@@ -240,7 +277,7 @@ INFO     Started operator service
 	</li>
 	<li>
 		<h3>Upload deposit file to the <mark class="stakewise_wlt_address">0xXXXX...</mark> vault</h3>
-		<p>Once you have created your validator keys, deposit data file, and hot wallet, you need to upload the deposit data file to the Vault. This process connects your node to the Vault. <strong>Note, if there is more than one node operator in a Vault, you first need to merge all operator deposit data files into a single file</strong> (use the merge-deposit-data command). Uploading the deposit data file can be achieved either through the StakeWise UI or via Operator Service and can only be done by the <a href="https://docs-v3.stakewise.io/protocol-overview-in-depth/vaults#governance-and-management">Vault Admin or Keys Manager</a>.</p>
+		<p>Once you have created your validator keys, deposit data file, and hot wallet, you need to upload the deposit data file to the Vault. This process connects your node to the Vault. <strong>Note, if there is more than one node operator in a Vault, you first need to merge all operator deposit data files into a single file</strong> (use the <code>./stakewise-operator merge-deposit-data</code> command). Uploading the deposit data file can be achieved either through the StakeWise UI or via Operator Service and can only be done by the <a href="https://docs.stakewise.io/protocol-overview-in-depth/vaults#governance-and-management">Vault Admin or Keys Manager</a>.</p>
 		<p><strong>Upload the deposit data file either over the web StakeWise vault web UI or StakeWise operator service</strong></p>
 		<div class="tabselector">
 			<nav class="egrid egrid-2">
@@ -265,7 +302,26 @@ The validator deposit data Merkle tree root: 0x504...26d7</code></pre>
 				<p>For other steps, check <a href="https://docs.stakewise.io/for-operators/operator-service" target="_blank">StakeWise guide</a>, section Upload deposit data file to Vault, tab Operate Service.</p>
 			</div>
 		</div>
-
-	
+	</li>
+	<li><h3>Extend validators set for other validators</h3>
+		<p>If there is allocated more {{#ifEqual chain "ethereum"}}ETH{{else}}GNO{{/ifEqual}} in the Vault deposit contract than a number of generated validator keys for the Vault contract, the operator informs about that with following message:</p>
+		<pre><code>stakewise-operator: YYYY-MM-DD HH:MM:SS WARNING  There are no available validators in the current deposit data to proceed with registration. To register additional validators, you must upload new deposit data.</code></pre>
+		<p>For option to register and launch other validators, you must do following:</p>
+		<ul>
+			<li>On Offline PC, generate more validator keys for the Vault</li>
+			<li>On your staking node:
+				<ol>
+					<li>Register the new keystores into a standard validator instance - either extend existing or create a new.</li>
+					<li>Stop StakeWise Operator</li>
+					<li>Copy the new validator keys to stakewise operator keystores directory <code>/srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores</code></li>
+					<li>Replace the old depost-data.json file at <code>/srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/deposit_data.json</code>. take into notice, that the <code>deposit_data.json</code> file must contain only keystores that were not deposited yet.</li>
+					<li>Start StakeWise Operator again</li>
+					<li>As there is a different <code>deposit_data.json</code> file at your staking operator and on the Vault, you will see following log in the operator:
+						<pre><code>ERROR    Deposit data tree root and vault's validators root don't match. Have you updated vault deposit data?</code></pre>
+					</li>
+					<li>Upload a new <code>deposit_data.json</code> file (same as on the operator) to the Stakevise Vault through Web UI. After that, operator should work properly again and pending {{#ifEqual chain "ethereum"}}ETH{{else}}GNO{{/ifEqual}} should be immediatelly allocated into newly registered validators.</li>
+				</ol>
+			</li>
+		</ul>
 	</li>
 </ol>

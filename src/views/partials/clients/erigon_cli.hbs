@@ -33,8 +33,20 @@
     </li>
     {{#unless InstallationGuide}}
     <li><h4>Stop Erigon client</h4>
-        <p>Note: It's a good practice to check the log before stopping the client. <code>journalctl -fu <mark class="execution_sn" data-client="erigon">erigon</mark></code></p>
-        <pre><code>sudo systemctl stop <mark class="execution_sn" data-client="erigon">erigon</mark> && systemctl status <mark class="execution_sn" data-client="erigon">erigon</mark></code></pre>
+        <div class="tabselector" data-client="erigon">
+		  <nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Standard option</button>
+				<button class="tab" data-tabpanel="2">Staking manager</button>
+			</nav>
+			<div class="tabpanel selected">
+                <p>Note: It's a good practice to check the log before stopping the client. <code>journalctl -fu <mark class="execution_sn" data-client="erigon">erigon</mark></code></p>
+                <pre><code>sudo systemctl stop <mark class="execution_sn" data-client="erigon">erigon</mark> && systemctl status <mark class="execution_sn" data-client="erigon">erigon</mark></code></pre>
+			</div>
+			<div class="tabpanel">
+                <p>Note: It's a good practice to check the log before stopping the client. <code>/usr/local/bin/staking.sh monitor execution</code></p>
+                <pre><code>/usr/local/bin/staking.sh stop execution && /usr/local/bin/staking.sh check execution</code></pre>
+			</div>
+		</div>
     </li>
     <li>
         <h4>Remove old library</h4>
@@ -47,10 +59,32 @@
     </li>
     {{#unless InstallationGuide}}
     <li><h4>Start Erigon client and check its status</h4>
-        <pre><code>sudo systemctl start <mark class="execution_sn" data-client="erigon">erigon</mark> && systemctl status <mark class="execution_sn" data-client="erigon">erigon</mark></code></pre>
+        <div class="tabselector" data-client="erigon">
+		  <nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Standard option</button>
+				<button class="tab" data-tabpanel="2">Staking manager</button>
+			</nav>
+			<div class="tabpanel selected">
+                <pre><code>sudo systemctl start <mark class="execution_sn" data-client="erigon">erigon</mark> && systemctl status <mark class="execution_sn" data-client="erigon">erigon</mark></code></pre>
+			</div>
+			<div class="tabpanel">
+                <pre><code>/usr/local/bin/staking.sh start execution && /usr/local/bin/staking.sh check execution</code></pre>
+			</div>
+		</div>
     </li>
     <li><h4>Monitor Erigon client</h4>
-        <pre><code>journalctl -fu <mark class="execution_sn" data-client="erigon">erigon</mark></code></pre>
+        <div class="tabselector" data-client="erigon">
+		  <nav class="egrid egrid-2">
+				<button class="tab selected" data-tabpanel="1">Standard option</button>
+				<button class="tab" data-tabpanel="2">Staking manager</button>
+			</nav>
+			<div class="tabpanel selected">
+                <pre><code>journalctl -fu <mark class="execution_sn" data-client="erigon">erigon</mark></code></pre>
+			</div>
+			<div class="tabpanel">
+                <pre><code>/usr/local/bin/staking.sh monitor execution</code></pre>
+			</div>
+		</div>
     </li>
     {{/unless}}
     <li>
@@ -67,4 +101,27 @@
         for (const elm of document.getElementsByClassName("erigonVer-input")) { elm.innerHTML = value; elm.value = value; };
         for (const elm of document.getElementsByClassName("erigonVer")) { elm.innerHTML = value; };
     }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const tabSelectors = document.querySelectorAll('.tabselector[data-client="erigon"]');
+    tabSelectors.forEach(tabSelector => {
+        const buttons = tabSelector.querySelectorAll("button.tab");
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                const selectedTabPanel = button.getAttribute("data-tabpanel");
+                tabSelectors.forEach(syncTabSelector => {
+                    // remove selectors
+                    syncTabSelector.querySelectorAll("button.tab, .tabpanel").forEach(el => {
+                        el.classList.remove("selected");
+                    });
+                    // button
+                    syncTabSelector.querySelector(`button.tab[data-tabpanel="${selectedTabPanel}"]`).classList.add("selected");
+                    // panel
+                    syncTabSelector.children[selectedTabPanel].classList.add("selected");
+                });
+            });
+        });
+    });
+});
 </script>

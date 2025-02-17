@@ -213,7 +213,10 @@
                                 </ol>
                             </li>
                             <li>It allows starting services through a shared script
-                                <p>Starting all services through the <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util and its command <code>/usr/local/bin/staking.sh start execution</code> prevents a human error when there is forgotten set of <code>sudo systemctl enable ...</code> for any staking-related service.</p>
+                                <p>Starting all services through the <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util and its command <code>/usr/local/bin/staking.sh start validators</code> prevents a human error when there is forgotten set of <code>sudo systemctl enable ...</code> for any staking-related service.</p>
+                                <h4>Extend Staking manager clients.conf</h4>
+                                Insert <code><mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code> into clients.conf file that is used by <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a>.
+                                <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
                             </li>
                         </ul>
                         <p>There's a <code>Start with delay</code> util to manage this.</p>
@@ -226,12 +229,11 @@
                                 <pre><code><mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
                                 <pre><code><mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark>_logmonitor</code></pre>
                             </li>
+                            <li>Place command to start all validator services, if not attached yet
+                                <pre><code>/usr/local/bin/staking.sh start validators</code></pre>
+                            </li>
                             <li>Verify, that a service `delayed-start.service` exists and is automatically launched on system start. See <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">GitHub for a guide to do that</a>.</li>
                         </ol>
-                    </li>
-                    <li><h4>Extend Staking manager clients.conf</h4>
-                        Insert <code><mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code> into clients.conf file that is used by <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a>.
-                        <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
                     </li>
                 </ul>
 			</div>

@@ -256,10 +256,10 @@
             "name": "Lodestar",
             "link": "https://lodestar.chainsafe.io/",
             "github": "https://github.com/chainsafe/lodestar",
-            "latestVer": "1.25.0",
+            "latestVer": "1.26.0",
             "nodejsVer": "20.11.0",
             "nvmVer": "0.40.1",
-            "release_time": "2025-01-14T20:08:00Z",
+            "release_time": "2025-02-04T20:06:00Z",
             "prerequisity": "NodeJS v20+",
             "social":[
                 {
@@ -479,8 +479,8 @@
             "name": "StakeWise",
             "link": "https://www.stakewise.io/",
             "github": "https://github.com/stakewise/v3-operator/releases/",
-            "latestVer": "3.0.1",
-            "release_time": "2025-01-29T14:33:00Z",
+            "latestVer": "3.0.3",
+            "release_time": "2025-02-05T10:26:00Z",
             "social":[
                 {
                     "name": "Discord",

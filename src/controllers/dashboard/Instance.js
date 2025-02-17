@@ -11,7 +11,7 @@ exports.DefineInstance = (req, res, next) => {
     
     const serverId = req.query.sid; // id, not name. → Get Server data?
     const instanceId = req.query.iid;
-    console.log("DefineInstance",serverId, instanceId);
+    console.log("DefineInstance ",instanceId, "(Server Id:",serverId,")");
     
     const mysqlInst = new mysqlSrv();
     mysqlInst.GetServerClientsInfo(serverId, function(err,result){ // does not need ports, nor client?
@@ -46,7 +46,7 @@ exports.DefineInstance = (req, res, next) => {
         }
 
         res.locals.formTitle = "Add New Validator Instance to Server "+serverObj.serverName;
-        res.locals.instance = new InstanceModel(null,null);
+        res.locals.instance = new InstanceModel(null,null,null);
 
         let scheduledInnerTasks = 1;
 
@@ -74,12 +74,18 @@ exports.DefineInstance = (req, res, next) => {
 
         // get instance data by id
         mysqlInst.GetValidatorInstance(instanceId, function(err, result){
-            //console.log("GetValidatorInstance",instanceId, result);
+            //console.log("GetValidatorInstance",instanceId, err, result);
             if(err) { res.locals.err = err; return next(); }
+            
             if(result.length !== 1) return OnTaskCompleted("Unauthorized request: No instance found");
             
             res.locals.instance = new InstanceModel().GenerateFromMysqlResponse(result[0]);
             res.locals.formTitle = `Edit Validator Instance ${res.locals.instance.instance} (private ID ${res.locals.instance.vi_pid}) at Server `+serverObj.serverName;
+            res.locals.forms.removeInstance = {
+                submitLink: "/dashboard/define-instance/remove?id="+res.locals.instance.id+"&sid="+serverId,
+                submitText: "Remove Instance"
+            };
+            
             //console.log(res.locals);
             OnTaskCompleted();
         });
@@ -123,7 +129,7 @@ exports.AddOrUpdateInstanceMetadata = (req, res) => {
     let instanceId = req.query.iid;
     
     // owner ?? - cannot be the server owner, but user. But it's processed by server owner...
-    var instanceData = new InstanceModel(req.user.id, req.body['name'], req.body['note'], null, serverId, null, null, req.body['fee_recipient'], req.body['vi_sname'], req.body['vi_suser'], req.body['vi_sdata'], req.body['vi_pid']);
+    var instanceData = new InstanceModel(null, req.user.id, req.body['name'], req.body['note'], null, serverId, null, null, req.body['fee_recipient'], req.body['vi_sname'], req.body['vi_suser'], req.body['vi_sdata'], req.body['vi_pid']);
 
     const mysqlInst = new mysqlSrv();
     if(instanceId){ // update instance
@@ -166,7 +172,7 @@ exports.LinkInstanceToAccount = function(req,res,next){
     const userId = req.user.id;
     const serverId = req.query.sid;
     let instanceId = req.query.iid;
-    const chain = req.body.chain;
+    //const chain = req.body.chain;
     const accountEmail = req.body.email;
     // get userId based on email
     const mysqlInst = new mysqlSrv();
@@ -174,7 +180,8 @@ exports.LinkInstanceToAccount = function(req,res,next){
 
     mysqlInst.GetValidatorInstance(instanceId, function(err,instanceData){
         if (err) return ThrowError(err,res);
-        if(instanceData.length === 0) if (err) return ThrowError("No instance found",res);
+        if(instanceData.length === 0) return ThrowError("No instance found",res);
+        
         if(instanceData[0].owner !== userId) return ThrowError("Unauthorized access: Only instance owner can manage accesses",res);
         mysqlInst.GetAccountData(accountEmail, function(err,results){
             if (err) return ThrowError(err,res);
@@ -255,10 +262,36 @@ exports.OnLinkInstance = function(req,res){
             return ThrowError(err,res);
         } else {
             console.log(resp, "changed rows:", resp.changedRows);
-            if(resp.changedRows === 1) return res.redirect('/dashboard&success=instanceMoved');
+            if(resp.changedRows === 1) return res.redirect('/dashboard?success=instanceMoved');
 
-            return res.redirect('/dashboard&success=noactionperformed');
+            return res.redirect('/dashboard?success=noactionperformed');
         }
+    });
+};
+
+exports.OnRemoveInstance = function(req, res){
+    console.log("OnRemoveInstance", req.query);
+    if(req.query.confirm_phrase !== "Remove Instance") return res.redirect('/dashboard?failure=InvalidConfirmPhrase');
+    // get instance info
+    //res.redirect('/dashboard/?removeInstance&success=featureUnderDevelpment');
+    const mysql = new mysqlSrv();
+
+    mysql.GetValidatorInstance(req.query.id, function(err,instance_data){
+        if(err) {
+            console.log(err);
+            return res.redirect('/dashboard?failure=GetValidatorInstance');
+        }
+
+        const chain = instance_data[0].chain;
+        cache.updatePubkeystoQueue(chain, req.query.id, "", "", "", false);
+
+        mysql.RemoveValidatorInstance(req.user.id, req.query.sid, req.query.id, function(err,result){
+            if(err) return ThrowError(err, res);
+            if(result.affectedRows === 0) return ThrowError("Unauthorized request: Action reserved for instance owner only", res);
+            // push to queue (data from browser so it manages adding and removal indexes as well)
+            
+            res.redirect('/dashboard/?removeInstance&success=processing');
+        });
     });
 };
 

@@ -27,8 +27,19 @@
             {{#unless InstallationGuide}}
             <li class="mt-15">
                 <h4>Stop running StakeWise clients</h4>
-                <pre><code>sudo systemctl stop <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark> && systemctl status <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
-                <i>Modify the service names to reflect your used names during StakeWise integration</i>
+                <div class="tabselector mt-20" data-client="stakewise">
+                    <nav class="egrid egrid-2">
+                        <button class="tab selected" data-tabpanel="1">Standard configuration</button>
+                        <button class="tab" data-tabpanel="2">Stakers.space configuration</button>
+                    </nav>
+                    <div class="tabpanel selected">
+                        <pre><code>sudo systemctl stop <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark> && systemctl status <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+                        <i>Modify the service names to reflect your used names during StakeWise integration</i>
+                    </div>
+                    <div class="tabpanel">
+                        <pre><code>/usr/local/bin/staking.sh stop stakewise</code></pre>
+                    </div>
+                </div>
             </li>
             <li class="mt-15">
                 <h4>Remove the old client</h4>
@@ -42,13 +53,35 @@
             {{#unless InstallationGuide}}
             <li>
                 <h4>Start the client again</h4>
-                <pre><code>sudo systemctl start <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark> && systemctl status <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
-                <i>Modify the service names to reflect your used names during StakeWise integration</i>
+                <div class="tabselector mt-20" data-client="stakewise">
+                    <nav class="egrid egrid-2">
+                        <button class="tab selected" data-tabpanel="1">Standard configuration</button>
+                        <button class="tab" data-tabpanel="2">Stakers.space configuration</button>
+                    </nav>
+                    <div class="tabpanel selected">
+                        <pre><code>sudo systemctl start <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark> && systemctl status <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+                        <i>Modify the service names to reflect your used names during StakeWise integration</i>
+                    </div>
+                    <div class="tabpanel">
+                        <pre><code>/usr/local/bin/staking.sh start stakewise</code></pre>
+                    </div>
+                </div>
             </li>
             <li>
                 <h4>Monitor</h4>
-                <pre><code>journalctl -f -u <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
-                <i>Modify the service names to reflect your used names during StakeWise integration</i>
+                <div class="tabselector mt-20" data-client="stakewise">
+                    <nav class="egrid egrid-2">
+                        <button class="tab selected" data-tabpanel="1">Standard configuration</button>
+                        <button class="tab" data-tabpanel="2">Stakers.space configuration</button>
+                    </nav>
+                    <div class="tabpanel selected">
+                        <pre><code>journalctl -f -u <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
+                        <i>Modify the service names to reflect your used names during StakeWise integration</i>
+                    </div>
+                    <div class="tabpanel">
+                        <pre><code>/usr/local/bin/staking.sh monitor stakewise</code></pre>
+                    </div>
+                </div>
             </li>
             {{/unless}}
             <li>
@@ -58,3 +91,24 @@
         </ol>
     </li>
 </ol>
+<script>document.addEventListener("DOMContentLoaded", function() {
+        const tabSelectors = document.querySelectorAll('.tabselector[data-client="stakewise"]');
+        tabSelectors.forEach(tabSelector => {
+            const buttons = tabSelector.querySelectorAll("button.tab");
+            buttons.forEach(button => {
+                button.addEventListener("click", () => {
+                    const selectedTabPanel = button.getAttribute("data-tabpanel");
+                    tabSelectors.forEach(syncTabSelector => {
+                        // remove selectors
+                        syncTabSelector.querySelectorAll("button.tab, .tabpanel").forEach(el => {
+                            el.classList.remove("selected");
+                        });
+                        // button
+                        syncTabSelector.querySelector(`button.tab[data-tabpanel="${selectedTabPanel}"]`).classList.add("selected");
+                        // panel
+                        syncTabSelector.children[selectedTabPanel].classList.add("selected");
+                    });
+                });
+            });
+        });
+    });</script>

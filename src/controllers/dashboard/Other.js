@@ -15,7 +15,7 @@ exports.ServerResources = function(req,res,next){
         }
 
         const resourcesByServerArray = Object.entries(resourcesByServer);
-        console.log(resourcesByServerArray);
+        //console.log("Server Resources page:", resourcesByServerArray);
         res.locals.resourcesByServer = resourcesByServerArray;
 
         res.locals.resourcesByServerJSON = JSON.stringify(resourcesByServer);

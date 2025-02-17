@@ -2,7 +2,7 @@
 var app = null;
 const fs = require('fs'),
       path = require('path'),
-      //httpXmlModule = require('../utils/xmlhttps'),
+      httpXmlModule = require('../utils/xmlhttps'),
       EthStoreDataModel = require('../models/ethstoretable.js'),
       EthBeaconChainData = require('../models/ethbeaconchaintable'),
       GnoBeaconChainData = require('../models/gnobeaconchaintable'),
@@ -10,7 +10,8 @@ const fs = require('fs'),
       GnosischainData = require('../models/gnosischaintable'),
       CalculateTimeChange = require('../utils/get-time-difference'),
       numeral = require('numeral');
-const azureCosmosDB = require('../services/azureCosmosDB');
+const azureCosmosDB = require('../services/azureCosmosDB'),
+      MySqlService = require('../services/mysqlDB.js');
 
 function ChartsPagePresenter(){ 
     this.dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
@@ -30,23 +31,24 @@ ChartsPagePresenter.prototype.GetData = function(req, res, next){
             res.locals.beaconData = JSON.stringify(null);
             res.locals.chainData = JSON.stringify(null);
             res.locals.chartsUIconfig = JSON.stringify(null);
-            res.locals.dashboardData = JSON.stringify(null);
+            res.locals.valuationData = JSON.stringify(null);
             next();
         }
     });
 };
 
 ChartsPagePresenter.prototype.GnoCirculationSupply = function(req,res,next){
-    const gnoDashboardData = res.locals.parsedData.gnosis.gnoDashboard;
-    res.locals.dashboardData = JSON.stringify(gnoDashboardData);
+    const gnovaluationData = res.locals.parsedData.gnosis.gnoDashboard;
+    console.log("GnoCirculationSupply | gnovaluationData:", gnovaluationData);
+    res.locals.valuationData = JSON.stringify(gnovaluationData);
     res.locals.hbp = "chart_gno-buybacks";
     res.locals.chartId = 'buybacksupply_chart';
     res.locals.jsController = 'gno-supply';
     res.locals.overview = [
         `<h1>Overview</h1>`,
-        `<strong>GNO Total Supply:</strong> ${numeral(gnoDashboardData.generalHealthOverview.total_minted).format('0,0')} GNO`,
-        `<div><strong>GNO in DAO holdings:</strong> ${numeral(gnoDashboardData.generalHealthOverview.gno_in_dao_holdings).format('0,0')} GNO</div>`,
-		`<div><strong>OutstandingGNO in circulation:</strong> ${numeral(gnoDashboardData.generalHealthOverview.outstanding_tokens).format('0,0')} GNO</div>`
+        `<strong>GNO Total Supply:</strong> ${numeral(gnovaluationData.generalHealthOverview.total_minted).format('0,0')} GNO`,
+        `<div><strong>GNO in DAO holdings:</strong> ${numeral(gnovaluationData.generalHealthOverview.gno_in_dao_holdings).format('0,0')} GNO</div>`,
+		`<div><strong>OutstandingGNO in circulation:</strong> ${numeral(gnovaluationData.generalHealthOverview.outstanding_tokens).format('0,0')} GNO</div>`
     ]
     next();
 };
@@ -153,7 +155,7 @@ ChartsPagePresenter.prototype.Response = function(req,res){
 ChartsPagePresenter.prototype.CacheData = function(cb){
     //console.log(`${new Date()} GnosisController.prototype.CacheIndexPageData`);
 
-    var callbacks = 5;
+    var callbacks = 7;
 
     var ethereum_srcData = {
         storeData: null,
@@ -163,7 +165,8 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
     var gnosis_srcData = {
         beaconData: null,
         chainData: null,
-        gnoDashboardData: null
+        valuationData: null,
+        circulationData: null
     };
 
     // get ethstore data
@@ -196,27 +199,47 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
         taskCompleted(err, "chain");
     });
 
-    // https get req from api
-    /*new httpXmlModule().HttpsRequest({
-        hostname: 'gnodashboard.azurewebsites.net',
-        path: '/api/gnosis-overview',
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
+    // Get Gnosis valuation_metrics data
+    new MySqlService().GetValuationMetrics(500,function(err,data){
+		if(err) return taskCompleted(err, "mysql-GetValuationMetrics");
+
+        gnosis_srcData.valuationData = {};
+        gnosis_srcData.valuationData.gnoPrice = [];
+        gnosis_srcData.valuationData.bookValueTime = {
+            date:[],
+            book_ratio:[],
+            market_cap:[],
+            book_value:[],
+            margin_of_safety: []
         }
+        const dl = data.length;
+        for(var i=0;i<dl;i++){
+            const d = data[i];
+            gnosis_srcData.valuationData.bookValueTime.date.push(d.datetime);
+            gnosis_srcData.valuationData.bookValueTime.book_ratio.push(d.book_ratio);
+            gnosis_srcData.valuationData.bookValueTime.margin_of_safety.push((1 - d.book_ratio) * 100);
+            gnosis_srcData.valuationData.bookValueTime.market_cap.push(d.market_cap);
+            gnosis_srcData.valuationData.bookValueTime.book_value.push(d.book_value);
+            gnosis_srcData.valuationData.gnoPrice.push(d.gno_price);
+        }
+        taskCompleted(null, "mysql-GetValuationMetrics");
+    });
+
+    new httpXmlModule().HttpsRequest({
+            hostname: 'gnodashboard.azurewebsites.net',
+            path: '/api/gnosis-overview',
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            }
     }, null, function(err,jsonData){
         if(err){
             console.log(err);
         } else {
-            gnosis_srcData.gnoDashboardData = JSON.parse(jsonData).data; 
-            // inverse book value (display opportunity) ?
-            for(var i=0;i<gnosis_srcData.gnoDashboardData.bookValueTime.book_ratio.length;i++){
-                gnosis_srcData.gnoDashboardData.bookValueTime.book_ratio[i] = (1 - gnosis_srcData.gnoDashboardData.bookValueTime.book_ratio[i]) * 100;
-            }
+            gnosis_srcData.circulationData = JSON.parse(jsonData).data;
         }
         taskCompleted(err, "gnodashboard api");
-    });*/
-
+     });
 
     function taskCompleted(err, taskId){ callbacks--;
         //console.log(taskId, "task completed |", callbacks, err);
@@ -233,8 +256,10 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
 
         const gnosis_arrData = {
             beaconData: new GnoBeaconChainData().ConvertToChartsArray(gnosis_srcData.beaconData, 0),
-            chainData: new GnosischainData().ConvertToChartsArray(gnosis_srcData.chainData, 0)
-        }
+            chainData: new GnosischainData().ConvertToChartsArray(gnosis_srcData.chainData, 0),
+            valuationData: gnosis_srcData.valuationData//,
+            //circulationData: gnosis_srcData.circulationData
+        };
 
          // Ethereum
         const bcle = (ethereum_arrData.beaconData.stakedTokens.length <= ethereum_arrData.chainData.price.length) ? ethereum_arrData.beaconData.stakedTokens.length : ethereum_arrData.chainData.price.length;
@@ -318,26 +343,27 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
             gnosis: { 
                 beaconData: gnosis_arrData.beaconData,
                 chainData: gnosis_arrData.chainData,
-                gnoDashboard: gnosis_srcData.gnoDashboardData,
+                valuationData: gnosis_srcData.valuationData,
+                circulationData: gnosis_srcData.circulationData,
                 indicators: {
                     validators: {
                         value: numeral(gnosis_arrData.beaconData.validators[gnosis_arrData.beaconData.validators.length - 1]).format('0,0'),
                         increments: CalculateTimeChange(gnosis_arrData.beaconData.validators, '0,0')
                     },
                     stakedTokens: {
-                        value: stakedGno,/*,
-                        supplyShare: numeral(gnosis_arrData.beaconData.stakedTokens[gnosis_arrData.beaconData.stakedTokens.length - 1] / aggregaredData.gnosisChain.totalSupply[aggregaredData.gnosisChain.totalSupply.length - 1]).format('0.00%')*/
+                        value: stakedGno,
+                        supplyShare: numeral(gnosis_arrData.beaconData.stakedTokens[gnosis_arrData.beaconData.stakedTokens.length - 1] / gnosis_srcData.circulationData.generalHealthOverview.outstanding_tokens).format('0.00%'),
                         increments: CalculateTimeChange(gnosis_arrData.beaconData.stakedTokens, '0,0'),
                         hr_value: numeral(stakedGno).format('0.00a')
                     },
                     tvl: {
-                        value: 0,
-                        value_hr: numeral(0).format('$0.00a')/*,
+                        value: stakedGno * gnosis_srcData.valuationData.gnoPrice,
+                        value_hr: numeral(stakedGno * gnosis_srcData.valuationData.gnoPrice).format('$0.00a')/*,
                         increments: CalculateTimeChange(gnosis_arrData.beaconData.tvl, '$0,0')*/
                     },
                     supply: {
-                        value: 0,//gnosis_srcData.gnoDashboardData.generalHealthOverview.outstanding_tokens,
-                        value_formated: numeral(/*gnosis_srcData.gnoDashboardData.generalHealthOverview.outstanding_tokens*/0).format('0,0')
+                        value: gnosis_srcData.circulationData.generalHealthOverview.outstanding_tokens,//0,//gnosis_srcData.gnovaluationData.generalHealthOverview.outstanding_tokens,
+                        value_formated: gnosis_srcData.circulationData.generalHealthOverview.formated.outstanding_tokens
                     }
                 }
             }
