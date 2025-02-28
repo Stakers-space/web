@@ -1,35 +1,55 @@
 {{#unless InstallationGuide}}
-Check current version
-<pre><code>cd /usr/local/bin
-./mev-boost --version</code></pre>
+<strong>Check current version:</strong> <code>/usr/local/bin/mev-boost --version</code>
 {{/unless}}
 <ul>
     <li>
-Download Mevboost
+        <h4>Find the latest stable version at Github</h4>
+        <p>Write latest stable Mev-boost version from <a href="https://github.com/flashbots/mev-boost/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/flashbots/mev-boost/releases</a>: <input type="text" value="{{mevClients.mevboost.latestVer}}" class="interactive-element mevboostVer" data-class="mevboostVer"></p>
+    </li>
+    <li>
+        <h4>Download Mev-boost version <code class="mevboostVer">{{mevClients.mevboost.latestVer}}</code> from GitHub</h4>
 <pre><code>cd ~/downloads
 curl -LO https://github.com/flashbots/mev-boost/releases/download/v<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>/mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
+        <p>Get hash of the downloaded file</p>
+        <pre><code>sha256sum mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
+        <p>And compare it to content of https://github.com/flashbots/mev-boost/releases/download/v<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>/checksums.txt.</p>
     </li>
     <li>
-Verifz hash of downloaded file
-<pre><code>sha256sum mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
-    </li>
-    <li>
-Unpack mevboost
+        <h4>Unpack mevboost</h4>
 <pre><code>tar xvf mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
+        <p>Remove downloaded + useless unpacked files</p>
+        <pre><code>rm LICENSE README.md mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
     </li>
     <li>
-Remove original packed file
-<pre><code>rm LICENSE README.md mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
+    {{#if InstallationGuide}}
+        <h4>Copy mev-boost client to <code>/usr/local/bin</code></h4>
+    {{else}}
+        <h4>Stop mevboost client</h4>
+        <pre><code>sudo systemctl stop mevboost</code></pre>
     </li>
-{{#if InstallationGuide}}
-<li>Create the mevboost systemd unit file
-<pre><code>sudo nano /etc/systemd/system/mevboost.service</code></pre>
-Sample configuration
+    <li>
+        <h4>Rewrite original mev-boost client</h4>
+    {{/if}}
+        <pre><code>sudo cp ~/downloads/mev-boost /usr/local/bin</code></pre>
+    </li>
+    {{#if InstallationGuide}}
+    <li><h4>Create a system user and system service for running Mev-boost</h4>
+        <p>System user</p>
+        <pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="mevboost_su">mevboost</mark></code></pre>
+        <p>Open Systemd unit file for mevboost</p>
+        <pre><code>sudo nano /etc/systemd/system/mevboost.service</code></pre>
+        <p>And copy sample configuration below into it.</p>
+        <div class="tabselector" data-client="nimbus">
+                <nav class="egrid egrid-2">
+                <button class="tab selected" data-tabpanel="1">Ethereum</button>
+                <button class="tab" data-tabpanel="2">Gnosis</button>
+              </nav>
+              <div class="tabpanel selected">
 <pre><code>[Unit]
 Description=MEV-Boost Service for Ethereum Mainnet
 Wants=network-online.target
 After=network-online.target
-Documentation=https://www.coincashew.com
+Documentation=https://stakers.space/mev-boost
 
 [Service]
 User=mevboost
@@ -51,38 +71,27 @@ ExecStart=/usr/local/bin/mev-boost \
 [Install]
 WantedBy=multi-user.target</code></pre>
 <p>Note: Replace ralyes for your preferred rallyes from <a href="/ethereum-staking/mev-relay-list">MEV relay list</a></p>
-</li>
-<li>Create a service user for Mev Boost
-<pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="mevboost_su">mevboost</mark></code></pre>
-</li>
-<li>Restart daemon
-<pre><code>sudo systemctl daemon-reload</code></pre>
-</li>
-<li>
-Copy mev-boost client to <code>/usr/local/bin</code>
-{{else}}
-<li>Stop mevboost client
-<pre><code>sudo systemctl stop mevboost</code></pre>
-</li>
-<li>Rewrite original mev-boost client
-{{/if}}
-<pre><code>sudo cp ~/downloads/mev-boost /usr/local/bin</code></pre>
-</li>
-<li>Set proper ownership
-<pre><code>sudo chown mevboost:mevboost /usr/local/bin/mev-boost</code></pre>
-</li>
-<li>Start Mev boost service
+              </div>
+              <div class="tabpanel">
+                <p>Mev-boost is not available for Gnosis chain</p>
+              </div>
+            </div>
+            <p>Restart daemon</p>
+            <pre><code>sudo systemctl daemon-reload</code></pre>
+    </li>
+    {{/if}}
+<li><h4>Start Mev boost service</h4>
 <pre><code>sudo systemctl start mevboost</code></pre>
 </li>
-<li>Monitor Mev-boost running
+<li><h4>Monitor Mev-boost running</h4>
 <pre><code>systemctl status mevboost</code></pre>
 <pre><code>journalctl -fu mevboost.service</code></pre>
 </li>
 {{#if InstallationGuide}}
-<li>Set auto start of Mev boost service on system startup
+<li><h4>Set auto start of Mev boost service on system startup</h4>
 <pre><code>sudo systemctl enable mevboost</code></pre>
 </li>
-<li>Link Beacon service to Mevboost client
+<li><h4>Link Beacon service to Mevboost client</h4>
 <pre><code>sudo nano /etc/systemd/system/<mark>consensus-beacon</mark>.service</code></pre> 
 <p>NOTE: Replace <code>consensus-beacon</code> for your beacon service name</p>
 Extend its <code>ExecStart</code> for following flag:
@@ -115,12 +124,39 @@ Extend its <code>ExecStart</code> for following flag:
                     </div>
     Restart Daemon
     <pre><code>sudo systemctl daemon-reload</code></pre>
-    Restart the service
-    <pre><code>sudo systemctl restart <mark>consensus-beacon</mark>.service && systemctl status <mark>consensus-beacon</mark>.service</code></pre> 
-    Monitor the service
-    <pre><code>journalctl -f -u <mark>consensus-beacon</mark>.service</code></pre>
+    
+    <div class="tabselector mt-30">
+        <nav class="egrid egrid-2">
+            <button class="tab selected" data-tabpanel="1">Standard configuration</button>
+            <button class="tab" data-tabpanel="2">StakersSpace configuration</button>
+        </nav>
+        <div class="tabpanel selected">
+            Restart the Beacon service
+            <pre><code>sudo systemctl restart <mark>consensus-beacon</mark>.service && systemctl status <mark>consensus-beacon</mark>.service</code></pre> 
+            Monitor the service
+            <pre><code>journalctl -f -u <mark>consensus-beacon</mark>.service</code></pre>
+        </div>
+        <div class="tabpanel">
+            <aside>NOTE: This option requires following installed utils:
+                <ul>
+                    <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
+                </ul>
+                <p>A guide to install each util is attached on the Github.</p>
+            </aside>
+            <ul>
+                <li>
+                    Restart the Beacon service
+                    <pre><code>/usr/local/bin/staking.sh restart beacon && /usr/local/bin/staking.sh status beacon</code></pre>
+                </li>
+                <li>
+                    Monitor the service
+                    <pre><code>/usr/local/bin/staking.sh monitor beacon</code></pre> 
+                </li>
+            </ul>
+        </div>
+    </div>
 </li>
-<li>Link each Validator service to Mevboost client
+<li><h4>Link each Validator service to Mevboost client</h4>
 <pre><code>sudo nano /etc/systemd/system/<mark>validator</mark>.service</code></pre> 
 <p>NOTE: Replace <code>validator</code> for your validator service name</p>
 Extend its <code>ExecStart</code> for following flag:
@@ -148,12 +184,42 @@ Extend its <code>ExecStart</code> for following flag:
                             <pre><code>--enable-builder</code></pre>
                         </div>
                     </div>
-                    Restart Daemon
+    <h4>Restart Daemon</h4>
     <pre><code>sudo systemctl daemon-reload</code></pre>
-    Restart the service
-    <pre><code>sudo systemctl restart <mark>consensus-beacon</mark>.service && systemctl status <mark>consensus-beacon</mark>.service</code></pre>
-    Monitor the service
-    <pre><code>journalctl -f -u <mark>consensus-beacon</mark>.service</code></pre>
+
+    <div class="tabselector mt-30">
+        <nav class="egrid egrid-2">
+            <button class="tab selected" data-tabpanel="1">Standard configuration</button>
+            <button class="tab" data-tabpanel="2">StakersSpace configuration</button>
+        </nav>
+        <div class="tabpanel selected">
+           <h4>Restart the validator service(s)</h4>
+            <pre><code>sudo systemctl restart <mark>validator</mark>.service && systemctl status <mark>validator</mark>.service</code></pre>
+            <h4>Monitor the validator service(s)</h4>
+            <pre><code>journalctl -f -u <mark>validator</mark>.service</code></pre>
+        </div>
+        <div class="tabpanel">
+            <aside>NOTE: This option requires following installed utils:
+                <ul>
+                    <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
+                </ul>
+                <p>A guide to install each util is attached on the Github.</p>
+            </aside>
+            <ul>
+                <li>
+                    Restart validator service(s)
+                    <pre><code>/usr/local/bin/staking.sh restart validators && /usr/local/bin/staking.sh status validators</code></pre>
+                </li>
+                <li>
+                    Monitor validator service(s)
+                    <pre><code>/usr/local/bin/staking.sh monitor validators</code></pre> 
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    
 </li>
 
 {{/if}}

@@ -17,6 +17,7 @@ ExecStart=/usr/local/bin/teku/bin/teku validator-client \
   --data-path <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark> \
   --validator-keys <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid" data-client="teku">1</span></mark>/keystores:<mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid" data-client="teku">1</span></mark>/keystores \
   --validators-proposer-default-fee-recipient <mark class="instance_frw" data-client="teku">0xXXXXXXXXXXXXXXXX</mark> \
+  #--<a href="https://docs.teku.consensys.io/reference/cli#builder-bid-compare-factor" target="_blank" rel="nofollow noopener noreferrer">builder-bid-compare-factor</a> <mark title="Required for Lido">100</mark> \
   --validators-graffiti "<mark class="ec_name">Nethermind</mark>+Teku"
 [Install]
 WantedBy=multi-user.target</code></pre>

@@ -33,26 +33,110 @@
 			</div>
 		</div>
 		<div class="content-body">
-            <section class="chapter" id="prerequisites">
-				<div class="content" style="width:100%;padding-top:10px">
-					<h2 data-number="°">Prerequisites for this guide</h2>
-					<ol>
-						<li>Installed and synced Execution and Consensus client
-							<p><a href="/ethereum-staking/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a></p>
-						</li>
-					</ol>
+			<section class="chapter mt-60" id="modules-list">
+				<div class="content" style="width:100%">
+					<h2><a href="https://operatorportal.lido.fi/modules" target="_blank" rel="nofollow noopener noreferrer">Lido Modules</a></h2>
+					<ul>
+						<li><strong><a href="https://operatorportal.lido.fi/modules/curated-module" target="_blank" rel="nofollow noopener noreferrer">Curated Module (CM)</a></strong></li>
+						<li><strong><a href="https://operatorportal.lido.fi/modules/simple-dvt-module" target="_blank" rel="nofollow noopener noreferrer">Simple Distributed Validator Technology (sDVT)</a></strong> or the second mainnet Lido protocol module, provides the first opportunity for solo and community stakers to participate in running validators using the Lido protocol by leveraging the established design of the Curated Operator Module and DVT solutions provided by Obol and SSV Network.</li>
+						<li><strong><a href="https://operatorportal.lido.fi/modules/community-staking-module" target="_blank" rel="nofollow noopener noreferrer">Community Staking Module (CSM)</a></strong> allowing any node operator — and especially community stakers, from solo stakers, to groups of friends, to amateur operators — to operate validators by providing an ETH-based safety deposit.</li>
+					</ul>
 				</div>
             </section>
 
 			<section class="chapter mt-60" id="csm">
 				<div class="content" style="width:100%">
 					<h2>Lido CSM</h2>
-					<p>The <a href="https://operatorportal.lido.fi/modules/community-staking-module" target="_blank" rel="nofollow noopener noreferrer">Community Staking Module (CSM)</a> is the <a href="https://lido.fi/" target="_blank" rel="nofollow noopener noreferrer">Lido</a> protocol’s first module with permissionless entry, allowing any node operator to operate validators by providing a token-based bond as security collateral.</p>
+					<p>The <a href="https://operatorportal.lido.fi/csm-getting-started" target="_blank" rel="nofollow noopener noreferrer">Community Staking Module (CSM)</a> is the <a href="https://lido.fi/" target="_blank" rel="nofollow noopener noreferrer">Lido</a> protocol’s first module with permissionless entry, allowing any node operator to operate validators by providing a token-based bond as security collateral.</p>
 					<p><strong>CSM is supported for <a href="/ethereum-staking">Ethereum staking</a>.</strong></p>
 
+					<div class="mt-20">
+						<h3><a href="https://operatorportal.lido.fi/modules/community-staking-module" target="_blank" rel="nofollow noopener noreferrer">Characteristics</a></h3>
+						<ul>
+							<li>Bond requirement: <strong>2.4 ETH for first validator nad 1.3 ETH for each next validator</strong></li>
+							<li><strong>Reward rate:</strong> 10% broken down as:
+								<ul>
+									<li>4% allocated to Lido treasury</li>
+									<li>6% allocated to Operator's module</li>
+								</ul>
+							
+							</li>
+						</ul>
+					</div>
 					<p>Guide in progress.</p>
+
 				</div>
             </section>
+
+
+			<section class="chapter" id="prerequisites">
+				<div class="content" style="width:100%;padding-top:10px">
+					<mark>The Guide is under construction. Do not use!!!</mark>
+					<h2 data-number="°">Prerequisites for this guide</h2>
+					<ol>
+						<li>Installed and synced Execution and Consensus client
+							<p><a href="/ethereum-staking/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a></p>
+						</li>
+						<li>Installed Mev-boost client with <code>-min-bid</code> set maximally to <code>0.07</code>
+							<p><a href="/mev-boost" class="btn btn-black btn-rounded">Mev-boost client installation guide</a></p>
+						</li>
+					</ol>
+				</div>
+            </section>
+
+			<section class="chapter" id="validator">
+				<div class="content">
+					<mark>The Guide is under construction. Do not use!!!</mark>
+					<ol>
+						<li><h2>Validator keys generation</h2></li>
+						
+					</ol>
+
+
+					<h2>Validator client configuration for Lido</h2>
+					<ul>
+						<li>Be sure <code>Builder-boost-factor</code> is set to <code>100%</code></li>
+						<li>Be sure <code>fee_recipient</code> is set to <code><a href="https://etherscan.io/address/0x388C818CA8B9251b393131C08a736A67ccB19297" target="_blank" rel="nofollow noopener noreferrer">0x388C818CA8B9251b393131C08a736A67ccB19297</a></code></li>
+					</ul>
+					<div class="tabselector">
+						<nav class="egrid egrid-5">
+							<button class="tab selected" data-tabpanel="1" onclick="OnValidatorClientChanged('lighthouse')">Lighthouse</button>
+							<button class="tab" data-tabpanel="2" onclick="OnValidatorClientChanged('lodestar')">Lodestar</button>
+							<button class="tab" data-tabpanel="3" onclick="OnValidatorClientChanged('teku')">Teku</button>
+							<button class="tab" data-tabpanel="4" onclick="OnValidatorClientChanged('nimbus')">Nimbus</button>
+							<button class="tab" data-tabpanel="5" onclick="OnValidatorClientChanged('prysm')">Prysm</button>
+						</nav>
+						<div class="tabpanel selected">
+{{> clients/lighthouse_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/lighthouse/exit-validator">https://stakers.space/lighthouse/exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/lodestar_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/lodestar/exit-validator">https://stakers.space/lodestar/exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/teku_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/teku/exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/nimbus_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/nimbus/exit-validator</a>.</p>
+						</div>
+						<div class="tabpanel">
+{{> clients/prysm_validator AddValidator=true}}
+<p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/prysm/exit-validator</a>.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+			<section class="chapter" id="fund">
+				<div class="content" style="width:100%;padding-top:10px">
+					<mark>The Guide is under construction. Do not use!!!</mark>
+					Fund
+				</div>
+			</section>
 
         </div>
 		

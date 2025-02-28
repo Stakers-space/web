@@ -15,6 +15,7 @@ ExecStart=/usr/local/bin/beacon-chain \
   --execution-endpoint=http://127.0.0.1:<mark class="execution-endpoint">8551</mark> \
   --jwt-secret=/var/lib/jwtsecret/ethereum.hex \
   --suggested-fee-recipient=<mark>FeeRecipientAddress</mark> \
+  #--<a href="https://docs.prylabs.network/docs/prysm-usage/parameters#client-stats-flags" target="_blank" rel="nofollow noopener noreferrer">local-block-value-boost</a>=<mark title="Required for Lido">0</mark> \
   --checkpoint-sync-url=<mark>CheckpointSyncURL</mark> \
   --genesis-beacon-api-url=<mark>CheckpointSyncURL</mark> \
   --accept-terms-of-use
