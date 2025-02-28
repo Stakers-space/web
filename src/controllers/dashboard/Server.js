@@ -1,9 +1,8 @@
 const mysqlSrv = require('../../services/mysqlDB');
 const ServerModel = require('../../models/dashboard/server');
 
-const sanitizeHtml = require('sanitize-html');
-
-const cache = require('../../middlewares/cache');
+//const sanitizeHtml = require('sanitize-html');
+//const cache = require('../../middlewares/cache');
 
 const fs = require('fs'),
     path = require('path');

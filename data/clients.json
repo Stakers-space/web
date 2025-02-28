@@ -4,9 +4,9 @@
             "name": "Nethermind",
             "link": "https://nethermind.io/",
             "github": "https://github.com/NethermindEth/nethermind",
-            "latestVer": "1.30.3-87c86379",
-            "latestVerClean":"1.30.3",
-            "release_time": "2025-01-04T13:43:00Z",
+            "latestVer": "1.31.2-25e26aaf",
+            "latestVerClean":"1.31.2",
+            "release_time": "2025-02-27T20:53:00Z",
             "social":[
                 {
                 "name": "Discord",
@@ -49,8 +49,8 @@
             "name": "Erigon",
             "link": "https://github.com/ledgerwatch/erigon",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "2.61.0",
-            "release_time": "2025-01-06T17:39:00Z",
+            "latestVer": "2.61.1",
+            "release_time": "2025-02-12T18:00:00Z",
             "social":[
                 {
                     "name": "X",
@@ -256,10 +256,10 @@
             "name": "Lodestar",
             "link": "https://lodestar.chainsafe.io/",
             "github": "https://github.com/chainsafe/lodestar",
-            "latestVer": "1.26.0",
+            "latestVer": "1.27.1",
             "nodejsVer": "20.11.0",
             "nvmVer": "0.40.1",
-            "release_time": "2025-02-04T20:06:00Z",
+            "release_time": "2025-02-24T17:43:00Z",
             "prerequisity": "NodeJS v20+",
             "social":[
                 {
@@ -298,9 +298,9 @@
             "name": "Teku",
             "link": "https://docs.teku.consensys.net/",
             "github": "https://github.com/ConsenSys/teku",
-            "latestVer": "25.1.0",
+            "latestVer": "25.2.0",
             "jdkVer": "23",
-            "release_time": "2024-12-18T12:04:00Z",
+            "release_time": "2025-02-12T02:34:00Z",
             "prerequisity": "jdk v21+",
             "social":[
                 {
@@ -339,8 +339,8 @@
             "name": "Prysm",
             "link": "https://prysmaticlabs.com/",
             "github": "https://github.com/prysmaticlabs/prysm",
-            "latestVer": "5.2.0",
-            "release_time": "2024-12-16T20:42:00Z",
+            "latestVer": "5.3.0",
+            "release_time": "2025-02-12T19:53:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -378,9 +378,9 @@
             "name": "Nimbus",
             "link": "https://nimbus.team/",
             "github": "https://github.com/status-im/nimbus-eth2",
-            "latestVer": "24.12.0_4e440277",
-            "latestVerClean":"24.12.0",
-            "release_time": "2024-12-13T09:13:00Z",
+            "latestVer": "25.2.0_c6688004",
+            "latestVerClean":"25.2.0",
+            "release_time": "2025-02-13T14:42:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -448,8 +448,8 @@
             "name": "RocketPool",
             "link": "https://rocketpool.net/",
             "github": "https://github.com/rocket-pool/smartnode-install/releases",
-            "latestVer": "1.15.2",
-            "release_time": "2025-01-31T11:43:00Z",
+            "latestVer": "1.15.3",
+            "release_time": "2025-02-21T01:57:00Z",
             "social":[
                 {
                     "name": "Discord",

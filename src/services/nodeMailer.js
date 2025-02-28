@@ -1,4 +1,4 @@
-var nodemailer = require("nodemailer");
+/*var nodemailer = require("nodemailer");
 
 async function SendMail(receiver, content){
 	//DOCS: https://www.npmjs.com/package/nodemailer/v/2.2.0-rc.8
@@ -39,4 +39,4 @@ async function SendMail(receiver, content){
 
 module.exports = {
     SendMail
-}
+}*/

@@ -1,7 +1,7 @@
 /**
  * Mailjet.com Email service
  */
-const config = require('../config/config.secret.json').mailJet;
+/*const config = require('../config/config.secret.json').mailJet;
 const Mailjet = require('node-mailjet');
 const mailjet = Mailjet.apiConnect( config.apikey, config.secretkey);
 
@@ -34,4 +34,4 @@ request
     })
     .catch((err) => {
         console.log("err:",err.statusCode)
-    })
+    })*/

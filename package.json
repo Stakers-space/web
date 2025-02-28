@@ -1,6 +1,6 @@
 {
   "name": "stakers.space",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "private": true,
   "scripts": {
     "start": "node src/app"
@@ -14,8 +14,6 @@
     "express-handlebars": "^7.1.2",
     "express-session": "^1.18.0",
     "mysql": "^2.18.1",
-    "node-mailjet": "^6.0.4",
-    "nodemailer": "^6.9.14",
     "numeral": "^2.0.6",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",

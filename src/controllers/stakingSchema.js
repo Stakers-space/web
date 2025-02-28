@@ -9,8 +9,8 @@ StakingSchemaPagePresenter.prototype.Request = function(req,res,next){
 	res.locals.title = `${res.locals.chainName} staking schema`;
     res.locals.metaDescription = `${res.locals.chainName} staking schema.`;
 	res.locals.css_file = "chain";
-	res.locals.page = "stakingschema";
-	res.locals.layout = "amp";
+	res.locals.page_hbs = "stakingschema";
+	res.locals.layout_hbs = "amp";
 	next();
 };
 

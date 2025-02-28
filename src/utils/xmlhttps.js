@@ -7,6 +7,7 @@ function Xmlhttp(){}
 Xmlhttp.prototype.HttpsRequest = function(options, body, cb){
 	const req = https.request(options, (resp) => {
 		if(resp.statusCode === 404) return cb("Err 404: not found");
+		if(resp.statusCode === 500) return cb("Err 500: internal server error");
 		let responseData = '';
 		resp.on('data', (chunk) => { responseData += chunk; });
 		resp.on('end', () => { return cb(null,responseData); }); 

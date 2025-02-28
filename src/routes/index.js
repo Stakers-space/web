@@ -45,8 +45,10 @@ router.use('/lodestar', require('./client'));
 router.use('/teku', require('./client'));
 router.use('/nimbus', require('./client'));
 router.use('/prysm', require('./client'));
-router.use('/rocketpool', require('./service'));
 router.use('/stakewise', require('./service'));
+router.use('/rocketpool', (req, res) => {
+    res.redirect('/ethereum-staking/full-guide/rocketpool');
+}/*require('./service')*/);
 router.use('/lido', (req, res) => {
     res.redirect('/ethereum-staking/full-guide/lido');
 });

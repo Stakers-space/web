@@ -17,7 +17,6 @@ const crypto =  require('crypto');
 const mysqlLib = require('../services/mysqlDB');
 const mysqlSrv = new mysqlLib();
 
-//const NodeMailer = require('../services/nodeMailer');
 const MailMessage = require('../models/emailMessage/account');
 const MailService = require('../services/customMailing');
 
@@ -196,7 +195,6 @@ AuthentizationController.prototype.ResetPassword = function(req,res){
         } else {
             var emailCnt = MailMessage.Resetpassword(email, token);
 			console.log(email, emailCnt);
-			//NodeMailer.SendMail(email, emailCnt);
 			MailService.SendMail("notification@stakers.space", email, emailCnt.subject, emailCnt.message, function(err,resp){
 				console.log(err,resp);
 			})
@@ -226,7 +224,6 @@ AuthentizationController.prototype.NewAccount = function(req,res){
         } else {
             var emailCnt = MailMessage.AccountRegistration(email, token);
 			//console.log(email, emailCnt);
-			//NodeMailer.SendMail(email, emailCnt);
 			
 			// Temporary - no email verification required till there will be custom mail
 			//return res.redirect(emailCnt.link);
