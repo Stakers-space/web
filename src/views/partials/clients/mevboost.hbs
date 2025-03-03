@@ -59,7 +59,7 @@ Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/mev-boost \
   -mainnet \
-  -min-bid 0.03 \
+  <mark>-min-bid</mark> 0.03 \
   -relay-check \
   -addr 127.0.0.1:18550 \
   -relay https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net \

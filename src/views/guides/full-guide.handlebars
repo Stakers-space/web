@@ -20,9 +20,9 @@
 					<strong>Solo staking guide</strong>
 					<ol>
 						<li><a href="#hardware">Hardware & OS</a></li>
-						<li><a href="">Securying server</a></li>
-						<li><a href="">Setting Basic conf</a></li>
-						<li><a href="">Jwtsecret</a></li>
+						<li><a href="#security">Securying server</a></li>
+						<li><a href="#config">Setting Basic conf</a></li>
+						<li><a href="#jwt">Jwtsecret</a></li>
 						<li>Install & configurate clients
 							<ul>
 								<li><a href="#execution">Execution client</a></li>
@@ -34,9 +34,6 @@
 								</li>
 							</ul>
 						</li>
-						<li>Run a Validator</li>
-						<li>Updating clients</li>
-						<li>Exit validators</li>
 					</ol>
 				</nav>
 			</div>
@@ -63,7 +60,7 @@
 				</div>
             </section>
 
-            <section class="chapter mt-60" id="secure">
+            <section class="chapter mt-60" id="security">
 				<div class="content bt">
                     <h2 data-number="1">Securying Ubuntu OS</h2>
 					<p>In the matter of security, you must think about the way you are going to connect to / access your node - see the guide below.</p>
@@ -240,7 +237,7 @@ sudo systemctl disable ssh</code></pre>
 				</div>
             </section>
 
-             <section class="chapter mt-60" id="basic-setup">
+             <section class="chapter mt-60" id="config">
 				<div class="content bt">
                     <h2 data-number="2">Check / set basic config for your node machine</h2>
 					<ul>
@@ -265,7 +262,7 @@ sudo systemctl disable ssh</code></pre>
                 </div>
             </section>
 
-			<section class="chapter mt-60" id="cauthkey">
+			<section class="chapter mt-60" id="jwt">
 				<div class="content bt">
                     <h2 data-number="3">Generate Client Authentication Secret for {{chain}}</h2>
 					<ul>

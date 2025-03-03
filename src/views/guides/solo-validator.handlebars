@@ -33,24 +33,25 @@
 				 <nav>
 					<strong>Solo staking guide</strong>
 					<ol>
-						<li><a href="">Hardware & OS</a></li>
-						<li><a href="">Securying server</a></li>
-						<li><a href="">Setting Basic conf</a></li>
-						<li><a href="">Jwtsecret</a></li>
+						<li><a href="/{{chainUrl}}#hardware">Hardware & OS</a></li>
+						<li><a href="/{{chainUrl}}#security">Securying server</a></li>
+						<li><a href="/{{chainUrl}}#config">Setting Basic conf</a></li>
+						<li><a href="/{{chainUrl}}#jwt">Jwtsecret</a></li>
 						<li>Install & configurate clients
 							<ul>
-								<li><a href="#execution">Execution client</a></li>
-								<li><a href="#consensus">Consensus client</a>
+								<li><a href="/{{chainUrl}}#execution">Execution client</a></li>
+								<li><a href="/{{chainUrl}}#consensus">Consensus client</a>
 									<ul>
-										<li><a href="#beacon">Beacon</a></li>
-										<li><a href="#validator">Validator</a></li>
+										<li><a href="/{{chainUrl}}#beacon">Beacon</a></li>
+										<li><a href="/{{chainUrl}}#validator">Validator</a></li>
 									</ul>
 								</li>
 							</ul>
 						</li>
-						<li>Run a Validator</li>
+						<li><a href="#validator">Run a Validator</a></li>
+						<li><a href="#deposit">Deposit a validator</a></li>
 						<li>Updating clients</li>
-						<li>Exit validators</li>
+						<li><a href="#exit">Exit validators</a></li>
 					</ol>
 				</nav>
 			</div>
@@ -90,6 +91,7 @@
 
 					<p class="mt-30">To configurate an instance of validator service, you need at least one keystore. 1 keystore represents 1 validator. You can generate keystores on an <a href="">offline PC</a> with Validator Data generator tool, <a href="">see the guide</a>.</p>
 					<h3>Get Keystores</h3>
+					<p>Keystores can be generated with <a href="/{{chainUrl}}/keystores">Gnosis validator keys generation guide</a>.</p>
 					<p>The tool generates a directory <code>deposit_keys</code> with keystore json files and 1 deposit json file.</p>
 
 					<h3 class="mt-30">Copy keystores to your machine</h3>
@@ -136,6 +138,14 @@
 					<h2>Fund the validator keys</h2>
 					<p>If anything works smoothly, you can deposit the validator keys now.</p>
 					<a href="/{{chainUrl}}/keystores#deposit" class="btn btn-black btn-rounded">Deposit validator keys</a>
+				</div>
+			</section>
+
+			<section class="chapter mt-60" id="maintenance">
+				<div class="content bt">
+					<h2>Regular maintenance</h2>
+					<p>As a regular member securying the network and processing blockchain operations on it, you need to keep your software up to date to avoid penalties and earning rewards for the work.</p>
+					<a href="/{{chainUrl}}/maintenance" class="btn btn-black btn-rounded">Guides for regular maintenance</a>
 				</div>
 			</section>
         </div>

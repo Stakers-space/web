@@ -1,0 +1,125 @@
+{{> header}}
+<main class="mb-60">
+	<section class="cover grid egrid">
+		<div class="mt-60 mb-20">
+			<h1 class="cover-title"><span>Maintenance guide</span> for {{chainName}} staking</h1>
+			<p><strong>Maintenance guide for {{chainName}} staking.</strong></p>
+            <p>As a regular member securying the network and processing blockchain operations on it, you need to keep your software up to date to avoid penalties and earning rewards for the processed work.</p>
+            <p><strong>You can check current versions of individual clients at <a href="/clients">clients page</a>.</strong></p>
+		</div>
+		<div class="disclaimer">
+			<div class="disclaimer-content">
+				<h3>Disclaimer</h3>
+				<p>This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.</p>
+            </div>
+		</div>
+	</section>
+
+	<div class="grid-full contents serverguide">
+        <div class="content-chapters">
+			<div class="sticky">
+				 <nav class="mt-60">
+					<strong>Navigation:</strong>
+                    <ol>
+						<li><a href="#os">Updating Operation system</a></li>
+						<li><a href="#clients">Updating Staking clients</a>
+                            <ul>
+                                <li><a href="#execution">Execution client</a></li>
+                                <li><a href="#consensus">Consensus (Beacon + Validator) client</a></li>
+                                <li><a href="#mev">MEV client</a></li>
+                                <li><a href="#services">Services clients</a></li>
+                            </ul>
+                        </li>
+                    </ol>
+				</nav>
+			</div>
+		</div>
+	
+		<div class="content-body">
+            <section class="chapter" id="os">
+
+				<div class="content">
+                    <h2>Updating OS</h2>
+                    <p>Be sure your Operating system is up to date.</p>
+                    <pre><code>sudo apt update && sudo apt -y upgrade</code></pre>
+                    <pre><code>sudo apt dist-upgrade && sudo apt autoremove</code></pre>
+                </div>
+            </section>
+
+			<section class="chapter" id="clients">
+
+				<div class="content">
+                    <h2>Updating Staking clients</h2>
+                    <ul>
+						<li><h3 id="execution">Execution Client</h3>
+                                    <div class="tabselector">
+						<nav class="egrid egrid-4">
+							<button class="tab selected" data-tabpanel="1" onclick="OnExecutionClientChanged('nethermind')">
+								Nethermind
+							</button>
+							<button class="tab" data-tabpanel="2" onclick="OnExecutionClientChanged('erigon')">
+								Erigon
+							</button>
+							<button class="tab" data-tabpanel="3" onclick="OnExecutionClientChanged('geth')">
+								Geth
+							</button>
+							<button class="tab" data-tabpanel="4" onclick="OnExecutionClientChanged('reth')">
+								Reth
+							</button>
+						</nav>
+						<div class="tabpanel selected">
+{{> clients/nethermind_cli InstallationGuide=false }}
+						</div>
+						<div class="tabpanel">
+{{> clients/erigon_cli InstallationGuide=false }}
+						</div>
+						<div class="tabpanel">
+							<p>Soon</p>
+						</div>
+						<div class="tabpanel">
+							<p>Soon</p>
+						</div>
+					</div>
+                                </li>
+								<li><h3 class="mt-50" id="consensus">Consensus clients (Beacon and Validator(s))</h3>
+                                    <div class="tabselector">
+                                        <nav class="egrid egrid-5">
+                                            <button class="tab selected" data-tabpanel="1" onclick="OnConsensusClientChanged('lighthouse')">Lighthouse</button>
+                                            <button class="tab" data-tabpanel="2" onclick="OnConsensusClientChanged('lodestar')">Lodestar</button>
+                                            <button class="tab" data-tabpanel="3" onclick="OnConsensusClientChanged('teku')">Teku</button>
+                                            <button class="tab" data-tabpanel="4" onclick="OnConsensusClientChanged('nimbus')">Nimbus</button>
+                                            <button class="tab" data-tabpanel="5" onclick="OnConsensusClientChanged('prysm')">Prysm</button>
+                                        </nav>
+
+                                        <div class="tabpanel selected">
+{{> clients/lighthouse_cli InstallationGuide=false }}
+						</div>
+						<div class="tabpanel">
+{{> clients/lodestar_cli InstallationGuide=false }}
+						</div>
+						<div class="tabpanel">
+{{> clients/teku_cli InstallationGuide=false }}
+						</div>
+						<div class="tabpanel">
+{{> clients/nimbus_cli InstallationGuide=false }}
+						</div>
+						<div class="tabpanel">
+{{> clients/prysm_cli InstallationGuide=false }}
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mt-50"><h3 id="mev">Updating MEV client (if used)</h3>
+{{> clients/mevboost InstallationGuide=false }}
+                                </li>
+                                <li class="mt-50"><h3 id="services">Updating service(s) client(s) (if used)</h3>
+                                    <p>If you validate with services such as <a href="/stakewise">StakeWise</a>, <a href="/rocketpool">Rocketpool</a> or <a href="/lido">Lido</a>, be sure that also these clients are up to date.</p>
+                                </li>
+							</ul>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}

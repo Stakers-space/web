@@ -33,7 +33,8 @@ class GnosisRouter {
         router.get('/validators', Chain.Gnosis, this.chainController.Validators, this.Response);
         router.get('/deposit-contract-balance', Chain.Gnosis, this.chainController.DepositContract, this.Response);
         router.get('/keystores', Chain.Gnosis, this.chainController.Keystores, this.Response);
-
+        router.get('/maintenance', Chain.Gnosis, this.GuidePage.Maintenance, this.Response);
+        router.get('/emergency', Chain.Gnosis, this.GuidePage.Emergency, this.Response);
 
         router.get('/staking-hardware', Chain.Gnosis, this.GuidePage.Hardware, this.Response);
         router.get('/full-guide', Chain.Gnosis, this.GuidePage.Base, this.Response); // gudide - run execution and consensus layer clients
@@ -48,8 +49,6 @@ class GnosisRouter {
         router.get('/gno-circulation-supply', this.ChartsPage.GetData, this.ChartsPage.GnoCirculationSupply, this.ChartsPage.Response);
         router.get('/validators', Chain.Gnosis, this.ChartsPage.GetData, this.ChartsPage.Validators, this.ChartsPage.Response);
         router.get('/news', Chain.Gnosis, this.NewsPage.Request, this.Response);
-
-        router.get('/emergency', Chain.Gnosis, this.GuidePage.Emergency, this.Response);
     }
 
     Response(req,res){

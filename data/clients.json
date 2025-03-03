@@ -4,9 +4,9 @@
             "name": "Nethermind",
             "link": "https://nethermind.io/",
             "github": "https://github.com/NethermindEth/nethermind",
-            "latestVer": "1.31.2-25e26aaf",
-            "latestVerClean":"1.31.2",
-            "release_time": "2025-02-27T20:53:00Z",
+            "latestVer": "1.31.3-d991da8a",
+            "latestVerClean":"1.31.3",
+            "release_time": "2025-03-03T16:02:00Z",
             "social":[
                 {
                 "name": "Discord",

@@ -110,6 +110,27 @@ class GuidePage {
         res.locals.metaDescription = `What to do if anything goes wrong with ${res.locals.chainName} staking?`;
         next();
     }
+    Maintenance(req,res,next){
+        res.locals = app._ExtandLocals(res.locals);
+        res.locals.page_hbs = 'guides/maintenance';
+        res.locals.title = `Maintenance guide for ${res.locals.chainName} staking`;
+        res.locals.executionClient = "nethermind";
+        res.locals.consensusClient = "lighthouse";
+        res.locals.metaDescription = `What to do to be a valid member in ${res.locals.chainName} staking longterm?`;
+        fs.readFile(path.join(__dirname, '..', '..', 'data/clients.json'), 'utf8', (err, data) => {
+            if(!err) {
+                try {
+                    const clients = JSON.parse(data);
+                    res.locals.executionClients = clients.executionLayer;
+                    res.locals.consensusClients = clients.consensusLayer;
+                    res.locals.mevClients = clients.mevLayer;
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+            next();
+        });
+    }
 }
 
 module.exports = GuidePage;

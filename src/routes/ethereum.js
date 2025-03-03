@@ -34,7 +34,8 @@ class EthereumRouter {
         // topic-based
         router.get('/validators', Chain.Ethereum, this.chainController.Validators, this.Response);
         router.get('/keystores', Chain.Ethereum, this.chainController.Keystores, this.Response);
-
+        router.get('/maintenance', Chain.Ethereum, this.GuidePage.Maintenance, this.Response);
+        router.get('/emergency', Chain.Ethereum, this.GuidePage.Emergency, this.Response);
         router.get('/validator-queue', Chain.Ethereum, this.ValidatorQueue.Page, this.Response);
 
         router.get('/staking-hardware', Chain.Ethereum, this.GuidePage.Hardware, this.Response);
@@ -48,8 +49,6 @@ class EthereumRouter {
         router.get('/schema', Chain.Ethereum, this.StakingSchema.Request, this.Response);
         router.get('/clients', Chain.Ethereum, this.ClientsPage.ClientsOverview, this.Response);
         router.get('/news', Chain.Ethereum, this.NewsPage.Request, this.Response);
-
-        router.get('/emergency', Chain.Ethereum, this.GuidePage.Emergency, this.Response);
     }
 
     Response(req,res){
