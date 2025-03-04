@@ -2,6 +2,20 @@
 <main class="mb-60">
 	<section class="cover grid egrid">
 		<div class="mt-60 mb-20">
+			<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{chainName}} staking</span></a>
+					<meta property="position" content="2">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}/full-guide"><span property="name" class="intro-label">Full Guide</span></a>
+					<meta property="position" content="3">
+				</li>
+			</ul>
 			<h1 class="cover-title"><span>Interactive Solo {{chainName}} staking</span> guide for Ubuntu OS</h1>
 			<p><strong>Complete guide to stake one as well as thousands of validators on multiple chains through a single staking node.</strong> Simply made, interactive, well explained. The guide on thsi webpage is focused on staking {{chainName}}.</p>
 		</div>

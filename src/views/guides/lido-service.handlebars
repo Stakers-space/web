@@ -2,6 +2,24 @@
 <main class="mb-60">
 	<section class="cover grid egrid">
 		<div class="mt-60 mb-20">
+			<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{chainName}} staking</span></a>
+					<meta property="position" content="2">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}/full-guide"><span property="name" class="intro-label">Guide</span></a>
+					<meta property="position" content="3">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}/full-guide/lido"><span property="name" class="intro-label">Lido</span></a>
+					<meta property="position" content="3">
+				</li>
+			</ul>
 			<h1 class="cover-title">Interactive guide for Ethereum staking using <span>Lido client</span> on Ubuntu OS</h1>
 			<p>A guide to set Lido client for running <a href="/bonded-validators">bonded validators</a> on Ethereum Mainnet.</p>
 		</div>

@@ -20,6 +20,20 @@
 <main class="mb-60">
 	<section class="cover grid egrid">
 		<div class="mt-80 mb-0">
+			<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{chainName}} staking</span></a>
+					<meta property="position" content="2">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}/staking-hardware"><span property="name" class="intro-label">Hardware</span></a>
+					<meta property="position" content="3">
+				</li>
+			</ul>
 			<h1 class="cover-title">Choosing Hardware, OS & Location <span>for {{chainName}} staking</span></h1>
 			<p><strong>Complete guide to choose proper hardware, operating system and placement for a staking node allowing staking on multiple chains.</strong> This page is part of a <a href="/{{chainUrl}}/full-guide">complete {{chainName}} staking guide</a>.</p>
 			{{!--<p>This guide comes with an interactive way for simple setup of the staking node in the matter of security and services. It's relevant to staking on various chains (this page specifically targets {{chainName}}), anyway the way of installation is not in a conflict with adding any other chain on the same machine - see <a href="/staking-guide">Guide to stake on multiple chains from a single machine</a>.</p>--}}
