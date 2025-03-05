@@ -13,6 +13,17 @@ ExecStart=/usr/local/bin/lighthouse vc \
   --datadir <mark class="instance_dp" data-client="lighthouse">/var/lib{{slashChain}}/lighthouse/vi<span class="instance_pid" data-client="lighthouse">1</span></mark> \
   --suggested-fee-recipient <mark class="instance_frw" data-client="lighthouse">0xXXXXXXXXXXXXXXXX</mark> \
   --beacon-nodes http://localhost:<mark class="consensus-endpoint">5052</mark> \
+{{#if isLido}}
+  --builder-boost-factor 100 \
+  --graffiti "Lido CSM | <mark class="ec_name">Nethermind</mark>+Lighthouse"
+{{else}}
   --graffiti "<mark class="ec_name">Nethermind</mark>+Lighthouse"
+{{/if}}
 [Install]
 WantedBy=multi-user.target</code></pre>
+{{#if isLido}}
+<h4 class="mt-0 mb-0">Notes</h4>
+<ul>
+  <li><strong><code>--<a href="https://lighthouse-book.sigmaprime.io/help_vc.html" target="_blank" rel="nofollow noopener noreferrer">builder-boost-factor</a></code> must be set to 100%</strong> for running LIDO CSM validator client.</li>
+</ul>
+{{/if}}

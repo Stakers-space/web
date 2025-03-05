@@ -53,7 +53,7 @@
                     </div>
 {{else}}
     {{#ifEqual chain "ethereum"}}
-{{> clients/config/eth-nimbusvalidator }}
+{{> clients/config/eth-nimbusvalidator isLido=isLido}}
     {{/ifEqual}}
     {{#ifEqual chain "gnosis"}}
 {{> clients/config/gno-nimbusvalidator }}

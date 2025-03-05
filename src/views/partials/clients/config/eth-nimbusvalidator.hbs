@@ -13,9 +13,20 @@ ExecStart=/usr/local/bin/nimbus/nimbus_validator_client \
   --data-dir=<mark class="instance_dp" data-client="nimbus">/var/lib{{slashChain}}/nimbus/vi<span class="instance_pid">1</span></mark> \
   --beacon-node=http://127.0.0.1:<mark class="consensus-endpoint">5052</mark> \
   --suggested-fee-recipient=<mark class="instance_frw" data-client="teku">0xXXXXXXXXXXXXXXXX</mark> \
+{{#if isLido}}
+  --builder-boost-factor 100 \
+  --graffiti "Lido CSM | <mark class="ec_name">Nethermind</mark>+Nimbus"
+{{else}}
   --graffiti="<mark class="ec_name">Nethermind</mark>+Nimbus"
+{{/if}}
   # --payload-builder=true --payload-builder-url=https://${HOST}:${PORT}/
  
 [Install]
 WantedBy=multi-user.target</code></pre>
-<p>See more flags at <a href="https://nimbus.guide/options.html" target="_blank" rel="nofollow noopener noreferrer">https://nimbus.guide/options.html</a></p>
+<h4 class="mt-0 mb-0">Notes</h4>
+<ul>
+  <li>See more flags at <a href="https://nimbus.guide/options.html" target="_blank" rel="nofollow noopener noreferrer">https://nimbus.guide/options.html</a></li>
+  {{#if isLido}}
+  <li><strong><code>--<a href="https://nimbus.guide/external-block-builder.html" target="_blank" rel="nofollow noopener noreferrer">builder-boost-factor</a></code> must be set to 100%</strong> for running LIDO CSM validator client.</li>
+  {{/if}}
+</ul>

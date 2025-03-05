@@ -4,9 +4,9 @@
             "name": "Nethermind",
             "link": "https://nethermind.io/",
             "github": "https://github.com/NethermindEth/nethermind",
-            "latestVer": "1.31.3-d991da8a",
-            "latestVerClean":"1.31.3",
-            "release_time": "2025-03-03T16:02:00Z",
+            "latestVer": "1.31.4-294a2029",
+            "latestVerClean":"1.31.4",
+            "release_time": "2025-03-05T13:42:00Z",
             "social":[
                 {
                 "name": "Discord",
@@ -49,8 +49,8 @@
             "name": "Erigon",
             "link": "https://github.com/ledgerwatch/erigon",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "2.61.1",
-            "release_time": "2025-02-12T18:00:00Z",
+            "latestVer": "2.61.3",
+            "release_time": "2025-03-05T14:07:00Z",
             "social":[
                 {
                     "name": "X",

@@ -75,7 +75,7 @@
                     </div>
 {{else}}
     {{#ifEqual chain "ethereum"}}
-{{> clients/config/eth-lighthousevalidator }}
+{{> clients/config/eth-lighthousevalidator isLido=isLido}}
     {{/ifEqual}}
     {{#ifEqual chain "gnosis"}}
 {{> clients/config/gno-lighthousevalidator }}

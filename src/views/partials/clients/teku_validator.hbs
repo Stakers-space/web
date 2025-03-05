@@ -83,7 +83,7 @@
 			</div>
 {{else}}
 {{#ifEqual chain "ethereum"}}
-{{> clients/config/eth-tekuvalidator }}
+{{> clients/config/eth-tekuvalidator isLido=isLido}}
 {{/ifEqual}}
 {{#ifEqual chain "gnosis"}}
 {{> clients/config/gno-tekuvalidator }}

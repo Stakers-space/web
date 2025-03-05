@@ -2,9 +2,9 @@
   "ethereum": {
     "price": "$3,458",
     "apr": {
-      "value": "3.06%",
-      "operator": "3.06%",
-      "delegator": "2.75%"
+      "value": "3.27%",
+      "operator": "3.27%",
+      "delegator": "2.94%"
     },
     "validators": "1,063,380",
     "tvl": "$117.66b",
@@ -19,6 +19,6 @@
     },
     "validators": "328,930",
     "tvl": "$0.00",
-    "stakedRatio": "21.73%"
+    "stakedRatio": "23.29%"
   }
 }

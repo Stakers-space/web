@@ -86,7 +86,7 @@
 			</div>
 {{else}}
 {{#ifEqual chain "ethereum"}}
-{{> clients/config/eth-lodestarvalidator }}
+{{> clients/config/eth-lodestarvalidator isLido=isLido}}
 {{/ifEqual}}
 {{#ifEqual chain "gnosis"}}
 {{> clients/config/gno-lodestarvalidator }}

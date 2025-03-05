@@ -16,6 +16,17 @@ ExecStart=/usr/local/bin/lodestar/lodestar validator \
   --suggestedFeeRecipient <mark class="instance_frw" data-client="lodestar">0xXXXXXXXXXXXXXXXX</mark> \
   # ToDo: Add Beacon API URL
   --force \
+{{#if isLido}}
+  --builder.selection ‘maxprofit’ \
+  --graffiti "Lido CSM | <mark class="ec_name">Nethermind</mark>+Lodestar"
+{{else}}
   --graffiti "<mark class="ec_name">Nethermind</mark>+Lodestar"
+{{/if}}
 [Install]
 WantedBy=multi-user.target</code></pre>
+{{#if isLido}}
+<h4 class="mt-0 mb-0">Notes</h4>
+<ul>
+  <li><strong><code>--<a href="https://chainsafe.github.io/lodestar/run/validator-management/vc-configuration/#configure-your-builder-selection-andor-builder-boost-factor" target="_blank" rel="nofollow noopener noreferrer">builder.selection</a></code> must be set to ‘maxprofit’</strong> for running LIDO CSM validator client.</li>
+</ul>
+{{/if}}

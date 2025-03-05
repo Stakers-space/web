@@ -80,6 +80,8 @@
 							
 							</li>
 						</ul>
+
+						<strong>Official implementation guide:</strong> <a href="https://operatorportal.lido.fi/modules/community-staking-module" target="_blank" rel="nofollow noopener noreferrer">https://operatorportal.lido.fi/modules/community-staking-module</a>
 					</div>
 					<p>Guide in progress.</p>
 
@@ -94,38 +96,54 @@
 					<ol>
 						<li>Installed and synced Execution and Consensus client
 							<p><a href="/ethereum-staking/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a></p>
+							<p>On consensus client, configurate <code>builder-boost-factor</code> (or equivalent flags) to 100%, see:</p>
+							<div class="tabselector">
+								<nav class="egrid egrid-5">
+									<button class="tab selected" data-tabpanel="1" onclick="OnValidatorClientChanged('lighthouse')">Lighthouse</button>
+									<button class="tab" data-tabpanel="2" onclick="OnValidatorClientChanged('lodestar')">Lodestar</button>
+									<button class="tab" data-tabpanel="3" onclick="OnValidatorClientChanged('teku')">Teku</button>
+									<button class="tab" data-tabpanel="4" onclick="OnValidatorClientChanged('nimbus')">Nimbus</button>
+									<button class="tab" data-tabpanel="5" onclick="OnValidatorClientChanged('prysm')">Prysm</button>
+								</nav>
+								<div class="tabpanel selected">
+									<p>No action needed. <code>builder-boost-factor</code> is set in validator configuration only.</p>
+								</div>
+								<div class="tabpanel">
+									<p>No action needed. <code>builder.selection</code> is set in validator configuration only.</p>
+								</div>
+								<div class="tabpanel">
+									Teku <strong>Consensus Client</strong> (action: set to 100), <a href="https://docs.teku.consensys.io/reference/cli#builder-bid-compare-factor" target="_blank" rel="nofollow noopener noreferrer">Source</a>
+									<pre><code>--builder-bid-compare-factor 100</code></pre>
+									<p>*A default builder bid comparison factor of 90 means the builder's payload is chosen when its value is at least 10% greater than what can be built locally. That's why factor <code>100</code> must be set.</p>
+								</div>
+								<div class="tabpanel">
+									<p>For Nimbus, which setting has the priority - depends where the validators live (which component owns the private keys). If they're in the VC, then the VC determines it. if in the BN, then the BN does</p>
+									<p>Nimbus CL (action: set to 0), <a href="https://nimbus.guide/external-block-builder.html" target="_blank" rel="nofollow noopener noreferrer">Source</a>, <a href="https://nimbus.guide/options.html" target="_blank" rel="nofollow noopener noreferrer">Source 2</a></p>
+									<pre><code>--local-block-value-boost 0</code></pre>
+									<p>Default value <code>10</code>. Increase execution layer block values for builder bid comparison by a percentage. Default value of <code>10</code> must be rewritten with <code>0</code>.</p>
+								</div>
+								<div class="tabpanel">
+									<p>Prysm CL (action: set to 0), <a href="https://docs.prylabs.network/docs/prysm-usage/parameters#client-stats-flags" target="_blank" rel="nofollow noopener noreferrer">Source</a></p>
+									<pre><code>--local-block-value-boost 0</code></pre>
+									<p>Use builder block if: <code>builder_bid_value * 100 &gt; local_block_value * (local-block-value-boost + 100)</code>. Default value: <code>10</code> must be overwritten with <code>0</code>.</p>
+								</div>
+							</div>
+							<p>* Validator clients configurations must be added after validator client definition made in the next step.</p>
 						</li>
-						<li>Installed Mev-boost client with <code>-min-bid</code> set maximally to <code>0.07</code>
+						<li>Installed Mev-boost client with <code>-min-bid</code> set maximally to <code>0.07</code> and set list of LIDO Vetted MEV-Boost Relayes
 							<p><a href="/mev-boost" class="btn btn-black btn-rounded">Mev-boost client installation guide</a></p>
+							<p><a href="https://enchanted-direction-844.notion.site/6d369eb33f664487800b0dedfe32171e?v=8e5d1f1276b0493caea8a2aa1517ed65" target="_blank" rel="nofollown noopener noreferrer">list of LIDO Vetted MEV-Boost Relayes</a></p>
+						</li>
+						<li>Generated validator keys with withdrawal wallet set to <code><a href="https://etherscan.io/address/0xb9d7934878b5fb9610b3fe8a5e441e8fad7e293f" target="_blank" rel="nofollow noopener noreferrer">0xB9D7934878B5FB9610B3fE8A5e441e8fad7E293f</a></code>
+							<p><a href="/ethereum-staking/keystores" class="btn btn-black btn-rounded">Keys generation guide</a></p>
 						</li>
 					</ol>
 				</div>
             </section>
 
-			<section class="chapter" id="validation-keys">
-				<div class="content">
-					<mark>The Guide is under construction. Do not use!!!</mark>
-					<h2>Validator keys generation</h2>
-					<p>Prepare validation keys that meet following criteria:</p>
-
-
-
-					<a href="/ethereum-staking/keystores" class="btn btn-black btn-rounded">Keys generation guide</a>
-						
-				</div>
-			</section>
-
-
-
 			<section class="chapter" id="validator">
 				<div class="content">
 					<mark>The Guide is under construction. Do not use!!!</mark>
-					<ol>
-						<li><h2>Validator keys generation</h2></li>
-						
-					</ol>
-
-
 					<h2>Validator client configuration for Lido</h2>
 					<ul>
 						<li>Be sure <code>Builder-boost-factor</code> is set to <code>100%</code></li>
@@ -140,34 +158,40 @@
 							<button class="tab" data-tabpanel="5" onclick="OnValidatorClientChanged('prysm')">Prysm</button>
 						</nav>
 						<div class="tabpanel selected">
-{{> clients/lighthouse_validator AddValidator=true}}
+{{> clients/lighthouse_validator AddValidator=true isLido=true}}
 <p>Guide to exit validator is available at <a href="https://stakers.space/lighthouse/exit-validator">https://stakers.space/lighthouse/exit-validator</a>.</p>
 						</div>
 						<div class="tabpanel">
-{{> clients/lodestar_validator AddValidator=true}}
+{{> clients/lodestar_validator AddValidator=true isLido=true}}
 <p>Guide to exit validator is available at <a href="https://stakers.space/lodestar/exit-validator">https://stakers.space/lodestar/exit-validator</a>.</p>
 						</div>
 						<div class="tabpanel">
-{{> clients/teku_validator AddValidator=true}}
+{{> clients/teku_validator AddValidator=true isLido=true}}
 <p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/teku/exit-validator</a>.</p>
 						</div>
 						<div class="tabpanel">
-{{> clients/nimbus_validator AddValidator=true}}
+{{> clients/nimbus_validator AddValidator=true isLido=true}}
 <p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/nimbus/exit-validator</a>.</p>
 						</div>
 						<div class="tabpanel">
-{{> clients/prysm_validator AddValidator=true}}
+{{> clients/prysm_validator AddValidator=true isLido=true}}
 <p>Guide to exit validator is available at <a href="https://stakers.space/teku/exit-validator">https://stakers.space/prysm/exit-validator</a>.</p>
 						</div>
 					</div>
 				</div>
 			</section>
 
-
 			<section class="chapter" id="fund">
 				<div class="content" style="width:100%;padding-top:10px">
 					<mark>The Guide is under construction. Do not use!!!</mark>
-					Fund
+					<h2>Fund the validators</h2>
+					<ul>
+						<li>Go to the <a href="https://csm.lido.fi/" target="_blank" rel="nofollow noopener noreferrer">Lido CSM Widget</a> and connect your wallet.</li>
+						<li>MAKE SURE THAT YOU ARE ON THE CORRECT NETWORK.</li>
+						<li>Select <code>Become a Node Operator</code> and then <code>Create a Node Operator</code></li>
+						<li>On the Lido CSM Widget, upload your <code>deposit data file</code> and select the corresponding bond type (ETH, stETH, wstETH), and provide the desired bond amount</li>
+					</ul>
+					<p>Wait for your CSM validator keys to be deposited by Lido and make sure your node remains online in the meantime!</p>
 				</div>
 			</section>
 
@@ -178,9 +202,19 @@
 					<a href="/{{chainUrl}}/maintenance" class="btn btn-black btn-rounded">Guides for regular maintenance</a>
 				</div>
 			</section>
-
+			<aside>
+				<section class="chapter mt-60" id="alternatives">
+					<div class="content bt">
+						<h3>Alternative LIDO guides</h3>
+						<ul>
+							<li><a href="https://operatorportal.lido.fi/csm-getting-started" target="_blank" rel="nofollow noopener noreferrer">Official Lido Guide</a></li>
+							<li><a href="https://dvt-homestaker.stakesaurus.com/bonded-validators-setup/lido-csm" target="_blank" rel="nofollow noopener noreferrer">DVT Home Staker Lido CSM Guide</a></li>
+						</ul>
+					</div>
+				</section>
+			</aside>
+			
         </div>
-		
     </div>
 </main>
 {{> footer}}
