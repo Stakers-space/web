@@ -4,9 +4,9 @@
             "name": "Nethermind",
             "link": "https://nethermind.io/",
             "github": "https://github.com/NethermindEth/nethermind",
-            "latestVer": "1.31.4-294a2029",
-            "latestVerClean":"1.31.4",
-            "release_time": "2025-03-05T13:42:00Z",
+            "latestVer": "1.31.6-4e68f8ee",
+            "latestVerClean":"1.31.6",
+            "release_time": "2025-03-19T16:19:00Z",
             "social":[
                 {
                 "name": "Discord",
@@ -49,8 +49,8 @@
             "name": "Erigon",
             "link": "https://github.com/ledgerwatch/erigon",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "2.61.3",
-            "release_time": "2025-03-05T14:07:00Z",
+            "latestVer": "3.0.0",
+            "release_time": "2025-03-24T10:11:00Z",
             "social":[
                 {
                     "name": "X",
@@ -256,10 +256,10 @@
             "name": "Lodestar",
             "link": "https://lodestar.chainsafe.io/",
             "github": "https://github.com/chainsafe/lodestar",
-            "latestVer": "1.27.1",
+            "latestVer": "1.28.1",
             "nodejsVer": "20.11.0",
             "nvmVer": "0.40.1",
-            "release_time": "2025-02-24T17:43:00Z",
+            "release_time": "2025-03-20T20:09:00Z",
             "prerequisity": "NodeJS v20+",
             "social":[
                 {
@@ -298,9 +298,9 @@
             "name": "Teku",
             "link": "https://docs.teku.consensys.net/",
             "github": "https://github.com/ConsenSys/teku",
-            "latestVer": "25.2.0",
+            "latestVer": "25.3.0",
             "jdkVer": "23",
-            "release_time": "2025-02-12T02:34:00Z",
+            "release_time": "2025-03-20T22:13:00Z",
             "prerequisity": "jdk v21+",
             "social":[
                 {
@@ -339,8 +339,8 @@
             "name": "Prysm",
             "link": "https://prysmaticlabs.com/",
             "github": "https://github.com/prysmaticlabs/prysm",
-            "latestVer": "5.3.0",
-            "release_time": "2025-02-12T19:53:00Z",
+            "latestVer": "5.3.1",
+            "release_time": "2025-03-13T22:45:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -413,6 +413,39 @@
             },
             "system-requirements": "https://nimbus.guide/hardware.html",
             "ilink":"nimbus"
+        },
+        "caplin": {
+            "name": "Caplin",
+            "link": "https://erigon.tech/",
+            "github": "https://github.com/ledgerwatch/erigon",
+            "latestVer": "3.0.0",
+            "release_time": "2025-03-24T10:11:00Z",
+            "social":[
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://twitter.com/erigoneth"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": true,
+                    "share": null,
+                    "link": "https://docs.gnosischain.com/node/manual/execution/erigon"
+                }
+            },
+            "language": "Go",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "system-requirements": "https://github.com/ledgerwatch/erigon#system-requirements",
+            "ilink":"#"
         }
     },
     "mevLayer":{

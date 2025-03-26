@@ -11,6 +11,9 @@ function NewsPagePresenter(){
 NewsPagePresenter.prototype.Request = function(req, res, next){
 	res.locals.title = `${res.locals.chainName} staking news`;
     res.locals.metaDescription = `News from ${res.locals.chainName} staking world`;
+	res.locals.page_hbs = "newsPage";
+	res.locals.layout_hbs = "standard";
+	res.locals.css_file = "hp";
 
 	//console.log("FundamentalsPagePresenter.Request");
 	//console.log(res.locals.chain, app.dataFile);

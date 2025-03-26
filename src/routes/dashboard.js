@@ -24,11 +24,18 @@ router.use(passport.session());
 router.use(bodyParser.urlencoded({ limit: '15mb', extended: true }));
 router.use(bodyParser.json( {limit: '15mb'} ));
 router.use(cookieParser());
+
+router.use('/authentization', require('./authentization'));
+
 /**
  * Routes
  */
 class DashboardRouter {
     constructor(){
+        /** Authentization */
+
+
+
         router.get('/', this.DashboardBtn, Controller.Dashboard, this.Render);
         
         // Server-related
@@ -72,7 +79,7 @@ class DashboardRouter {
     }
 
     Auth(req,res,next){
-        if(!req.isAuthenticated()) return res.redirect("/authentization");
+        if(!req.isAuthenticated()) return res.redirect("/dashboard/authentization");
         res.locals.isDemoAccount = (Number(req.user.id) === 4);
         next();
     };

@@ -3,7 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-		<meta name="robots" content="index, follow">
+		
+		<meta name="robots" content="{{#if noIndex}}noindex, nofollow{{else}}index, follow{{/if}}">
+		
 		<title>{{ title }}</title>
 		<meta name="description" property="og:description" content="{{ metaDescription }}">
 		<link rel="canonical" href="{{ canonicalUrl }}">

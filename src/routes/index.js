@@ -8,7 +8,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
 const passportConf = require('../config/config.secret.json').passport;
-router.use(['/authentization','/dashboard','/api/account'],
+router.use([/*'/authentization',*/'/dashboard','/api/account'],
 	session({
 		secret: passportConf.sessionSecret,
 		resave: false,
@@ -25,7 +25,7 @@ router.use('/ethereum-staking', require('./ethereum'));
 router.use('/gnosis-staking', require('./gnosis'));
 router.use('/api', require('./api'));
 router.use('/test', require('./test'));
-router.use('/authentization', require('./authentization'));
+//router.use('/authentization', require('./authentization')); // moved to dashboard
 router.use('/dashboard', require('./dashboard'));
 router.use('/charts', require('./charts'));
 router.use('/account', require('./account'));
@@ -159,6 +159,15 @@ router.use('/tools', function(req,res,next){
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Tools | Stakers.space`;
     res.locals.metaDescription = null;
+    next();
+}, Response);
+
+router.use('/knowledge-sources', function(req,res,next){
+    res.locals.page_hbs = 'knowledge-sources';
+    res.locals.layout_hbs = 'amp';
+    res.locals.title = `Other Knowledge Sources | Stakers.space`;
+    res.locals.metaDescription = null;
+    res.locals.noIndex = true;
     next();
 }, Response);
 

@@ -6,7 +6,7 @@ exports.AccountRegistration = function(emailAddress, token){
 		subject: "",
 		message: ""
 	};
-	var link = 'https://stakersspace.azurewebsites.net/authentization/set-password?e='+emailAddress+'&vh='+token;
+	var link = 'https://stakers.space/dashboard/authentization/set-password?e='+emailAddress+'&vh='+token;
         email.subject = "Password for Stakers.space account";
         email.message = 'Hello,\n\nthank you for joining Stakers.space dashboard. You can set password for your account associated with email '+emailAddress+' by clicking on the following unique link: "'+link+'".\n';
 		email.message += 'In a case of any problem, the whole link can be copied and opened in any web browser.\n\n';
@@ -20,7 +20,7 @@ exports.Resetpassword = function(emailAddress, token){
 		subject: "",
 		message: ""
 	};
-	var link = 'https://stakersspace.azurewebsites.net/authentization/set-password?e='+emailAddress+'&vh='+token;
+	var link = 'https://stakers.space/dashboard/authentization/set-password?e='+emailAddress+'&vh='+token;
 		email.subject = "Reset Password";
 		email.message = 'Hello,\n\nA password reset request for Stakers.space account has been sent to your '+emailAddress+' email address. You can set a new password by clicking on the following unique link: "'+link+'".\n';
 		email.message += 'In a case of problems, the link with the password setting page can be copied and opened in any web browser.\n\n';

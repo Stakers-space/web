@@ -84,11 +84,11 @@ AuthentizationController.prototype.LoginPage = function(req,res,next){
 	} else {
 		var url = req.originalUrl;
 
-		if(url.indexOf("fail=true") > -1) res.failureCallback = 'Incorrect email or password. Try it again, please, alternatively you can <a href="/authentization/reset-password">reset your password</a>.';
+		if(url.indexOf("fail=true") > -1) res.failureCallback = 'Incorrect email or password. Try it again, please, alternatively you can <a href="/dashboard/authentization/reset-password">reset your password</a>.';
 		//res.setHeader("Access-Control-Allow-Origin", "stakers.space");
 		Object.assign(res.locals, {
 			template: "authentization/signin",
-			actionUrl: "/authentization/login?r="+req.query.r,
+			actionUrl: "/dashboard/authentization/login?r="+req.query.r,
 			loginPage: true,
 			formTitle: "Sign In",
 			titletxt:{
@@ -103,7 +103,7 @@ AuthentizationController.prototype.LoginPage = function(req,res,next){
 			linktxt:{
 				login: "Sign in",
 				psw: "Forgotten password",
-				link: "/authentization/reset-password"
+				link: "/dashboard/authentization/reset-password"
 			}
 		});
 		res.locals.titletxt.default = res.locals.titletxt.login;
@@ -127,8 +127,8 @@ AuthentizationController.prototype.ResetPasswordPage = function(req,res,next){
 
 	Object.assign(res.locals, {
 		template: "authentization/signin",
-		actionUrl: "/authentization/reset-password",
-		alternateUrl: "/authentization/reset-password",
+		actionUrl: "/dashboard/authentization/reset-password",
+		alternateUrl: "/dashboard/authentization/reset-password",
 		passwordPage: true,
 		formTitle: "Reset password",
 		titletxt:{
@@ -143,7 +143,7 @@ AuthentizationController.prototype.ResetPasswordPage = function(req,res,next){
 		linktxt:{
 			login: "Sign in",
 			psw: "Forgotten password",
-			link: "/authentization"
+			link: "/dashboard/authentization"
 		}
 	});
 	res.locals.titletxt.default = res.locals.titletxt.psw;
@@ -184,14 +184,14 @@ AuthentizationController.prototype.IsValidEmail = function(email){
 AuthentizationController.prototype.ResetPassword = function(req,res){
     const email = req.body.username;
     console.log("Reset password for account:", email);
-    if(!app.IsValidEmail(email)) return res.redirect("/authentization/reset-password?fail=true");
+    if(!app.IsValidEmail(email)) return res.redirect("/dashboard/authentization/reset-password?fail=true");
     
     var token = app.CreateHash(email);
     mysqlSrv.UpdatePasswordResetToken(email, token, function(err,rows){
-        if(err) return res.redirect("/authentization/reset-password?fail=true");
+        if(err) return res.redirect("/dashboard/authentization/reset-password?fail=true");
         
         if(rows.affectedRows === 0){ // no account
-            return res.redirect("/authentization/reset-password?fail=true");
+            return res.redirect("/dashboard/authentization/reset-password?fail=true");
         } else {
             var emailCnt = MailMessage.Resetpassword(email, token);
 			console.log(email, emailCnt);
@@ -199,7 +199,7 @@ AuthentizationController.prototype.ResetPassword = function(req,res){
 				console.log(err,resp);
 			})
 
-			return res.redirect("/authentization/reset-password?success=true");
+			return res.redirect("/dashboard/authentization/reset-password?success=true");
         }
 	});
 };
@@ -212,15 +212,15 @@ AuthentizationController.prototype.ResetPassword = function(req,res){
  */
 AuthentizationController.prototype.NewAccount = function(req,res){
     const email = req.body.username;
-    if(!app.IsValidEmail(email)) return res.redirect("/authentization/new-account?fail=emailvalidation");
+    if(!app.IsValidEmail(email)) return res.redirect("/dashboard/authentization/new-account?fail=emailvalidation");
     // add email to DB
     var token = app.CreateHash(email);
     mysqlSrv.AddUserAccount(email, token, function(err,rows){
         console.log("Authentization | Adding User Account to DB | err:", err,"email:", email,"token:", token,"rows:", rows);
-        if(err) return res.redirect("/authentization/reset-password?fail=true");
+        if(err) return res.redirect("/dashboard/authentization/reset-password?fail=true");
         
         if(rows.affectedRows === 0){ // no account
-            return res.redirect("/authentization/new-account?fail=existingemail");
+            return res.redirect("/dashboard/authentization/new-account?fail=existingemail");
         } else {
             var emailCnt = MailMessage.AccountRegistration(email, token);
 			//console.log(email, emailCnt);
@@ -230,8 +230,8 @@ AuthentizationController.prototype.NewAccount = function(req,res){
 
 			MailService.SendMail("notification@stakers.space", email, emailCnt.subject, emailCnt.message, function(err,resp){
 				console.log("Send email notif:", err,resp);
-				if(err) return res.redirect("/authentization/new-account?success=false");
-				return res.redirect("/authentization/new-account?success=true&email="+email);
+				if(err) return res.redirect("/dashboard/authentization/new-account?success=false");
+				return res.redirect("/dashboard/authentization/new-account?success=true&email="+email);
 			});
 
         }
@@ -258,7 +258,7 @@ AuthentizationController.prototype.SetPasswordPage = function(req,res,next){
 	
 	Object.assign(res.locals, {
 		template: "authentization/setpassword",
-		actionUrl: "/authentization/set-password",
+		actionUrl: "/dashboard/authentization/set-password",
 		titletxt: {},
 		btntxt: {},
 		notValidMsg: "Entered passwords do not match",
@@ -278,14 +278,14 @@ AuthentizationController.prototype.SignUpEmailPage = function(req,res,next){
 	} else if(pageUrl.indexOf("fail=emailvalidation") > -1) {
 		res.failureCallback = "Filled email is not valid.";
 	} else if(pageUrl.indexOf("fail=existingemail") > -1){
-		res.failureCallback = 'Account with specified email already exists. Please, use <a href="/authentization/reset-password">Forgottent password option</a> instead.';
+		res.failureCallback = 'Account with specified email already exists. Please, use <a href="/dashboard/authentization/reset-password">Forgottent password option</a> instead.';
 	} else if(pageUrl.indexOf("fail=true") > -1) {
 		res.failureCallback = 'Ops, something went wrong';
 	}
 	
 	Object.assign(res.locals, {
 		template: "authentization/signup",
-		actionUrl: "/authentization/new-account",
+		actionUrl: "/dashboard/authentization/new-account",
 		accountPage: true,
 		titletxt:{
 			login: "Sign Up",
@@ -299,7 +299,7 @@ AuthentizationController.prototype.SignUpEmailPage = function(req,res,next){
 		linktxt:{
 			login: "Sign in",
 			psw: "Forgotten password",
-			link: "/authentization"
+			link: "/dashboard/authentization"
 		}
 	});
 	res.locals.titletxt.default = res.locals.titletxt.acc;
@@ -373,14 +373,14 @@ AuthentizationController.prototype.SetPassword = function(req,res,next){
 AuthentizationController.prototype.LogUser = function (req, res, next) {
 	//passport.authenticate('local', {
 	//	successRedirect: '/dashboard',
-	//	failureRedirect: '/authentization?fail=true',
+	//	failureRedirect: '/dashboard/authentization?fail=true',
 	//	failureMessage: true
 	//}/*, function(err, user, info, status){
 	//	console.log(err,user);
 	//}*/);
 	passport.authenticate('local', function (err, user, info) {
 		if (err) { return next(err); }
-		if (!user) { return res.redirect('/authentization?fail=true'); }
+		if (!user) { return res.redirect('/dashboard/authentization?fail=true'); }
 		
 		req.logIn(user, function (err) {
 		  if (err) { return next(err); }
@@ -395,7 +395,7 @@ AuthentizationController.prototype.LogOut = function(req,res){
 	//if(req.isAuthenticated()){
 		req.logout(function(err) {
 			if (err) { return next(err); }
-			res.redirect('/authentization');
+			res.redirect('/dashboard/authentization');
 		});
 	//} else {
 	//	res.redirect('/login');
@@ -403,9 +403,9 @@ AuthentizationController.prototype.LogOut = function(req,res){
 };
 
 AuthentizationController.prototype.Render = function(req,res){
-	res.locals.loginUrl = "/authentization/login";
-	res.locals.newPswUrl = "/authentization/reset-password";
-	res.locals.newAccUrl = "/authentization/new-account";
+	res.locals.loginUrl = "/dashboard/authentization/login";
+	res.locals.newPswUrl = "/dashboard/authentization/reset-password";
+	res.locals.newAccUrl = "/dashboard/authentization/new-account";
 	res.locals.lang = "en";
 
 	//console.log("session:", req.session);

@@ -23,7 +23,7 @@
                 </p>
                 {{else}}
                 <div class="mt-20">
-                    <form method="post" action="/authentization/login"  data-login="/authentization/login" data-forgotpsw="/authentization/reset-password">
+                    <form method="post" action="/dashboard/authentization/login"  data-login="/dashboard/authentization/login" data-forgotpsw="/dashboard/authentization/reset-password">
                         <div id="email" class="login-item">
                             <input type="text" id="email" name="username" required="required">
                             <label for="email">Email address</label>
@@ -61,7 +61,7 @@
                 {{/if}}
                 </div>
             </div>
-            <p class="signup text-center">New to Stakers.space? <span class="btns"><a class="btn btn-black btn-rounded" href="/authentization/new-account">Sign Up</a> <a class="btn" href="/authentization/demo">Demo account</a></span></p>
+            <p class="signup text-center">New to Stakers.space? <span class="btns"><a class="btn btn-black btn-rounded" href="/dashboard/authentization/new-account">Sign Up</a> <a class="btn" href="/dashboard/authentization/demo">Demo account</a></span></p>
         </div>
     </section>
     {{> footer}}
