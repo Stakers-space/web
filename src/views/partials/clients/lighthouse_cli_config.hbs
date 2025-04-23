@@ -7,7 +7,7 @@
             <li class="mt-15">
                 <strong>Create a directory for data</strong>
                 <label>Service data directory</label>: <input type="text" value="/var/lib{{slashChain}}/lighthouse/beacon" class="interactive-element consensus-dp" data-class="consensus-dp" data-client="lighthouse">
-<pre><code>$ sudo mkdir -p /var/lib{{slashChain}}/lighthouse/beacon</code></pre>
+<pre><code>$ sudo mkdir -p <mark class="consensus-dp">/var/lib{{slashChain}}/lighthouse/beacon</mark></code></pre>
             </li>
             <li><strong>Set permission for accessing the directory</strong>
 <pre><code>$ sudo chown -R <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>:<mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark> <mark class="consensus-dp" data-client="lighthouse">/var/lib{{slashChain}}/lighthouse/beacon</mark></code></pre>
