@@ -21,7 +21,10 @@ ExecStart=/usr/local/bin/nethermind/nethermind \
   --Network.P2PPort <mark class="execution-p2p">30303</mark> \
   --Network.DiscoveryPort <mark class="execution-p2p">30303</mark> \
   --JsonRpc.EnginePort <mark class="execution-endpoint">8551</mark> \
-  --JsonRpc.Port <mark class="execution-rpc">8545</mark>
+  --JsonRpc.Port <mark class="execution-rpc">8545</mark> \
+  --Pruning.Mode Hybrid \
+  --Pruning.FullPruningTrigger VolumeFreeSpace \
+  --Pruning.FullPruningThresholdMb 512000
 
 [Install]
 WantedBy=default.target</code></pre>

@@ -117,6 +117,7 @@ class ClientPagePresenter {
 				res.locals.cliLayer = "consensus";
 				break;
 			case 'mev-boost':
+				res.locals.client = "mev-boost";
 				res.locals.clientName = "Mev-boost";
 				res.locals.cliPartial = "clients/mevboost";
 				res.locals.cliLayer = "mev";
@@ -175,7 +176,9 @@ class ClientPagePresenter {
 							res.locals.cliData = clients.consensusLayer[client];
 							break;
 						case 'mev':
-							//if(client === "mev-boost") ...
+							if(client === "mev-boost") {
+								res.locals.cliData = clients.mevLayer["mevboost"];
+							}
 							break;
 						case 'service':
 
