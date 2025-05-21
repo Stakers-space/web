@@ -4,9 +4,9 @@
             "name": "Nethermind",
             "link": "https://nethermind.io/",
             "github": "https://github.com/NethermindEth/nethermind",
-            "latestVer": "1.31.9-98c5dca4",
-            "latestVerClean":"1.31.9",
-            "release_time": "2025-04-22T10:43:00Z",
+            "latestVer": "1.31.10-f62cfede",
+            "latestVerClean":"1.31.10",
+            "release_time": "2025-05-08T02:02:00Z",
             "social":[
                 {
                 "name": "Discord",
@@ -49,8 +49,8 @@
             "name": "Erigon",
             "link": "https://github.com/ledgerwatch/erigon",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "3.0.2",
-            "release_time": "2025-04-18T13:52:00Z",
+            "latestVer": "3.0.3",
+            "release_time": "2025-05-05T12:02:00Z",
             "social":[
                 {
                     "name": "X",
@@ -82,8 +82,8 @@
             "name": "Geth",
             "link": "https://geth.ethereum.org/",
             "github": "https://github.com/ethereum/go-ethereum",
-            "latestVer": "1.15.9",
-            "release_time": "2025-04-21T14:56:00Z",
+            "latestVer": "1.15.10",
+            "release_time": "2025-04-25T13:27:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -189,8 +189,8 @@
             "name": "EthereumJS",
             "link": "https://github.com/ethereumjs/ethereumjs-monorepo",
             "github": "https://github.com/ethereumjs/ethereumjs-monorepo",
-            "latestVer": "0.10.4",
-            "release_time": "2025-03-24T14:21:00Z",
+            "latestVer": "10.0.0",
+            "release_time": "2025-04-29T10:31:00Z",
             "social":[],
             "chain":{
                 "ethereum":{
@@ -217,8 +217,8 @@
             "name": "Lighthouse",
             "link": "https://lighthouse.sigmaprime.io/",
             "github": "https://github.com/sigp/lighthouse",
-            "latestVer": "7.0.0",
-            "release_time": "2025-04-22T04:13:00Z",
+            "latestVer": "7.0.1",
+            "release_time": "2025-04-30T09:25:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -256,10 +256,10 @@
             "name": "Lodestar",
             "link": "https://lodestar.chainsafe.io/",
             "github": "https://github.com/chainsafe/lodestar",
-            "latestVer": "1.29.0",
+            "latestVer": "1.30.0",
             "nodejsVer": "20.11.0",
             "nvmVer": "0.40.1",
-            "release_time": "2025-04-21T16:22:00Z",
+            "release_time": "2025-05-15T17:49:00Z",
             "prerequisity": "NodeJS v20+",
             "social":[
                 {
@@ -339,8 +339,8 @@
             "name": "Prysm",
             "link": "https://prysmaticlabs.com/",
             "github": "https://github.com/prysmaticlabs/prysm",
-            "latestVer": "6.0.0",
-            "release_time": "2025-04-21T23:17:00Z",
+            "latestVer": "6.0.2",
+            "release_time": "2025-05-12T21:13:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -378,9 +378,9 @@
             "name": "Nimbus",
             "link": "https://nimbus.team/",
             "github": "https://github.com/status-im/nimbus-eth2",
-            "latestVer": "25.2.0_c6688004",
-            "latestVerClean":"25.2.0",
-            "release_time": "2025-02-13T14:42:00Z",
+            "latestVer": "25.4.1_77cfa783",
+            "latestVerClean":"25.4.1",
+            "release_time": "2025-04-26T05:48:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -418,7 +418,7 @@
             "name": "Caplin",
             "link": "https://erigon.tech/",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "3.0.0",
+            "latestVer": "3.0.2",
             "release_time": "2025-03-24T10:11:00Z",
             "social":[
                 {
@@ -481,8 +481,8 @@
             "name": "RocketPool",
             "link": "https://rocketpool.net/",
             "github": "https://github.com/rocket-pool/smartnode-install/releases",
-            "latestVer": "1.15.4",
-            "release_time": "2025-03-26T15:42:00Z",
+            "latestVer": "1.15.6",
+            "release_time": "2025-04-30T19:11:00Z",
             "social":[
                 {
                     "name": "Discord",

@@ -2,6 +2,42 @@
   "all": [
     {
       "partitionKey": "news",
+      "t": 1745916670062,
+      "m": "Pectra Fork on May 7th, 2025, 10:05:11am UTC (epoch epoch 364032)",
+      "a": "https://x.com/StakersSpace/status/1913222933830304062",
+      "c": [
+        "eth"
+      ],
+      "id": "6c878dcc-d7b5-4eb9-883a-c41f69396701",
+      "_rid": "VPZWAPgLfuluLAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfuluLAAAAAAAAA==/",
+      "_etag": "\"1e0016e4-0000-1600-0000-681093150000\"",
+      "_attachments": "attachments/",
+      "_ts": 1745916693,
+      "ht": "29.04.2025, 10:51:10",
+      "ta": "22 days ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
+      "t": 1745916623836,
+      "m": "Pectra Fork on April 30th, 2025, 14:03:40 UTC (epoch 1337856)",
+      "a": "https://x.com/StakersSpace/status/1913222933830304062",
+      "c": [
+        "gno"
+      ],
+      "id": "01299124-5340-458a-ac26-b267e871ca90",
+      "_rid": "VPZWAPgLfultLAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfultLAAAAAAAAA==/",
+      "_etag": "\"1e0021e3-0000-1600-0000-681092fd0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1745916669,
+      "ht": "29.04.2025, 10:50:23",
+      "ta": "22 days ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
       "t": 1737456574750,
       "m": "Ethereum L2s are about to hit a brick wall. 55% of all blob space is already consumed by just 2 chains.",
       "a": "https://x.com/gauthamzzz/status/1880342051721736267",
@@ -15,7 +51,7 @@
       "_attachments": "attachments/",
       "_ts": 1737456664,
       "ht": "21.01.2025, 11:49:34",
-      "ta": "3 months ago",
+      "ta": "4 months ago",
       "img": "ethereum"
     },
     {
@@ -35,7 +71,7 @@
       "_attachments": "attachments/",
       "_ts": 1736621990,
       "ht": "11.01.2025, 19:59:18",
-      "ta": "3 months ago",
+      "ta": "4 months ago",
       "img": "gnosis"
     },
     {
@@ -74,7 +110,7 @@
       "_attachments": "attachments/",
       "_ts": 1732705502,
       "ht": "27.11.2024, 12:03:36",
-      "ta": "5 months ago",
+      "ta": "6 months ago",
       "img": "gnosis"
     },
     {
@@ -114,7 +150,7 @@
       "_attachments": "attachments/",
       "_ts": 1731317088,
       "ht": "30.10.2024, 09:04:12",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "gnosis"
     },
     {
@@ -133,7 +169,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275158,
       "ht": "30.10.2024, 08:58:31",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -152,7 +188,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275244,
       "ht": "30.10.2024, 08:58:00",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -171,7 +207,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275080,
       "ht": "30.10.2024, 08:57:04",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -190,7 +226,7 @@
       "_attachments": "attachments/",
       "_ts": 1729852522,
       "ht": "25.10.2024, 05:36:58",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -209,7 +245,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275271,
       "ht": "21.10.2024, 19:02:16",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -228,7 +264,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275289,
       "ht": "17.10.2024, 12:01:00",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -247,7 +283,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275305,
       "ht": "17.10.2024, 12:00:20",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -286,7 +322,7 @@
       "_attachments": "attachments/",
       "_ts": 1729852497,
       "ht": "29.08.2024, 11:07:18",
-      "ta": "8 months ago",
+      "ta": "9 months ago",
       "img": "ethereum"
     }
   ],
@@ -308,7 +344,7 @@
       "_attachments": "attachments/",
       "_ts": 1736621990,
       "ht": "11.01.2025, 19:59:18",
-      "ta": "3 months ago",
+      "ta": "4 months ago",
       "img": "gnosis"
     },
     {
@@ -327,7 +363,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275158,
       "ht": "30.10.2024, 08:58:31",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -346,7 +382,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275244,
       "ht": "30.10.2024, 08:58:00",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -365,7 +401,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275080,
       "ht": "30.10.2024, 08:57:04",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -384,7 +420,7 @@
       "_attachments": "attachments/",
       "_ts": 1729852522,
       "ht": "25.10.2024, 05:36:58",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -403,7 +439,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275271,
       "ht": "21.10.2024, 19:02:16",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -422,7 +458,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275289,
       "ht": "17.10.2024, 12:01:00",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     },
     {
@@ -441,7 +477,7 @@
       "_attachments": "attachments/",
       "_ts": 1730275305,
       "ht": "17.10.2024, 12:00:20",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "ethereum"
     }
   ],
@@ -503,7 +539,7 @@
       "_attachments": "attachments/",
       "_ts": 1731317088,
       "ht": "30.10.2024, 09:04:12",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "gnosis"
     },
     {
@@ -542,7 +578,7 @@
       "_attachments": "attachments/",
       "_ts": 1729852497,
       "ht": "29.08.2024, 11:07:18",
-      "ta": "8 months ago",
+      "ta": "9 months ago",
       "img": "ethereum"
     }
   ]

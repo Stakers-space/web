@@ -38,6 +38,7 @@ class EthereumRouter {
         router.get('/emergency', Chain.Ethereum, this.GuidePage.Emergency, this.Response);
         router.get('/validator-queue', Chain.Ethereum, this.ValidatorQueue.Page, this.Response);
 
+        router.get('/validator-actions', Chain.Ethereum, this.GuidePage.ValidatorActions, this.Response);
         router.get('/staking-hardware', Chain.Ethereum, this.GuidePage.Hardware, this.Response);
         router.get('/full-guide', Chain.Ethereum, this.GuidePage.Base, this.Response); // gudide - run execution and consensus layer clients
         router.get('/full-guide/solo', Chain.Ethereum, this.GuidePage.Solo, this.Response);

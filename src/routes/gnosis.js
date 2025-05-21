@@ -35,6 +35,7 @@ class GnosisRouter {
         router.get('/keystores', Chain.Gnosis, this.chainController.Keystores, this.Response);
         router.get('/maintenance', Chain.Gnosis, this.GuidePage.Maintenance, this.Response);
         router.get('/emergency', Chain.Gnosis, this.GuidePage.Emergency, this.Response);
+        router.get('/validator-actions', Chain.Gnosis, this.GuidePage.ValidatorActions, this.Response);
 
         router.get('/staking-hardware', Chain.Gnosis, this.GuidePage.Hardware, this.Response);
         router.get('/full-guide', Chain.Gnosis, this.GuidePage.Base, this.Response); // gudide - run execution and consensus layer clients

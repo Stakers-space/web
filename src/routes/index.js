@@ -65,6 +65,30 @@ router.use('/about', function(req,res,next){
     next();
 }, Response);
 
+router.use('/privacy-policy', function(req,res,next){
+    res.locals.page_hbs = 'pages/privacy-policy';
+    res.locals.layout_hbs = 'amp';
+    res.locals.title = `Privacy Policy | Stakers.space`;
+    res.locals.metaDescription = null;
+    next();
+}, Response);
+
+router.use('/terms-and-conditions', function(req,res,next){
+    res.locals.page_hbs = 'pages/terms-conditions';
+    res.locals.layout_hbs = 'amp';
+    res.locals.title = `Terms & Conditions | Stakers.space`;
+    res.locals.metaDescription = null;
+    next();
+}, Response);
+
+router.use('/disclaimer', function(req,res,next){
+    res.locals.page_hbs = 'pages/disclaimer';
+    res.locals.layout_hbs = 'amp';
+    res.locals.title = `Disclaimer | Stakers.space`;
+    res.locals.metaDescription = null;
+    next();
+}, Response);
+
 router.use('/chains', function(req,res,next){
     res.locals.page_hbs = 'chains';
     res.locals.layout_hbs = 'amp';

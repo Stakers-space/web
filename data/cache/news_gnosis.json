@@ -2,6 +2,24 @@
   "all": [
     {
       "partitionKey": "news",
+      "t": 1745916623836,
+      "m": "Pectra Fork on April 30th, 2025, 14:03:40 UTC (epoch 1337856)",
+      "a": "https://x.com/StakersSpace/status/1913222933830304062",
+      "c": [
+        "gno"
+      ],
+      "id": "01299124-5340-458a-ac26-b267e871ca90",
+      "_rid": "VPZWAPgLfultLAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfultLAAAAAAAAA==/",
+      "_etag": "\"1e0021e3-0000-1600-0000-681092fd0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1745916669,
+      "ht": "29.04.2025, 10:50:23",
+      "ta": "22 days ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
       "t": 1736621958394,
       "m": "Ethereum's randomness is more biasable than previously thought.",
       "a": "https://x.com/istvan_a_seres/status/1877648087277047931",
@@ -17,7 +35,7 @@
       "_attachments": "attachments/",
       "_ts": 1736621990,
       "ht": "11.01.2025, 19:59:18",
-      "ta": "3 months ago",
+      "ta": "4 months ago",
       "img": "gnosis"
     },
     {
@@ -56,7 +74,7 @@
       "_attachments": "attachments/",
       "_ts": 1732705502,
       "ht": "27.11.2024, 12:03:36",
-      "ta": "5 months ago",
+      "ta": "6 months ago",
       "img": "gnosis"
     },
     {
@@ -96,7 +114,7 @@
       "_attachments": "attachments/",
       "_ts": 1731317088,
       "ht": "30.10.2024, 09:04:12",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "gnosis"
     },
     {
@@ -138,7 +156,7 @@
       "_attachments": "attachments/",
       "_ts": 1736621990,
       "ht": "11.01.2025, 19:59:18",
-      "ta": "3 months ago",
+      "ta": "4 months ago",
       "img": "gnosis"
     }
   ],
@@ -200,7 +218,7 @@
       "_attachments": "attachments/",
       "_ts": 1731317088,
       "ht": "30.10.2024, 09:04:12",
-      "ta": "6 months ago",
+      "ta": "7 months ago",
       "img": "gnosis"
     },
     {

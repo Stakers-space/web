@@ -1,0 +1,122 @@
+{{> header}}
+<main class="mb-60">
+	<section class="cover grid egrid">
+		<div class="mt-60 mb-20">
+            <ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{chainName}} staking</span></a>
+					<meta property="position" content="2">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}/validator-actions"><span property="name" class="intro-label">Validator Actions</span></a>
+					<meta property="position" content="3">
+				</li>
+			</ul>
+			<h1 class="cover-title"><span>Validator actions when staking {{chainName}}</span> - what actions can you perform with validator(s)?</h1>
+			<p>{{#ifEqual chain "ethereum"}}For Ethereum Staking, your one-stop place for doing validator actions is <a href="https://launchpad.ethereum.org/en/validator-actions" target="_blank" rel="nofollow noopener">Validator actions section on Ethereum Launchpad, see https://launchpad.ethereum.org/en/validator-actions</a>.{{/ifEqual}}</p>
+		</div>
+		<div class="disclaimer">
+			<div class="disclaimer-content">
+				<h3>Disclaimer</h3>
+				<p>This guide is for informational and education purposes only - accuracy is not guaranteed, see <a href="/disclaimer">disclaimer</a>.</p>
+            </div>
+		</div>
+	</section>
+
+	<div class="grid-full contents serverguide">
+        <div class="content-chapters">
+			<div class="sticky">
+				 <nav class="mt-60">
+					<strong>Navigation:</strong>
+                    <ul>
+                        <li><a href="#wallet-upgrade">Wallet Upgrade</a>
+                            <ul>
+                                <li>From 0x00 to 0x01 (Attach withdrawal credential to validator keys)</li>
+                                <li><a href="#upgrade-to-compounding">From 0x01 to 0x02 (Switch from standard validator to compounding validator)</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#add-funds">Add funds to validator</a></li>
+                        <li><a href="#partial-withdrawal">Request partial withdrawal</a></li>
+                        <li><a href="#merge-validators">Nerge validators</a>
+                            <ul>
+                                <li>Absorb another validator</li>
+                                <li>Migrate funds</li>
+                            </ul>
+                        </li>
+                        <li><a href="#exit-validator">Exit validator</a></li>
+                    </ul>
+				</nav>
+			</div>
+		</div>
+	
+		<div class="content-body">
+			<section class="chapter" id="wallet-upgrade">
+                <h2>Wallet upgrade</h2>
+                <p>Wallet type can be found through a <a href="{{#ifEqual chain "ethereum"}}https://beaconcha.in/{{/ifEqual}}{{#ifEqual chain "gnosis"}}https://gnosischa.in/{{/ifEqual}}">Chain explorer</a>. Just find your validator key and check the <code>Withdrawal Address</code> at <code>Deposits</code> tab of your validator keys detail. There are 3 available withdrawal wallet states, recognizable through first 3 letter of the withdrawal credentials:</p>
+                <ul>
+                    <li><code>0x00</code> - <strong>Standard validator with {{#ifEqual chain "ethereum"}}32 ETH{{/ifEqual}}{{#ifEqual chain "gnosis"}}1 GNO{{/ifEqual}} maximum stake</strong></strong> - no withdrawal credentials attached to the validator key. This is the default state of the validator key, if no withdrawal wallet was set during key generation</li>
+                    <li><code>0x01</code> - <strong>Standard validator with {{#ifEqual chain "ethereum"}}32 ETH{{/ifEqual}}{{#ifEqual chain "gnosis"}}1 GNO{{/ifEqual}} maximum stake</strong> and withdrawal wallet attached. Staking rewards are distributed automatically to the withdrawal wallet {{#ifEqual chain "gnosis"}}withdrawn based on request{{/ifEqual}}.</li>
+                    <li><code>0x02</code> - <strong>Compounding validator with {{#ifEqual chain "ethereum"}}ETH stake between 32 and 2048{{/ifEqual}}{{#ifEqual chain "gnosis"}}GNO stake between 1 and 64{{/ifEqual}}</strong>. Staking rewards are withdrawed <a href="#partial-request">based on request</a>.</li>
+                </ul>
+
+                <h3>How to swith wallet state?</h3>
+                <p>There is possible only to upgrade the wallet. Downgroad is not possible.</p>
+                <ul>
+                    <li>Upgrade from <code>0x00</code> to <code>0x01</code> can be processed through validator key generation tool.</li>
+                    <li>Upgrade from <code>0x01</code> to <code>0x02</code> can be processed through {{#if isEthereum}}Launchpad website, see below:
+                        <ol>
+                            <li>Go to <a href="https://launchpad.ethereum.org/en/validator-actions" target="_blank">https://launchpad.ethereum.org/en/validator-actions</a></li>
+                            <li>Connect with your withdrawal wallet</li>
+                            <li>Process action <code>Upgrade account to compounding</code>
+                                <a href="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding.webp" target="_blank"><img src="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding.webp" alt="Upgrade Ethereum Account To Compounding" style="width:100%"></a>
+                                <ul>
+                                    <li>The upgrade to <code>0x02</code> wallet type requires confirmation of following:
+                                        <a href="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding-confirm.webp" target="_blank"><img src="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding-confirm.webp" alt="Upgrade Ethereum Account To Compounding" style="width:100%"></a>
+                                    </li>
+                                    <li>On confirming the request in your wallet, be sure you interacting with <a href="https://etherscan.io/address/0x0000BBdDc7CE488642fb579F8B00f3a590007251" target="_blank">0x0000BBdDc7CE488642fb579F8B00f3a590007251 (EIP-7251: Consolidation Request) contract</a></li>
+                                </ul>
+                            </li>
+                        </ol>
+                    {{/if}}
+                    {{#if isGnosis}}... the guide will be updated later, once all tools are tested properly.
+                    
+                    {{/if}}
+                    </li>
+                </ul>
+
+				<!--div class="content">
+                    <h2 class="mt-0">Introduction</h2>
+                   
+                    <nav>
+                        <h4 class="mb-0">Navigation:</h4>
+                        <ul>
+                            <li><a href="#offline"><strong>Emergency:</strong> Validator is down or have a poor performance</a></li>
+                            <li><a href="#update"><strong>Emergency:</strong> A client update is required</a></li>
+                            <li><a href="#access"><strong>Emergency:</strong> No/Lost access to staking server</a></li>
+                        </ul>
+                    </nav>
+				</div-->
+            </section>
+
+            <!--section class="chapter" id="offilne">
+				<div class="content bt">
+                    <h2 data-number="1">Validator is down or have a poor performance</h2>
+                    
+                    
+                </div>
+            </section>
+            <section class="chapter" id="update">
+				<div class="content bt">
+                    <h2>An important client update was released (Update is required)</h2>
+                    
+                </div>
+            </section-->
+        </div>
+    </div>
+</main>
+{{> footer}}
+{{> scripts/tabselector}}

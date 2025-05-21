@@ -110,6 +110,14 @@ class GuidePage {
         res.locals.metaDescription = `What to do if anything goes wrong with ${res.locals.chainName} staking?`;
         next();
     }
+    ValidatorActions(req,res,next){
+        res.locals = app._ExtandLocals(res.locals);
+        res.locals.page_hbs = 'guides/validator-actions';
+        res.locals.title = `Validator Actions when staking ${res.locals.chainName}`;
+        res.locals.metaDescription = `What actions can you perform with your validator when staking ${res.locals.chainName}?`;
+        next();
+    }
+
     Maintenance(req,res,next){
         res.locals = app._ExtandLocals(res.locals);
         res.locals.page_hbs = 'guides/maintenance';

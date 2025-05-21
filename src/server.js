@@ -27,14 +27,11 @@ module.exports = {
 		  });
 		app.engine('handlebars', hbs.engine);
 		app.set('view engine', 'handlebars');
-		app.set('views', './src/views');
-		//console.log("env port: ", process.env.PORT);
-		/*if(process.env.PORT == undefined){ // localhost
-			app.set('views', './web/views');
-			app.set('views', './web/src/views');
-		} else { // production
+		if(process.env.PRODUCTION == 1){
 			app.set('views', './src/views');
-		}*/
+		} else { // localhost
+			app.set('views', './web/src/views');
+		}
 		return app;
 	}
 }
