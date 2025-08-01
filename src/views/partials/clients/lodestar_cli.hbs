@@ -37,38 +37,10 @@
     <li><h3>Get Lodestar Client</h3>
         <div class="tabselector">
 			<nav class="egrid egrid-2">
-				<button class="tab selected" data-tabpanel="1">Download client</button>
-				<button class="tab" data-tabpanel="2">Build client from GIT source code</button>
+				<button class="tab selected" data-tabpanel="1">Build client from GIT source code</button>
+				<button class="tab" data-tabpanel="2">Download client</button>
 			</nav>
-			<div class="tabpanel selected">
-                <ul>
-                    {{#unless InstallationGuide}}
-                    <li><h4>Remove old client folder</h4>
-                        <pre><code>cd ~/downloads && sudo rm -r lodestarclient && sudo rm -r lodestar</code></pre>
-                    </li>
-                    {{/unless}}
-                    <li>
-                        <h4>Find the latest stable version of Lodestar client on Github</h4>
-                        <ul>
-                            <li>Find latest Lodestar version at <a href="https://github.com/ChainSafe/lodestar/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/ChainSafe/lodestar/releases</a></li>
-                            <li>Write latest stable Lodestar version: <input type="text" value="{{consensusClients.lodestar.latestVer}}" class="lodestarVer-input"><br>
-                                <p>This will update the url links in the guide below.</p>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="mt-15">
-                        <h4>Download Lodestar version <code class="lodestarVer">{{consensusClients.lodestar.latestVer}}</code> to your node</h4>
-                        <pre><code>mkdir ~/downloads/lodestarclient && cd ~/downloads/lodestarclient && curl -LO https://github.com/ChainSafe/lodestar/releases/download/v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>/lodestar-v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
-                    </li>
-                    <li><h4>Extract downloaded file</h4>
-                        <pre><code>$ tar xvf lodestar-v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
-                    </li>
-                    <li><h4>Create lodestar directory and move the client into it</h4>
-                        <pre><code>mkdir ~/downloads/lodestar && mv ~/downloads/lodestarclient/lodestar ~/downloads/lodestar/lodestar</code></pre>
-                    </li>
-                </ul>
-			</div>
-			<div class="tabpanel">
+            <div class="tabpanel selected">
                 <ul>
                     {{#if InstallationGuide}}
                     <li>
@@ -99,7 +71,36 @@
                             <li><strong>Build Lodestart client</strong>
                                 <pre><code>yarn run build</code></pre>
                             </li>
-                        </ul>   
+                        </ul>
+                        <aside>Note: If Lodestar build fails with error due to old Node.js or missing corepack, apply the <a href="/lodestar/install">Lodestar Installation guide</a> to install latest Node.js, associated Build essential and Corepack.</aside>
+                    </li>
+                </ul>
+			</div>
+			<div class="tabpanel">
+                <ul>
+                    {{#unless InstallationGuide}}
+                    <li><h4>Remove old client folder</h4>
+                        <pre><code>cd ~/downloads; sudo rm -r lodestarclient; sudo rm -r lodestar</code></pre>
+                    </li>
+                    {{/unless}}
+                    <li>
+                        <h4>Find the latest stable version of Lodestar client on Github</h4>
+                        <ul>
+                            <li>Find latest Lodestar version at <a href="https://github.com/ChainSafe/lodestar/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/ChainSafe/lodestar/releases</a></li>
+                            <li>Write latest stable Lodestar version: <input type="text" value="{{consensusClients.lodestar.latestVer}}" class="lodestarVer-input"><br>
+                                <p>This will update the url links in the guide below.</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mt-15">
+                        <h4>Download Lodestar version <code class="lodestarVer">{{consensusClients.lodestar.latestVer}}</code> to your node</h4>
+                        <pre><code>mkdir ~/downloads/lodestarclient && cd ~/downloads/lodestarclient && curl -LO https://github.com/ChainSafe/lodestar/releases/download/v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>/lodestar-v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
+                    </li>
+                    <li><h4>Extract downloaded file</h4>
+                        <pre><code>$ tar xvf lodestar-v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
+                    </li>
+                    <li><h4>Create lodestar directory and move the client into it</h4>
+                        <pre><code>mkdir ~/downloads/lodestar && mv ~/downloads/lodestarclient/lodestar ~/downloads/lodestar/lodestar</code></pre>
                     </li>
                 </ul>
 			</div>

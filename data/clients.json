@@ -4,9 +4,9 @@
             "name": "Nethermind",
             "link": "https://nethermind.io/",
             "github": "https://github.com/NethermindEth/nethermind",
-            "latestVer": "1.31.10-f62cfede",
-            "latestVerClean":"1.31.10",
-            "release_time": "2025-05-08T02:02:00Z",
+            "latestVer": "1.31.11-2be1890e",
+            "latestVerClean":"1.31.11",
+            "release_time": "2025-05-22T13:18:00Z",
             "social":[
                 {
                 "name": "Discord",
@@ -47,10 +47,10 @@
         },
         "erigon": {
             "name": "Erigon",
-            "link": "https://github.com/ledgerwatch/erigon",
+            "link": "https://erigon.tech/",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "3.0.3",
-            "release_time": "2025-05-05T12:02:00Z",
+            "latestVer": "3.0.9",
+            "release_time": "2025-06-25T20:26:00Z",
             "social":[
                 {
                     "name": "X",
@@ -256,11 +256,11 @@
             "name": "Lodestar",
             "link": "https://lodestar.chainsafe.io/",
             "github": "https://github.com/chainsafe/lodestar",
-            "latestVer": "1.30.0",
-            "nodejsVer": "20.11.0",
+            "latestVer": "1.31.0",
+            "nodejsVer": "22.16.0",
             "nvmVer": "0.40.1",
-            "release_time": "2025-05-15T17:49:00Z",
-            "prerequisity": "NodeJS v20+",
+            "release_time": "2025-06-03T22:12:00Z",
+            "prerequisity": "NodeJS v22+",
             "social":[
                 {
                     "name": "Discord",
@@ -298,9 +298,9 @@
             "name": "Teku",
             "link": "https://docs.teku.consensys.net/",
             "github": "https://github.com/ConsenSys/teku",
-            "latestVer": "25.4.1",
+            "latestVer": "25.5.0",
             "jdkVer": "24",
-            "release_time": "2025-04-17T19:34:00Z",
+            "release_time": "2025-05-29T01:18:00Z",
             "prerequisity": "jdk v21+",
             "social":[
                 {
@@ -339,8 +339,8 @@
             "name": "Prysm",
             "link": "https://prysmaticlabs.com/",
             "github": "https://github.com/prysmaticlabs/prysm",
-            "latestVer": "6.0.2",
-            "release_time": "2025-05-12T21:13:00Z",
+            "latestVer": "6.0.4",
+            "release_time": "2025-06-06T03:29:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -418,8 +418,8 @@
             "name": "Caplin",
             "link": "https://erigon.tech/",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "3.0.2",
-            "release_time": "2025-03-24T10:11:00Z",
+            "latestVer": "3.0.9",
+            "release_time": "2025-06-25T20:26:00Z",
             "social":[
                 {
                     "name": "X",
@@ -480,9 +480,9 @@
         "rocketpool":{
             "name": "RocketPool",
             "link": "https://rocketpool.net/",
-            "github": "https://github.com/rocket-pool/smartnode-install/releases",
-            "latestVer": "1.15.6",
-            "release_time": "2025-04-30T19:11:00Z",
+            "github": "https://github.com/rocket-pool/smartnode/releases",
+            "latestVer": "1.16.0",
+            "release_time": "2025-06-19T00:31:00Z",
             "social":[
                 {
                     "name": "Discord",
