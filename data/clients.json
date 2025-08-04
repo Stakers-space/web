@@ -4,9 +4,9 @@
             "name": "Nethermind",
             "link": "https://nethermind.io/",
             "github": "https://github.com/NethermindEth/nethermind",
-            "latestVer": "1.31.11-2be1890e",
-            "latestVerClean":"1.31.11",
-            "release_time": "2025-05-22T13:18:00Z",
+            "latestVer": "1.32.4-1c4c7c0a",
+            "latestVerClean":"1.32.4",
+            "release_time": "2025-07-31T11:18:00Z",
             "social":[
                 {
                 "name": "Discord",
@@ -49,8 +49,8 @@
             "name": "Erigon",
             "link": "https://erigon.tech/",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "3.0.9",
-            "release_time": "2025-06-25T20:26:00Z",
+            "latestVer": "3.0.15",
+            "release_time": "2025-07-25T12:38:00Z",
             "social":[
                 {
                     "name": "X",
@@ -82,8 +82,8 @@
             "name": "Geth",
             "link": "https://geth.ethereum.org/",
             "github": "https://github.com/ethereum/go-ethereum",
-            "latestVer": "1.15.10",
-            "release_time": "2025-04-25T13:27:00Z",
+            "latestVer": "1.16.1",
+            "release_time": "2025-07-02T10:13:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -120,8 +120,8 @@
             "name": "Besu",
             "link": "https://besu.hyperledger.org/en/stable/",
             "github": "https://github.com/hyperledger/besu",
-            "latestVer": "25.4.1",
-            "release_time": "2025-04-16T18:34:00Z",
+            "latestVer": "25.7.0",
+            "release_time": "2025-07-03T09:39:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -163,8 +163,8 @@
             "name": "Reth",
             "link": "https://reth.rs/",
             "github": "https://github.com/paradigmxyz/reth",
-            "latestVer": "1.3.12",
-            "release_time": "2025-04-17T22:04:00Z",
+            "latestVer": "1.6.0",
+            "release_time": "2025-07-22T17:10:00Z",
             "social":[],
             "chain":{
                 "ethereum":{
@@ -217,8 +217,8 @@
             "name": "Lighthouse",
             "link": "https://lighthouse.sigmaprime.io/",
             "github": "https://github.com/sigp/lighthouse",
-            "latestVer": "7.0.1",
-            "release_time": "2025-04-30T09:25:00Z",
+            "latestVer": "7.1.0",
+            "release_time": "2025-07-10T05:47:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -256,10 +256,10 @@
             "name": "Lodestar",
             "link": "https://lodestar.chainsafe.io/",
             "github": "https://github.com/chainsafe/lodestar",
-            "latestVer": "1.31.0",
+            "latestVer": "1.32.0",
             "nodejsVer": "22.16.0",
             "nvmVer": "0.40.1",
-            "release_time": "2025-06-03T22:12:00Z",
+            "release_time": "2025-07-15T21:16:00Z",
             "prerequisity": "NodeJS v22+",
             "social":[
                 {
@@ -298,9 +298,9 @@
             "name": "Teku",
             "link": "https://docs.teku.consensys.net/",
             "github": "https://github.com/ConsenSys/teku",
-            "latestVer": "25.5.0",
+            "latestVer": "25.7.1",
             "jdkVer": "24",
-            "release_time": "2025-05-29T01:18:00Z",
+            "release_time": "2025-07-28T01:10:00Z",
             "prerequisity": "jdk v21+",
             "social":[
                 {
@@ -378,9 +378,9 @@
             "name": "Nimbus",
             "link": "https://nimbus.team/",
             "github": "https://github.com/status-im/nimbus-eth2",
-            "latestVer": "25.4.1_77cfa783",
-            "latestVerClean":"25.4.1",
-            "release_time": "2025-04-26T05:48:00Z",
+            "latestVer": "25.7.1_92defe0f",
+            "latestVerClean":"25.7.1",
+            "release_time": "2025-07-31T11:36:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -418,8 +418,8 @@
             "name": "Caplin",
             "link": "https://erigon.tech/",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "3.0.9",
-            "release_time": "2025-06-25T20:26:00Z",
+            "latestVer": "3.0.15",
+            "release_time": "2025-07-25T12:38:00Z",
             "social":[
                 {
                     "name": "X",
@@ -481,8 +481,8 @@
             "name": "RocketPool",
             "link": "https://rocketpool.net/",
             "github": "https://github.com/rocket-pool/smartnode/releases",
-            "latestVer": "1.16.0",
-            "release_time": "2025-06-19T00:31:00Z",
+            "latestVer": "1.17.1",
+            "release_time": "2025-07-28T23:22:00Z",
             "social":[
                 {
                     "name": "Discord",
@@ -512,8 +512,8 @@
             "name": "StakeWise",
             "link": "https://www.stakewise.io/",
             "github": "https://github.com/stakewise/v3-operator/releases/",
-            "latestVer": "3.1.1",
-            "release_time": "2025-04-10T16:16:00Z",
+            "latestVer": "3.1.10",
+            "release_time": "2025-07-17T16:42:00Z",
             "social":[
                 {
                     "name": "Discord",

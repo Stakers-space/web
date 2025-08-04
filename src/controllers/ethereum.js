@@ -17,9 +17,9 @@ function EthereumController(){
 }
 
 EthereumController.prototype.Request = function(req,res, next){
-    res.locals.page_hbs = 'ethereum-staking';
+    res.locals.page_hbs = 'ethereum/staking';
     res.locals.layout_hbs = "standard";
-    res.locals.css_file = 'chain';
+    res.locals.css_file = 'chainpage';
     res.locals.title = `All around Ethereum Staking at one place.`;
     res.locals.metaDescription = `Stakers.space is a space full of guides, tools and advices targeted at Ethereum staking.`;
 

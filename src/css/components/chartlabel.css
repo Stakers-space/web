@@ -1,0 +1,69 @@
+@layer components {
+    .chart-legend {
+  position: absolute;
+  font-size: 0.75rem;
+  font-weight: bold;
+  bottom: 7px;
+  left: 0.8rem;
+  background: rgba(255,255,255,0.822);
+  border-radius: 6px;
+}
+.chart-legend .black-line,
+.chart-legend .balance-bar,
+.chart-legend .green-bar,
+.chart-legend .red-bar,
+.chart-legend .grey-bar {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+}
+.chart-legend .black-line:after,
+.chart-legend .balance-bar:after,
+.chart-legend .green-bar:after,
+.chart-legend .red-bar:after,
+.chart-legend .grey-bar:after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+.chart-legend .black-line:after {
+  background: #000;
+  top: 50%;
+  height: 3px;
+  width: 25px;
+}
+.chart-legend .green-bar:after,
+.chart-legend .grey-bar:after,
+.chart-legend .red-bar:after,
+.chart-legend .balance-bar:after {
+  width: 10px;
+  height: 73%;
+  bottom: 0;
+  left: 7.5px;
+}
+.chart-legend .balance-bar:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  left: 7.5px;
+  width: 10px;
+  background: #f00;
+  height: 50%;
+  bottom: 0;
+}
+.chart-legend .balance-bar:after {
+  background: #008000;
+  height: 50%;
+  bottom: 50%;
+}
+.chart-legend .green-bar:after {
+  background: #008000;
+}
+.chart-legend .red-bar:after {
+  background: #f00;
+}
+.chart-legend .grey-bar:after {
+  background: #808080;
+}
+
+}

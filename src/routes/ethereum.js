@@ -24,7 +24,7 @@ class EthereumRouter {
     }
 
     httpListener(){
-        router.get('/', Chain.Ethereum, this.chainController.Request, this.Response); // homepage
+        router.get('/', Chain.Ethereum, this.chainController.Request, this.Response); // homepage staking
 
         router.get('/liquid-staking', Chain.Ethereum, this.chainController.RequestLiquid, this.Response); // homepage
         router.get('/validators-saas', Chain.Ethereum, this.chainController.RequestSaas, this.Response); // homepage

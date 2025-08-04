@@ -21,6 +21,20 @@ router.use([/*'/authentization',*/'/dashboard','/api/account'],
 );
 
 router.use('/', require('./homepage'));
+/*router.use('/ethereum', function(req,res,next){
+    res.locals.page_hbs = 'ethereum/index';
+    res.locals.layout_hbs = 'standard';
+    res.locals.title = `Ethereum | Stakers.space`;
+    res.locals.metaDescription = null;
+    console.log(req.originalUrl.split('?')[0]);
+    const cononicalUrl = (process.env.PORT) ? "https://stakers.space"+req.originalUrl.split('?')[0] : null; // allow localhost
+    res.render(res.locals.page_hbs, {
+        layout: res.locals.layout_hbs,
+        canonicalUrl: cononicalUrl,
+        cssFile: "chainpage"
+    });
+});*/
+router.use('/ethereum', require('./ethereum-tailwind'));
 router.use('/ethereum-staking', require('./ethereum'));
 router.use('/gnosis-staking', require('./gnosis'));
 router.use('/api', require('./api'));

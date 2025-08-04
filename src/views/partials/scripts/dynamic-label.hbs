@@ -4,19 +4,7 @@
 }
 Slider.prototype.Start = function(){
     setInterval(this.Slide, 4000, this);
-   // this.ShowSlide(this.currentIndex);
 };
-/*Slider.prototype.ShowSlide = function(index){
-    console.log("show slide", this.slides, this.slides.length);
-    for(var i=0;i<this.slides.length;i++){
-        this.slides[i].classList.remove('visible', 'hidden');
-        if (i === index) {
-            this.slides[i].classList.add('visible');
-        } else {
-            this.slides[i].classList.add('hidden');
-        }
-    }
-};*/
 Slider.prototype.Slide = function(inst){
     //console.log("slide", inst);
     inst.slides[inst.currentIndex].classList.remove('visible');
@@ -26,6 +14,9 @@ Slider.prototype.Slide = function(inst){
     inst.slides[inst.currentIndex].classList.add('visible');
 };
 Array.from(document.querySelectorAll('.dynamic.label')).forEach((dynamicLabel) => {
+    new Slider(dynamicLabel.children).Start();
+});
+Array.from(document.querySelectorAll('.dynamic-label')).forEach((dynamicLabel) => {
     new Slider(dynamicLabel.children).Start();
 });
 </script>

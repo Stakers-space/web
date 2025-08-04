@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "./components/header.css";
+@import "./components/broadcrumbs.css";
+@import "./components/footer.css";
+
+@import "./components/dynamic.css";
+@import "./components/chartlabel.css";
+@import "./components/servicetable.css";

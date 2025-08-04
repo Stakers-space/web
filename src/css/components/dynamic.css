@@ -1,0 +1,102 @@
+@layer components {
+   .dynamic-title {
+        display: block;
+        color: #00ca72;
+    }
+    .dynamic-title:after {
+        content: attr(data-text);
+        animation: titledynamic 10s linear infinite;
+    }
+    @-moz-keyframes titledynamic {
+        0% {
+            content: "Internet";
+        }
+        20% {
+            content: "Finance";
+        }
+        40% {
+            content: "Ownership";
+        }
+        60% {
+            content: "Assets";
+        }
+        80% {
+            content: "Games";
+        }
+    }
+    @-webkit-keyframes titledynamic {
+        0% {
+            content: "Internet";
+        }
+        20% {
+            content: "Finance";
+        }
+        40% {
+            content: "Ownership";
+        }
+        60% {
+            content: "Assets";
+        }
+        80% {
+            content: "Games";
+        }
+    }
+    @-o-keyframes titledynamic {
+        0% {
+            content: "Internet";
+        }
+        20% {
+            content: "Finance";
+        }
+        40% {
+            content: "Ownership";
+        }
+        60% {
+            content: "Assets";
+        }
+        80% {
+            content: "Games";
+        }
+    }
+    @keyframes titledynamic {
+        0% {
+            content: "Internet";
+        }
+        20% {
+            content: "Finance";
+        }
+        40% {
+            content: "Ownership";
+        }
+        60% {
+            content: "Assets";
+        }
+        80% {
+            content: "Games";
+        }
+    }
+    .dynamic-label {
+        position: relative;
+        overflow: hidden;
+        height: 14.6px;
+        margin-left: 0.25rem;
+        margin-top: 0.15rem;
+    }
+    .dynamic-label .item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        margin-top: -0.15rem;
+        display: flex;
+        transition: transform 1s, opacity 1s;
+        opacity: 0;
+    }
+    .dynamic-label .item.visible {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    .dynamic-label .item.hidden {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}

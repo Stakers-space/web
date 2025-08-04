@@ -1,0 +1,21 @@
+@layer components {
+    .broadcrumbs {
+        @apply flex space-x-1 text-sm text-gray-600 mb-5;
+    }
+    .broadcrumbs li {
+        position: relative;
+        display: inline;
+    }
+    .broadcrumbs li a {
+        color: #4a4e57;
+        text-decoration: none;
+    }
+    .broadcrumbs li a:hover {
+        text-decoration: underline;
+    }
+    .broadcrumbs li:not(:last-child):after {
+        content: '/';
+        color: #4a4e57;
+        font-size: 12px;
+    }
+}
