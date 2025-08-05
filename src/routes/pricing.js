@@ -7,7 +7,7 @@ router.get('/', function(req,res){
         pageUrl: 'https://stakers.space',//('https://' + req.appData.host + req.canonicalUrl),
         title: "Stakers.space pricing", //req.appData.meta.title,
         metaDescription: null,
-        cssFile: "hp"
+        cssFile: "chain"
     });
 });
 

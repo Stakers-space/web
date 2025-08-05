@@ -36,6 +36,7 @@ router.use('/', require('./homepage'));
 });*/
 router.use('/ethereum', require('./ethereum-tailwind'));
 router.use('/ethereum-staking', require('./ethereum'));
+router.use('/gnosis', require('./gnosis-tailwind'));
 router.use('/gnosis-staking', require('./gnosis'));
 router.use('/api', require('./api'));
 router.use('/test', require('./test'));

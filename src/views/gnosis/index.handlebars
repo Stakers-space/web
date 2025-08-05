@@ -1,0 +1,172 @@
+<body id="body" data-amp-auto-lightbox-disable>
+
+{{> header}}
+
+<main>
+	<section class="py-12 container mx-auto px-6">
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-15">
+			<div class="grid items-center">
+				<div>
+					<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+						<li property="itemListElement" typeof="ListItem">
+							<a property="item" typeof="Thing" href="/" class="hover:underline">
+								<span property="name">Stakers.space</span>
+							</a>
+							<meta property="position" content="1">
+						</li>
+						<li property="itemListElement" typeof="ListItem">
+							<a property="item" typeof="Thing" href="/gnosis" class="hover:underline">
+								<span property="name">Gnosis</span>
+							</a>
+							<meta property="position" content="2">
+						</li>
+					</ul>
+
+					<h1 class="flex items-center gap-4 text-5xl lg:text-7xl font-bold leading-tight mb-8">
+						<img src="/logo/gnosis.svg" alt="Gnosis logo" class="h-20 w-20">
+						Gnosis
+					</h1>
+
+					<p class="text-gray-700 leading-relaxed">
+						Gnosis is a decentralized blockchain where transactions take place, including payments,
+						ownership of digital assets, and interactions with smart contracts.
+						<a href="#gnosis" class="text-blue-600 hover:underline">See more detailed view.</a>
+					</p>
+
+					<div class="mt-6 text-gray-500">
+						Officially launched on October 8, 2018
+					</div>
+					
+
+					<ul class="flex flex-wrap items-center gap-6 text-lg font-medium mt-8">
+						<li>
+							<a href="https://www.gnosischain.com/" target="_blank" 
+							class="text-[#4a4e57] hover:text-emerald-600 transition-colors duration-200">
+							Website
+							</a>
+						</li>
+						<li>
+							<a href="https://gnosisscan.io/" target="_blank" 
+							class="text-[#4a4e57] hover:text-emerald-600 transition-colors duration-200">
+							Explorer
+							</a>
+						</li>
+						<li>
+							<a href="https://github.com/gnosis" target="_blank" 
+							class="text-[#4a4e57] hover:text-emerald-600 transition-colors duration-200">
+							GitHub
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div>
+				<p class="mb-2 text-gray-500 text-center">Charts for last 10 days</p>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pr-8">
+					<div class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
+						<div class="mb-4">
+							<h2 class="text-xl font-semibold">
+								Price
+							</h2>
+							<div class="chart" style="position:relative">
+								<div class="header">
+									<h2 class="title">{{gnoPrice}} GNO Price</h2>
+								</div>
+								<canvas id="priceratio_chart" name="lazy-canvas" class="chart"></canvas>
+								<div class="chart-legend">
+									<span class="black-line">Price</span>
+									<span class="balance-bar">Margin Of Safety</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<a href="/charts/gno-circulation-supply" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
+						<div class="mb-4">
+							<h2 class="text-xl font-semibold">
+								{{{indicators.supply.value_formated}}} GNO in circulation
+							</h2>
+						</div>
+						<canvas id="buybacksupply_chart" name="lazy-canvas" class="w-full h-40"></canvas>
+						<div class="chart-legend">
+							<span class="black-line">Circ GNO</span>
+							<span class="green-bar">Buybacks</span>
+						</div>
+					</a>
+
+					<a href="/charts/gnosis-transactions" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
+							<div class="mb-4">
+								<h2 class="text-xl font-semibold">Transactions & Fees</h2>
+							</div>
+							<canvas id="transactions_chart" name="lazy-canvas" class="w-full h-40"></canvas>
+							<div class="chart-legend">
+								<span class="black-line">Transactions</span>
+								<span class="balance-bar">xDai Fees paid</span>
+							</div>
+					</a>
+				</div>
+			</div>
+			
+		</div>
+
+	</section>
+
+		<!-- Newsfeed -->
+				<section class="px-6 py-6 bg-gradient-to-b from-white to-gray-50">
+
+					<div class="lg:p-6 container mx-auto">
+						<h2 class="text-2xl font-bold leading-tight mb-4">Latest news</h2>
+						<ul class="space-y-3 lg:columns-2 lg:gap-x-12">
+							{{#each newsfeed.fundamental}}
+							<li class="flex justify-between text-sm">
+								<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer"
+								class="text-blue-600 hover:underline">{{{this.m}}}</a>
+								<span class="text-gray-500" title="{{{this.ht}}}">{{{this.ta}}}</span>
+							</li>
+							{{/each}}
+						</ul>
+						<a href="/ethereum-staking/news" 
+							class="mt-6 inline-block bg-black text-white rounded-lg px-5 py-2 hover:bg-gray-800 transition">
+							View all news
+						</a>
+					</div>
+	</section>
+
+	
+	<section class="bg-emerald-600 py-16 px-6 lg:px-20 text-white">
+  <div class="max-w-5xl mx-auto text-center">
+    <h2 class="text-3xl lg:text-4xl font-bold mb-6">
+      Contribute to <span class="underline decoration-white/40">securing Gnosis</span> 
+      and earn ~8% p.a.
+    </h2>
+    <p class="text-lg text-emerald-100 mb-8">
+      Join the Gnosis network and start earning rewards through staking 
+      while helping to secure one of the world’s most important blockchain networks.
+    </p>
+    <a href="/gnosis-staking" 
+       class="inline-block bg-white text-emerald-700 font-semibold px-8 py-4 rounded-lg shadow hover:bg-emerald-50 hover:shadow-lg transition">
+       About Gnosis Staking
+    </a>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
+<script>var beaconchainData = {{{beaconData}}};</script>
+<script>var etherchainData = {{{chainData}}};</script>
+<script>var dashboardData={{{valuationData}}};</script>
+<script>var circulationData={{{circulationData}}};</script>
+<script>var depositContract = {{{depositContract.chart}}};</script>
+<script>var chartsUIconfig = {{{chartsUIconfig}}};</script>
+<script type="text/javascript" src="/js/chart-presenter.js"></script>
+
+<script type="text/javascript" src="/js/charts/gno-priceratio.js"></script>
+<script type="text/javascript" src="/js/charts/gno-supply.js"></script>
+<script type="text/javascript" src="/js/charts/transactions.js"></script>
+<script>charts.ActivateLazyLoad();</script>
+</main>
+
+{{> footer_tailwind}}
+
+</body>

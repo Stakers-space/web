@@ -52,12 +52,14 @@
   bottom: 0;
 }
 .chart-legend .balance-bar:after {
-  background: #008000;
+  background: #009966
+;
   height: 50%;
   bottom: 50%;
 }
 .chart-legend .green-bar:after {
-  background: #008000;
+  background: #009966
+;
 }
 .chart-legend .red-bar:after {
   background: #f00;

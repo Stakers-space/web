@@ -1,6 +1,6 @@
 @layer components {
     .broadcrumbs {
-        @apply flex space-x-1 text-sm text-gray-600 mb-5;
+        @apply flex text-sm text-gray-600 mb-5;
     }
     .broadcrumbs li {
         position: relative;
@@ -17,5 +17,6 @@
         content: '/';
         color: #4a4e57;
         font-size: 12px;
+        padding-right: 5px;
     }
 }

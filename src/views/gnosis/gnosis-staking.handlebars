@@ -1,4 +1,4 @@
-<body id="body" data-amp-auto-lightbox-disable>
+<body id="body">
 
 {{> header}}
 <main>
@@ -12,24 +12,24 @@
 								<meta property="position" content="1">
 							</li>
 							<li property="itemListElement" typeof="ListItem">
-								<a property="item" typeof="Thing" href="/ethereum"><span property="name">Ethereum</span></a>
+								<a property="item" typeof="Thing" href="/gnosis"><span property="name">Gnosis</span></a>
 								<meta property="position" content="2">
 							</li>
 							<li property="itemListElement" typeof="ListItem">
-								<a property="item" typeof="Thing" href="/ethereum-staking"><span property="name">Staking</span></a>
+								<a property="item" typeof="Thing" href="/gnosis-staking"><span property="name">Staking</span></a>
 								<meta property="position" content="3">
 							</li>
 						</ul>
 						<h1 class="text-5xl font-bold leading-tight mb-8">
-							All around<br><span class="text-emerald-600">Ethereum staking</span>
+							All around<br><span class="text-emerald-600">Gnosis staking</span>
 						</h1>
 
 						<p class="text-2xl"><strong>Earn 24/7</strong> while <br>securing a new era of  <span class="dynamic-title" data-text="Internet"></span></p>
 						
 						<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-							<a href="/ethereum" 
+							<a href="/gnosis" 
 								class="inline-block bg-gray-300 rounded-lg px-5 py-2 text-center hover:bg-gray-800 hover:text-white transition">
-								About Ethereum
+								About Gnosis
 							</a>
 							<a href="#operate" 
 								class="inline-block bg-black text-white rounded-lg px-5 py-2 text-center hover:bg-gray-800 transition">
@@ -46,23 +46,23 @@
 			<div class="grid items-center">
 				<p class="mb-2 text-gray-500 text-center">Latest news</p>
 				<ul class="space-y-3">
-							{{#each newsfeed.clients}}
-							<li class="flex justify-between text-sm">
-								<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer"
-								class="text-blue-600 hover:underline">{{{this.m}}}</a>
-								<span class="text-gray-500" title="{{{this.ht}}}">{{{this.ta}}}</span>
-							</li>
-							{{/each}}
-						</ul>
-						<a href="/ethereum-staking/news" 
-							class="mt-6 px-5 py-2 transition underline text-center">
-							View all news
-						</a>
-
+					{{#each newsfeed.clients}}
+					<li class="flex justify-between text-sm">
+						<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer"
+						class="text-blue-600 hover:underline">{{{this.m}}}</a>
+						<span class="text-gray-500" title="{{{this.ht}}}">{{{this.ta}}}</span>
+					</li>
+					{{/each}}
+				</ul>
+				<a href="/gnosis-staking/news" 
+					class="mt-6 px-5 py-2 transition underline text-center">
+					View all news
+				</a>
 			</div>
 		</div>
 	</section>
-	<section class="border-t border-gray-200 py-12">
+
+		<section class="border-t border-gray-200 py-12">
 			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 container mx-auto px-6">
 
 				<div class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
@@ -105,23 +105,14 @@
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-					<a href="/charts/ethereum-staking-apy" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
+					<a href="/gnosis-staking/deposit-contract-balance" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
 						<div class="mb-4">
-							<h2 class="text-xl font-semibold">~ {{{indicators.aprLastDay.value}}} ETH APY</h2>
-							<div class="dynamic-label px-1 py-1 bg-green-100 text-green-700 rounded px-2 py-1 w-[170px] h-[21px] overflow-hidden text-xs">
-								<span class="item visible">~ {{{indicators.aprLastDay.operator}}} Operator</span>
-								<span class="item hidden">~ {{{indicators.aprLastDay.delegator}}} Delegator</span>
-							</div>
+							<h2 class="text-xl font-semibold">{{depositContract.lastState.gno_balance}} GNO in deposit contract balance</h2>
 						</div>
-						<canvas id="ethstakingapr_chart" name="lazy-canvas" class="w-full h-40"></canvas>
-						<div class="chart-legend">
-							<span class="black-line">Daily APR</span>
-							<span class="green-bar">Daily Execution Reward percentage</span>
-							<span class="grey-bar">Daily Consensus Reward percentage</span>
-						</div>
+						<canvas id="depositcontractbalance_chart" name="lazy-canvas"></canvas>
 					</a>
 
-					<a href="/charts/ethereum-blocks" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
+					<a href="/charts/gnosis-blocks" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
 						<div class="mb-4">
 							<h2 class="text-xl font-semibold">Blocks</h2>
 						</div>
@@ -138,16 +129,13 @@
 	<section class="bg-gradient-to-b from-white to-gray-50 py-16 px-6 lg:px-20">
 		<div class="max-w-5xl mx-auto text-center">
 			<h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-			What is <span class="text-emerald-600">Ethereum</span>?
+			What is <span class="text-emerald-600">Gnosis</span>?
 			</h2>
-			<p class="text-lg text-gray-700 leading-relaxed mb-8">
-			Ethereum is a decentralized, open-source blockchain powering smart contracts, 
-			decentralized applications, and the entire ecosystem of Layer 2 networks. 
-			It enables secure, trustless transactions and is the backbone of modern Web3 infrastructure.
+			<p class="text-lg text-gray-700 leading-relaxed mb-8">Gnosis is a <strong>Layer 1 blockchain compatible with Ethereum, designed to offer efficient, secure, and decentralized solutions.</strong> It supports staking, allowing users to help secure the network and earn rewards. Built for compatibility with Ethereum tools and applications, Gnosis provides a versatile ecosystem for developers and users, while benefiting from the robustness and scalability of its Proof of Stake consensus mechanism.
 			</p>
-			<a href="/ethereum" 
+			<a href="/gnosis" 
 			class="inline-block bg-black text-white rounded-lg px-6 py-3 hover:bg-gray-800 transition">
-			Learn more about Ethereum
+			Learn more about Gnosis
 			</a>
 		</div>
 	</section>
@@ -157,74 +145,54 @@
 			<div class="lg:pr-10 grid items-center">
 				<div class="mb-8">
 					<h2 class="text-3xl font-semibold mb-4">
-					<span>What's Ethereum Staking?</span>
+					<span>What's Gnosis Staking?</span>
 					</h2>
 					<p class="text-gray-700 leading-relaxed">
-					Staking is the 
-					<strong>
-						process of locking up ETH to support the operations and security of a blockchain network.
-						By staking, you help validate transactions and maintain the network's integrity while earning rewards in return.
-					</strong>
-					It’s a key feature of Ethereum’s Proof of Stake system.
+						Staking is the <strong>process of locking up GNO to support the operations and security of a blockchain network. By staking, you help validate transactions and maintain the network's integrity while earning rewards in return.</strong> It’s a key feature of Gnosis’s Proof of Stake system.
 					</p>
 				</div>
 			</div>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pr-8">
+			<div class="grid grid-cols-1 gap-6 pr-8">
 
-				<a href="/charts/eth-staked" class="relative block bg-white rounded-lg shadow hover:shadow-lg transition p-4">
+				<a href="/charts/gno-staked" class="relative block bg-white rounded-lg shadow hover:shadow-lg transition p-4">
 					<div class="mb-4">
 					<h2 class="text-xl font-semibold" 
-						title="{{{indicators.stakedTokens.supplyShare}}} of all ETH in circulation">
-						{{{indicators.stakedTokens.hr_value}}} staked ETH
+						title="{{{indicators.stakedTokens.supplyShare}}} of all GNO in circulation">
+						{{{indicators.stakedTokens.hr_value}}} staked GNO
 					</h2>
 					<div class="bg-green-100 text-green-700 rounded px-2 py-1 w-[230px] h-[21px] overflow-hidden text-xs dynamic-label">
-						<span class="item visible">{{{indicators.stakedTokens.increments.day}}} ETH in the last day</span>
-						<span class="item hidden">{{{indicators.stakedTokens.increments.week}}} ETH in the last week</span>
-						<span class="item hidden">{{{indicators.stakedTokens.increments.month}}} ETH in the last month</span>
-						<span class="item hidden">{{{indicators.stakedTokens.increments.year}}} ETH in the last year</span>
+						<span class="item visible">{{{indicators.stakedTokens.increments.day}}} GNO in the last day</span>
+						<span class="item hidden">{{{indicators.stakedTokens.increments.week}}} GNO in the last week</span>
+						<span class="item hidden">{{{indicators.stakedTokens.increments.month}}} GNO in the last month</span>
+						<span class="item hidden">{{{indicators.stakedTokens.increments.year}}} GNO in the last year</span>
 					</div>
 					</div>
 					<canvas id="stakedbalance_chart" name="lazy-canvas" class="w-full h-40"></canvas>
 					<div class="chart-legend">
-						<span class="black-line">Staked ETH</span>
+						<span class="black-line">Staked GNO</span>
 						<span class="balance-bar">Daily change</span>
 					</div>
 				</a>
-
-				<a href="/charts/ethereum-staking-tvl" class="relative block bg-white rounded-lg shadow hover:shadow-lg transition p-4">
-					<div class="mb-4">
-					<h2 class="text-xl font-semibold">
-						{{{indicators.tvl.value_hr}}} locked in ETH staking
-					</h2>
-					</div>
-					<canvas id="tvlbalance_chart" name="lazy-canvas" class="w-full h-40"></canvas>
-					<div class="chart-legend">
-							<span class="black-line">Locked ETH</span>
-							<span class="balance-bar">Daily change</span>
-						</div>
-				</a>
-
 			</div>
 		</div>
 	</section>
-
+	
 	<section class="border-t border-gray-200 py-20 bg-white">
 		<div class="container mx-auto px-6">
 			<div class="mb-12">
 				<h2 class="text-3xl font-semibold leading-tight">
-					<span>Participate in <span class="text-emerald-600">ETH</span>ereum staking</span> 
+					<span>Participate in <span class="text-emerald-600">GNO</span>sis staking</span> 
 					<span class="block text-gray-700 text-xl mt-2">By using SAAS (Stake As a Service)</span>
 				</h2>
 			</div>
 
-			<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
 				<!-- Liquid Staking -->
 				<div>
-					<h2 class="text-2xl font-semibold mb-4"><a href="/ethereum-staking/liquid-staking" class="underline">Liquid Staking</a></h2>
+					<h2 class="text-2xl font-semibold mb-4"><a href="/gnosis-staking/liquid-staking" class="underline">Liquid Staking</a></h2>
 					<p class="text-gray-700 mb-6 pr-6">
-						Stake your Ether and get a "confirmation" token in exchange that can be used as collateral.
+						Stake your GNO and get a "confirmation" token in exchange that can be used as collateral.
 					</p>
 					<div class="bg-gray-50 rounded-lg shadow max-h-72 overflow-y-auto lg:overflow-x-hidden">
 						<table class="w-full text-sm text-left text-gray-700 border-collapse" id="liquid-vs">
@@ -239,7 +207,7 @@
 							</thead>
 							<tbody>
 							{{#each vaultServices}}
-								{{#if this.liquid_token}}
+								
 								<tr class="border-t">
 								<td class="px-4 py-3">
 									<a href="{{this.link}}" target="_blank" rel="nofollow noopener" 
@@ -272,79 +240,18 @@
 									{{/if}}
 								</td>
 								</tr>
-								{{/if}}
+								
 							{{/each}}
 							</tbody>
 						</table>
 					</div>
-					<button class="w-full mt-4 bg-gray-200 text-gray-800 rounded px-4 py-2 hover:bg-gray-300 transition cursor-pointer"
-							onclick="Unpack(this)" data-table="liquid-vs">
-					Unpack
-					</button>
-				</div>
-
-
-				<div>
-					<h2 class="text-2xl font-semibold mb-4">Pooled Staking</h2>
-					<p class="text-gray-700 mb-6 pr-6">
-					Stake your Ether without a need to have 32 ETH. Pool token avilability base on table below.
-					</p>
-					<div class="bg-gray-50 rounded-lg shadow max-h-72 overflow-y-auto lg:overflow-x-hidden">
-						<table class="w-full text-sm text-left text-gray-700 border-collapse servicetable scrollable" id="pooled-vs">
-							<thead class="bg-gray-100 text-gray-600 uppercase text-xs sticky top-0">
-								<tr>
-									<th class="px-4 py-3">Service</th>
-									<th class="px-4 py-3">Min Stake</th>
-									<th class="px-4 py-3">Fee</th>
-									<th class="px-4 py-3">Liquid Token</th>
-									<th class="px-4 py-3">Pool token</th>
-								</tr>
-							</thead>
-							<tbody>
-							{{#each vaultServices}}
-								{{#unless this.liquid_token}}
-								<tr class="border-t">
-								<td class="px-4 py-3">
-									<a href="{{this.link}}" target="_blank" rel="nofollow noopener" 
-									class="text-blue-600 hover:underline">{{this.service}}</a>
-								</td>
-								<td class="px-4 py-3">{{this.min_stake}} {{this.stake_unit}}</td>
-								<td class="px-4 py-3">{{this.fee}}{{this.fee_note}}</td>
-								<td class="px-4 py-3">
-									<a href="{{this.liquid_token.link}}" target="_blank" rel="nofollow noopener noreferrer" 
-									class="flex items-center space-x-2">
-									{{#if this.liquid_token.icon}}<img src="{{this.liquid_token.icon}}" alt="{{this.liquid_token.ticker}}" class="w-5 h-5">{{/if}}
-									<span>{{this.liquid_token.ticker}}</span>
-									</a>
-								</td>
-								<td class="px-4 py-3">
-									{{#if this.pool_token}}
-									<a href="{{this.pool_token.link}}" target="_blank" rel="nofollow noopener noreferrer"
-										class="flex items-center space-x-2">
-										<img src="{{this.pool_token.icon}}" alt="{{this.pool_token.ticker}}" class="w-5 h-5">
-										<span>{{this.pool_token.ticker}}</span>
-									</a>
-									{{else}}
-									{{this.pool_token}}
-									{{/if}}
-								</td>
-								</tr>
-								{{/unless}}
-							{{/each}}
-							</tbody>
-						</table>
-					</div>
-					<button class="w-full mt-4 bg-gray-200 text-gray-800 rounded px-4 py-2 hover:bg-gray-300 transition cursor-pointer"
-								onclick="Unpack(this)" data-table="pooled-vs">
-						Unpack
-					</button>
 				</div>
 
 				<!-- Hosted validator staking -->
 				<div>
 					<h2 class="text-2xl font-semibold mb-4"><a href="/ethereum-staking/validators-saas" class="underline">Hosted validator staking</a></h2>
 					<p class="text-gray-700 mb-6 pr-6">
-						Launch a solo validator by locking 32 ETH into a smart contract and operate the validator on hosted server.
+						Launch a solo validator by locking 1 GNO into a smart contract and operate the validator on hosted server.
 					</p>
 					<div class="bg-gray-50 rounded-lg shadow max-h-72 overflow-y-auto lg:overflow-x-hidden">
 						<table class="w-full text-sm text-left text-gray-700 border-collapse" id="hosted-vs">
@@ -369,10 +276,6 @@
 							</tbody>
 						</table>
 					</div>
-					<button class="w-full mt-4 bg-gray-200 text-gray-800 rounded px-4 py-2 hover:bg-gray-300 transition cursor-pointer"
-							onclick="Unpack(this)" data-table="hosted-vs">
-					Unpack
-					</button>
 				</div>
 
 			</div>
@@ -393,23 +296,16 @@
 							<ul class="list-disc pl-5 space-y-2 text-gray-700">
 								<li>operate various staking services simultaneously within a single staking server</li>
 								<li>perform staking from node at home as well as from a server house or cloud</li>
-								<li>collect single rewards or 
-									<a href="/ethereum-staking/smoothing-pools" class="text-blue-600 hover:underline">join a smoothing pool</a>
-								</li>
 							</ul>
 						</div>
 
 						<div>
 							<h3 class="text-2xl font-semibold mt-12 mb-4"><strong>Boost</strong> the staking node revenue</h3>
-							<p class="text-gray-700 mb-6">There's possible to use a "leverage" in a form of bonded staking as well as use restaking to maximalize staking revenue.</p>
+							<p class="text-gray-700 mb-6">There's possible to use a "leverage" in a form of bonded staking to maximalize staking revenue.</p>
 							<div class="flex flex-wrap gap-4">
 								<a href="/bonded-validators" class="flex-1 min-w-[200px] bg-gray-50 rounded-lg border px-5 py-4 text-center hover:shadow transition">
 									<h3 class="text-lg font-semibold">Bonded Staking</h3>
 									<p class="text-sm text-gray-600">Leverage your stake</p>
-								</a>
-								<a href="/restaking" class="flex-1 min-w-[200px] bg-gray-50 rounded-lg border px-5 py-4 text-center hover:shadow transition">
-									<h3 class="text-lg font-semibold">Re-Staking</h3>
-									<p class="text-sm text-gray-600">Provide Node / Restake the liquid token</p>
 								</a>
 							</div>
 						</div>
@@ -486,47 +382,23 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr class="border-t">
+						<tr class="border-t">
 						<th colspan="2" class="px-4 py-3 text-center">Solo</th>
-						<td class="px-4 py-3">32</td>
+						<td class="px-4 py-3">1</td>
 						<td class="px-4 py-3">0</td>
 						<td class="px-4 py-3">None</td>
 						<td class="px-4 py-3">None</td>
 						<td class="px-4 py-3">No bond</td>
 					</tr>
 					<tr class="border-t">
-						<td rowspan="4" class="px-4 py-3 align-middle">
+						<td class="px-4 py-3 align-middle">
 							<a href="/bonded-validators" class="text-blue-600 hover:underline">Bonded</a>
 						</td>
-						<th class="px-4 py-3">Lido</th>
-						<td class="px-4 py-3">2</td>
-						<td class="px-4 py-3">32</td>
-						<td class="px-4 py-3">None</td>
-						<td class="px-4 py-3">8% out of 10% total</td>
-						<td class="px-4 py-3">Bond provided in stETH which also accrues rewards</td>
-					</tr>
-					<tr class="border-t bg-gray-50">
-						<th class="px-4 py-3">Rocketpool</th>
-						<td class="px-4 py-3">8</td>
-						<td class="px-4 py-3">24</td>
-						<td class="px-4 py-3">2.4 ETH worth of RPL</td>
-						<td class="px-4 py-3">14% out of 14% total</td>
-						<td class="px-4 py-3">8% APR on RPL staked</td>
-					</tr>
-					<tr class="border-t">
-						<th class="px-4 py-3">Stader</th>
-						<td class="px-4 py-3">4</td>
-						<td class="px-4 py-3">28</td>
-						<td class="px-4 py-3">0.4 ETH worth of SD</td>
-						<td class="px-4 py-3">6% out of 10% total</td>
-						<td class="px-4 py-3">7.97% APR on SD staked</td>
-					</tr>
-					<tr class="border-t">
 						<th class="px-4 py-3">StakeWise</th>
 						<td class="px-4 py-3">0</td>
-						<td class="px-4 py-3">Up to 32</td>
+						<td class="px-4 py-3">Up to 1</td>
 						<td class="px-4 py-3">-</td>
-						<td class="px-4 py-3">-</td>
+						<td class="px-4 py-3">From 0%</td>
 						<td class="px-4 py-3">-</td>
 					</tr>
 					</tbody>
@@ -535,7 +407,6 @@
 		</div>
 	</section>
 	
-
 	<section class="container mx-auto px-6 mb-20">
 		<div class="grid grid-cols-1 lg:grid-cols-6 gap-10">
 
@@ -546,7 +417,7 @@
 				<p class="text-gray-700 mb-6">
 					Build your own custom node from scratch with our interactive step-by-step guides.
 				</p>
-				<a href="/ethereum-staking/schema" target="_blank"
+				<a href="/gnosis-staking/schema" target="_blank"
 					class="inline-block bg-black text-white rounded-lg px-5 py-3 hover:bg-gray-800 transition">
 					Staking schema
 				</a>
@@ -558,9 +429,9 @@
 					<div class="p-6 bg-emerald-600 text-white rounded-xl shadow-lg h-full flex flex-col justify-center">
 						<h3 class="text-2xl font-bold mb-4">Execution & Consensus Layer</h3>
 						<p class="text-emerald-100 mb-6 text-sm">
-							The foundation of Ethereum staking. Set up your base node before choosing a validator type.
+							The foundation of Gnosis staking. Set up your base node before choosing a validator type.
 						</p>
-						<a href="/ethereum-staking/full-guide"
+						<a href="/gnosis-staking/full-guide"
 							class="inline-block bg-white text-emerald-700 font-semibold rounded-lg px-4 py-2 hover:bg-gray-100 transition">
 							Get Started
 						</a>
@@ -569,26 +440,17 @@
 				</div>
 				<div>
 					<div class="grid grid-cols-2 gap-6">
-						<a href="/ethereum-staking/full-guide/solo" 
+						<a href="/gnosis-staking/full-guide/solo" 
 						class="border rounded-lg p-6 text-center hover:shadow transition">
 						<img src="/logo/ethereum.svg" alt="Ethereum" class="mx-auto mb-3 w-12">
 						<h5 class="font-medium">Solo</h5>
 						</a>
-						<a href="/ethereum-staking/full-guide/rocketpool" 
-						class="border rounded-lg p-6 text-center hover:shadow transition">
-						<img src="/logo/rocketpool.webp" alt="Rocketpool" class="mx-auto mb-3 w-12">
-						<h5 class="font-medium">Rocketpool</h5>
-						</a>
-						<a href="/ethereum-staking/full-guide/stakewise" 
+						<a href="/gnosis-staking/full-guide/stakewise" 
 						class="border rounded-lg p-6 text-center hover:shadow transition">
 						<img src="/logo/stakewise.svg" alt="Stakewise" class="mx-auto mb-3 w-12">
 						<h5 class="font-medium">Stakewise</h5>
 						</a>
-						<a href="/ethereum-staking/full-guide/lido" 
-						class="border rounded-lg p-6 text-center hover:shadow transition">
-						<img src="/logo/lido.png" alt="Lido" class="mx-auto mb-3 w-12">
-						<h5 class="font-medium">Lido</h5>
-						</a>
+						
 					</div>
 					<p class="text-center text-gray-700 mt-2">Validator type</p>
 				</div>
@@ -596,27 +458,23 @@
 		</div>
 	</section>
 
-
-
 	<section class="container mx-auto px-6 mb-20">
 		<h2 class="text-3xl font-semibold mb-4">
 			Client-based interactive <span class="text-green-600">guides</span>
 		</h2>
 		<p class="text-gray-700 leading-relaxed">
 			Get help with installation, updates, maintenance, and issue-solving for staking clients.  
-			Explore our <a href="/ethereum-staking/clients" target="_blank" 
-			class="text-emerald-600 font-medium hover:underline">detailed overview of Ethereum clients</a>.
+			Explore our <a href="/gnosis-staking/clients" target="_blank" 
+			class="text-emerald-600 font-medium hover:underline">detailed overview of Gnosis clients</a>.
 		</p>
 
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
 				<div>
 					<h3 class="font-semibold mb-3">Execution clients</h3>
 					<div class="flex flex-wrap gap-2">
 					<a href="/nethermind" class="border rounded px-4 py-2 hover:shadow">Nethermind</a>
 					<a href="/erigon" class="border rounded px-4 py-2 hover:shadow">Erigon</a>
-					<a href="/geth" class="border rounded px-4 py-2 hover:shadow">Geth</a>
 					<a href="/reth" class="border rounded px-4 py-2 hover:shadow">Reth</a>
-					<a href="/besu" class="border rounded px-4 py-2 hover:shadow">Besu</a>
 					</div>
 				</div>
 				<div>
@@ -625,19 +483,10 @@
 					<a href="/lighthouse" class="border rounded px-4 py-2 hover:shadow">Lighthouse</a>
 					<a href="/lodestar" class="border rounded px-4 py-2 hover:shadow">Lodestar</a>
 					<a href="/teku" class="border rounded px-4 py-2 hover:shadow">Teku</a>
-					<a href="/prysm" class="border rounded px-4 py-2 hover:shadow">Prysm</a>
 					</div>
-				</div>
-				<div>
-					<h3 class="font-semibold mb-1">MEV clients</h3>
-					<p class="text-sm text-gray-600 mb-3">
-					(<a href="/ethereum-staking/mev-relay-list" class="text-blue-600 hover:underline">MEV Relays</a>)
-					</p>
-					<a href="/mev-boost" class="border rounded px-4 py-2 hover:shadow">MevBoost</a>
 				</div>
 		</div>
 	</section>
-
 
 	<section class="container mx-auto px-6 mb-20">
 
@@ -645,74 +494,47 @@
 			Looking for a <span class="text-green-600">simpler way?</span>
 			</h2>
 			<p class="text-gray-700 mb-6">
-			There are a bunch of toolkits that simplifies the process of setting up and maintaining an Ethereum Node.
+			There are toolkits that simplifies the process of setting up and maintaining an Ethereum Node.
 			</p>
 			<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-				<a href="https://www.stereum.com/" target="_blank" class="border rounded px-4 py-3 text-center hover:shadow">Stereum</a>
 				<a href="https://docs.dappnode.io/docs/user/install/overview/" target="_blank" class="border rounded px-4 py-3 text-center hover:shadow">DAppNode OS</a>
-				<a href="https://ethereum-on-arm-documentation.readthedocs.io/en/latest/quick-guide/about-quick-start.html" target="_blank" class="border rounded px-4 py-3 text-center hover:shadow">Ethereum on ARM</a>
-				<a href="https://github.com/stake-house/eth-wizard" target="_blank" class="border rounded px-4 py-3 text-center hover:shadow">ETH-Wizard</a>
-				<a href="https://docs.sedge.nethermind.io/docs/quickstart/complete-guide" target="_blank" class="border rounded px-4 py-3 text-center hover:shadow">Nethermind Sedge</a>
-				<a href="https://ethdocker.com/" target="_blank" class="border rounded px-4 py-3 text-center hover:shadow">ETH Docker</a>
-				<a href="https://launchnodes.gitbook.io/node-set-up-instructions" target="_blank" class="border rounded px-4 py-3 text-center hover:shadow">Launchnodes</a>
 			</div>
 	</section>
 
-<section class="bg-black text-white py-20">
-  <div class="container mx-auto px-6">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6">
-        Ethereum staking <span class="text-emerald-400">Emergency guide</span>
-      </h2>
-      <p class="text-lg leading-relaxed mb-8">
-        <strong>Did something go wrong during Ethereum staking?</strong> 
-        Stay calm and open our emergency guide, which will walk you through the situation —
-        from analyzing the issue to choosing the best possible steps to resolve it.
-      </p>
-      <a href="/ethereum-staking/emergency"
-         class="inline-block bg-white text-black font-semibold rounded-full px-8 py-3 text-lg shadow-md 
-                hover:bg-gray-200 hover:shadow-lg transition">
-        	Ethereum staking Emergency guide
-      </a>
-    </div>
-  </div>
-</section>
+	<section class="bg-black text-white py-20">
+		<div class="container mx-auto px-6">
+			<div class="max-w-3xl mx-auto text-center">
+			<h2 class="text-3xl font-bold mb-6">
+				Gnosis staking <span class="text-emerald-400">Emergency guide</span>
+			</h2>
+			<p class="text-lg leading-relaxed mb-8">
+				<strong>Did something go wrong during Gnosis staking?</strong> 
+				Stay calm and open our emergency guide, which will walk you through the situation —
+				from analyzing the issue to choosing the best possible steps to resolve it.
+			</p>
+			<a href="/gnosis-staking/emergency"
+				class="inline-block bg-white text-black font-semibold rounded-full px-8 py-3 text-lg shadow-md 
+						hover:bg-gray-200 hover:shadow-lg transition">
+					Gnosis staking Emergency guide
+			</a>
+			</div>
+		</div>
+	</section>
 
-
-	<!-- Airdrop Monitor -->
-<section class="py-10">
-  <div class="container mx-auto px-6 text-center">
-    <h2 class="text-2xl font-semibold mb-4">Airdrop Monitor</h2>
-    <p class="text-gray-700">
-      There has been associated airdrops adding extra revenue of validating. 
-      See them at <a href="https://ethstaker.cc/airdrops" target="_blank" 
-         rel="nofollow noopener noreferrer" 
-         class="text-blue-600 hover:underline">
-        https://ethstaker.cc/airdrops</a>.
-    </p>
-  </div>
-</section>
-
-	
-{{> scripts/dynamic-label}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
-<script>var ethStoreData = {{{ethStoreData}}}, beaconchainData = {{{beaconData}}}, etherchainData = {{{chainData}}}, chartsUIconfig = {{{chartsUIconfig}}};</script>
+<script>var beaconchainData = {{{beaconData}}};</script>
+<script>var etherchainData = {{{chainData}}};</script>
+<script>var dashboardData={{{valuationData}}};</script>
+<script>var circulationData={{{circulationData}}};</script>
+<script>var depositContract = {{{depositContract.chart}}};</script>
+<script>var chartsUIconfig = {{{chartsUIconfig}}};</script>
 <script type="text/javascript" src="/js/chart-presenter.js"></script>
-{{!--<script type="text/javascript" src="/js/charts/eth-overview.js"></script>--}}
-<script type="text/javascript" src="/js/charts/eth-stakingapr.js"></script>
 <script type="text/javascript" src="/js/charts/validators.js"></script>
 <script type="text/javascript" src="/js/charts/staked-balance.js"></script>
-<script type="text/javascript" src="/js/charts/tvl-balance.js"></script>
+<script type="text/javascript" src="/js/charts/depositcontractbalance.js"></script>
 <script type="text/javascript" src="/js/charts/blocks.js"></script>
 <script>charts.ActivateLazyLoad();</script>
-<script>
-	function Unpack(e){
-		const tableElement = document.getElementById(e.dataset.table);
-		tableElement.parentElement.classList.remove('max-h-72');
-		e.style.display = 'none';
-	}
-</script>
 </main>
 {{> footer_tailwind}}
 </body>

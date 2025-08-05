@@ -22,9 +22,9 @@ function GnosisController(){
 }
 
 GnosisController.prototype.Request = function(req,res, next){
-    res.locals.page_hbs = 'gnosis-staking';
+    res.locals.page_hbs = 'gnosis/gnosis-staking';
     res.locals.layout_hbs = "standard";
-    res.locals.css_file = 'chain';
+    res.locals.css_file = 'chainpage';
     res.locals.title = `All around Gnosis Staking at one place.`;
     res.locals.metaDescription = `Stakers.space is a space full of guides, tools and advices targeted at Gnosis staking.`;
     

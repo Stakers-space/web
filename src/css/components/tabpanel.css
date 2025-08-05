@@ -1,0 +1,43 @@
+.tabselector {
+  display: block;
+}
+.tabselector nav .tab {
+  display: block;
+  background: none;
+  border: none;
+  flex-grow: 1;
+  text-align: center;
+  padding: 0.5rem;
+  font-weight: bold;
+  font-size: 1.15rem;
+}
+@media (min-width: 1000px) {
+  .tabselector nav .tab {
+    display: grid;
+  }
+}
+.tabselector nav .tab.selected {
+  outline: none;
+  cursor: auto;
+  border-bottom: 2px solid #00ca72;
+}
+.tabselector .tabpanel {
+  display: none;
+  order: 1;
+  padding: 2rem;
+  background-color: #ecffe7;
+}
+.tabselector .tabpanel.selected {
+  outline: none;
+  display: block;
+}
+.tabselector.decent .tab {
+  padding: unset;
+  font-weight: unset;
+  font-size: unset;
+  line-height: 26px;
+}
+.tabselector.decent .tabpanel {
+  padding: unset;
+  background-color: unset;
+}

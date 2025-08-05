@@ -7,7 +7,7 @@ router.get('/', function(req,res){
         pageUrl: 'https://stakers.space',//('https://' + req.appData.host + req.canonicalUrl),
         title: "Contact Us | Stakers.space", //req.appData.meta.title,
         metaDescription: "Feel free to contact us regarding staking related services.",
-        cssFile: "hp"
+        cssFile: "chain"
     });
 });
 
