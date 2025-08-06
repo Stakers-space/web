@@ -2,6 +2,26 @@
   "all": [
     {
       "partitionKey": "news",
+      "t": 1754489565503,
+      "m": "<strong>Lodestar</strong> version 1.33.0 released",
+      "a": "https://stakers.space/lodestar",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "7c777d5d-9424-4cba-a8f7-5bb7e9cba337",
+      "_rid": "VPZWAPgLfulJLwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulJLwAAAAAAAA==/",
+      "_etag": "\"6b003796-0000-1600-0000-689363550000\"",
+      "_attachments": "attachments/",
+      "_ts": 1754489685,
+      "ht": "06.08.2025, 16:12:45",
+      "ta": "about 4 hours ago",
+      "img": "gnosis"
+    },
+    {
+      "partitionKey": "news",
       "t": 1745916623836,
       "m": "Pectra Fork on April 30th, 2025, 14:03:40 UTC (epoch 1337856)",
       "a": "https://x.com/StakersSpace/status/1913222933830304062",
@@ -161,6 +181,26 @@
     }
   ],
   "clients": [
+    {
+      "partitionKey": "news",
+      "t": 1754489565503,
+      "m": "<strong>Lodestar</strong> version 1.33.0 released",
+      "a": "https://stakers.space/lodestar",
+      "c": [
+        "eth",
+        "gno",
+        "client"
+      ],
+      "id": "7c777d5d-9424-4cba-a8f7-5bb7e9cba337",
+      "_rid": "VPZWAPgLfulJLwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulJLwAAAAAAAA==/",
+      "_etag": "\"6b003796-0000-1600-0000-689363550000\"",
+      "_attachments": "attachments/",
+      "_ts": 1754489685,
+      "ht": "06.08.2025, 16:12:45",
+      "ta": "about 4 hours ago",
+      "img": "gnosis"
+    },
     {
       "partitionKey": "news",
       "t": 1736181707441,

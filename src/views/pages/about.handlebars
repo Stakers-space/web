@@ -1,40 +1,115 @@
+<body id="body" class="bg-white text-gray-900">
 {{> header_amp}}
-<main class="grid">
-	<h1 class="mt-60">About Stakers.space</h1>
-	<p>Hey everyone! 👋</p>
-	<p>I would like to introduce you to a new project I’ve started around staking - the <a href="https://stakers.space">https://stakers.space</a>. Here’s what it’s all about and why I’ve created it:</p>
-	<h2>🔹 Staking Resources</h2>
-	<p>Over the years of staking, I’ve gathered a lot of hands-on experience and created various scripts and materials for my own use. Now, I’m starting to share these resources with the community through the website. If you would like to look at some resources, you can check GitHub: <a href="https://github.com/Stakers-space/staking-scripts" target="_blank">https://github.com/Stakers-space/staking-scripts</a>.</p>
-	<h2>🔹 Guides and materials also for minority chains such as <a href="https://www.gnosis.io/" target="_blank">Gnosis</a> and others</h2>
-	<p>While there’s extensive guidance for Ethereum staking, e.g. Gnosis staking resources are limited. Even though there are similarities, specific guides can really help beginners build confidence in staking on Gnosis and others. Also, for example testing Gnosis staking setups can be challenging due to limited client support for Chiado testnet.</p>
-	<h2>🔹 The Goal</h2>
-	<p>My goal with Stakers.space is to collect all essential information about staking in one place, making it easier for everyone to get started and stay safe. Here’s what’s currently available:</p>
-	<ul>
-		<li><strong>Step-by-step guides</strong> with a focus on simplicity and security, available as 1-page complete guide as well as <a href="/clients">client-specific guides</a>. Check out an example of 1-page guide for <a href="/ethereum-staking/full-guide">Ethereum</a> and <a href="/gnosis-staking/full-guide">Gnosis</a>.</li>
-		<li><strong>Guides for multi-chain setups</strong> (e.g., Ethereum + Gnosis) <strong>and multi-service configurations</strong> (e.g., Solo Staking + StakeWise + Rocketpool) on a single node.</li>
-		<li><strong>Overview of compatible clients</strong> for <a href="/ethereum-staking/clients">Ethereum</a> and <a href="/gnosis-staking/clients">Gnosis staking</a></li>
-		<li><strong>Emergency procedures</strong> to troubleshoot issues as they arise.</li>
-		<li><strong>Client-based encrypted Account section</strong> for monitoring staking and securely storing server settings: <a href="/account">https://stakers.space/account</a></li>
-		<li><strong>Automated scripts and instructions</strong> to address common issues.</li>
-	</ul>
-	<h2>🔹 Open Source and Offline Availability</h2>
-	<p>The project is designed to ensure that all key informational content is independent of a database structure. This means anyone will have an option to download the entire website as an open-source package and access all guides locally. This setup ensures that the guides remain accessible to anyone, even if something were to happen to the website.</p>
-	<h2>⚠️ Project Status</h2>
-	<p>This project is still in beta, so it’s a work in progress. I’m continuously working to improve the UX, simplify the design, and add new tools and resources that will make Gnosis staking even more accessible. Also, I need to review the text and correct errors.</p>
-	<p class="mt-20">Thanks for checking it out, and I’m looking forward to any feedback or questions you might have!</p>
 
-	<aside class="mt-60 separator-horizontal separator-before">
-		<br>
-		<h2 class="mt-0">Support Stakers.space</h2>
-		<p>You can support stakers.space by using its services</p>
-		<ul>
-			<li>Using Stakers.space vaults (in progress)</li>
-			<li>Using Stakers.space smoothing pool (in progress)</li>
-			<li><a href="/cloud-node">Renting a staking server</a></li>
-			<li>Using other <a href="/pricing">paid services</a> under <a href="/account">account</a> or tailored tools development</li>
-			<li>Using referral links to exchanges and eshops</li>
+<main class="container mx-auto px-6 lg:px-20 py-12">
+ <ul class="broadcrumbs mt-15" vocab="https://schema.org/" typeof="BreadcrumbList">
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/" class="hover:underline">
+					<span property="name">Stakers.space</span>
+				</a>
+				<meta property="position" content="1">
+			</li>
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/about" class="hover:underline">
+					<span property="name">About</span>
+				</a>
+				<meta property="position" content="2">
+			</li>
 		</ul>
-	</aside>
+  <h1 class="text-4xl lg:text-5xl font-bold mb-10">About Stakers.space</h1>
+
+  <p class="mb-6">Hey everyone! 👋</p>
+
+  <p class="mb-6">
+    I would like to introduce you to a new project I’ve started around staking — 
+    the <a href="https://stakers.space" class="text-emerald-700 hover:underline">stakers.space</a>. 
+    Here’s what it’s all about and why I’ve created it:
+  </p>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4">🔹 Staking Resources</h2>
+  <p class="mb-6">
+    Over the years of staking, I’ve gathered a lot of hands-on experience and created various scripts and materials for my own use.
+    Now, I’m starting to share these resources with the community through the website. 
+    You can check GitHub: 
+    <a href="https://github.com/Stakers-space/staking-scripts" target="_blank" class="text-emerald-700 hover:underline">
+      https://github.com/Stakers-space/staking-scripts
+    </a>.
+  </p>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4">
+    🔹 Guides and materials also for minority chains such as 
+    <a href="https://www.gnosis.io/" target="_blank" class="text-emerald-700 hover:underline">Gnosis</a> and others
+  </h2>
+  <p class="mb-6">
+    While there’s extensive guidance for Ethereum staking, e.g. Gnosis staking resources are limited.
+    Even though there are similarities, specific guides can really help beginners build confidence in staking on Gnosis and others.
+    Also, for example testing Gnosis staking setups can be challenging due to limited client support for Chiado testnet.
+  </p>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4">🔹 The Goal</h2>
+  <p class="mb-4">My goal with Stakers.space is to collect all essential information about staking in one place, making it easier for everyone to get started and stay safe. Here’s what’s currently available:</p>
+
+  <ul class="list-disc list-inside space-y-2 mb-10">
+    <li>
+      <strong>Step-by-step guides</strong> with a focus on simplicity and security, available as 
+      1-page complete guide as well as 
+      <a href="/clients" class="text-emerald-700 hover:underline">client-specific guides</a>. 
+      Example guides for 
+      <a href="/ethereum-staking/full-guide" class="text-emerald-700 hover:underline">Ethereum</a> and 
+      <a href="/gnosis-staking/full-guide" class="text-emerald-700 hover:underline">Gnosis</a>.
+    </li>
+    <li>
+      <strong>Guides for multi-chain setups</strong> (e.g., Ethereum + Gnosis) 
+      and <strong>multi-service configurations</strong> 
+      (e.g., Solo Staking + StakeWise + Rocketpool) on a single node.
+    </li>
+    <li>
+      <strong>Overview of compatible clients</strong> for 
+      <a href="/ethereum-staking/clients" class="text-emerald-700 hover:underline">Ethereum</a> and 
+      <a href="/gnosis-staking/clients" class="text-emerald-700 hover:underline">Gnosis staking</a>
+    </li>
+    <li><strong>Emergency procedures</strong> to troubleshoot issues as they arise.</li>
+    <li>
+      <strong>Client-based encrypted Account section</strong> for monitoring staking and securely storing server settings: 
+      <a href="/account" class="text-emerald-700 hover:underline">https://stakers.space/account</a>
+    </li>
+    <li><strong>Automated scripts and instructions</strong> to address common issues.</li>
+  </ul>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4">🔹 Open Source and Offline Availability</h2>
+  <p class="mb-6">
+    The project is designed to ensure that all key informational content is independent of a database structure.
+    Anyone will have an option to download the entire website as an open-source package and access all guides locally —
+    ensuring the content remains accessible even if something happens to the site.
+  </p>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4">⚠️ Project Status</h2>
+  <p class="mb-10">
+    This project is still in beta, so it’s a work in progress.
+    I’m continuously working to improve the UX, simplify the design, and add new tools and resources that will make Gnosis staking even more accessible.
+    Also, I need to review the text and correct errors.
+  </p>
+
+  <p class="mt-20 mb-16">Thanks for checking it out, and I’m looking forward to any feedback or questions you might have!</p>
+
+  <!-- Support Section -->
+  <aside class="mt-24 border-t pt-12">
+    <h2 class="text-2xl font-semibold mb-4">Support Stakers.space</h2>
+    <p class="mb-4">You can support Stakers.space by using its services:</p>
+    <ul class="list-disc list-inside space-y-2">
+      <li>Using Stakers.space vaults (in progress)</li>
+      <li>Using Stakers.space smoothing pool (in progress)</li>
+      <li>
+        <a href="/cloud-node" class="text-emerald-700 hover:underline">Renting a staking server</a>
+      </li>
+      <li>
+        Using other <a href="/pricing" class="text-emerald-700 hover:underline">paid services</a> under 
+        <a href="/account" class="text-emerald-700 hover:underline">account</a> or tailored tools development
+      </li>
+      <li>Using referral links to exchanges and eshops</li>
+    </ul>
+  </aside>
 </main>
-{{> footer_amp}}
+
+{{> footer_amp_tailwind}}
 </body>

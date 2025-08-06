@@ -1,0 +1,69 @@
+{{> header_amp}}
+<main class="mb-40">
+  <section class="grid gap-8 px-4 md:px-10">
+    <h1 class="text-4xl font-bold">VPNs</h1>
+
+    <div>
+      <h2 class="text-2xl font-semibold mt-10">VPNs for hiding node IP</h2>
+      <p class="mt-2">There are multiple services that provide VPN servers to use. Below you can find 3 of them. Choose the one of your preference and install it according to the corresponding guide.</p>
+
+      <div class="overflow-auto mt-6">
+        <table class="min-w-full table-auto border border-gray-200 text-left">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="px-4 py-3 border"> </th>
+              <th class="px-4 py-3 border">Mullvad VPN</th>
+              <th class="px-4 py-3 border">Proton VPN</th>
+              <th class="px-4 py-3 border">Nord VPN</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <th class="px-4 py-3 border font-medium">Payment options</th>
+              <td class="px-4 py-3 border"> <strong>Crypto</strong>, <strong>Cash</strong>, Credit/Debit card, bank Wire, ... </td>
+              <td class="px-4 py-3 border"> <strong><a href="https://protonvpn.com/support/vpn-bitcoin-payments" target="_blank" rel="nofollow noopener noreferrer" class="underline text-blue-600">Bitcoin</a></strong>, <strong>Cash</strong>, Credit/Debit card, PayPal </td>
+              <td class="px-4 py-3 border"> <strong>Crypto*</strong>, Credit/Debit card, PayPal </td>
+            </tr>
+            <tr>
+              <th class="px-4 py-3 border font-medium">Allows Full anonymity</th>
+              <td class="px-4 py-3 border">Yes</td>
+              <td class="px-4 py-3 border">Yes</td>
+              <td class="px-4 py-3 border">Partly, it requires "your" personal address during billing</td>
+            </tr>
+            <tr>
+              <th class="px-4 py-3 border font-medium">Servers</th>
+              <td class="px-4 py-3 border"><a href="https://mullvad.net/en/servers" target="_blank" class="text-blue-600 underline" rel="nofollow noopener noreferrer">Mullvad Servers</a></td>
+              <td class="px-4 py-3 border"><a href="https://protonvpn.com/vpn-servers" target="_blank" class="text-blue-600 underline" rel="nofollow noopener noreferrer">ProtonVPN Servers</a></td>
+              <td class="px-4 py-3 border"><a href="https://nordvpn.com/servers/" target="_blank" class="text-blue-600 underline" rel="nofollow noopener noreferrer">NordVPN Servers</a></td>
+            </tr>
+            <tr>
+              <th class="px-4 py-3 border font-medium">Price</th>
+              <td class="px-4 py-3 border"><a href="https://mullvad.net/en/pricing" target="_blank" class="text-blue-600 underline" rel="nofollow noopener noreferrer">Mullvad Pricing</a></td>
+              <td class="px-4 py-3 border"><a href="https://protonvpn.com/pricing" target="_blank" class="text-blue-600 underline" rel="nofollow noopener noreferrer">ProtonVPN Pricing</a></td>
+              <td class="px-4 py-3 border"><a href="https://nordvpn.com/pricing/" target="_blank" class="text-blue-600 underline" rel="nofollow noopener noreferrer">NordVPN Pricing</a></td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 border"> </td>
+              <td class="px-4 py-3 border"><a href="https://vrealmatic.com/ubuntu-server/mullvad-vpn" target="_blank" rel="nofollow noopener noreferrer" class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800">Install</a></td>
+              <td class="px-4 py-3 border"><a href="https://vrealmatic.com/ubuntu-server/proton-vpn" target="_blank" rel="nofollow noopener noreferrer" class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800">Install</a></td>
+              <td class="px-4 py-3 border"><a href="https://nordvpn.com/download/linux/" target="_blank" rel="nofollow noopener noreferrer" class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800">Install</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="mt-20">
+      <h2 class="text-2xl font-semibold">VPNs for remote connection</h2>
+      <p class="mt-2">VPNs below allow remote connection to your staking node. It can be used if the node is not behind public IP.</p>
+
+      <div class="grid md:grid-cols-2 gap-4 mt-6">
+        <a href="https://github.com/Stakers-space/staking-scripts/tree/main/mullvad/enable_tailscale" target="_blank" class="bg-gray-100 p-6 rounded text-center font-medium hover:bg-gray-200 transition" rel="nofollow noopener noreferrer">
+          <strong>TailScale VPN (With Mullvad)</strong>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+{{> footer_amp_tailwind}}
+</body>

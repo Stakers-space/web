@@ -14,6 +14,7 @@ class ClientPagePresenter {
 		let client = null;
 		let clientSegment = "overview";
 		res.locals.hbsTemplate = "client";
+		res.locals.css_file = "docs"; // default css file for client pages
 		if (segments.length === 1) {
 			client = segments[0];
 		} else if (segments.length === 2) {
@@ -124,8 +125,9 @@ class ClientPagePresenter {
 				break;
 			default:
 				// default clients page
-				res.locals.hbsTemplate = "clients";
+				res.locals.hbsTemplate = "pages/clients";
 				res.locals.cliLayer = "all";
+				res.locals.css_file = "pages";
 		}
 
 		switch(clientSegment) {
@@ -206,9 +208,9 @@ class ClientPagePresenter {
 	};
 
 	ClientsOverview(req,res,next){
-		res.locals.page_hbs = "clients";
+		res.locals.page_hbs = "pages/clients";
 		res.locals.layout_hbs = "amp";
-		res.locals.css_file = "docs";
+		res.locals.css_file = "pages";
 		res.locals.title = `${res.locals.chainName} staking clients overview`;
     	res.locals.metaDescription = `Execution, Consensus, MEV and service-based clients overview for ${res.locals.chainName} staking.`;
 				

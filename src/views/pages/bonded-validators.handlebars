@@ -1,0 +1,104 @@
+{{> header_amp}}
+<main class="max-w-6xl mx-auto px-6 lg:px-12 py-12 space-y-12">
+  <section class="space-y-8">
+    <h1 class="text-4xl font-bold text-gray-900">Bonded Validators</h1>
+    <p class="text-gray-700 text-lg">
+      A simplified way to run validators with lower requirements.
+    </p>
+
+    <section>
+      <h2 class="text-2xl font-semibold mb-3">What Are Bonded Validators?</h2>
+      <p class="text-gray-700">
+        Bonded validators enable you to operate an Ethereum validator with a reduced initial ETH investment. 
+        Instead of the traditional 32 ETH deposit, you can participate with much less using bonded protocols.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold mb-3">How Bonded Validators Work</h2>
+      <ol class="list-decimal list-inside space-y-2 text-gray-700">
+        <li><strong>Liquid Staking:</strong> Users stake ETH through protocols like Lido or Rocketpool.</li>
+        <li><strong>Node Operators:</strong> Operators provide ETH as collateral to ensure validator reliability.</li>
+        <li><strong>Validator Setup:</strong> Staked ETH is combined to meet the 32 ETH requirement.</li>
+        <li><strong>Rewards Distribution:</strong> Fees are shared between liquid stakers and node operators.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold mb-6">Compare Protocols</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-200 text-sm">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="px-4 py-3 border">Protocol</th>
+              <th class="px-4 py-3 border">ETH Bond</th>
+              <th class="px-4 py-3 border">ETH Matched</th>
+              <th class="px-4 py-3 border">Additional Bond</th>
+              <th class="px-4 py-3 border">Fee</th>
+              <th class="px-4 py-3 border">Rewards</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 border font-medium">Rocketpool</td>
+              <td class="px-4 py-3 border">8 ETH</td>
+              <td class="px-4 py-3 border">24 ETH</td>
+              <td class="px-4 py-3 border">2.4 ETH in RPL</td>
+              <td class="px-4 py-3 border">14% out of 14% total</td>
+              <td class="px-4 py-3 border">8% APR on RPL</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 border font-medium">Stader</td>
+              <td class="px-4 py-3 border">4 ETH</td>
+              <td class="px-4 py-3 border">28 ETH</td>
+              <td class="px-4 py-3 border">0.4 ETH in SD</td>
+              <td class="px-4 py-3 border">6% out of 10% total</td>
+              <td class="px-4 py-3 border">7.97% APR on SD</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 border font-medium">Lido</td>
+              <td class="px-4 py-3 border">2 ETH</td>
+              <td class="px-4 py-3 border">32 ETH</td>
+              <td class="px-4 py-3 border">None</td>
+              <td class="px-4 py-3 border">8% out of 10% total</td>
+              <td class="px-4 py-3 border">Bond in stETH</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 border font-medium">Ether.fi</td>
+              <td class="px-4 py-3 border">WIP</td>
+              <td class="px-4 py-3 border">WIP</td>
+              <td class="px-4 py-3 border">WIP</td>
+              <td class="px-4 py-3 border">WIP</td>
+              <td class="px-4 py-3 border"></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3 border font-medium">Puffer</td>
+              <td class="px-4 py-3 border">WIP</td>
+              <td class="px-4 py-3 border">WIP</td>
+              <td class="px-4 py-3 border">WIP</td>
+              <td class="px-4 py-3 border">WIP</td>
+              <td class="px-4 py-3 border"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold mt-12 mb-6">Protocols to Operate Bonded Validators</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="/lido" class="bg-gray-100 rounded-lg p-6 text-center shadow hover:bg-gray-200 transition">
+          <strong>Set Up Lido</strong>
+        </a>
+        <a href="/rocketpool" class="bg-gray-100 rounded-lg p-6 text-center shadow hover:bg-gray-200 transition">
+          <strong>Set Up Rocketpool</strong>
+        </a>
+        <a href="/stakewise" class="bg-gray-100 rounded-lg p-6 text-center shadow hover:bg-gray-200 transition">
+          <strong>Set Up StakeWise</strong>
+        </a>
+      </div>
+    </section>
+  </section>
+</main>
+{{> footer_amp_tailwind}}
+</body>

@@ -1,0 +1,76 @@
+
+
+<body id="body">
+{{> header}}
+
+ <main class="max-w-3xl mx-auto px-6 py-12">
+    
+    <h1 class="text-4xl font-bold mb-8">{{chainName}} staking news</h1>
+
+    <div class="mb-6 tabselector decent">
+		<nav class="flex flex-wrap gap-2 items-center">
+			<span class="text-sm font-medium text-gray-600">News filtration:</span>
+			
+			<button class="tab selected px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md text-sm font-medium cursor-pointer" data-tabpanel="1" type="button">
+				All
+			</button>
+			<button class="tab px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md text-sm font-medium cursor-pointer" data-tabpanel="2" type="button">
+			Fundamentals
+			</button>
+			<button class="tab px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md text-sm font-medium cursor-pointer" data-tabpanel="3" type="button">
+			Clients
+			</button>
+		</nav>
+
+		<div class="tabpanel selected">
+			<ul class="divide-y divide-gray-200">
+				{{#each newsfeed.all}}
+				<li class="py-4 flex justify-between items-center">
+				<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer"
+					class="flex items-center gap-2 text-blue-600 hover:underline">
+					{{{this.m}}}
+				</a>
+				<span class="text-sm text-gray-500 whitespace-nowrap" title="{{{this.ht}}}">
+					{{{this.ta}}}
+				</span>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+
+		<div class="tabpanel hidden">
+			<ul class="divide-y divide-gray-200">
+				{{#each newsfeed.fundamental}}
+				<li class="py-4 flex justify-between items-center">
+				<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer"
+					class="flex items-center gap-2 text-blue-600 hover:underline">
+					{{{this.m}}}
+				</a>
+				<span class="text-sm text-gray-500 whitespace-nowrap" title="{{{this.ht}}}">
+					{{{this.ta}}}
+				</span>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+
+		<div class="tabpanel hidden">
+			<ul class="divide-y divide-gray-200">
+				{{#each newsfeed.clients}}
+				<li class="py-4 flex justify-between items-center">
+				<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer"
+					class="text-blue-600 hover:underline">
+					{{{this.m}}}
+				</a>
+				<span class="text-sm text-gray-500 whitespace-nowrap" title="{{{this.ht}}}">
+					{{{this.ta}}}
+				</span>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+    </div>
+  </main>
+  {{> footer_tailwind}}
+  {{> scripts/tabselector}}
+</body>

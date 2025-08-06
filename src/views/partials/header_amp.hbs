@@ -1,9 +1,8 @@
 <header id="header" class="h grid egrid">
-	<a href="/" class="h-logo center-vertical">Stakers.space</a>
+	<a href="/" class="h-logo center-vertical flex items-center space-x-6">Stakers.space</a>
 	<div class="h-bar">
-		<button id="hamburger" class="egrid h-mbtn" tabindex="1" role="button" on="tap:body.toggleClass(class='active-menu')"><span></span><span></span><span></span></button>
 		<div class="egrid h-cnt">
-			<nav class="h-nav center-vertical">
+			<nav class="h-nav center-vertical block lg:flex lg:items-center lg:space-x-6">
 				<a href="/chains">Chains</a>
 				<a href="/guides">Guides</a>
 				<a href="/clients">Clients</a>
@@ -12,6 +11,8 @@
 				<a href="/about">About</a>
 			</nav>
 		</div>
-		<a href="/dashboard" class="h-dashboard btn btn-black btn-rounded">My Account</a>
+		<a href="/dashboard" class="h-dashboard btn btn-black btn-rounded inline-block bg-black text-white rounded-md px-4 py-2 text-center capitalize no-underline transition 
+          duration-200 hover:bg-gray-800">My Account</a>
+		  <button id="hamburger" class="egrid h-mbtn" tabindex="1" role="button" on="tap:body.toggleClass(class='active-menu')"><span></span><span></span><span></span></button>
 	</div>
 </header>

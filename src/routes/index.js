@@ -44,8 +44,6 @@ router.use('/test', require('./test'));
 router.use('/dashboard', require('./dashboard'));
 router.use('/charts', require('./charts'));
 router.use('/account', require('./account'));
-router.use('/contact', require('./contact'));
-router.use('/pricing', require('./pricing'));
 router.use('/clients', require('./client'));
 // Execution clients
 router.use('/nethermind', require('./client'));
@@ -71,6 +69,22 @@ router.use('/lido', (req, res) => {
 // Mev clients
 router.use('/mev-boost', require('./client'));
 router.use('/guides', require('./guides'));
+
+router.use('/contact', function(req,res,next){
+    res.locals.page_hbs = 'pages/contact';
+    res.locals.layout_hbs = 'amp';
+    res.locals.title = "Contact Us | Stakers.space", //req.appData.meta.title,
+    res.locals.metaDescription = "Feel free to contact us regarding staking related services.",
+    next();
+}, Response);
+
+router.use('/pricing', function(req,res,next){
+    res.locals.page_hbs = 'pages/pricing';
+    res.locals.layout_hbs = 'amp';
+    res.locals.title = `Stakers.space pricing`;
+    res.locals.metaDescription = null;
+    next();
+}, Response);
 
 router.use('/about', function(req,res,next){
     res.locals.page_hbs = 'pages/about';
@@ -105,7 +119,7 @@ router.use('/disclaimer', function(req,res,next){
 }, Response);
 
 router.use('/chains', function(req,res,next){
-    res.locals.page_hbs = 'chains';
+    res.locals.page_hbs = 'pages/chains';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Chains | Stakers.space`;
     res.locals.metaDescription = null;
@@ -114,7 +128,7 @@ router.use('/chains', function(req,res,next){
 
 
 router.use('/cloud-node', function(req,res,next){
-    res.locals.page_hbs = 'cloud-node';
+    res.locals.page_hbs = 'pages/cloud-node';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Cloud staking node | Stakers.space`;
     res.locals.metaDescription = null;
@@ -122,7 +136,7 @@ router.use('/cloud-node', function(req,res,next){
 }, Response);
 
 router.use('/custom-node', function(req,res,next){
-    res.locals.page_hbs = 'custom-node';
+    res.locals.page_hbs = 'pages/custom-node';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Custom staking node | Stakers.space`;
     res.locals.metaDescription = null;
@@ -130,7 +144,7 @@ router.use('/custom-node', function(req,res,next){
 }, Response);
 
 router.use('/managed-node', function(req,res,next){
-    res.locals.page_hbs = 'managed-node';
+    res.locals.page_hbs = 'pages/managed-node';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Managed staking node | Stakers.space`;
     res.locals.metaDescription = null;
@@ -138,7 +152,7 @@ router.use('/managed-node', function(req,res,next){
 }, Response);
 
 router.use('/staking-node', function(req,res,next){
-    res.locals.page_hbs = 'staking-node';
+    res.locals.page_hbs = 'pages/staking-node';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Staking node | Stakers.space`;
     res.locals.metaDescription = null;
@@ -146,7 +160,7 @@ router.use('/staking-node', function(req,res,next){
 }, Response);
 
 router.use('/vpn', function(req,res,next){
-    res.locals.page_hbs = 'vpn';
+    res.locals.page_hbs = 'pages/vpn';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `VPN for Staking | Stakers.space`;
     res.locals.metaDescription = null;
@@ -154,7 +168,7 @@ router.use('/vpn', function(req,res,next){
 }, Response);
 
 router.use('/bonded-validators', function(req,res,next){
-    res.locals.page_hbs = 'bonded-validators';
+    res.locals.page_hbs = 'pages/bonded-validators';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Bonded validators | Stakers.space`;
     res.locals.metaDescription = null;
@@ -162,7 +176,7 @@ router.use('/bonded-validators', function(req,res,next){
 }, Response);
 
 router.use('/staking', function(req,res,next){
-    res.locals.page_hbs = 'wiki/staking';
+    res.locals.page_hbs = 'pages/staking';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `About Staking | Stakers.space`;
     res.locals.metaDescription = null;
@@ -170,7 +184,7 @@ router.use('/staking', function(req,res,next){
 }, Response);
 
 router.use('/liquid-staking', function(req,res,next){
-    res.locals.page_hbs = 'wiki/liquid-staking';
+    res.locals.page_hbs = 'pages/liquid-staking';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Liquid Staking | Stakers.space`;
     res.locals.metaDescription = null;
@@ -178,7 +192,7 @@ router.use('/liquid-staking', function(req,res,next){
 }, Response);
 
 router.use('/restaking', function(req,res,next){
-    res.locals.page_hbs = 'wiki/restaking';
+    res.locals.page_hbs = 'pages/restaking';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `ReStaking | Stakers.space`;
     res.locals.metaDescription = null;
@@ -186,7 +200,7 @@ router.use('/restaking', function(req,res,next){
 }, Response);
 
 router.use('/slashing', function(req,res, next){
-    res.locals.page_hbs = 'wiki/slashing';
+    res.locals.page_hbs = 'pages/slashing';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Slashing | Stakers.space`;
     res.locals.metaDescription = null;
@@ -194,7 +208,7 @@ router.use('/slashing', function(req,res, next){
 }, Response);
 
 router.use('/tools', function(req,res,next){
-    res.locals.page_hbs = 'tools';
+    res.locals.page_hbs = 'pages/tools';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Tools | Stakers.space`;
     res.locals.metaDescription = null;
@@ -202,7 +216,7 @@ router.use('/tools', function(req,res,next){
 }, Response);
 
 router.use('/knowledge-sources', function(req,res,next){
-    res.locals.page_hbs = 'knowledge-sources';
+    res.locals.page_hbs = 'pages/knowledge-sources';
     res.locals.layout_hbs = 'amp';
     res.locals.title = `Other Knowledge Sources | Stakers.space`;
     res.locals.metaDescription = null;
@@ -218,7 +232,7 @@ function Response(req,res){
     res.render(res.locals.page_hbs, {
         layout: res.locals.layout_hbs,
         canonicalUrl: cononicalUrl,
-        cssFile: "chain"
+        cssFile: "pages"
     });
 }
 

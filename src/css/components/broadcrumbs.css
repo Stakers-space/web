@@ -2,6 +2,11 @@
     .broadcrumbs {
         @apply flex text-sm text-gray-600 mb-5;
     }
+    .broadcrumbs:before {
+        content: '#';
+        color: #009966;
+        padding-right:5px;
+    }
     .broadcrumbs li {
         position: relative;
         display: inline;

@@ -26,7 +26,7 @@ class ClientRouter {
 			//metaDescription: null,//req.appData.meta.meta_desc,
 			lang: "en",//req.appData.meta.lang,
 			js:null,//req.appData.meta.js,
-			cssFile:"docs",//req.appData.meta.css,
+			cssFile: res.locals.css_file,//req.appData.meta.css,
 			//client: res.locals.client,
 			helpers: {}
 		})

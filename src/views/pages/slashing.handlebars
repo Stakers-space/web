@@ -1,0 +1,69 @@
+{{> header_amp}}
+<main class="max-w-5xl mx-auto px-6 lg:px-12 py-12 space-y-12">
+  <h1 class="text-4xl font-bold">Slashing</h1>
+
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">What is Slashing in Blockchain?</h2>
+    <p>Shortly, Slashing is a mechanism used in PoS blockchains to penalize validators who fail to act in the best interest of the network.</p>
+    <p>It's a punitive mechanism employed in Proof-of-Stake (PoS) blockchain networks to maintain security and incentivize honest behavior among validators. It involves penalizing validators for malicious actions or negligent behavior by reducing their staked assets or rewards. This ensures the network remains secure and discourages behaviors that could harm the blockchain ecosystem.</p>
+  </section>
+
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">How Does Slashing Work?</h2>
+    <p>In PoS networks, validators stake cryptocurrency to participate in transaction validation and block creation. However, this privilege comes with the responsibility to act in the network's best interest. When validators fail to meet these responsibilities or engage in malicious activity, slashing is triggered.</p>
+    <h3 class="text-xl font-medium mt-4">Typical reasons for slashing:</h3>
+    <ul class="list-disc list-inside space-y-2">
+      <li><strong>Double Signing</strong>: A validator signs conflicting blocks on the same network, potentially causing a "double-spend" scenario.</li>
+      <li><strong>Downtime</strong>: A validator is offline and fails to perform its duties, reducing the network's reliability.</li>
+      <li><strong>Surround Voting</strong>: A validator includes a vote that contradicts earlier commitments, undermining consensus.</li>
+    </ul>
+    <p>The exact conditions for slashing vary by protocol, but they all share the goal of protecting the network from harm.</p>
+  </section>
+
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">Consequences of Slashing</h2>
+    <p>When slashing occurs, the affected validator incurs penalties, which can include:</p>
+    <ul class="list-disc list-inside space-y-2">
+      <li><strong>Loss of Staked Assets</strong>: A portion of the validator’s stake is deducted. In severe cases, the entire stake might be confiscated.</li>
+      <li><strong>Removal from the Network</strong>: A slashed validator might be ejected from the active validator set, losing the opportunity to earn rewards.</li>
+      <li><strong>Reputation Damage</strong>: Validators rely on community trust. Slashing can harm their reputation, reducing delegations from token holders.</li>
+    </ul>
+  </section>
+
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">Why is Slashing Important?</h2>
+    <p>Slashing serves as a safeguard for PoS networks, ensuring:</p>
+    <ul class="list-disc list-inside space-y-2">
+      <li><strong>Network Security</strong>: Validators are motivated to act honestly, as malicious actions could lead to significant financial losses.</li>
+      <li><strong>Decentralization</strong>: By penalizing bad actors, slashing prevents centralization of power among a few validators.</li>
+      <li><strong>Reliability</strong>: It ensures that validators remain online and actively participate in maintaining the blockchain’s integrity.</li>
+    </ul>
+  </section>
+
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">How to Avoid Slashing</h2>
+    <p>Validators and delegators can take precautions to avoid slashing penalties:</p>
+    <ul class="list-disc list-inside space-y-2">
+      <li><strong>Ensure Uptime</strong>: Validators must invest in reliable infrastructure to minimize downtime.</li>
+      <li><strong>Avoid Malicious Behavior</strong>: Validators should follow the protocol's rules to prevent double-signing or other infractions.</li>
+      <li><strong>Choose Reputable Validators</strong>: Delegators should stake with trusted validators who have a proven track record of honest behavior.</li>
+    </ul>
+  </section>
+
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">Impact of Slashing on Delegators</h2>
+    <p>In PoS networks where delegation is possible, slashing can affect delegators as well. usually it vary on the protocol design. When a validator is slashed, delegators typically share the penalty proportionally to their staked amount. This underscores the importance of selecting reliable validators and diversifying stake to minimize risk. Usually, on <a href="/bonded-validators" class="text-blue-600 underline">bonded validators</a>, the operator's deposit is deducted first, and delegators funds may be affected only if the operator's deposit was not enough to cover the penalty.</p>
+  </section>
+
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold">Examples of Slashing in Blockchain</h2>
+    <ul class="list-disc list-inside space-y-2">
+      <li><strong>Ethereum 2.0 (Beacon Chain)</strong>: Validators who engage in double-signing or are offline for extended periods risk slashing. The penalties are proportional to the severity of the offense and the network’s current state.</li>
+      <li><strong>Cosmos Hub</strong>: Slashing penalties apply for downtime (5% of staked assets) and double-signing (up to 100% of staked assets).</li>
+      <li><strong>Polkadot</strong>: Slashing penalties vary based on the number of validators involved in the infraction, ranging from a minor deduction to the entire stake.</li>
+    </ul>
+    <p>Slashing is a critical component of maintaining trust and security in PoS blockchain ecosystems. While it may seem like a harsh penalty, its existence ensures validators act responsibly, protecting the network and its participants from malicious or negligent behavior.</p>
+  </section>
+</main>
+{{> footer_amp_tailwind}}
+</body>

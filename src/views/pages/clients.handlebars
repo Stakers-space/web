@@ -1,71 +1,85 @@
 {{> header}}
-<main class="mb-60">
-	<section class="cover grid egrid">
-		<div class="mt-60 mb-40">
-			<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
-				<li property="itemListElement" typeof="ListItem">
-					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
-					<meta property="position" content="1">
-				</li>
-				{{#or isEthereum isGnosis}}
-				<li property="itemListElement" typeof="ListItem">
-					<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{chainName}} staking</span></a>
-					<meta property="position" content="2">
-				</li>
-				<li property="itemListElement" typeof="ListItem">
-					<a property="item" typeof="Thing" href="/{{chainUrl}}/clients"><span property="name" class="intro-label">Clients</span></a>
-					<meta property="position" content="3">
-				</li>
-				{{else}}
-				<li property="itemListElement" typeof="ListItem">
-					<a property="item" typeof="Thing" href="/clients"><span property="name" class="intro-label">Clients</span></a>
-					<meta property="position" content="2">
-				</li>
-				{{/or}}
-			</ul>
-			<h1 class="cover-title"><span>{{chainName}} staking clients</span></h1>
-		</div>
-		<div class="mt-60 mb-40" style="position:relative;padding-left:9rem;font-size:.8rem">
-			<div>
-				<h3>Disclaimer</h3>
-				<p>This page is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.</p>
-            </div>
-		</div>
-	</section>
+<main class="max-w-7xl mx-auto px-6 lg:px-20 py-12">
+  <ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+    <li property="itemListElement" typeof="ListItem">
+      <a property="item" typeof="Thing" href="/">
+        <span property="name">Stakers.space</span>
+      </a>
+      <meta property="position" content="1">
+    </li>
+    {{#or isEthereum isGnosis}}
+      <li property="itemListElement" typeof="ListItem">
+        <a property="item" typeof="Thing" href="/{{chainUrl}}">
+          <span property="name">{{chainName}} staking</span>
+        </a>
+        <meta property="position" content="2">
+      </li>
+      <li property="itemListElement" typeof="ListItem">
+        <a property="item" typeof="Thing" href="/{{chainUrl}}/clients">
+          <span property="name">Clients</span>
+        </a>
+        <meta property="position" content="3">
+      </li>
+    {{else}}
+      <li property="itemListElement" typeof="ListItem">
+        <a property="item" typeof="Thing" href="/clients">
+          <span property="name">Clients</span>
+        </a>
+        <meta property="position" content="2">
+      </li>
+    {{/or}}
+  </ul>
 
-	<div class="grid-full">
-			{{#or isEthereum isGnosis}}
-			{{else}}
-			<section class="grid">
-				<b class="mb-0">Navigation:</b>
-				<div class="egrid egrid-3">
-					<a href="#clients" class="btn center box"><span><strong>All</strong> staking clients</span></a>
-					<a href="/ethereum-staking/clients" class="btn center box"><span><strong>Ethereum</strong> staking clients</span></a>
-					<a href="/gnosis-staking/clients" class="btn center box"><span><strong>Gnosis</strong> staking clients</span></a>
-				</div>
-			</section>
-			{{/or}}
+  <!-- Title -->
+  <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-10">{{chainName}} Staking clients</h1>
 
-			<section class="chapter" id="clients">
-				<div class="content" style="width:100%;max-width:1024px;">
-					<h2>Execution layer clients</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Name</th>
-								{{#or isEthereum isGnosis}}
-								{{else}}
-									<th>Chains</th>
-								{{/or}}
-								<th>Language</th>
-								<th>Prerequisity</th>
-								<th>OS</th>
-								<th>Latest version</th>
-								<th>Social Media</th>
-							</tr>
-						</thead>
-						<tbody>
-							{{#each executionClients_arr}}
+  <!-- Disclaimer -->
+  <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-12 text-sm text-yellow-800 shadow">
+    <h3 class="text-lg font-semibold mb-2">Disclaimer</h3>
+    <p>This page is for informational purposes only. The author nor website owner does not guarantee accuracy of the
+       information in this guide and is not responsible for any damages or losses incurred by following the guide.</p>
+  </div>
+
+  <!-- Navigation (only if not Ethereum or Gnosis) -->
+  {{#or isEthereum isGnosis}}
+  {{else}}
+  <section class="mb-12">
+    <h2 class="font-semibold mb-4">Navigation:</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <a href="#clients" class="bg-white rounded-xl border border-gray-200 shadow hover:shadow-md p-5 text-center transition">
+        <span><strong>All</strong> staking clients</span>
+      </a>
+      <a href="/ethereum-staking/clients" class="bg-white rounded-xl border border-gray-200 shadow hover:shadow-md p-5 text-center transition">
+        <span><strong>Ethereum</strong> staking clients</span>
+      </a>
+      <a href="/gnosis-staking/clients" class="bg-white rounded-xl border border-gray-200 shadow hover:shadow-md p-5 text-center transition">
+        <span><strong>Gnosis</strong> staking clients</span>
+      </a>
+    </div>
+  </section>
+  {{/or}}
+
+  <!-- Clients Section -->
+  <section id="clients">
+    <div class="max-w-full overflow-x-auto">
+      <!-- Execution Clients -->
+      <h2 class="text-2xl font-semibold mb-6">Execution layer clients</h2>
+      <table class="w-full border border-gray-200 rounded-xl shadow text-sm text-left">
+        <thead class="bg-gray-100 text-gray-700">
+          <tr>
+            <th class="px-4 py-3">Name</th>
+            {{#or isEthereum isGnosis}}{{else}}
+              <th class="px-4 py-3">Chains</th>
+            {{/or}}
+            <th class="px-4 py-3">Language</th>
+            <th class="px-4 py-3">Prerequisity</th>
+            <th class="px-4 py-3">OS</th>
+            <th class="px-4 py-3">Latest version</th>
+            <th class="px-4 py-3">Social Media</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+			{{#each executionClients_arr}}
 							{{#or ../isEthereum ../isGnosis}}
 								{{#and this.chain.ethereum.supported ../isEthereum }}
 									<tr>
@@ -77,13 +91,13 @@
 										</td>
 										<td>{{this.language}}</td>
 										<td>{{this.prerequisity}}</td>
-										<td>
+										<td class="flex items-center gap-2">
 											{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="20">{{/if}}
 											{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="20">{{/if}}
 											{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="20">{{/if}}
 										</td>
 										<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-										<td>
+										<td class="flex items-center gap-2">
 											{{#each this.social}}
 											<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 											{{/each}}
@@ -100,13 +114,13 @@
 										</td>
 										<td>{{this.language}}</td>
 										<td>{{this.prerequisity}}</td>
-										<td>
+										<td class="flex items-center gap-2">
 											{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="20">{{/if}}
 											{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="20">{{/if}}
 											{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="20">{{/if}}
 										</td>
 										<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-										<td>
+										<td class="flex items-center gap-2">
 											{{#each this.social}}
 											<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 											{{/each}}
@@ -121,19 +135,19 @@
 										<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/code.png" alt="Developer" width="25"></a>
 									</span>
 								</td>
-								<td>
+								<td class="flex items-center gap-2">
 									{{#if this.chain.ethereum.supported}}<img src="/img/icons/ethereum.png" alt="Linux" width="25">{{/if}}
 									{{#if this.chain.gnosis.supported}}<img src="/img/icons/gnosis.png" alt="Linux" width="25">{{/if}}
 								</td>
 								<td>{{this.language}}</td>
 								<td>{{this.prerequisity}}</td>
-								<td>
+								<td class="flex items-center gap-2">
 									{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="20">{{/if}}
 									{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="20">{{/if}}
 									{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="20">{{/if}}
 								</td>
 								<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-								<td>
+								<td class="flex items-center gap-2">
 									{{#each this.social}}
 									<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 									{{/each}}
@@ -141,34 +155,43 @@
 							</tr>
 							{{/or}}
 							{{/each}}
-						</tbody>
-					</table>
-					{{#or isEthereum isGnosis}}
-						{{#if isGnosis}}
-						<p class="center"><a href="https://gnosisscan.io/nodetracker" target="_blank" rel="nofollow noopener noreferrer">Gnosis Chain Node Tracker</a></p>
-						{{else}}
-						<p class="center"><a href="https://clientdiversity.org/" target="_blank" rel="nofollow noopener noreferrer">Clients distribution</a></p>
-						{{/if}}
-					{{/or}}
+        </tbody>
+      </table>
+      <!-- Link to tracker -->
+      {{#or isEthereum isGnosis}}
+        {{#if isGnosis}}
+          <p class="text-center mt-4">
+            <a href="https://gnosisscan.io/nodetracker" target="_blank" rel="nofollow noopener noreferrer" class="text-emerald-600 hover:underline">
+              Gnosis Chain Node Tracker
+            </a>
+          </p>
+        {{else}}
+          <p class="text-center mt-4">
+            <a href="https://clientdiversity.org/" target="_blank" rel="nofollow noopener noreferrer" class="text-emerald-600 hover:underline">
+              Clients distribution
+            </a>
+          </p>
+        {{/if}}
+      {{/or}}
 
-					<h2>Consensus layer clients</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Name</th>
-								{{#or isEthereum isGnosis}}
-								{{else}}
-									<th>Chains</th>
-								{{/or}}
-								<th>Language</th>
-								<th>Prerequisity</th>
-								<th>OS</th>
-								<th>Latest version</th>
-								<th>Social Media</th>
-							</tr>
-						</thead>
-						<tbody>
-						{{#each consensusClients_arr}}
+      <!-- Consensus Clients -->
+      <h2 class="text-2xl font-semibold mt-12 mb-6">Consensus layer clients</h2>
+      <table class="w-full border border-gray-200 rounded-xl shadow text-sm text-left">
+        <thead class="bg-gray-100 text-gray-700">
+          <tr>
+            <th class="px-4 py-3">Name</th>
+            {{#or isEthereum isGnosis}}{{else}}
+              <th class="px-4 py-3">Chains</th>
+            {{/or}}
+            <th class="px-4 py-3">Language</th>
+            <th class="px-4 py-3">Prerequisity</th>
+            <th class="px-4 py-3">OS</th>
+            <th class="px-4 py-3">Latest version</th>
+            <th class="px-4 py-3">Social Media</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+         {{#each consensusClients_arr}}
 							{{#or ../isEthereum ../isGnosis}}
 								{{#and this.chain.ethereum.supported ../isEthereum }}
 									<tr>
@@ -180,13 +203,13 @@
 										</td>
 										<td>{{this.language}}</td>
 										<td>{{this.prerequisity}}</td>
-										<td>
+										<td class="flex items-center gap-2">
 											{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="20">{{/if}}
 											{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="20">{{/if}}
 											{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="20">{{/if}}
 										</td>
 										<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-										<td>
+										<td class="flex items-center gap-2">
 											{{#each this.social}}
 											<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 											{{/each}}
@@ -203,13 +226,13 @@
 											</td>
 											<td>{{this.language}}</td>
 											<td>{{this.prerequisity}}</td>
-											<td>
+											<td class="flex items-center gap-2">
 												{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="20">{{/if}}
 												{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="20">{{/if}}
 												{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="20">{{/if}}
 											</td>
 											<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-											<td>
+											<td class="flex items-center gap-2">
 												{{#each this.social}}
 												<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 												{{/each}}
@@ -224,19 +247,19 @@
 										<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/code.png" alt="Developer" width="25"></a>
 									</span>
 								</td>
-								<td>
+								<td class="flex items-center gap-2">
 									{{#if this.chain.ethereum.supported}}<img src="/img/icons/ethereum.png" alt="Linux" width="25">{{/if}}
 									{{#if this.chain.gnosis.supported}}<img src="/img/icons/gnosis.png" alt="Linux" width="25">{{/if}}
 								</td>
 								<td>{{this.language}}</td>
 								<td>{{this.prerequisity}}</td>
-								<td>
+								<td class="flex items-center gap-2">
 									{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="20">{{/if}}
 									{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="20">{{/if}}
 									{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="20">{{/if}}
 								</td>
 								<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-								<td>
+								<td class="flex items-center gap-2">
 									{{#each this.social}}
 									<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 									{{/each}}
@@ -244,26 +267,27 @@
 							</tr>
 							{{/or}}
 							{{/each}}
-						</tbody>
-					</table>
-					<h2>MEV clients</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Name</th>
-								{{#or isEthereum isGnosis}}
-								{{else}}
-									<th>Chains</th>
-								{{/or}}
-								<th>Language</th>
-								<th>Prerequisity</th>
-								<th>OS</th>
-								<th>Latest version</th>
-								<th>Social Media</th>
-							</tr>
-						</thead>
-						<tbody>
-							{{#each mevClients_arr}}
+        </tbody>
+      </table>
+
+      <!-- MEV Clients -->
+      <h2 class="text-2xl font-semibold mt-12 mb-6">MEV clients</h2>
+      <table class="w-full border border-gray-200 rounded-xl shadow text-sm text-left">
+        <thead class="bg-gray-100 text-gray-700">
+          <tr>
+            <th class="px-4 py-3">Name</th>
+            {{#or isEthereum isGnosis}}{{else}}
+              <th class="px-4 py-3">Chains</th>
+            {{/or}}
+            <th class="px-4 py-3">Language</th>
+            <th class="px-4 py-3">Prerequisity</th>
+            <th class="px-4 py-3">OS</th>
+            <th class="px-4 py-3">Latest version</th>
+            <th class="px-4 py-3">Social Media</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          {{#each mevClients_arr}}
 								{{#or ../isEthereum ../isGnosis}}
 									{{#and this.chain.ethereum.supported ../isEthereum}}
 										<tr>
@@ -275,13 +299,13 @@
 											</td>
 											<td>{{this.language}}</td>
 											<td>{{this.prerequisity}}</td>
-											<td>
+											<td class="flex items-center gap-2">
 												{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="25">{{/if}}
 												{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="25">{{/if}}
 												{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="25">{{/if}}
 											</td>
 											<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-											<td>
+											<td class="flex items-center gap-2">
 												{{#each this.social}}
 												<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 												{{/each}}
@@ -298,13 +322,13 @@
 												</td>
 												<td>{{this.language}}</td>
 												<td>{{this.prerequisity}}</td>
-												<td>
+												<td class="flex items-center gap-2">
 													{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="20">{{/if}}
 													{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="20">{{/if}}
 													{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="20">{{/if}}
 												</td>
 												<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-												<td>
+												<td class="flex items-center gap-2">
 													{{#each this.social}}
 													<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 													{{/each}}
@@ -314,19 +338,19 @@
 								{{else}}
 								<tr>
 											<td><a href="/{{this.ilink}}">{{this.name}}</a></td>
-											<td>
+											<td class="flex items-center gap-2">
 												{{#if this.chain.ethereum.supported}}<img src="/img/icons/ethereum.png" alt="Linux" width="25">{{/if}}
 												{{#if this.chain.gnosis.supported}}<img src="/img/icons/gnosis.png" alt="Linux" width="25">{{/if}}
 											</td>
 											<td>{{this.language}}</td>
 											<td>{{this.prerequisity}}</td>
-											<td>
+											<td class="flex items-center gap-2">
 												{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="25">{{/if}}
 												{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="25">{{/if}}
 												{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="25">{{/if}}
 											</td>
 											<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-											<td>
+											<td class="flex items-center gap-2">
 												{{#each this.social}}
 												<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 												{{/each}}
@@ -334,40 +358,40 @@
 								</tr>
 								{{/or}}
 								{{/each}}
-						</tbody>
-					</table>
+        </tbody>
+      </table>
 
-					<h2>Service-based clients</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Name</th>
-								{{#or isEthereum isGnosis}}
-								{{else}}
-									<th>Chains</th>
-								{{/or}}
-								<th>Language</th>
-								<th>Prerequisity</th>
-								<th>OS</th>
-								<th>Latest version</th>
-								<th>Social Media</th>
-							</tr>
-						</thead>
-						<tbody>
-							{{#each serviceClients_arr}}
+      <!-- Service Clients -->
+      <h2 class="text-2xl font-semibold mt-12 mb-6">Service-based clients</h2>
+      <table class="w-full border border-gray-200 rounded-xl shadow text-sm text-left">
+        <thead class="bg-gray-100 text-gray-700">
+          <tr>
+            <th class="px-4 py-3">Name</th>
+            {{#or isEthereum isGnosis}}{{else}}
+              <th class="px-4 py-3">Chains</th>
+            {{/or}}
+            <th class="px-4 py-3">Language</th>
+            <th class="px-4 py-3">Prerequisity</th>
+            <th class="px-4 py-3">OS</th>
+            <th class="px-4 py-3">Latest version</th>
+            <th class="px-4 py-3">Social Media</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          {{#each serviceClients_arr}}
 								{{#or ../isEthereum ../isGnosis}}
 									{{#and this.chain.ethereum.supported ../isEthereum }}
 									<tr>
 										<td><a href="/{{this.ilink}}">{{this.name}}</a></td>
 										<td>{{this.language}}</td>
 										<td>{{this.prerequisity}}</td>
-										<td>
+										<td class="flex items-center gap-2">
 												{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="25">{{/if}}
 												{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="25">{{/if}}
 												{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="25">{{/if}}
 											</td>
 										<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-										<td>
+										<td class="flex items-center gap-2">
 											{{#each this.social}}
 											<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 											{{/each}}
@@ -379,13 +403,13 @@
 											<td><a href="/{{this.ilink}}">{{this.name}}</a></td>
 											<td>{{this.language}}</td>
 											<td>{{this.prerequisity}}</td>
-											<td>
+											<td class="flex items-center gap-2">
 												{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="25">{{/if}}
 												{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="25">{{/if}}
 												{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="25">{{/if}}
 											</td>
 											<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-											<td>
+											<td class="flex items-center gap-2">
 												{{#each this.social}}
 												<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 												{{/each}}
@@ -395,19 +419,19 @@
 								{{else}}
 								<tr>
 										<td><a href="/{{this.ilink}}">{{this.name}}</a></td>
-										<td>
+										<td class="flex items-center gap-2">
 											{{#if this.chain.ethereum.supported}}<img src="/img/icons/ethereum.png" alt="Linux" width="25">{{/if}}
 											{{#if this.chain.gnosis.supported}}<img src="/img/icons/gnosis.png" alt="Linux" width="25">{{/if}}
 										</td>
 										<td>{{this.language}}</td>
 										<td>{{this.prerequisity}}</td>
-										<td>
+										<td class="flex items-center gap-2">
 											{{#if this.os.linux}}<img src="/img/icons/linux.png" alt="Linux" width="25">{{/if}}
 											{{#if this.os.windows}}<img src="/img/icons/windows.png" alt="Linux" width="25">{{/if}}
 											{{#if this.os.macos}}<img src="/img/icons/macos.png" alt="Linux" width="25">{{/if}}
 										</td>
 										<td><a href="{{this.github}}" target="_blank" rel="nofollow noopener noreferrer">{{this.latestVer}}</a> <code style="font-size:0.8rem">({{this.release_time}})</code></td>
-										<td>
+										<td class="flex items-center gap-2">
 											{{#each this.social}}
 											<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/{{this.icon}}" alt="{{this.name}}" width="25"></a>
 											{{/each}}
@@ -415,11 +439,9 @@
 									</tr>
 								{{/or}}
 							{{/each}}
-						</tbody>
-					</table>
-				</div>
-			</section>
+        </tbody>
+      </table>
     </div>
+  </section>
 </main>
-{{> footer}}
-{{> scripts/tabselector}}
+{{> footer_tailwind}}

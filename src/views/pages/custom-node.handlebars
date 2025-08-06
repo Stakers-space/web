@@ -1,0 +1,70 @@
+{{> header_amp}}
+<main class="container mx-auto px-6 lg:px-20 py-16 text-center">
+  <h1 class="text-4xl lg:text-5xl font-bold mb-6">Build Custom Node</h1>
+  <p class="text-lg text-gray-700">Build your custom node.</p>
+  <p class="text-lg text-gray-700 mb-12">Stake from home, server house or cloud.</p>
+
+  <!-- Ethereum Staking -->
+  <h2 class="text-2xl font-semibold mb-8">Ethereum Staking</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+    <!-- Operate Full Node -->
+    <a href="/ethereum-staking/full-guide" 
+       class="p-6 bg-emerald-600 text-white rounded-xl shadow-lg h-full flex flex-col justify-center">
+      Operate Execution and Consensus Layer
+    </a>
+
+    <!-- Solo + Rocketpool -->
+    <div class="grid grid-cols-2 gap-6">
+      <a href="/ethereum-staking/full-guide/solo" 
+         class="bg-white border rounded-xl p-6 shadow hover:shadow-md transition flex flex-col items-center justify-center">
+        <img src="/logo/ethereum.svg" alt="Ethereum logo" class="h-10 w-10 mb-3">
+        <h5 class="font-semibold">Solo Staking Node</h5>
+      </a>
+      <a href="/ethereum-staking/full-guide/rocketpool" 
+         class="bg-white border rounded-xl p-6 shadow hover:shadow-md transition flex flex-col items-center justify-center">
+        <img src="/logo/rocketpool.webp" alt="Rocketpool logo" class="h-10 w-10 mb-3">
+        <h5 class="font-semibold">Rocketpool Staking Node</h5>
+      </a>
+    </div>
+
+    <!-- Stakewise + Lido -->
+    <div class="grid grid-cols-2 gap-6">
+      <a href="/ethereum-staking/full-guide/stakewise" 
+         class="bg-white border rounded-xl p-6 shadow hover:shadow-md transition flex flex-col items-center justify-center">
+        <img src="/logo/stakewise.svg" alt="Stakewise logo" class="h-10 w-10 mb-3">
+        <h5 class="font-semibold">Stakewise Staking Node</h5>
+      </a>
+      <a href="/ethereum-staking/full-guide/lido" 
+         class="bg-white border rounded-xl p-6 shadow hover:shadow-md transition flex flex-col items-center justify-center">
+        <img src="/logo/lido.png" alt="Lido logo" class="h-10 w-10 mb-3">
+        <h5 class="font-semibold">Lido Staking Node</h5>
+      </a>
+    </div>
+  </div>
+
+  <!-- Gnosis Staking -->
+  <h2 class="text-2xl font-semibold mb-8">Gnosis Staking</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Operate Full Node -->
+    <a href="/gnosis-staking/full-guide" 
+      class="p-6 bg-emerald-600 text-white rounded-xl shadow-lg h-full flex flex-col justify-center">
+      Operate Execution and Consensus Layer
+    </a>
+
+    <!-- Solo -->
+    <a href="/gnosis-staking/full-guide/solo" 
+       class="bg-white border rounded-xl p-6 shadow hover:shadow-md transition flex flex-col items-center justify-center">
+      <img src="/logo/gnosis.svg" alt="Gnosis logo" class="h-10 w-10 mb-3">
+      <h5 class="font-semibold">Solo Staking Node</h5>
+    </a>
+
+    <!-- Stakewise -->
+    <a href="/gnosis-staking/full-guide/stakewise" 
+       class="bg-white border rounded-xl p-6 shadow hover:shadow-md transition flex flex-col items-center justify-center">
+      <img src="/logo/stakewise.svg" alt="Stakewise logo" class="h-10 w-10 mb-3">
+      <h5 class="font-semibold">Stakewise Staking Node</h5>
+    </a>
+  </div>
+</main>
+{{> footer_amp_tailwind}}
+</body>

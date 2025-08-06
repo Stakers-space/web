@@ -256,10 +256,10 @@
             "name": "Lodestar",
             "link": "https://lodestar.chainsafe.io/",
             "github": "https://github.com/chainsafe/lodestar",
-            "latestVer": "1.32.0",
+            "latestVer": "1.33.0",
             "nodejsVer": "22.16.0",
             "nvmVer": "0.40.1",
-            "release_time": "2025-07-15T21:16:00Z",
+            "release_time": "2025-08-06T16:08:00Z",
             "prerequisity": "NodeJS v22+",
             "social":[
                 {
