@@ -254,9 +254,6 @@
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
-  .top-1 {
-    top: calc(var(--spacing) * 1);
-  }
   .top-1\/2 {
     top: calc(1/2 * 100%);
   }
@@ -617,10 +614,6 @@
   .border-collapse {
     border-collapse: collapse;
   }
-  .-translate-y-1 {
-    --tw-translate-y: calc(var(--spacing) * -1);
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
   .-translate-y-1\/2 {
     --tw-translate-y: calc(calc(1/2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -630,9 +623,6 @@
   }
   .cursor-pointer {
     cursor: pointer;
-  }
-  .resize {
-    resize: both;
   }
   .list-inside {
     list-style-position: inside;
@@ -1199,9 +1189,6 @@
   .underline {
     text-decoration-line: underline;
   }
-  .decoration-white {
-    text-decoration-color: var(--color-white);
-  }
   .decoration-white\/40 {
     text-decoration-color: color-mix(in srgb, #fff 40%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -1232,10 +1219,6 @@
   .shadow-sm {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
@@ -1840,45 +1823,6 @@
     top: 5px;
   }
 }
-.tabselector {
-  display: block;
-}
-.tabselector nav .tab {
-  border: none;
-  flex-grow: 1;
-  text-align: center;
-  padding: 0.5rem;
-  font-size: 1.15rem;
-}
-.tabselector nav .tab.selected {
-  outline: none;
-  cursor: auto;
-  border-bottom: 2px solid black;
-  background-color: #f6f3f4;
-}
-.tabselector .tabpanel {
-  display: none;
-  order: 1;
-  padding: 2rem;
-  background-color: #f6f3f4;
-}
-.tabselector .tabpanel.selected {
-  outline: none;
-  display: block;
-}
-.tabselector.decent .tab {
-  padding: unset;
-  font-weight: unset;
-  font-size: unset;
-  line-height: 26px;
-}
-.tabselector.decent nav .tab.selected {
-  background-color: unset;
-}
-.tabselector.decent .tabpanel {
-  padding: unset;
-  background-color: unset;
-}
 @layer components {
   .broadcrumbs {
     margin-bottom: calc(var(--spacing) * 5);
@@ -2085,11 +2029,6 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-blur {
   syntax: "*";
   inherits: false;
@@ -2191,7 +2130,6 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;

@@ -1,47 +1,18 @@
-<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-<script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
-<script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
-<script async custom-element="amp-fit-text" src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"></script>
-<link as="script" rel="preload" href="https://cdn.ampproject.org/v0/amp-selector-0.1.js">
-<script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
-<style>.caption{
-	text-align: center;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: var(--space-3);
-    background: hsla(0, 0%, 78.4%, .5);
-    color: var(--color-text-light);
-    font-size: 36px;
-    max-height: 20%;
-    font-weight: 300;
-}</style>
-
 {{> header}}
-<div class="mb-24">
 	<section>
 		<div class="max-w-6xl mx-auto px-6 py-16">
-			<ul class="flex flex-wrap items-center text-sm text-gray-500 mb-8" vocab="https://schema.org/" typeof="BreadcrumbList">
-				<li property="itemListElement" typeof="ListItem" class="flex items-center">
-				<a property="item" typeof="Thing" href="/" class="hover:text-blue-600 transition">
-					<span property="name">Stakers.space</span>
-				</a>
-				<meta property="position" content="1">
-				<span class="mx-2 text-gray-400">›</span>
+			<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
 				</li>
-				<li property="itemListElement" typeof="ListItem" class="flex items-center">
-				<a property="item" typeof="Thing" href="/{{chainUrl}}" class="hover:text-blue-600 transition">
-					<span property="name">{{chainName}} staking</span>
-				</a>
-				<meta property="position" content="2">
-				<span class="mx-2 text-gray-400">›</span>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{chainName}} staking</span></a>
+					<meta property="position" content="2">
 				</li>
-				<li property="itemListElement" typeof="ListItem" class="flex items-center font-semibold text-gray-800">
-				<a property="item" typeof="Thing" href="/{{chainUrl}}/staking-hardware" class="hover:text-blue-600 transition">
-					<span property="name">Hardware</span>
-				</a>
-				<meta property="position" content="3">
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}/staking-hardware"><span property="name">Hardware</span></a>
+					<meta property="position" content="3">
 				</li>
 			</ul>
 
@@ -63,13 +34,12 @@
 		</div>
 	</section>
 
-
 	<div class="grid grid-cols-1 xl:grid-cols-[minmax(220px,1fr)_minmax(0,6fr)_minmax(220px,1fr)] gap-6">
 		<!-- Left panel -->
-		<aside class="order-1 xl:order-none xl:sticky xl:top-8 self-start mt-14">
+		<aside class="order-1 xl:order-none xl:sticky xl:top-8 self-start lg:mt-14">
 			<nav class="border-l-4 border-gray-500 pl-4 py-3">
 				<p class="font-semibold mb-2">Navigation</p>
-				<ol class="space-y-1">
+				<ol class="space-y-1 list-decimal space-y-2 pl-6">
 					<li><a href="#hardware" class="hover:underline">Hardware</a></li>
 					<li><a href="#hardware-placement" class="hover:underline">Location</a></li>
 					<li><a href="#os" class="hover:underline">OS</a></li>
@@ -78,8 +48,7 @@
 		</aside>
 
 		<main class="order-3 xl:order-none prose prose-lg max-w-none;">
-    
-			<section id="hardware" class="max-w-6xl my-1 mx-auto border border-gray-200 rounded-xl p-6 py-10 shadow-sm">
+			<section id="hardware" class="max-w-6xl my-1 mx-auto border border-gray-200 lg:rounded-xl p-6 py-10 shadow-sm">
 				<!-- Left Caption number -->
 				<div class="flex items-start mb-12">
 					<div class="text-gray-300 font-bold text-7xl leading-none mr-6 select-none">1</div>
@@ -168,22 +137,13 @@
 						</div>
 
 						<div class="overflow-hidden rounded-lg shadow-md h-full">
-							<iframe
-							class="w-full h-[350px] lg:h-full"
-							src="https://www.youtube-nocookie.com/embed/L_JHtu5VoRo?si=LDRN9-hm1Lmjrq7Y"
-							title="YouTube video player"
-							frameborder="0"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-							allowfullscreen
-							></iframe>
+							<iframe title="NUC Assembling" loading="lazy" class="w-full h-[350px] lg:h-full" src="https://www.youtube-nocookie.com/embed/L_JHtu5VoRo?si=LDRN9-hm1Lmjrq7Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
 						</div>
 					</div>
 				</div>
 			</section>
 
-
-
-			<section id="hardware-placement" class="max-w-6xl my-16 mx-auto border border-gray-200 rounded-xl p-6 py-10 shadow-sm">
+			<section id="hardware-placement" class="max-w-6xl my-16 mx-auto border border-gray-200 lg:rounded-xl p-6 py-10 shadow-sm">
 				<div class="flex items-start mb-12">
 					<div class="text-gray-300 font-bold text-7xl leading-none mr-6 select-none">2</div>
 					<div>
@@ -240,9 +200,7 @@
 				</p>
 			</section>
 
-
-
-			<section id="os" class="max-w-6xl my-16 mx-auto border border-gray-200 rounded-xl p-6 py-10 shadow-sm">
+			<section id="os" class="max-w-6xl my-16 mx-auto border border-gray-200 lg:rounded-xl p-6 py-10 shadow-sm">
 				<div class="flex items-start mb-12">
 					<div class="text-gray-300 font-bold text-7xl leading-none mr-6 select-none">3</div>
 					<div>
@@ -254,222 +212,236 @@
 					</div>
 				</div>
 
-  <h3 class="text-2xl font-semibold mb-6">Ways to install the OS</h3>
-  <ul class="grid gap-6 md:grid-cols-2">
-    <li class="relative p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200">
-      <div class="absolute top-4 left-4 text-indigo-100 text-[80px] font-extrabold leading-none select-none pointer-events-none">1</div>
-      <div class="relative z-10">
-        <h4 class="text-xl font-semibold mb-2">Install on local hardware</h4>
-        <p class="text-gray-700 text-sm">
-          Use bootable USB with Ubuntu Server. This method gives you full control and transparency over your staking node.
-        </p>
-      </div>
-    </li>
-
-    <li class="relative p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200">
-      <div class="absolute top-4 left-4 text-indigo-100 text-[80px] font-extrabold leading-none select-none pointer-events-none">2</div>
-      <div class="relative z-10">
-        <h4 class="text-xl font-semibold mb-2">Install on cloud instance</h4>
-        <p class="text-gray-700 text-sm">
-          Choose pre-installed Ubuntu 24.04 LTS on cloud platform and configure user permissions. Great for remote deployment.
-        </p>
-      </div>
-    </li>
-  </ul>
-
-
-  <div class="content" style="width:100%">
-
-					<div class="tabselector">
-						<nav class="egrid egrid-2">
-							<button class="tab selected" data-tabpanel="1">Installing OS on local HW</button>
-							<button class="tab" data-tabpanel="2">Installing OS on cloud HW</button>
+				<h3 class="text-2xl font-semibold mb-6">Ways to install the OS</h3>
+				<div class="tabselector">
+					<nav class="grid gap-2 md:grid-cols-2">
+						<button class="tab selected relative p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer" data-tabpanel="1" type="button">
+							<div class="absolute top-4 left-4 text-indigo-100 text-[80px] font-extrabold leading-none select-none pointer-events-none">1</div>
+							<div class="relative z-10">
+								<h4 class="text-xl font-semibold mb-2">Install on local hardware</h4>
+								<p class="text-gray-700 text-sm">
+								Use bootable USB with Ubuntu Server. This method gives you full control and transparency over your staking node.
+								</p>
+							</div>
+						</button>
+							<button class="tab relative p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer" data-tabpanel="2" type="button">
+								<div class="absolute top-4 left-4 text-indigo-100 text-[80px] font-extrabold leading-none select-none pointer-events-none">2</div>
+								<div class="relative z-10">
+									<h4 class="text-xl font-semibold mb-2">Install on cloud instance</h4>
+									<p class="text-gray-700 text-sm">
+									Choose pre-installed Ubuntu 24.04 LTS on cloud platform and configure user permissions. Great for remote deployment.
+									</p>
+								</div>
+							</button>
 						</nav>
 
-						<div class="tabpanel selected" style="position: relative;">
-							<h4 class="mt-0">Get Ubuntu Server OS</h4>
-							<p>Staking is possible from Ubuntu Desktop as well as Ubuntu Server OS. While Ubuntu Desktop comes with a standard User Interface (UI) and may seem to be easier to manage, the Ubuntu Server is usually the better choice as the UI is usually useless as you work with a terminal. Absence of that UI tools associated with Server distribution may save computional resources.</p>
-							<ol>
-								<li>Download <code>Ubuntu 24.04 LTS Server</code> from <a href="https://ubuntu.com/download/server">https://ubuntu.com/download/server</a></li>
-								<li><a href="">Create a bootable USB Stick</a> with the Ubuntu Server distribution image</li>
-							</ol>
-							<h4>Install Ubuntu Server OS to your your node</h4>
-							<p>For this step, you need to </p>
-							<ol>
-								<li>Connect your node to monitor, keyborad, electricity and internet. Stick Ubuntu bootable flash disk to your node.
-									<amp-img src="/img/pages/hw-preparation/nuc-connection-start.webp" layout="responsive" alt="NUC - connected devices"  width="1000" height="600"></amp-img>
-								</li>
-								<li>Turn on the PC while pressing F11 key to load boot selection. If loaded, select your USB stick</li>
-								<li style="position:relative;">Install The Ubuntu Server
-									<amp-carousel id="installation-images" width="1000" height="600" layout="responsive" type="slides" style="position:relative;">
-										<div class="relative">
-											<amp-img src="/img/pages/hw-preparation/install-select.webp" layout="fill" alt="product hero 2" attribution="visualhunt"></amp-img>
-											<amp-fit-text 
-  class="absolute bottom-0 left-0 right-0 text-center bg-gray-300/50 text-white text-2xl font-light p-3 max-h-[20%]"
-  width="300"
-  height="200"
-  layout="responsive"
-  max-font-size="36">
-  Select "Try or Install Ubuntu Server"
-</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/installation-load.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Wait for OS preparation
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/timedate.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Wait for timedatectl service
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/os-language.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Select OS language
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/installer-update.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Select "Update to the new installer"
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/keyboard-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Confirm keyboard
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/installation-type.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Select "Ubuntu Server"
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/network-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Confirm network by selecting "Done"
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/proxy-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Skip proxy by pressing "Done"
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/mirror-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Wait till mirror is completed, then press "Done"
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/storage-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Check Storage configuration, then press "Done". Confirm the option by pressing "Continue"
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/storage-configuration-confirm.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Uncheck "Set up this disk as an LVM group to avoid disk fragmentation", then press "Done".
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/profile-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Fill identifiers. Your name may be same as username. Server name is name under which you will see the device in the network.
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/ubuntu-pro.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Skip "Upgrade pro" option
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/ssh-configuration.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											You can check Install OpenSSH server option. Anyway, this may be installed later as well (see the guide).
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/server-snaps.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Skip snaps by pressing "Done".
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/installation-complete.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											Wait for Ubuntu server OS installation complete. Then select "Reboot Now".
-											</amp-fit-text>
-										</div>
-									</amp-carousel>
-								</li>
-								<li>Unstick flash
-									<amp-carousel id="flash-stick" width="1000" height="600" layout="responsive" type="slides" style="position:relative;">
-										<div>
-											<amp-img src="/img/pages/hw-preparation/umount.webp" layout="fill" alt="product hero 2" attribution="visualhunt"></amp-img>
-											<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-											On request, remove flash.
-											</amp-fit-text>
-										</div>
-										<div>
-											<amp-img src="/img/pages/hw-preparation/umount-hw.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-										</div>
-									</amp-carousel>
-								</li>
-							</ol>
-							<h4>Set proper BIOS settings</h4>
-							<ol>
-								<li>While PC loads ater restart, press F2 to load BiOS settings</li>
-								<li>Set Power delivery after failure and cooling mode</li>
-								<li>Press F10 to save and exit</li>
-							</ol>
-							<amp-carousel id="bios-conf" width="1500" height="1000" layout="responsive" type="slides" style="position:relative;">
-								<div>
-									<amp-img src="/img/pages/hw-preparation/failure-power.webp" layout="fill" alt="product hero 2" attribution="visualhunt"></amp-img>
-									<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-									In "Power,Performance and Cooling", set "After Power Failure" to Power On. This ensure that the node will automatically start after an electricity power failure.
-									</amp-fit-text>
-								</div>
-								<div>
-									<amp-img src="/img/pages/hw-preparation/cooling.webp" layout="fill" alt="product hero 3" attribution="visualhunt"></amp-img>
-									<amp-fit-text class="caption" width="300" height="200" layout="responsive" max-font-size="36">
-									Through "Secondary Power Settings" of the same section, you can customize cooling mode.
-									</amp-fit-text>
-								</div>
-							</amp-carousel>
-
-							<h4>First load</h4>
-							<ol>
-								<li>After auto restart, a login window appears.</li>
-								<li>Past your username and press enter. You will be requested to palce password. Write the password and press enter.</li>
-							</ol>
-							<p>After a succesfull login, you can skip at <a href="/{{chainUrl}}/full-guide">next step</a>.</p>
-						</div>
-						<div class="tabpanel">
-							<h4 class="mt-0">Get Ubuntu Server on Cloud node</h4>
-							<ol>
-								<li>Select a choice with <code>Ubuntu 24.04 LTS Server</code> OS Installed</li>
-							</ol>
-							<h4>Check your server user</h4>
-							<p>As your Ubuntu Server OS was installed automatically, you may face to being logged in as a <code>root</code> user. If that's the case, it's recommended to use a different user for accessing and managing the server.</p>
-							<ul>
-								<li><p>create a new standard user and give it <code>sudo</code> rights.</p>
-									Select name for your new server user: <input type="text" value="myserveruser" id="serverUser">
-									<pre><code>adduser <mark class="serverUser">yourusername</mark>
-usermod -aG sudo <mark class="serverUser">yourusername</mark></code></pre>
+						<div class="tabpanel selected relative">
+							<h4 class="mt-0 text-xl font-semibold mb-4">Get Ubuntu Server OS</h4>
+							<p class="text-gray-700 mb-4">Staking is possible from Ubuntu Desktop as well as Ubuntu Server OS. While Ubuntu Desktop comes with a standard User Interface (UI) and may seem to be easier to manage, the Ubuntu Server is usually the better choice as the UI is usually useless as you work with a terminal. Absence of that UI tools associated with Server distribution may save computional resources.</p>
+							 <ol class="list-decimal space-y-2 pl-6">
+								<li>
+									Download <code>Ubuntu 24.04 LTS Server</code> from
+									<a href="https://ubuntu.com/download/server" class="text-blue-600 hover:underline" target="_blank">https://ubuntu.com/download/server</a>
 								</li>
 								<li>
-									<p>If you are logged in <code>root</code> through the SSH keys, associate these SSH keys to the newly create user</p>
-									<code>rsync --archive --chown=<mark class="serverUser">yourusername</mark>:<mark class="serverUser">yourusername</mark> ~/.ssh /home/<mark class="serverUser">yourusername</mark></code>
+									Create a bootable USB Stick with the Ubuntu Server distribution image
 								</li>
+							</ol>
+							<h4 class="text-xl font-semibold mt-8 mb-4">Install Ubuntu Server OS to your node</h4>
+							<ol class="list-decimal space-y-6 pl-6">
+								<li>
+									Connect your node to monitor, keyboard, electricity and internet. Stick Ubuntu bootable flash disk to your node.
+									<img src="/img/pages/hw-preparation/nuc-connection-start.webp" alt="NUC - connected devices" class="w-full rounded-lg shadow-md my-4" />
+								</li>
+								<li>Turn on the PC while pressing F11 key to <strong>load boot selection</strong>. If loaded, select your USB stick</li>
+								<li>Install The Ubuntu Server
+									<div class="carousel relative overflow-hidden w-full rounded-lg shadow-md mt-4" data-index="0">
+										<ol class="slides flex transition-transform duration-500 ease-in-out">
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/install-select.webp" class="w-full" alt="Ubuntu installation screen 1" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 1/17: <strong>Select "Try or Install Ubuntu Server"</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/installation-load.webp" class="w-full" alt="Ubuntu installation screen 2" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 2/17: <strong>Wait for OS preparation</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/timedate.webp" class="w-full" alt="Ubuntu installation screen 3" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 3/17: <strong>Wait for timedatectl service</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/os-language.webp" class="w-full" alt="Ubuntu installation screen 4" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 4/17: <strong>Select OS language</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/installer-update.webp" class="w-full" alt="Ubuntu installation screen 5" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 5/17: <strong>Select "Update to the new installer"</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/keyboard-configuration.webp" class="w-full" alt="Ubuntu installation screen 6" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 6/17: <strong>Confirm keyboard</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/installation-type.webp" class="w-full" alt="Ubuntu installation screen 7" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 7/17: <strong>Select "Ubuntu Server"</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/network-configuration.webp" class="w-full" alt="Ubuntu installation screen 8" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 8/17: <strong>Confirm network by selecting "Done"</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/proxy-configuration.webp" class="w-full" alt="Ubuntu installation screen 9" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 9/17: <strong>Skip proxy by pressing "Done"</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/mirror-configuration.webp" class="w-full" alt="Ubuntu installation screen 10" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 10/17: <strong>Wait till mirror is completed, then press "Done"</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/storage-configuration.webp" class="w-full" alt="Ubuntu installation screen 11" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 11/17: <strong>Check Storage configuration, then press "Done". Confirm the option by pressing "Continue"</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/storage-configuration-confirm.webp" class="w-full" alt="Ubuntu installation screen 12" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 12/17: <strong>Uncheck "Set up this disk as an LVM group to avoid disk fragmentation", then press "Done".</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/profile-configuration.webp" class="w-full" alt="Ubuntu installation screen 13" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 13/17: <strong>Fill identifiers. Your name may be same as username. Server name is name under which you will see the device in the network.</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/ubuntu-pro.webp" class="w-full" alt="Ubuntu installation screen 14" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 14/17: <strong>Skip "Upgrade pro" option</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/ssh-configuration.webp" class="w-full" alt="Ubuntu installation screen 15" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 15/17: <strong>You can check Install OpenSSH server option. Anyway, this may be installed later as well (see the guide).</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/server-snaps.webp" class="w-full" alt="Ubuntu installation screen 16" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 16/17: <strong>Skip snaps by pressing "Done".</strong>
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/installation-complete.webp" class="w-full" alt="Ubuntu installation screen 17" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													Step 17/17: <strong>Wait for Ubuntu server OS installation complete. Then select "Reboot Now".</strong>
+												</p>
+											</li>
+										</ol>
+										<button class="prev absolute top-1/2 left-4 -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-full z-10 cursor-pointer" role="button">&larr;</button>
+										<button class="next absolute top-1/2 right-4 -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-full z-10 cursor-pointer" role="button">&rarr;</button>
+									</div>
+								</li>
+								<li>Unstick flash
+									<div class="carousel relative overflow-hidden w-full rounded-lg shadow-md mt-4" data-index="0">
+										<ol class="slides flex transition-transform duration-500 ease-in-out">
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/umount.webp" class="w-full" alt="Unstick Flash" />
+												<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+													On request, remove flash.
+												</p>
+											</li>
+											<li class="slide min-w-full relative">
+												<img src="/img/pages/hw-preparation/umount-hw.webp" class="w-full" alt="Unstick Flash" />
+											</li>
+										</ol>
+										<button class="prev absolute top-1/2 left-4 -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-full z-10 cursor-pointer" role="button">&larr;</button>
+										<button class="next absolute top-1/2 right-4 -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-full z-10 cursor-pointer" role="button">&rarr;</button>
+									</div>
+								</li>
+							</ol>
+
+							<h4 id="bios-conf" class="text-2xl font-semibold mt-12 mb-4">Set proper BIOS settings</h4>
+							<ol class="list-decimal space-y-2 pl-6">
+								<li>While PC loads ater restart, press <strong class="text-black">F2</strong> to load BiOS settings</li>
+								<li>Set <strong class="text-black">Power delivery after failure</strong> and <strong class="text-black">cooling mode</strong></li>
+								<li>Press <strong class="text-black">F10</strong> to save and exit</li>
+							</ol>
+							<div class="carousel relative overflow-hidden w-full rounded-lg shadow-md mt-4" data-index="0">
+								<ol class="slides flex transition-transform duration-500 ease-in-out">
+									<li class="slide min-w-full relative">
+										<img src="/img/pages/hw-preparation/failure-power.webp" class="w-full" alt="After failure" />
+										<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+											In "Power,Performance and Cooling", set "After Power Failure" to Power On. This ensure that the node will automatically start after an electricity power failure.
+										</p>
+									</li>
+									<li class="slide min-w-full relative">
+										<img src="/img/pages/hw-preparation/cooling.webp" class="w-full" alt="Cooling" />
+										<p class="absolute bottom-0 left-0 right-0 text-center bg-black text-white font-light p-3 max-h-[10%]">
+											Through "Secondary Power Settings" of the same section, you can customize cooling mode.
+										</p>
+									</li>
+								</ol>
+								<button class="prev absolute top-1/2 left-4 -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-full z-10 cursor-pointer" role="button">&larr;</button>
+								<button class="next absolute top-1/2 right-4 -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-2 rounded-full z-10 cursor-pointer" role="button">&rarr;</button>
+							</div>
+
+							<h4 class="text-xl font-medium mt-12 mb-4">First login</h4>
+							<ol class="list-decimal list-inside text-gray-700 space-y-2 pl-4">
+								<li>After auto-restart, the login window appears.</li>
+								<li>Enter your username and press <strong class="text-black">Enter</strong>. Then enter the password.</li>
+							</ol>
+							<p class="text-gray-700 mt-4">
+								After successful login, proceed to the 
+								<a href="/{{chainUrl}}/full-guide" class="text-blue-600 hover:underline">next step</a>.
+							</p>
+						</div>
+						<div class="tabpanel">
+							<h3 class="mt-0 text-xl font-semibold mb-4">Get Ubuntu Server on Cloud Node</h3>
+							<ol class="list-decimal list-inside text-gray-700 space-y-2 pl-4">
+								<li>Select a cloud instance with <code>Ubuntu 24.04 LTS Server</code> pre-installed.</li>
+							</ol>
+
+							<h4 class="text-xl font-medium mt-8 mb-2">Check your server user</h4>
+							<p class="text-gray-700 mb-4">
+							Cloud providers often log you in as <code>root</code> by default. For better security and management, create a dedicated user with sudo rights.
+							</p>
+
+							<ul class="list-disc list-inside text-gray-700 space-y-4 pl-4">
+							<li>
+								Create a new standard user and assign <code>sudo</code> rights:
+								<label for="serverUser" class="block text-sm text-gray-600 mb-1">Choose your username:</label>
+								<input type="text" value="myserveruser" id="serverUser" class="px-3 py-1 border border-gray-300 rounded-md text-sm font-mono text-gray-800 mb-2" />
+
+								<pre class="bg-gray-200 p-4 overflow-x-auto text-sm border border-gray-300 rounded-md"><code>adduser <mark class="serverUser">myserveruser</mark>
+usermod -aG sudo <mark class="serverUser">myserveruser</mark></code></pre>
+							</li>
+							<li>
+								If you're logged in as <code>root</code> via SSH key, copy your SSH keys to the new user:
+								<pre class="bg-gray-200 p-4 overflow-x-auto text-sm border border-gray-300 rounded-md"><code>rsync --archive --chown=<mark class="serverUser">myserveruser</mark>:<mark class="serverUser">myserveruser</mark> ~/.ssh /home/<mark class="serverUser">myserveruser</mark></code></pre>
+							</li>
 							</ul>
 							<script>
 								(function(){
@@ -485,40 +457,9 @@ usermod -aG sudo <mark class="serverUser">yourusername</mark></code></pre>
 							</script>
 						</div>
 					</div>
-				</div>
+			</section>
 
-  <div class="mt-12 space-y-10">
-    <div>
-      <h4 class="text-xl font-semibold mb-4">Local hardware installation</h4>
-      <ul class="list-disc list-inside text-gray-700 space-y-1 pl-4">
-        <li>Download Ubuntu Server from <a href="https://ubuntu.com/download/server" target="_blank" class="text-blue-600 hover:underline">ubuntu.com</a></li>
-        <li>Create bootable USB stick (link to guide)</li>
-        <li>Connect monitor, keyboard, power, and USB stick</li>
-        <li>Install Ubuntu Server following guided steps</li>
-        <li>Configure BIOS: set power recovery, cooling mode</li>
-      </ul>
-
-    </div>
-
-    <div>
-      <h4 class="text-xl font-semibold mb-4">Cloud instance installation</h4>
-      <ul class="list-disc list-inside text-gray-700 space-y-1 pl-4">
-        <li>Choose cloud VM with Ubuntu Server 24.04 LTS</li>
-        <li>If you're logged in as <code>root</code>, create a new user and grant <code>sudo</code> rights</li>
-        <li>Transfer SSH keys from <code>root</code> to the new user for secure access</li>
-      </ul>
-
-      <div class="bg-gray-50 border border-gray-200 p-4 mt-4 rounded-md text-sm text-gray-800 font-mono">
-        <code>adduser yourusername</code><br>
-        <code>usermod -aG sudo yourusername</code><br>
-        <code>rsync --archive --chown=yourusername:yourusername ~/.ssh /home/yourusername</code>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-			<section id="next" class="max-w-6xl my-20 mx-auto border border-gray-200 rounded-xl p-6 py-10 shadow-sm text-center">
+			<section id="next" class="max-w-6xl my-20 mx-auto border border-gray-200 lg:rounded-xl p-6 py-10 shadow-sm text-center">
 				<div class="flex justify-center items-start mb-4">
 					<h2 class="text-3xl font-semibold">Next step: Securing your server & Installing staking clients</h2>
 				</div>
@@ -531,9 +472,6 @@ usermod -aG sudo <mark class="serverUser">yourusername</mark></code></pre>
 					Guide to Secure OS & Install Staking Clients
 				</a>
 			</section>
-
-
-
 		</main>
 
 		{{!--<!-- right panel -->
@@ -548,6 +486,6 @@ usermod -aG sudo <mark class="serverUser">yourusername</mark></code></pre>
 			</div>
 		</aside>--}}
 	</div>
-</div>
-{{> footer_amp_tailwind}}
+{{> footer_tailwind}}
 {{> scripts/tabselector}}
+{{> scripts/carousel}}

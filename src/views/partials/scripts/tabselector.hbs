@@ -1,10 +1,11 @@
 <script>Array.from(document.getElementsByClassName("tabselector")).forEach((tabSelector) => {
-		var nav = tabSelector.children[0];
+		var nav = tabSelector.children[0]; // navbar
 		for(var i=0;i<nav.children.length;i++){
 			if(!nav.children[i].classList.contains("tab")) continue;
 			nav.children[i].addEventListener('click', function(e) {
-				console.log("TabSelector clicked", e.target);
-				var tabSelectorChildrens = e.target.parentElement.parentElement.children;
+				const tabButton = this;
+				console.log("TabSelector clicked", e.target, "→", tabButton);
+				var tabSelectorChildrens = tabButton.parentElement.parentElement.children;
 				console.log("TabSelector childrens", tabSelectorChildrens);
 				// hide all tabpanels, unselect nav tabs
 				for(var c=0;c<tabSelectorChildrens.length;c++){
@@ -17,9 +18,12 @@
 					}
 				}
 				// highline requested tab button
-				e.target.classList.add('selected');
+				tabButton.classList.add('selected');
 				// display requested tabpanel
-				if(tabSelectorChildrens[Number(e.target.dataset.tabpanel)]) tabSelectorChildrens[Number(e.target.dataset.tabpanel)].classList.add('selected')
+				const targetPanelIndex = Number(tabButton.dataset.tabpanel);
+				if (tabSelectorChildrens[targetPanelIndex]) {
+					tabSelectorChildrens[targetPanelIndex].classList.add('selected');
+				}
 			});
 		}
 });</script>

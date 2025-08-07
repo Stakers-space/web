@@ -24,4 +24,7 @@
         font-size: 12px;
         padding-right: 5px;
     }
+    .broadcrumbs li:last-child {
+        @apply font-semibold text-gray-800
+    }
 }

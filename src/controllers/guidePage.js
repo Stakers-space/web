@@ -97,7 +97,6 @@ class GuidePage {
     }
     Hardware(req, res, next){
         res.locals = app._ExtandLocals(res.locals);
-        res.locals.layout_hbs = "amp"; // rewrite
         res.locals.page_hbs = 'guides/hardware';
         res.locals.title = `Hardware for ${res.locals.chainName} staking`;
         res.locals.metaDescription = `What hardware to choose for ${res.locals.chainName} staking?`;

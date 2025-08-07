@@ -2,30 +2,24 @@
   display: block;
 }
 .tabselector nav .tab {
-  display: block;
-  background: none;
   border: none;
   flex-grow: 1;
   text-align: center;
   padding: 0.5rem;
-  font-weight: bold;
   font-size: 1.15rem;
 }
-@media (min-width: 1000px) {
-  .tabselector nav .tab {
-    display: grid;
-  }
-}
+
 .tabselector nav .tab.selected {
   outline: none;
   cursor: auto;
-  border-bottom: 2px solid #00ca72;
+  border-bottom: 2px solid black;
+  background-color: #f6f3f4;
 }
 .tabselector .tabpanel {
   display: none;
   order: 1;
   padding: 2rem;
-  background-color: #ecffe7;
+  background-color: #f6f3f4;
 }
 .tabselector .tabpanel.selected {
   outline: none;
@@ -37,6 +31,10 @@
   font-size: unset;
   line-height: 26px;
 }
+.tabselector.decent nav .tab.selected {
+  background-color: unset;
+}
+
 .tabselector.decent .tabpanel {
   padding: unset;
   background-color: unset;

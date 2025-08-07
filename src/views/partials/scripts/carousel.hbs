@@ -1,0 +1,33 @@
+<script>Array.from(document.getElementsByClassName("carousel")).forEach((carousel) => {
+    const slides = carousel.children[0];
+    const prevBtn = carousel.getElementsByClassName("prev")[0];
+    const nextBtn = carousel.getElementsByClassName("next")[0];
+
+    console.log("Carousel initialized", carousel, slides, prevBtn, nextBtn);
+
+    function updateCarousel(index) {
+        console.log("→ index", index);
+        const offset = -Number(index) * 100;
+        slides.style.transform = `translateX(${offset}%)`;
+        carousel.dataset.index = index;
+    }
+
+    prevBtn.addEventListener("click", () => {
+        let index = Number(carousel.dataset.index);
+        index--;
+        if (index < 0) index = slides.children.length - 1; // Wrap around to the last slide
+        updateCarousel(index);
+    });
+
+    nextBtn.addEventListener("click", () => {
+        let index = Number(carousel.dataset.index);
+        index = (index + 1) % slides.children.length;
+        updateCarousel(index);
+    });
+});</script>
+{{!-- 
+  setInterval(() => {
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateCarousel();
+}, 5000);
+--}}
