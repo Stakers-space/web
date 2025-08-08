@@ -1,7 +1,7 @@
 {{#unless InstallationGuide}}
 <strong>Check current version:</strong> <code>/usr/local/bin/mev-boost --version</code>
 {{/unless}}
-<ul>
+<ul class="list-disc mt-4 mb-4">
     <li>
         <h4>Find the latest stable version at Github</h4>
         <p>Write latest stable Mev-boost version from <a href="https://github.com/flashbots/mev-boost/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/flashbots/mev-boost/releases</a>: <input type="text" value="{{mevClients.mevboost.latestVer}}" class="interactive-element mevboostVer" data-class="mevboostVer"></p>
@@ -138,12 +138,12 @@ Extend its <code>ExecStart</code> for following flag:
         </div>
         <div class="tabpanel">
             <aside>NOTE: This option requires following installed utils:
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
                 </ul>
                 <p>A guide to install each util is attached on the Github.</p>
             </aside>
-            <ul>
+            <ul class="list-disc mt-4 mb-4">
                 <li>
                     Restart the Beacon service
                     <pre><code>/usr/local/bin/staking.sh restart beacon && /usr/local/bin/staking.sh status beacon</code></pre>
@@ -200,12 +200,12 @@ Extend its <code>ExecStart</code> for following flag:
         </div>
         <div class="tabpanel">
             <aside>NOTE: This option requires following installed utils:
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
                 </ul>
                 <p>A guide to install each util is attached on the Github.</p>
             </aside>
-            <ul>
+            <ul class="list-disc mt-4 mb-4">
                 <li>
                     Restart validator service(s)
                     <pre><code>/usr/local/bin/staking.sh restart validators && /usr/local/bin/staking.sh status validators</code></pre>

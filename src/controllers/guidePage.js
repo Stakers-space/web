@@ -5,7 +5,7 @@ const fs = require('fs'),
 class GuidePage {
     constructor(){
         this.layout_hbs = 'standard';
-        this.css_file = 'docs';
+        this.css_file = 'guides';
         app = this;
     }
     _ExtandLocals(locals){
@@ -100,7 +100,6 @@ class GuidePage {
         res.locals.page_hbs = 'guides/hardware';
         res.locals.title = `Hardware for ${res.locals.chainName} staking`;
         res.locals.metaDescription = `What hardware to choose for ${res.locals.chainName} staking?`;
-        res.locals.css_file = 'guides';
         next();
     }
     Emergency(req,res,next){

@@ -13,10 +13,10 @@
 	</div>
 </div>
 {{/unless}}
-<ol>
+<ol class="list-decimal space-y-2 pl-6">
     <li>
         <h3>Find the latest stable version of Lighthouse on Github</h3>
-        <ul>
+        <ul class="list-disc mt-4 mb-4">
             <li>Find latest Lighthouse version at <a href="https://github.com/sigp/lighthouse/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/sigp/lighthouse/releases</a></li>
             <li>
                 Write latest stable lighthouse version: <input type="text" value="{{consensusClients.lighthouse.latestVer}}" class="lighthouseVer-input"><br>
@@ -24,7 +24,7 @@
             </li>
         </ul>
     </li>
-    <li class="mt-15">
+    <li>
         <h3>Download Lighthouse version <code class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</code> to your node</h3>
         <pre><code>cd ~/downloads && curl -LO https://github.com/sigp/lighthouse/releases/download/v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>/lighthouse-v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>-x86_64-unknown-linux-gnu.tar.gz</code></pre>
         <p>Extract downloaded file</p>
@@ -32,9 +32,9 @@
     </li>
 
     {{#unless InstallationGuide}}
-    <li class="mt-15">
+    <li>
         <h3>Stop Lighthouuse services</h3>
-        <div class="tabselector" data-client="lighthouse">
+        <div class="tabselector bg-gray-200 p-10 pt-5 rounded-xl shadow-md" data-client="lighthouse">
 		    <nav class="egrid egrid-2">
 				<button class="tab selected" data-tabpanel="1">Standard option</button>
 				<button class="tab" data-tabpanel="2">Staking manager</button>
@@ -56,14 +56,14 @@ sudo systemctl stop {{servicePrefix}}lighthouse-vi...
 		</div>
     </li>
     {{/unless}}
-    <li class="mt-15">
+    <li>
         <strong>Replace old Lighthouse client for new</strong>
 <pre><code>$ sudo cp ~/downloads/lighthouse /usr/local/bin</code></pre>
     </li>
     {{#unless InstallationGuide}}
-    <li class="mt-15">
+    <li>
         <h3>Start the Lighthouse services</h3>
-        <div class="tabselector" data-client="lighthouse">
+        <div class="tabselector bg-gray-200 p-10 pt-5 rounded-xl shadow-md" data-client="lighthouse">
 		    <nav class="egrid egrid-2">
 				<button class="tab selected" data-tabpanel="1">Standard option</button>
 				<button class="tab" data-tabpanel="2">Staking manager</button>
@@ -82,13 +82,13 @@ sudo systemctl start {{servicePrefix}}lighthouse-vi...
 		</div>
     </li>
     <li><h3>Monitor</h3>
-        <div class="tabselector" data-client="lighthouse">
+        <div class="tabselector bg-gray-200 p-10 pt-5 rounded-xl shadow-md" data-client="lighthouse">
 		    <nav class="egrid egrid-2">
 				<button class="tab selected" data-tabpanel="1">Standard option</button>
 				<button class="tab" data-tabpanel="2">Staking manager</button>
 			</nav>
 			<div class="tabpanel selected">
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li><pre><code>systemctl status <mark class="consensus_sn">{{servicePrefix}}lighthousebeacon</mark> {{servicePrefix}}lighthouse-vi.. {{servicePrefix}}lighthouse-vi..</code></pre></li>
                     <li><pre><code>journalctl -fu <mark class="consensus_sn">{{servicePrefix}}lighthousebeacon</mark></code></pre></li>
                     <li><pre><code>journalctl -f -u {{servicePrefix}}lighthouse-vi.. -u {{servicePrefix}}lighthouse-vi...</code></pre></li>
@@ -102,7 +102,7 @@ sudo systemctl start {{servicePrefix}}lighthouse-vi...
 		</div>
     </li>
     {{/unless}}
-    <li class="mt-15">
+    <li>
         <strong>Remove downloaded files</strong>
 <pre><code>$ cd ~/downloads && rm lighthouse-v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>-x86_64-unknown-linux-gnu.tar.gz && rm -r lighthouse</code></pre>
     </li>

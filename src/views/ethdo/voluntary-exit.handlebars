@@ -5,15 +5,15 @@
     <p>Ethdo tool is usually used on both side - on the side of staking node to generate offline-preparation.json file and on the client side to generate exit keys with a use of the offline-preparation.json file. However, as offline-preparation.json file can be downloaded from internet, it's possible to perform the exit externally - without a need to have access to any staking node. This guide sumamrizes both options.</p>
     <p>Exiting with using ethdo consists of 2 steps:</p>
     <nav>
-        <ol>
+        <ol class="list-decimal space-y-2 pl-6">
             <li>Generate Exit keys</li>
             <li>Broadcast Exit keys</li>
         </ol>
     </nav>
-    <ol>
+    <ol class="list-decimal space-y-2 pl-6">
         <li>
             <h2>Sources preparation</h2>
-            <ul>
+            <ul class="list-disc mt-4 mb-4">
                 <li><h3>Download Ethdo</h3>
                     <p>ethdo is a command-line tool for managing common tasks in Ethereum. In this guide it will be used to (pre)sign voluntary exit for your validators.</p>
                     <p>Download the etho archive and the associated checksum file for OS you are going to generate exit keys on. <strong>Note: I recommend to use Linux option, as it allows simplest way to "run" in a secure offline mode (see <a href="#generation">step generation</a>).</strong></p>

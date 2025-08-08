@@ -1,0 +1,185 @@
+{{> header}}
+<section class="grid grid-cols-1 md:grid-cols-[67fr_33fr] gap-8 bg-white rounded-lg shadow-sm p-8">
+	<div class="mx-auto md:px-6 md:py-16">
+		<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/clients"><span property="name">Clients</span></a>
+					<meta property="position" content="2">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{client}}"><span property="name">{{clientName}} client</span></a>
+					<meta property="position" content="3">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{client}}/emergency"><span property="name" class="intro-label">Emergency</span></a>
+					<meta property="position" content="4">
+				</li>
+			</ul>
+		<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+			Emergency guide for <span class="block mt-1 text-green-600">{{clientName}} client</span>
+		</h1>
+		<p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl">
+			One-page interactive complete emergency guide for {{clientName}} client.
+		</p>
+	</div>
+	<div class="flex items-center justify-center md:pl-10 text-sm text-gray-600">
+		<div class="md:max-w-xs bg-gray-50 p-6 rounded-xl shadow-md">
+			<h3 class="font-semibold mb-1">Disclaimer</h3>
+			<p>
+				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.
+			</p>
+		</div>
+	</div>
+</section>
+
+<div class="ifr-grid grid-cols-1 xl:grid-cols-[minmax(220px,1fr)_minmax(0,6fr)_minmax(220px,1fr)] gap-6">
+	{{!--<aside class="ifr-nav lg:mt-14">
+		<nav class="border-l-4 border-gray-500 pl-4 py-3">
+			<p class="font-semibold mb-2">{{clientName}} client</p>
+			<ul class="list-disc pl-4">
+				<li><a href="#update">Update client</a></li>
+			</ul>
+		</nav>
+	</aside>--}}
+
+	<aside class="ifr-header">
+		<p class="text-gray-700 mx-auto max-w-6xl text-center p-8">
+			{{clientName}} client can be used for staking on various supported chains. Client installation is always only one, used by services with an individual configuration (different service name, data path and ports in use).
+		</p>
+		{{> guides/serverSelection }}
+	</aside>
+
+	<main class="ifr-body prose prose-lg max-w-none;">
+		<aside class="bg-yellow-50 border-l-4 border-yellow-400 p-4 text-sm text-yellow-800 mt-2 my-8">
+			NOTE: Service name, directory and user may vary based on your initial configuration.
+		</aside>
+
+			{{#ifEqual clientName "Nethermind"}}
+			<h2 class="text-xl">Database corruption</h2>
+			<p>In a case of database corruption (shortly DB corruption):</p>
+			
+			<ol class="list-decimal space-y-2 pl-6">
+				<li><h3>Stop Nethermind service</h3>
+					<pre><code>sudo systemctl stop <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
+				</li>
+				<li><h3>Delete and recreate Nethermind directory</h3>
+					Delete the directory
+					<pre><code>sudo rm -r <mark class="execution-dp">/var/lib{{slashChain}}/nethermind</mark></code></pre>
+					Recreate the directory
+					<pre><code>sudo mkdir -p <mark class="execution-dp">/var/lib{{slashChain}}/nethermind</mark></code></pre>
+					Set directory ownership
+					<pre><code>sudo chown -R <mark class="execution_sn">{{servicePrefix}}nethermind</mark>:<mark class="execution_sn">{{servicePrefix}}nethermind</mark> <mark class="execution-dp">/var/lib{{slashChain}}/nethermind</mark></code></pre>
+				</li>
+				<li><h3>Start the service</h3>
+					<pre><code>sudo systemctl start <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
+					Check the service
+					<pre><code>systemctl status <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
+					<pre><code>journalctl -f -u <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
+				</li>
+			</ol>
+			<p>Once the execution chain will get synchronized, your validator will go online again.</p>
+
+			<h2 class="mt-6 text-xl">Nethermind got stucked</h2>
+			<p>If a Nethermind got stucked, you can simply restart it.</p>
+			<pre><code>sudo systemctl restart <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
+			<p>This can be also automated through <a href="https://github.com/Stakers-space/staking-scripts/tree/main/monitor/service_log" target="_blank" rel="nofollow noopener noreferrer">Service Log Monitor</a>.</p>
+
+			<p class="mt-1">There are no other serious issues with Nethermind detected.</p>
+			{{/ifEqual}}
+			
+			{{#ifEqual clientName "Erigon"}}
+			<h2 class="text-xl">Database corruption</h2>
+			<p>In a case of database corruption (shortly DB corruption):</p>
+			<ol class="list-decimal space-y-2 pl-6">
+				<li><h3>Stop Erigon service</h3>
+					<pre><code>sudo systemctl stop <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></code></pre>
+				</li>
+				<li><h3>Delete and recreate Erigon directory</h3>
+					Delete the directory
+					<pre><code>sudo rm -r <mark class="execution-dp">/var/lib{{slashChain}}/erigon</mark></code></pre>
+					Recreate the directory
+					<pre><code>sudo mkdir -p <mark class="execution-dp">/var/lib{{slashChain}}/erigon</mark></code></pre>
+					Set directory ownership
+					<pre><code>sudo chown -R <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark>:<mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark> <mark class="execution-dp">/var/lib{{slashChain}}/erigon</mark></code></pre>
+				</li>
+				<li><h3>Start the service</h3>
+					<pre><code>sudo systemctl start <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></code></pre>
+					Check the service
+					<pre><code>systemctl status <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></code></pre>
+					<pre><code>journalctl -f -u <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></code></pre>
+				</li>
+			</ol>
+			<p>Once the execution chain will get synchronized, your validator will go online again.</p>
+
+			<h2 class="text-xl mt-6">Erigon got stucked</h2>
+			<p>If a Erigon got stucked, you can simply restart it.</p>
+			<pre><code>sudo systemctl restart <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
+			<p>This can be also automated through <a href="https://github.com/Stakers-space/staking-scripts/tree/main/monitor/service_log" target="_blank" rel="nofollow noopener noreferrer">Service Log Monitor</a>.</p>
+
+			<p class="mt-1">There are no other serious issues with Erigon detected.</p>
+			{{/ifEqual}}
+
+			{{#ifEqual clientName "Lighthouse"}}
+			<h2 class="text-xl">ERRO Database write failed</h2>
+			<p>There's any issue with writing to Lighthouse database. To fix that, stop and start the Lighthouse Beacon service.</p>
+			<pre><code>sudo systemctl stop <mark class="consensus_sn">{{servicePrefix}}lighthousebeacon</mark></code></pre>
+			<pre><code>sudo systemctl start <mark class="consensus_sn">{{servicePrefix}}lighthousebeacon</mark></code></pre>
+			<p>This can be also automated through <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lighthouse/beacon_log_monitor" target="_blank" rel="nofollow noopener noreferrer">Lighthouse Beacon Log Monitor</a>.</p>
+
+			<h2 class="text-xl mt-6">status: 503 Service Unavailable</h2>
+			<p>This is an execution client issue - the client got stuck. You can simply restart it.</p>
+			<pre><code>sudo systemctl restart ExecutionService</code></pre>
+
+			<p>This can be also automated through <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lighthouse/beacon_log_monitor" target="_blank" rel="nofollow noopener noreferrer">Lighthouse Beacon Log Monitor</a>.</p>
+			{{/ifEqual}}
+
+			{{#ifEqual clientName "Lodestar"}}
+			<h2 class="text-xl">Validators cannot start due to existing lock file</h2>
+			<p>This may occur, for example, in the event of a power failure—when the staking node powers back on, validators cannot start due to existing lock files.</p>
+			<p>The check can be disabled by adding label <code>--force</code> into <a href="/lodestar/add-validator#config">validator service config file</a>.</p>
+			{{/ifEqual}}
+
+			{{#ifEqual clientName "Teku"}}
+			<h2 class="text-xl">Validators cannot start due to existing lock file</h2>
+			<p>This may occur, for example, in the event of a power failure—when the staking node powers back on, validators cannot start due to existing lock files.</p>
+			<p>Lock files can be removed with a use of <a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/remove_lock_files" target="_blank" rel="nofollow noopener noreferrer">Remove Lock files util</a>.</p>
+
+			<h2 class="text-xl mt-6">Stucked Execution/TekuBeacon client</h2>
+			<p>If a any client got stucked, you can simply restart them.</p>
+			<pre><code>sudo systemctl restart ExecutionService</code></pre>
+			<pre><code>sudo systemctl restart <mark class="consensus_sn">{{servicePrefix}}tekubeacon</mark></code></pre>
+			<p>This (and many others) can be also automated through <a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/beacon_log_monitor" target="_blank" rel="nofollow noopener noreferrer">Teku Beacon Log Monitor service</a>.</p>
+			{{/ifEqual}}
+	</main>
+
+	<aside class="ifr-panel xl:sticky xl:top-8 self-start mt-14">
+		<div class="bg-gray-100 rounded-lg p-4 text-sm shadow-sm">
+			<p class="font-semibold mb-2">Interactive Config</p>
+			{{> guides/variablesOverview }}
+		</div>
+	</aside>
+</div>
+<section class="max-w-6xl my-1 mx-auto p-6 py-10" id="individual-guides">
+	<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+		<a href="/{{client}}/install" class="flex items-center justify-center text-center bg-white rounded-lg shadow hover:shadow-md transition p-6">
+			<span><strong>Install</strong> {{clientName}} client</span>
+		</a>
+		<a href="/{{client}}/update" class="flex items-center justify-center text-center bg-white rounded-lg shadow hover:shadow-md transition p-6">
+			<span><strong>Update</strong> {{clientName}} client</span>
+		</a>
+		{{#ifEqual cliLayer "consensus"}}
+		<a href="/{{client}}/add-validator" class="flex items-center justify-center text-center bg-white rounded-lg shadow hover:shadow-md transition p-6">
+			<span><strong>Add</strong> {{clientName}} validator</span>
+		</a>
+		<a href="/{{client}}/exit-validator" class="flex items-center justify-center text-center bg-white rounded-lg shadow hover:shadow-md transition p-6">
+			<span><strong>Exit</strong> {{clientName}} validator</span>
+		</a>
+		{{/ifEqual}}
+	</div>
+</section>
+{{> footer_tailwind}}
+{{> scripts/tabselector}}

@@ -1,4 +1,4 @@
-    <ul>
+    <ul class="list-disc mt-4 mb-4">
       <li>
     <h4>Create a user</h4>
       <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}prysmbeacon" class="interactive-element consensus_sn" data-class="consensus_sn" data-client="prysm">
@@ -14,15 +14,15 @@
     <pre><code>sudo chown -R <mark class="consensus_sn" data-client="prysm">{{servicePrefix}}prysmbeacon</mark>:<mark class="consensus_sn" data-client="prysm">{{servicePrefix}}prysmbeacon</mark> <mark class="consensus-dp">/var/lib{{slashChain}}/prysm/beacon</mark></code></pre>
   </li>
     </ul>
-<h3 class="mt-60">Configurate & Run PrysmBeacon service</h3>
+<h3 class="mt-1">Configurate & Run PrysmBeacon service</h3>
 
-<ul>
+<ul class="list-disc mt-4 mb-4">
  {{#if PortSelection}}
-    <li class="mt-15">{{> clients/config/consensusclient-portselection }}</li>
+    <li>{{> clients/config/consensusclient-portselection }}</li>
     {{/if}}
   <li>
     <h4>Create configuration file for Tekubeacon service</h4>
-    <ol>
+    <ol class="list-decimal space-y-2 pl-6">
       <li>
         <p>Open PrysmBeacon configuration file</p>
         <pre><code>sudo nano /etc/systemd/system/<mark class="consensus_sn" data-client="prysm">{{servicePrefix}}prysmbeacon</mark>.service</code></pre>
@@ -87,7 +87,7 @@ journalctl -fu <mark class="consensus_sn">{{servicePrefix}}prysmbeacon</mark></c
                 </div>
                 <div class="tabpanel">
                     <aside>NOTE: This option requires installed <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank" rel="nofollow noopener">Start with Delay util</a>.</aside>
-                    <ul>
+                    <ul class="list-disc mt-4 mb-4">
                         <li>Open Delayed Start shell
                             <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
                             <p>Configurate service start inside it</p>
@@ -102,15 +102,15 @@ journalctl -fu <mark class="consensus_sn">{{servicePrefix}}prysmbeacon</mark></c
             </div>
             <div class="tabpanel">
               <aside>NOTE: This option requires following installed utils:
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                   <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with Delay util with delayed-start.service</a>.</li>
                   <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
                 </ul>
                 <p>A guide to install each util is attached on the Github.</p>
               </aside>
-              <ol>
+              <ol class="list-decimal space-y-2 pl-6">
                 <li><h4>Configurate Staking Manager util</h4>
-                  <ul>
+                  <ul class="list-disc mt-4 mb-4">
                     <li>Open the configuration file
                       <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
                       <p>If the file is empty, generate it with command <code>sudo /usr/local/bin/staking.sh init</code></p>
@@ -122,7 +122,7 @@ journalctl -fu <mark class="consensus_sn">{{servicePrefix}}prysmbeacon</mark></c
                 </li>
                 <li>
                   <h4>Activate service to start automatically on OS startup</h4>
-                  <ul>
+                  <ul class="list-disc mt-4 mb-4">
                     <li>Open Start with delay util
                         <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
                     </li>

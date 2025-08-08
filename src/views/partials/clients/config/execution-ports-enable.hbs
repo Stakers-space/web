@@ -1,24 +1,24 @@
-<h4>Enable ports communication</h4>
 <div class="tabselector">
-	<nav class="egrid egrid-2">
-		<button class="tab selected" data-tabpanel="1">Single machine (Standard)</button>
-		<button class="tab" data-tabpanel="2">Multiple machines (Advanced)</button>
+	<nav class="flex gap-4 pb-2 mb-3">
+		<button class="tab selected" data-tabpanel="1" type="button">Single machine (Standard)</button>
+		<button class="tab" data-tabpanel="2" type="button">Multiple machines (Advanced)</button>
 	</nav>
 	<div class="tabpanel selected">
-        <p>To allow execution client synchronization, <strong>there's need to enable port <code class="execution-p2p">30303</code> reserved for P2P traffic to TCP</strong> (allows the node to connect to peers) and UDP (allows node discovery). It may be done with following UFW setup:</p>
+        <p class="mb-4">To allow execution client synchronization, <strong>there's need to enable port <code class="execution-p2p">30303</code> reserved for P2P traffic to TCP</strong> (allows the node to connect to peers) and UDP (allows node discovery). It may be done with following UFW setup:</p>
         <pre><code>$ sudo ufw allow <mark class="execution-p2p">30303</mark></code></pre>
 	</div>
 	<div class="tabpanel">
         <p><strong>Use this option only if you need operate execution client and beacon client on different machines.</strong></p>
-        <ul>
+        <ul class="list-disc mt-4 mb-4">
             <li>
-                <strong>Enable port <code class="execution-p2p">30303</code> for P2P traffic</strong>
-                <p>To allow execution client synchronization, <strong>there's need to enable port <code class="execution-p2p">30303</code> reserved for P2P traffic to TCP</strong> (allows the node to connect to peers) and UDP (allows node discovery). It may be done with following UFW setup:</p>
+                <h5>Enable port <code class="execution-p2p">30303</code> for P2P traffic</h5>
+                <p class="my-2">To allow execution client synchronization, <strong>there's need to enable port <code class="execution-p2p">30303</code> reserved for P2P traffic to TCP</strong> (allows the node to connect to peers) and UDP (allows node discovery). It may be done with following UFW setup:</p>
                 <pre><code>$ sudo ufw allow <mark class="execution-p2p">30303</mark></code></pre>
             </li>
-            <li class="mt-10"><strong>Enable port <code class="execution-endpoint">8551</code> for IP of your second machine</strong>
+            <li class="mt-2">
+                <h5>Enable port <code class="execution-endpoint">8551</code> for IP of your second machine</h5>
                 <pre><code>sudo ufw allow from <mark>192.168.88.0/27</mark> to any port <mark class="execution-endpoint">8551</mark></code></pre>
-                <p>Note: Be sure you use proper IP of your second machine / proper local network configuration.</p>
+                <p class="mt-2">Note: Be sure you use proper IP of your second machine / proper local network configuration.</p>
             </li>
         </ul>
 	</div>

@@ -3,7 +3,7 @@
 <main>
 	<section class="grid mt-100 mb-100">
         <h1>{{formTitle}}</h1>
-        <ol>
+        <ol class="list-decimal space-y-2 pl-6">
             {{#each newsList}}
             <li data-newsid="{{this.id}}" data-time="{{this.t}}" data-category="{{this.c}}">{{this.t}} [{{this.c}}] <a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer">{{{this.m}}}</a> | <button onclick="UpdateNews(this)">Edit</button></li>
             {{/each}}

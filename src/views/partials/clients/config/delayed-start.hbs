@@ -1,0 +1,33 @@
+<aside class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md shadow-sm">
+  <div class="flex">
+    <svg class="h-6 w-6 text-yellow-400 flex-shrink-0 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+      viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 9v2m0 4h.01M4.93 4.93l14.14 14.14M12 4.93l7.07 7.07M12 4.93L4.93 12m14.14 0L12 19.07" />
+    </svg>
+    <div>
+      <p class="font-semibold text-yellow-800">Note</p>
+      <p class="text-yellow-700">This option requires the following installed utils:</p>
+      <ul class="list-disc pl-5 mt-2 space-y-1 text-yellow-700">
+        <li>
+          <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" 
+             target="_blank" class="underline hover:text-yellow-900">
+             Start with Delay util with delayed-start.service
+          </a>
+        </li>
+      </ul>
+      <p class="mt-2 text-yellow-700">A guide to install the util is attached on the Github.</p>
+    </div>
+  </div>
+</aside>
+
+<ul class="list-disc mt-4 mb-4">
+    <li>Open Delayed Start shell
+        <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
+        <p class="mt-1">Configurate service start inside it</p>
+        <pre><code>systemctl start <mark class="{{MarkClass}}" data-client="{{ClientName}}">{{servicePrefix}}{{ClientName}}{{#if InstanceNumber}}-vi<span class="instance_pid">{{InstanceNumber}}</span>{{/if}}</mark>.service</code></pre>
+    </li>
+    <li class="mt-2">Be sure, <code>delayed-start.service</code> service controlling <code>delayed-start.sh</code> is enabled for auto start with system startup
+        <pre><code>sudo systemctl enable delayed-start.service</code></pre>
+    </li>
+</ul>

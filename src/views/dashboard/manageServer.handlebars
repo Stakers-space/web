@@ -12,7 +12,7 @@
         <section class="mb-100 grey" style="margin-top:1rem">
             <h1>{{formTitle}}</h1>
             <form method="post" action="{{submitLink}}" id="serverDefinition">
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li>
                         <label for="server-name">Server name</label>
                         <input type="text" id="server-name" name="server-name" required="required" value="{{server.serverName}}">
@@ -56,9 +56,9 @@
                 </ul>
                 {{#if editingView}}
                 <div><h4>Staking clients selection</h4>
-                    <ul>
+                    <ul class="list-disc mt-4 mb-4">
                         <li>Execution client(s)
-                            <ol>
+                            <ol class="list-decimal space-y-2 pl-6">
                                 {{#each server.execution}}
                                 <li><label for="ec_1">Execution Client</label>
                                     <select id="ec_1" name="ec_1" onchange="OnClientChanged('ec_1')">
@@ -73,7 +73,7 @@
                             <p><i>* Support for defining more consensus clients will be added later</i></p>
                         </li>
                         <li>Consensus client(s)
-                            <ol>
+                            <ol class="list-decimal space-y-2 pl-6">
                                 {{#each server.consensus}}
                                 <li>
                                     <label for="cc_1">Consensus Client</label>
@@ -193,7 +193,7 @@
                             Check port availability: <code>sudo ss -tulpn | grep ':PORT'</code>
                         </li>
                         <li><h4>Service-based clients</h4>
-                            <ul>
+                            <ul class="list-disc mt-4 mb-4">
                                 <li class="{{#ifEqual server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
                                     <label for="mb_1">MEV Client</label>
                                     <select id="mb_1" name="mb_1">
@@ -353,7 +353,7 @@
         <section>
             <div style="margin:1rem;" class="grey">
                 <h2>API credentials</h2>
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li>Account ID: <code>{{account.id}}</code></li>
                     <li>SERVER ID: <code>{{server.id}}</code></li>
                     <li>API TOKEN: {{#if account.api_token}}
@@ -364,7 +364,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="mt-60" style="margin:1rem">
+            <div class="mt-1" style="margin:1rem">
                 <h2>Server notes (internal, encrypted)</h2>
                 <form method="post" action="{{submitNoteLink}}" id="editServerNote">
                     <textarea type="text" id="server-note" name="note" rows="20" cols="100" class="encrypted_value">{{{server.serverNote}}}</textarea>
@@ -405,8 +405,8 @@
     {{/if}}
 	
     <section class="grid">
-        <h2 class="mt-60">Server Actions (Unencrypted)</h2>
-        <ol>
+        <h2 class="mt-1">Server Actions (Unencrypted)</h2>
+        <ol class="list-decimal space-y-2 pl-6">
              {{#each actions}}
             <li>[{{this.timestamp}}] {{{this.action}}}</a></li>
             {{/each}}

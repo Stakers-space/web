@@ -3,7 +3,7 @@
 <pre><code>/usr/local/bin/teku/bin/teku --version</code></pre>
 {{/unless}}
 
-<ol>
+<ol class="list-decimal space-y-2 pl-6">
 {{#if InstallationGuide}}
     <li><h3>Install Java</h3>
       <pre><code>cd ~/downloads && wget https://download.oracle.com/java/{{consensusClients.teku.jdkVer}}/latest/jdk-{{consensusClients.teku.jdkVer}}_linux-x64_bin.deb</code></pre>
@@ -88,7 +88,7 @@ sudo systemctl start {{servicePrefix}}teku-vi...
 				<button class="tab" data-tabpanel="2">Staking manager</button>
 			</nav>
 			<div class="tabpanel selected">
-        <ul>
+        <ul class="list-disc mt-4 mb-4">
             <li><pre><code>systemctl status <mark class="consensus_sn">{{servicePrefix}}tekubeacon</mark> {{servicePrefix}}teku-vi..</code></pre></li>
             <li><pre><code>journalctl -fu <mark class="consensus_sn">{{servicePrefix}}tekubeacon</mark></code></pre></li>
             <li><pre><code>journalctl -f -u teku-vi.. -u teku-vi..</code></pre></li>

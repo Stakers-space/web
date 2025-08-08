@@ -1,85 +1,170 @@
 {{> header}}
-<main class="mb-60">
-	<section class="cover grid egrid">
-		<div class="mt-60 mb-20">
-			<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
-				<li property="itemListElement" typeof="ListItem">
-					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
-					<meta property="position" content="1">
-				</li>
-				<li property="itemListElement" typeof="ListItem">
-					<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{chainName}} staking</span></a>
-					<meta property="position" content="2">
-				</li>
-				<li property="itemListElement" typeof="ListItem">
-					<a property="item" typeof="Thing" href="/{{chainUrl}}/full-guide"><span property="name" class="intro-label">Full Guide</span></a>
-					<meta property="position" content="3">
-				</li>
-			</ul>
-			<h1 class="cover-title"><span>Interactive Solo {{chainName}} staking</span> guide for Ubuntu OS</h1>
-			<p><strong>Complete guide to stake one as well as thousands of validators on multiple chains through a single staking node.</strong> Simply made, interactive, well explained. The guide on this webpage is focused on staking {{chainName}}.</p>
-		</div>
-		<div class="disclaimer">
-			<div class="disclaimer-content">
-				<h3>Disclaimer</h3>
-				<p>This guide is for informational and education purposes only - accuracy is not guaranteed, see <a href="/disclaimer">disclaimer</a>.</p>
-            </div>
-		</div>
-	</section>
+<section class="grid grid-cols-1 md:grid-cols-[67fr_33fr] gap-8 p-8">
+	<div class="mx-auto md:px-6 md:py-16">
+		<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+				<meta property="position" content="1">
+			</li>
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{chainName}} staking</span></a>
+				<meta property="position" content="2">
+			</li>
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/{{chainUrl}}/full-guide"><span property="name" class="intro-label">Full Guide</span></a>
+				<meta property="position" content="3">
+			</li>
+		</ul>
 
-	<div class="grid-full contents serverguide">
-        <div class="content-chapters">
-			<div class="sticky">
-				 <nav>
-					<strong>Solo staking guide</strong>
-					<ol>
-						<li><a href="#hardware">Hardware & OS</a></li>
-						<li><a href="#security">Securying server</a></li>
-						<li><a href="#config">Setting Basic conf</a></li>
-						<li><a href="#jwt">Jwtsecret</a></li>
-						<li>Install & configurate clients
-							<ul>
-								<li><a href="#execution">Execution client</a></li>
-								<li><a href="#consensus">Consensus client</a>
-									<ul>
-										<li><a href="#beacon">Beacon</a></li>
-										<li><a href="#validator">Validator</a></li>
-									</ul>
-								</li>
+		<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+			<span class="block mt-1 text-green-600">Interactive Solo {{chainName}} staking</span> guide for Ubuntu OS
+		</h1>
+
+		<p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl">
+			<strong>Complete guide to stake one as well as thousands of validators on multiple chains through a single staking node.</strong> Simply made, interactive, well explained. The guide on this webpage is focused on staking {{chainName}}.
+		</p>
+	</div>
+	<div class="flex items-center justify-center md:pl-10 text-sm text-gray-600">
+		<div class="md:max-w-xs bg-gray-50 p-6 rounded-xl shadow-md">
+			<h3 class="font-semibold mb-1">Disclaimer</h3>
+			<p>
+				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.
+			</p>
+		</div>
+	</div>
+</section>
+
+<div class="ifr-grid grid-cols-1 xl:grid-cols-[minmax(220px,1fr)_minmax(0,6fr)_minmax(240px,1fr)] gap-6 mt-12">
+	<aside class="ifr-nav lg:mt-14">
+		<nav class="border-l-4 border-gray-500 pl-4">
+			<p class="font-semibold mb-2">Navigation</p>
+			<ul class="list-disc pl-4">
+				<li><a href="#hardware">Hardware & OS</a></li>
+				<li><a href="#security">Securing server</a></li>
+				<li><a href="#jwt">Jwtsecret</a></li>
+				<li><a href="#config">Basic configuration</a></li>
+				<li>Install & configure clients
+					<ul class="list-disc pl-6">
+						<li><a href="#execution">Execution client</a></li>
+						<li><a href="#consensus">Consensus client</a>
+							<ul class="list-disc pl-6">
+								<li><a href="#beacon">Beacon</a></li>
+								<li><a href="#validator">Validator</a></li>
 							</ul>
 						</li>
-					</ol>
-				</nav>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+
+	<div class="ifr-header">
+		<section id="prerequisites">
+			<div class="max-w-6xl mx-auto px-4 py-14 pt-0">
+				<span class="inline-flex items-center rounded-full bg-emerald-600 text-white px-3 py-1 text-xs font-semibold tracking-wide shadow">
+					Prerequisites
+				</span>
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Prerequisites for {{chainName}} staking
+				</h2>
+				<p class="mt-2 text-gray-600 mb-8">
+					Before you start, make sure you have these three things ready.
+				</p>
+
+				<div class="rounded-2xl border backdrop-blur shadow-2xl ring-1 ring-black/5 bg-neutral-900/70 border-white/10">
+					<ol class="divide-y divide-gray-100/70">
+						<li class="p-6 md:p-8 flex gap-5">
+						<div class="flex-shrink-0">
+							<span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white font-bold shadow">
+							1
+							</span>
+						</div>
+						<div class="min-w-0">
+							<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+							Staking Node for {{chainName}}
+							</h3>
+							<p class="mt-1 text-gray-600 dark:text-gray-300">
+								Prepare hardware/VM for {{chainName}} staking. Check out the recommended options and instructions.
+							</p>
+							<div class="mt-4">
+								<a href="/{{chainUrl}}/staking-hardware"
+									class="inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+									Options & guides for Staking Node
+									<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</li>
+
+					<li class="p-6 md:p-8 flex gap-5">
+						<div class="flex-shrink-0">
+							<span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white font-bold shadow">
+							2
+							</span>
+						</div>
+						<div class="min-w-0">
+							<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+							Access to Staking Node
+							</h3>
+							<p class="mt-1 text-gray-600 dark:text-gray-300">
+								SSH/sudo access and basic knowledge of working in the terminal.
+							</p>
+						</div>
+					</li>
+
+					<li class="p-6 md:p-8 flex gap-5">
+						<div class="flex-shrink-0">
+							<span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white font-bold shadow">
+							3
+							</span>
+						</div>
+						<div class="min-w-0">
+							<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+								Sufficient capital
+							</h3>
+							<p class="mt-1 text-gray-600 dark:text-gray-300">
+								Running a node involves the need to lock up capital
+							</p>
+						</div>
+					</li>
+				</ol>
 			</div>
-		</div>
-		<div class="content-header">
-			{{> guides/serverSelection }}
-		</div>
-		<div class="content-panel">
-			<div class="sticky">
-				{{> guides/variablesOverview }}
-			</div>
-		</div>
-		<div class="content-body">			
-			<section class="chapter" id="prerequisites">
-				<div class="content" style="padding-top:10px">
-					<h2 data-number="°">Prerequisites for this {{chainName}} staking</h2>
-					<ol>
-						<li><p>Staking Node for {{chainName}} staking, see</p>
-							<a href="/{{chainUrl}}/staking-hardware" class="btn btn-black btn-rounded">options and guides for Staking Node</a>
-						</li>
-						<li><p>Access to Staking Node Operating System</p></li>
-						<li><p>Interest in staking</p></li>
-					</ol>
+
+			<div class="mt-8 flex flex-wrap items-center justify-between gap-3">
+				<p class="text-sm text-gray-600 dark:text-gray-400">
+					Do you meet all the requirements? Continue with configuration and key generation.
+				</p>
+				<a href="/{{chainUrl}}/setup"
+					class="inline-flex items-center gap-2 rounded-full bg-emerald-600 text-white px-5 py-2.5 text-sm font-semibold hover:bg-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">
+					Start setup
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+					<path fill-rule="evenodd" d="M12.293 4.293a1 1 0 011.414 0L18 8.586a2 2 0 010 2.828l-4.293 4.293a1 1 0 01-1.414-1.414L14.586 12H4a1 1 0 110-2h10.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+					</svg>
+				</a>
 				</div>
-            </section>
+			</div>
+		</section>
+		<aside class="mt-12">
+			{{> guides/serverSelection }}
+		</aside>
+	</div>
 
-            <section class="chapter mt-60" id="security">
-				<div class="content bt">
-                    <h2 data-number="1">Securying Ubuntu OS</h2>
-					<p>In the matter of security, you must think about the way you are going to connect to / access your node - see the guide below.</p>
+	<main class="ifr-body prose prose-lg" id="setup">
+            <section id="security" class="mt-8 max-w-6xl mx-auto px-4">
 
-					<h3>Upgrade & update on the latest software and security updates.</h3>
+				<span class="inline-flex items-center rounded-full bg-emerald-600 text-white px-3 py-1 text-xs font-semibold tracking-wide shadow">
+					Security
+				</span>
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Securing Ubuntu OS for {{chainName}} staking
+				</h2>
+				<p class="mt-2 text-gray-600 mb-8">
+					In the matter of security, you must think about the way you are going to connect to / access your node - see the guide below.
+				</p>
+				
+				<h3>Upgrade & update on the latest software and security updates.</h3>
 					<pre><code>$ sudo apt update && sudo apt -y upgrade
 $ sudo apt dist-upgrade && sudo apt autoremove
 $ sudo reboot</code></pre>
@@ -87,7 +172,7 @@ $ sudo reboot</code></pre>
 						
 					<div>
 						<h3>Install UFW, configurate <code>deny</code> state for incoming and <code>allow</code> state for outgoing traffic</h3>
-						<ul>
+						<ul class="list-disc mt-4 mb-4">
 							<li>Install UFW (if not installed yet)
 								<pre><code>sudo apt install ufw</code></pre></li>
 							<li>Set default Fireall configuration
@@ -98,32 +183,40 @@ sudo ufw default allow outgoing</code></pre>
 						<p><strong>NOTE: Installed firewall is required for enabling custom SSH port for remote connection. Firewall activation itself will be processed later, after additional configuration made in next steps.</strong></p>
 					</div>
 
-					<div>
-						<h3 class="mt-40" id="securyiing-ssh">Managing the SSH access</h3>
-						<ul>
+					<div class="bg-gray-100 p-10 rounded-xl shadow-md mt-10">
+						<span class="inline-flex items-center text-white text-xs font-semibold tracking-wide">
+							<span class="rounded-l-full bg-emerald-600 px-3 py-1 shadow">
+								Security
+							</span>
+							<span class="rounded-r-full bg-gray-300 text-gray-800 px-3 py-1 shadow">
+								SSH
+							</span>
+						</span>
+						<h3 class="mt-3 text-2xl" id="securing-ssh">Managing the SSH access</h3>
+						<ul class="list-disc p-6">
 							<li>SSH allows to connect to the server remotely either from the local or remote network.</li>
 							<li>If you are going to connect your node locally only (= with monitor and keyboard connected right in the node), you do not need to install SSH or you can simply disable it, if is already installed.</li>
 						</ul>
 
-						<h4 class="mt-20" id="ssh-install">Check, whether <code>SSH</code> is installed on the server</h4>
+						<h4 class="mt-4" id="ssh-install">Check, whether <code>SSH</code> is installed on the server</h4>
 						<pre><code>which sshd</code></pre>
 						<p>This command should print directory of the <code>SSH</code> service. If it prints an empty response, <code>SSH</code> is not installed on the server and thus connecting to server over <code>SSH</code> is not possible.</p>
 						
-						<div class="tabselector mt-40">
-							<nav class="egrid egrid-2">
+						<div class="tabselector mt-6 bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
+							<nav class="mb-5">
 								<button class="tab selected" data-tabpanel="1">Securying SSH access</button>
 								<button class="tab" data-tabpanel="2">Disabling SSH access</button>
 							</nav>
 
 							<div class="tabpanel selected">
 								<p>With allowed SSH access, you must protect SSH access to your server from attackers. Based on your network confifuration, access may be possible from:</p>
-								<ul>
+								<ul class="list-disc mt-4 mb-4 pl-10">
 									<li>From any network (Your server has public IP)</li>
 									<li>From a local network only (Your server is behind nat)</li>
 									<li>From a VPN network the node is assigned to</li>
 								</ul>
 								<p>Even if you have enabled access from a local netowk only (your node is behind <a href="https://vrealmatic.com/mikrotik-router/firewall/nat">NAT</a>), you should still protect your SSH access as a potential attacker may use a compromised device in your local network to access your node. The defense consists in increasing the number of obstacles that must be overcome to access your node.</p>
-								<ul>
+								<ul class="list-disc mt-4 mb-4 pl-10">
 									<li><a href="#ssh-keys">Configurate SSH keys</a></li>
 									<li><a href="#ssh-port">Modify default SSH port</a></li>
 									<li><a href="#2fa">Configurate 2FA authentization</a></li>
@@ -137,86 +230,131 @@ sudo ufw default allow outgoing</code></pre>
 								<pre><code>ssh -o IdentitiesOnly=yes -o PreferredAuthentications=password username@server_id -p 22</code></pre>
 								<p>Remote connection from Windows OS requires installation of SSH client such as e.g. Putty. See more information about remote connections from Windows at <a href="https://vrealmatic.com/ubuntu-server/ssh-keys" target="_blank">this Guide</a>.</p>
 
-								<p><strong>Before configuring security matters and connecting to your node,</strong> take note the basic rule to maintain also the security of the computer(s) you are going to use for connecting to your node (stealing the SSH keys) as well as other devices required for connection (stealing 2FA codes) etc.</p>
-								<ul>
+								<p class="mt-10"><strong>Before configuring security matters and connecting to your node,</strong> take note the basic rule to maintain also the security of the computer(s) you are going to use for connecting to your node (stealing the SSH keys) as well as other devices required for connection (stealing 2FA codes) etc.</p>
+								<ul class="list-disc mt-4 mb-4">
 									<li id="ssh-keys">
 										<h4>Configure SSH keys</h4>
-										<p>By default, SSH connections can be made using a combo of <code>username</code> and <code>password</code>. As <code>password</code> is usually somewhat "short" and thus susceptible to brute-force attacks, key loggers attacks and so on. This is why SSH keys significantly enhances the security of the login process.</p>
-										<a href="https://vrealmatic.com/ubuntu-server/ssh-keys" target="_blank" class="btn btn-black btn-rounded">SSH keys step by step guide.</a>
+										<p class="mb-5">By default, SSH connections can be made using a combo of <code>username</code> and <code>password</code>. As <code>password</code> is usually somewhat "short" and thus susceptible to brute-force attacks, key loggers attacks and so on. This is why SSH keys significantly enhances the security of the login process.</p>
+										<a href="https://vrealmatic.com/ubuntu-server/ssh-keys" target="_blank"
+											class="inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+											SSH keys step by step guide.
+											<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+											</svg>
+										</a>
 									</li>
-									<li class="mt-40" id="ssh-port">
+									<li class="mt-10" id="ssh-port">
 										<h4>Modify default <code>22</code> SSH port</h4>
 										<p>As port <code>22</code> is default port for SSH connections, it's the first port that a potential attacker tests. Change it to a different free port.</p>
-										<ol>
+										<ol class="list-decimal space-y-2 pl-6">
 											<li>
-												<p>Choose any number between <code>21</code> and <code>49151</code></p>
+												<p class="mt-2">Choose any number between <code>21</code> and <code>49151</code></p>
 												<strong>Choose a port number for SSH:</strong> <input data-type="number" type="text" data-min="21" data-max="49151" value="22" class="interactive-element sshPort" data-class="sshPort">
 											</li>
-											<li class="mt-20">
+											<li>
 												Check whether the selected port for SSH is not already in use
 												<pre><code>sudo ss -tulpn | grep ':<mark class="sshPort">22</mark>'</code></pre>
-												<ul>
+												<ul class="list-disc mt-4 mb-4 pl-6">
 													<li>blank response = port is not in used</li>
 													<li>red text response, the port is already in used. Check availability of a different port number in such case.</li>
 												</ul>
 											</li>
-											<li class="mt-15">Change SSH port from default <code>22</code> to <code class="sshPort">22</code> in the SSH config file
-												<ol>
-													<li class="mt-10">
+											<li>Change SSH port from default <code>22</code> to <code class="sshPort">22</code> in the SSH config file
+												<ol class="list-decimal space-y-2 pl-6">
+													<li>
 														Open <code>sshd_config</code> config file
 														<pre><code>sudo nano /etc/ssh/sshd_config</code></pre>
 													</li>
-													<li class="mt-10">
+													<li>
 														<p>Find mark <code>Port</code>, usually <code>Port 22</code>. The mark specifies currently port used for SSH access.</p>
 														<p><strong>Rewrite the port value for <code>Port <span class="sshPort"></span></code></strong></p>
 													</li>
-													<li class="mt-10">Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</li>
+													<li>Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</li>
 												</ol>
 											</li>
-											<li class="mt-15">Enable the Port <code class="sshPort">1024</code> for SSH/TCP connection
+											<li>Enable the Port <code class="sshPort">1024</code> for SSH/TCP connection
 												<pre><code>sudo ufw allow <mark class="sshPort">1024</mark>/tcp</code></pre>
 											</li>
-											<li class="mt-15">Disable the default <code>22</code> port for SSH/TCP connection
+											<li>Disable the default <code>22</code> port for SSH/TCP connection
 												<pre><code>sudo ufw deny 22/tcp</code></pre>
 											</li>
-											<li class="mt-15">Restart the SSH service and reboot the system to reflect the changes.
+											<li>Restart the SSH service and reboot the system to reflect the changes.
 												<pre><code>sudo systemctl restart ssh && sudo reboot</code></pre>
 												<p>After the restart, you will not able to connect through the SSH over port <code>22</code> anymore. Be sure you are connecting over the <code class="sshPort">1024</code> next time.</p>
 											</li>
 										</ol>
-										<p><strong>NOTE: If you are facing an issue to sign in over SSH after changing the port, try reboot the staking node and sign in again.</strong></p>
-									</li>
-									<li class="mt-40" id="2fa">
-										<h4>Configuring 2FA authentization</h4>
-										<p>2FA (2 Factor authentization) comes with additional code you must provide to access your node. You may know 2FA from crypto exchanges. In the same way you can protect loging to your node.</p>
-										<a href="https://vrealmatic.com/ubuntu-server/2fa-google-authenticator" target="_blank" class="btn btn-black btn-rounded">2FA Google Authentication activation guide.</a>
-									</li>
-									<li class="mt-40" id="ddos">
-										<h4>Configuring Brute-force & DDoS protection</h4>
-										<p>To defend against Brute Force and DDoS attacks, one can monitor incoming connections and block IP addresses that repeatedly attempt to log in with incorrect credentials. Installing the Fail2Ban package can assist with this.</p>
-										<a href="https://vrealmatic.com/ubuntu-server/fail2ban" target="_blank"  class="btn btn-black btn-rounded">Guide to activate Fail2Ban.</a>
+										<p class="mt-5"><strong>NOTE: If you are facing an issue to sign in over SSH after changing the port, try reboot the staking node and sign in again.</strong></p>
 									</li>
 								</ul>
-								
-								<h3 class="mt-50" id="remote-access">Securying remote access tips</h3>
-								<ul>
-									<li>Staking node is accessible from public IP:
-										<ul>
-											<li>If you do not need o connect to your node from remote networks, move your node behind the router that prevents accessing the node.</li>
-											<li>If you want to keep this feature, you should still consider move the node behind the router, <a href="https://vrealmatic.com/mikrotik-router/vpn" target="_blank">set VPN on the router</a>, and when connecting to the node, firstly connect to the router VPN and then connect the node from "local" network through its local IP.</li>
+
+									<div class="mt-10" id="2fa">
+										<span class="inline-flex items-center text-white text-xs font-semibold tracking-wide">
+											<span class="rounded-l-full bg-emerald-600 px-3 py-1 shadow">
+												Security
+											</span>
+											<span class="rounded-r-full bg-gray-300 text-gray-800 px-3 py-1 shadow">
+												2FA
+											</span>
+										</span>
+										<h4 class="text-xl mt-2">Configuring 2FA authentization</h4>
+										<p class="mb-5">2FA (2 Factor authentization) comes with additional code you must provide to access your node. You may know 2FA from crypto exchanges. In the same way you can protect loging to your node.</p>
+										<a href="https://vrealmatic.com/ubuntu-server/2fa-google-authenticator" target="_blank"
+											class="inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+											2FA Google Authentication activation guide
+											<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+											</svg>
+										</a>
+									</div>
+									<div class="mt-10" id="ddos">
+										<span class="inline-flex items-center text-white text-xs font-semibold tracking-wide">
+											<span class="rounded-l-full bg-emerald-600 px-3 py-1 shadow">
+												Security
+											</span>
+											<span class="rounded-r-full bg-gray-300 text-gray-800 px-3 py-1 shadow">
+												DDoS
+											</span>
+										</span>
+										<h4 class="text-xl mt-2">Configuring Brute-force & DDoS protection</h4>
+										<p class="mb-5">To defend against Brute Force and DDoS attacks, one can monitor incoming connections and block IP addresses that repeatedly attempt to log in with incorrect credentials. Installing the Fail2Ban package can assist with this.</p>
+										<a href="https://vrealmatic.com/ubuntu-server/fail2ban" target="_blank"
+											class="inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+											Guide to activate Fail2Ban.
+											<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+											</svg>
+										</a>
+									</div>
+
+									<div class="mt-10" id="tips">
+										<span class="inline-flex items-center text-white text-xs font-semibold tracking-wide">
+											<span class="rounded-l-full bg-emerald-600 px-3 py-1 shadow">
+												Security
+											</span>
+											<span class="rounded-r-full bg-gray-300 text-gray-800 px-3 py-1 shadow">
+												Tips
+											</span>
+										</span>
+										<h3 class="mt-2" id="remote-access">Securying remote access tips</h3>
+										<ul class="list-disc mt-4 mb-4 pl-6">
+											<li>Staking node is accessible from public IP:
+												<ul class="list-disc mt-4 mb-4 pl-6">
+													<li>If you do not need o connect to your node from remote networks, move your node behind the router that prevents accessing the node.</li>
+													<li>If you want to keep this feature, you should still consider move the node behind the router, <a href="https://vrealmatic.com/mikrotik-router/vpn" target="_blank">set VPN on the router</a>, and when connecting to the node, firstly connect to the router VPN and then connect the node from "local" network through its local IP.</li>
+												</ul>
+											</li>
+											<li>Staking node is not accessible from public IP:
+												<ul class="list-disc mt-4 mb-4 pl-6">
+													<li>If you need connecting your node from remote networks, you must either set a VPN, such as Tailscale (either on the server itself or any other device in your local network), or buy public IP from your ISP and follow the points for server accessible from the public IP.</li>
+												</ul>
+											</li>
 										</ul>
-									</li>
-									<li>Staking node is not accessible from public IP:
-										<ul>
-											<li>If you need connecting your node from remote networks, you must either set a VPN, such as Tailscale (either on the server itself or any other device in your local network), or buy public IP from your ISP and follow the points for server accessible from the public IP.</li>
-										</ul>
-									</li>
-								</ul>
+									</div>
 							</div>
 
 							<div class="tabpanel">
 								<p><a href="#ssh-install">If you have <code>SSH</code> installed and running on your server</a>, you must either disable ports for SSH traffic, disable SSH or remove it. If <code>SSH</code> is not installed on your machine, you can skip this step - ssh access is not possible already.</p>
-								<ul>
+								<ul class="list-disc mt-4 mb-4">
 									<li><h4>Option 1: Stop and disable the ssh service</h4>
 										<pre><code>sudo systemctl stop ssh
 sudo systemctl disable ssh</code></pre>
@@ -234,83 +372,129 @@ sudo systemctl disable ssh</code></pre>
 						</div>
 					</div>
 
-					<h3 class="mt-40">Configure the Firewall</h3>
-					<ul>
-						<li>Enable Firewall
-							<pre><code>$ sudo ufw enable</code></pre>
-						</li>
-						<li>Check Firewall Ports
-							<pre><code>sudo ufw numbered</code></pre>
-						</li>
-					</ul>
+					<div class="mt-15">
+						<span class="inline-flex items-center text-white text-xs font-semibold tracking-wide">
+											<span class="rounded-l-full bg-emerald-600 px-3 py-1 shadow">
+												Security
+											</span>
+											<span class="rounded-r-full bg-gray-300 text-gray-800 px-3 py-1 shadow">
+												Firewall
+											</span>
+										</span>
+										<h3 class="mt-2">Configure the Firewall</h3>
+						<ul class="list-disc mt-4 mb-4">
+							<li>Enable Firewall
+								<pre><code>$ sudo ufw enable</code></pre>
+							</li>
+							<li>Check Firewall Ports
+								<pre><code>sudo ufw numbered</code></pre>
+							</li>
+						</ul>
+					</div>
 
-					<h3 class="mt-50">Consider installing and setting VPN to hide your public IP</h3>
-					<p>VPN allows the server to access the internet through an intermediary in a form of a VPN server. In such case, your server's IP address (and location) is hidden behind the VPN server IP address. The disadvantage is the potential instability of the VPN server, in terms of connection speed and possible crashes into offline state.</p>
-					<a href="/vpn" target="_blank"  class="btn btn-black btn-rounded">Install, configurate and activate VPN service on Ubuntu server.</a>
-					<p>Note: If you need to have active Mullvad and Tailscale VPNs simultaneously, follow a <a href="https://github.com/Stakers-space/staking-scripts/tree/main/mullvad/enable_tailscale" target="_blank">guide for setting rules for netfilter</a>.</p>
-				</div>
-            </section>
+					<div class="mt-15" id="jwt">
+						<span class="inline-flex items-center text-white text-xs font-semibold tracking-wide">
+											<span class="rounded-l-full bg-emerald-600 px-3 py-1 shadow">
+												Security
+											</span>
+											<span class="rounded-r-full bg-gray-300 text-gray-800 px-3 py-1 shadow">
+												JWT
+											</span>
+										</span>
 
-             <section class="chapter mt-60" id="config">
-				<div class="content bt">
-                    <h2 data-number="2">Check / set basic config for your node machine</h2>
-					<ul>
+						<h4 class="text-xl mt-2">Generate Client Authentication Secret for {{chain}}</h4>
+						<ul class="list-disc mt-4 mb-4 pl-6">
+							<li>Create a new directory for <code>jwtsecret</code> files
+								<pre><code>sudo mkdir -p /var/lib/jwtsecret</code></pre>
+							</li>
+							<li>Generate the JWT file using the openssl cryptography software library.
+								<pre><code>openssl rand -hex 32 | sudo tee /var/lib/jwtsecret/<mark>{{chain}}</mark>.hex > /dev/null</code></pre>
+							</li>
+							<li>Check the generated authentication secret
+								<pre><code>$ nano /var/lib/jwtsecret/<mark>{{chain}}</mark>.hex</code></pre>
+								Press <code>CTRL</code> + <code>X</code> to exit the config file.
+							</li>
+						</ul>	
+					</div>
+
+					
+					<div class="mt-15">
+						<span class="inline-flex items-center text-white text-xs font-semibold tracking-wide">
+											<span class="rounded-l-full bg-emerald-600 px-3 py-1 shadow">
+												Security
+											</span>
+											<span class="rounded-r-full bg-gray-300 text-gray-800 px-3 py-1 shadow">
+												VPN
+											</span>
+										</span>
+										<h3 class="mt-2">Consider installing and setting VPN to hide your public IP</h3>
+						<p class="mb-5">VPN allows the server to access the internet through an intermediary in a form of a VPN server. In such case, your server's IP address (and location) is hidden behind the VPN server IP address. The disadvantage is the potential instability of the VPN server, in terms of connection speed and possible crashes into offline state.</p>
+						<a href="/vpn" target="_blank"
+												class="inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+												Install, configurate and activate VPN service on Ubuntu server.
+												<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+												</svg>
+											</a>
+						
+						<p class="mt-5">Note: If you need to have active Mullvad and Tailscale VPNs simultaneously, follow a <a href="https://github.com/Stakers-space/staking-scripts/tree/main/mullvad/enable_tailscale" target="_blank">guide for setting rules for netfilter</a>.</p>
+            
+					</div>
+			</section>
+
+            <section id="config" class="mt-8 max-w-6xl mx-auto px-4 mt-20">
+				<span class="inline-flex items-center rounded-full bg-emerald-600 text-white px-3 py-1 text-xs font-semibold tracking-wide shadow">
+					Basic Config
+				</span>
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Check / set basic config for your staking node
+				</h2>
+					<ul class="list-disc mt-4 mb-4 space-y-2 pl-6">
 						<li>Check, you are not logged in as <code>root</code>. If so, create a new user with <code>sudo</code>, see section <a href="/{{chainUrl}}/staking-hardware">Staking on rented hardware</a></li>
-						<li class="mt-15">Check a <code>swap</code> space 
+						<li>Check a <code>swap</code> space 
 							<pre><code>free -h</code></pre>
 							<p>If there's no <code>swap</code> space created on your node, <a href="#">configurate a swap space</a>.</p>
 						</li>
-						<li class="mt-15">Check <code>timedatectl</code> service for option to synchronize time
+						<li>Check <code>timedatectl</code> service for option to synchronize time
 							<p>Check current state:</p>
 							<pre><code>timedatectl status</code></pre>
-							<ul>
+							<ul class="list-disc pl-6">
 								<li><code>NTP service</code> must be <code>active</code>. If not, run <code>sudo timedatectl set-ntp on</code></li>
 								<li><code>System clock synchronized</code> must be <code>yes</code>. If not, and you have active VPN client, <a href="https://github.com/Stakers-space/staking-scripts/tree/main/mullvad/split-tunnel" target="_blank">set a split tunnel for <code>timedatectl</code> service.</a></li>
 							</ul>
 						</li>
-						<li class="mt-15">Create <code>downloads</code> directory in your machine
+						<li>Create <code>downloads</code> directory in your machine
 							<pre><code>mkdir ~/downloads</code></pre>
 							<p>This folder will be used for downloading clients</p>
 						</li>
 					</ul>
-                </div>
             </section>
 
-			<section class="chapter mt-60" id="jwt">
-				<div class="content bt">
-                    <h2 data-number="3">Generate Client Authentication Secret for {{chain}}</h2>
-					<ul>
-						<li>Create a new directory for <code>jwtsecret</code> files
-							<pre><code>sudo mkdir -p /var/lib/jwtsecret</code></pre>
-						</li>
-						<li>Generate the JWT file using the openssl cryptography software library.
-							<pre><code>openssl rand -hex 32 | sudo tee /var/lib/jwtsecret/<mark>{{chain}}</mark>.hex > /dev/null</code></pre>
-						</li>
-						<li>Check the generated authentication secret
-							<pre><code>$ nano /var/lib/jwtsecret/<mark>{{chain}}</mark>.hex</code></pre>
-							Press <code>CTRL</code> + <code>X</code> to exit the config file.
-						</li>
-					</ul>
-                </div>
-            </section>
-
-			<aside class="chapter mt-60">
-                <div class="content bt">
+			<aside id="config" class="mt-8 max-w-6xl mx-auto px-4 mt-20">
+				<span class="inline-flex items-center rounded-full bg-emerald-600 text-white px-3 py-1 text-xs font-semibold tracking-wide shadow">
+					Basic Config
+				</span>
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Check / set basic config for your staking node
+				</h2>
                     <p>Perfect, now we can move on configuring individual clients</p>
-					<h3>Default vs custom settings for staking clients</h3>
+					<h3 class="text-xl mt-5">Default vs custom settings for staking clients</h3>
 					<p>Default settings is great. It's absolutely preferred to start with first clients running in the default settings. Sometimes later, when you want e.g. switch at other client, you can use a custom settings for this new client only. This applies also for settings clients on another chain. The custom options below allow all this. Anyway, if you are a beginner, just ignore the ports settings and so on and use the default options everywhere.</p>
-					<ol>
-						<li><a href="#execution">Installing Execution client</a></li>
-						<li><a href="#consensus">Installing Consensus client</a></li>
+					<ol class="list-decimal space-y-2 pl-6 mt-5">
+						<li><a href="#execution" class="text-blue-600 hover:text-blue-800">Installing Execution client</a></li>
+						<li><a href="#consensus" class="text-blue-600 hover:text-blue-800">Installing Consensus client</a></li>
 					</ol>
-				</div>
             </aside>
 
-            <section class="chapter mt-60" id="execution">
-				<div class="content bt">
-                    <h2 data-number="4">Install and configurate preferred execution client</h2>
-					<div class="tabselector">
-						<nav class="egrid egrid-4">
+			<section id="execution" class="mt-8 max-w-6xl mx-auto px-4 mt-25">
+				<span class="inline-flex items-center rounded-full bg-emerald-600 text-white px-3 py-1 text-xs font-semibold tracking-wide shadow">
+					Execution Client
+				</span>
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Install and configurate preferred execution client
+				</h2>
+					<div class="tabselector mt-6 bg-gray-100 p-10 pt-5 rounded-xl shadow-md">
+						<nav class="mb-5">
 							<button class="tab selected" data-tabpanel="1" onclick="OnExecutionClientChanged('nethermind')">
 								{{!--<div class="mb-10">
 									<img src="/logo/nethermind.webp" alt="Nethermind">
@@ -345,7 +529,6 @@ sudo systemctl disable ssh</code></pre>
 							<p>Soon</p>
 						</div>
 					</div>
-                </div>
 				<script>
 					function OnExecutionClientChanged(value){
 						document.getElementById("ec_1").value = value;
@@ -353,15 +536,23 @@ sudo systemctl disable ssh</code></pre>
 				</script>
             </section>
 
-             <section class="chapter mt-60" id="consensus">
-				<div class="content bt">
-                    <h2 data-number="5">Consensus client</h2>
-					<aside>
+
+
+            <section id="consensus" class="mt-8 max-w-6xl mx-auto px-4 mt-25">
+				<span class="inline-flex items-center rounded-full bg-emerald-600 text-white px-3 py-1 text-xs font-semibold tracking-wide shadow">
+					Consensus Client
+				</span>
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Install and configurate preferred Consensus client
+				</h2>
+				<div class="bg-gray-100 p-10 pt-5 rounded-xl shadow-md">
+					<aside class="bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
 						{{> clients/config/consensusclient-portselection}}
 					</aside>
-					<h3 class="mt-60">Install Consensus client</h3>
-					<div class="tabselector">
-						<nav class="egrid egrid-5">
+
+					<h3 class="mt-10 text-xl">Install Consensus client</h3>
+					<div class="tabselector bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
+						<nav>
 							<button class="tab selected" data-tabpanel="1" onclick="OnConsensusClientChanged('lighthouse')">Lighthouse</button>
 							<button class="tab" data-tabpanel="2" onclick="OnConsensusClientChanged('lodestar')">Lodestar</button>
 							<button class="tab" data-tabpanel="3" onclick="OnConsensusClientChanged('teku')">Teku</button>
@@ -370,54 +561,81 @@ sudo systemctl disable ssh</code></pre>
 						</nav>
 
 						<div class="tabpanel selected">
-{{> clients/lighthouse_cli InstallationGuide=true }}
-<h3 class="mt-60">Configurate Lighthouse Beacon service</h3>
-{{> clients/lighthouse_cli_config PortSelection=false}}
+	{{> clients/lighthouse_cli InstallationGuide=true }}
+	<h3 class="mt-1">Configurate Lighthouse Beacon service</h3>
+	{{> clients/lighthouse_cli_config PortSelection=false}}
+							</div>
+							<div class="tabpanel">
+	{{> clients/lodestar_cli InstallationGuide=true }}
+	<h3 class="mt-1">Configurate Lodestar Beacon service</h3>
+	{{> clients/lodestar_cli_config PortSelection=false}}
+							</div>
+							<div class="tabpanel">
+	{{> clients/teku_cli InstallationGuide=true }}
+	<h3 class="mt-1">Configurate Teku Beacon service</h3>
+	{{> clients/teku_cli_config PortSelection=false}}
+							</div>
+							<div class="tabpanel">
+	{{> clients/nimbus_cli InstallationGuide=true }}
+	<h3 class="mt-1">Configurate Nimbus Beacon service</h3>
+	{{> clients/nimbus_cli_config PortSelection=false}}
+							</div>
+							<div class="tabpanel">
+	{{> clients/prysm_cli InstallationGuide=true }}
+	<h3 class="mt-1">Configurate Prysm Beacon service</h3>
+	{{> clients/prysm_cli_config PortSelection=false}}
+							</div>
 						</div>
-						<div class="tabpanel">
-{{> clients/lodestar_cli InstallationGuide=true }}
-<h3 class="mt-60">Configurate Lodestar Beacon service</h3>
-{{> clients/lodestar_cli_config PortSelection=false}}
-						</div>
-						<div class="tabpanel">
-{{> clients/teku_cli InstallationGuide=true }}
-<h3 class="mt-60">Configurate Teku Beacon service</h3>
-{{> clients/teku_cli_config PortSelection=false}}
-						</div>
-						<div class="tabpanel">
-{{> clients/nimbus_cli InstallationGuide=true }}
-<h3 class="mt-60">Configurate Nimbus Beacon service</h3>
-{{> clients/nimbus_cli_config PortSelection=false}}
-						</div>
-						<div class="tabpanel">
-{{> clients/prysm_cli InstallationGuide=true }}
-<h3 class="mt-60">Configurate Prysm Beacon service</h3>
-{{> clients/prysm_cli_config PortSelection=false}}
-						</div>
-					</div>
-                </div>
-				<script>
-					function OnConsensusClientChanged(value){
-						document.getElementById("cc_1").value = value;
-					}
-				</script>
+					<script>
+						function OnConsensusClientChanged(value){
+							document.getElementById("cc_1").value = value;
+						}
+					</script>
+				</div>
             </section>
 
-			<section class="chapter mt-60">
-				<div class="content bt">
-					<h2 data-number="6">Continue with your Staking option preference</h2>
-					<div>
-						<a href="full-guide/solo"><h3>Solo Staking</h3></a>
-						<a href="full-guide/stakewise"><h3>Stakewise Staking</h3></a>
-						{{#if isEthereum}}
-						<a href="full-guide/rocketpool"><h3>Rocketpool Staking</h3></a>
-						<a href="full-guide/lido"><h3>Lido Staking</h3></a>
-						{{/if}}
-					</div>
-				</div>	
+			<section id="validator" class="my-20 max-w-6xl mx-auto">
+				<span class="inline-flex items-center rounded-full bg-emerald-600 text-white px-3 py-1 text-xs font-semibold tracking-wide shadow">
+					Validator Client
+				</span>
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Continue with your Staking option preference
+				</h2>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<a href="full-guide/solo" class="block bg-gray-100 border border-gray-200 rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1 p-8 text-center">
+						<span class="text-2xl font-semibold text-gray-800">
+							<span class="text-green-600">Solo Staking</span>
+						</span>
+					</a>
+
+					<a href="full-guide/stakewise" class="block bg-gray-100 border border-gray-200 rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1 p-8 text-center">
+						<span class="text-2xl font-semibold text-gray-800">
+							<span class="text-green-600">Stakewise Staking</span>
+						</span>
+					</a>
+
+					{{#if isEthereum}}
+						<a href="full-guide/rocketpool" class="block bg-gray-100 border border-gray-200 rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1 p-8 text-center">
+							<span class="text-2xl font-semibold text-gray-800">
+								<span class="text-green-600">Rocketpool Staking</span>
+							</span>
+						</a>
+						<a href="full-guide/lido" class="block bg-gray-100 border border-gray-200 rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1 p-8 text-center">
+							<span class="text-2xl font-semibold text-gray-800">
+								<span class="text-green-600">Lido Staking</span>
+							</span>
+						</a>
+					{{/if}}
+				</div>
 			</section>
-        </div>
-    </div>
-</main>
-{{> footer}}
+	</main>
+
+	<aside class="ifr-panel xl:sticky xl:top-8 self-start xl:mt-180">
+		<div class="bg-gray-100 rounded-lg p-4 text-sm shadow-sm">
+			<p class="font-semibold mb-2">Interactive Config</p>
+			{{> guides/variablesOverview }}
+		</div>
+	</aside>
+</div>
+{{> footer_tailwind}}
 {{> scripts/tabselector}}

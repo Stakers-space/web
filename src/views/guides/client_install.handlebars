@@ -1,0 +1,106 @@
+{{> header}}
+<section class="grid grid-cols-1 md:grid-cols-[67fr_33fr] gap-8 bg-white rounded-lg shadow-sm p-8">
+	<div class="mx-auto md:px-6 md:py-16">
+		<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+				<meta property="position" content="1">
+			</li>
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/{{client}}"><span property="name">{{clientName}} client</span></a>
+				<meta property="position" content="2">
+			</li>
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/{{client}}/install"><span property="name" class="intro-label">Installation</span></a>
+				<meta property="position" content="3">
+			</li>
+		</ul>
+
+		<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+			<span class="block mt-1 text-green-600">{{clientName}} client</span> Installation guide
+		</h1>
+
+		<p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl">
+			One-page interactive guide to install {{clientName}} client and configurate it for running on supported chain.
+		</p>
+	</div>
+	<div class="flex items-center justify-center md:pl-10 text-sm text-gray-600">
+		<div class="md:max-w-xs bg-gray-50 p-6 rounded-xl shadow-md">
+			<h3 class="font-semibold mb-1">Disclaimer</h3>
+			<p>
+				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.
+			</p>
+		</div>
+	</div>
+</section>
+
+<div class="ifr-grid grid-cols-1 xl:grid-cols-[minmax(220px,1fr)_minmax(0,6fr)_minmax(220px,1fr)] gap-6">
+	<aside class="ifr-nav lg:mt-14">
+		<nav class="border-l-4 border-gray-500 pl-4 py-3">
+			<p class="font-semibold mb-2">{{clientName}} client</p>
+			<ul class="list-disc pl-4">
+				<li><a href="#install">Install client</a></li>
+				<li><a href="#service">Configurate service</a></li>
+				{{#if partial2ToLoad}}
+				<li><a href="/{{client}}/add-validator">Add Validator</a></li>
+				<li><a href="/{{client}}/exit-validator">Exit Validator</a></li>
+				{{/if}}
+				<li><a href="/{{client}}/update">Update client</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<aside class="ifr-header">
+		<p class="text-gray-700 mx-auto max-w-6xl text-center p-8">
+			{{clientName}} client can be used for staking on various supported chains. Client installation is always only one, used by services with an individual configuration (different service name, data path and ports in use).
+		</p>
+		{{> guides/serverSelection }}
+	</aside>
+
+	<main class="ifr-body prose prose-lg max-w-none;">
+			<section id="install" class="rounded-lg shadow p-6 border-t border-gray-200">
+				{{> (lookup . 'cliPartial') InstallationGuide=true }}
+			</section>
+
+			{{#if cliConfigPartial}}
+			<section id="service" class="rounded-lg shadow p-12 mt-15 border-t border-gray-200">
+					<h2 class="text-xl font-semibold mb-4">Configurate the service</h2>
+{{> (lookup . 'cliConfigPartial') PortSelection=true }}
+			</section>
+			{{/if}}
+
+			{{#if client}}
+			<section id="emergency" class="rounded-lg shadow p-6 mt-12 bg-gray-100">
+				<h2 class="text-xl font-semibold mb-4">Any issue while running {{clientName}} client?</h2>
+				<p>Check <a href="/{{client}}/emergency" class="text-blue-600 hover:underline">{{clientName}} client emergency page</a>.</p>
+			</section>
+			{{/if}}
+	</main>
+
+	<aside class="ifr-panel xl:sticky xl:top-8 self-start mt-14">
+		<div class="bg-gray-100 rounded-lg p-4 text-sm shadow-sm">
+			<p class="font-semibold mb-2">Interactive Config</p>
+			{{> guides/variablesOverview }}
+		</div>
+	</aside>
+</div>
+<section class="max-w-6xl my-1 mx-auto p-6 py-10" id="individual-guides">
+	<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+		<a href="/{{client}}/update" class="flex items-center justify-center text-center bg-white rounded-lg shadow hover:shadow-md transition p-6">
+			<span><strong>Update</strong> {{clientName}} client</span>
+		</a>
+		<a href="/{{client}}/emergency" class="flex items-center justify-center text-center bg-white rounded-lg shadow hover:shadow-md transition p-6">
+			<span><strong>Emergency</strong> for {{clientName}} client</span>
+		</a>
+		{{#ifEqual cliLayer "consensus"}}
+		<a href="/{{client}}/add-validator" class="flex items-center justify-center text-center bg-white rounded-lg shadow hover:shadow-md transition p-6">
+			<span><strong>Add</strong> {{clientName}} validator</span>
+		</a>
+		<a href="/{{client}}/exit-validator" class="flex items-center justify-center text-center bg-white rounded-lg shadow hover:shadow-md transition p-6">
+			<span><strong>Exit</strong> {{clientName}} validator</span>
+		</a>
+		{{/ifEqual}}
+	</div>
+</section>
+{{> footer_tailwind}}
+{{> scripts/tabselector}}

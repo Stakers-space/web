@@ -1,9 +1,4 @@
-{{#if InstallationGuide}}
-<h3>Installing Erigon client</h3>
-{{else}}
-<h3>Updating Erigon client</h3>
-{{/if}}
-
+<h2 class="text-xl font-semibold mb-4">{{#if InstallationGuide}}Install{{else}}Update{{/if}} Erigon client</h2>
 <p>Erigon documentation: <a href="https://erigon.gitbook.io/erigon" target="_blank" rel="nofollow noopener noreferrer">https://erigon.gitbook.io/erigon</a></p>
 
 {{#unless InstallationGuide}}
@@ -11,11 +6,11 @@
 <pre><code>$ /usr/local/bin/erigonlib/erigon -v</code></pre>
 {{/unless}}
 
-<ol>
+<ol class="list-decimal space-y-2 pl-6 mt-6">
     <li><h4>Find the latest stable version of Erigon on Github</h4>
-        <ul>
+        <ul class="list-disc mt-4 mb-4 pl-6">
             <li>Find latest Erigon version at <a href="https://github.com/ledgerwatch/erigon/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/ledgerwatch/erigon/releases</a>. AMD64 v1/v2 links at <a href="https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels" target="_blank" rel="nofollow noopener">Microarchitecture levels</a>.</li>
-            <li>Write latest stable Erigon version: <input type="text" value="{{executionClients.erigon.latestVer}}" class="erigonVer-input" style="width:100%"></li>
+            <li>Write latest stable Erigon version: <input type="text" value="{{executionClients.erigon.latestVer}}" class="erigonVer-input" class="w-64"></li>
         </ul>
     </li>
     <li>

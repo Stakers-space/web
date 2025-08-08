@@ -13,15 +13,15 @@ class ClientPagePresenter {
 		const segments = req.originalUrl.split('?')[0].split('/').filter(Boolean);
 		let client = null;
 		let clientSegment = "overview";
-		res.locals.hbsTemplate = "client";
-		res.locals.css_file = "docs"; // default css file for client pages
+		res.locals.hbsTemplate = "guides/client";
+		res.locals.css_file = "guides"; // default css file for client pages
 		if (segments.length === 1) {
 			client = segments[0];
 		} else if (segments.length === 2) {
 			// URL has 2 segments - /install, /update, /add-validator, /exit-validator /emergency
 			client = segments[0];
 			clientSegment = segments[1];
-			res.locals.hbsTemplate = "client_"+clientSegment;
+			res.locals.hbsTemplate = "guides/client_"+clientSegment;
 			if(clientSegment !== "emergency") res.locals.canonicalUrl = `https://stakers.space/${client}`; // use base fir /install, update etc indicvidual pages
 		} else {
 			return res.status(404).send('Requested page does not exists.');

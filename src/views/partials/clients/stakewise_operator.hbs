@@ -1,10 +1,10 @@
 <p>StakeWise Operator is a middleware that connects staked {{chainTokenUpr}} in selected StakeWise Vault with actual validator keys connected to the same Vault. StakeWise operator doesn’t replace a validator client and as so, there's still required to to run standard validator client with the validator keystores simultaneously to perform validator duties.</p>
 <p>StakeWise documentation: <a href="https://docs.stakewise.io/" target="_blank" rel="nofollow noopener noreferrer">https://docs.stakewise.io/</a></p>
-<ol>
+<ol class="list-decimal space-y-2 pl-6">
     <li>
 		<h3>Creating a StakeWise Vault</h3>
 		<p>You must have a deployed Vault. You can create a new Vault or use an existing one.</p>
-		<ul>
+		<ul class="list-disc mt-4 mb-4">
 			<li>At <a href="https://app.stakewise.io/operate" target="_blank">https://app.stakewise.io/operate</a>, connect your wallet and create a new (or select your existing) Vault</li>
 			<li>Process vault setup step by step.
 				<div class="egrid egrid-3 gap-1">
@@ -30,12 +30,12 @@
 			</nav>
 			<div class="tabpanel selected">
 				<p>Operator Service has in-built functionality to generate all of the above. If needed, you can check also original guide at <a href="https://docs.stakewise.io/for-operators/operator-service" target="_blank" rel="noopener noreferrer">https://docs.stakewise.io/for-operators/operator-service</a>.</p>
-				<ul>
+				<ul class="list-disc mt-4 mb-4">
 					<li><h4>Preparation for offline generation</h4>
 						<p>For security reasons, it is recommended to perform configuration and generation strictly offline.</p>
-						<ul>
+						<ul class="list-disc mt-4 mb-4">
 							<li><strong>Download latest StakeWise Operator client</strong>
-								<ul>
+								<ul class="list-disc mt-4 mb-4">
 									<li>On an online machine, <strong>download the latest stable version of StakeWise Operator client</strong> from StakeWise github page <a href="https://github.com/stakewise/v3-operator/releases" target="_blank">https://github.com/stakewise/v3-operator/releases</a>. Choose a version of the client for operating system you use on the offline machine.</li>
 									<li>Unwrap the downloaded client and move it using USB stick to your offline machine.</li>
 								</ul>
@@ -44,7 +44,7 @@
 					</li>
 					<li><h4>Offline generation</h4>
 						On offline PC, unsing the StakeWise operator client, process the operations below:
-						<ul>
+						<ul class="list-disc mt-4 mb-4">
 							<li><h4>Generate a config.json file</h4>
 						<pre><code>./stakewise-operator init --data-dir ./</code></pre>
 						Example process & output
@@ -97,10 +97,10 @@ Done. The wallet and password saved to ./<mark class="stakewise_wlt_address">0xX
 					</li>
 					<li>
 						<h4>Moving StakeWise configuration to staking node</h4>
-						<ul>
+						<ul class="list-disc mt-4 mb-4">
 							<li><h5>Removing <code>password.txt</code> files for security reason</h5>
 								For security reason, you can write content of following password files on the paper and then remove the passwords from the file.
-								<ul>
+								<ul class="list-disc mt-4 mb-4">
 									<li><code>keystores/password.txt</code></li>
 									<li><code>wallet/password.txt</code></li>
 								</ul>
@@ -113,7 +113,7 @@ Done. The wallet and password saved to ./<mark class="stakewise_wlt_address">0xX
 			</div>
 			<div class="tabpanel">
 				<p>Use your preferred methods of generating keystores and deposit data file, such as via <a href="https://github.com/stake-house/wagyu-key-gen" target="_blank" rel="nofollow noopener noreferrer">Wagyu Keygen</a>, and your preferred tool for generating the hot wallet, such as <a href="https://metamask.io/" target="_blank" rel="nofollow noopener noreferrer">MetaMask</a>.</p>
-				<ul>
+				<ul class="list-disc mt-4 mb-4">
 					<li>On offline PC, generate deposit keys with the Vault withdrawal's address. See a <a href="/{{#ifEqual chain "ethereum"}}ethereum{{else}}gnosis{{/ifEqual}}-staking/keystores" target="_blank" rel="nofollow noopener noreferrer">keystore guide</a>.</li>
 					<li>Create Hot wallet...</li>
 				</ul>
@@ -123,7 +123,7 @@ Done. The wallet and password saved to ./<mark class="stakewise_wlt_address">0xX
 	<li>
 		<h3>Create a <code>StakeWise operator</code> service</h3>
 		<p>Create a node operator system service for running StakeWise validators and register keystores into it.</p>
-		<ul>
+		<ul class="list-disc mt-4 mb-4">
 			<li>StakeWise instance (node operator) service name: <input type="text" class="interactive-element stakewise_service" data-class="stakewise_service" value="{{servicePrefix}}stakewise-operator"></li>
 			<li>
 				<h4>Create a service user for StakeWise Operator</h4>
@@ -131,10 +131,10 @@ Done. The wallet and password saved to ./<mark class="stakewise_wlt_address">0xX
 			</li>
 			<li><h4>Create a directory for StakeWise operation configuration data</h4>
 				<pre><code>sudo mkdir -p /srv/stakewise{{slashChain}}</code></pre>
-				<ul>
+				<ul class="list-disc mt-4 mb-4">
 					<li>Copy your offline-generated <code class="stakewise_wlt_address">0xXXXX...</code> folder to this directory to make the Vault data files available at <code>/srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark></code></li>
 					<li>Do not forget to add correct passwords to the <code>passowrd.txt</code> files, if you removed them for the transfer
-						<ul>
+						<ul class="list-disc mt-4 mb-4">
 							<li><code>sudo nano /srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores/password.txt</code></li>
 							<li><code>sudo nano /srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark>/wallet/password.txt</code></li>
 						</ul>
@@ -143,7 +143,7 @@ Done. The wallet and password saved to ./<mark class="stakewise_wlt_address">0xX
 						<pre><code>sudo chown -R <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark>:<mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark> /srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark></code></pre>
 					</li>
 					<li>Set Read only by owner permission at the password files
-						<ul>
+						<ul class="list-disc mt-4 mb-4">
 							<li><code>sudo chmod 400 /srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores/password.txt</code></li>
 							<li><code>sudo chmod 400 /srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark>/wallet/password.txt</code></li>
 						</ul>
@@ -215,20 +215,20 @@ INFO     Started operator service
             </div>
             <div class="tabpanel">
 				<aside>NOTE: This option requires following installed utils:
-				<ul>
+				<ul class="list-disc mt-4 mb-4">
 					<li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with Delay util with delayed-start.service</a>.</li>
 					<li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
 				</ul>
 				<p>A guide to install each util is attached on the Github.</p>
 				</aside>
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li><h4>Extend Staking manager clients.conf</h4>
                         Insert <code><mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code> into clients.conf file, section <code>stakewiseOperators</code>, that is used by <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a>.
                         <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
                     </li>
 					<li>
 						<h4>Activate service to start automatically on OS startup</h4>
-						<ul>
+						<ul class="list-disc mt-4 mb-4">
 							<li>Open Start with delay util
 								<pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
 							</li>
@@ -285,7 +285,7 @@ INFO     Started operator service
 				<button class="tab" data-tabpanel="2">StakeWise operator service</button>
 			</nav>
 			<div class="tabpanel selected">
-				<ol>
+				<ol class="list-decimal space-y-2 pl-6">
 					<li>Connect with your wallet to <a href="https://app.stakewise.io/operate" target="_blank">StakeWise Operate webpage</a></li>
 					<li>Select the Vault you want to upload the deposit data file to.</li>
 					<li>In the upper right corner, click on "Settings" and open the "Deposit Data" tab. The "Settings" button is only visible to the Vault Admin or Keys Manager.</li>
@@ -307,10 +307,10 @@ The validator deposit data Merkle tree root: 0x504...26d7</code></pre>
 		<p>If there is allocated more {{#ifEqual chain "ethereum"}}ETH{{else}}GNO{{/ifEqual}} in the Vault deposit contract than a number of generated validator keys for the Vault contract, the operator informs about that with following message:</p>
 		<pre><code>stakewise-operator: YYYY-MM-DD HH:MM:SS WARNING  There are no available validators in the current deposit data to proceed with registration. To register additional validators, you must upload new deposit data.</code></pre>
 		<p>For option to register and launch other validators, you must do following:</p>
-		<ul>
+		<ul class="list-disc mt-4 mb-4">
 			<li>On Offline PC, generate more validator keys for the Vault</li>
 			<li>On your staking node:
-				<ol>
+				<ol class="list-decimal space-y-2 pl-6">
 					<li>Register the new keystores into a standard validator instance - either extend existing or create a new.</li>
 					<li>Stop StakeWise Operator</li>
 					<li>Copy the new validator keys to stakewise operator keystores directory <code>/srv/stakewise{{slashChain}}/<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores</code></li>

@@ -1,0 +1,55 @@
+<aside class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md shadow-sm">
+  <div class="flex">
+    <svg class="h-6 w-6 text-yellow-400 flex-shrink-0 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+      viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 9v2m0 4h.01M4.93 4.93l14.14 14.14M12 4.93l7.07 7.07M12 4.93L4.93 12m14.14 0L12 19.07" />
+    </svg>
+    <div>
+      <p class="font-semibold text-yellow-800">Note</p>
+      <p class="text-yellow-700">This option requires the following installed utils:</p>
+      <ul class="list-disc pl-5 mt-2 space-y-1 text-yellow-700">
+        <li>
+          <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" 
+             target="_blank" class="underline hover:text-yellow-900">
+             Start with Delay util with delayed-start.service
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" 
+             target="_blank" class="underline hover:text-yellow-900">
+             Staking Manager util
+          </a>
+        </li>
+      </ul>
+      <p class="mt-2 text-yellow-700">A guide to install each util is attached on the Github.</p>
+    </div>
+  </div>
+</aside>
+<ol class="list-decimal space-y-2 pl-6 mt-4">
+   <li><h4>Configurate Staking Manager util</h4>
+      <ul class="list-disc mt-4">
+        <li>Open the configuration file
+          <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
+          <p>If the file is empty, generate it with command <code>sudo /usr/local/bin/staking.sh init</code></p>
+        </li>
+        <li>Set link to proper service. It should be as follow:
+          <pre><code>executionServices="<mark class="{{MarkClass}}">{{servicePrefix}}nethermind</mark>.service"</code></pre>
+        </li>
+      </ul>
+   </li>
+   <li>
+      <h4>Activate service to start automatically on OS startup</h4>
+      <ul class="list-disc mt-4">
+        <li>Open Start with delay util
+            <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
+        </li>
+        <li>Place or uncomment a command to start the Beacon client(s)
+            <pre><code>/usr/local/bin/staking.sh start execution</code></pre>
+        </li>
+        <li>Verify, that a service `delayed-start.service` exists and is automatically launched on system start.
+          <pre><code>sudo systemctl enable delayed-start.service</code></pre>
+        </li>
+      </ul>
+   </li>      
+</ol>

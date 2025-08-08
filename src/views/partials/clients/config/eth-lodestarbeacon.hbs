@@ -4,6 +4,7 @@ Wants=network-online.target
 After=network-online.target
 [Service]
 User=<mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark>
+Group=<mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark>
 Type=simple
 Restart=always
 RestartSec=5

@@ -1,0 +1,23 @@
+@layer components {
+    pre {
+        @apply bg-gray-800 text-green-300 font-mono text-sm p-4 m-2 rounded-xl border border-gray-700 shadow-sm overflow-x-auto
+    }
+    code {
+        @apply bg-gray-800 p-1 rounded-xl;
+        /*padding: 2px 4px;*/
+        /*font-size: 90%;*/
+        color: white;
+    }
+    pre code {
+        padding: unset;
+        font-size: unset;
+        color: unset;
+        background-color: unset;
+        border-radius: unset;
+    }
+    code input {
+        color: white;
+        border: none;
+    }
+}
+

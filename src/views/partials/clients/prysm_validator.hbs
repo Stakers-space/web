@@ -1,4 +1,4 @@
-{{> guides/instanceSelection client="prysm" }}
+<aside class="bg-gray-100 dataloader">{{> guides/instanceSelection client="prysm" }}</aside>
 {{#if AddValidator}}
 <ol class="mt-30">
     <li>
@@ -9,7 +9,7 @@
                 <button class="tab" data-tabpanel="2">Extend existing</button>
             </nav>
             <div class="tabpanel selected">
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li><h4>Create a directory for validator instance data</h4>
                         <pre><code>sudo mkdir -p <mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid">1</span></mark></code></pre>
                     </li>
@@ -37,7 +37,7 @@
     <mark>Gnosis chain is not supported by Prysm client</mark>
     {{/ifEqual}}
 {{/unless}}
-                        <ul>
+                        <ul class="list-disc mt-4 mb-4">
                             <li>Accept <a href="https://github.com/prysmaticlabs/prysm/blob/master/TERMS_OF_SERVICE.md" target="_blank" rel="nofollow noopener noreferrer">Terms of Use</a></li>
                             <li>Set a wallet password. This is different to the validator password you set during keys generation. Prysm will use this to decrypt the validator wallet. Back it up somewhere safe. You will need this later in this section and when configuring the validator.</li>
                             <li>Provide the validator keys password. This is the password you set when you created the keys during keys generation</li>
@@ -56,14 +56,14 @@
                         <pre><code>sudo chown -R <mark class="instance_su" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark>:<mark class="instance_su" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark> <mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid">1</span></mark></code></pre>
                     </li>
                     <li><h4>Create configuration service file for <code class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></code> service</h4>
-                        <ol>
+                        <ol class="list-decimal space-y-2 pl-6">
                             <li>
                                 <p>Open the configuration file</p>
                                 <pre><code>sudo nano /etc/systemd/system/<mark class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark>.service</code></pre>
                             </li>
                             <li>
                                 <p>Copy the configuration below into the file.</p>
-                                <ul>
+                                <ul class="list-disc mt-4 mb-4">
                                     <li><label>What's fee recipient wallet?</label> <input type="text" class="interactive-element instance_frw" data-class="instance_frw" value="0xXXXXXXXXXXXXXXXX"></li>
                                     <li><label>What's your execution client?</label> <input type="text" class="interactive-element ec_name" data-class="ec_name" value="Nethermind"></li>
                                 </ul>
@@ -104,7 +104,7 @@
                                 Nothing to do. You are ok.
                             </div>
                             <div class="tabpanel">
-                                <ul>
+                                <ul class="list-disc mt-4 mb-4">
                                     <li><h4>Extend Staking manager clients.conf</h4>
                                         Insert <code><mark class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark></code> into clients.conf file that is used by <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a>.
                                         <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
@@ -116,7 +116,7 @@
                 </ul>
             </div>
             <div class="tabpanel">
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li><h4>Stop running validator instance <code class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></code></h4>
                         <pre><code>sudo systemctl stop <mark class="instance_sn" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid">1</span></mark></code></pre>
                     </li>
@@ -142,7 +142,7 @@
     <mark>Gnosis chain is not supported by Prysm client</mark>
     {{/ifEqual}}
 {{/unless}}
-                        <ul>
+                        <ul class="list-disc mt-4 mb-4">
                             <li>Accept <a href="https://github.com/prysmaticlabs/prysm/blob/master/TERMS_OF_SERVICE.md" target="_blank" rel="nofollow noopener noreferrer">Terms of Use</a></li>
                             <li>Set a wallet password. This is different to the validator password you set during keys generation. Prysm will use this to decrypt the validator wallet. Back it up somewhere safe. You will need this later in this section and when configuring the validator.</li>
                             <li>Provide the validator keys password. This is the password you set when you created the keys during keys generation</li>

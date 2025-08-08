@@ -36,7 +36,7 @@
 			<div class="sticky">
 				 <nav>
 					<strong>Rocketpool guide</strong>
-					<ol>
+					<ol class="list-decimal space-y-2 pl-6">
 						<li><a href="#prerequisites">Prerequisites</a></li>
 						<li><a href="#config">Files structure</a></li>
 						<li><a href="#install">Install Rocketpool</a></li>
@@ -64,7 +64,7 @@
             <section class="chapter" id="prerequisites">
 				<div class="content" style="width:100%;padding-top:10px">
 					<h2 data-number="°">Prerequisites for this guide</h2>
-					<ol>
+					<ol class="list-decimal space-y-2 pl-6">
 						<li>Installed and synced Execution and Consensus client
 							<p><a href="/ethereum-staking/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a></p>
 						</li>
@@ -77,10 +77,10 @@
 			
 			<section class="chapter" id="config">
 				<div class="content" style="width:100%">
-					<h2 class="mt-60">Rocketpool client(s) and file(s) (hybrid configuration, native mode)</h2>
+					<h2 class="mt-1">Rocketpool client(s) and file(s) (hybrid configuration, native mode)</h2>
 <aside>
     <h4>Rocketpool configuration</h4>
-    <ul>
+    <ul class="list-disc mt-4 mb-4">
         <li><label for="rpl-validator-client">Validator client:</label>
             <select name="rpl-validator-client" id="rpl-validator-client">
                 <option value="prysm">Prysm</option>
@@ -129,7 +129,7 @@
 			<section class="chapter" id="commands">
 				<div class="content bt" style="width:100%">
 					<h2>Other commands</h2>
-					<ul>
+					<ul class="list-disc mt-4 mb-4">
 						<li><h3>Check Rocketpool version</h3>
 							<p>$<code>rocketpool -v</code> - check rocketpool client version</p>
 						</li>
@@ -137,7 +137,7 @@
 							<pre><code>rocketpool node status</code></pre>
 						</li>
 						<li><h3>Claim rewards:</h3>
-							<ul>
+							<ul class="list-disc mt-4 mb-4">
 								<li>Beacon chain: <code>rocketpool minipool distribute-balance</code></li>
 								<li>Tx Fees: <code>rocketpool node distribute-fees</code></li>
 								<li>RPL: <code>rocketpool node claim-rewards</code></li>

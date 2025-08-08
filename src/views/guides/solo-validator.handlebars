@@ -32,16 +32,16 @@
 			<div class="sticky">
 				 <nav>
 					<strong>Solo staking guide</strong>
-					<ol>
+					<ol class="list-decimal space-y-2 pl-6">
 						<li><a href="/{{chainUrl}}#hardware">Hardware & OS</a></li>
-						<li><a href="/{{chainUrl}}#security">Securying server</a></li>
-						<li><a href="/{{chainUrl}}#config">Setting Basic conf</a></li>
+						<li><a href="/{{chainUrl}}#security">Securing server</a></li>
+						<li><a href="/{{chainUrl}}#config">Basic configuration</a></li>
 						<li><a href="/{{chainUrl}}#jwt">Jwtsecret</a></li>
-						<li>Install & configurate clients
-							<ul>
+						<li>Install & configure clients
+							<ul class="list-disc mt-4 mb-4">
 								<li><a href="/{{chainUrl}}#execution">Execution client</a></li>
 								<li><a href="/{{chainUrl}}#consensus">Consensus client</a>
-									<ul>
+									<ul class="list-disc mt-4 mb-4">
 										<li><a href="/{{chainUrl}}#beacon">Beacon</a></li>
 										<li><a href="/{{chainUrl}}#validator">Validator</a></li>
 									</ul>
@@ -68,7 +68,7 @@
 			<section class="chapter" id="prerequisites">
 				<div class="content" style="width:100%;padding-top:10px">
 					<h2 data-number="°">Prerequisites for this guide</h2>
-					<ol>
+					<ol class="list-decimal space-y-2 pl-6">
 						<li><p>Installed and synced Execution and Consensus client</p>
 							<a href="/{{chainUrl}}/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a>
 						</li>
@@ -82,7 +82,7 @@
 				<div class="content bt">
 					<h2>Run a validator</h2>
 					<p>Stakers.space guide works with a concept of validator instances. You are used to have only one validator service from the other staking guides. However, this one service is just a single instance. This guide supports you to set multiple such validator instances on a single machine (if necessary), which has following benefits:</p>
-					<ul>
+					<ul class="list-disc mt-4 mb-4">
 						<li>You are able to keep validators separated - e.g. based on used deposit / withdrawal / fee recipient wallet address</li>
 						<li>Keep logs in smaller size</li>
 						<li>Remove a limitation of thread perofmance - with more instances you are able to you your CPU and threads in a more efficient way that results in option to run more validators on a single machine.</li>

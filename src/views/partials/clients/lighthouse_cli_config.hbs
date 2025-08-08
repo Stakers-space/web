@@ -1,10 +1,10 @@
-    <ol>
+    <ol class="list-decimal space-y-2 pl-6">
             <li>
                 <strong>Create a user for lighthouse beacon</strong>
                 <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}lighthousebeacon" class="interactive-element consensus_sn" data-class="consensus_sn" data-client="lighthouse">
 <pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
             </li>
-            <li class="mt-15">
+            <li>
                 <strong>Create a directory for data</strong>
                 <label>Service data directory</label>: <input type="text" value="/var/lib{{slashChain}}/lighthouse/beacon" class="interactive-element consensus-dp" data-class="consensus-dp" data-client="lighthouse">
 <pre><code>$ sudo mkdir -p <mark class="consensus-dp">/var/lib{{slashChain}}/lighthouse/beacon</mark></code></pre>
@@ -13,17 +13,17 @@
 <pre><code>$ sudo chown -R <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>:<mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark> <mark class="consensus-dp" data-client="lighthouse">/var/lib{{slashChain}}/lighthouse/beacon</mark></code></pre>
             </li>
     </ol>
-    <ul>
+    <ul class="list-disc mt-4 mb-4">
     {{#if PortSelection}}
-    <li class="mt-15">{{> clients/config/consensusclient-portselection }}</li>
+    <li>{{> clients/config/consensusclient-portselection }}</li>
     {{/if}}
         <li><h3>Create configuration file for Lighthouse Beacon service</h3>
             <p>Open Lighthouse Beacon configuration file</p>
             <pre><code>$ sudo nano /etc/systemd/system/<mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>.service</code></pre>
             <p>Copy the configuration below into the file. If needed, check <a href="https://lighthouse-book.sigmaprime.io/api-bn.html" target="_blank" rel="nofollow noopener noreferrer">flags documentation</a>.</p>
             {{#unless chain}}
-          <div class="tabselector">
-						<nav class="egrid egrid-2">
+          <div class="tabselector bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
+						<nav>
 							<button class="tab selected" data-tabpanel="1">Ethereum</button>
 							<button class="tab" data-tabpanel="2">Gnosis</button>
 						</nav>
@@ -44,58 +44,48 @@
 {{/ifEqual}}
             <p>Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</p>
         </li>
-        <li class="mt-15"><h3>Load changes made in config files to the system</h3>
+        <li><h3>Load changes made in config files to the system</h3>
             <pre><code>$ sudo systemctl daemon-reload</code></pre>
         </li>
         <li><strong>Start the service</strong>
 <pre><code>$ sudo systemctl start <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
         </li>
-        <li class="mt-15"><strong>Check the state</strong>
+        <li><strong>Check the state</strong>
 <pre><code>$ systemctl status <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>
 $ journalctl -fu <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
         </li>
-        <li class="mt-15">
+        <li>
             <strong>Activate service to start automatically</strong>
-            <div class="tabselector">
-                <nav class="egrid egrid-2">
-                <button class="tab selected" data-tabpanel="1">Standard configuration</button>
-                <button class="tab" data-tabpanel="2">StakersSpace configuration</button>
+            <div class="tabselector bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
+                <nav>
+                    <button class="tab selected" data-tabpanel="1">Standard configuration</button>
+                    <button class="tab" data-tabpanel="2">StakersSpace configuration</button>
                 </nav>
                 <div class="tabpanel selected">
-                <div class="tabselector">
-                    <nav class="egrid egrid-2">
-                    <button class="tab selected" data-tabpanel="1">Standard option</button>
-                    <button class="tab" data-tabpanel="2">Delayed start util</button>
+                <div class="tabselector bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
+                    <nav>
+                        <button class="tab selected" data-tabpanel="1">Standard option</button>
+                        <button class="tab" data-tabpanel="2">Delayed start util</button>
                     </nav>
                     <div class="tabpanel selected">
                     <pre><code>$ sudo systemctl enable <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
                     </div>
                     <div class="tabpanel">
-                        <aside>NOTE: This option requires installed <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank" rel="nofollow noopener">Start with Delay util</a>.</aside>
-                        <ul>
-                            <li>Open Delayed Start shell
-                                <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
-                                <p>Configurate service start inside it</p>
-                                <pre><code>systemctl start <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>.service</code></pre>
-                            </li>
-                            <li>Be sure, <code>delayed-start.service</code> service controlling <code>delayed-start.sh</code> is enabled for auto start with system startup
-                                <pre><code>sudo systemctl enable delayed-start.service</code></pre>
-                            </li>
-                        </ul>
+                        {{> clients/config/delayed-start MarkClass="consensus_sn" ClientName="lighthouse" }}
                     </div>
                 </div>
                 </div>
                 <div class="tabpanel">
                 <aside>NOTE: This option requires following installed utils:
-                    <ul>
+                    <ul class="list-disc mt-4 mb-4">
                     <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with Delay util with delayed-start.service</a>.</li>
                     <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
                     </ul>
                     <p>A guide to install each util is attached on the Github.</p>
                 </aside>
-                <ol>
+                <ol class="list-decimal space-y-2 pl-6">
                     <li><h4>Configurate Staking Manager util</h4>
-                    <ul>
+                    <ul class="list-disc mt-4 mb-4">
                         <li>Open the configuration file
                         <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
                         <p>If the file is empty, generate it with command <code>sudo /usr/local/bin/staking.sh init</code></p>
@@ -107,7 +97,7 @@ $ journalctl -fu <mark class="consensus_sn" data-client="lighthouse">{{servicePr
                     </li>
                     <li>
                     <h4>Activate service to start automatically on OS startup</h4>
-                    <ul>
+                    <ul class="list-disc mt-4 mb-4">
                         <li>Open Start with delay util
                             <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
                         </li>

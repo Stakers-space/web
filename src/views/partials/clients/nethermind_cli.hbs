@@ -1,9 +1,6 @@
-{{#if InstallationGuide}}
-<h3>Installing Nethermind client</h3>
-{{else}}
-<h3>Updating Nethermind client</h3>
-{{/if}}
-<p>Nethermind documentation: <a href="https://docs.nethermind.io/" target="_blank"
+
+<h2 class="text-xl font-semibold mb-4">{{#if InstallationGuide}}Install{{else}}Update{{/if}} Nethermind client</h2>
+<p class="mb-4">Nethermind documentation: <a href="https://docs.nethermind.io/" target="_blank"
     rel="nofollow noopener noreferrer">https://docs.nethermind.io/</a></p>
 
 {{#unless InstallationGuide}}
@@ -11,37 +8,37 @@
 <pre><code>$ /usr/local/bin/nethermind/./nethermind-cli --version</code></pre>
 {{/unless}}
 
-<ol>
+<ol class="list-decimal space-y-2 pl-6">
   <li>
     <h4>Find the latest stable version of Nethermind on Github</h4>
-    <ul>
+    <ul class="list-disc mt-4 mb-4">
       <li>Find latest Nethermind version at <a href="https://github.com/NethermindEth/nethermind/releases"
           target="_blank" rel="nofollow noopener noreferrer">https://github.com/NethermindEth/nethermind/releases</a>
       </li>
       <li>
         <mark>Write latest stable Nethermind version in format such as
           <code>{{executionClients.nethermind.latestVer}}</code></mark>:
-        <input type="text" value="{{executionClients.nethermind.latestVer}}" class="nethermind_verhash-input" style="width:100%">
+        <input type="text" value="{{executionClients.nethermind.latestVer}}" class="nethermind_verhash-input">
       </li>
     </ul>
   </li>
-  <li class="mt-15">
+  <li>
     <h4>Download Nethermind version <code class="nethermind_verhash">{{executionClients.nethermind.latestVer}}</code> to
       your node</h4>
     <pre><code>cd ~/downloads && curl -LO https://github.com/NethermindEth/nethermind/releases/download/<mark class="nethermind_ver">{{executionClients.nethermind.latestVerClean}}</mark>/nethermind-<mark class="nethermind_verhash">{{executionClients.nethermind.latestVer}}</mark>-linux-x64.zip</code></pre>
   </li>
   {{#if InstallationGuide}}
-  <li class="mt-15">
+  <li>
     <h4>Install package for unzipping</h4>
     <pre><code>sudo apt-get install -y unzip</code></pre>
   </li>
   {{/if}}
-  <li class="mt-15">
+  <li>
     <h4>Unzip the downloaded file</h4>
     <pre><code>unzip nethermind-<mark class="nethermind_verhash">{{executionClients.nethermind.latestVer}}</mark>-linux-x64 -d nethermind</code></pre>
   </li>
   {{#unless InstallationGuide}}
-  <li class="mt-15">
+  <li>
     <h4>Stop running clients</h4>
     <div class="tabselector" data-client="nethermind">
 		    <nav class="egrid egrid-2">
@@ -58,7 +55,7 @@
 			</div>
 		</div>
   </li>
-  <li class="mt-15">
+  <li>
     <h4>Remove the old client</h4>
     <pre><code>sudo rm -r /usr/local/bin/nethermind</code></pre>
   </li>

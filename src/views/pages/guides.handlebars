@@ -39,11 +39,9 @@
     <h3 class="text-xl font-semibold text-gray-700 mb-4">Execution clients</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
       {{#each executionClients}}
-        <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition">
-          <a href="/{{this.ilink}}" class="text-lg font-semibold text-gray-800 hover:text-emerald-600">
+        <a href="/{{this.ilink}}" class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition text-lg font-semibold text-gray-800 hover:text-emerald-600">
             {{this.name}}
-          </a>
-        </div>
+        </a>
       {{/each}}
     </div>
 
@@ -51,11 +49,9 @@
     <h3 class="text-xl font-semibold text-gray-700 mb-4">Consensus clients</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
       {{#each consensusClients}}
-        <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition">
-          <a href="/{{this.ilink}}" class="text-lg font-semibold text-gray-800 hover:text-emerald-600">
-            {{this.name}}
-          </a>
-        </div>
+        <a href="/{{this.ilink}}" class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition text-lg font-semibold text-gray-800 hover:text-emerald-600">
+          {{this.name}}
+        </a>
       {{/each}}
     </div>
 
@@ -63,11 +59,9 @@
     <h3 class="text-xl font-semibold text-gray-700 mb-4">Mev clients</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
       {{#each mevClients}}
-        <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition">
-          <a href="/{{this.ilink}}" class="text-lg font-semibold text-gray-800 hover:text-emerald-600">
-            {{this.name}}
-          </a>
-        </div>
+        <a href="/{{this.ilink}}" class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition text-lg font-semibold text-gray-800 hover:text-emerald-600">
+          {{this.name}}
+        </a>
       {{/each}}
     </div>
 
@@ -76,30 +70,23 @@
       <h3 class="text-xl font-semibold text-gray-700 mb-4">Service-based guides</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
         {{#each serviceClients}}
-          <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition">
-            <a href="/{{this.ilink}}" class="text-lg font-semibold text-gray-800 hover:text-emerald-600">
+          <a href="/{{this.ilink}}" class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition text-lg font-semibold text-gray-800 hover:text-emerald-600">
               {{this.name}}
-            </a>
-          </div>
-        {{/each}}
-        <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition">
-          <a href="/ethereum-staking/full-guide/lido" class="text-lg font-semibold text-gray-800 hover:text-emerald-600">
-            Lido
           </a>
-        </div>
+        {{/each}}
+        <a href="/ethereum-staking/full-guide/lido" class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition text-lg font-semibold text-gray-800 hover:text-emerald-600">
+            Lido
+        </a>
       </div>
     </section>
 
     <!-- Ethdo Guides -->
     <h3 class="text-xl font-semibold text-gray-700 mb-4">Ethdo guides</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition">
-        <a href="https://github.com/Stakers-space/staking-scripts/tree/main/ethdo/presigned-exit-keys" 
-           target="_blank"
-           class="text-lg font-semibold text-gray-800 hover:text-emerald-600">
+      <a href="https://github.com/Stakers-space/staking-scripts/tree/main/ethdo/presigned-exit-keys" 
+           target="_blank" class="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center shadow hover:shadow-md transition text-lg font-semibold text-gray-800 hover:text-emerald-600">
           Generate and use pre-signed exit keys
-        </a>
-      </div>
+      </a>
     </div>
   </main>
   {{> footer_amp_tailwind}}

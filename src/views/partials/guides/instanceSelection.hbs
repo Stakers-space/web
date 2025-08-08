@@ -1,44 +1,43 @@
-<aside class="grey dataloader">
-	<div class="chapter">
-        <div class="content">
-            <div class="egrid egrid-2 center-vertical">
-                <div>
-                    <div class="user-authentized hide">
-                        <div>
-                            <label><strong>Server Selection </strong></label>
-                            <select class="account-servers"></select>
-                        </div>
-                        <div>
-                            <label for="account-servers-instances"><strong>Instance Selection </strong></label>
-                            <select id="account-servers-instances"></select>
-                            <div class="mt-20">
-                                <a id="account-server-instance-link" href="#" class="btn btn-black btn-rounded" target="_blank">Edit saved data</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user-guest hide">
-                        <h2 class="mt-20">Load data for your Server<br>and instance</h2>
-                        <a href="https://stakers.space/dashboard/authentization?r=" class="btn btn-black btn-rounded">Sign In</a>
-                    </div>
+<div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:items-start">
+        <div class="flex flex-col justify-center h-full">
+            <div class="user-authentized hidden">
+                <div class="mb-6">
+                    <label class="font-semibold">Server Selection</label>
+                    <select class="account-servers block w-full border border-gray-300 rounded-md mt-1 px-3 py-2"></select>
                 </div>
                 <div>
-                    <ul>
-                        <li><label>Instance ID</label>: <input type="number" value="1" class="interactive-element instance_pid" data-class="instance_pid"{{!-- data-client="{{client}}"--}}></li>
-                        <li><label>Fee Recipient wallet</label>: <input type="text" value="0xXXXX" class="interactive-element instance_frw" data-class="instance_frw"{{!-- data-client="{{client}}"--}}></li>
-                        <li>Validator Instance service config
-                            <ul>
-                                <li><label>Name</label>: <input type="text" value="{{servicePrefix}}{{client}}-vi1" class="interactive-element instance_sn" data-class="instance_sn"{{!-- data-client="{{client}}"--}}></li>
-                                <li><label>User</label>:  <input type="text" value="{{servicePrefix}}{{client}}-vi1" class="interactive-element instance_su" data-class="instance_su"{{!-- data-client="{{client}}"--}}></li>
-                                <li><label>Data</label>: 
-                                    <input type="text" value="/var/lib{{slashChain}}/{{client}}/vi1" class="interactive-element instance_dp" data-class="instance_dp"{{!-- data-client="{{client}}"--}}>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <label for="account-servers-instances" class="font-semibold">Instance Selection</label>
+                    <select id="account-servers-instances" class="block w-full border border-gray-300 rounded-md mt-1 px-3 py-2"></select>
+                        <div class="mt-5">
+                            <a id="account-server-instance-link" href="#" class="inline-block bg-black text-white rounded-full px-5 py-2 hover:bg-gray-800" target="_blank">Edit saved data</a>
+                        </div>
                 </div>
             </div>
+            <div class="user-guest hidden">
+                <h2 class="text-2xl font-bold mt-5">Load data for your Server<br>and instance</h2>
+                <a href="https://stakers.space/dashboard/authentization?r=" class="inline-block bg-black text-white rounded-full px-5 py-2 mt-4 hover:bg-gray-800">Sign In</a>
+            </div>
+        </div>
+        <div>
+            <ul class="mt-4 mb-4 pl-5">
+                <li><label class="font-semibold">Instance ID</label>: <input type="number" value="1" class="interactive-element instance_pid border border-gray-300 rounded-md px-3" data-class="instance_pid"{{!-- data-client="{{client}}"--}}></li>
+                <li><label class="font-semibold">Fee Recipient wallet</label>: <input type="text" value="0xXXXX" class="interactive-element instance_frw" data-class="instance_frw"{{!-- data-client="{{client}}"--}}></li>
+                <li>
+                    <span class="font-semibold">Validator Instance service config</span>
+                    <ul class="list-disc mt-4 mb-4 pl-10">
+                        <li><label class="font-semibold">Name</label>: <input type="text" value="{{servicePrefix}}{{client}}-vi1" class="interactive-element instance_sn border border-gray-300 rounded-md px-3" data-class="instance_sn"{{!-- data-client="{{client}}"--}}></li>
+                        <li><label class="font-semibold">User</label>: <input type="text" value="{{servicePrefix}}{{client}}-vi1" class="interactive-element instance_su border border-gray-300 rounded-md px-3" data-class="instance_su"{{!-- data-client="{{client}}"--}}></li>
+                        <li><label class="font-semibold">Data</label>: 
+                            <input type="text" value="/var/lib{{slashChain}}/{{client}}/vi1" class="interactive-element instance_dp border border-gray-300 rounded-md px-3" data-class="instance_dp"{{!-- data-client="{{client}}"--}}>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
+</div>
+
     <script>
     /*
         Update Instance Numbers based on manual change
@@ -126,4 +125,3 @@
         })();
     {{/if}}
     </script>
-</aside>

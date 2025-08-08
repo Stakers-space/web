@@ -14,7 +14,7 @@
 				<button class="tab" data-tabpanel="2">Build from source code (Required for Gnosis)</button>
 			</nav>
       <div class="tabpanel selected">
-          <ol>
+          <ol class="list-decimal space-y-2 pl-6">
             <li>
               <h3>Find the latest stable version of Nimbus on Github</h3>
 Find latest Nimbus version at Github: <a href="https://github.com/status-im/nimbus-eth2/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/status-im/nimbus-eth2/releases</a><br>
@@ -87,7 +87,7 @@ sudo systemctl start {{servicePrefix}}nimbus-vi...
 				<button class="tab" data-tabpanel="2">Staking manager</button>
 			</nav>
 			<div class="tabpanel selected">
-          <ul>
+          <ul class="list-disc mt-4 mb-4">
               <li><pre><code>systemctl status <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark> {{servicePrefix}}nimbus-vi..</code></pre></li>
               <li><pre><code>journalctl -fu <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark></code></pre></li>
               <li><pre><code>journalctl -f -u nimbus-vi.. -u nimbus-vi..</code></pre></li>
@@ -108,7 +108,7 @@ sudo systemctl start {{servicePrefix}}nimbus-vi...
 			</div>
 
 			<div class="tabpanel">
-          <ol>
+          <ol class="list-decimal space-y-2 pl-6">
             {{#if InstallationGuide}}
             <li><h3>Install Nimbus' dependencies</h3>
                 <pre><code>sudo apt-get install build-essential git-lfs cmake</code></pre>

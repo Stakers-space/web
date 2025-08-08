@@ -1,11 +1,12 @@
-<aside class="grey dataloader">
-	<div class="chapter">
-		<div class="content egrid egrid-2">
+<aside class="dataloader bg-gray-100 py-8">
+	<div class="max-w-6xl mx-auto px-4">
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
 			<div>
-				<h2>Load data for defined Server</h2>
-				<p>Stakers.space allows to specify server(s) and load custom guides <a href="#prerequisites">based on ther definition</a>.</p>
+				<h2 class="text-2xl font-bold mb-3">Load data for the defined server</h2>
+				<p class="text-gray-700">Stakers.space allows to specify server(s) and load custom guides <a href="#prerequisites">based on their definition</a>.</p>
 			</div>
-			<div class="center-vertical">
+			<div class="flex flex-col items-center space-y-6">
+
 				<div class="user-initializing text-center">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="180" height="60" style="shape-rendering: auto; background: transparent;" xmlns:xlink="http://www.w3.org/1999/xlink"><g>
 <circle r="22" fill="#00ca72" cy="50" cx="32">
@@ -18,28 +19,28 @@
   <animate begin="-0.625s" values="16;68;16" keyTimes="0;0.5;1" dur="1.25s" repeatCount="indefinite" attributeName="cx"></animate>
   <animate repeatCount="indefinite" dur="1.25s" keyTimes="0;0.499;0.5;1" calcMode="discrete" values="0;0;1;1" attributeName="fill-opacity"></animate>
 </circle><g></g></g></svg>
-					<p class="mt-0">Initializing user data</p>
+					<p class="mt-2">Initializing user data</p>
 				</div>
-				<div class="user-guest hide">
-					<p><strong>As a guest, you can fill values manually at the right sidebar.</strong> You can also Sign In/Up and load your defined server data.</p>
-					<a href="https://stakers.space/dashboard/authentization?r={{pathUrl}}" class="btn btn-black btn-rounded">Sign In</a>
+
+				<div class="user-guest hidden text-center">
+					<p class="font-semibold"><strong>As a guest, you can fill values manually at the right sidebar.</strong> You can also Sign In/Up and load your defined server data.</p>
+					<a href="https://stakers.space/dashboard/authentization?r={{pathUrl}}" class="inline-block bg-black text-white rounded-full px-5 py-2 mt-3 hover:bg-gray-800">Sign In</a>
 				</div>
-				<div class="user-authentized hide">
-					<div>
-						<label><strong>Data loaded for server </strong></label>
-						<select class="account-servers"></select>
-						<a id="account-server-link" href="#" class="btn btn-rounded" target="_blank">Edit data</a>
+				<div class="user-authentized hidden w-full">
+					<div class="mb-4">
+						<label class="font-semibold">Data loaded for server </label>
+						<select class="account-servers block w-full border-gray-300 rounded-md mt-1"></select>
+						<a id="account-server-link" href="#" class="inline-block bg-gray-200 rounded-full px-4 py-1 mt-2 hover:bg-gray-300" target="_blank">Edit data</a>
 					</div>
-					<div class="text-center mt-5">
-						<input type="text" placeholder="Encryption password" id="decryption-password">
-						<button class="submit btn btn-black btn-rounded" data-decrypt="all" onclick="DecryptPageData()" id="mainDecryptBtn">Decrypt & reload values</button>
+					<div class="text-center mt-5 space-y-2">
+						<input type="text" placeholder="Encryption password" id="decryption-password" class="border border-gray-300 rounded-md px-3 py-1 w-full max-w-sm">
+						<button class="submit bg-black text-white rounded-full px-5 py-2 hover:bg-gray-800" data-decrypt="all" onclick="DecryptPageData()" id="mainDecryptBtn">Decrypt & reload values</button>
 					</div>
-					<div class="mt-20 bt text-center">
-						<a href="/dashboard/server-node/define" class="btn btn-rounded" target="_blank">Define new server</a>
+					<div class="mt-8 border-t pt-4 text-center">
+						<a href="/dashboard/server-node/define" class="inline-block bg-gray-200 rounded-full px-4 py-2 hover:bg-gray-300" target="_blank">Define new server</a>
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 	{{> scripts/utils/xmlhttp}}
@@ -50,11 +51,11 @@
 
 		function RequestAccountData(){
 			xmlHttpRequest({type:"GET", url:"/api/account", credentials:true, data:null }, function(err,data){
-				for(const elm of document.getElementsByClassName("user-initializing")){ elm.classList.add("hide");}
+				for(const elm of document.getElementsByClassName("user-initializing")){ elm.classList.add("hidden");}
 				const pd = JSON.parse(data);
 				console.log("On /api/account:", err, pd);
 				if(err || !pd.a){
-					for(const elm of document.getElementsByClassName("user-guest")){ elm.classList.remove("hide");}
+					for(const elm of document.getElementsByClassName("user-guest")){ elm.classList.remove("hidden");}
 					{{#if chain}}
 					// Update Data directory?
 					{{/if}}
@@ -64,7 +65,7 @@
 					accounData = pd.d;
 					
 					// hide authentization
-					for(const elm of document.getElementsByClassName("user-authentized")){ elm.classList.remove("hide");}
+					for(const elm of document.getElementsByClassName("user-authentized")){ elm.classList.remove("hidden");}
 					
 					if(Object.keys(accounData).length > 0) accounData[0] = {
 																				serverName: "-",
@@ -179,9 +180,9 @@
             for(const elm of document.getElementsByClassName("client-oriented")){
                 console.log(elm, elm.dataset.client, clientSelected);
                 if(elm.dataset.client === clientSelected) {
-                    elm.classList.remove("hide");
-                } else if(!elm.classList.contains("hide")){
-                    elm.classList.add("hide");
+                    elm.classList.remove("hidden");
+                } else if(!elm.classList.contains("hidden")){
+                    elm.classList.add("hidden");
                 }
             }
 			// set values from db / default value

@@ -5,10 +5,10 @@ Beacon chain: <pre><code>./beacon-chain --version</code></pre>
 Validator: <pre><code>./validator --version</code></pre>
 {{/unless}}
 
-<ol>
+<ol class="list-decimal space-y-2 pl-6">
     <li>
         <h3>Find the latest stable version of Prysm on Github</h3>
-        <ul>
+        <ul class="list-disc mt-4 mb-4">
             <li>Find latest Prysm version at <a href="https://github.com/prysmaticlabs/prysm/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/prysmaticlabs/prysm/releases</a></li>
             <li>
                 Write latest stable Prysm version: <input type="text" value="{{consensusClients.prysm.latestVer}}" class="prysmVer-input"><br>
@@ -16,21 +16,21 @@ Validator: <pre><code>./validator --version</code></pre>
             </li>
         </ul>
     </li>
-    <li class="mt-15">
+    <li>
         <h3>Download Prysm clients to your node</h3>
         <pre><code>cd ~/downloads && curl -LO https://github.com/prysmaticlabs/prysm/releases/download/v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>/beacon-chain-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-modern-linux-amd64</code></pre>
         <pre><code>cd ~/downloads && curl -LO https://github.com/prysmaticlabs/prysm/releases/download/v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>/validator-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-linux-amd64</code></pre>
     </li>
-    <li class="mt-15">
+    <li>
         <h3>Rename downloaded files</h3>
         <pre><code>mv beacon-chain-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-modern-linux-amd64 beacon-chain && mv validator-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-linux-amd64 validator</code></pre>
     </li>
-    <li class="mt-15">
+    <li>
         <h3>Set files permissions</h3>
         <pre><code>chmod +x beacon-chain && chmod +x validator</code></pre>
     </li>
     {{#unless InstallationGuide}}
-    <li class="mt-15">
+    <li>
         <h3>Stop running clients</h3>
         <p>You can time this based on validator duties either from validator instances log(s) or for Ethereum also from sources such as <a href="https://wenmerge.com/block-proposer-schedule/validator-proposal-subscription/" target="_blank" rel="nofollow noopener noreferrer">WenMerge.com</a> or <a href="https://ethstakers.club/dashboard" target="_blank" rel="nofollow noopener noreferrer">ETHStakers</a>.</p>
         <div class="tabselector" data-client="prysm">
@@ -57,12 +57,12 @@ sudo systemctl stop prysmbeacon</code></pre>
 		</div>
     </li>
     {{/unless}}
-    <li class="mt-15">
+    <li>
         <h3>Copy clients to <code>/usr/local/bin</code></h3>
         <pre><code>sudo cp ~/downloads/beacon-chain /usr/local/bin</code></pre>
         <pre><code>sudo cp ~/downloads/validator /usr/local/bin</code></pre>
     </li>
-    <li class="mt-15">
+    <li>
         <h3>Start services using Prysm clients</h3>
         <div class="tabselector" data-client="prysm">
 			<nav class="egrid egrid-2">
@@ -87,7 +87,7 @@ sudo systemctl start prysmbeacon</code></pre>
 			</div>
 		</div>
     </li>
-    <li class="mt-15"><h3>Monitor</h3>
+    <li><h3>Monitor</h3>
         <div class="tabselector" data-client="prysm">
 		    <nav class="egrid egrid-2">
 				<button class="tab selected" data-tabpanel="1">Standard option</button>
@@ -105,7 +105,7 @@ sudo systemctl start prysmbeacon</code></pre>
 			</div>
 		</div>
     </li>
-    <li class="mt-15">
+    <li>
         <h3>Remove downloaded files</h3>
         <pre><code>cd ~/downloads && rm beacon-chain && rm validator</code></pre>
     </li>

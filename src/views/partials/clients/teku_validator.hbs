@@ -1,4 +1,4 @@
-{{> guides/instanceSelection client="teku"}}
+<aside class="bg-gray-100 dataloader">{{> guides/instanceSelection client="teku"}}</aside>
 {{#if AddValidator}}
 <ol class="mt-30">
     <li>
@@ -9,14 +9,14 @@
 		<button class="tab" data-tabpanel="2">Extend existing</button>
 	</nav>
 	<div class="tabpanel selected">
-		<ul>
+		<ul class="list-disc mt-4 mb-4">
             <li><h4>Create a directory for validator instance data</h4>
 
                 <pre><code>sudo mkdir -p <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark></code></pre>
             </li>
             <li><h4>If exists, remove <code>deposit_data</code> file from keystores folder</h4>
                 <label>Directory with Deposit Data keystores</label>: <input type="text" value="$HOME/keystores/ddk_i1" class="interactive-element ddkeys-path" data-class="ddkeys-path">
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li>Display files in the directory
                         <pre><code>cd <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> && ls -lh</code></pre>
                     </li>
@@ -30,7 +30,7 @@
                 <pre><code>sudo cp -a <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark>/* <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark>/keystores && cd <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark>/keystores</code></pre>
             </li>
             <li><p>Teku requires a <code>.txt</code> file with encryption password for each <code>.json</code> validator file.</p>
-                <ol>
+                <ol class="list-decimal space-y-2 pl-6">
                     <li>
                         Display all keystores in the directory
                         <pre><code>ls -lh</code></pre>
@@ -58,13 +58,13 @@
                 <pre><code>sudo chown -R <mark class="instance_su" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark>:<mark class="instance_su" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark> <mark class="instance_dp">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span></mark></code></pre>
             </li>
             <li><h4>Create configuration service file for <code class="instance_sn" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></code> service</h4>
-                <ol>
+                <ol class="list-decimal space-y-2 pl-6">
                     <li>Open the configuration file
                         <pre><code>sudo nano /etc/systemd/system/<mark class="instance_sn" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark>.service</code></pre>
                     </li>
                     <li>
                         Copy the configuration below into the file.
-                        <ul>
+                        <ul class="list-disc mt-4 mb-4">
                             <li><label>What's fee recipient wallet?</label> <input type="text" class="interactive-element instance_frw" data-class="instance_frw" value="0xXXXX"></li>
                             <li><label>What's your execution client?</label> <input type="text" class="interactive-element ec_name" data-class="ec_name" value="Nethermind"></li>
                         </ul>
@@ -95,13 +95,13 @@
         </ul>
 	</div>
 	<div class="tabpanel">
-		<ul>
+		<ul class="list-disc mt-4 mb-4">
             <li><h4>Stop running validator instance <code class="instance_sn" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></code></h4>
                 <pre><code>sudo systemctl stop <mark class="instance_sn" data-client="teku">{{servicePrefix}}teku-vi<span class="instance_pid">1</span></mark></code></pre>
             </li>
             <li><h4>If exists, remove <code>deposit_data</code> file from keystores folder</h4>
                 <label>Directory with Deposit Data keystores</label>: <input type="text" value="$HOME/keystores/ddk_i1" class="interactive-element ddkeys-path" data-class="ddkeys-path">
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li>Display files in the directory
                         <pre><code>cd <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> && ls -lh</code></pre>
                     </li>
@@ -116,7 +116,7 @@
                 <pre><code>sudo cp -a <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark>/* <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span>/keystores</mark>/keystores  && cd <mark class="instance_dp" data-client="teku">/var/lib{{slashChain}}/teku/vi<span class="instance_pid">1</span>/keystores</mark></code></pre>
             </li>
             <li><p>Teku requires a <code>.txt</code> file with encryption password for each <code>.json</code> validator file.</p>
-                <ol>
+                <ol class="list-decimal space-y-2 pl-6">
                     <li>
                         Display all keystores in the directory
                         <pre><code>ls -lh</code></pre>
@@ -168,13 +168,13 @@
                 </div>
                 <div class="tabpanel">
                     <aside>NOTE: This option requires following utils installed: 
-                        <ul>
+                        <ul class="list-disc mt-4 mb-4">
                             <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with Delay util with delayed-start.service</a>.</li>
                             <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/remove_lock_files" target="_blank">Remove Lock files</a> util.</li>
                         </ul>
                         <p>A guide to install each util is attached on the Github.</p>
                     </aside>
-                    <ol>
+                    <ol class="list-decimal space-y-2 pl-6">
                         <li>Open Delayed Start shell
                             <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
                         </li>
@@ -193,16 +193,16 @@
             </div>
             <div class="tabpanel">
                 <aside>NOTE: This option requires following utils installed:
-                    <ul>
+                    <ul class="list-disc mt-4 mb-4">
                         <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with Delay util with delayed-start.service</a>.</li>
                         <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
                         <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/remove_lock_files" target="_blank">Remove Lock files</a> util.</li>
                     </ul>
                     <p>A guide to install each util is attached on the Github.</p>
                 </aside>
-                <ol>
+                <ol class="list-decimal space-y-2 pl-6">
                     <li><h4>Configurate Staking Manager util</h4>
-                        <ul>
+                        <ul class="list-disc mt-4 mb-4">
                             <li>Open the configuration file
                                 <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
                                 <p>If the file is empty, generate it with command <code>sudo /usr/local/bin/staking.sh init</code></p>
@@ -214,7 +214,7 @@
                     </li>
                     <li>
                         <h4>Activate service to start automatically on OS startup</h4>
-                        <ul>
+                        <ul class="list-disc mt-4 mb-4">
                         <li>Open Start with delay util
                             <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
                         </li>

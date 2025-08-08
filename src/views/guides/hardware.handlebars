@@ -201,7 +201,7 @@
 			</section>
 
 			<section id="os" class="max-w-6xl my-16 mx-auto border border-gray-200 lg:rounded-xl p-6 py-10 shadow-sm">
-				<div class="flex items-start mb-12">
+				<div class="flex items-start mb-8">
 					<div class="text-gray-300 font-bold text-7xl leading-none mr-6 select-none">3</div>
 					<div>
 					<h2 class="text-3xl font-semibold mb-4">Operating System</h2>
@@ -212,11 +212,12 @@
 					</div>
 				</div>
 
-				<h3 class="text-2xl font-semibold mb-6">Ways to install the OS</h3>
+				<div class="bg-gray-50 p-6 rounded-xl shadow-md">
+					<h3 class="text-2xl font-semibold mb-4">Ways to install the OS</h3>
 				<div class="tabselector">
-					<nav class="grid gap-2 md:grid-cols-2">
-						<button class="tab selected relative p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer" data-tabpanel="1" type="button">
-							<div class="absolute top-4 left-4 text-indigo-100 text-[80px] font-extrabold leading-none select-none pointer-events-none">1</div>
+					<nav class="flex gap-4 pb-2 mb-3">
+						<button class="tab selected relative pb-1" data-tabpanel="1" type="button">
+							<div class="absolute text-indigo-100 text-[80px] font-extrabold leading-none select-none pointer-events-none">1</div>
 							<div class="relative z-10">
 								<h4 class="text-xl font-semibold mb-2">Install on local hardware</h4>
 								<p class="text-gray-700 text-sm">
@@ -224,8 +225,8 @@
 								</p>
 							</div>
 						</button>
-							<button class="tab relative p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer" data-tabpanel="2" type="button">
-								<div class="absolute top-4 left-4 text-indigo-100 text-[80px] font-extrabold leading-none select-none pointer-events-none">2</div>
+							<button class="tab relative pb-1" data-tabpanel="2" type="button">
+								<div class="absolute text-indigo-100 text-[80px] font-extrabold leading-none select-none pointer-events-none">2</div>
 								<div class="relative z-10">
 									<h4 class="text-xl font-semibold mb-2">Install on cloud instance</h4>
 									<p class="text-gray-700 text-sm">
@@ -248,7 +249,7 @@
 								</li>
 							</ol>
 							<h4 class="text-xl font-semibold mt-8 mb-4">Install Ubuntu Server OS to your node</h4>
-							<ol class="list-decimal space-y-6 pl-6">
+							<ol class="list-decimal space-y-2 pl-6">
 								<li>
 									Connect your node to monitor, keyboard, electricity and internet. Stick Ubuntu bootable flash disk to your node.
 									<img src="/img/pages/hw-preparation/nuc-connection-start.webp" alt="NUC - connected devices" class="w-full rounded-lg shadow-md my-4" />
@@ -433,14 +434,14 @@
 							<li>
 								Create a new standard user and assign <code>sudo</code> rights:
 								<label for="serverUser" class="block text-sm text-gray-600 mb-1">Choose your username:</label>
-								<input type="text" value="myserveruser" id="serverUser" class="px-3 py-1 border border-gray-300 rounded-md text-sm font-mono text-gray-800 mb-2" />
+								<input type="text" value="myserveruser" id="serverUser" />
 
-								<pre class="bg-gray-200 p-4 overflow-x-auto text-sm border border-gray-300 rounded-md"><code>adduser <mark class="serverUser">myserveruser</mark>
+								<pre><code>adduser <mark class="serverUser">myserveruser</mark>
 usermod -aG sudo <mark class="serverUser">myserveruser</mark></code></pre>
 							</li>
 							<li>
 								If you're logged in as <code>root</code> via SSH key, copy your SSH keys to the new user:
-								<pre class="bg-gray-200 p-4 overflow-x-auto text-sm border border-gray-300 rounded-md"><code>rsync --archive --chown=<mark class="serverUser">myserveruser</mark>:<mark class="serverUser">myserveruser</mark> ~/.ssh /home/<mark class="serverUser">myserveruser</mark></code></pre>
+								<pre><code>rsync --archive --chown=<mark class="serverUser">myserveruser</mark>:<mark class="serverUser">myserveruser</mark> ~/.ssh /home/<mark class="serverUser">myserveruser</mark></code></pre>
 							</li>
 							</ul>
 							<script>
@@ -457,6 +458,7 @@ usermod -aG sudo <mark class="serverUser">myserveruser</mark></code></pre>
 							</script>
 						</div>
 					</div>
+				</div>
 			</section>
 
 			<section id="next" class="max-w-6xl my-20 mx-auto border border-gray-200 lg:rounded-xl p-6 py-10 shadow-sm text-center">

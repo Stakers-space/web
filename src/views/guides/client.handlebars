@@ -1,0 +1,107 @@
+{{> header}}
+<section class="grid grid-cols-1 md:grid-cols-[67fr_33fr] gap-8 bg-white rounded-lg shadow-sm p-8">
+	<div class="mx-auto md:px-6 md:py-16">
+		<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+				<meta property="position" content="1">
+			</li>
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/clients"><span property="name">clients</span></a>
+				<meta property="position" content="2">
+			</li>
+			<li property="itemListElement" typeof="ListItem">
+				<a property="item" typeof="Thing" href="/{{client}}"><span property="name">{{clientName}} client</span></a>
+				<meta property="position" content="3">
+			</li>
+		</ul>
+
+		<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+			<span class="block mt-1 text-green-600">{{clientName}} client</span> guides and options
+		</h1>
+
+		<p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl">
+			One-page interactive complete guide to configurate and operate {{clientName}} client.
+		</p>
+		{{#if cliData.system-requirements}}
+		<div class="mt-4">
+			<a href="{{cliData.system-requirements}}" target="_blank" class="inline-block text-blue-600 hover:underline">
+				{{clientName}} System / Hardware requirements →
+			</a>
+		</div>
+		{{/if}}
+	</div>
+	<div class="flex items-center justify-center md:pl-10 text-sm text-gray-600">
+		<div class="md:max-w-xs bg-gray-50 p-6 rounded-xl shadow-md">
+			<h3 class="font-semibold mb-1">Disclaimer</h3>
+			<p>
+				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.
+			</p>
+		</div>
+	</div>
+</section>
+<section class="shadow-sm py-8">
+	<div class="max-w-6xl mx-auto">
+		<h2 class="text-2xl font-semibold mb-6">Chains support</h2>
+		<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+			<li class="flex flex-col items-center justify-center bg-white rounded-lg shadow p-4">
+				{{#if cliData.chain.ethereum.supported}}
+				<img src="/img/icons/supported.png" alt="Supported" title="Supported" width="32">
+				{{else}}
+				<span class="text-red-500 font-bold">X</span>
+				{{/if}}
+				<strong class="mt-2">
+				<a href="/ethereum-staking" class="hover:underline">Ethereum</a>
+				</strong>
+			</li>
+			<li class="flex flex-col items-center justify-center bg-white rounded-lg shadow p-4">
+				{{#if cliData.chain.gnosis.supported}}
+				<img src="/img/icons/supported.png" alt="Supported" title="Supported" width="32">
+				{{else}}
+				<span class="text-red-500 font-bold">X</span>
+				{{/if}}
+				<strong class="mt-2">
+				<a href="/ethereum-staking" class="hover:underline">Gnosis</a>
+				</strong>
+			</li>
+		</ul>
+	</div>
+</section>
+<section class="max-w-6xl mx-auto px-4 py-10" id="individual-guides">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <a href="/{{client}}/install" class="block bg-gray-100 border border-gray-200 rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1 p-8 text-center">
+      <span class="text-2xl font-semibold text-gray-800">
+        <span class="text-green-600">Install {{clientName}}</span> client
+      </span>
+    </a>
+
+    <a href="/{{client}}/update" class="block bg-gray-100 border border-gray-200 rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1 p-8 text-center">
+      <span class="text-2xl font-semibold text-gray-800">
+        <span class="text-green-600">Update {{clientName}}</span> client
+      </span>
+    </a>
+
+    <a href="/{{client}}/emergency" class="block bg-gray-100 border border-gray-200 rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1 p-8 text-center">
+      <span class="text-2xl font-semibold text-gray-800">
+        <span class="text-grey-800">Emergency for {{clientName}}</span>
+      </span>
+    </a>
+
+    {{#ifEqual cliLayer "consensus"}}
+    <a href="/{{client}}/add-validator" class="block bg-gray-100 border border-gray-200 rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1 p-8 text-center">
+      <span class="text-2xl font-semibold text-gray-800">
+        <span class="text-blue-600">Add {{clientName}}</span> validator
+      </span>
+    </a>
+
+    <a href="/{{client}}/exit-validator" class="block bg-gray-100 border border-gray-200 rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1 p-8 text-center">
+      <span class="text-2xl font-semibold text-gray-800">
+        <span class="text-blue-600">Exit {{clientName}}</span> validator
+      </span>
+    </a>
+    {{/ifEqual}}
+  </div>
+</section>
+
+
+{{> footer_tailwind}}

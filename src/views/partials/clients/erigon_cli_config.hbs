@@ -1,5 +1,5 @@
 <h3>Create a system user and data directory for Erigon service</h3>
-<ul>
+<ul class="list-disc mt-4 mb-4 pl-6">
     <li><h4>Create a user</h4>
         <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}erigon" class="interactive-element execution_sn" data-class="execution_sn" data-client="erigon">
         <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
@@ -13,16 +13,19 @@
         <pre><code>sudo chown -R <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark>:<mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark> <mark class="execution-dp">/var/lib{{slashChain}}/erigon</mark></code></pre>
     </li>
 </ul>
-<h3 class="mt-60">Configurate & Run Erigon Service</h3>
-<ul>
+<h3 class="mt-1">Configurate & Run Erigon Service</h3>
+<ul class="list-disc mt-4 mb-4 pl-6">
     <li>
         {{> clients/config/execution-ports }}
     </li>
     <li>
-      {{> clients/config/execution-ports-enable }}
+       <h4 class="font-semibold mb-2">Enable ports communication</h4>
+        <div class="bg-gray-200 p-6 rounded-xl shadow-md">
+          {{> clients/config/execution-ports-enable }}
+        </div>
     </li>
     <li><h4>Create configuration file for Erigon service</h4>
-        <ol>
+        <ol class="list-decimal space-y-2 pl-6">
             <li>Open configuration file
                 <pre><code>sudo nano /etc/systemd/system/<mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark>.service</code></pre>
             </li>
@@ -61,14 +64,14 @@ sudo systemctl start <mark class="execution_sn" data-client="erigon">{{servicePr
 journalctl -fu <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
     </li>
     <li><h4>Start the service on system startup</h4>
-    <div class="tabselector">
-        <nav class="egrid egrid-2">
+    <div class="tabselector bg-gray-200 p-6 rounded-xl shadow-md">
+        <nav>
             <button class="tab selected" data-tabpanel="1">Standard configuration</button>
             <button class="tab" data-tabpanel="2">StakersSpace configuration</button>
         </nav>
         <div class="tabpanel selected">
-            <div class="tabselector">
-                <nav class="egrid egrid-2">
+            <div class="tabselector bg-gray-300 p-6 rounded-xl shadow-md">
+                <nav>
                     <button class="tab selected" data-tabpanel="1">Standard option</button>
                     <button class="tab" data-tabpanel="2">Delayed start util</button>
                 </nav>
@@ -76,31 +79,21 @@ journalctl -fu <mark class="execution_sn" data-client="erigon">{{servicePrefix}}
                     <pre><code>sudo systemctl enable <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
                 </div>
                 <div class="tabpanel">
-                    <aside>NOTE: This option requires installed <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank" rel="nofollow noopener">Start with Delay util</a>.</aside>
-                    <ul>
-                        <li>Open Delayed Start shell
-                            <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
-                            <p>Configurate service start inside it</p>
-                            <pre><code>systemctl start <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark>.service</code></pre>
-                        </li>
-                        <li>Be sure, <code>delayed-start.service</code> service controlling <code>delayed-start.sh</code> is enabled for auto start with system startup
-                            <pre><code>sudo systemctl enable delayed-start.service</code></pre>
-                        </li>
-                    </ul>
+                    {{> clients/config/delayed-start MarkClass="execution_sn" ClientName="erigon" }}
                 </div>
               </div>
             </div>
             <div class="tabpanel">
               <aside>NOTE: This option requires following installed utils:
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                   <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with Delay util with delayed-start.service</a>.</li>
                   <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
                 </ul>
                 <p>A guide to install each util is attached on the Github.</p>
               </aside>
-              <ol>
+              <ol class="list-decimal space-y-2 pl-6">
                 <li><h4>Configurate Staking Manager util</h4>
-                  <ul>
+                  <ul class="list-disc mt-4 mb-4">
                     <li>Open the configuration file
                       <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
                       <p>If the file is empty, generate it with command <code>sudo /usr/local/bin/staking.sh init</code></p>
@@ -112,7 +105,7 @@ journalctl -fu <mark class="execution_sn" data-client="erigon">{{servicePrefix}}
                 </li>
                 <li>
                   <h4>Activate service to start automatically on OS startup</h4>
-                  <ul>
+                  <ul class="list-disc mt-4 mb-4">
                     <li>Open Start with delay util
                         <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
                     </li>

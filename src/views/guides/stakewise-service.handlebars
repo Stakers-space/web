@@ -36,7 +36,7 @@
 			<div class="sticky">
 				 <nav>
 					<strong>StakeWise staking guide</strong>
-					<ol>
+					<ol class="list-decimal space-y-2 pl-6">
 						<li><a href="#prerequisites">Prerequisites</a></li>
 						<li><a href="#install">Install</a></li>
 						<li><a href="#operator">Configurate StakeWise operator</a></li>
@@ -60,7 +60,7 @@
 			<section class="chapter" id="prerequisites">
 				<div class="content" style="width:100%;padding-top:10px">
 					<h2 data-number="°">Prerequisites for this guide</h2>
-					<ol>
+					<ol class="list-decimal space-y-2 pl-6">
 						<li>Installed and synced Execution and Consensus client
 							<p><a href="/ethereum-staking/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a></p>
 						</li>
@@ -71,9 +71,9 @@
 				<div class="content" style="width:100%">
 					<h2>Installing StakeVise Operator / Validator</h2>
 					<h2>Vaults parameters</h2>
-					<ul>
+					<ul class="list-disc mt-4 mb-4">
 						<li><h3>Vault type</h3>
-							<ul>
+							<ul class="list-disc mt-4 mb-4">
 								<li><strong>Public Vaults</strong> can receive staking deposits from any wallet.</li>
 								<li><strong>Private Vaults can only receive deposits from whitelisted wallets by the Vault Admin</strong></li>
 							</ul>
@@ -81,7 +81,7 @@
 						</li>
 						<li>
 							<h3>Vault capacity</h3>
-							<ul>
+							<ul class="list-disc mt-4 mb-4">
 								<li>Can range from 32 ETH / 1 GNO to infinity. </li>
 								<li>Setting/choosing an appropriate Vault capacity helps to ensure that the staking infrastructure of the Vault Operator does not carry more validators than it was designed to handle. </li>
 								<li>Vault capacity is defined by the Vault creator during Vault setup and <strong>cannot be changed later</strong>.</li>
@@ -89,14 +89,14 @@
 						</li>
 						<li>
 							<h3>Vault fee</h3>
-							<ul>
+							<ul class="list-disc mt-4 mb-4">
 								<li>Sets a percentage fee that will be withheld from the rewards earned by Vault's validators as compensation for staking services. Can range from 0 to 100%.</li>
 								<li>Vault fee is defined by the Vault creator during Vault setup and <strong>cannot be changed later</strong>.</li>
 							</ul>
 						</li>
 						<li>
 							<h3>Vault token</h3>
-							<ul>
+							<ul class="list-disc mt-4 mb-4">
 								<li>Defines whether a Vault has an ERC-20 token to represent ETH staked by users in the Vault, or the Vault is tokenless.</li>
 								<li>Vaults that opt into having a Vault Token can set its name and symbol (e.g. mntETH), which will be visible in most portfolio tracking applications.</li>
 								<li>Setting/choosing a Vault with Vault Tokens allows users to transfer their stake in the Vault as long as they don't have osETH minted. It also allows Vault owners to develop a utility & liquidity ecosystem for ETH staked in their Vault.</li>
@@ -106,14 +106,14 @@
 						</li>
 						<li>
 							<h3>Vault block rewards destination</h3>
-							<ul>
+							<ul class="list-disc mt-4 mb-4">
 								<li>Smoothing Pool or Own Escrow for collecting the block rewards.</li>
 								<li>Block rewards destination is defined by the Vault creator during Vault setup and <strong>cannot be changed later</strong>.</li>
 							</ul>
 						</li>
 						<li>
 							<h3>Vault branding</h3>
-							<ul>
+							<ul class="list-disc mt-4 mb-4">
 								<li>Allows Vault Admins to set the name, description and avatar for their Vault.</li>
 								<li>Vault branding <strong>can be changed at any time</strong>.</li>
 							</ul>
@@ -124,14 +124,14 @@
 						</li>
 					</ul>
 
-					<h2 class="mt-60"><a href="https://docs.stakewise.io/protocol-overview-in-depth/vaults#solo-vaults" target="_blank">Operator Service</a></h2>
+					<h2 class="mt-1"><a href="https://docs.stakewise.io/protocol-overview-in-depth/vaults#solo-vaults" target="_blank">Operator Service</a></h2>
 					<p>Operator Service is primarily responsible for the registration of validators. Operator Service periodically checks whether a Vault has accumulated enough assets for registering new validator(s) and sends a registration transaction to the Vault. The validator registration process consists of the following steps:</p>
-					<ol>
+					<ol class="list-decimal space-y-2 pl-6">
 						<li>Check whether Vault has accumulated enough assets to register a validator (e.g., 32 ETH for Ethereum)</li>
 						<li>Get the next free validator public key from the deposit data file attached to Operator Service. The validators are registered in the same order as specified in the deposit data file.</li>
 						<li>Obtain BLS signature for exit message using local keystores or remote signer.</li>
 						<li>Share the exit signature of the validator with StakeWise Oracles:
-							<ul>
+							<ul class="list-disc mt-4 mb-4">
 								<li>Using <a href="https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing" target="_blank">Shamir's secret sharing</a>, split validator's BLS signature. The number of shares is equal to the number of Oracles.</li>
 								<li>Encrypt exit signatures with with Oracles' public keys.</li>
 								<li>Send encrypted exit signatures to all the Oracles and receive registration signatures from them.</li>
@@ -141,13 +141,13 @@
 					</ol>
 					<p>Operator Service periodically checks active validators of the Vault and if some exit signatures become outdated, Operator Service will submit a signature update transaction to the Vault.</p>
 				
-					<h2 class="mt-60">Government and management</h2>
+					<h2 class="mt-1">Government and management</h2>
 					<p>Every Vault is an independent staking pool and its smart contracts cannot be unilaterally changed or upgraded by the StakeWise DAO. The DAO may implement changes to the Vault contracts to improve their efficiency and safety, in which case a new version of Vault contracts would become available to users. However, Vaults can always choose not to upgrade to the new version. This helps Vault owners preserve control over the staking experience they offer.</p>
 					<p>Every Vault has several key roles for the internal management of the staking process. </p>
-					<ul>
+					<ul class="list-disc mt-4 mb-4">
 						<li>
 							<h3>Vault Admin</h3>
-							<ul>
+							<ul class="list-disc mt-4 mb-4">
 								<li>Deploys the Vaults and sets the core parameters like the type of Vault and fee. Vault Admins also control the Vault's branding.</li>
 								<li>Vault Admin can be a single wallet, a multisig, or a DAO. Out of security considerations, Vault Admin cannot be changed once the Vault has been deployed.</li>
 								<li>Vault Admin cannot change the core parameters of the Vault once it has been deployed. However, an Admin can assign the Access Manager and Keys Manager roles to other wallets, and change the recipient of the staking fee. </li>
@@ -155,14 +155,14 @@
 						</li>
 						<li>
 							<h3>Access Manager</h3>
-							<ul>
+							<ul class="list-disc mt-4 mb-4">
 								<li>Wallet with the power to add and remove wallets from the whitelist of a Private Vault.</li>
 								<li>By default, Vault Admin is also the Access Manager. However, an Admin can assign the Access Manager role to another wallet, and reclaim this role at any moment in the future.</li>
 							</ul>
 						</li>
 						<li>
 							<h3>Keys Manager</h3>
-							<ul>
+							<ul class="list-disc mt-4 mb-4">
 								<li>Wallet with the power to add new deposit data to a given Vault.</li>
 								<li>By default, Vault Admin is also the Keys Manager. However, an Admin can assign the Keys Manager role to another wallet, and reclaim this role at any moment in the future.</li>
 							</ul>
@@ -170,8 +170,8 @@
 					</ul>
 					<p>Note that StakeWise always checks the validity of deposit data submitted to the Vault to ensure it contains the correct withdrawal address and hasn't been used before.</p>
 
-					<h2 class="mt-60">Operating a vault</h2>
-					<ul>
+					<h2 class="mt-1">Operating a vault</h2>
+					<ul class="list-disc mt-4 mb-4">
 						<li><strong>Vault operator(s)</strong> = Entities or individuals who run validators for a Vault
 							<p>Vault Admins determine who the Vault operators are by uploading a deposit data file to the Vault. This file contains the public keys to the validators and the order they will be created when the Vault accumulates enough ETH. These keys are generated by the Vault operators using StakeWise Operator Service, or another keygen software.</p>
 							<p>It is not possible to change an operator who is already running validators for a Vault. However, it is possible to assign new operators for the validators that will be launched in the future by uploading new deposit data.</p>
@@ -183,15 +183,15 @@
 							<p>Any user-driven interaction with the Vault will trigger an update in the Vault state. In the absence of user-driven actions, Vault operator(s) can manually trigger the update whenever they see fit (optional). </p>
 						</li>
 					</ul>
-					<h2 class="mt-60">Whitelist</h2>
-					<ul>
+					<h2 class="mt-1">Whitelist</h2>
+					<ul class="list-disc mt-4 mb-4">
 						<li>Within private Vaults, it allows Vault Admin to control who can deposit and withdraw ETH from the Vault.</li>
 						<li>Once a Private Vault is deployed, Vault Admin can add or remove wallets from the whitelist to manage access to the Vault. Wallets added to the whitelist can stake ETH into the Vault. If a wallet is removed from the whitelist after making a deposit, it will still be able to unstake ETH from that Vault.</li>
 						<li>Vault Admin can also assign the role of Access Manager to another wallet to outsource the management of the whitelist to a third party.</li>
 					</ul>
 
-					<h2 class="mt-60">Handling of Mev</h2>
-					<ul>
+					<h2 class="mt-1">Handling of Mev</h2>
+					<ul class="list-disc mt-4 mb-4">
 						<li>
 							<h3>Smoothing Pool</h3>
 							<p>Smoothing Pool collects block proposal rewards from all participating validators (Vaults) and periodically distributes rewards to the participants, proportionately to their size.</p>

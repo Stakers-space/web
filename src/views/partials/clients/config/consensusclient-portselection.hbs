@@ -1,18 +1,18 @@
-<h3>Communication ports selection</h3>
+<h3 class="text-xl">Communication ports selection</h3>
 <p>Each service on the server needs a custom port for communication. Through ports, consensus client communicates with
     other peers in the network as well as other services running on the server, such as validator clients. There is an
     IPv4 and IPv6 variant, depending on the ISP support / preference. Each protocol version needs custom port. If you
     are not sure what to select, continue with default IPv4 port.</p>
 <div class="tabselector">
-    <nav class="egrid egrid-2">
+    <nav class="my-5">
         <button class="tab selected" data-tabpanel="1">IPv4 port (default)</button>
         <button class="tab" data-tabpanel="2">IPv6 port</button>
     </nav>
     <div class="tabpanel selected">
-        <ol>
+        <ol class="list-decimal space-y-2 pl-6">
             <li>
                 <h4 class="mt-0">Configurate public IPv4 port for P2P communication with other peers</h4>
-                <ul>
+                <ul class="list-disc mt-4 mb-4 pl-6">
                     <li>
                         <label><strong>Choose P2P communication port</strong></label>: <select onchange="OnP2PChanged(this)"
                             data-id="consensus-p2p_cinp">
@@ -21,19 +21,19 @@
                         </select><input type="number" id="consensus-p2p_cinp" class="hide interactive-element consensus-p2p"
                             data-class="consensus-p2p" value="9000">
                     </li>
-                    <li class="mt-15"><strong>Verify availability of selected port <code><mark class="consensus-p2p">9000</mark></strong></code>
+                    <li><strong>Verify availability of selected port <code class="consensus-p2p">9000</strong></code>
                         <pre><code>ss -tuln | grep ':<mark class="consensus-p2p">9000</mark>'</code></pre>
-                        <p><i>If it returns empty response, the port <code><mark class="consensus-p2p">9000</mark></code> is free and can be used.</i></p>
+                        <p><i>If it returns empty response, the port <code class="consensus-p2p">9000</code> is free and can be used.</i></p>
                     </li>
-                    <li class="mt-15"><strong>Enable traffic on the port through UFW</strong>
+                    <li><strong>Enable traffic on the port through UFW</strong>
                         <pre><code>$ sudo ufw allow <mark class="consensus-p2p">9000</mark></code></pre>
                     </li>
-                    <li class="mt-15"><strong>Disable IPv6 traffic on the port</strong>
-                        <ul>
+                    <li><strong>Disable IPv6 traffic on the port</strong>
+                        <ul class="list-disc mt-4 mb-4">
                             <li>List allowed ports
                                 <pre><code>sudo ufw status numbered</code></pre>
                             </li>
-                            <li>Find order number for V6, see <code><mark class="consensus-p2p">9000</mark> (V6)</code> and
+                            <li>Find order number for V6, see <code class="consensus-p2p">9000 (V6)</code> and
                                 remove it with the following line
                                 <pre><code>sudo ufw delete &lt;Number&gt;</code></pre>
                             </li>
@@ -42,40 +42,40 @@
                 </ul>
             </li>
             <li><h4>QUIC IPv4 port</h4>
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li><label><strong>Choose QUIC IPv4 port</strong></label>: <select onchange="OnP2PChanged(this)"
                             data-id="consensus-quic_cinp">
                             <option value="add">default (9001)</option>
                             <option value="remove">Custom</option>
                         </select><input data-lighthouse="9001" data-lodestar="" data-teku="" data-prysm="" type="number" id="consensus-quic_cinp" class="hide interactive-element consensus-quic" data-class="consensus-quic" value="9001"></code></li>
                     </li>
-                    <li class="mt-15"><strong>Verify availability of selected port <code><mark class="consensus-quic">9001</mark></strong></code>
+                    <li><strong>Verify availability of selected port <code class="consensus-quic">9001</strong></code>
                         <pre><code>ss -tuln | grep ':<mark class="consensus-quic">9001</mark>'</code></pre>
-                        <p><i>If it returns empty response, the port <code><mark class="consensus-quic">9001</mark></code> is free and can be used.</i></p>
+                        <p><i>If it returns empty response, the port <code class="consensus-quic">9001</code> is free and can be used.</i></p>
                     </li>
                 </ul>
             </li>
             <li>
                 <h4>Beacon API port for internal communication</h4>
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li><label><strong>Choose Beacon API port</strong></label>: <select onchange="OnP2PChanged(this)" data-id="consensus-endpoint_cinp">
                             <option value="add">default</option>
                             <option value="remove">Custom</option>
                         </select><input data-lighthouse="5052" data-lodestar="9596" data-teku="" data-prysm="" type="number" id="consensus-endpoint_cinp" class="hide interactive-element consensus-endpoint" data-class="consensus-endpoint" value="5052"></code></li>
                     </li>
-                    <li class="mt-15"><strong>Verify availability of selected port <code><mark class="consensus-endpoint">5052</mark></strong></code>
+                    <li><strong>Verify availability of selected port <code class="consensus-endpoint">5052</strong></code>
                         <pre><code>ss -tuln | grep ':<mark class="consensus-endpoint">5052</mark>'</code></pre>
-                        <p><i>If it returns empty response, the port <code><mark class="consensus-endpoint">5052</mark></code> is free and can be used.</i></p>
+                        <p><i>If it returns empty response, the port <code class="consensus-endpoint">5052</code> is free and can be used.</i></p>
                     </li>
                 </ul>
             </li>
         </ol>
     </div>
     <div class="tabpanel">
-        <ol>
+        <ol class="list-decimal space-y-2 pl-6">
             <li>
                 <h4 class="mt-0">Configurate public IPv6 port for P2P communication with other peers</h4>
-                <ul>
+                <ul class="list-disc mt-4 mb-4 pl-6">
                     <li>
                         <label>P2P communication port</label>: <select onchange="OnP2PChanged(this)" data-id="consensus-p2p_v6_cinp">
                             <option value="add">default (9090)</option>
@@ -83,19 +83,19 @@
                         </select>
                         <input type="number" id="consensus-p2p_v6_cinp" class="hide interactive-element consensus-p2p_v6" data-class="consensus-p2p_v6" value="9090">
                     </li>
-                    <li class="mt-15"><strong>Verify availability of selected port <code><mark class="consensus-p2p_v6">9090</mark></strong></code>
+                    <li><strong>Verify availability of selected port <code class="consensus-p2p_v6">9090</strong></code>
                         <pre><code>ss -tuln | grep ':<mark class="consensus-p2p_v6">9090</mark>'</code></pre>
-                        <p><i>If it returns empty response, the port <code><mark class="consensus-p2p_v6">9090</mark></code> is free and can be used.</i></p>
+                        <p><i>If it returns empty response, the port <code class="consensus-p2p_v6">9090</code> is free and can be used.</i></p>
                     </li>
-                    <li class="mt-15"><strong>Enable traffic on the port through UFW</strong>
+                    <li><strong>Enable traffic on the port through UFW</strong>
                         <pre><code>$ sudo ufw allow <mark class="consensus-p2p_v6">9090</mark></code></pre>
                     </li>
-                    <li class="mt-15"><strong>Disable IPv6 traffic on the port</strong>
-                        <ul>
+                    <li><strong>Disable IPv6 traffic on the port</strong>
+                        <ul class="list-disc mt-4 mb-4">
                             <li>List allowed ports
                                 <pre><code>sudo ufw status numbered</code></pre>
                             </li>
-                            <li>Find order number for V6, see <code><mark class="consensus-p2p_v6">9090</mark></code> and
+                            <li>Find order number for V6, see <code class="consensus-p2p_v6">9090</code> and
                                 remove it with the following line
                                 <pre><code>sudo ufw delete &lt;Number&gt;</code></pre>
                             </li>
@@ -104,30 +104,30 @@
                 </ul>
             </li>
             <li><h4>QUIC IPv6 port</h4>
-                <ul>
+                <ul class="list-disc mt-4 mb-4 pl-6">
                     <li><label><strong>Choose QUIC IPv4 port</strong></label>: <select onchange="OnP2PChanged(this)"
                             data-id="consensus-quic_v6_cinp">
                             <option value="add">default</option>
                             <option value="remove">Custom</option>
                         </select><input data-lighthouse="9091" data-lodestar="" data-teku="" data-prysm="" type="number" id="consensus-quic_v6_cinp" class="hide interactive-element consensus-quic_v6" data-class="consensus-quic_v6" value="9091"></code></li>
                     </li>
-                    <li class="mt-15"><strong>Verify availability of selected port <code><mark class="consensus-quic_v6">9091</mark></strong></code>
+                    <li><strong>Verify availability of selected port <code class="consensus-quic_v6">9091</strong></code>
                         <pre><code>ss -tuln | grep ':<mark class="consensus-quic_v6">9091</mark>'</code></pre>
-                        <p><i>If it returns empty response, the port <code><mark class="consensus-quic_v6">9091</mark></code> is free and can be used.</i></p>
+                        <p><i>If it returns empty response, the port <code class="consensus-quic_v6">9091</code> is free and can be used.</i></p>
                     </li>
                 </ul>
             </li>
             {{!--
             <li>
                 <h4>Beacon API port for internal IPv6 communication</h4>
-                <ul>
+                <ul class="list-disc mt-4 mb-4">
                     <li><label><strong>Choose Beacon API port</strong></label>: <select onchange="OnP2PChanged(this)"
                             data-id="consensus-endpoint_v6_cinp">
                             <option value="add">default</option>
                             <option value="remove">Custom</option>
                         </select><input data-lighthouse="5052" data-lodestar="9596" data-teku="" data-prysm="" type="number" id="consensus-endpoint_v6_cinp" class="hide interactive-element consensus-endpoint_v6" data-class="consensus-endpoint_v6" value="5052"></code></li>
                     </li>
-                    <li class="mt-15"><strong>Verify availability of selected port <code><mark class="consensus-endpoint_v6">5052</mark></strong></code>
+                    <li><strong>Verify availability of selected port <code><mark class="consensus-endpoint_v6">5052</mark></strong></code>
                         <pre><code>ss -tuln | grep ':<mark class="consensus-endpoint_v6">5052</mark>'</code></pre>
                         <p><i>If it returns empty response, the port <code><mark class="consensus-endpoint_v6">5052</mark></code> is free and can be used.</i></p>
                     </li>
