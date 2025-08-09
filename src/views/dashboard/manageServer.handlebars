@@ -12,7 +12,7 @@
         <section class="mb-100 grey" style="margin-top:1rem">
             <h1>{{formTitle}}</h1>
             <form method="post" action="{{submitLink}}" id="serverDefinition">
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4">
                     <li>
                         <label for="server-name">Server name</label>
                         <input type="text" id="server-name" name="server-name" required="required" value="{{server.serverName}}">
@@ -56,7 +56,7 @@
                 </ul>
                 {{#if editingView}}
                 <div><h4>Staking clients selection</h4>
-                    <ul class="list-disc mt-4 mb-4">
+                    <ul class="list-disc my-4">
                         <li>Execution client(s)
                             <ol class="list-decimal space-y-2 pl-6">
                                 {{#each server.execution}}
@@ -193,7 +193,7 @@
                             Check port availability: <code>sudo ss -tulpn | grep ':PORT'</code>
                         </li>
                         <li><h4>Service-based clients</h4>
-                            <ul class="list-disc mt-4 mb-4">
+                            <ul class="list-disc my-4">
                                 <li class="{{#ifEqual server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
                                     <label for="mb_1">MEV Client</label>
                                     <select id="mb_1" name="mb_1">
@@ -353,7 +353,7 @@
         <section>
             <div style="margin:1rem;" class="grey">
                 <h2>API credentials</h2>
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4">
                     <li>Account ID: <code>{{account.id}}</code></li>
                     <li>SERVER ID: <code>{{server.id}}</code></li>
                     <li>API TOKEN: {{#if account.api_token}}

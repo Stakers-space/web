@@ -15,17 +15,36 @@
              Start with Delay util with delayed-start.service
           </a>
         </li>
+        {{#ifEqual MarkClass "instance_sn"}}
+          {{#ifEqual ClientName "teku"}}
+          <li>
+            <a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/remove_lock_files" 
+              target="_blank" class="underline hover:text-yellow-900">
+              Remove Lock files util.
+            </a>
+          </li>
+          {{/ifEqual}}
+        {{/ifEqual}}
       </ul>
       <p class="mt-2 text-yellow-700">A guide to install the util is attached on the Github.</p>
     </div>
   </div>
 </aside>
 
-<ul class="list-disc mt-4 mb-4">
+<ul class="list-disc my-4">
     <li>Open Delayed Start shell
         <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
-        <p class="mt-1">Configurate service start inside it</p>
-        <pre><code>systemctl start <mark class="{{MarkClass}}" data-client="{{ClientName}}">{{servicePrefix}}{{ClientName}}{{#if InstanceNumber}}-vi<span class="instance_pid">{{InstanceNumber}}</span>{{/if}}</mark>.service</code></pre>
+        <div class="pl-6">
+           {{#ifEqual MarkClass "instance_sn"}}
+            {{#ifEqual ClientName "teku"}}
+              <p class="mt-1">Attach command to remove lock files (to prevent start the validator in a case of existing lock fiels after a power failure). This must be processed before starting the validator service.</p>
+              <pre><code>/opt/remove-teku-validator-lock-files.sh '<mark class="instance_dp">/var/lib{{slashChain}}/teku/vi1</mark>/keystores'</code></pre>
+            {{/ifEqual}}
+          {{/ifEqual}}
+          <p class="mt-1">Configurate service start inside it</p>
+          <pre><code>systemctl start <mark class="{{MarkClass}}" data-client="{{ClientName}}">{{servicePrefix}}{{ServiceName}}</mark>.service</code></pre>
+        </div>
+       
     </li>
     <li class="mt-2">Be sure, <code>delayed-start.service</code> service controlling <code>delayed-start.sh</code> is enabled for auto start with system startup
         <pre><code>sudo systemctl enable delayed-start.service</code></pre>

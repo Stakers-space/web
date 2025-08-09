@@ -3,9 +3,7 @@
         @apply bg-gray-800 text-green-300 font-mono text-sm p-4 m-2 rounded-xl border border-gray-700 shadow-sm overflow-x-auto
     }
     code {
-        @apply bg-gray-800 p-1 rounded-xl;
-        /*padding: 2px 4px;*/
-        /*font-size: 90%;*/
+        @apply bg-gray-800 px-1 rounded-xl text-sm;
         color: white;
     }
     pre code {
@@ -18,6 +16,9 @@
     code input {
         color: white;
         border: none;
+    }
+    code mark {
+        @apply rounded-xs;
     }
 }
 

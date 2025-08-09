@@ -1,15 +1,15 @@
-<aside class="bg-gray-100 dataloader">{{> guides/instanceSelection client="lodestar"}}</aside>
+<aside class="dataloader">{{> guides/instanceSelection client="lodestar"}}</aside>
 {{#if AddValidator}}
 <ol class="mt-4">
     <li>
-        <p class="mt-4"><strong>Do you want to create a new validation instance or extend exisiting instance for more validators?</strong></p>
-        <div class="tabselector bg-gray-100 rounded-xl shadow-md p-4">
+        <p class="my-3"><strong>Do you want to create a new validation instance or extend exisiting instance for more validators?</strong></p>
+        <div class="tabselector bg-gray-200 rounded-xl shadow-md p-4">
             <nav class="">
                 <button class="tab selected" data-tabpanel="1">Creating new</button>
                 <button class="tab" data-tabpanel="2">Extend existing</button>
             </nav>
             <div class="tabpanel selected">
-                <ul class="list-disc mt-4 mb-4 pl-10">
+                <ul class="list-disc my-4 pl-10 space-y-4">
                     <li><h4>Create a directory for validator instance data</h4>
                         <pre><code>sudo mkdir -p <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre>
                     </li>
@@ -41,7 +41,7 @@
 <pre><code>./lodestar validator import --network gnosis --importKeystores <mark class="ddkeys-path">$HOME/keystores/ddk_i<span class="instance_pid">1</span></mark> --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre></p>
 {{/ifEqual}}
 {{/unless}}
-                <ul class="list-disc mt-4 mb-4 pl-10">
+                <ul class="list-disc my-4 pl-10">
                     <li>Insert keystores encryption password (the one used during keystores generation) on request</li>
                     <li>If there are keystores with different encryption password, repeat the process for each encryption password</li>
                 </ul>
@@ -53,7 +53,7 @@
                 <pre><code>sudo chown -R <mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark>:<mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark> <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/vi<span class="instance_pid">1</span></mark></code></pre>
             </li>
             <li><h4>Enable access to <code>NodeJs</code> for user <code class="instance_su" data-client="lodestar">lodestar-vi<span class="instance_pid">1</span></code></h4>
-                <label>User with NodeJs</label>: <input type="text" value="nodejsusr" class="interactive-element nodejsUser" data-class="nodejsUser">
+                <label>User with NodeJs</label>: <input type="text" value="nodejsusr" class="interactive-element nodejsUser w-64" data-class="nodejsUser">
                 <pre><code>sudo usermod -aG <mark class="nodejsUser">nodejsusr</mark> <mark class="instance_su" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
             </li>
             <li><h4>Create configuration service file for <code class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></code> service</h4>
@@ -104,7 +104,7 @@
         </ul>
 	</div>
 	<div class="tabpanel">
-		<ul class="list-disc mt-4 mb-4">
+		<ul class="list-disc my-4">
             <li><h4>Stop running validator instance <code class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></code></h4>
                 <pre><code>sudo systemctl stop <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
             </li>
@@ -168,12 +168,12 @@
                         <pre><code>$ sudo systemctl enable <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
                     </div>
                     <div class="tabpanel">
-                        {{> clients/config/delayed-start MarkClass="instance_sn" ClientName="lodestar" InstanceNumber="1" }}
+                        {{> clients/config/delayed-start MarkClass="instance_sn" ClientName="lodestar" ServiceName="lodestar-vi1" }}
                     </div>
                 </div>
             </div>
 			<div class="tabpanel">
-                <ul class="list-disc mt-4 mb-4 pl-10">
+                <ul class="list-disc my-4 pl-10">
                     <li><h4 class="text-xl">Configurate Lodestar validator Log monitor service</h4>
                         <p>Log monitor service monitors the service log and process defined action (fixes) in a case of any issue detected.</p>
                         <ol class="list-decimal pl-6">
@@ -190,7 +190,7 @@
                     </li>
                     <li><h4 class="text-xl">Activate service to start automatically on OS startup</h4>
                         <p>Our guide uses a custom util for launching services. It has following benefits:</p>
-                        <ul class="list-disc mt-4 mb-4 pl-10">
+                        <ul class="list-disc my-4 pl-10">
                             <li>It allows set delay for starting services. It eliminates slashing risk in the following scenario:
                                 <ol class="list-decimal pl-6">
                                     <li>A database corruption occures</li>

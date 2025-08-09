@@ -28,7 +28,7 @@
 		<div class="md:max-w-xs bg-gray-50 p-6 rounded-xl shadow-md">
 			<h3 class="font-semibold mb-1">Disclaimer</h3>
 			<p>
-				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.
+				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide. <a href="/disclaimer" target="_blank">See more.</a>
 			</p>
 		</div>
 	</div>
@@ -63,7 +63,7 @@
 			<section id="add-validator" class="rounded-lg shadow p-12 mt-15 border-t border-gray-200">
 					<h2>Launch validator instance / validator(s)</h2>
 					<p>Validators are defined by validator keys. Based on the network you are going to stake on, check <a href="/gnosis-staking/keystores">Gnosis validator keys</a> / <a href="/ethereum-staking/keystores">Ethereum validator keys</a> generation guide.</p>
-{{> (lookup . 'partial2ToLoad') AddValidator=true }}
+{{> (lookup . 'partial2ToLoad') AddValidator=true sectionHeader="h3" }}
 			</section>
 			{{/if}}
 		

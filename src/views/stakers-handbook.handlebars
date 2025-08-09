@@ -19,10 +19,10 @@
 						<li><a href="">Basic configuration</a></li>
 						<li><a href="">Jwtsecret</a></li>
 						<li>Install & configure clients
-							<ul class="list-disc mt-4 mb-4">
+							<ul class="list-disc my-4">
 								<li><a href="#execution">Execution client</a></li>
 								<li><a href="#consensus">Consensus client</a>
-									<ul class="list-disc mt-4 mb-4">
+									<ul class="list-disc my-4">
 										<li><a href="#beacon">Beacon</a></li>
 										<li><a href="#validator">Validator</a></li>
 									</ul>
@@ -101,13 +101,14 @@
 							<button class="tab" data-tabpanel="3">Teku</button>
 						</nav>
 						<div class="tabpanel selected">
-{{> clients/lighthouse_cli InstallationGuide=false }}
+<h3 class="text-xl mt-4">Update Lighthouse</h3>
+{{> clients/lighthouse_cli InstallationGuide=false sectionHeader="h4" }}
 						</div>
 						<div class="tabpanel">
-{{> clients/lodestar_cli InstallationGuide=false }}
+{{> clients/lodestar_cli InstallationGuide=false sectionHeader="h4"}}
 						</div>
 						<div class="tabpanel">
-{{> clients/teku_cli InstallationGuide=false }}
+{{> clients/teku_cli InstallationGuide=false sectionHeader="h4" }}
 						</div>
 					</div>
 				</div>

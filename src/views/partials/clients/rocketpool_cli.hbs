@@ -1,7 +1,7 @@
 {{#unless InstallationGuide}}
-<ul class="list-disc mt-4 mb-4">
+<ul class="list-disc my-4">
     <li>
-        <h3 class="mt-30">Check version of running Rocketpool client</h3>
+        <h3>Check version of running Rocketpool client</h3>
         <pre><code>$ rocketpool -v</code></pre>
     </li>
 </ul>
@@ -10,8 +10,8 @@
 <ol class="list-decimal space-y-2 pl-6">
     {{#if InstallationGuide}}
     <li>
-        <h3 class="mt-30">Create a Rocketpool service user</h3>
-        <ul class="list-disc mt-4 mb-4">
+        <h3>Create a Rocketpool service user</h3>
+        <ul class="list-disc my-4 pl-6">
             <li>
                 <h4>Create a rocketpool service User</h4>
                 <pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="rocketpool_su">rocketpool</mark></code></pre>
@@ -25,7 +25,7 @@
     </li>
     <li>
         <h3>Create directories for Rocketpool client's data</h3>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li>
                 <h4>Root folder</h4>
                 <pre><code>sudo mkdir -p /srv/rocketpool</code></pre>
@@ -52,7 +52,7 @@
         <h3>Download Rocketpool clients</h3>
         <p>Rocketpool clients should be downloaded from the <a href="https://github.com/rocket-pool/smartnode"
                 target="_blank" rel="nofollow noopener noreferrer">official Rocketpool Github</a>.</p>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li>
                 <h4>Download latest Rocketool client (linux-amd64 version)</h4>
                 <pre><code>wget https://github.com/rocket-pool/smartnode/releases/latest/download/rocketpool-cli-linux-amd64 -O ~/downloads/rocketpool</code></pre>
@@ -66,7 +66,7 @@
     {{#unless InstallationGuide}}
     <li>
         <h3>Stop Rocketpool services</h3>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li>If preferred, you can wait for a moment after published attestation(s)
                 <pre><code>journalctl -fu <mark class="validator_sn">rocketpool-validator</mark></code></pre> </li>
             <li><h4>Stop Rocketpool services</h4>
@@ -79,12 +79,12 @@
     </li>
     {{/unless}}
     <li>
-        <h3 class="mt-30">Copy clients to targeted locations</h3>
+        <h3 class="mt-4">Copy clients to targeted locations</h3>
         <pre><code>sudo cp rocketpool /usr/local/bin && sudo cp rocketpoold /usr/local/bin</code></pre>
     </li>
     <li>
         <h3>Set clients permissions</h3>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li><code>sudo chown <mark class="rocketpool_su">rocketpool</mark>:<mark class="rocketpool_su">rocketpool</mark> /usr/local/bin/rocketpool</code>
             </li>
             <li><code>sudo chown <mark class="rocketpool_su">rocketpool</mark>:<mark class="rocketpool_su">rocketpool</mark> /usr/local/bin/rocketpoold</code>
@@ -102,7 +102,7 @@
         <h3>Check state of running</h3>
         <pre><code>systemctl status rp-node rp-watchtower <mark class="validator_sn">rocketpool-validator</mark></code></pre>
         <h4>Monitor logs</h4>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li><code>journalctl -fu rp-node.service</code></li>
             <li><code>journalctl -fu rp-watchtower.service</code></li>
             <li><code>journalctl -fu <mark class="validator_sn">rocketpool-validator</mark></code></li>
@@ -116,7 +116,7 @@
     {{#if InstallationGuide}}
     <li>
         <h3>Configurate Rocketpool Node service</h3>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li><h4>Define <code>rp-node.service</code> service</h4>
                 <pre><code>sudo nano /etc/systemd/system/rp-node.service</code></pre>
                 <p>Copy the configuration below into the <code>rp-node.service</code> service file</p>
@@ -136,7 +136,7 @@ WantedBy=multi-user.target</code></pre>
                 <p>Save and Exit the file by pressing <code>ctrl</code>+<code>x</code>, then <code>y</code>.</p>
             </li>
             <li><h4>Define log script for <code>rp-node.service</code></h4>
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4 pl-6">
                     <li>Open <code>node-log.sh</code> log file
                         <pre><code>sudo nano /srv/rocketpool/node-log.sh</code></pre>
                         <p>Copy the code below into the file</p>
@@ -153,8 +153,8 @@ journalctl -u rp-node -b -f</code></pre>
         </ul>
     </li>
     <li>
-        <h3 class="mt-40">Configurate Rocketpool Watchtower service</h3>
-        <ul class="list-disc mt-4 mb-4">
+        <h3 class="mt-4">Configurate Rocketpool Watchtower service</h3>
+        <ul class="list-disc my-4 pl-6">
             <li><h4>Define <code>rp-watchtower.service</code></h4>
                 <pre><code>sudo nano /etc/systemd/system/rp-watchtower.service</code></pre>
                 <p>Copy the configuration below into the <code>rp-watchtower.service</code> service file</p>
@@ -174,7 +174,7 @@ WantedBy=multi-user.target</code></pre>
                 <p>Save and Exit the file by pressing <code>ctrl</code>+<code>x</code>, then <code>y</code>.</p>
             </li>
             <li><h4>Define log script for <code>rp-watchtower.service</code></h4>
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4 pl-6">
                     <li>Open <code>watchtower-log.sh</code> log file
                         <pre><code>sudo nano /srv/rocketpool/watchtower-log.sh</code></pre>
                         <p>Copy the code below into the file</p>
@@ -191,10 +191,11 @@ journalctl -u rp-watchtower -b -f</code></pre>
         </ul>
     </li>
     <li>
-        <h3 class="mt-40">Configurate a validator service for validators controlled by Rocketpool</h3>
+        <h3 class="mt-4">Configurate a validator service for validators controlled by Rocketpool</h3>
         <p>Validator service controlled by Rocketpol is same as Solo validator, only with Rocketpool data placed in its config file.</p>
-        <div class="tabselector">
-			<nav class="egrid egrid-4">
+        
+        <div class="tabselector mt-6 bg-gray-100 p-10 pt-5 rounded-xl shadow-md">
+			<nav class="mb-5">
                 <button class="tab selected" data-tabpanel="1">Prysm</button>
 				<button class="tab" data-tabpanel="2">Lighthouse</button>
 				<button class="tab" data-tabpanel="3">Lodestar</button>
@@ -203,7 +204,7 @@ journalctl -u rp-watchtower -b -f</code></pre>
             <div class="tabpanel selected">
                 <p><label>Validator service name</label>: <input type="text" class="interactive-element rpl_validator" data-class="rpl_validator" value="rocketpool-validator"></p>
                 <p><label>Validator service direcotry</label>: <input type="text" class="interactive-element validator_snd" data-class="validator_snd" value="/var/lib/ethereum/prysm"></p>
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4">
                     <li><h4>Create a new rocketpool validator user</h4>
                         <pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="rpl_validator">rocketpool-validator</mark></code></pre>
                     </li>
@@ -223,7 +224,7 @@ journalctl -u rp-watchtower -b -f</code></pre>
                         <p>Save and Exit the file by pressing <code>ctrl</code>+<code>x</code>, then <code>y</code>.</p>
                     </li>
                     <li><h4>Create additional directories</h4>
-                        <ul class="list-disc mt-4 mb-4">
+                        <ul class="list-disc my-4">
                             <li>
                                 <pre><code>sudo mkdir -p /srv/rocketpool/data/validators/prysm-non-hd/direct/accounts</code></pre>
                             </li>
@@ -238,19 +239,19 @@ journalctl -u rp-watchtower -b -f</code></pre>
                 </ul>
 			</div>
 			<div class="tabpanel">
-{{> clients/lighthouse_validator}}
+                <p>Guide can be created on request.</p>
 			</div>
 			<div class="tabpanel">
-{{> clients/lodestar_validator}}
+                <p>Guide can be created on request.</p>
 			</div>
 			<div class="tabpanel">
-{{> clients/teku_validator}}
+                <p>Guide can be created on request.</p>
 			</div>
 		</div>
     </li>
     <li>
-        <h3 class="mt-40">Define alias for Rocketpool access</h3>
-        <ul class="list-disc mt-4 mb-4">
+        <h3 class="mt-4">Define alias for Rocketpool access</h3>
+        <ul class="list-disc my-4 pl-6">
             <li>Open <code>~/.profile</code> file
                 <pre><code>sudo nano ~/.profile</code></pre>  
             </li>
@@ -264,11 +265,11 @@ journalctl -u rp-watchtower -b -f</code></pre>
         </ul>
     </li>
     <li>
-        <h3 class="mt-40">Configure Rocketpool companion scripts</h3>
+        <h3 class="mt-4">Configure Rocketpool companion scripts</h3>
         <p>Companion scripts allows Rocketpool client to process certain operations automatically, if necessary.</p>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li><h4>Restarting validator instance</h4>
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4 pl-6">
                     <li>Download the companion script
                         <pre><code>sudo wget https://github.com/rocket-pool/smartnode/raw/release/install/scripts/restart-vc.sh -O /srv/rocketpool/restart-vc.sh</code></pre>
                     </li>
@@ -286,7 +287,7 @@ journalctl -u rp-watchtower -b -f</code></pre>
                 </ul>
             </li>
             <li><h4>Stoping validator instance</h4>
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4 pl-6">
                     <li>Download the companion script
                         <pre><code>sudo wget https://github.com/rocket-pool/smartnode/raw/release/install/scripts/stop-validator.sh -O /srv/rocketpool/stop-validator.sh</code></pre>
                     </li>
@@ -305,7 +306,7 @@ journalctl -u rp-watchtower -b -f</code></pre>
             </li>
         </ul>
         <h4>Set up passwordless access</h4>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li>Request <code>sudo visudo -f /etc/sudoers.d/rocketpool</code> to open the configuration file
                 <p>Place the code below into the file</p>
                 <pre><code>Cmnd_Alias RP_RESTART = /usr/bin/systemctl restart <mark class="rpl_validator">rocketpool-validator</mark>
@@ -315,8 +316,8 @@ Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="rpl_validator">rocketp
         </ul>
     </li>
     <li>
-        <h3 class="mt-40">Configurate Rocketpool native mode</h3>
-        <ul class="list-disc mt-4 mb-4">
+        <h3 class="mt-4">Configurate Rocketpool native mode</h3>
+        <ul class="list-disc my-4 pl-6">
             <li><h4>Launch service configuration tool</h4>
                 <pre><code>rocketpool service config</code></pre>
                 <p>And follow <a href="https://docs.rocketpool.net/guides/node/config-native.html" target="_blank" rel="nofollow noopener noreferrer">the documentation</a></p>
@@ -334,7 +335,7 @@ Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="rpl_validator">rocketp
     </li>
     <li><h3>Generate rocketpool wallet</h3>
         <p>NOTE: It's recommended to access the device locally to generate the seed</p>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li><h4>Enable access to the directory for server user</h4>
                 <pre><code>sudo chown -R <mark class="serveruser">myserveruser</mark>:<mark class="serveruser">myserveruser</mark> /srv/rocketpool/data</code></pre>
             </li>
@@ -354,7 +355,7 @@ Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="rpl_validator">rocketp
                 <pre><code>sudo chown -R <mark>rocketpool</mark>:<mark>rocketpool</mark> /srv/rocketpool/data</code></pre>
             </li>
             <li><h4>Set temporary permissions</h4>
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4 pl-6">
                     <li>$<code>sudo usermod -aG <mark class="rocketpool_su">rocketpool</mark> <mark class="serverUser">myserveruser</mark></code></li>
                     <li>$<code>sudo usermod -aG <mark class="serverUser">myserveruser</mark> <mark class="rocketpool_su">rocketpool</mark></code></li>
                     <li>$<code>cd /srv/rocketpool/data/</code></li>
@@ -374,20 +375,20 @@ Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="rpl_validator">rocketp
         <p>Guide: https://www.howtogeek.com/812961/umask-linux/</p>
     </li>
     <li><h3>Choosing Distributor / Smoothing pool option</h3>
-        <div class="tabselector">
-            <nav class="egrid egrid-2">
+        <div class="tabselector mt-6 bg-gray-100 p-10 pt-5 rounded-xl shadow-md">
+            <nav>
                 <button class="tab selected" data-tabpanel="1">Distributor</button>
                 <button class="tab" data-tabpanel="2">Smoothing pool</button>
             </nav>
             <div class="tabpanel selected">
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4 pl-6">
                     <li>$<code>rocketpool node status</code> - check fee distributor's address</li>
                     <li>$<code>rocketpool node initialize-fee-distributor</code> - fee distributor initialization</li>
                     <li>$<code>rocketpool node distribute-fees</code> - request fees distribution</li>
                 </ul>
             </div>
             <div class="tabpanel">
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4 pl-6">
                     <li>$<code>rocketpool node join-smoothing-pool</code></li>
                     <li>$<code>rocketpool node leave-smoothing-pool</code></li>
                     <li>$<code>rocketpool node claim-rewards</code></li>
@@ -399,7 +400,7 @@ Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="rpl_validator">rocketp
         <pre><code>sudo systemctl daemon-reload</code></pre>
     </li>
     <li><h3>Launch Rocketpool services</h3>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li>
                 <pre><code>sudo systemctl start rp-node rp-watchtower <mark class="rpl_validator">rocketpool-validator</mark></code></pre>
             </li>
@@ -417,7 +418,7 @@ Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="rpl_validator">rocketp
     </li>
     <li><h3>Prepare Rocketpool node</h3>
         <a href="https://docs.rocketpool.net/guides/node/prepare-node.html" target="_blank" rel="nofollow noopener noreferrer">guides/node/prepare-node</a>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li>$<code><strong>rocketpool node status</strong></code></li>
             <li>$<code>rocketpool node register</code></li>
             <li>Whitelist HW wallet for RPL staking:
@@ -430,14 +431,14 @@ Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="rpl_validator">rocketp
     </li>
     <li><h3>Create a rocketpool validator</h3>
         <a href="https://docs.rocketpool.net/guides/node/create-validator.html" target="_blank" rel="nofollow noopener noreferrer">guides/node/create-validator</a>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li>Stake RPL - <a href="https://stake.rocketpool.net/stake-behalf" target="_blank"
                     rel="nofollow noopener noreferrer">/stake-behalf</a></li>
             <li>$<code>rocketpool node deposit</code></li>
         </ul>
     </li>
     <li><h3>Monitor</h3>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li>$<code>rocketpool node status</code></li>
             <li>$<code>journalctl -fu rp-node.service</code></li>
             <li>$<code>journalctl -fu rp-watchtower.service</code></li>
@@ -445,7 +446,7 @@ Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="rpl_validator">rocketp
         </ul>
     </li>
     <li><h3>Remove option to read wallet and password files for the group</h3>
-        <ul class="list-disc mt-4 mb-4">
+        <ul class="list-disc my-4 pl-6">
             <li>$<code>cd /srv/rocketpool/data/</code></li>
             <li>$<code>sudo chmod 600 password</code></li>
             <li>$<code>sudo chmod 600 wallet</code></li>

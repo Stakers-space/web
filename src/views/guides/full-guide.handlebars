@@ -28,7 +28,7 @@
 		<div class="md:max-w-xs bg-gray-50 p-6 rounded-xl shadow-md">
 			<h3 class="font-semibold mb-1">Disclaimer</h3>
 			<p>
-				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.
+				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide. <a href="/disclaimer" target="_blank">See more.</a>
 			</p>
 		</div>
 	</div>
@@ -81,7 +81,7 @@
 						</div>
 						<div class="min-w-0">
 							<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-							Staking Node for {{chainName}}
+								Staking Node for {{chainName}}
 							</h3>
 							<p class="mt-1 text-gray-600 dark:text-gray-300">
 								Prepare hardware/VM for {{chainName}} staking. Check out the recommended options and instructions.
@@ -172,7 +172,7 @@ $ sudo reboot</code></pre>
 						
 					<div>
 						<h3>Install UFW, configurate <code>deny</code> state for incoming and <code>allow</code> state for outgoing traffic</h3>
-						<ul class="list-disc mt-4 mb-4">
+						<ul class="list-disc my-4">
 							<li>Install UFW (if not installed yet)
 								<pre><code>sudo apt install ufw</code></pre></li>
 							<li>Set default Fireall configuration
@@ -210,13 +210,13 @@ sudo ufw default allow outgoing</code></pre>
 
 							<div class="tabpanel selected">
 								<p>With allowed SSH access, you must protect SSH access to your server from attackers. Based on your network confifuration, access may be possible from:</p>
-								<ul class="list-disc mt-4 mb-4 pl-10">
+								<ul class="list-disc my-4 pl-10">
 									<li>From any network (Your server has public IP)</li>
 									<li>From a local network only (Your server is behind nat)</li>
 									<li>From a VPN network the node is assigned to</li>
 								</ul>
 								<p>Even if you have enabled access from a local netowk only (your node is behind <a href="https://vrealmatic.com/mikrotik-router/firewall/nat">NAT</a>), you should still protect your SSH access as a potential attacker may use a compromised device in your local network to access your node. The defense consists in increasing the number of obstacles that must be overcome to access your node.</p>
-								<ul class="list-disc mt-4 mb-4 pl-10">
+								<ul class="list-disc my-4 pl-10">
 									<li><a href="#ssh-keys">Configurate SSH keys</a></li>
 									<li><a href="#ssh-port">Modify default SSH port</a></li>
 									<li><a href="#2fa">Configurate 2FA authentization</a></li>
@@ -231,7 +231,7 @@ sudo ufw default allow outgoing</code></pre>
 								<p>Remote connection from Windows OS requires installation of SSH client such as e.g. Putty. See more information about remote connections from Windows at <a href="https://vrealmatic.com/ubuntu-server/ssh-keys" target="_blank">this Guide</a>.</p>
 
 								<p class="mt-10"><strong>Before configuring security matters and connecting to your node,</strong> take note the basic rule to maintain also the security of the computer(s) you are going to use for connecting to your node (stealing the SSH keys) as well as other devices required for connection (stealing 2FA codes) etc.</p>
-								<ul class="list-disc mt-4 mb-4">
+								<ul class="list-disc my-4">
 									<li id="ssh-keys">
 										<h4>Configure SSH keys</h4>
 										<p class="mb-5">By default, SSH connections can be made using a combo of <code>username</code> and <code>password</code>. As <code>password</code> is usually somewhat "short" and thus susceptible to brute-force attacks, key loggers attacks and so on. This is why SSH keys significantly enhances the security of the login process.</p>
@@ -254,7 +254,7 @@ sudo ufw default allow outgoing</code></pre>
 											<li>
 												Check whether the selected port for SSH is not already in use
 												<pre><code>sudo ss -tulpn | grep ':<mark class="sshPort">22</mark>'</code></pre>
-												<ul class="list-disc mt-4 mb-4 pl-6">
+												<ul class="list-disc my-4 pl-6">
 													<li>blank response = port is not in used</li>
 													<li>red text response, the port is already in used. Check availability of a different port number in such case.</li>
 												</ul>
@@ -336,15 +336,15 @@ sudo ufw default allow outgoing</code></pre>
 											</span>
 										</span>
 										<h3 class="mt-2" id="remote-access">Securying remote access tips</h3>
-										<ul class="list-disc mt-4 mb-4 pl-6">
+										<ul class="list-disc my-4 pl-6">
 											<li>Staking node is accessible from public IP:
-												<ul class="list-disc mt-4 mb-4 pl-6">
+												<ul class="list-disc my-4 pl-6">
 													<li>If you do not need o connect to your node from remote networks, move your node behind the router that prevents accessing the node.</li>
 													<li>If you want to keep this feature, you should still consider move the node behind the router, <a href="https://vrealmatic.com/mikrotik-router/vpn" target="_blank">set VPN on the router</a>, and when connecting to the node, firstly connect to the router VPN and then connect the node from "local" network through its local IP.</li>
 												</ul>
 											</li>
 											<li>Staking node is not accessible from public IP:
-												<ul class="list-disc mt-4 mb-4 pl-6">
+												<ul class="list-disc my-4 pl-6">
 													<li>If you need connecting your node from remote networks, you must either set a VPN, such as Tailscale (either on the server itself or any other device in your local network), or buy public IP from your ISP and follow the points for server accessible from the public IP.</li>
 												</ul>
 											</li>
@@ -354,7 +354,7 @@ sudo ufw default allow outgoing</code></pre>
 
 							<div class="tabpanel">
 								<p><a href="#ssh-install">If you have <code>SSH</code> installed and running on your server</a>, you must either disable ports for SSH traffic, disable SSH or remove it. If <code>SSH</code> is not installed on your machine, you can skip this step - ssh access is not possible already.</p>
-								<ul class="list-disc mt-4 mb-4">
+								<ul class="list-disc my-4">
 									<li><h4>Option 1: Stop and disable the ssh service</h4>
 										<pre><code>sudo systemctl stop ssh
 sudo systemctl disable ssh</code></pre>
@@ -382,7 +382,7 @@ sudo systemctl disable ssh</code></pre>
 											</span>
 										</span>
 										<h3 class="mt-2">Configure the Firewall</h3>
-						<ul class="list-disc mt-4 mb-4">
+						<ul class="list-disc my-4">
 							<li>Enable Firewall
 								<pre><code>$ sudo ufw enable</code></pre>
 							</li>
@@ -403,7 +403,7 @@ sudo systemctl disable ssh</code></pre>
 										</span>
 
 						<h4 class="text-xl mt-2">Generate Client Authentication Secret for {{chain}}</h4>
-						<ul class="list-disc mt-4 mb-4 pl-6">
+						<ul class="list-disc my-4 pl-6">
 							<li>Create a new directory for <code>jwtsecret</code> files
 								<pre><code>sudo mkdir -p /var/lib/jwtsecret</code></pre>
 							</li>
@@ -449,7 +449,7 @@ sudo systemctl disable ssh</code></pre>
 				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
 					Check / set basic config for your staking node
 				</h2>
-					<ul class="list-disc mt-4 mb-4 space-y-2 pl-6">
+					<ul class="list-disc my-4 space-y-2 pl-6">
 						<li>Check, you are not logged in as <code>root</code>. If so, create a new user with <code>sudo</code>, see section <a href="/{{chainUrl}}/staking-hardware">Staking on rented hardware</a></li>
 						<li>Check a <code>swap</code> space 
 							<pre><code>free -h</code></pre>
@@ -536,8 +536,6 @@ sudo systemctl disable ssh</code></pre>
 				</script>
             </section>
 
-
-
             <section id="consensus" class="mt-8 max-w-6xl mx-auto px-4 mt-25">
 				<span class="inline-flex items-center rounded-full bg-emerald-600 text-white px-3 py-1 text-xs font-semibold tracking-wide shadow">
 					Consensus Client
@@ -550,42 +548,48 @@ sudo systemctl disable ssh</code></pre>
 						{{> clients/config/consensusclient-portselection}}
 					</aside>
 
-					<h3 class="mt-10 text-xl">Install Consensus client</h3>
+					<p class="mt-10 text-xl font-bold mb-3 bold" id="consensus-install">Install preferred Consensus client</p>
 					<div class="tabselector bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
 						<nav>
 							<button class="tab selected" data-tabpanel="1" onclick="OnConsensusClientChanged('lighthouse')">Lighthouse</button>
 							<button class="tab" data-tabpanel="2" onclick="OnConsensusClientChanged('lodestar')">Lodestar</button>
 							<button class="tab" data-tabpanel="3" onclick="OnConsensusClientChanged('teku')">Teku</button>
-							<button class="tab" data-tabpanel="4" onclick="OnConsensusClientChanged('nimbus')">Nimbus</button>
-							<button class="tab" data-tabpanel="5" onclick="OnConsensusClientChanged('prysm')">Prysm</button>
+							<button class="tab" data-tabpanel="4" onclick="OnConsensusClientChanged('prysm')">Prysm</button>
+							<button class="tab" data-tabpanel="5" onclick="OnConsensusClientChanged('nimbus')">Nimbus</button>
+							
 						</nav>
 
 						<div class="tabpanel selected">
-	{{> clients/lighthouse_cli InstallationGuide=true }}
-	<h3 class="mt-1">Configurate Lighthouse Beacon service</h3>
-	{{> clients/lighthouse_cli_config PortSelection=false}}
-							</div>
-							<div class="tabpanel">
-	{{> clients/lodestar_cli InstallationGuide=true }}
-	<h3 class="mt-1">Configurate Lodestar Beacon service</h3>
-	{{> clients/lodestar_cli_config PortSelection=false}}
-							</div>
-							<div class="tabpanel">
-	{{> clients/teku_cli InstallationGuide=true }}
-	<h3 class="mt-1">Configurate Teku Beacon service</h3>
-	{{> clients/teku_cli_config PortSelection=false}}
-							</div>
-							<div class="tabpanel">
-	{{> clients/nimbus_cli InstallationGuide=true }}
-	<h3 class="mt-1">Configurate Nimbus Beacon service</h3>
-	{{> clients/nimbus_cli_config PortSelection=false}}
-							</div>
-							<div class="tabpanel">
-	{{> clients/prysm_cli InstallationGuide=true }}
-	<h3 class="mt-1">Configurate Prysm Beacon service</h3>
-	{{> clients/prysm_cli_config PortSelection=false}}
-							</div>
+<h3 class="text-xl mt-4">Install Lighthouse</h3>
+{{> clients/lighthouse_cli InstallationGuide=true sectionHeader="h4"}}
+<h3 class="mt-10 text-xl">Configurate Lighthouse Beacon service</h3>
+{{> clients/lighthouse_cli_config PortSelection=false sectionHeader="h4"}}
 						</div>
+						<div class="tabpanel">
+<h3 class="text-xl mt-4">Install Lodestar</h3>
+{{> clients/lodestar_cli InstallationGuide=true sectionHeader="h4"}}
+<h3 class="mt-10 text-xl">Configurate Lodestar Beacon service</h3>
+{{> clients/lodestar_cli_config PortSelection=false sectionHeader="h4"}}
+						</div>
+						<div class="tabpanel">
+<h3 class="text-xl mt-4">Install Teku</h3>
+{{> clients/teku_cli InstallationGuide=true sectionHeader="h4"}}
+<h3 class="mt-10 text-xl">Configurate Teku Beacon service</h3>
+{{> clients/teku_cli_config PortSelection=false sectionHeader="h4"}}
+						</div>
+						<div class="tabpanel">
+<h3 class="text-xl mt-4">Install Prysm</h3>
+{{> clients/prysm_cli InstallationGuide=true sectionHeader="h4"}}
+<h3 class="mt-10 text-xl">Configurate Prysm Beacon service</h3>
+{{> clients/prysm_cli_config PortSelection=false sectionHeader="h4"}}
+						</div>
+						<div class="tabpanel">
+<h3 class="text-xl mt-4">Install Nimbus</h3>
+{{> clients/nimbus_cli InstallationGuide=true sectionHeader="h4"}}
+<h3 class="mt-10 text-xl">Configurate Nimbus Beacon service</h3>
+{{> clients/nimbus_cli_config PortSelection=false sectionHeader="h4"}}
+						</div>
+					</div>
 					<script>
 						function OnConsensusClientChanged(value){
 							document.getElementById("cc_1").value = value;

@@ -1,0 +1,60 @@
+{{> header}}
+<section class="grid grid-cols-1 md:grid-cols-[67fr_33fr] gap-8 p-8">
+	<div class="mx-auto md:px-6 md:py-16">
+		<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+					<meta property="position" content="1">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}"><span property="name">{{chainName}} staking</span></a>
+					<meta property="position" content="2">
+				</li>
+				<li property="itemListElement" typeof="ListItem">
+					<a property="item" typeof="Thing" href="/{{chainUrl}}/solo"><span property="name" class="intro-label">Solo staking</span></a>
+					<meta property="position" content="3">
+				</li>
+			</ul>
+
+		<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+			<span class="block mt-1 text-green-600">Interactive Solo {{chainName}} staking</span> guide for Ubuntu OS
+		</h1>
+
+		<p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl">
+			One-page interactive complete guide to stake one as well as thousands of validators in a single staking node. Simply made, well explained, allowing running multiple chains on a single node. Focused on {{chain}}.
+		</p>
+	</div>
+	<div class="flex items-center justify-center md:pl-10 text-sm text-gray-600">
+		<div class="md:max-w-xs bg-gray-50 p-6 rounded-xl shadow-md">
+			<h3 class="font-semibold mb-1">Disclaimer</h3>
+			<p>
+				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide. <a href="/disclaimer" target="_blank">See more.</a>
+			</p>
+		</div>
+	</div>
+</section>
+
+<div class="ifr-grid grid-cols-1 xl:grid-cols-[minmax(220px,1fr)_minmax(0,6fr)_minmax(240px,1fr)] gap-6">
+	<aside class="ifr-nav lg:mt-14">
+		<nav class="border-l-4 border-gray-500 pl-4">
+			<p class="font-semibold mb-2">Navigation</p>
+			
+		</nav>
+	</aside>
+
+	<div class="ifr-header">
+	</div>
+
+	<main class="ifr-body prose prose-lg" id="setup">
+		
+	</main>
+
+	<aside class="ifr-panel xl:sticky xl:top-8 self-start xl:mt-160">
+		<div class="bg-gray-100 rounded-lg p-4 text-sm shadow-sm">
+			<p class="font-semibold mb-2">Interactive Config</p>
+			{{> guides/variablesOverview }}
+		</div>
+	</aside>
+</div>
+{{> footer_tailwind}}
+{{> scripts/tabselector}}

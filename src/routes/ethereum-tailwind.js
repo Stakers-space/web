@@ -2,7 +2,6 @@
 const router = require('express').Router();
 const EthereumController = require('../controllers/ethereum');
 const GuidePageController = require('../controllers/guidePage')
-const FundamentalsController = require('../controllers/fundamentalsPage');
 const ChartsController = require('../controllers/charts');
 const StakingSchema = require('../controllers/stakingSchema');
 const Chain = require('../middlewares/SetChain');
@@ -14,7 +13,6 @@ class EthereumRouter {
     constructor(){
         this.chainController = new EthereumController();
         this.GuidePage = new GuidePageController();
-        this.fundamentals = new FundamentalsController();
         this.ChartsPage = new ChartsController();
         this.StakingSchema = new StakingSchema();
         this.NewsPage = new NewsPageSchema();

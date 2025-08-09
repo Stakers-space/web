@@ -1,8 +1,7 @@
 {{> header}}
-<main class="mb-60">
-	<section class="cover grid egrid">
-		<div class="mt-60 mb-20">
-			<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+<section class="grid grid-cols-1 md:grid-cols-[67fr_33fr] gap-8 p-8">
+	<div class="mx-auto md:px-6 md:py-16">
+		<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
 				<li property="itemListElement" typeof="ListItem">
 					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
 					<meta property="position" content="1">
@@ -20,74 +19,161 @@
 					<meta property="position" content="3">
 				</li>
 			</ul>
-			<h1 class="cover-title">Interactive guide for <span>running Rocketpool client</span> on Ubuntu OS</h1>
-			<p>A guide to set <a href="https://docs.rocketpool.net/guides/node/install-modes#the-hybrid-configuration-with-external-clients" target="_blank">hybrid configuration</a> (<a href="https://docs.rocketpool.net/guides/node/native" target="_blank">native mode</a>) for Rocketpool client. This configuration allows to run Rocketpool validators simultaneously with other type of validators (solo, StakeWise and so on.)</p>
-		</div>
-		<div class="disclaimer">
-			<div class="disclaimer-content">
-				<h3>Disclaimer</h3>
-				<p>This guide is for informational and education purposes only - accuracy is not guaranteed, see <a href="/disclaimer">disclaimer</a>.</p>
-            </div>
-		</div>
-	</section>
 
-	<div class="grid-full contents serverguide">
-        <div class="content-chapters">
-			<div class="sticky">
-				 <nav>
-					<strong>Rocketpool guide</strong>
-					<ol class="list-decimal space-y-2 pl-6">
-						<li><a href="#prerequisites">Prerequisites</a></li>
-						<li><a href="#config">Files structure</a></li>
-						<li><a href="#install">Install Rocketpool</a></li>
-						<li><a href="#update">Update Rocketpool</a></li>
-						<li><a href="#commands">Useful commands</a></li>
-					</ol>
-				</nav>
-			</div>
+		<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+			Interactive guide for <span class="block mt-1 text-green-600">running Rocketpool client</span> on Ubuntu OS
+		</h1>
+
+		<p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl">
+			A guide to set <a href="https://docs.rocketpool.net/guides/node/install-modes#the-hybrid-configuration-with-external-clients" target="_blank">hybrid configuration</a> (<a href="https://docs.rocketpool.net/guides/node/native" target="_blank">native mode</a>) for Rocketpool client. This configuration allows to run Rocketpool validators simultaneously with other type of validators (solo, StakeWise and so on.)
+		</p>
+	</div>
+	<div class="flex items-center justify-center md:pl-10 text-sm text-gray-600">
+		<div class="md:max-w-xs bg-gray-50 p-6 rounded-xl shadow-md">
+			<h3 class="font-semibold mb-1">Disclaimer</h3>
+			<p>
+				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide. <a href="/disclaimer" target="_blank">See more.</a>
+			</p>
 		</div>
-		<div class="content-header">
-			<section class="chapter" id="intro">
-				<div class="content" style="width:100%">
-					<h2>Rocketpool service</h2>
-					<p>Rocketpool allows multiple ways of installation, <a href="https://docs.rocketpool.net/guides" target="_blank">see the documentation</a>. Within this guide, there is used a <a href="https://docs.rocketpool.net/guides/node/native" target="_blank"><strong>native type of installation</strong></a> that operates rocketpool clients above standard consensus and execution client you know from <a href="/ethereum-staking/full-guide">Solo Staking guide</a>. It's a type of open implementation within which Rocketpool can be configured simultaneously with other clients (<a href="/ethereum-staking/full-guide/solo">solo validators</a>, <a href="/ethereum-staking/full-guide/stakewise">stakewise validators</a>, and so on). In other words, this implementation allows to get the most out of staking opportunities within a single staking machine.</p>
+	</div>
+</section>
+
+<div class="ifr-grid grid-cols-1 xl:grid-cols-[minmax(220px,1fr)_minmax(0,6fr)_minmax(240px,1fr)] gap-6">
+	<aside class="ifr-nav lg:mt-14">
+		<nav class="border-l-4 border-gray-500 pl-4">
+			<p class="font-semibold mb-2">Navigation</p>
+			<ol class="list-decimal space-y-2 pl-6">
+				<li><a href="#prerequisites">Prerequisites</a></li>
+				<li><a href="#config">Files structure</a></li>
+				<li><a href="#install">Install Rocketpool</a></li>
+				<li><a href="#update">Update Rocketpool</a></li>
+				<li><a href="#commands">Useful commands</a></li>
+			</ol>
+		</nav>
+	</aside>
+
+	<div class="ifr-header">
+		<section id="intro" class="mt-8 max-w-6xl mx-auto px-4">
+			<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+				Rocketpool service
+			</h2>
+			<p class="mt-2 text-gray-600 mb-8">
+				Rocketpool allows multiple ways of installation, <a href="https://docs.rocketpool.net/guides" target="_blank">see the documentation</a>. Within this guide, there is used a <a href="https://docs.rocketpool.net/guides/node/native" target="_blank"><strong>native type of installation</strong></a> that operates rocketpool clients above standard consensus and execution client you know from <a href="/ethereum-staking/full-guide">Solo Staking guide</a>. It's a type of open implementation within which Rocketpool can be configured simultaneously with other clients (<a href="/ethereum-staking/full-guide/solo">solo validators</a>, <a href="/ethereum-staking/full-guide/stakewise">stakewise validators</a>, and so on). In other words, this implementation allows to get the most out of staking opportunities within a single staking machine.
+			</p>
+		</section>
+
+		<section id="prerequisites">
+			<div class="max-w-6xl mx-auto px-4 py-14 pt-0 mt-15">
+				<span class="inline-flex items-center rounded-full bg-emerald-600 text-white px-3 py-1 text-xs font-semibold tracking-wide shadow">
+					Prerequisites
+				</span>
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Prerequisites for {{chainName}} staking
+				</h2>
+				<p class="mt-2 text-gray-600 mb-8">
+					Before you start, make sure you have these three things ready.
+				</p>
+
+				<div class="rounded-2xl border backdrop-blur shadow-2xl ring-1 ring-black/5 bg-neutral-900/70 border-white/10">
+					<ol class="divide-y divide-gray-100/70">
+						<li class="p-6 md:p-8 flex gap-5">
+							<div class="flex-shrink-0">
+								<span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white font-bold shadow">
+								1
+								</span>
+							</div>
+							<div class="min-w-0">
+								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+									Installed and synced Execution and Consensus client
+								</h3>
+								<p class="mt-1 text-gray-600 dark:text-gray-300">
+									Prepare Execution and Consensus client for {{chainName}} staking. Check out the recommended options and instructions.
+								</p>
+								<a href="/{{chainUrl}}/full-guide"
+									class="mt-4 inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+									Install Execution and Consensus Client
+									<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+									</svg>
+								</a>
+							</div>
+						</li>
+
+						<li class="p-6 md:p-8 flex gap-5">
+							<div class="flex-shrink-0">
+								<span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white font-bold shadow">
+								2
+								</span>
+							</div>
+							<div class="min-w-0">
+								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+									Installed Mev-boost client with <code>-min-bid</code> set to <code>0</code>
+								</h3>
+								<p class="mt-1 text-gray-600 dark:text-gray-300">
+									Be sure you configured Mev-boost configuration with <code>-min-bid</code> set to <code>0</code>
+								</p>
+								<a href="/mev-boost"
+										class="mt-4 inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+										Mev-boost client installation guide
+										<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+										</svg>
+									</a>
+							</div>
+						</li>
+
+						<li class="p-6 md:p-8 flex gap-5">
+							<div class="flex-shrink-0">
+								<span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white font-bold shadow">
+								3
+								</span>
+							</div>
+							<div class="min-w-0">
+								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+									Sufficient capital
+								</h3>
+								<p class="mt-1 text-gray-600 dark:text-gray-300">
+									Validator activation is associated with capital locking
+								</p>
+							</div>
+						</li>
+					</ol>
 				</div>
-			</section>
+
+				<div class="mt-8 flex flex-wrap items-center justify-between gap-3">
+					<p class="text-sm text-gray-600 dark:text-gray-400">
+						Do you meet all the requirements? Continue with configuration and key generation.
+					</p>
+					<a href="/{{chainUrl}}/setup"
+						class="inline-flex items-center gap-2 rounded-full bg-emerald-600 text-white px-5 py-2.5 text-sm font-semibold hover:bg-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">
+						Start setup
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+						<path fill-rule="evenodd" d="M12.293 4.293a1 1 0 011.414 0L18 8.586a2 2 0 010 2.828l-4.293 4.293a1 1 0 01-1.414-1.414L14.586 12H4a1 1 0 110-2h10.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+						</svg>
+					</a>
+				</div>
+			</div>
+		</section>
+		<aside class="my-12" id="setup">
 			{{> guides/serverSelection }}
-		</div>
-		<div class="content-panel">
-			<div class="sticky">
-				{{> guides/variablesOverview }}
-			</div>
-		</div>
-		<div class="content-body">
-            <section class="chapter" id="prerequisites">
-				<div class="content" style="width:100%;padding-top:10px">
-					<h2 data-number="°">Prerequisites for this guide</h2>
-					<ol class="list-decimal space-y-2 pl-6">
-						<li>Installed and synced Execution and Consensus client
-							<p><a href="/ethereum-staking/full-guide" class="btn btn-black btn-rounded">Install Execution and Consensus Client</a></p>
-						</li>
-						<li>Installed Mev-boost client with <code>-min-bid</code> set to <code>0</code>
-							<p><a href="/mev-boost" class="btn btn-black btn-rounded">Mev-boost client installation guide</a></p>
-						</li>
-					</ol>
-				</div>
-            </section>
-			
-			<section class="chapter" id="config">
-				<div class="content" style="width:100%">
-					<h2 class="mt-1">Rocketpool client(s) and file(s) (hybrid configuration, native mode)</h2>
-<aside>
-    <h4>Rocketpool configuration</h4>
-    <ul class="list-disc mt-4 mb-4">
-        <li><label for="rpl-validator-client">Validator client:</label>
-            <select name="rpl-validator-client" id="rpl-validator-client">
-                <option value="prysm">Prysm</option>
-            </select>
-        </li>
-    </ul>
-</aside>
+		</aside>
+	</div>
+
+	<main class="ifr-body prose prose-lg">
+		<section id="config" class="mt-8 max-w-6xl mx-auto px-4">
+			<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+				Rocketpool client(s) and file(s) (hybrid configuration, native mode)
+			</h2>
+		<aside>
+			<h4>Rocketpool configuration</h4>
+			<ul class="list-disc my-4">
+				<li><label for="rpl-validator-client">Validator client:</label>
+					<select name="rpl-validator-client" id="rpl-validator-client">
+						<option value="prysm">Prysm</option>
+					</select>
+				</li>
+			</ul>
+		</aside>
 <pre><code>Rocketpool implementation
 ├── Service Users
 │   ├── <input type="text" class="interactive-element rocketpool_su" data-class="rocketpool_su" value="rocketpool"> <label>(Service user)</label>
@@ -109,27 +195,27 @@
     ├── /etc/systemd/system/rp-watchtower.service <label>(<mark class="rocketpool_su">rocketpool</mark> user)</label>
     └── /etc/systemd/system/<input type="text" class="interactive-element validator_sn" data-class="validator_sn" value="rocketpool-validator">.service <label>(<mark class="rpl_validator">rocketpool-validator</mark> user)</label>
 </code></pre>
-				</div>
-			</section>
+		</section>
 
-			<section class="chapter" id="install">
-				<div class="content" style="width:100%">
-					<h2>Install Rocketpool service</h2>
+		<section id="install" class="mt-8 max-w-6xl mx-auto px-4">
+			<h2 class="mt-15 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+				Install Rocketpool service
+			</h2>
 {{> clients/rocketpool_cli InstallationGuide=true }}
-				</div>
-            </section>
+        </section>
 
-			<section class="chapter" id="update">
-				<div class="content bt" style="width:100%">
-					<h2>Update Rocketpool service</h2>
+		<section id="update" class="mt-20 max-w-6xl mx-auto px-4">
+			<h2 class="mt-15 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+				Update Rocketpool service
+			</h2>
 {{> clients/rocketpool_cli }}
-				</div>
-            </section>
+        </section>
 
-			<section class="chapter" id="commands">
-				<div class="content bt" style="width:100%">
-					<h2>Other commands</h2>
-					<ul class="list-disc mt-4 mb-4">
+		<section id="commands" class="mt-8 max-w-6xl mx-auto px-4">
+			<h2 class="mt-15 text-2xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+				Other commands
+			</h2>
+					<ul class="list-disc my-4">
 						<li><h3>Check Rocketpool version</h3>
 							<p>$<code>rocketpool -v</code> - check rocketpool client version</p>
 						</li>
@@ -137,7 +223,7 @@
 							<pre><code>rocketpool node status</code></pre>
 						</li>
 						<li><h3>Claim rewards:</h3>
-							<ul class="list-disc mt-4 mb-4">
+							<ul class="list-disc my-4">
 								<li>Beacon chain: <code>rocketpool minipool distribute-balance</code></li>
 								<li>Tx Fees: <code>rocketpool node distribute-fees</code></li>
 								<li>RPL: <code>rocketpool node claim-rewards</code></li>
@@ -147,18 +233,29 @@
 							<pre><code>rocketpool node deposit</code></pre>
 						</li>
 					</ul>
-				</div>
-			</section>
+		</section>
 
-			<section class="chapter mt-60" id="maintenance">
-				<div class="content bt">
-					<h2>Regular maintenance</h2>
-					<p>As a regular member securying the network and processing blockchain operations on it, you need to keep your software up to date to avoid penalties and earning rewards for the work.</p>
-					<a href="/{{chainUrl}}/maintenance" class="btn btn-black btn-rounded">Guides for regular maintenance</a>
-				</div>
-			</section>
-        </div>
-    </div>
-</main>
-{{> footer}}
+		<section id="maintenance" class="mt-8 max-w-6xl mx-auto px-4 mb-20">
+			<h2 class="mt-15 text-2xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+				Regular maintenance
+			</h2>
+			<p>As a regular member securying the network and processing blockchain operations on it, you need to keep your software up to date to avoid penalties and earning rewards for the work.</p>
+			<a href="/{{chainUrl}}/maintenance"
+						class="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-600 text-white px-5 py-2.5 text-sm font-semibold hover:bg-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">
+						Guides for regular maintenance
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+						<path fill-rule="evenodd" d="M12.293 4.293a1 1 0 011.414 0L18 8.586a2 2 0 010 2.828l-4.293 4.293a1 1 0 01-1.414-1.414L14.586 12H4a1 1 0 110-2h10.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+						</svg>
+					</a>
+		</section>
+	</main>
+
+	<aside class="ifr-panel xl:sticky xl:top-8 self-start xl:mt-180">
+		<div class="bg-gray-100 rounded-lg p-4 text-sm shadow-sm">
+			<p class="font-semibold mb-2">Interactive Config</p>
+			{{> guides/variablesOverview }}
+		</div>
+	</aside>
+</div>
+{{> footer_tailwind}}
 {{> scripts/tabselector}}

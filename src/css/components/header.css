@@ -24,6 +24,7 @@
 		font-size: 1.25rem;
 		text-decoration: overline;
 		position: relative;
+		@apply text-black;
 	}
 	.h-logo span {
 		position: absolute;

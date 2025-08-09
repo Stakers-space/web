@@ -87,7 +87,7 @@ sudo systemctl start {{servicePrefix}}nimbus-vi...
 				<button class="tab" data-tabpanel="2">Staking manager</button>
 			</nav>
 			<div class="tabpanel selected">
-          <ul class="list-disc mt-4 mb-4">
+          <ul class="list-disc my-4">
               <li><pre><code>systemctl status <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark> {{servicePrefix}}nimbus-vi..</code></pre></li>
               <li><pre><code>journalctl -fu <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark></code></pre></li>
               <li><pre><code>journalctl -f -u nimbus-vi.. -u nimbus-vi..</code></pre></li>

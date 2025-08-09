@@ -1,66 +1,67 @@
 {{#unless InstallationGuide}}
-<h3>Check current version of Lodestar running on the server:</h3>
+<{{sectionHeader}}>Check current version of Lodestar running on the server:</{{sectionHeader}}>
 <pre><code>cd /usr/local/bin/lodestar && ./lodestar -v</code></pre>
 {{/unless}}
 
 <ol class="list-decimal space-y-2 pl-6">
     {{#if InstallationGuide}}
     <li>
-        <h3 class="text-xl">Installing NodeJS through the Node Version Manager</h3>
-        <p>Node Version Manager (NVM) is a piece of shell code that allows you to easily install and maintain different versions of Node.js and its associated packages.</p>
+        <{{sectionHeader}} class="text-xl">Install NodeJS through the NVM</{{sectionHeader}}>
+        <p class="my-2">Node Version Manager (NVM) is a piece of shell code that allows you to easily install and maintain different versions of Node.js and its associated packages.</p>
         <ol class="list-decimal space-y-2 pl-6">
-            <li><h4>Check latest verision of <a href="https://github.com/nvm-sh/nvm">NVM on GitHub</a>.</h4></li>
-            <li><h4>View code of NVM ver {{consensusClients.lodestar.nvmVer}}</h4>
+            <li><a href="https://github.com/nvm-sh/nvm" class="block font-bold">Check latest NVM verision on GitHub.</a></li>
+            <li><span class="font-bold">View code of latest NVM ver</span> ({{consensusClients.lodestar.nvmVer}} in this guide)
                 <pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{consensusClients.lodestar.nvmVer}}/install.sh</code></pre></li>
-            <li><h4>Install NVM</h4>
+            <li><span class="font-bold">Install latest NVM</span> ({{consensusClients.lodestar.nvmVer}} in this guide)
                 <pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v{{consensusClients.lodestar.nvmVer}}/install.sh | bash</code></pre>
                 <p><i>NVM will be installed with permissions of a user that processing that request (you). NVM is installed to user account, specifically to "~/.bashrc" directory.</i></p>
             </li>
-            <li><h4>source/reload <code>nvm</code> for an option to use it</h4>
+            <li><span class="block font-bold">source/reload <code>nvm</code> for an option to use it</span>
                 <pre><code>source ~/.bashrc</code></pre>
             </li>
-            <li><h4>Check available Node.js versions</h4>
+            <li><span class="block font-bold">Check available Node.js versions</span>
                 <pre><code>nvm list-remote</code></pre>
                 Selected version: <code>v<input type="text" value="20.11.0" id="nodejsVer" class="interactive-element" data-class="nodejsVer"></code>
             </li>
-            <li><h4>Install requested Node.js version</h4>
+            <li><span class="block font-bold">Install requested Node.js version</span>
                 <pre><code>nvm install v<mark class="nodejsVer">{{consensusClients.lodestar.nodejsVer}}</mark></code></pre>
                 <p><i>Node.js is installed with permissions of a user that processing that request (you)</i></p>
             </li>
-            <li><h4>Show active Node.js version in use</h4>
+            <li><span class="block font-bold">Show active Node.js version in use</span>
                 <pre><code>node -v</code></pre>
                 <p>If o version is selected, use <code>nvm use <mark class="nodejsVer">{{consensusClients.lodestar.nodejsVer}}</mark></code></p>
             </li>
         </ol>
     </li>
     {{/if}}
-    <li><h3 class="text-xl">Get Lodestar Client</h3>
-        <div class="tabselector bg-gray-100 p-4 pl-10">
+    <li><{{sectionHeader}} class="text-xl mt-10">Get Lodestar Client</{{sectionHeader}}>
+        <div class="tabselector bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
 			<nav>
 				<button class="tab selected" data-tabpanel="1">Build client from GIT source code</button>
 				<button class="tab" data-tabpanel="2">Download client</button>
 			</nav>
             <div class="tabpanel selected">
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4">
                     {{#if InstallationGuide}}
                     <li>
-                        <h4>Install build-essential tools</h4>
+                        <span class="block font-bold">Install build-essential tools</span>
                         <pre><code>sudo apt-get install build-essential -y</code></pre>
                     </li>
                     <li class="mt-2">
-                        <h4>Install Yarn</h4>
+                        <span class="block font-bold">Install Yarn</span>
                         <pre><code>corepack enable</code></pre>
                         <pre><code>corepack prepare yarn@stable --activate</code></pre>
                         <pre><code>yarn help</code></pre>
                     </li>
                     {{else}}
                     <li>
-                        <h4>Remove old repository clone</h4>
+                        <span class="block font-bold">Remove old repository clone</span>
                         <pre><code>cd ~/downloads && sudo rm -r lodestar</code></pre>
                     </li>
                     {{/if}}
-                    <li><h4>Build Lodestar</h4>
-                        <ul class="list-disc mt-4 mb-4 pl-8">
+                    <li>
+                        <span class="block font-bold">Build Lodestar</span>
+                        <ul class="list-disc my-4 pl-8">
                             <li><strong>Download latest Lodestar client <a href="https://github.com/ChainSafe/lodestar/releases" target="_blank" rel="nofollow noopener noreferrer">from GitHub</a></strong>
                                 <pre><code>cd ~/downloads && git clone -b stable https://github.com/chainsafe/lodestar.git</code></pre>
                             </li>
@@ -77,15 +78,16 @@
                 </ul>
 			</div>
 			<div class="tabpanel">
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4">
                     {{#unless InstallationGuide}}
-                    <li><h4>Remove old client folder</h4>
+                    <li>
+                        <span class="block font-bold">Remove old client folder</span>
                         <pre><code>cd ~/downloads; sudo rm -r lodestarclient; sudo rm -r lodestar</code></pre>
                     </li>
                     {{/unless}}
                     <li>
-                        <h4>Find the latest stable version of Lodestar client on Github</h4>
-                        <ul class="list-disc mt-4 mb-4">
+                       <span class="block font-bold">Find the latest stable version of Lodestar client on Github</span>
+                        <ul class="list-disc my-4">
                             <li>Find latest Lodestar version at <a href="https://github.com/ChainSafe/lodestar/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/ChainSafe/lodestar/releases</a></li>
                             <li>Write latest stable Lodestar version: <input type="text" value="{{consensusClients.lodestar.latestVer}}" class="lodestarVer-input"><br>
                                 <p>This will update the url links in the guide below.</p>
@@ -93,13 +95,13 @@
                         </ul>
                     </li>
                     <li>
-                        <h4>Download Lodestar version <code class="lodestarVer">{{consensusClients.lodestar.latestVer}}</code> to your node</h4>
+                       <span class="block font-bold">Download Lodestar version <code class="lodestarVer">{{consensusClients.lodestar.latestVer}}</code> to your node</span>
                         <pre><code>mkdir ~/downloads/lodestarclient && cd ~/downloads/lodestarclient && curl -LO https://github.com/ChainSafe/lodestar/releases/download/v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>/lodestar-v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
                     </li>
-                    <li><h4>Extract downloaded file</h4>
+                    <li><span class="block font-bold">Extract downloaded file</span>
                         <pre><code>$ tar xvf lodestar-v<mark class="lodestarVer">{{consensusClients.lodestar.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
                     </li>
-                    <li><h4>Create lodestar directory and move the client into it</h4>
+                    <li><span class="block font-bold">Create lodestar directory and move the client into it</span>
                         <pre><code>mkdir ~/downloads/lodestar && mv ~/downloads/lodestarclient/lodestar ~/downloads/lodestar/lodestar</code></pre>
                     </li>
                 </ul>
@@ -107,13 +109,13 @@
 		</div>
     </li>
     <li>
-        <h3>Check version of new Lodestar client</h3>
+        <{{sectionHeader}}>Check version of new Lodestar client</{{sectionHeader}}>
         <pre><code>~/downloads/lodestar/lodestar -v</code></pre>
     </li>
     
     {{#unless InstallationGuide}}
     <li>
-        <h3>Stop Lodestar services</h3>
+        <{{sectionHeader}}>Stop Lodestar services</{{sectionHeader}}>
         <div class="tabselector" data-client="lodestar">
 		    <nav class="egrid egrid-2">
 				<button class="tab selected" data-tabpanel="1">Standard option</button>
@@ -135,15 +137,15 @@ sudo systemctl stop {{servicePrefix}}lodestar-vi...
 			</div>
 		</div>
     </li>
-    <li><h3>Remove old production Lodestar client</h3>
+    <li><{{sectionHeader}}>Remove old production Lodestar client</{{sectionHeader}}>
         <pre><code>sudo rm -r /usr/local/bin/lodestar</code></pre>
     </li>
     {{/unless}}
-    <li><h3>Copy new production client to <code>/usr/local/bin</code> directory</h3>
+    <li><{{sectionHeader}}>Copy new production client to <code>/usr/local/bin</code> directory</{{sectionHeader}}>
         <pre><code>sudo cp -a ~/downloads/lodestar /usr/local/bin</code></pre>
     </li>
     {{#unless InstallationGuide}}
-     <li><h3>Start the Lodestar services</h3>
+     <li><{{sectionHeader}}>Start the Lodestar services</{{sectionHeader}}>
         <div class="tabselector" data-client="lodestar">
 		    <nav class="egrid egrid-2">
 				<button class="tab selected" data-tabpanel="1">Standard option</button>
@@ -162,14 +164,14 @@ sudo systemctl start {{servicePrefix}}lodestar-vi...
 			</div>
 		</div>
     </li>
-    <li><h3>Monitor</h3>
+    <li><{{sectionHeader}}>Monitor</{{sectionHeader}}>
         <div class="tabselector" data-client="lodestar">
 		    <nav class="egrid egrid-2">
 				<button class="tab selected" data-tabpanel="1">Standard option</button>
 				<button class="tab" data-tabpanel="2">Staking manager</button>
 			</nav>
 			<div class="tabpanel selected">
-                <ul class="list-disc mt-4 mb-4">
+                <ul>
                     <li><pre><code>systemctl status <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark> {{servicePrefix}}lodestar-vi.. {{servicePrefix}}lodestar-vi..</code></pre></li>
                     <li><pre><code>journalctl -fu <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre></li>
                     <li><pre><code>journalctl -f -u lodestar-vi.. -u lodestar-vi..</code></pre></li>

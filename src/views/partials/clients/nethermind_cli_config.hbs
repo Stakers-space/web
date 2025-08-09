@@ -1,6 +1,6 @@
 
 <h3 class="mt-1">Create a system user and data directory for Nethermind service</h3>
-<ul class="list-disc mt-4 mb-4">
+<ul class="list-disc my-4">
   <li>
     <h4>Create a user</h4>
     <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}nethermind" class="interactive-element execution_sn" data-class="execution_sn" data-client="nethermind">
@@ -17,7 +17,7 @@
   </li>
 </ul>
 <h3 class="mt-6 text-xl font-semibold mb-4">Configurate & Run Nethermind service</h3>
-<ul class="list-disc mt-4 mb-4 space-y-3">
+<ul class="list-disc my-4 space-y-3">
   <li>
     {{> clients/config/execution-ports }}
     <p>If needed, check <a href="https://docs.nethermind.io/interacting/json-rpc-server/" target="_blank"
@@ -101,12 +101,12 @@ journalctl -fu <mark class="execution_sn">{{servicePrefix}}nethermind</mark></co
                   <pre><code>sudo systemctl enable <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
                 </div>
                 <div class="tabpanel">
-                  {{> clients/config/delayed-start MarkClass="execution_sn" ClientName="nethermind" }}
+                  {{> clients/config/delayed-start MarkClass="execution_sn" ClientName="nethermind" ServiceName="nethermind" }}
                 </div>
               </div>
             </div>
             <div class="tabpanel">
-              {{> clients/config/staking-manager MarkClass="execution_sn" ClientName="nethermind" }}
+              {{> clients/config/staking-manager MarkClass="execution_sn" servicesCategory="execution" ClientName="nethermind" ServiceName="nethermind" }}
             </div>
       </div>
   </li>

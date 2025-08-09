@@ -12,7 +12,7 @@
         <ol class="list-decimal space-y-2 pl-6">
             <li>
                 <h4 class="mt-0">Configurate public IPv4 port for P2P communication with other peers</h4>
-                <ul class="list-disc mt-4 mb-4 pl-6">
+                <ul class="list-disc my-4 pl-6">
                     <li>
                         <label><strong>Choose P2P communication port</strong></label>: <select onchange="OnP2PChanged(this)"
                             data-id="consensus-p2p_cinp">
@@ -29,7 +29,7 @@
                         <pre><code>$ sudo ufw allow <mark class="consensus-p2p">9000</mark></code></pre>
                     </li>
                     <li><strong>Disable IPv6 traffic on the port</strong>
-                        <ul class="list-disc mt-4 mb-4">
+                        <ul class="list-disc my-4">
                             <li>List allowed ports
                                 <pre><code>sudo ufw status numbered</code></pre>
                             </li>
@@ -42,7 +42,7 @@
                 </ul>
             </li>
             <li><h4>QUIC IPv4 port</h4>
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4">
                     <li><label><strong>Choose QUIC IPv4 port</strong></label>: <select onchange="OnP2PChanged(this)"
                             data-id="consensus-quic_cinp">
                             <option value="add">default (9001)</option>
@@ -57,7 +57,7 @@
             </li>
             <li>
                 <h4>Beacon API port for internal communication</h4>
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4">
                     <li><label><strong>Choose Beacon API port</strong></label>: <select onchange="OnP2PChanged(this)" data-id="consensus-endpoint_cinp">
                             <option value="add">default</option>
                             <option value="remove">Custom</option>
@@ -75,7 +75,7 @@
         <ol class="list-decimal space-y-2 pl-6">
             <li>
                 <h4 class="mt-0">Configurate public IPv6 port for P2P communication with other peers</h4>
-                <ul class="list-disc mt-4 mb-4 pl-6">
+                <ul class="list-disc my-4 pl-6">
                     <li>
                         <label>P2P communication port</label>: <select onchange="OnP2PChanged(this)" data-id="consensus-p2p_v6_cinp">
                             <option value="add">default (9090)</option>
@@ -91,7 +91,7 @@
                         <pre><code>$ sudo ufw allow <mark class="consensus-p2p_v6">9090</mark></code></pre>
                     </li>
                     <li><strong>Disable IPv6 traffic on the port</strong>
-                        <ul class="list-disc mt-4 mb-4">
+                        <ul class="list-disc my-4">
                             <li>List allowed ports
                                 <pre><code>sudo ufw status numbered</code></pre>
                             </li>
@@ -104,7 +104,7 @@
                 </ul>
             </li>
             <li><h4>QUIC IPv6 port</h4>
-                <ul class="list-disc mt-4 mb-4 pl-6">
+                <ul class="list-disc my-4 pl-6">
                     <li><label><strong>Choose QUIC IPv4 port</strong></label>: <select onchange="OnP2PChanged(this)"
                             data-id="consensus-quic_v6_cinp">
                             <option value="add">default</option>
@@ -120,7 +120,7 @@
             {{!--
             <li>
                 <h4>Beacon API port for internal IPv6 communication</h4>
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4">
                     <li><label><strong>Choose Beacon API port</strong></label>: <select onchange="OnP2PChanged(this)"
                             data-id="consensus-endpoint_v6_cinp">
                             <option value="add">default</option>

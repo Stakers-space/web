@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const GnosisController = require('../controllers/gnosis');
 const GuidePageController = require('../controllers/guidePage')
-const FundamentalsController = require('../controllers/fundamentalsPage');
+//const FundamentalsController = require('../controllers/fundamentalsPage');
 const ChartsController = require('../controllers/charts');
 const StakingSchema = require('../controllers/stakingSchema');
 const Chain = require('../middlewares/SetChain');
@@ -14,7 +14,7 @@ class GnosisRouter {
     constructor(){
         this.chainController = new GnosisController();
         this.GuidePage = new GuidePageController();
-        this.fundamentals = new FundamentalsController();
+        //this.fundamentals = new FundamentalsController();
         this.ChartsPage = new ChartsController();
         this.StakingSchema = new StakingSchema();
         this.NewsPage = new NewsPageController();

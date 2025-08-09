@@ -1,8 +1,7 @@
 {{> header}}
-<main class="mb-60">
-	<section class="cover grid egrid">
-		<div class="mt-60 mb-20">
-            <ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+<section class="grid grid-cols-1 md:grid-cols-[67fr_33fr] gap-8 p-8">
+	<div class="mx-auto md:px-6 md:py-16">
+		 <ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
 				<li property="itemListElement" typeof="ListItem">
 					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
 					<meta property="position" content="1">
@@ -16,99 +15,111 @@
 					<meta property="position" content="3">
 				</li>
 			</ul>
-			<h1 class="cover-title"><span>Emergency guide for {{chainName}} staking</span> - what to do if anything goes wrong</h1>
-			<p><strong>How to consider next steps and possibly stop the staking and withdraw locked funds?</strong></p>
-		</div>
-		<div class="disclaimer">
-			<div class="disclaimer-content">
-				<h3>Disclaimer</h3>
-				<p>This guide is for informational and education purposes only - accuracy is not guaranteed, see <a href="/disclaimer">disclaimer</a>.</p>
-            </div>
-		</div>
-	</section>
 
-	<div class="grid-full contents serverguide">
-        <div class="content-chapters">
-			<div class="sticky">
-				 <nav class="mt-1">
-					<strong>Navigation:</strong>
-                    <ul class="list-disc mt-4 mb-4">
+		<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+			<span class="block mt-1 text-green-600">Emergency guide for {{chainName}} staking:</span> What to do if anything goes wrong
+		</h1>
+
+		<p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl">
+			How to consider next steps and possibly stop the staking and withdraw locked funds?
+		</p>
+	</div>
+	<div class="flex items-center justify-center md:pl-10 text-sm text-gray-600">
+		<div class="md:max-w-xs bg-gray-50 p-6 rounded-xl shadow-md">
+			<h3 class="font-semibold mb-1">Disclaimer</h3>
+			<p>
+				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide. <a href="/disclaimer" target="_blank">See more.</a>
+			</p>
+		</div>
+	</div>
+</section>
+
+<div class="ifr-grid grid-cols-1 xl:grid-cols-[minmax(220px,1fr)_minmax(0,6fr)_minmax(240px,1fr)] gap-6">
+	<aside class="ifr-nav lg:mt-14">
+		<nav class="border-l-4 border-gray-500 pl-8">
+			<p class="font-semibold mb-2">Navigation</p>
+                    <ul class="list-disc my-4">
                         <li><a href="#intro">Intro</a></li>
                     </ul>
                     <strong>Node emergency</strong>
-                    <ul class="list-disc mt-4 mb-4">
+                    <ul class="list-disc my-4">
                         <li><a href="#offline">Validator is down or have a poor performance</a></li>
                         <li><a href="#update">A client update is required</a></li>
                         <li><a href="#access">No/Lost access to staking server</a></li>
                     </ul>
 
                     <strong>Emergency actions</strong>
-                    <ul class="list-disc mt-4 mb-4">
+                    <ul class="list-disc my-4">
                         <li><a href="#keystores">Regenerating lost keystores</a></li>
                         <li><a href="#exit">Exiting validator</a></li>
                     </ul>
-				</nav>
-			</div>
-		</div>
-	
-		<div class="content-body">
-			<section class="chapter" id="intro">
+		</nav>
+	</aside>
 
-				<div class="content">
-                    <h2 class="mt-0">Introduction</h2>
+	<div class="ifr-header">
+	</div>
+
+	<main class="ifr-body prose prose-lg" id="setup">
+        <section id="intro" class="mb-20 mt-0 max-w-6xl mx-auto px-4">
+				<span class="inline-flex items-center rounded-full bg-emerald-600 text-white px-3 py-1 text-xs font-semibold tracking-wide shadow">
+					Introduction
+				</span>
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Introduction
+				</h2>
                     <p>Staking, or validating, involves participating in the security and operation of {{chainName}} blockchain network. Validators are rewarded for performing this continuous task, but they can also be penalized for failing to participate. The goal is to always be an active and valid member of the network. To do so, some necessary actions may be taken from time to time to keep getting rewards and protect locked capital.</p>
                     
-                    <h3>An action is necessary especially in 3 cases:</h3>
-                    <ol class="list-decimal space-y-2 pl-6">
-                        <li><h4 class="mb-5"><a href="#offline">Validator(s) are down or have a poor performance.</a></h4>
+                    <h3 class="mt-5">An action is necessary especially in 3 cases:</h3>
+                    <ol class="list-decimal space-y-4 pl-6">
+                        <li><h4><a href="#offline">Validator(s) are down or have a poor performance.</a></h4>
                             It's essential to use some kind of monitoring of your validators performance to be sure that they are online and valid (you earn standard rewards). Otherwise, you are penalized. You can do the monitoring either on the local level, or better, externally through online services such as the <a href="/account#monitor" target="_blank">Stakers.space validator monitor</a> or 
                     {{#ifEqual chain "ethereum"}}<a href="https://beaconcha.in/dashboard" target="_blank" rel="nofollow noopener">Beaconcha.in dashboard</a>.{{/ifEqual}}{{#ifEqual chain "gnosis"}}<a href="https://gnosischa.in/dashboard" target="_blank" rel="nofollow noopener">Gnosischa.in dashboard</a>.{{/ifEqual}} Both services can notify you imediatelly in case of a validator failure, allowing you to address as soon as possible.</li>
                        
-                        <li><h4 class="mb-5"><a href="#update">An important client update is released.</a></h4> You can sign-up for Github notifications onnew client versions releases, or you can get these notifications from online services such as the <a href="/account#monitor" target="_blank">Stakers.space validator monitor</a> or 
+                        <li><h4><a href="#update">An important client update is released.</a></h4> You can sign-up for Github notifications onnew client versions releases, or you can get these notifications from online services such as the <a href="/account#monitor" target="_blank">Stakers.space validator monitor</a> or 
                     {{#ifEqual chain "ethereum"}}<a href="https://beaconcha.in/dashboard" target="_blank" rel="nofollow noopener">Beaconcha.in dashboard</a>.{{/ifEqual}}{{#ifEqual chain "gnosis"}}<a href="https://gnosischa.in/dashboard" target="_blank" rel="nofollow noopener">Gnosischa.in dashboard</a>.{{/ifEqual}} again. In a case of important releases there is required to process the client update on your staking machine to remain on the proper fork chain.</li>
                         
-                        <li><h4 class="mb-5"><a href="#access">You lost access to your staking server.</a></h4> If you have your server physically accessible, you can re-initializate your node, otherwise you must exit the validators.</li>
+                        <li><h4><a href="#access">You lost access to your staking server.</a></h4> If you have your server physically accessible, you can re-initializate your node, otherwise you must exit the validators.</li>
                     </ol>
 
-                    <h3 class="mt-40">Why the action is required?</h3>
+                    <h3 class="mt-10">Why the action is required?</h3>
                     <p>As mentioned already, <strong>for a reason of capital protection</strong>. Each validator is associated with a locked collateral for that you may be deducted if the validator does not comply properly with the network. For that reason, in a long-run, it's unprecedented to keep you validator either online and valid, or exited.</p>
                     <p>If you do not do anythng, a penalties are gradually applied and deducted from a locked collateral. Once the colaterral falls to 50%, the validator will be exited, remaining funds unlocked and send to a withdrawal wallet.</p>
 
                     <nav>
-                        <h4 class="mb-0">Navigation:</h4>
-                        <ul class="list-disc mt-4 mb-4">
+                        <h4 class="mt-5">Navigation:</h4>
+                        <ul class="list-disc mb-4 pl-6">
                             <li><a href="#offline"><strong>Emergency:</strong> Validator is down or have a poor performance</a></li>
                             <li><a href="#update"><strong>Emergency:</strong> A client update is required</a></li>
                             <li><a href="#access"><strong>Emergency:</strong> No/Lost access to staking server</a></li>
                         </ul>
                     </nav>
-				</div>
             </section>
 
-            <section class="chapter" id="offilne">
-				<div class="content bt">
-                    <h2 data-number="1">Validator is down or have a poor performance</h2>
-                    
-                    <div class="tabselector mt-20">
-                        <nav class="egrid egrid-2">
+            <section id="offilne" class="my-20 max-w-6xl mx-auto px-4">
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Validator is down or have a poor performance
+				</h2>
+
+                    <div class="tabselector mt-6 bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
+                        <nav class="mb-5">
                             <button class="tab selected" data-tabpanel="1">Validators are down</button>
                             <button class="tab" data-tabpanel="2">Validators have bad performance</button>
                         </nav>
                         <div class="tabpanel selected">
                            <p>This issue can be caused for numerous reaons:</p>
-                            <ul class="list-disc mt-4 mb-4">
+                            <ul class="list-disc my-4 pl-6">
                                 <li>Internet connection issue</li>
                                 <li>Power Failure</li>
                                 <li>Client issue</li>
                                 <li>Hardware issue</li>
                             </ul>
                             <p>Step by step guide to diagnose and fix the issue deal with following:</p>
-                            <ol class="list-decimal space-y-2 pl-6">
-                                <li><h3>Connect to your staking node</h3>
-                                    <ul class="list-disc mt-4 mb-4">
+                            <ol class="list-decimal space-y-4 pl-6 mt-4">
+                                <li><h3 class="text-xl">Connect to your staking node</h3>
+                                    <ul class="list-disc my-4 pl-6">
                                         <li>If you are able to log-in and access the server, skip at <a href="#motd">step 2 - Check MOTD</a>.</li>
                                         <li>If you are not able to connect your server, check the following:
-                                            <ul class="list-disc mt-4 mb-4">
+                                            <ul class="list-disc my-4 pl-6">
                                                 <li>Computer is turned on (= no Power Failure) and loaded (no Hardware issue)</li>
                                                 <li>There's no internet connection issue</li>
                                             </ul>
@@ -116,51 +127,48 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li id="motd"><h3>Check MOTD (Message of the Day)</h3>
+                                <li id="motd"><h3 class="text-xl">Check MOTD (Message of the Day)</h3>
                                     <p>MOTD is the first screen you see after succesfull log-in to your staking machine. Check especially following:</p>
-                                    <ul class="list-disc mt-4 mb-4">
+                                    <ul class="list-disc my-4 pl-6">
                                         <li><strong>Uptime</strong>: Make sure there hasn't been a recent power outage.</li>
                                         <li><strong>Last login</strong>: Make sure there hasn't been unauthorized access to your staking node.</li>
                                         <li><strong>SSD usage</strong>: Make sure there is enough free disk space.</li>
                                     </ul>
                                 </li>
-                                <li id="timedatectl"><h3>Check server time</h3>
+                                <li id="timedatectl"><h3 class="text-xl">Check server time</h3>
                                     <p>The beacon chain relies on your computer having the correct time set (±0.5 seconds). To fulfill that, check that server time is being siynchronized</p>
                                     <pre><code>timedatectl status</code></pre>
                                     <i><code>System clock synchronized</code> must have value <code>yes</code>. If not, run <code>timedatectl set-ntp true</code>.</i>
                                     <p>You can also consider install <a href="https://chrony-project.org/" target="_blank" rel="nofollow noopenor noreferrer">Chrony</a> </p>
                                 </li>
-                                <li><h3>Check clients statuses</h3>
+                                <li><h3 class="text-xl">Check clients statuses</h3>
                                     <p>Usually, <code>Loaded</code> state instead of <code>Active</code> on a client service may occur after a system reboot with missing autostart setup. Status of any service may be checked with a use of following command:</p>
                                     <pre><code>systemctl status &lt;ServiceName&gt;</code></pre>
                                     <p>ToDo: Check statuses of all staking services running on the server. If any service is not active, launch it with command <code>sudo systemctl start &lt;ServiceName&gt;</code>.</p>
                                 </li>
-                                <li><h3>Check clients logs for issues</h3>
+                                <li><h3 class="text-xl">Check clients logs for issues</h3>
                                     <p>Most common issue is an issue of any client. You can check log of any client service with following command:</p>
                                     <pre><code>journalctl -f -u &lt;ServiceName&gt;</code></pre>
                                     <p>Based on the log you may find out several issues such as:</p>
-                                    <ul class="list-disc mt-4 mb-4">
+                                    <ul class="list-disc my-4 pl-6">
                                         <li><code>No peers</code> → check internet connection issues</li>
                                         <li><code>Stucked client (no execution/consensus client listening)</code> → try restart the client</li>
                                         <li><code>DB issue/corruption</code>
                                             <p>Try stop and start the client. If it does not help, you will need to remove and resync corrupted database.</p>
-                                            <ul class="list-disc mt-4 mb-4">
+                                            <ul class="list-disc my-4 pl-6">
                                                 <li>BeaconChain client database can be synced within minutes from a checkpoint.</li>
                                                 <li>Execution client database synchronization is matter of days or weeks. If you run more nodes, you can connect to the execution client running on the second node meanwhile you synchronizing the execution client on the current node.</li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><h3>Perform the Best possible action</h3>
-                                    <ul class="list-disc mt-4 mb-4">
-                                        <li></li>
-                                    </ul>
+                                <li><h3 class="text-xl">Perform the Best possible action</h3>
                                     <p>You should consider how long it will take you to fix the problem and run the validator(s) again. If you are not to do this within maximally few weeks, you should consider <a href="#exit">exiting your validators</a> and launching new once your staking node will be ready again.</p>
                                 </li>
                             </ol>
                         </div>
                         <div class="tabpanel">
-                            <ul class="list-disc mt-4 mb-4">
+                            <ul class="list-disc my-4 pl-6">
                                 <li>Check clients logs for issues</li>
                                 <li>Check number of connected peers. If you sue VPN, consider switching at a different VPN server.</li>
                                 <li>Check hardware components usage and temperature</li>
@@ -168,13 +176,15 @@
                             </ul>
                         </div>
                     </div>
-                </div>
             </section>
-            <section class="chapter" id="update">
-				<div class="content bt">
-                    <h2 data-number="2">An important client update was released (Update is required)</h2>
+
+            <section id="update" class="my-20 max-w-6xl mx-auto px-4">
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					An important client update was released (Update is required)
+				</h2>
+
                     <p>Update the client. Firstly, find out what clients are used and in what way. If native mode is used, an update may be used based on the following guides for updating following popular clients and services:</p>
-                    <h3>Execution clients:</h3>
+                    <h3 class="mt-5">Execution clients:</h3>
                     <ul style="columns:2">
                         <li><a href="/nethermind#update">Update Nethermind client</a></li>
                         <li><a href="/erigon#update">Update Erigon client</a></li>
@@ -182,46 +192,48 @@
                         <li><a href="/reth#update">Update Reth client</a></li>
                         <li><a href="/besu#update">Update Besu client</a></li>
                     </ul>
-                    <h3>Consensus clients:</h3>
+                    <h3 class="mt-5">Consensus clients:</h3>
                     <ul style="columns:2">
                         <li><a href="/lighthouse#update">Update Lighthouse client</a></li>
                         <li><a href="/lodestar#update">Update Lodestar client</a></li>
                         <li><a href="/teku#update">Update Teku client</a></li>
                         <li><a href="/prysm#update">Update Prysm client</a></li>
                     </ul>
-                    <h3>Services clients:</h3>
+                    <h3 class="mt-5">Services clients:</h3>
                     <ul style="columns:2">
                         <li><a href="/mev-boost#update">Update Mev-boost client</a></li>
                         <li><a href="/rocketpool#update">Update Rocketpool client</a></li>
                         <li><a href="/stakewise#update">Update Stakewise client</a></li>
                         <li><a href="/lido#update">Update Lido client</a></li>
                     </ul>
-                </div>
             </section>
 
-            <section class="chapter" id="access">
-				<div class="content bt">
-                    <h2 data-number="3">No/Lost access to staking server</h2>
+            <section id="access" class="my-20 max-w-6xl mx-auto px-4">
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					No/Lost access to staking server
+				</h2>
                     <p>First rule of staking {{chainName}} is to avoid running the same validator on two machines at the same time. Such beahviour would lead to double attestation and a significant penalty called "slashing" associated with forced exit. From here:</p>
-                    <ul class="list-disc mt-4 mb-4">
+                    <ul class="list-disc my-4 pl-6">
                         <li>If you have physical access to your server and you can be sure the validators on it will never go online through the server (e.g. due to damaged disk or removed keystores from the disk), you can 
                             <a href="{{#ifEqual chain "ethereum"}}/ethereum-staking/full-guide{{/ifEqual}}{{#ifEqual chain "gnosis"}}/gnosis-staking/full-guide{{/ifEqual}}">relaunch the validators on another machine</a>.</li>
                         <li>If you have no control above the server with keystores (e.g. someone stole it), you must <a href="#exit">exit validators</a>.</li>
                     </ul>
-                </div>
             </section>
 
-            <section class="chapter" id="keystores">
-				<div class="content bt">
-                    <h2>(Re)Generating keystores</h2>
+
+            <section id="keystores" class="my-20 max-w-6xl mx-auto px-4">
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					(Re)Generating keystores
+				</h2>
+
                     <p>Validators are represented by keystores. Keystores (or validation keys) are generated from a seed. The seed, as well as keystores, is generated through 
                     {{#ifEqual chain "ethereum"}}<a href="https://github.com/ethereum/staking-deposit-cli/">Staking Deposit client</a>.{{/ifEqual}}{{#ifEqual chain "gnosis"}}<a href="https://github.com/gnosischain/validator-data-generator/releases">Gnosis Chain validator's data generator client</a>.{{/ifEqual}} The software has more use-cases:</p>
-                    <ul class="list-disc mt-4 mb-4">
+                    <ul class="list-disc my-4">
                         <li>Generation of a seed + first keystores from the seed (+ deposit keys file)</li>
                         <li>From the seed, regeneration of keystores or generation of more keystores (+ deposit keys file)</li>
                     </ul>
                     <p>During a generation process, you will have to provide following:</p>
-                    <ul class="list-disc mt-4 mb-4">
+                    <ul class="list-disc my-4">
                         <li>An information, whether you want to generate new keystores (you want to generate seed as well), or generate keystores from a seed. The second option is right in this case, as you need to regenerate lost keystores. To do so, use a command 
                             <pre><code>./deposit existing-mnemonic</code></pre>
                             <p>On request, provde the seed based on which the keystores will be regenerated.</p>
@@ -230,43 +242,48 @@
                         <li><code>--validator_indices</code> - keystore index. As a seed may be associated with many validator keystores, each keystore is being identified through own index. Each index generates always the same keystores, and this is the way how keystores can be regenerated. Simply, set keystores value of the keystores you lost. On <a href="/account" target="_blank">Stakers.space account</a>, we allow to save encrypted information about used indexes for each instance. If you do not know the the index (starts at 0 in default, - so if you had 2 validators, it was 0 and 1 in standard setup), you can generate e.g. 1000 keystores for indexes starting at <code>--validator_start_index</code> 0 (= from 0 to 1000). With a new keystores generation, you will be requested to provide a new keystore password. As this password serves for decryption / encryption of the generated keys only, it does not need to be same as before - simply set your own password.</li>
                     </ul>
                     <p>Keep the seed and validator keystores with password private. Do not share neither of these with anyone, as knowledge either of the seed or owning the keystores with password allows to start a validator on any server and leads to a risk of slashing (happens when the same validator contributes to the network more times at the same time (= is launched paralelly on 2 machines or instances)).</p>
-
-                    <p class="mt-20">For loading a validator to a validator client on the staking server, you will need the validator keystore(s) with the password. The seed serves especially as a backup for regenerating the keystores (if you would lose them or the password). </p>
+                    <p class="my-4">For loading a validator to a validator client on the staking server, you will need the validator keystore(s) with the password. The seed serves especially as a backup for regenerating the keystores (if you would lose them or the password). </p>
                     <p>So far you have either the seed or the keystore(s) with passoword, you can move your validators between staking machines as well as exit them. However, if you lose both, you are no more access for your validators.</p>
-                    <p>It's always a good practice to have both and do not rely at one only. Keystore(s) with passwrds can be reinitialized from seed anytime in a case you lose them. However, if you lose your seed, there's no way to find out it from the generated keystores. Thus, be always sure you have your seed, and if not, consider <a href="#exit">exiting your validators</a> and reinitialized them from a new seed you will keep better than the previous.</p>
-                </div>
+                    <p class="mt-4">It's always a good practice to have both and do not rely at one only. Keystore(s) with passwrds can be reinitialized from seed anytime in a case you lose them. However, if you lose your seed, there's no way to find out it from the generated keystores. Thus, be always sure you have your seed, and if not, consider <a href="#exit">exiting your validators</a> and reinitialized them from a new seed you will keep better than the previous.</p>
             </section>
 
-            <section class="chapter" id="exit">
-				<div class="content bt">
-                    <h2>Exiting {{chainName}} validator(s)</h2>
+            <section class="exit" id="exit">
+            <section id="keystores" class="my-20 max-w-6xl mx-auto px-4">
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Exiting {{chainName}} validator(s)
+				</h2>
                     <p>There are numerous ways to axit {{chainName}} validator:</p>
-                    <div class="tabselector">
-                        <nav class="egrid egrid-2">
+                    <div class="tabselector mt-6 bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
+                        <nav class="mb-5">
                             <button class="tab selected" data-tabpanel="1">Pre-signed Exit keys</button>
                             <button class="tab" data-tabpanel="2">Through staking node</button>
                         </nav>
                         <div class="tabpanel selected">
                             <h3>Broadcast presigned exit message</h3>
-                            <p>If you have presigned exit messages, or you are able to generate them, you can simply broadcast them to the beaconchain through the {{#ifEqual chain "ethereum"}}<a href="https://beaconcha.in/tools/broadcast" target="_blank" rel="nofollow noopener noreferrer">https://beaconcha.in/tools/broadcast</a> tool on the Beaconcha.in website.{{/ifEqual}}{{#ifEqual chain "gnosis"}}<a href="https://gnosischa.in/tools/broadcast" target="_blank" rel="nofollow noopener noreferrer">https://gnosischa.in/tools/broadcast</a> tool on the Gnosischa.in website.{{/ifEqual}}</p>
-                            <p>Through the tool, you can send signed messages to the network just like from a server. <strong>It allows to exit validator externally without need of any staking server.</strong></p>
-                            <p>The presigned messages for validation keys can be created using the tool <a href="https://github.com/wealdtech/ethdo" target="_blank" rel="nofollow noopener noreferrer">Ethdo</a>. Generated exit can be then simply uploaded to the <a href="{{#ifEqual chain "ethereum"}}https://beaconcha.in/tools/broadcast{{/ifEqual}}{{#ifEqual chain "gnosis"}}https://gnosischa.in/tools/broadcast{{/ifEqual}}" target="_blank" rel="nofollow noopener noreferrer">broadcasting tool</a>.</p>
-                            <a href="https://github.com/eth-educators/ethstaker-guides/blob/main/voluntary-exit.md" target="_blank" rel="nofollow noopener noreferrer"><strong>Guide</strong></a>
-                            <p>You can generate presigned exit keys yourself according to the guide, or you can request them from your staking manager who operates a node for you.</p>
+                            <p class="mt-5">If you have presigned exit messages, or you are able to generate them, you can simply broadcast them to the beaconchain through the {{#ifEqual chain "ethereum"}}<a href="https://beaconcha.in/tools/broadcast" target="_blank" rel="nofollow noopener noreferrer">https://beaconcha.in/tools/broadcast</a> tool on the Beaconcha.in website.{{/ifEqual}}{{#ifEqual chain "gnosis"}}<a href="https://gnosischa.in/tools/broadcast" target="_blank" rel="nofollow noopener noreferrer">https://gnosischa.in/tools/broadcast</a> tool on the Gnosischa.in website.{{/ifEqual}}</p>
+                            <p class="mt-5">Through the tool, you can send signed messages to the network just like from a server. <strong>It allows to exit validator externally without need of any staking server.</strong></p>
+                            <p class="mt-5">The presigned messages for validation keys can be created using the tool <a href="https://github.com/wealdtech/ethdo" target="_blank" rel="nofollow noopener noreferrer">Ethdo</a>. Generated exit can be then simply uploaded to the <a href="{{#ifEqual chain "ethereum"}}https://beaconcha.in/tools/broadcast{{/ifEqual}}{{#ifEqual chain "gnosis"}}https://gnosischa.in/tools/broadcast{{/ifEqual}}" target="_blank" rel="nofollow noopener noreferrer">broadcasting tool</a>.</p>
+								<a href="https://github.com/eth-educators/ethstaker-guides/blob/main/voluntary-exit.md" class="mt-5 inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+									Guide
+									<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+									</svg>
+								</a>                            
+                            <p class="mt-5">You can generate presigned exit keys yourself according to the guide, or you can request them from your staking manager who operates a node for you.</p>
                         </div>
                         <div class="tabpanel">
                             <h3>Exit from the server where the validators are active / registered</h3>
                             <p>In a case you have access to a server your validators are active on and your beaconchain client is synchronized, you can process the exit right from the consensus client on the server, see below:</p>
-                            <ul class="list-disc mt-4 mb-4">
+                            <ul class="list-disc my-4">
                                 <li><a href="/lighthouse/exit-validator" target="_blank">Exiting Lighthouse validator</a></li>
                                 <li><a href="/lodestar/exit-validator" target="_blank">Exiting Lodestar Validator</a></li>
                                 <li><a href="/teku/exit-validator" target="_blank">Exiting Teku validator</a></li>
                                 <li><a href="/prysm#exit-validator" target="_blank">Exiting Prysm Validator</a></li>
                             </ul>
-                            <h3 class="mt-40">Exit from a different server than where the validators are active</h3>
+                            <h3 class="mt-10">Exit from a different server than where the validators are active</h3>
                             <p>You can follow the <a href="{{#ifEqual chain "ethereum"}}/ethereum-staking/full-guide{{/ifEqual}}{{#ifEqual chain "gnosis"}}/gnosis-staking/full-guide{{/ifEqual}}">Full staking guide</a> to launch an Execution client and Beacon client on a new machine. Then import your keystores (guide in Validators part), but instead of configuring the validator client and starting it, simply run the exit command.</p>
                             <p>From a speed and simplicity, I recommend to use a combination of <a href="/nethermind" target="_blank">Nethermind</a> + <a href="/lodestar" target="_blank">Lodestar</a> client.</p>
-                            <ul class="list-disc mt-4 mb-4">
+                            <ul class="list-disc my-4">
                                 <li><a href="/lighthouse/exit-validator" target="_blank">Exiting Lighthouse validator</a></li>
                                 <li><a href="/lodestar/exit-validator" target="_blank">Exiting Lodestar Validator</a></li>
                                 <li><a href="/teku/exit-validator" target="_blank">Exiting Teku validator</a></li>
@@ -274,7 +291,6 @@
                             </ul>
                         </div>
                     </div>
-                </div>
             </section>
 
             {{!--
@@ -284,7 +300,7 @@
         <p>Receiving funds involves passing through three stages with varying waiting times, which are:</p>
         <ol class="list-decimal space-y-2 pl-6">
             <li>Exit queue: <strong>With an empty exit queue, the exit will take place 5 epochs (~ 1 epoch = 1 minute for Gnosis and 6.4 minutes for Ethereum) after the voluntary exit request is initialized.</strong> The protocol allows the following number of validators to activate/exit (churn limit) per epoch:
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4">
                     <li>Ethereum: 12</li>
                     <li>Gnosis: 47 ??</li>
                 </ul>
@@ -292,7 +308,7 @@
             </li>
             <li>A fixed waiting period of 256 epochs (~ 4.27 hours for Gnosis / 27.3 hours for Ethereum).</li>
             <li>The time until the validator's turn for withdrawals (withdrawals are performed at regular intervals, during which not only accrued rewards but also the entire stake are withdrawn).
-                <ul class="list-disc mt-4 mb-4">
+                <ul class="list-disc my-4">
                     <li>For Gnosis, 1 epoch = 16 blocks. Each epoch includes <a href="https://beacon.gnosisscan.io/" target="_blank" rel="nofollow noopener noreferrer">~120 withdrawals</a>. 1 epoch is ~ 1 minute. Thus, in 1 day, 60 * 24 * 120 = 172,800 withdrawals are performed. With 250,000 active validators, the maximum time for the withdrawal to be completed is 250,000/172,800 = 1.45 days.</li>
                 </ul>
             </li>
@@ -313,7 +329,7 @@
 					<p>Validators are defined by validation keys generated from a seed. The seed was provided by ...
 						 creation software. These keys may be re-generated anytime from a seed input into  (this seed is unique to you). Learn more about the mechanism in the <a href="/staking/wiki/intro">intro section</a>. Validation keys are both with you (on the provided flash drive) and on the specific validation server, where they are indirectly registered into the validation instance running on the same server (see the basic dashboard). Metadata associated with validation keys (indices, withdrawal wallet, or seed specifications) is part of the instance description on your dashboard.</p>
 					<p>Validation keys were funded from the deposit wallet using a deposit file, and since then, the deposited funds (8/32Eth per validator on the Ethereum network and 1 GNO per validator on the Gnosis network) are bound to the specific validator and its operation, serving as collateral.</p>
-					<ul class="list-disc mt-4 mb-4">
+					<ul class="list-disc my-4">
 						<li>If the validator operates in sync with the rest of the network, it receives rewards in the same currency (+ additional xDAI on Gnosis).</li>
 						<li>If the validator does not comply properly with the network, a penalty is automatically deducted from this collateral. If the validator’s collateral falls to half of the minimum stake, the validator is automatically terminated by the network, and the funds linked to it are sent to the withdrawal wallet associated with the validator (your wallet).</li>
 					</ul>
@@ -326,7 +342,7 @@
 
 					<h2 class="mt-1"><mark>Validator Exit Procedure</mark></h2>
 					<p>Validators can be exited via any synchronized server (i.e., synchronized Execution and Consensus clients) using the <strong>Beacon Chain client based on the registered validation key of each inactive validator in the validation client</strong>. The following options are available in practice:</p>
-					<ul class="list-disc mt-4 mb-4">
+					<ul class="list-disc my-4">
 						<li><a href="#presigned-message">Broadcast presigned exit message</a></li>
 						<li><a href="#broadcast-exit-direct">Exit initiated from the server where the validators are actively running</a></li>
 						<li><a href="#broadcast-exit-indirect">Exit initiated from any synchronized server</a></li>
@@ -334,16 +350,20 @@
 					</ul>
 
 
-                    <ul class="list-disc mt-4 mb-4">
+                    <ul class="list-disc my-4">
                         <li>If the validator operates in sync with the rest of the network, it receives rewards in {{#ifEqual chain "ethereum"}}ETH for pariticipating in attestations and producing blocks.{{/ifEqual}}{{#ifEqual chain "ethereum"}}GNO for pariticipating in attestations and Gno + xDAI for producing blocks.{{/ifEqual}}</li>
                         <li>If the validator does not comply properly with the network, a penalty is automatically deducted from the collateral in a form of locked funds behalf the validator. If the validator’s collateral falls to half of the minimum stake, the validator is automatically terminated by the network, and the funds linked to it are sent to the withdrawal wallet associated with the validator.</li>
                     </ul>
                 </div>
             </section>--}}
-        </div>
+	</main>
 
-
-    </div>
-</main>
-{{> footer}}
+	<aside class="ifr-panel xl:sticky xl:top-8 self-start xl:mt-160">
+		<div class="bg-gray-100 rounded-lg p-4 text-sm shadow-sm">
+			<p class="font-semibold mb-2">Interactive Config</p>
+			{{> guides/variablesOverview }}
+		</div>
+	</aside>
+</div>
+{{> footer_tailwind}}
 {{> scripts/tabselector}}

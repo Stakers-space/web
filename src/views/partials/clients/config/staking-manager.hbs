@@ -21,6 +21,16 @@
              Staking Manager util
           </a>
         </li>
+        {{#ifEqual servicesCategory "validator"}}
+          {{#ifEqual ClientName "teku"}}
+          <li>
+            <a href="https://github.com/Stakers-space/staking-scripts/tree/main/teku/remove_lock_files" 
+              target="_blank" class="underline hover:text-yellow-900">
+              Remove Lock files util.
+            </a>
+          </li>
+          {{/ifEqual}}
+        {{/ifEqual}}
       </ul>
       <p class="mt-2 text-yellow-700">A guide to install each util is attached on the Github.</p>
     </div>
@@ -28,26 +38,36 @@
 </aside>
 <ol class="list-decimal space-y-2 pl-6 mt-4">
    <li><h4>Configurate Staking Manager util</h4>
-      <ul class="list-disc mt-4">
+      <ul class="list-disc mt-4 pl-6">
         <li>Open the configuration file
           <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
           <p>If the file is empty, generate it with command <code>sudo /usr/local/bin/staking.sh init</code></p>
         </li>
         <li>Set link to proper service. It should be as follow:
-          <pre><code>executionServices="<mark class="{{MarkClass}}">{{servicePrefix}}nethermind</mark>.service"</code></pre>
+          <pre><code>{{servicesCategory}}Services="<mark class="{{MarkClass}}" data-client="{{ClientName}}">{{servicePrefix}}{{ServiceName}}</mark>"</code></pre>
+          <p class="my-2">If you place more services to the category, separate them with a space, see <code>{{servicesCategory}}Services="service1 service2 service3 ..."</code></p>
         </li>
       </ul>
    </li>
    <li>
       <h4>Activate service to start automatically on OS startup</h4>
-      <ul class="list-disc mt-4">
+      <ul class="list-disc mt-4 pl-6">
         <li>Open Start with delay util
             <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
         </li>
-        <li>Place or uncomment a command to start the Beacon client(s)
-            <pre><code>/usr/local/bin/staking.sh start execution</code></pre>
+        {{#ifEqual servicesCategory "validator"}}
+          {{#ifEqual ClientName "teku"}}
+          <li>
+            <p>Attach command to remove lock files (to prevent start the validator in a case of existing lock fiels after a power failure). This must be processed before starting the validator service.</p>
+            <pre><code>/opt/remove-teku-validator-lock-files.sh '<mark class="instance_dp">/var/lib{{slashChain}}/teku/vi1</mark>/keystores'</code></pre>
+          </li>
+          {{/ifEqual}}
+        {{/ifEqual}}
+
+        <li>Place or uncomment a command to start the {{servicesCategory}} client(s)
+            <pre><code>/usr/local/bin/staking.sh start {{#ifEqual servicesCategory "validator"}}validators{{else}}{{servicesCategory}}{{/ifEqual}}</code></pre>
         </li>
-        <li>Verify, that a service `delayed-start.service` exists and is automatically launched on system start.
+        <li>Verify, that a service `<code>delayed-start.service</code>` exists and is automatically launched on system start.
           <pre><code>sudo systemctl enable delayed-start.service</code></pre>
         </li>
       </ul>

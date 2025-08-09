@@ -27,7 +27,7 @@
 		<div class="md:max-w-xs bg-gray-50 p-6 rounded-xl shadow-md">
 			<h3 class="font-semibold mb-1">Disclaimer</h3>
 			<p>
-				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide.
+				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide. <a href="/disclaimer" target="_blank">See more.</a>
 			</p>
 		</div>
 	</div>
@@ -47,12 +47,13 @@
 		<p class="text-gray-700 mx-auto max-w-6xl text-center p-8">
 			{{clientName}} client can be used for staking on various supported chains. Client installation is always only one, used by services with an individual configuration (different service name, data path and ports in use).
 		</p>
-		{{> guides/serverSelection }}
+{{> guides/serverSelection }}
 	</aside>
 
 	<main class="ifr-body prose prose-lg max-w-none;">
 			<section id="update" class="rounded-lg shadow p-6 bg-gray-100">
-				{{> (lookup . 'cliPartial') }}
+				<h2 class="text-xl mt-4">Update client</h2>
+{{> (lookup . 'cliPartial') InstallationGuide=false sectionHeader="h3" }}
 			</section>
 			
 			{{#if client}}
@@ -66,7 +67,7 @@
 	<aside class="ifr-panel xl:sticky xl:top-8 self-start mt-14">
 		<div class="bg-gray-100 rounded-lg p-4 text-sm shadow-sm">
 			<p class="font-semibold mb-2">Interactive Config</p>
-			{{> guides/variablesOverview }}
+{{> guides/variablesOverview }}
 		</div>
 	</aside>
 </div>

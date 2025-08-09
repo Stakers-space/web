@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const EthereumController = require('../controllers/ethereum');
 const GuidePageController = require('../controllers/guidePage')
-const FundamentalsController = require('../controllers/fundamentalsPage');
+//const FundamentalsController = require('../controllers/fundamentalsPage');
 const ChartsController = require('../controllers/charts');
 const StakingSchema = require('../controllers/stakingSchema');
 const Chain = require('../middlewares/SetChain');
@@ -14,7 +14,7 @@ class EthereumRouter {
     constructor(){
         this.chainController = new EthereumController();
         this.GuidePage = new GuidePageController();
-        this.fundamentals = new FundamentalsController();
+        //this.fundamentals = new FundamentalsController();
         this.ChartsPage = new ChartsController();
         this.StakingSchema = new StakingSchema();
         this.NewsPage = new NewsPageSchema();
@@ -45,7 +45,7 @@ class EthereumRouter {
         router.get('/full-guide/rocketpool', Chain.Ethereum, this.GuidePage.Rocketpool, this.Response);
         router.get('/full-guide/stakewise', Chain.Ethereum, this.GuidePage.Stakewise, this.Response);
         router.get('/full-guide/lido', Chain.Ethereum, this.GuidePage.Lido, this.Response);
-        router.get('/fundamentals', Chain.Ethereum, this.fundamentals.Request, this.Response); // fundamentals
+        //router.get('/fundamentals', Chain.Ethereum, this.fundamentals.Request, this.Response); // fundamentals
         //router.get('/charts', Chain.Ethereum, this.ChartsPage.Request, this.ChartsPage.Response);
         router.get('/schema', Chain.Ethereum, this.StakingSchema.Request, this.Response);
         router.get('/clients', Chain.Ethereum, this.ClientsPage.ClientsOverview, this.Response);

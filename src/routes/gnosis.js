@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const GnosisController = require('../controllers/gnosis');
 const GuidePageController = require('../controllers/guidePage')
-const FundamentalsController = require('../controllers/fundamentalsPage');
+//const FundamentalsController = require('../controllers/fundamentalsPage');
 const ChartsController = require('../controllers/charts');
 const StakingSchema = require('../controllers/stakingSchema');
 const Chain = require('../middlewares/SetChain');
@@ -14,7 +14,7 @@ class GnosisRouter {
     constructor(){
         this.chainController = new GnosisController();
         this.GuidePage = new GuidePageController();
-        this.fundamentals = new FundamentalsController();
+        //this.fundamentals = new FundamentalsController();
         this.ChartsPage = new ChartsController();
         this.StakingSchema = new StakingSchema();
         this.NewsPage = new NewsPageController();
@@ -41,7 +41,7 @@ class GnosisRouter {
         router.get('/full-guide', Chain.Gnosis, this.GuidePage.Base, this.Response); // gudide - run execution and consensus layer clients
         router.get('/full-guide/solo', Chain.Gnosis, this.GuidePage.Solo, this.Response);
         router.get('/full-guide/stakewise', Chain.Gnosis, this.GuidePage.Stakewise, this.Response);
-        router.get('/fundamentals', Chain.Gnosis, this.fundamentals.Request, this.Response); // fundamentals
+        //router.get('/fundamentals', Chain.Gnosis, this.fundamentals.Request, this.Response); // fundamentals
         
         router.get('/schema', Chain.Gnosis, this.StakingSchema.Request, this.Response);
         router.get('/clients', Chain.Gnosis, this.ClientsPage.ClientsOverview, this.Response);

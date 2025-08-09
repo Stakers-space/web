@@ -1,5 +1,5 @@
     <aside><mark>Guide under construction, not tested yet. Do not use it for production.</mark></aside>
-    <ul class="list-disc mt-4 mb-4">
+    <ul class="list-disc my-4">
       <li>
     <h4>Create a user</h4>
       <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}nimbusbeacon" class="interactive-element consensus_sn" data-class="consensus_sn" data-client="nimbus">
@@ -17,7 +17,7 @@
     </ul>
 <h3 class="mt-1">Configurate & Run Nimbus Beacon service</h3>
 
-<ul class="list-disc mt-4 mb-4">
+<ul class="list-disc my-4">
  {{#if PortSelection}}
   <li>{{> clients/config/consensusclient-portselection }}</li>
   {{/if}}
@@ -123,13 +123,13 @@ journalctl -fu <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark></
                     <pre><code>sudo systemctl enable <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark></code></pre>
                     </div>
                     <div class="tabpanel">
-                      {{> clients/config/delayed-start MarkClass="consensus_sn" ClientName="nimbus" }}
+                      {{> clients/config/delayed-start MarkClass="consensus_sn" ClientName="nimbus" ServiceName="nimbusbeacon" }}
                     </div>
                 </div>
                 </div>
                 <div class="tabpanel">
                 <aside>NOTE: This option requires following installed utils:
-                    <ul class="list-disc mt-4 mb-4">
+                    <ul class="list-disc my-4">
                     <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with Delay util with delayed-start.service</a>.</li>
                     <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util.</li>
                     </ul>
@@ -137,7 +137,7 @@ journalctl -fu <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark></
                 </aside>
                 <ol class="list-decimal space-y-2 pl-6">
                     <li><h4>Configurate Staking Manager util</h4>
-                    <ul class="list-disc mt-4 mb-4">
+                    <ul class="list-disc my-4">
                         <li>Open the configuration file
                         <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
                         <p>If the file is empty, generate it with command <code>sudo /usr/local/bin/staking.sh init</code></p>
@@ -149,7 +149,7 @@ journalctl -fu <mark class="consensus_sn">{{servicePrefix}}nimbusbeacon</mark></
                     </li>
                     <li>
                     <h4>Activate service to start automatically on OS startup</h4>
-                    <ul class="list-disc mt-4 mb-4">
+                    <ul class="list-disc my-4">
                         <li>Open Start with delay util
                             <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
                         </li>

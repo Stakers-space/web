@@ -1,8 +1,7 @@
 {{> header}}
-<main class="mb-60">
-	<section class="cover grid egrid">
-		<div class="mt-60 mb-20">
-			<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+<section class="grid grid-cols-1 md:grid-cols-[67fr_33fr] gap-8 p-8">
+	<div class="mx-auto md:px-6 md:py-16">
+		<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
 				<li property="itemListElement" typeof="ListItem">
 					<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
 					<meta property="position" content="1">
@@ -16,58 +15,67 @@
 					<meta property="position" content="3">
 				</li>
 			</ul>
-			<h1 class="cover-title"><span>Maintenance guide</span> for {{chainName}} staking</h1>
-			<p><strong>Maintenance guide for {{chainName}} staking.</strong></p>
-            <p>As a regular member securying the network and processing blockchain operations on it, you need to keep your software up to date to avoid penalties and earning rewards for the processed work.</p>
-            <p><strong>You can check current versions of individual clients at <a href="/clients">clients page</a>.</strong></p>
-		</div>
-		<div class="disclaimer">
-			<div class="disclaimer-content">
-				<h3>Disclaimer</h3>
-				<p>This guide is for informational and education purposes only - accuracy is not guaranteed, see <a href="/disclaimer">disclaimer</a>.</p>
-            </div>
-		</div>
-	</section>
 
-	<div class="grid-full contents serverguide">
-        <div class="content-chapters">
-			<div class="sticky">
-				 <nav class="mt-1">
-					<strong>Navigation:</strong>
-                    <ol class="list-decimal space-y-2 pl-6">
-						<li><a href="#os">Updating Operation system</a></li>
+		<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+			<span class="block mt-1 text-green-600">Maintenance guide</span> for {{chainName}} staking
+		</h1>
+
+		<p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl">
+			As a regular member securying the network and processing blockchain operations on it, you need to keep your software up to date to avoid penalties and earning rewards for the processed work.
+		</p>
+		<p class="mt-10"><strong>You can check current versions of individual clients at <a href="/clients">clients page</a>.</strong></p>
+	</div>
+	<div class="flex items-center justify-center md:pl-10 text-sm text-gray-600">
+		<div class="md:max-w-xs bg-gray-50 p-6 rounded-xl shadow-md">
+			<h3 class="font-semibold mb-1">Disclaimer</h3>
+			<p>
+				This guide is for informational purposes only. The author nor website owner does not guarantee accuracy of the information in this guide and is not responsible for any damages or losses incurred by following the guide. <a href="/disclaimer" target="_blank">See more.</a>
+			</p>
+		</div>
+	</div>
+</section>
+
+<div class="ifr-grid grid-cols-1 xl:grid-cols-[minmax(220px,1fr)_minmax(0,6fr)_minmax(240px,1fr)] gap-6 mt-12">
+	<aside class="ifr-nav lg:mt-14">
+		<nav class="border-l-4 border-gray-500 pl-4">
+			<p class="font-semibold mb-2">Navigation</p>
+			<ul class="list-disc pl-4">
+				<li><a href="#os">Updating Operation system</a></li>
 						<li><a href="#clients">Updating Staking clients</a>
-                            <ul class="list-disc mt-4 mb-4">
+                            <ul class="list-disc my-4">
                                 <li><a href="#execution">Execution client</a></li>
                                 <li><a href="#consensus">Consensus (Beacon + Validator) client</a></li>
                                 <li><a href="#mev">MEV client</a></li>
                                 <li><a href="#services">Services clients</a></li>
                             </ul>
                         </li>
-                    </ol>
-				</nav>
-			</div>
-		</div>
+			</ul>
+		</nav>
+	</aside>
+
+	<aside class="ifr-header">
+		{{> guides/serverSelection }}
+	</aside>
+
+	<main class="ifr-body prose prose-lg" id="setup">
+		<section id="os" class="mt-8 max-w-6xl mx-auto px-4">
+			<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+				Updating OS
+			</h2>
 	
-		<div class="content-body">
-            <section class="chapter" id="os">
+            <p>Be sure your Operating system is up to date.</p>
+            <pre><code>sudo apt update && sudo apt -y upgrade</code></pre>
+            <pre><code>sudo apt dist-upgrade && sudo apt autoremove</code></pre>
+        </section>
 
-				<div class="content">
-                    <h2>Updating OS</h2>
-                    <p>Be sure your Operating system is up to date.</p>
-                    <pre><code>sudo apt update && sudo apt -y upgrade</code></pre>
-                    <pre><code>sudo apt dist-upgrade && sudo apt autoremove</code></pre>
-                </div>
-            </section>
-
-			<section class="chapter" id="clients">
-
-				<div class="content">
-                    <h2>Updating Staking clients</h2>
-                    <ul class="list-disc mt-4 mb-4">
-						<li><h3 id="execution">Execution Client</h3>
-                                    <div class="tabselector">
-						<nav class="egrid egrid-4">
+		<section id="clients" class="mt-8 max-w-6xl mx-auto px-4 mt-20">
+			<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+				Updating Staking clients
+			</h2>
+            <ul class="list-disc my-4">
+				<li><h3 id="execution" class="text-xl mt-10">Execution Client</h3>
+                    <div class="tabselector mt-6 bg-gray-100 p-10 pt-5 rounded-xl shadow-md">
+						<nav class="mb-5">
 							<button class="tab selected" data-tabpanel="1" onclick="OnExecutionClientChanged('nethermind')">
 								Nethermind
 							</button>
@@ -95,45 +103,62 @@
 						</div>
 					</div>
                                 </li>
-								<li><h3 class="mt-50" id="consensus">Consensus clients (Beacon and Validator(s))</h3>
-                                    <div class="tabselector">
-                                        <nav class="egrid egrid-5">
+
+
+								<li>
+									<h3 id="consensus" class="text-xl mt-20">Consensus clients (Beacon and Validator(s))</h3>
+                                    <div class="tabselector mt-6 bg-gray-100 p-10 pt-5 rounded-xl shadow-md">
+                                        <nav class="mb-5">
                                             <button class="tab selected" data-tabpanel="1" onclick="OnConsensusClientChanged('lighthouse')">Lighthouse</button>
                                             <button class="tab" data-tabpanel="2" onclick="OnConsensusClientChanged('lodestar')">Lodestar</button>
                                             <button class="tab" data-tabpanel="3" onclick="OnConsensusClientChanged('teku')">Teku</button>
+											<button class="tab" data-tabpanel="5" onclick="OnConsensusClientChanged('prysm')">Prysm</button>
                                             <button class="tab" data-tabpanel="4" onclick="OnConsensusClientChanged('nimbus')">Nimbus</button>
-                                            <button class="tab" data-tabpanel="5" onclick="OnConsensusClientChanged('prysm')">Prysm</button>
+                                            
                                         </nav>
 
                                         <div class="tabpanel selected">
-{{> clients/lighthouse_cli InstallationGuide=false }}
+<h3 class="text-xl mt-4">Update Lighthouse</h3>
+{{> clients/lighthouse_cli InstallationGuide=false sectionHeader="h4" }}
 						</div>
 						<div class="tabpanel">
-{{> clients/lodestar_cli InstallationGuide=false }}
+<h3 class="text-xl mt-4">Update Lodestar</h3>
+{{> clients/lodestar_cli InstallationGuide=false sectionHeader="h4" }}
 						</div>
 						<div class="tabpanel">
-{{> clients/teku_cli InstallationGuide=false }}
+<h3 class="text-xl mt-4">Update Teku</h3>
+{{> clients/teku_cli InstallationGuide=false sectionHeader="h4" }}
 						</div>
 						<div class="tabpanel">
-{{> clients/nimbus_cli InstallationGuide=false }}
+{{> clients/nimbus_cli InstallationGuide=false sectionHeader="h4" }}
 						</div>
 						<div class="tabpanel">
-{{> clients/prysm_cli InstallationGuide=false }}
+{{> clients/prysm_cli InstallationGuide=false sectionHeader="h4" }}
                                         </div>
                                     </div>
                                 </li>
-                                <li class="mt-50"><h3 id="mev">Updating MEV client (if used)</h3>
-{{> clients/mevboost InstallationGuide=false }}
+
+                                <li>
+									<h3 id="mev" class="text-xl mt-20">Updating MEV client (if used)</h3>
+									<div class="bg-gray-100 rounded-lg shadow p-10 border-t border-gray-200 max-w-6xl mx-auto mt-5">
+{{> clients/mevboost InstallationGuide=false sectionHeader="h4" }}
+									</div>
+
                                 </li>
-                                <li class="mt-50"><h3 id="services">Updating service(s) client(s) (if used)</h3>
+                                <li class="mb-20">
+									<h3 id="services" class="text-xl mt-20">Updating service(s) client(s) (if used)</h3>
                                     <p>If you validate with services such as <a href="/stakewise">StakeWise</a>, <a href="/rocketpool">Rocketpool</a> or <a href="/lido">Lido</a>, be sure that also these clients are up to date.</p>
                                 </li>
 							</ul>
-                </div>
             </section>
-        </div>
+	</main>
 
-    </div>
-</main>
-{{> footer}}
+	<aside class="ifr-panel xl:sticky xl:top-8 self-start xl:mt-180">
+		<div class="bg-gray-100 rounded-lg p-4 text-sm shadow-sm">
+			<p class="font-semibold mb-2">Interactive Config</p>
+			{{> guides/variablesOverview }}
+		</div>
+	</aside>
+</div>
+{{> footer_tailwind}}
 {{> scripts/tabselector}}

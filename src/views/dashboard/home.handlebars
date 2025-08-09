@@ -34,7 +34,7 @@ ul.img_marker li {
                 <div class="header">
                     <h2>{{this.location}}</h2>
                     <i class="encrypted_value">{{this.location_note}}</i>
-                    <ul class="list-disc mt-4 mb-4">
+                    <ul class="list-disc my-4">
                         <li>Network: <span class="encrypted_value">{{this.network}}</span></li>
                         <li>validators
                             <ul class="img_marker dest_validators">
@@ -48,7 +48,7 @@ ul.img_marker li {
                     {{#each this.servers}}
                      <div class="destination-server">
                         <h3 id="{{this.name}}"><a href="/dashboard/server-node/define?id={{this.sid}}">{{this.name}}</a></h3>
-                                <ul class="list-disc mt-4 mb-4">
+                                <ul class="list-disc my-4">
                                     {{!<li>Validators: <strong></strong></li>}}
                                     <li>Clients: {{#each this.cliensList}}
                                         <code {{#if this.rcm}}style="color:orange" title="{{this.rcm}}"{{/if}}><a href="/{{this.client}}?sid={{../this.sid}}" target="_blank">{{this.client}}</a> ({{this.ver}})</code>
