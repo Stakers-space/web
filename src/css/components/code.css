@@ -15,7 +15,8 @@
     }
     code input {
         color: white;
-        border: none;
+        padding-block: unset;
+        padding-inline: unset;
     }
     code mark {
         @apply rounded-xs;

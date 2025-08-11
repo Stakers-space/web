@@ -19,9 +19,9 @@ class SitemapRouter {
 
     RespLinks(req,res){
         const cononicalUrl = (process.env.PORT) ? "https://stakers.space"+req.originalUrl.split('?')[0] : null; // allow localhost
-        for(var i=0; i<pagesToIndexList.length;i++){
+        /*for(var i=0; i<pagesToIndexList.length;i++){
             pagesToIndexList[i].url = pagesToIndexList[i].url.substring(21);
-        }
+        }*/
         
         res.render("pages/sitemapLinks", {
             layout: "amp",

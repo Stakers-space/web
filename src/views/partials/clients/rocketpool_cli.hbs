@@ -7,7 +7,7 @@
 </ul>
 <label>Reocketpool validators service name:</label> <input type="text" class="interactive-element validator_sn" data-class="validator_sn" value="rocketpool-validator">
 {{/unless}}
-<ol class="list-decimal space-y-2 pl-6">
+<ol class="list-decimal space-y-4 pl-6">
     {{#if InstallationGuide}}
     <li>
         <h3>Create a Rocketpool service user</h3>
@@ -83,14 +83,20 @@
         <pre><code>sudo cp rocketpool /usr/local/bin && sudo cp rocketpoold /usr/local/bin</code></pre>
     </li>
     <li>
-        <h3>Set clients permissions</h3>
-        <ul class="list-disc my-4 pl-6">
-            <li><code>sudo chown <mark class="rocketpool_su">rocketpool</mark>:<mark class="rocketpool_su">rocketpool</mark> /usr/local/bin/rocketpool</code>
+        <h3 class="mt-4">Set clients permissions</h3>
+        <ul class="list-disc pl-6">
+            <li>
+                <pre><code>sudo chown <mark class="rocketpool_su">rocketpool</mark>:<mark class="rocketpool_su">rocketpool</mark> /usr/local/bin/rocketpool</code></pre>
             </li>
-            <li><code>sudo chown <mark class="rocketpool_su">rocketpool</mark>:<mark class="rocketpool_su">rocketpool</mark> /usr/local/bin/rocketpoold</code>
+            <li>
+                <pre><code>sudo chown <mark class="rocketpool_su">rocketpool</mark>:<mark class="rocketpool_su">rocketpool</mark> /usr/local/bin/rocketpoold</code></pre> 
             </li>
-            <li><code>sudo chmod +x /usr/local/bin/rocketpool</code></li>
-            <li><code>sudo chmod u+sx,g+sx,o-rwx /usr/local/bin/rocketpoold</code></li>
+            <li>
+                <pre><code>sudo chmod +x /usr/local/bin/rocketpool</code></pre>
+            </li>
+            <li>
+                <pre><code>sudo chmod u+sx,g+sx,o-rwx /usr/local/bin/rocketpoold</code></pre>
+            </li>
         </ul>
     </li>
     {{#unless InstallationGuide}}
@@ -102,10 +108,10 @@
         <h3>Check state of running</h3>
         <pre><code>systemctl status rp-node rp-watchtower <mark class="validator_sn">rocketpool-validator</mark></code></pre>
         <h4>Monitor logs</h4>
-        <ul class="list-disc my-4 pl-6">
-            <li><code>journalctl -fu rp-node.service</code></li>
-            <li><code>journalctl -fu rp-watchtower.service</code></li>
-            <li><code>journalctl -fu <mark class="validator_sn">rocketpool-validator</mark></code></li>
+        <ul class="list-disc pl-6">
+            <li><pre><code>journalctl -fu rp-node.service</code></pre></li>
+            <li><pre><code>journalctl -fu rp-watchtower.service</code></pre></li>
+            <li><pre><code>journalctl -fu <mark class="validator_sn">rocketpool-validator</mark></code></pre></li>
         </ul>
     </li>
     {{/unless}}

@@ -19,8 +19,7 @@
 
     .ifr-grid {
         @apply grid;
-        grid-template-columns: 1fr 260px;
-        grid-template-areas: "outl outl" "head panel" "body panel";
+        grid-template-areas: "outl" "head" "panel" "body";
     }
     .ifr-grid .ifr-nav {
         @apply xl:sticky xl:top-8 self-start;
@@ -36,7 +35,8 @@
         grid-area: body;
     }
 
-    @media (min-width: 1500px) {
+
+    @media (min-width: 1280px) {
         .ifr-grid {
             grid-template-columns: 230px 1fr 260px;
             grid-template-areas: "outl head panel" "outl body panel";
