@@ -15,10 +15,10 @@ ul.img_marker li {
     <div class="grid">
         
         <div id="overview" class="egrid egrid-3">
-            <div>Validators: 
+            <div><span id="amount_identifier">Validators: </span>
                 <ul class="img_marker account_validators" style="display:ruby;">
-                    <li style="--marker-image: url('/logo/ethereum.svg')" class="f-bold">??? ETH / ?? Val</li>
-                    <li style="--marker-image: url('/logo/gnosis.svg');margin-left: 50px" class="f-bold">??? GNO / ?? Val</li>
+                    <li style="--marker-image: url('/logo/ethereum.svg')" class="f-bold">?? Val</li>
+                    <li style="--marker-image: url('/logo/gnosis.svg');margin-left: 50px" class="f-bold"> ?? Val</li>
                 </ul>
             </div>
             <div>
@@ -208,7 +208,7 @@ ul.img_marker li {
         }
 
         // aggregation
-        RenderAccountCounts();
+        RenderAccountCounts("val");
 
         // UI level account (header)
         if(valcount_instance["gnosis"]["agg"].offline > 0) document.getElementById("overview").children[1].innerHTML += `| <span style="color:red">Offline: ${valcount_instance["gnosis"]["agg"].offline} GNO Val</span> `;
@@ -233,14 +233,17 @@ ul.img_marker li {
                 for(const snapshotKey of snapshotKeys){
                      // find val balance for each pubId in the instance list
                     for (const pubId of data.pubIds){
-                        data.total.balance += snapshots[chain][snapshotKey].data[Number(pubId)];
+                        data.total.balance += snapshots[chain][snapshotKey].data[Number(pubId)]; 
                     }
                 }
+                valcount_instance[chain]["agg"].total.balance += valcount_instance[chain][instance_id].total.balance;
                 
                 // Update 
                 RenderInstanceCountsView(instance_id, null, data, chain);
 			};
         }
+
+        RenderAccountCounts("balance");
     }
 
     function RenderInstanceCountsView(instanceId, instanceElm, instance_data, chain, initIteration = false){
@@ -330,10 +333,14 @@ ul.img_marker li {
         dest_agg_ui.children[1].innerHTML = count.gnosis;
     }
 
-    function RenderAccountCounts(){
+    function RenderAccountCounts(key){
         const acc_agg_ui = document.getElementsByClassName("account_validators")[0];
-        acc_agg_ui.children[0].innerHTML = valcount_instance["ethereum"]["agg"].total.val;
-        acc_agg_ui.children[1].innerHTML = valcount_instance["gnosis"]["agg"].total.val;
+        acc_agg_ui.children[0].innerHTML = valcount_instance["ethereum"]["agg"].total[key];
+        acc_agg_ui.children[1].innerHTML = valcount_instance["gnosis"]["agg"].total[key];
+
+        if(key === "balance"){
+            document.getElementById("amount_identifier").innerHTML = "Assets:";
+        }
     }
 
 </script>
