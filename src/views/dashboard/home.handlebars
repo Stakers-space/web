@@ -125,7 +125,7 @@ ul.img_marker li {
                 const offlineCount = (offlineStateData[instanceId].o) ? offlineStateData[instanceId].o.length : 0;
                 const pendingCount = (offlineStateData[instanceId].p) ? offlineStateData[instanceId].p : 0;
                
-                valcount_instance[chain][instanceId].offile.val_count = offlineCount;
+                valcount_instance[chain][instanceId].offline = offlineCount;
                 valcount_instance[chain]["agg"].offline += offlineCount;
                 
                 valcount_instance[chain][instanceId].pending = pendingCount;
@@ -260,7 +260,7 @@ ul.img_marker li {
         
         if(initIteration){
             // first iteration
-            if(instance_data.offline === 0 && instance_data.pending === 0){
+            if(instance_data.offline === 0 && instance_data.pending === 0 && !offlineStateData[instanceId]){
                 statusElm.innerHTML = "All online";
                 statusElm.style.color = "green";
                 return;
@@ -281,7 +281,7 @@ ul.img_marker li {
                 let stArr = offlineIds.toString();
                 msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+instance_data.offline+' Offline</a> ';
             }
-            if(pendingCount > 0) msg += pendingCount+' Pending ';
+            if(valcount_instance[chain][instanceId].pending > 0) msg += valcount_instance[chain][instanceId].pending+' Pending ';
             msg += "| " + offlineStateData[instanceId].v + "Total";
 
             statusElm.innerHTML = msg;
@@ -295,7 +295,7 @@ ul.img_marker li {
         } 
 
         // 3rd iteration
-        if(instance_data.total.balance > 0){
+        if(instance_data.total.balance > 0 && !offlineStateData[instanceId]){
             let ticker = (chain === "gnosis") ? "GNO" : "ETH";
             statusElm.innerHTML = `${instance_data.total.balance} ${ticker} | ${instance_data.total.val}/${instance_data.total.val} Val online`;
             return;
