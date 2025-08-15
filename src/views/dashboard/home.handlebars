@@ -98,11 +98,11 @@ ul.img_marker li {
     /* In-page Offline / pending state data */
     var offlineStateData = {{{offlineStateData}}}; // offline data
     let asyncTasks = 2;
+    let snapshots = {};
 
     /* Aggregated view */
-    function ValState(){ this.val_count = 0; this.asset_balance = 0; }
     function SectorState(pubIdsIncluded = false){ 
-        this.offline = new ValState(); this.pending = new ValState(); this.online = new ValState()
+        this.offline = 0; this.pending = 0; this.total = { val: 0, balance: 0 }
         if(pubIdsIncluded) this.pubIds = [];
     }
     let valcount_instance = { ethereum: {}, gnosis: {} };
@@ -126,13 +126,13 @@ ul.img_marker li {
                 const pendingCount = (offlineStateData[instanceId].p) ? offlineStateData[instanceId].p : 0;
                
                 valcount_instance[chain][instanceId].offile.val_count = offlineCount;
-                valcount_instance[chain]["agg"].offline.val_count += offlineCount;
+                valcount_instance[chain]["agg"].offline += offlineCount;
                 
-                valcount_instance[chain][instanceId].pending.val_count = pendingCount;
-                valcount_instance[chain]["agg"].pending.val_count += pendingCount;
+                valcount_instance[chain][instanceId].pending = pendingCount;
+                valcount_instance[chain]["agg"].pending += pendingCount;
             }
 
-           RenderQuickView(instanceId, instanceElm, valcount_instance[chain][instanceId], chain);
+            RenderInstanceCountsView(instanceId, instanceElm, valcount_instance[chain][instanceId], chain);
         }
     })();
 
@@ -140,12 +140,15 @@ ul.img_marker li {
      *  Request validators data
     **/
     function GetValidatorsSnapshot(chain, state_snapshot){
-        xmlHttpRequest({type:"GET", url:`/api/state-balances?f=${chain}_${state_snapshot}.json`, credentials:false, data:null }, function(err,data){ return OnSnapshotReceived({chain, snapshot: state_snapshot}, "err:", err); });    
+        snapshots[chain] = {};
+        snapshots[chain][state_snapshot] = {};
+        xmlHttpRequest({type:"GET", url:`/api/state-balances?f=${chain}_${state_snapshot}.json`, credentials:false, data:null }, function(err,data){ return OnSnapshotReceived({chain, snapshot: state_snapshot}, err, data); });    
     }
 
     function OnSnapshotReceived(cred, err, data){
-        console.log("OnSnapshotReceived", cred, err, data);
-        CalculateState();
+        //console.log("On Snapshot received", cred, err, data);
+        snapshots[cred.chain][cred.snapshot] = JSON.parse(data);
+        CalculateBalances();
     }
 
     // if gnosis validators
@@ -155,7 +158,6 @@ ul.img_marker li {
 
     /* callback from cryptography util */
     function OnDecryptionProcessComplted(){
-        let acc_agg_validators = { gnosis:0, ethereum:0 }
         // parse pubkeys
         for(const serverDestination of document.getElementsByClassName("servers-destination")){
             //console.log("destination:", serverDestination);
@@ -164,88 +166,91 @@ ul.img_marker li {
                 let srv_agg_validators = {gnosis:0,ethereum:0} 
                 for(const instanceElm of server.getElementsByClassName("val_instance")){
                     const instanceId = instanceElm.dataset.iid;
+                    const chain = instanceElm.dataset.chain;
                     const statusElm = instanceElm.children[1];
-
+                    
                     // update fee wlt
                     const feeWltC = instanceElm.getElementsByClassName("instance_fwlt");
                     if(feeWltC.length > 0){
                         const feeWlt = feeWltC[0];
                         // set ahref
-                        const explorerurl = (instanceElm.dataset.chain === "gnosis") ? "https://gnosischa.in/address/" : "https://beaconcha.in/address/"
+                        const explorerurl = (chain === "gnosis") ? "https://gnosischa.in/address/" : "https://beaconcha.in/address/"
                         feeWlt.href = explorerurl+feeWlt.innerHTML;
                         feeWlt.innerHTML = "..."+feeWlt.innerHTML.slice(-3);
                     }
 
-                    const pubkeyElm = instanceElm.getElementsByClassName("instance_insight")[0]; //instanceElm.children[4];
+                    const pubkeyElm = instanceElm.getElementsByClassName("instance_insight")[0];
 
                     if(pubkeyElm.innerHTML === "") continue;
                     if(pubkeyElm.innerHTML.indexOf("Processing") > -1) continue;
+
                     const pubkeys = pubkeyElm.innerHTML.split(",");
                     
-                    valcount_instance[instanceElm.dataset.chain][instanceId].pubIds = pubkeys;
+                    valcount_instance[chain][instanceId].pubIds = pubkeys;
 
-                    // Render
                     const validators_count = pubkeys.length;
-                    if(statusElm.innerHTML === "All online") statusElm.innerHTML = `${validators_count}/${validators_count} Val online`;
+                    valcount_instance[chain][instanceId].total.val = validators_count; 
+                    valcount_instance[chain]["agg"].total.val += validators_count;
+
+                    RenderInstanceCountsView(instanceId, instanceElm, valcount_instance[chain][instanceId], chain);
                     //console.log("pubkeys:", validators_count);
-                    srv_agg_validators[instanceElm.dataset.chain] += validators_count;
-                    dest_agg_validators[instanceElm.dataset.chain] += validators_count;
-                    acc_agg_validators[instanceElm.dataset.chain] += validators_count;
+                    srv_agg_validators[chain] += validators_count;
+                    dest_agg_validators[chain] += validators_count;
                     
-                        
-                    const chunks = splitArrayIntoChunks(pubkeys, 100);
-                    let output = "Insight: ";
-                    for(const index in chunks){
-                        const chunk = chunks[index];
-                        output += `<a href="https://gnosischa.in/dashboard?validators=${chunk.toString()}" target="_blank" rel="nofollow noopener noreferrer">${(Number(index)+1)}</a> `;
-                    }
-                    pubkeyElm.innerHTML = output;
+                    RenderInsightLinks(pubkeyElm, valcount_instance[chain][instanceId]);
                 }
 
-                const srv_agg_ui = server.getElementsByClassName("server_validators")[0];
-                srv_agg_ui.children[0].innerHTML = srv_agg_validators.ethereum;
-                srv_agg_ui.children[1].innerHTML = srv_agg_validators.gnosis;
+                RenderServerCounts(server, srv_agg_validators);
             }
 
             // dest level ui
-            const dest_agg_ui = serverDestination.getElementsByClassName("dest_validators")[0];
-            dest_agg_ui.children[0].innerHTML = dest_agg_validators.ethereum;
-            dest_agg_ui.children[1].innerHTML = dest_agg_validators.gnosis;
+            RenderDestinationCounts(serverDestination, dest_agg_validators);
         }
 
         // aggregation
-        const acc_agg_ui = document.getElementsByClassName("account_validators")[0];
-        acc_agg_ui.children[0].innerHTML = acc_agg_validators.ethereum;
-        acc_agg_ui.children[1].innerHTML = acc_agg_validators.gnosis;
+        RenderAccountCounts();
 
         // UI level account (header)
-        if(valcount_instance["gnosis"]["agg"].offline.val_count > 0) document.getElementById("overview").children[1].innerHTML += `| <span style="color:red">Offline: ${valcount_instance["gnosis"]["agg"].offline.val_count} GNO Val</span> `;
-        if(valcount_instance["ethereum"]["agg"].offline.val_count > 0) document.getElementById("overview").children[1].innerHTML += `| <span style="color:red">Offline: ${valcount_instance["ethereum"]["agg"].offline.val_count} ETH Val</span> `;
-        if(valcount_instance["gnosis"]["agg"].pending.val_count > 0) document.getElementById("overview").children[1].innerHTML += `| Pending: ${valcount_instance["gnosis"]["agg"].pending.val_count} GNO Val`;
-        if(valcount_instance["ethereum"]["agg"].pending.val_count > 0) document.getElementById("overview").children[1].innerHTML += `| Pending: ${valcount_instance["ethereum"]["agg"].pending.val_count} ETH Val`;
+        if(valcount_instance["gnosis"]["agg"].offline > 0) document.getElementById("overview").children[1].innerHTML += `| <span style="color:red">Offline: ${valcount_instance["gnosis"]["agg"].offline} GNO Val</span> `;
+        if(valcount_instance["ethereum"]["agg"].offline > 0) document.getElementById("overview").children[1].innerHTML += `| <span style="color:red">Offline: ${valcount_instance["ethereum"]["agg"].offline} ETH Val</span> `;
+        if(valcount_instance["gnosis"]["agg"].pending > 0) document.getElementById("overview").children[1].innerHTML += `| Pending: ${valcount_instance["gnosis"]["agg"].pending} GNO Val`;
+        if(valcount_instance["ethereum"]["agg"].pending > 0) document.getElementById("overview").children[1].innerHTML += `| Pending: ${valcount_instance["ethereum"]["agg"].pending} ETH Val`;
 
-        function splitArrayIntoChunks(array, chunkSize) {
-            let result = [];
-            for (let i = 0; i < array.length; i += chunkSize) {
-                let chunk = array.slice(i, i + chunkSize);
-                result.push(chunk);
-            }
-            return result;
-        }
-
-        CalculateState();
+        CalculateBalances();
     }
 
-    function CalculateState(){
+    function CalculateBalances(){
         asyncTasks--;
         if(asyncTasks > 0) return;
 
         // Calculating
+        for(const chain in valcount_instance){
+            if(!snapshots[chain]) continue;
+            const snapshotKeys = Object.keys(snapshots[chain]);
+            for (const [instance_id, data] of Object.entries(valcount_instance[chain])) {
+                if(instance_id === "agg") continue;
+				
+                for(const snapshotKey of snapshotKeys){
+                     // find val balance for each pubId in the instance list
+                    for (const pubId of data.pubIds){
+                        data.total.balance += snapshots[chain][snapshotKey].data[Number(pubId)];
+                    }
+                }
+			};
+
+            // Update 
+            //RenderInstanceCountsView();
+        }
     }
 
-    function RenderQuickView(instanceId, instanceElm, instance_data, chain){
+    function RenderInstanceCountsView(instanceId, instanceElm, instance_data, chain){
         let statusElm = instanceElm.children[1];
-        if(instance_data.offline.val_count === 0 && instance_data.pending.val_count === 0){
+        if(statusElm.innerHTML === "All online") {
+            statusElm.innerHTML = `${instance_data.total.val}/${instance_data.total.val} Val online`;
+            return;
+        } 
+        
+        if(instance_data.offline === 0 && instance_data.pending === 0){
             statusElm.innerHTML = "All online";
             statusElm.style.color = "green";
             return;
@@ -264,13 +269,50 @@ ul.img_marker li {
         if(offlineIds.length > 0) {
             let link = (chain === "gnosis") ? "https://gnosischa.in" : "https://beaconcha.in";
             let stArr = offlineIds.toString();
-            msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+instance_data.offline.val_count+' Offline</a> ';
+            msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+instance_data.offline+' Offline</a> ';
         }
         if(pendingCount > 0) msg += pendingCount+' Pending ';
         msg += "| " + offlineStateData[instanceId].v + "Total";
 
         statusElm.innerHTML = msg;
         statusElm.style.color = "orange";
+    }
+
+    function RenderInsightLinks(pubkeyElm, data){
+        const chunks = splitArrayIntoChunks(data.pubIds, 100);
+        let output = "Insight: ";
+        for(const index in chunks){
+            const chunk = chunks[index];
+            output += `<a href="https://gnosischa.in/dashboard?validators=${chunk.toString()}" target="_blank" rel="nofollow noopener noreferrer">${(Number(index)+1)}</a> `;
+        }
+        pubkeyElm.innerHTML = output;
+
+        function splitArrayIntoChunks(array, chunkSize) {
+            let result = [];
+            for (let i = 0; i < array.length; i += chunkSize) {
+                let chunk = array.slice(i, i + chunkSize);
+                result.push(chunk);
+            }
+            return result;
+        }
+    }
+
+    function RenderServerCounts(serverElm, count){
+        const srv_agg_ui = serverElm.getElementsByClassName("server_validators")[0];
+        srv_agg_ui.children[0].innerHTML = count.ethereum;
+        srv_agg_ui.children[1].innerHTML = count.gnosis;
+    }
+
+    function RenderDestinationCounts(serverDestinationElm, count){
+        const dest_agg_ui = serverDestinationElm.getElementsByClassName("dest_validators")[0];
+        dest_agg_ui.children[0].innerHTML = count.ethereum;
+        dest_agg_ui.children[1].innerHTML = count.gnosis;
+    }
+
+    function RenderAccountCounts(){
+        const acc_agg_ui = document.getElementsByClassName("account_validators")[0];
+        acc_agg_ui.children[0].innerHTML = valcount_instance["ethereum"]["agg"].total.val;
+        acc_agg_ui.children[1].innerHTML = valcount_instance["gnosis"]["agg"].total.val;
     }
 
 </script>
