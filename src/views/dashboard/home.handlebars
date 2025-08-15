@@ -132,7 +132,7 @@ ul.img_marker li {
                 valcount_instance[chain]["agg"].pending += pendingCount;
             }
 
-            RenderInstanceCountsView(instanceId, instanceElm, valcount_instance[chain][instanceId], chain);
+            RenderInstanceCountsView(instanceId, instanceElm, valcount_instance[chain][instanceId], chain, true);
         }
     })();
 
@@ -236,46 +236,67 @@ ul.img_marker li {
                         data.total.balance += snapshots[chain][snapshotKey].data[Number(pubId)];
                     }
                 }
+                
+                // Update 
+                RenderInstanceCountsView(instance_id, null, data, chain);
 			};
-
-            // Update 
-            //RenderInstanceCountsView();
         }
     }
 
-    function RenderInstanceCountsView(instanceId, instanceElm, instance_data, chain){
+    function RenderInstanceCountsView(instanceId, instanceElm, instance_data, chain, initIteration = false){
+        if(!instanceElm) {
+            try {
+                instanceElm = document.querySelector('[data-iid="'+instanceId+'"]');
+                if(!instanceElm) return;
+            } catch(e){
+                console.error(e)
+            };
+        }
+
         let statusElm = instanceElm.children[1];
+        
+        if(initIteration){
+            // first iteration
+            if(instance_data.offline === 0 && instance_data.pending === 0){
+                statusElm.innerHTML = "All online";
+                statusElm.style.color = "green";
+                return;
+            }
+
+            let offlineIds = [];
+            for(const obj of offlineStateData[instanceId].o){
+                if(offlineIds.length < 100) { // limit at 100
+                    offlineIds.push(obj.i); 
+                } else {
+                    break;
+                }
+            }
+
+            let msg = "";
+            if(offlineIds.length > 0) {
+                let link = (chain === "gnosis") ? "https://gnosischa.in" : "https://beaconcha.in";
+                let stArr = offlineIds.toString();
+                msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+instance_data.offline+' Offline</a> ';
+            }
+            if(pendingCount > 0) msg += pendingCount+' Pending ';
+            msg += "| " + offlineStateData[instanceId].v + "Total";
+
+            statusElm.innerHTML = msg;
+            statusElm.style.color = "orange";
+        }
+        
+        // 2nd iteration
         if(statusElm.innerHTML === "All online") {
             statusElm.innerHTML = `${instance_data.total.val}/${instance_data.total.val} Val online`;
             return;
         } 
-        
-        if(instance_data.offline === 0 && instance_data.pending === 0){
-            statusElm.innerHTML = "All online";
-            statusElm.style.color = "green";
+
+        // 3rd iteration
+        if(instance_data.total.balance > 0){
+            let ticker = (chain === "gnosis") ? "GNO" : "ETH";
+            statusElm.innerHTML = `${instance_data.total.balance} ${ticker} | ${instance_data.total.val}/${instance_data.total.val} Val online`;
             return;
         }
-
-        let offlineIds = [];
-        for(const obj of offlineStateData[instanceId].o){
-            if(offlineIds.length < 100) { // limit at 100
-                offlineIds.push(obj.i); 
-            } else {
-                break;
-            }
-        }
-
-        let msg = "";
-        if(offlineIds.length > 0) {
-            let link = (chain === "gnosis") ? "https://gnosischa.in" : "https://beaconcha.in";
-            let stArr = offlineIds.toString();
-            msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+instance_data.offline+' Offline</a> ';
-        }
-        if(pendingCount > 0) msg += pendingCount+' Pending ';
-        msg += "| " + offlineStateData[instanceId].v + "Total";
-
-        statusElm.innerHTML = msg;
-        statusElm.style.color = "orange";
     }
 
     function RenderInsightLinks(pubkeyElm, data){
