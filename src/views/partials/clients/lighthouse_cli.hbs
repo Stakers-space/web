@@ -28,7 +28,7 @@
         <{{sectionHeader}} class="text-ml mt-4">Download Lighthouse version <code class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</code> to your node</{{sectionHeader}}>
         <pre><code>cd ~/downloads && curl -LO https://github.com/sigp/lighthouse/releases/download/v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>/lighthouse-v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>-x86_64-unknown-linux-gnu.tar.gz</code></pre>
         <p>Extract downloaded file</p>
-        <pre><code>$ tar xvf lighthouse-v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>-x86_64-unknown-linux-gnu.tar.gz</code></pre>
+        <pre><code>tar xvf lighthouse-v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>-x86_64-unknown-linux-gnu.tar.gz</code></pre>
     </li>
 
     {{#unless InstallationGuide}}
@@ -58,7 +58,7 @@ sudo systemctl stop {{servicePrefix}}lighthouse-vi...
     {{/unless}}
     <li>
         <strong>Replace old Lighthouse client for new</strong>
-<pre><code>$ sudo cp ~/downloads/lighthouse /usr/local/bin</code></pre>
+<pre><code>sudo cp ~/downloads/lighthouse /usr/local/bin</code></pre>
     </li>
     {{#unless InstallationGuide}}
     <li>
@@ -104,7 +104,7 @@ sudo systemctl start {{servicePrefix}}lighthouse-vi...
     {{/unless}}
     <li>
         <{{sectionHeader}} class="text-ml mt-4">Remove downloaded files</{{sectionHeader}}>
-<pre><code>$ cd ~/downloads && rm lighthouse-v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>-x86_64-unknown-linux-gnu.tar.gz && rm -r lighthouse</code></pre>
+<pre><code>cd ~/downloads && rm lighthouse-v<mark class="lighthouseVer">{{consensusClients.lighthouse.latestVer}}</mark>-x86_64-unknown-linux-gnu.tar.gz && rm -r lighthouse</code></pre>
     </li>
 </ol>
 

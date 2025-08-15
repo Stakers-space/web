@@ -38,7 +38,9 @@ router.use('/ethereum', require('./ethereum-tailwind'));
 router.use('/ethereum-staking', require('./ethereum'));
 router.use('/gnosis', require('./gnosis-tailwind'));
 router.use('/gnosis-staking', require('./gnosis'));
-router.use('/api', require('./api'));
+router.use('/api', require('./api_raw'));
+router.use('/api', require('./api')); // body parser
+
 router.use('/test', require('./test'));
 //router.use('/authentization', require('./authentization')); // moved to dashboard
 router.use('/dashboard', require('./dashboard'));

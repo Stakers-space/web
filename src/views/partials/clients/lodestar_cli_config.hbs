@@ -4,7 +4,7 @@
       <ul class="list-disc my-4 pl-6">
         <li><span class="block font-bold">Create a service user</span>
           <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}lodestarbeacon" class="interactive-element consensus_sn" data-class="consensus_sn" data-client="lodestar">
-          <pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
+          <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark></code></pre>
         </li>
         <li><span class="block font-bold mb-2">Enable <mark class="consensus_sn">{{servicePrefix}}lodestarbeacon</mark> user access NodeJs</span>
           <label>User with NodeJs</label>: <input type="text" value="nodejsusr" class="interactive-element nodejsUser" data-class="nodejsUser">
@@ -33,7 +33,7 @@
         </li>
         <li><span class="block font-bold">Copy following configuration to the file</span>
             <p><label>Installed NodeJs version on the server</label>: <input data-type="text" value="{{consensusClients.lodestar.nodejsVer}}" class="interactive-element nodejsVer" data-class="nodejsVer">
-            <br><i>This can be get with command <code>$ node -v</code></i></p>
+            <br><i>This can be get with command <code>node -v</code></i></p>
 {{#unless chain}}
           <div class="tabselector">
 						<nav class="egrid egrid-2">

@@ -66,7 +66,7 @@
                         <p>Copy the configuration below into the file.</p>
                         <ul class="list-disc mt-4 mb-2">
                             <li><p><label>Installed NodeJs version on the server</label>: <input data-type="text" value="{{consensusClients.lodestar.nodejsVer}}" class="interactive-element nodejsVer" data-class="nodejsVer" style="width:75px">
-                                <br><i>This can be get with command <code>$ node version</code></i></p>
+                                <br><i>This can be get with command <code>node version</code></i></p>
                             </li>
                             <li><label>What's fee recipient wallet?</label> <input type="text" class="interactive-element instance_frw" data-class="instance_frw" value="0xXXXXXXXXXXXXXXXX"></li>
                             <li><label>What's your execution client?</label> <input type="text" class="interactive-element ec_name" data-class="ec_name" value="Nethermind"></li>
@@ -165,7 +165,7 @@
                         <button class="tab" data-tabpanel="2">Delayed start util</button>
                     </nav>
                     <div class="tabpanel selected">
-                        <pre><code>$ sudo systemctl enable <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+                        <pre><code>sudo systemctl enable <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
                     </div>
                     <div class="tabpanel">
                         {{> clients/config/delayed-start MarkClass="instance_sn" ClientName="lodestar" ServiceName="lodestar-vi1" }}

@@ -17,8 +17,8 @@ ul.img_marker li {
         <div id="overview" class="egrid egrid-3">
             <div>Validators: 
                 <ul class="img_marker account_validators" style="display:ruby;">
-                    <li style="--marker-image: url('/logo/ethereum.svg')" class="f-bold">???</li>
-                    <li style="--marker-image: url('/logo/gnosis.svg');margin-left: 50px" class="f-bold">???</li>
+                    <li style="--marker-image: url('/logo/ethereum.svg')" class="f-bold">??? ETH / ?? Val</li>
+                    <li style="--marker-image: url('/logo/gnosis.svg');margin-left: 50px" class="f-bold">??? GNO / ?? Val</li>
                 </ul>
             </div>
             <div>
@@ -51,7 +51,7 @@ ul.img_marker li {
                                 <ul class="list-disc my-4">
                                     {{!<li>Validators: <strong></strong></li>}}
                                     <li>Clients: {{#each this.cliensList}}
-                                        <code {{#if this.rcm}}style="color:orange" title="{{this.rcm}}"{{/if}}><a href="/{{this.client}}?sid={{../this.sid}}" target="_blank">{{this.client}}</a> ({{this.ver}})</code>
+                                        <code {{#if this.rcm}}style="color:orange" title="{{this.rcm}}"{{/if}}><a href="/{{this.client}}/update?sid={{../this.sid}}" target="_blank">{{this.client}}</a> ({{this.ver}})</code>
                                     {{/each}}
                                     {{!<li>SSD: </li>}}
                                     <li>{{#if this.brand_name}}Operated by {{#if this.brand_link}}<a href="{{this.brand_link}}" target="_blank">{{this.brand_name}}</a>{{else}}{{this.brand_name}}{{/if}}{{/if}} | Last Login <code style="color:{{this.login.color}}">{{this.login.time}}</code></li>
@@ -66,7 +66,7 @@ ul.img_marker li {
                                 <ul class="img_marker server_instances">
                                     {{#each this.instances}}
                                         <li data-iid="{{this.id}}" data-chain="{{this.chain}}" class="val_instance" style="--marker-image: url('/logo/{{#ifEqual this.chain "gnosis"}}gnosis{{else}}{{#ifEqual this.chain "ethereum"}}ethereum{{/ifEqual}}{{/ifEqual}}.svg');">
-                                            {{#ifEqual isOwner "true"}}<a href="/dashboard/server-node/define-instance?sid={{../this.sid}}&iid={{this.id}}">{{this.instance}}</a>{{else}}<span>{{this.instance}}</span>{{/ifEqual}} | 
+                                            {{#ifEqual isOwner "true"}}<a href="/dashboard/server-node/define-instance?sid={{../this.sid}}&iid={{this.id}}" class="iname">{{this.instance}}</a>{{else}}<span>{{this.instance}}</span>{{/ifEqual}} | 
                                             <span class="instance_status"></span><br>
                                             <i class="encrypted_value instance_note" style="max-width:90%;overflow:hidden;display:block">{{this.note}}</i>
                                             <i>
@@ -93,57 +93,77 @@ ul.img_marker li {
     {{#if adminPanel}}{{{adminPanel}}}{{/if}}
 </main>
 {{> scripts/cryptography}}
+{{> scripts/utils/xmlhttp}}
 <script>
-    var offlineStateData = {{{offlineStateData}}};
-    console.log("state data:", offlineStateData);
-    const val_instances = document.getElementsByClassName("val_instance");
-    let valcount_aggregated = {offline: 0, pending: 0}; 
-    for(var instance of val_instances){
-        const instanceId = instance.dataset.iid;
-        const chain = instance.dataset.chain;
-        //console.log(instanceId, instance);
-        let statusElm = instance.children[1];
-        if(offlineStateData[instanceId]){
-            const offlineCount = (offlineStateData[instanceId].o) ? offlineStateData[instanceId].o.length : [];
-            const pendingCount = (offlineStateData[instanceId].p) ? offlineStateData[instanceId].p : 0;
-            valcount_aggregated.offline += offlineCount;
-            valcount_aggregated.pending += pendingCount;
+    /* In-page Offline / pending state data */
+    var offlineStateData = {{{offlineStateData}}}; // offline data
+    let asyncTasks = 2;
 
-            let offlineIds = [];
-            for(const obj of offlineStateData[instanceId].o){
-                if(offlineIds.length < 100) {
-                   offlineIds.push(obj.i); 
-                } else {
-                    break;
-                }
+    /* Aggregated view */
+    function ValState(){ this.val_count = 0; this.asset_balance = 0; }
+    function SectorState(pubIdsIncluded = false){ 
+        this.offline = new ValState(); this.pending = new ValState(); this.online = new ValState()
+        if(pubIdsIncluded) this.pubIds = [];
+    }
+    let valcount_instance = { ethereum: {}, gnosis: {} };
+
+    (function () {
+        const val_instances = document.getElementsByClassName("val_instance");
+        for(var instanceElm of val_instances){
+            const instanceId = instanceElm.dataset.iid;
+            const chain = instanceElm.dataset.chain;
+
+            if(!chain) {
+                console.warn("No chain attached to instance id", instanceId);
+                continue;
+            }
+            valcount_instance[chain][instanceId] = new SectorState(true);
+            if(!valcount_instance[chain]["agg"]) valcount_instance[chain]["agg"] = new SectorState(false);
+
+            if(offlineStateData[instanceId]){
+                 // is defined = known issue on the instance
+                const offlineCount = (offlineStateData[instanceId].o) ? offlineStateData[instanceId].o.length : 0;
+                const pendingCount = (offlineStateData[instanceId].p) ? offlineStateData[instanceId].p : 0;
+               
+                valcount_instance[chain][instanceId].offile.val_count = offlineCount;
+                valcount_instance[chain]["agg"].offline.val_count += offlineCount;
+                
+                valcount_instance[chain][instanceId].pending.val_count = pendingCount;
+                valcount_instance[chain]["agg"].pending.val_count += pendingCount;
             }
 
-            let msg = "";
-            if(offlineIds.length > 0) {
-                let link = (chain === "gnosis") ? "https://gnosischa.in" : "https://beaconcha.in";
-                let stArr = offlineIds.toString();
-                msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+offlineStateData[instanceId].o.length+' Offline</a> ';
-            }
-            if(pendingCount > 0) msg += pendingCount+' Pending ';
-            msg += "| " + offlineStateData[instanceId].v + "Total";
-
-            statusElm.innerHTML = msg/*.slice(0, -1)*/;
-            statusElm.style.color = "orange";
-        } else {
-            statusElm.innerHTML = "All online";
-            statusElm.style.color = "green";
+           RenderQuickView(instanceId, instanceElm, valcount_instance[chain][instanceId], chain);
         }
+    })();
+
+    /** 
+     *  Request validators data
+    **/
+    function GetValidatorsSnapshot(chain, state_snapshot){
+        xmlHttpRequest({type:"GET", url:`/api/state-balances?f=${chain}_${state_snapshot}.json`, credentials:false, data:null }, function(err,data){ return OnSnapshotReceived({chain, snapshot: state_snapshot}, "err:", err); });    
     }
 
+    function OnSnapshotReceived(cred, err, data){
+        console.log("OnSnapshotReceived", cred, err, data);
+        CalculateState();
+    }
+
+    // if gnosis validators
+    GetValidatorsSnapshot("gnosis", "active_ongoing", OnSnapshotReceived);
+    // if ethereum validators
+        // get ethereum snapshot
+
+    /* callback from cryptography util */
     function OnDecryptionProcessComplted(){
-        let acc_agg_validators = {gnosis:0,ethereum:0}
+        let acc_agg_validators = { gnosis:0, ethereum:0 }
         // parse pubkeys
         for(const serverDestination of document.getElementsByClassName("servers-destination")){
-            console.log("destination:", serverDestination);
+            //console.log("destination:", serverDestination);
             let dest_agg_validators = {gnosis:0,ethereum:0}
             for(const server of serverDestination.getElementsByClassName("destination-server")){
                 let srv_agg_validators = {gnosis:0,ethereum:0} 
                 for(const instanceElm of server.getElementsByClassName("val_instance")){
+                    const instanceId = instanceElm.dataset.iid;
                     const statusElm = instanceElm.children[1];
 
                     // update fee wlt
@@ -161,12 +181,17 @@ ul.img_marker li {
                     if(pubkeyElm.innerHTML === "") continue;
                     if(pubkeyElm.innerHTML.indexOf("Processing") > -1) continue;
                     const pubkeys = pubkeyElm.innerHTML.split(",");
+                    
+                    valcount_instance[instanceElm.dataset.chain][instanceId].pubIds = pubkeys;
+
+                    // Render
                     const validators_count = pubkeys.length;
-                    if(statusElm.innerHTML === "All online") statusElm.innerHTML = `${validators_count}/${validators_count} online`;
+                    if(statusElm.innerHTML === "All online") statusElm.innerHTML = `${validators_count}/${validators_count} Val online`;
                     //console.log("pubkeys:", validators_count);
                     srv_agg_validators[instanceElm.dataset.chain] += validators_count;
                     dest_agg_validators[instanceElm.dataset.chain] += validators_count;
                     acc_agg_validators[instanceElm.dataset.chain] += validators_count;
+                    
                         
                     const chunks = splitArrayIntoChunks(pubkeys, 100);
                     let output = "Insight: ";
@@ -193,9 +218,11 @@ ul.img_marker li {
         acc_agg_ui.children[0].innerHTML = acc_agg_validators.ethereum;
         acc_agg_ui.children[1].innerHTML = acc_agg_validators.gnosis;
 
-        // UI level account
-        if(valcount_aggregated.offline > 0) document.getElementById("overview").children[1].innerHTML += `| <span style="color:red">Offline: ${valcount_aggregated.offline}</span> `;
-        if(valcount_aggregated.pending > 0) document.getElementById("overview").children[1].innerHTML += `| Pending: ${valcount_aggregated.pending}`;
+        // UI level account (header)
+        if(valcount_instance["gnosis"]["agg"].offline.val_count > 0) document.getElementById("overview").children[1].innerHTML += `| <span style="color:red">Offline: ${valcount_instance["gnosis"]["agg"].offline.val_count} GNO Val</span> `;
+        if(valcount_instance["ethereum"]["agg"].offline.val_count > 0) document.getElementById("overview").children[1].innerHTML += `| <span style="color:red">Offline: ${valcount_instance["ethereum"]["agg"].offline.val_count} ETH Val</span> `;
+        if(valcount_instance["gnosis"]["agg"].pending.val_count > 0) document.getElementById("overview").children[1].innerHTML += `| Pending: ${valcount_instance["gnosis"]["agg"].pending.val_count} GNO Val`;
+        if(valcount_instance["ethereum"]["agg"].pending.val_count > 0) document.getElementById("overview").children[1].innerHTML += `| Pending: ${valcount_instance["ethereum"]["agg"].pending.val_count} ETH Val`;
 
         function splitArrayIntoChunks(array, chunkSize) {
             let result = [];
@@ -205,6 +232,45 @@ ul.img_marker li {
             }
             return result;
         }
+
+        CalculateState();
+    }
+
+    function CalculateState(){
+        asyncTasks--;
+        if(asyncTasks > 0) return;
+
+        // Calculating
+    }
+
+    function RenderQuickView(instanceId, instanceElm, instance_data, chain){
+        let statusElm = instanceElm.children[1];
+        if(instance_data.offline.val_count === 0 && instance_data.pending.val_count === 0){
+            statusElm.innerHTML = "All online";
+            statusElm.style.color = "green";
+            return;
+        }
+
+        let offlineIds = [];
+        for(const obj of offlineStateData[instanceId].o){
+            if(offlineIds.length < 100) { // limit at 100
+                offlineIds.push(obj.i); 
+            } else {
+                break;
+            }
+        }
+
+        let msg = "";
+        if(offlineIds.length > 0) {
+            let link = (chain === "gnosis") ? "https://gnosischa.in" : "https://beaconcha.in";
+            let stArr = offlineIds.toString();
+            msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+instance_data.offline.val_count+' Offline</a> ';
+        }
+        if(pendingCount > 0) msg += pendingCount+' Pending ';
+        msg += "| " + offlineStateData[instanceId].v + "Total";
+
+        statusElm.innerHTML = msg;
+        statusElm.style.color = "orange";
     }
 
 </script>

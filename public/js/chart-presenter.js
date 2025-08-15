@@ -336,8 +336,6 @@ ChartPresenter.prototype.PushTextAnotations = function(xAxis, outObj){
 };
 
 ChartPresenter.prototype.RequestNewData = function(type,fromP,toP,detail,cb){
-    if(token.name === "Bitcoin Cash") token.name = "bitcoin-cash";
-    if(token.name === "dogecoin") token.name = "doge";
 
     var reqUrl = "/api/get?id="+token.name+"&t="+type+"&d="+detail;
     

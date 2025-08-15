@@ -35,7 +35,7 @@ curl -LO https://github.com/flashbots/mev-boost/releases/download/v<mark class="
     {{#if InstallationGuide}}
     <li><h4>Create a system user and system service for running Mev-boost</h4>
         <p>System user</p>
-        <pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="mevboost_su">mevboost</mark></code></pre>
+        <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="mevboost_su">mevboost</mark></code></pre>
         <p>Open Systemd unit file for mevboost</p>
         <pre><code>sudo nano /etc/systemd/system/mevboost.service</code></pre>
         <p>And copy sample configuration below into it.</p>

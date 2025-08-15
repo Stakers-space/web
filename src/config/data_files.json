@@ -24,5 +24,6 @@
             "ethereum": "data/cache/ethereum_validatorqueue.json",
             "gnosis": "data/cache/gnosis_validatorqueue.json"
         }
-    }
+    },
+    "validatorsSnapshot": "data/cache/validators_snapshot"
 }

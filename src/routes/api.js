@@ -16,7 +16,7 @@ const ProtonVPN = require('../controllers/proton-vpn-servers.js');
 router.use(express.text());
 const config = require('../config/config.secret.json');
 
-// authentization
+// account-based authentization
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');

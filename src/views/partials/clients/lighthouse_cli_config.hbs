@@ -2,22 +2,22 @@
     <li>
         <{{sectionHeader}} class="text-md">Create a user for lighthouse beacon</{{sectionHeader}}>
         <label>Service/User name</label>: <input type="text" value="{{servicePrefix}}lighthousebeacon" class="interactive-element consensus_sn" data-class="consensus_sn" data-client="lighthouse">
-<pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
+<pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
     </li>
     <li>
        <{{sectionHeader}} class="text-md">Create a directory for data</{{sectionHeader}}>
         <label>Service data directory</label>: <input type="text" value="/var/lib{{slashChain}}/lighthouse/beacon" class="interactive-element consensus-dp" data-class="consensus-dp" data-client="lighthouse">
-<pre><code>$ sudo mkdir -p <mark class="consensus-dp">/var/lib{{slashChain}}/lighthouse/beacon</mark></code></pre>
+<pre><code>sudo mkdir -p <mark class="consensus-dp">/var/lib{{slashChain}}/lighthouse/beacon</mark></code></pre>
     </li>
     <li><{{sectionHeader}} class="text-md">Set permission for accessing the directory</{{sectionHeader}}>
-<pre><code>$ sudo chown -R <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>:<mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark> <mark class="consensus-dp" data-client="lighthouse">/var/lib{{slashChain}}/lighthouse/beacon</mark></code></pre>
+<pre><code>sudo chown -R <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>:<mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark> <mark class="consensus-dp" data-client="lighthouse">/var/lib{{slashChain}}/lighthouse/beacon</mark></code></pre>
     </li>
     {{#if PortSelection}}
         <li>{{> clients/config/consensusclient-portselection }}</li>
     {{/if}}
     <li><{{sectionHeader}} class="text-md">Create configuration file for Lighthouse Beacon service</{{sectionHeader}}>
         <p>Open Lighthouse Beacon configuration file</p>
-        <pre><code>$ sudo nano /etc/systemd/system/<mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>.service</code></pre>
+        <pre><code>sudo nano /etc/systemd/system/<mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>.service</code></pre>
         <p>Copy the configuration below into the file. If needed, check <a href="https://lighthouse-book.sigmaprime.io/api-bn.html" target="_blank" rel="nofollow noopener noreferrer">flags documentation</a>.</p>
         {{#unless chain}}
         <div class="tabselector bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
@@ -43,17 +43,16 @@
         <p class="mb-6">Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</p>
     </li>
     <li><{{sectionHeader}} class="text-md">Load changes made in config files to the system</{{sectionHeader}}>
-       <pre><code>$ sudo systemctl daemon-reload</code></pre>
+       <pre><code>sudo systemctl daemon-reload</code></pre>
     </li>
 </ol>
 <h2 class="text-xl mt-10">Launch the service</h2>
 <ul class="list-disc my-4 pl-6">
         <li><strong>Start the service</strong>
-<pre><code>$ sudo systemctl start <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
+<pre><code>sudo systemctl start <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
         </li>
         <li><strong>Check the state</strong>
-<pre><code>$ systemctl status <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark>
-$ journalctl -fu <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
+<pre><code>systemctl status <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark> && journalctl -fu <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
         </li>
         <li>
             <strong>Activate service to start automatically</strong>
@@ -69,7 +68,7 @@ $ journalctl -fu <mark class="consensus_sn" data-client="lighthouse">{{servicePr
                         <button class="tab" data-tabpanel="2">Delayed start util</button>
                     </nav>
                     <div class="tabpanel selected">
-                    <pre><code>$ sudo systemctl enable <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
+                    <pre><code>sudo systemctl enable <mark class="consensus_sn" data-client="lighthouse">{{servicePrefix}}lighthousebeacon</mark></code></pre>
                     </div>
                     <div class="tabpanel">
                         {{> clients/config/delayed-start MarkClass="consensus_sn" ClientName="lighthouse" ServiceName="lighthousebeacon" }}

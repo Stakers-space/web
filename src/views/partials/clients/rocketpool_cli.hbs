@@ -2,7 +2,7 @@
 <ul class="list-disc my-4">
     <li>
         <h3>Check version of running Rocketpool client</h3>
-        <pre><code>$ rocketpool -v</code></pre>
+        <pre><code>rocketpool -v</code></pre>
     </li>
 </ul>
 <label>Reocketpool validators service name:</label> <input type="text" class="interactive-element validator_sn" data-class="validator_sn" value="rocketpool-validator">
@@ -14,12 +14,12 @@
         <ul class="list-disc my-4 pl-6">
             <li>
                 <h4>Create a rocketpool service User</h4>
-                <pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="rocketpool_su">rocketpool</mark></code></pre>
+                <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="rocketpool_su">rocketpool</mark></code></pre>
             </li>
             <li>
                 <h4>Add <code>server user</code> into <span class="rocketpool_su">rocketpool</span> group</h4>
                 <pre><code>sudo usermod -aG <mark class="rocketpool_su">rocketpool</mark> <mark class="serveruser">myserveruser</mark></code></pre>
-                <aside><i>Get &lt;Server user&gt; by <code>$ whoami</code>, if needed.</i></aside>
+                <aside><i>Get &lt;Server user&gt; by <code>whoami</code>, if needed.</i></aside>
             </li>
         </ul>
     </li>
@@ -212,7 +212,7 @@ journalctl -u rp-watchtower -b -f</code></pre>
                 <p><label>Validator service direcotry</label>: <input type="text" class="interactive-element validator_snd" data-class="validator_snd" value="/var/lib/ethereum/prysm"></p>
                 <ul class="list-disc my-4">
                     <li><h4>Create a new rocketpool validator user</h4>
-                        <pre><code>$ sudo useradd --system --no-create-home --shell /bin/false <mark class="rpl_validator">rocketpool-validator</mark></code></pre>
+                        <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="rpl_validator">rocketpool-validator</mark></code></pre>
                     </li>
                     <li><h4>Add validator user into <code>rocketpool</code> user group</h4>
                         <pre><code>sudo usermod -aG <mark class="rocketpool_su">rocketpool</mark> <mark class="rpl_validator">rocketpool-validator</mark></code></pre>

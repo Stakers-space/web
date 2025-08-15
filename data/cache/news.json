@@ -2,6 +2,25 @@
   "all": [
     {
       "partitionKey": "news",
+      "t": 1755014784316,
+      "m": "<b>$1B invested in ETH ETF in a single day</b> on August 11th!",
+      "a": "https://www.strategicethreserve.xyz/",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "c602f6e6-7650-44a9-8653-d5cdfcc1a50a",
+      "_rid": "VPZWAPgLfuk0MAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfuk0MAAAAAAAAA==/",
+      "_etag": "\"0800a0c7-0000-1600-0000-689b66e30000\"",
+      "_attachments": "attachments/",
+      "_ts": 1755014883,
+      "ht": "12.08.2025, 18:06:24",
+      "ta": "3 days ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
       "t": 1754489565503,
       "m": "<strong>Lodestar</strong> version 1.33.0 released",
       "a": "https://stakers.space/lodestar",
@@ -17,7 +36,7 @@
       "_attachments": "attachments/",
       "_ts": 1754489685,
       "ht": "06.08.2025, 16:12:45",
-      "ta": "5 days ago",
+      "ta": "9 days ago",
       "img": "gnosis"
     },
     {
@@ -36,7 +55,7 @@
       "_attachments": "attachments/",
       "_ts": 1752829576,
       "ht": "18.07.2025, 11:05:03",
-      "ta": "24 days ago",
+      "ta": "28 days ago",
       "img": "ethereum"
     },
     {
@@ -73,7 +92,7 @@
       "_attachments": "attachments/",
       "_ts": 1745916693,
       "ht": "29.04.2025, 10:51:10",
-      "ta": "3 months ago",
+      "ta": "4 months ago",
       "img": "ethereum"
     },
     {
@@ -91,7 +110,7 @@
       "_attachments": "attachments/",
       "_ts": 1745916669,
       "ht": "29.04.2025, 10:50:23",
-      "ta": "3 months ago",
+      "ta": "4 months ago",
       "img": "gnosis"
     },
     {
@@ -387,6 +406,25 @@
   "fundamental": [
     {
       "partitionKey": "news",
+      "t": 1755014784316,
+      "m": "<b>$1B invested in ETH ETF in a single day</b> on August 11th!",
+      "a": "https://www.strategicethreserve.xyz/",
+      "c": [
+        "eth",
+        "fundamental"
+      ],
+      "id": "c602f6e6-7650-44a9-8653-d5cdfcc1a50a",
+      "_rid": "VPZWAPgLfuk0MAAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfuk0MAAAAAAAAA==/",
+      "_etag": "\"0800a0c7-0000-1600-0000-689b66e30000\"",
+      "_attachments": "attachments/",
+      "_ts": 1755014883,
+      "ht": "12.08.2025, 18:06:24",
+      "ta": "3 days ago",
+      "img": "ethereum"
+    },
+    {
+      "partitionKey": "news",
       "t": 1752829503479,
       "m": "<b>“Home proving” for home stakers?</b> Shipping an L1 zkEVM #1: Realtime Proving.",
       "a": "https://blog.ethereum.org/2025/07/10/realtime-proving",
@@ -401,7 +439,7 @@
       "_attachments": "attachments/",
       "_ts": 1752829576,
       "ht": "18.07.2025, 11:05:03",
-      "ta": "24 days ago",
+      "ta": "28 days ago",
       "img": "ethereum"
     },
     {
@@ -595,7 +633,7 @@
       "_attachments": "attachments/",
       "_ts": 1754489685,
       "ht": "06.08.2025, 16:12:45",
-      "ta": "5 days ago",
+      "ta": "9 days ago",
       "img": "gnosis"
     },
     {

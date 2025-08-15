@@ -165,9 +165,9 @@
 				</p>
 				
 				<h3>Upgrade & update on the latest software and security updates.</h3>
-					<pre><code>$ sudo apt update && sudo apt -y upgrade
-$ sudo apt dist-upgrade && sudo apt autoremove
-$ sudo reboot</code></pre>
+					<pre><code>sudo apt update && sudo apt -y upgrade
+sudo apt dist-upgrade && sudo apt autoremove
+sudo reboot</code></pre>
 					<p>You can also create a shell script that will do this either on manual request or a schedule, see <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/update-and-restart-linux" target="_blank">Update and Restart Ubuntu server Utility</a>.</p>
 						
 					<div>
@@ -384,7 +384,7 @@ sudo systemctl disable ssh</code></pre>
 										<h3 class="mt-2">Configure the Firewall</h3>
 						<ul class="list-disc my-4">
 							<li>Enable Firewall
-								<pre><code>$ sudo ufw enable</code></pre>
+								<pre><code>sudo ufw enable</code></pre>
 							</li>
 							<li>Check Firewall Ports
 								<pre><code>sudo ufw numbered</code></pre>
@@ -411,13 +411,12 @@ sudo systemctl disable ssh</code></pre>
 								<pre><code>openssl rand -hex 32 | sudo tee /var/lib/jwtsecret/<mark>{{chain}}</mark>.hex > /dev/null</code></pre>
 							</li>
 							<li>Check the generated authentication secret
-								<pre><code>$ nano /var/lib/jwtsecret/<mark>{{chain}}</mark>.hex</code></pre>
+								<pre><code>nano /var/lib/jwtsecret/<mark>{{chain}}</mark>.hex</code></pre>
 								Press <code>CTRL</code> + <code>X</code> to exit the config file.
 							</li>
 						</ul>	
 					</div>
 
-					
 					<div class="mt-15">
 						<span class="inline-flex items-center text-white text-xs font-semibold tracking-wide">
 											<span class="rounded-l-full bg-emerald-600 px-3 py-1 shadow">
