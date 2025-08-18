@@ -79,8 +79,8 @@ sudo systemctl start <mark class="execution_sn">{{servicePrefix}}nethermind</mar
   </li>
   <li>
     <h4>Check the service</h4>
-    <pre><code>systemctl status <mark class="execution_sn">{{servicePrefix}}nethermind</mark>
-journalctl -fu <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
+    <pre><code>systemctl status <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
+    <pre><code>journalctl -fu <mark class="execution_sn">{{servicePrefix}}nethermind</mark></code></pre>
     <p>If you see message "Waiting for Forkchoice message from Consensus Layer to set fresh pivot block", you can move
       on a Consensis Client setup.</p>
   </li>

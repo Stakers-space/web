@@ -13,6 +13,14 @@
         background-color: unset;
         border-radius: unset;
     }
+    pre::before {
+        content: '$ ';
+        color: #999999;
+        font-weight: bold;
+    }
+    pre.no-pseudo::before {
+        content: unset;
+    }
     code input {
         color: white;
         padding-block: unset;

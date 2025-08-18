@@ -55,13 +55,15 @@
             <li>Press <code>CTRL</code> + <code>X</code> then <code>Y</code> then <code>ENTER</code> to save and exit the config file.</li>
         </ol>
     </li>
+    <li><h4>Reload daemon</h4>
+        <pre><code>sudo systemctl daemon-reload</code></pre>
+    </li>
     <li><h4>Start the service</h4>
-<pre><code>sudo systemctl daemon-reload
-sudo systemctl start <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
+<pre><code>sudo systemctl start <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
     </li>
     <li><h4>Check the service</h4>
-        <pre><code>systemctl status <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark>
-journalctl -fu <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
+        <pre><code>systemctl status <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
+        <pre><code>journalctl -fu <mark class="execution_sn" data-client="erigon">{{servicePrefix}}erigon</mark></code></pre>
     </li>
     <li><h4>Start the service on system startup</h4>
     <div class="tabselector bg-gray-200 p-6 rounded-xl shadow-md">

@@ -73,23 +73,41 @@
                 <p>There is possible only to upgrade the wallet. Downgroad is not possible.</p>
                 <ul class="list-disc my-4 pl-6 space-y-4">
                     <li>Upgrade from <code>0x00</code> to <code>0x01</code> can be processed through validator key generation tool.</li>
-                    <li>Upgrade from <code>0x01</code> to <code>0x02</code> can be processed through {{#if isEthereum}}Launchpad website, see below:
+                    <li>Upgrade from <code>0x01</code> to <code>0x02</code> can be processed through 
+                    {{#if isEthereum}}Launchpad website, see below:
                         <ol class="list-decimal space-y-2 pl-6">
                             <li>Go to <a href="https://launchpad.ethereum.org/en/validator-actions" target="_blank">https://launchpad.ethereum.org/en/validator-actions</a></li>
                             <li>Connect with your withdrawal wallet</li>
                             <li>Process action <code>Upgrade account to compounding</code>
-                                <a href="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding.webp" target="_blank"><img src="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding.webp" alt="Upgrade Ethereum Account To Compounding" style="width:100%"></a>
+                                <a href="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding.webp" target="_blank"><img src="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding.webp" alt="Upgrade Ethereum Account To Compounding" class="w-full"></a>
                                 <ul class="list-disc my-4">
                                     <li>The upgrade to <code>0x02</code> wallet type requires confirmation of following:
-                                        <a href="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding-confirm.webp" target="_blank"><img src="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding-confirm.webp" alt="Upgrade Ethereum Account To Compounding" style="width:100%"></a>
+                                        <a href="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding-confirm.webp" target="_blank"><img src="/img/pages/guides/validator-actions/upgrade-ethereum-account-to-compounding-confirm.webp" alt="Upgrade Ethereum Account To Compounding" class="w-full"></a>
                                     </li>
                                     <li>On confirming the request in your wallet, be sure you interacting with <a href="https://etherscan.io/address/0x0000BBdDc7CE488642fb579F8B00f3a590007251" target="_blank">0x0000BBdDc7CE488642fb579F8B00f3a590007251 (EIP-7251: Consolidation Request) contract</a></li>
                                 </ul>
                             </li>
                         </ol>
                     {{/if}}
-                    {{#if isGnosis}}... the guide will be updated later, once all tools are tested properly.
-                    
+                    {{#if isGnosis}}Consolidation website, see below:
+                        <ul class="list-disc my-4 pl-6 space-y-4">
+                            <li>Consolidation website URL: <a href="https://consolidate.gnosischain.com/">https://consolidate.gnosischain.com/</a>
+                                <p>NOTE: If you use Safe Wallet, you need to open it in Safe UI. To do so, open a Safe Wallet, go to <code>Apps</code>, witch to <code>My custom apps</code> tab and add it there through "Add custom Safe App" button, if the app was not added yet. Then, open the app. You should have opened a page with url like:
+                                    <pre class="no-pseudo"><code>https://app.safe.global/apps/open?safe=gno:<mark>YourSafeWalletAddress</mark>&appUrl=https%3A%2F%2Fconsolidate.gnosischain.com</code></pre>
+                                </p>
+                            </li>
+                            <li>Within a consolidation app, you see a dashboard with your pubkey indexes and Action box at bottom side. Here, you can select maximum consolidation balance of a pubkey.
+                                <a href="/img/pages/guides/validator-actions/consolidation-gnosis-dashboard.webp" target="_blank"><img src="/img/pages/guides/validator-actions/consolidation-gnosis-dashboard.webp" alt="Consolidation Gnosis dashboard" class="w-full"></a>
+                            </li>
+                            <li>Next, you see an overview of the consolidation - which pubids will be consolidated into which pubids. On pressing <code>Consolidate batch</code> button, the consolidation will be processed-
+                                <a href="/img/pages/guides/validator-actions/consolidate-gnosis-overview.webp" target="_blank"><img src="/img/pages/guides/validator-actions/consolidate-gnosis-overview.webp" alt="Consolidation Gnosis dashboard" class="w-full"></a>
+                                <p>NOTE: If you see an error such as "Error submitting transactions" due to "An Unknown RPC Error occured. Details: Not connected to Ethereum network Version: viem@2.21.55", try a different HW wallet, such as Rabby, if you have the option.</p>
+                            </li>
+                            <li>
+                                On processing the consolidation batch, consolidating pubkeys will switch to exiting state. Target pubkeys will get a new tab in the expolerer - <code>Consol.</code>
+                                <p>Be patient - the target pubkey balance is not increased immediatelly with the exited pubkeys balances - there may be a queue. However the targeted pubkeys will get immediatelly 0x02 withdrawal wallet state, so they are compounding pubkeys now.</p>
+                            </li>
+                        </ul>
                     {{/if}}
                     </li>
                 </ul>

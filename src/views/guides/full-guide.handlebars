@@ -165,7 +165,7 @@
 				</p>
 				
 				<h3>Upgrade & update on the latest software and security updates.</h3>
-					<pre><code>sudo apt update && sudo apt -y upgrade
+					<pre class="no-pseudo"><code>sudo apt update && sudo apt -y upgrade
 sudo apt dist-upgrade && sudo apt autoremove
 sudo reboot</code></pre>
 					<p>You can also create a shell script that will do this either on manual request or a schedule, see <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/update-and-restart-linux" target="_blank">Update and Restart Ubuntu server Utility</a>.</p>
@@ -175,9 +175,9 @@ sudo reboot</code></pre>
 						<ul class="list-disc my-4">
 							<li>Install UFW (if not installed yet)
 								<pre><code>sudo apt install ufw</code></pre></li>
-							<li>Set default Fireall configuration
-        						<pre><code>sudo ufw default deny incoming
-sudo ufw default allow outgoing</code></pre>
+							<li>Set default Fireall configuration:
+								<pre><code>sudo ufw default deny incoming</code></pre>
+        						<pre><code>sudo ufw default allow outgoing</code></pre>
 							</li>
 						</ul>
 						<p><strong>NOTE: Installed firewall is required for enabling custom SSH port for remote connection. Firewall activation itself will be processed later, after additional configuration made in next steps.</strong></p>
