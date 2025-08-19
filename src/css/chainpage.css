@@ -6,3 +6,13 @@
 @import "./components/dynamic.css";
 @import "./components/chartlabel.css";
 @import "./components/servicetable.css";
+@import "./components/code.css";
+
+@layer components {
+    /*.h1 { 
+        @apply text-4xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight; 
+    }*/
+    .h2 { 
+        @apply text-3xl lg:text-4xl font-bold text-gray-900
+    }
+}

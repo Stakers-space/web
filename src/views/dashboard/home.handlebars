@@ -8,7 +8,6 @@ ul.img_marker li {
     overflow-y: clip;
 }
 </style>
-<body id="body">
 {{> header_dashboard}}
 <main class="mt-20">
     {{> sections/encryptionPassword }}
@@ -234,7 +233,8 @@ ul.img_marker li {
                 for(const snapshotKey of snapshotKeys){
                      // find val balance for each pubId in the instance list
                     for (const pubId of data.pubIds){
-                        data.total.balance += snapshots[chain][snapshotKey].data[Number(pubId)]; 
+                        const pubIdBalance = snapshots[chain][snapshotKey].data[Number(pubId)];
+                        if(pubIdBalance) data.total.balance += pubIdBalance; 
                     }
                 }
                 valcount_instance[chain]["agg"].total.balance += valcount_instance[chain][instance_id].total.balance;
@@ -286,7 +286,7 @@ ul.img_marker li {
             }
             if(valcount_instance[chain][instanceId].pending > 0) msg += valcount_instance[chain][instanceId].pending+' Val Pending ';
             if(instanceTmpData && instanceTmpData.e && instanceTmpData.e > 0) msg += instanceTmpData.e+' Val Exited ';
-            msg += "| " + instanceTmpData.v + "Val Total";
+            msg += "| " + instanceTmpData.v + " Val Total";
 
             statusElm.innerHTML = msg;
             statusElm.style.color = "orange";
@@ -301,15 +301,12 @@ ul.img_marker li {
         // 3rd iteration
         if(instance_data.total.balance > 0){
             let ticker = (chain === "gnosis") ? "GNO" : "ETH";
-            statusElm.innerHTML = `${instance_data.total.balance} ${ticker} | `;
             if(!offlineStateData[instanceId]){
-                statusElm.innerHTML += `${instance_data.total.val}/${instance_data.total.val} Val online`;
+                statusElm.innerHTML = `${instance_data.total.balance} ${ticker} | ${instance_data.total.val}/${instance_data.total.val} Val online`;
             } else if(offlineStateData[instanceId].e){
-                statusElm.innerHTML += `${offlineStateData[instanceId].e} Val exited | ${instance_data.total.val - offlineStateData[instanceId].e} Val Online`;
-            }
+                statusElm.innerHTML = `${instance_data.total.balance} ${ticker} | ${offlineStateData[instanceId].e} Val exited | ${instance_data.total.val - offlineStateData[instanceId].e} Val Online`;
+            } // else - offline val
         }
-
-        
     }
 
     function RenderInsightLinks(pubkeyElm, data){
@@ -356,4 +353,3 @@ ul.img_marker li {
 </script>
 {{> scripts/security-guard}}
 {{> footer}}
-</body>

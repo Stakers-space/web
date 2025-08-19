@@ -1,6 +1,6 @@
 {
   "name": "stakers.space",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": true,
   "scripts": {
     "start": "node src/app",
@@ -25,7 +25,7 @@
     "sanitize-html": "^2.13.0"
   },
   "engines": {
-    "node": "22.18.0",
+    "node": ">=22.17 <23",
     "npm": "10.9.3"
   },
   "devDependencies": {

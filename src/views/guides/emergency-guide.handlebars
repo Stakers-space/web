@@ -255,10 +255,16 @@
                     <p>There are numerous ways to axit {{chainName}} validator:</p>
                     <div class="tabselector mt-6 bg-gray-200 p-10 pt-5 rounded-xl shadow-md">
                         <nav class="mb-5">
-                            <button class="tab selected" data-tabpanel="1">Pre-signed Exit keys</button>
-                            <button class="tab" data-tabpanel="2">Through staking node</button>
+                            <button class="tab selected" data-tabpanel="1">Through Withdrawal wallet</button>
+                            <button class="tab" data-tabpanel="2">Pre-signed Exit keys</button>
+                            <button class="tab" data-tabpanel="3">Through staking node</button>
+                            
                         </nav>
                         <div class="tabpanel selected">
+                            <h3>Validators exit using withdrawal wallet</h3>
+                            <p>There's an option to request an exit (and other actions) using a <a href="/{{chain}}-staking/validator-actions#exit">validators action tool</a>. Validator actions are accessible from validator's withdrawal wallet. Through this way, you can perform actions without an access to your Staking node, nor offline PC with validator keys tool or even broadcasting pre-signed exit keys.</p>
+                        </div>
+                        <div class="tabpanel">
                             <h3>Broadcast presigned exit message</h3>
                             <p class="mt-5">If you have presigned exit messages, or you are able to generate them, you can simply broadcast them to the beaconchain through the {{#ifEqual chain "ethereum"}}<a href="https://beaconcha.in/tools/broadcast" target="_blank" rel="nofollow noopener noreferrer">https://beaconcha.in/tools/broadcast</a> tool on the Beaconcha.in website.{{/ifEqual}}{{#ifEqual chain "gnosis"}}<a href="https://gnosischa.in/tools/broadcast" target="_blank" rel="nofollow noopener noreferrer">https://gnosischa.in/tools/broadcast</a> tool on the Gnosischa.in website.{{/ifEqual}}</p>
                             <p class="mt-5">Through the tool, you can send signed messages to the network just like from a server. <strong>It allows to exit validator externally without need of any staking server.</strong></p>

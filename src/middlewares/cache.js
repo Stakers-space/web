@@ -30,16 +30,18 @@ function getOfflineState(instanceIds){
     return stateSnap;
 }
 function getOfflineStatesAlertType(){
-    let length = 0;
-    let isCritical = false;
-    Object.keys(offlineStates).forEach((key) => {
-        if(offlineStates[key].o.length > 30) length++; // instance is offline
-        if(offlineStates[key].o.length > 100) isCritical = true; // instance is offline
-    });
-
-    let notify = 0;
-    if(length > 0) notify = (isCritical) ? 2 : 1;
-    return notify;
+    let notifyState = 0; // 0 = no notification | 1 = standard notification | 2 = critical notification
+    for (const key of Object.keys(offlineStates)) {
+        const offlinePercentage = offlineStates[key].o.length / offlineStates[key].v;
+        if(offlinePercentage > 0.05) { // instance is offline
+            notifyState = 1;
+            if(offlinePercentage > 0.25) {
+                notifyState = 2;
+                break;
+            }
+        }
+    };
+    return notifyState;
 }
 
 function getLastReportSent(accountId){

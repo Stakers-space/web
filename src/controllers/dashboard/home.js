@@ -79,7 +79,7 @@ exports.Dashboard = (req,res,next) => {
             if(Object.keys(offlineValidatorsByInstances).length === 0) {
                 res.locals.offlineStateInfo = '<span style="color:green">All validators online</span>';
             } else {
-                res.locals.offlineStateInfo = '<span style="color:orange">Offline validators detected</span>';
+                res.locals.offlineStateInfo = '<span style="color:orange">⚠️</span>';
             }
             res.locals.offlineStateData = JSON.stringify(offlineValidatorsByInstances);
         }

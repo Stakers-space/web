@@ -122,5 +122,6 @@
     {"url": "https://stakers.space/charts/gno-staked"},
     {"url": "https://stakers.space/charts/gno-circulation-supply"},
     {"url": "https://stakers.space/charts/gnosis-transactions"},
-    {"url": "https://stakers.space/charts/gnosis-blocks"}
+    {"url": "https://stakers.space/charts/gnosis-blocks"},
+    {"url": "https://stakers.space/succinct"}
 ]

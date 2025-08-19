@@ -1,0 +1,557 @@
+{{> header}}
+<main>
+    <section class="py-12 container mx-auto px-6">
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-15">	
+			<div class="grid items-center">
+				<div>
+					<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+						<li property="itemListElement" typeof="ListItem">
+							<a property="item" typeof="Thing" href="/" class="hover:underline">
+								<span property="name">Stakers.space</span>
+							</a>
+							<meta property="position" content="1">
+						</li>
+                        <li property="itemListElement" typeof="ListItem">
+							<a property="item" typeof="Thing" href="/chains" class="hover:underline">
+								<span property="name">Chains</span>
+							</a>
+							<meta property="position" content="2">
+						</li>
+						<li property="itemListElement" typeof="ListItem">
+							<a property="item" typeof="Thing" href="/succinct" class="hover:underline">
+								<span property="name">Succinct</span>
+							</a>
+							<meta property="position" content="3">
+						</li>
+					</ul>
+
+					<h1 class="flex flex-col sm:flex-row items-start sm:items-center gap-4 text-4xl lg:text-6xl font-extrabold leading-[1.1] my-8">
+  <img src="/logo/succinct.svg" alt="Succinct logo" class="h-12 w-12 lg:h-16 lg:w-16 object-contain">
+  <span class="tracking-tight">
+    Succinct & <br><span class="text-emerald-600">Prove</span>r <span class="text-emerald-600">Staking</span>
+  </span>
+</h1>
+
+					<p class="text-gray-700 leading-relaxed">
+						A one‑page primer on what Succinct is, how the prover network works, and how staking & cashflow mechanics fit together.
+						<a href="#info" class="text-blue-600 hover:underline">see more detailed view.</a>
+					</p>
+
+                    <span class="my-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ring-1 ring-inset">
+                        Zero‑Knowledge • Prover Network • Staking
+                    </span>
+
+					<div class="text-gray-500">
+						Officially launched on August 5th, 2025
+					</div>
+					
+					<ul class="flex flex-wrap items-center gap-6 text-lg font-medium mt-8">
+                        <li><a href="https://www.succinct.xyz/" target="_blank" class="text-[#4a4e57] hover:text-emerald-600 transition-colors duration-200">Website</a></li>
+                        <li><a href="https://github.com/succinctlabs" target="_blank" class="text-[#4a4e57] hover:text-emerald-600 transition-colors duration-200">GitHub</a></li>
+                        <li><a href="https://twitter.com/succinctlabs" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/x.png" alt="X.com" width="20"></a></li>
+                        <li><a href="https://discord.com/invite/succinctlabs" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/discord.png" alt="Discord" width="20"></a></li>
+                    </ul>
+				</div>
+			</div>
+            <div class="mt-8 lg:mt-0 grid items-center">
+                <div class="bg-amber-50 border border-amber-200 text-amber-800 text-sm rounded-xl p-5 shadow-sm">
+                    <h3 class="font-semibold mb-2">Disclosure</h3>
+                    <p class="leading-relaxed">
+                    This page is an independent analytical overview of the Succinct Prover Network 
+                    and the PROVE token. It is <strong>not</strong> financial advice, investment 
+                    solicitation, or an official publication of Succinct Labs. 
+                    Readers should do their own research and consult professional advisors before 
+                    making financial decisions.
+                    </p>
+                </div>
+            </div>
+		</div>
+	</section>
+
+    <section class="bg-gradient-to-b from-white to-gray-100 py-12" id="intro">
+		<div class="grid grid-cols-1 lg:grid-cols-[42fr_58fr] gap-6 container mx-auto px-6">
+			<div class="lg:pr-10 grid items-center">
+				<div class="mb-8">
+					<h2 class="h2 mb-4">
+					    What is <span class="text-green-700">Succinct</span>?
+					</h2>
+					<p class="mt-4 text-gray-700">
+                        Succinct is a decentralized prover network + zkVM (SP1) that generates cryptographic proofs a program ran correctly.
+                        It’s about <strong>verifiable computation</strong> — others can trust the result without trusting the machine that ran it.
+                    </p>
+                    <ul class="mt-6 space-y-2 text-sm text-gray-800">
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-green-500"></span> Verifiable compute as a service</li>
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-green-500"></span> Provers compete in an open marketplace</li>
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-green-500"></span> Fast verification on-chain and off-chain</li>
+                    </ul>
+				</div>
+			</div>
+
+			<div class="grid grid-cols-1 gap-4">
+                <!-- Problem -->
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                <h3 class="font-semibold text-gray-900 mb-2">Problem</h3>
+                <p class="text-sm text-gray-700">
+                    Heavy computations happen off-chain. Today you must <em>trust</em> the operator who ran them —
+                    but they could be wrong, dishonest, or opaque.
+                </p>
+                </div>
+                
+                <!-- Solution -->
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                <h3 class="font-semibold text-gray-900 mb-2">Solution</h3>
+                <p class="text-sm text-gray-700">
+                    Succinct’s SP1 zkVM lets provers generate <strong>zk-proofs</strong> that a computation executed correctly.
+                    The prover network acts as decentralized compute providers, competing to deliver proofs.
+                </p>
+                </div>
+                
+                <!-- Outcome -->
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                <h3 class="font-semibold text-gray-900 mb-2">Outcome</h3>
+                <p class="text-sm text-gray-700">
+                    Anyone can verify the proof quickly and trust the result, <strong>without trusting the runner</strong>.
+                    <aside class="text-xs text-gray-700 mt-3">Note: Succinct guarantees only correctness of computation. For trusted <em>inputs</em> (real-world data, prices, events), it’s best combined with an oracle like <strong>Chainlink</strong>.</aside>
+                </p>
+                </div>
+			</div>
+		</div>
+
+        <div id="how" class="container mx-auto px-6 mt-8 py-8">
+            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">How the Prover Network works</h2>
+            <p class="mt-2 max-w-3xl subtle">
+                Succinct provides the proving runtime (SP1) and a decentralized marketplace of compute providers (provers). You bring a program; the network competes to prove it ran correctly.
+            </p>
+
+            <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                    <div class="flex items-start gap-3">
+                    <div class="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100">
+                        <span class="block h-4 w-4 rounded bg-gray-400"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Request posted</h3>
+                        <p class="mt-1 text-sm text-gray-700">A requester submits a job (program + inputs/commitments + constraints) to the network.</p>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                    <div class="flex items-start gap-3">
+                    <div class="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100">
+                        <span class="block h-4 w-4 rounded bg-gray-400"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Prover auction</h3>
+                        <p class="mt-1 text-sm text-gray-700">Provers bid to produce the proof. Competition drives price/performance.</p>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                    <div class="flex items-start gap-3">
+                    <div class="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100">
+                        <span class="block h-4 w-4 rounded bg-gray-400"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Proof generation</h3>
+                        <p class="mt-1 text-sm text-gray-700">The winner generates a zk-proof using SP1 (the zkVM).</p>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                    <div class="flex items-start gap-3">
+                    <div class="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100">
+                        <span class="block h-4 w-4 rounded bg-gray-400"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Verification & settlement</h3>
+                        <p class="mt-1 text-sm text-gray-700">Proof is verified (on-chain or off-chain), payment is released. Slashing applies for rule violations.</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================
+            PROTOCOL SWOT (Succinct Network)
+        ========================== -->
+        <div id="swot-protocol" class="container mx-auto py-8 px-6">
+            <div class="flex items-center justify-between flex-wrap gap-3 mb-6">
+                <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">Succinct Network — <span class="text-green-700">Protocol SWOT</span></h2>
+                <div class="flex items-center gap-2">
+                <a href="https://pdf.succinct.xyz/" target="_blank" rel="noopener"
+                    class="inline-flex items-center rounded-full bg-green-50 text-green-700 px-3 py-1 text-xs ring-1 ring-inset ring-green-200">
+                    Whitepaper
+                </a>
+                <a href="https://docs.succinct.xyz/" target="_blank" rel="noopener"
+                    class="inline-flex items-center rounded-full bg-gray-50 text-gray-700 px-3 py-1 text-xs ring-1 ring-inset ring-gray-200">
+                    Docs
+                </a>
+                </div>
+            </div>
+
+            <div class="grid gap-6 lg:grid-cols-2">
+                <!-- Strengths -->
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-6">
+                <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <span class="inline-block h-2 w-2 rounded-full bg-green-500"></span> Strengths
+                </h3>
+                <ul class="list-disc pl-5 space-y-2 text-sm text-gray-800">
+                    <li><strong>Clear product–market fit:</strong> unified marketplace to buy ZK proving capacity; aggregates demand/supply and improves price discovery. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                    <li><strong>Incentive design (“proof contests”):</strong> contest/all-pay mechanism balances decentralization with cost/latency. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                    <li><strong>SP1 zkVM co-design:</strong> performance gains accrue network-wide; single open stack for devs/operators. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                    <li><strong>Permissionless participation:</strong> accommodates home provers and pools → geographic diversity & resilience. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                    <li><strong>Transparent pricing:</strong> auctions reveal market prices → more forecastable infra cashflows. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                </ul>
+                </div>
+
+                <!-- Weaknesses -->
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-6">
+                <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <span class="inline-block h-2 w-2 rounded-full bg-yellow-500"></span> Weaknesses
+                </h3>
+                <ul class="list-disc pl-5 space-y-2 text-sm text-gray-800">
+                    <li><strong>All-pay overhead:</strong> some work is expended without winning to preserve decentralization. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                    <li><strong>Heavy infra requirements:</strong> compute-intensive proving (GPU/ASIC) → capex/opex + ops risk. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                    <li><strong>Stack coupling:</strong> co-design with SP1 concentrates technical risk in one zkVM stack. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                    <li><strong>Token-secured economics:</strong> staking/slashing exposure and token volatility feed into operator economics. <a class="text-green-700 underline" href="https://docs.succinct.xyz/docs/protocol/spn/staking" target="_blank" rel="noopener">Docs</a></li>
+                </ul>
+                </div>
+
+                <!-- Opportunities -->
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-6">
+                <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <span class="inline-block h-2 w-2 rounded-full bg-emerald-500"></span> Opportunities
+                </h3>
+                <ul class="list-disc pl-5 space-y-2 text-sm text-gray-800">
+                    <li><strong>Rising ZK demand:</strong> bridges, rollups, zk-coprocessors, identity & ZK-AI need scalable proving. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                    <li><strong>Hardware flywheel:</strong> transparent fees attract GPU/FPGA/ASIC investment → lower prices for users. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                    <li><strong>Home-prover long tail:</strong> pools let small operators add capacity and resilience. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                    <li><strong>Composability:</strong> pair compute-correctness with trusted inputs (e.g., Chainlink) for more use cases. <a class="text-green-700 underline" href="https://docs.succinct.xyz/" target="_blank" rel="noopener">Docs</a></li>
+                </ul>
+                </div>
+
+                <!-- Threats -->
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-6">
+                <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <span class="inline-block h-2 w-2 rounded-full bg-red-500"></span> Threats
+                </h3>
+                <ul class="list-disc pl-5 space-y-2 text-sm text-gray-800">
+                    <li><strong>Competitive markets:</strong> other ZK networks or centralized providers competing on latency/price.</li>
+                    <li><strong>Policy/parameter shocks:</strong> changes to rewards or staking rules, plus regulation, can impact yields & participation. <a class="text-green-700 underline" href="https://docs.succinct.xyz/docs/protocol/spn/parameters" target="_blank" rel="noopener">Docs</a></li>
+                    <li><strong>Supply concentration:</strong> specialized hardware economics may favor large operators absent careful tuning. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                    <li><strong>Demand uncertainty:</strong> if job volume lags, fee revenue underperforms expectations. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+	</section>
+
+    <section id="prove" class="py-20">
+        <div class="container mx-auto px-6">
+            <!-- Heading + intro -->
+            <div class="max-w-3xl mb-10">
+                <h2 class="h2 mb-4">The <span class="text-green-700">PROVE</span> Token</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    <strong>PROVE</strong> powers the Succinct Prover Network. It’s the <strong>payments token</strong> for proof jobs,
+                    the <strong>staking collateral</strong> that backs prover commitments (subject to <strong>slashing</strong>), and (per protocol rules) may be used for governance.
+                    Docs: <a class="text-green-700 underline" href="https://docs.succinct.xyz/docs/protocol/prove/overview" target="_blank" rel="noopener">Payments overview</a>,
+                    <a class="text-green-700 underline" href="https://docs.succinct.xyz/docs/protocol/spn/staking" target="_blank" rel="noopener">Staking mechanism</a>,
+                    <a class="text-green-700 underline" href="https://docs.succinct.xyz/docs/protocol/spn/parameters" target="_blank" rel="noopener">Protocol parameters</a>.
+                </p>
+            </div>
+
+            <div id="swot-token" class="container mx-auto py-8">
+                <div class="flex items-center justify-between flex-wrap gap-3 mb-6">
+                    <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">PROVE — <span class="text-green-700">Tokenomics SWOT</span></h2>
+                    <div class="flex items-center gap-2">
+                    <a href="https://docs.succinct.xyz/docs/protocol/prove/overview" target="_blank" rel="noopener"
+                        class="inline-flex items-center rounded-full bg-green-50 text-green-700 px-3 py-1 text-xs ring-1 ring-inset ring-green-200">
+                        Token / Payments
+                    </a>
+                    <a href="https://docs.succinct.xyz/docs/protocol/spn/staking" target="_blank" rel="noopener"
+                        class="inline-flex items-center rounded-full bg-gray-50 text-gray-700 px-3 py-1 text-xs ring-1 ring-inset ring-gray-200">
+                        Staking
+                    </a>
+                    </div>
+                </div>
+
+                <div class="grid gap-6 lg:grid-cols-2">
+                    <!-- Strengths -->
+                    <div class="rounded-xl border border-gray-200 p-5 bg-gray-50">
+                        <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                            <span class="inline-block h-2 w-2 rounded-full bg-green-500"></span> Strengths
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2 text-sm text-gray-800">
+                            <li><strong>Dual utility:</strong> payments for proofs + staking collateral → persistent operational & security demand. <a class="text-green-700 underline" href="https://docs.succinct.xyz/docs/protocol/prove/overview" target="_blank" rel="noopener">Docs</a></li>
+                            <li><strong>Slashing-backed security:</strong> credible penalties raise trust for integrators (L2s, bridges). <a class="text-green-700 underline" href="https://docs.succinct.xyz/docs/protocol/spn/staking" target="_blank" rel="noopener">Docs</a></li>
+                            <li><strong>Direct revenue linkage:</strong> fee distribution connects protocol usage to tokenholder returns. <a class="text-green-700 underline" href="https://docs.succinct.xyz/docs/protocol/prove/overview" target="_blank" rel="noopener">Docs</a></li>
+                            <li><strong>Early adopter upside:</strong> in early phases, rewards can be meaningfully higher vs. mature state. <a class="text-green-700 underline" href="https://docs.succinct.xyz/" target="_blank" rel="noopener">Docs</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Weaknesses -->
+                    <div class="rounded-xl border border-gray-200 p-5 bg-gray-50">
+                        <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                            <span class="inline-block h-2 w-2 rounded-full bg-yellow-500"></span> Weaknesses
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2 text-sm text-gray-800">
+                            <li><strong>Inflation risk:</strong> if rewards outpace organic fees, holders face dilution. <a class="text-green-700 underline" href="https://docs.succinct.xyz/" target="_blank" rel="noopener">Docs</a></li>
+                            <li><strong>Fee-volume dependency:</strong> low job volume ⇒ low fee-based yield ⇒ weaker price support. <a class="text-green-700 underline" href="https://docs.succinct.xyz/docs/protocol/prove/overview" target="_blank" rel="noopener">Docs</a></li>
+                            <li><strong>High operator barriers:</strong> ROI may skew to large operators; delegators depend on operator selection. <a class="text-green-700 underline" href="https://docs.succinct.xyz/docs/protocol/spn/staking" target="_blank" rel="noopener">Docs</a></li>
+                            <li><strong>Speculative demand share:</strong> price can decouple from fundamentals in the short term. <a class="text-green-700 underline" href="https://docs.succinct.xyz/" target="_blank" rel="noopener">Docs</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Opportunities -->
+                    <div class="rounded-xl border border-gray-200 p-5 bg-gray-50">
+                        <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                            <span class="inline-block h-2 w-2 rounded-full bg-emerald-500"></span> Opportunities
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2 text-sm text-gray-800">
+                            <li><strong>ZK adoption flywheel:</strong> more apps & L2s → more proof jobs → more fees → stronger staking yields. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                            <li><strong>DeFi composability:</strong> potential use as collateral/LP/restaking can deepen utility & demand. <a class="text-green-700 underline" href="https://docs.succinct.xyz/" target="_blank" rel="noopener">Docs</a></li>
+                            <li><strong>Scarcity levers:</strong> design options (e.g., fee burns/redirects) could add deflationary pressure. <a class="text-green-700 underline" href="https://docs.succinct.xyz/" target="_blank" rel="noopener">Docs</a></li>
+                            <li><strong>Institutional infra:</strong> predictable auctions & transparent fees attract professional operators. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Threats -->
+                    <div class="rounded-xl border border-gray-200 p-5 bg-gray-50">
+                        <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                            <span class="inline-block h-2 w-2 rounded-full bg-red-500"></span> Threats
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2 text-sm text-gray-800">
+                            <li><strong>Token velocity:</strong> if users buy PROVE only to pay for jobs (low holding/lock), price pressure can persist. <a class="text-green-700 underline" href="https://docs.succinct.xyz/" target="_blank" rel="noopener">Docs</a></li>
+                            <li><strong>Competing ZK markets:</strong> rival networks/providers could win on latency/price or integrations. <a class="text-green-700 underline" href="https://pdf.succinct.xyz/" target="_blank" rel="noopener">Whitepaper</a></li>
+                            <li><strong>Regulatory uncertainty:</strong> adverse classification can limit liquidity/adoption. <a class="text-green-700 underline" href="https://docs.succinct.xyz/" target="_blank" rel="noopener">Docs</a></li>
+                            <li><strong>Security reflexivity:</strong> sharp price drops reduce collateral value → lower security budget. <a class="text-green-700 underline" href="https://docs.succinct.xyz/docs/protocol/spn/staking" target="_blank" rel="noopener">Staking</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gradient-to-b from-white to-gray-100 py-12" id="staking">
+		<div class="grid grid-cols-1 lg:grid-cols-[42fr_58fr] gap-6 container mx-auto px-6">
+			<div class="lg:pr-10 grid items-center">
+				<div class="mb-8">
+					<h2 class="h2 ">
+					    PROVE <span class="text-green-700">Staking</span>
+					</h2>
+                    <p class="my-4 text-gray-700">The PROVE token underpins the Succinct Prover Network’s incentive and security model. A dedicated budget (protocol rewards) is redistributed to stakers, while provers earn fees from jobs. The effective yield depends on network activity and the proportion of PROVE staked.</p>
+					<ul class="space-y-3 text-sm text-gray-800 leading-relaxed">
+                        <li>
+                        <strong>Stake or delegate PROVE</strong> — Operators stake their own (and can attract delegated stake).
+                        Delegators lock PROVE to back an operator without running hardware.
+                        </li>
+                        <li>
+                        <strong>Collateral & security</strong> — Staked PROVE backs commitments; violations (missed deadlines, invalid proofs)
+                        may be <span class="text-red-600 font-semibold">slashed</span>.
+                        </li>
+                        <li>
+                        <strong>Eligibility to bid</strong> — Effective stake gates auction participation and concurrency.
+                        Requesters may set minimums (see <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/spn/parameters" target="_blank" rel="noopener">parameters</a>).
+                        </li>
+                        <li>
+                        <strong>Unbonding delay</strong> — Unstaking requires a protocol-defined delay before funds become liquid.
+                        </li>
+                    </ul>
+                    <p class="mt-4 text-xs text-gray-600">
+                        Sources:
+                        <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/spn/staking" target="_blank" rel="noopener">Staking</a>,
+                        <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/spn/parameters" target="_blank" rel="noopener">Parameters</a>.
+                    </p>
+				</div>
+			</div>
+
+			<div class="grid grid-cols-1 gap-4">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">PROVE staking rewards</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <!-- Fees -->
+                        <div class="rounded-2xl bg-white border border-gray-200 shadow p-6 hover:shadow-lg transition">
+                            <div class="flex items-start gap-4">
+                                <div class="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-green-50 ring-1 ring-green-200">
+                                    <span class="block h-4 w-4 rounded bg-green-500"></span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">1) Job payments (fees)</h4>
+                                    <p class="mt-1 text-sm text-gray-700">
+                                    Requesters pay in PROVE for completed proofs (base fee + auction price per compute unit).
+                                    Source: <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/prove/overview" target="_blank" rel="noopener">Docs: Payments</a>.
+                                    </p>
+                                    <dl class="mt-3 grid sm:grid-cols-2 gap-x-6 text-xs text-gray-700">
+                                    <div>
+                                        <dt class="font-medium text-gray-900">Who earns</dt>
+                                        <dd>Operators; Delegators via operator’s fee-share policy.</dd>
+                                    </div>
+                                    <div class="mt-2 sm:mt-0">
+                                        <dt class="font-medium text-gray-900">Yield driver</dt>
+                                        <dd>Job volume, compute price (PGU), operator commission to delegators.</dd>
+                                    </div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                <!-- Staking/Security -->
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-6 hover:shadow-lg transition">
+                    <div class="flex items-start gap-4">
+                    <div class="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-green-50 ring-1 ring-green-200">
+                        <span class="block h-4 w-4 rounded bg-green-500"></span>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">2) Staking & security</h4>
+                        <p class="mt-1 text-sm text-gray-700">
+                        Effective stake unlocks auctions/concurrency; violations can be <strong>slashed</strong>.
+                        Sources: <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/spn/staking" target="_blank" rel="noopener">Staking</a>,
+                        <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/spn/parameters" target="_blank" rel="noopener">Parameters</a>.
+                        </p>
+                        <dl class="mt-3 grid sm:grid-cols-2 gap-x-6 text-xs text-gray-700">
+                        <div>
+                            <dt class="font-medium text-gray-900">Who earns</dt>
+                            <dd>Delegators (fee share); Operators (job margin after sharing).</dd>
+                        </div>
+                        <div class="mt-2 sm:mt-0">
+                            <dt class="font-medium text-gray-900">Yield driver</dt>
+                            <dd>Access to more jobs via stake, minus risk-adjusted slashing.</dd>
+                        </div>
+                        </dl>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Protocol rewards -->
+                <div class="rounded-2xl bg-white border border-gray-200 shadow p-6 hover:shadow-lg transition">
+                    <div class="flex items-start gap-4">
+                    <div class="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-green-50 ring-1 ring-green-200">
+                        <span class="block h-4 w-4 rounded bg-green-500"></span>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">3) Protocol rewards (emissions)</h4>
+                        <p class="mt-1 text-sm text-gray-700">
+                        If a rewards budget is active, it’s distributed per policy. Check current budget & allocation:
+                        <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/prove/overview" target="_blank" rel="noopener">Protocol overview</a>.
+                        </p>
+                        <dl class="mt-3 grid sm:grid-cols-2 gap-x-6 text-xs text-gray-700">
+                        <div>
+                            <dt class="font-medium text-gray-900">Who earns</dt>
+                            <dd>Delegators (baseline APR); possibly operators (activity incentives).</dd>
+                        </div>
+                        <div class="mt-2 sm:mt-0">
+                            <dt class="font-medium text-gray-900">Yield driver</dt>
+                            <dd>Baseline APR ≈ <em>Rewards / Total Staked</em> (dilutes as staking grows).</dd>
+                        </div>
+                        </dl>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+			</div>
+		</div>
+        <!-- Formulas -->
+            <div id="economics" class="mt-14 container mx-auto px-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-3">Prove Staking Economics & Cashflow</h2>
+                <p class="my-2 max-w-3xl text-gray-700 leading-relaxed">
+                    Below are simple, implementation-agnostic formulas you can adapt. Numbers vary by network parameters and market conditions; treat any example values as placeholders you will replace with live data.
+                </p>
+                <div class="grid gap-6 lg:grid-cols-2">
+                    <div class="rounded-2xl bg-white border border-gray-200 shadow p-6">
+                    <h4 class="font-semibold text-gray-900">Delegating Staker — indicative APR</h4>
+                    <pre class="no-pseudo text-sm mt-3">APR ≈ ( ProtocolRewardsPerYear / TotalStaked )
+    + ( (1 − OperatorCommission) × OperatorFeeRevenuePerYear / YourStake )</pre>
+                    <p class="mt-3 text-xs text-gray-600">
+                        Sources:
+                        <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/prove/overview" target="_blank" rel="noopener">Payments</a>,
+                        <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/spn/parameters" target="_blank" rel="noopener">Parameters</a>.
+                    </p>
+                    </div>
+                    <div class="rounded-2xl bg-white border border-gray-200 shadow p-6">
+                    <h4 class="font-semibold text-gray-900">Prover Operator — daily P&amp;L</h4>
+                    <pre class="no-pseudo text-sm mt-3">Profit ≈ Σ_jobs [ ( BaseFee + PGU_Price × PGU_Used ) × (1 − ShareToDelegators) ]
+       − PowerCost − HW_Amortization − ( FailureProb × SlashAmount )</pre>
+                    <p class="mt-3 text-xs text-gray-600">
+                        Sources:
+                        <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/prove/overview" target="_blank" rel="noopener">Payments</a>,
+                        <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/spn/staking" target="_blank" rel="noopener">Staking</a>.
+                    </p>
+                    </div>
+                </div>
+
+                <div class="mt-8 px-y py-1">
+                    <h4 class="font-semibold text-gray-900">APR changes with Total Staked</h4>
+                    <p class="text-sm text-gray-700 mt-2">
+                    If a fixed rewards budget is active, baseline rewards APR follows
+                    <code>APR_rewards ≈ Rewards / TotalStaked</code> and declines as more PROVE is staked.
+                    Always verify the current rewards policy in the docs:
+                    <a class="underline text-green-700" href="https://docs.succinct.xyz/docs/protocol/prove/overview" target="_blank" rel="noopener">Protocol overview</a>.
+                    </p>
+                </div>
+            </div>
+
+        <div id="hardware" class="py-16 container mx-auto px-6 mt-8">
+            <h2 class="h2">Staking Hardware & Operations</h2>
+            <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                <h3 class="font-semibold text-gray-900">Recommended (competitive)</h3>
+                <ul class="mt-2 space-y-1 text-sm text-gray-700 list-disc list-inside">
+                <li>Modern NVIDIA GPU (e.g. 3090 / 4090)</li>
+                <li>≥ 24 GB RAM, ≥ 100 GB SSD</li>
+                <li>≥ 4 CPU cores</li>
+                <li>Linux (e.g. Ubuntu 22.04 / 24.04)</li>
+                </ul>
+            </div>
+            <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                <h3 class="font-semibold text-gray-900">CPU-only (works, slower)</h3>
+                <ul class="mt-2 space-y-1 text-sm text-gray-700 list-disc list-inside">
+                <li>8+ CPU cores, 32 GB RAM</li>
+                <li>Expect much longer proving times</li>
+                <li>Hard to win auctions vs. GPUs</li>
+                </ul>
+            </div>
+            <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                <h3 class="font-semibold text-gray-900">Ops tips</h3>
+                <ul class="mt-2 space-y-1 text-sm text-gray-700 list-disc list-inside">
+                <li>Monitor latency & job timeouts to avoid penalties</li>
+                <li>Budget power/colo or GPU-cloud costs</li>
+                <li>Keep binaries & circuits updated</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+        <div class="text-center"> 
+            <a href="https://staking.succinct.xyz/" target="_blank" rel="nofollow noopener noreferrer" class="inline-flex items-center gap-2 rounded-2xl bg-gray-700 px-4 py-2 font-medium text-white shadow hover:bg-gray-500"> Stake Prove </a> 
+            <a href="https://docs.succinct.xyz/docs/protocol/prove/staking" target="_blank" rel="nofollow noopener noreferrer" class="inline-flex items-center gap-2 rounded-2xl bg-gray-700 px-4 py-2 font-medium text-white shadow hover:bg-gray-500"> Staking docs </a> 
+        </div>
+	</section>
+
+    <section id="faq" class="container mx-auto px-6 py-16">
+        <h2 class="h2">FAQ</h2>
+        <div class="mt-6 grid gap-5 sm:grid-cols-2">
+            <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                <h3 class="font-semibold text-gray-900">Does Succinct replace Chainlink?</h3>
+                <p class="mt-1 text-sm text-gray-700">No. Succinct proves that a computation ran correctly. For trusted inputs (price feeds, etc.), you still need an oracle or a trusted data pipeline.</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                <h3 class="font-semibold text-gray-900">Is there a fixed minimum stake to bid?</h3>
+                <p class="mt-1 text-sm text-gray-700">Networks often set a minimum effective stake to bid and let requesters gate jobs by stake; treat it as configurable and check current docs before committing capital.</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                <h3 class="font-semibold text-gray-900">How are operators paid?</h3>
+                <p class="mt-1 text-sm text-gray-700">Via job fees: a base fee plus an auction-discovered price per proving compute unit (PGU). Revenue share to delegators is operator-defined.</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-gray-200 shadow p-5 hover:shadow-lg transition">
+                <h3 class="font-semibold text-gray-900">What happens on failure?</h3>
+                <p class="mt-1 text-sm text-gray-700">Missed deadlines or invalid proofs can lead to lost revenue and potential slashing, according to protocol policy.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+{{> footer_tailwind}}
