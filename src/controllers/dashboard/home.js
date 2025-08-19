@@ -76,6 +76,7 @@ exports.Dashboard = (req,res,next) => {
         //console.log("serversIdsList", serversIdsList);
         if(accountInstances.length > 0){
             let offlineValidatorsByInstances = cache.getOfflineState(accountInstances);
+            //console.log("cache.getOfflineState", offlineValidatorsByInstances);
             if(Object.keys(offlineValidatorsByInstances).length === 0) {
                 res.locals.offlineStateInfo = '<span style="color:green">All validators online</span>';
             } else {

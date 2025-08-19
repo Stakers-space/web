@@ -66,7 +66,7 @@ ul.img_marker li {
                                     {{#each this.instances}}
                                         <li data-iid="{{this.id}}" data-chain="{{this.chain}}" class="val_instance" style="--marker-image: url('/logo/{{#ifEqual this.chain "gnosis"}}gnosis{{else}}{{#ifEqual this.chain "ethereum"}}ethereum{{/ifEqual}}{{/ifEqual}}.svg');">
                                             {{#ifEqual isOwner "true"}}<a href="/dashboard/server-node/define-instance?sid={{../this.sid}}&iid={{this.id}}" class="iname">{{this.instance}}</a>{{else}}<span>{{this.instance}}</span>{{/ifEqual}} | 
-                                            <span class="instance_status"></span><br>
+                                            <span class="instance_balance"></span><span class="instance_status"></span><br>
                                             <i class="encrypted_value instance_note" style="max-width:90%;overflow:hidden;display:block">{{this.note}}</i>
                                             <i>
                                                 {{#if this.fee_recipient}}Wlt: <a href="#" target="_blank" rel="nofollow noopener noreferrer" class="encrypted_value instance_fwlt">{{this.fee_recipient}}</a> | {{/if}}
@@ -191,7 +191,7 @@ ul.img_marker li {
                     valcount_instance[chain][instanceId].total.val = validators_count; 
                     valcount_instance[chain]["agg"].total.val += validators_count;
 
-                    RenderInstanceCountsView(instanceId, instanceElm, valcount_instance[chain][instanceId], chain);
+                    RenderInstanceCountsView(instanceId, instanceElm, valcount_instance[chain][instanceId], chain, false);
                     //console.log("pubkeys:", validators_count);
                     srv_agg_validators[chain] += validators_count;
                     dest_agg_validators[chain] += validators_count;
@@ -240,73 +240,89 @@ ul.img_marker li {
                 valcount_instance[chain]["agg"].total.balance += valcount_instance[chain][instance_id].total.balance;
                 
                 // Update 
-                RenderInstanceCountsView(instance_id, null, data, chain);
+                RenderInstanceBalance(instance_id, data, chain);
 			};
         }
 
         RenderAccountCounts("balance");
     }
 
-    function RenderInstanceCountsView(instanceId, instanceElm, instance_data, chain, initIteration = false){
-        if(!instanceElm) {
-            try {
-                instanceElm = document.querySelector('[data-iid="'+instanceId+'"]');
-                if(!instanceElm) return;
-            } catch(e){
-                console.error(e)
-            };
+    function RenderInstanceBalance(instanceId, instance_data, chain){
+        const instanceElm = document.querySelector('[data-iid="'+instanceId+'"]');
+        if(!instanceElm) return;
+       
+        if(instance_data.total.balance > 0){
+            let ticker = (chain === "gnosis") ? "GNO" : "ETH";
+            instanceElm.children[1].innerHTML = `${instance_data.total.balance} ${ticker} | `;
         }
+    }
 
-        let statusElm = instanceElm.children[1];
+    function RenderInstanceCountsView(instanceId, instanceElm, instance_data, chain, initIteration = false){
+        let statusElm = instanceElm.children[2];
         
         if(initIteration){
             const instanceTmpData = offlineStateData[instanceId];
-
+            
             // first iteration
-            if(instance_data.offline === 0 && instance_data.pending === 0 && !instanceTmpData){
+            if(!instanceTmpData){
                 statusElm.innerHTML = "All online";
                 statusElm.style.color = "green";
                 return;
-            }
-
-            let offlineIds = [];
-            for(const obj of instanceTmpData.o){
-                if(offlineIds.length < 100) { // limit at 100
-                    offlineIds.push(obj.i); 
-                } else {
-                    break;
-                }
-            }
-
-            let msg = "";
-            if(offlineIds.length > 0) {
-                let link = (chain === "gnosis") ? "https://gnosischa.in" : "https://beaconcha.in";
-                let stArr = offlineIds.toString();
-                msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+instance_data.offline+' Offline</a> ';
-            }
-            if(valcount_instance[chain][instanceId].pending > 0) msg += valcount_instance[chain][instanceId].pending+' Val Pending ';
-            if(instanceTmpData && instanceTmpData.e && instanceTmpData.e > 0) msg += instanceTmpData.e+' Val Exited ';
-            msg += "| " + instanceTmpData.v + " Val Total";
-
-            statusElm.innerHTML = msg;
+            } 
+            
             statusElm.style.color = "orange";
+            statusElm.innerHTML = "Val: "
+            
+            let onlineVal = instanceTmpData.v;
+            let offlineIds = [];
+
+            const offlineValCount = instanceTmpData.o.length;
+            if(offlineValCount > 0){
+                for(const obj of instanceTmpData.o){
+                    if(offlineIds.length < 100) { // limit at 100
+                        offlineIds.push(obj.i); 
+                    } else {
+                        break;
+                    }
+                }
+
+                let msg = "";
+                if(offlineIds.length > 0) {
+                    let link = (chain === "gnosis") ? "https://gnosischa.in" : "https://beaconcha.in";
+                    let stArr = offlineIds.toString();
+                    msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+offlineValCount+' Offline</a> ';
+                }
+
+                onlineVal -= offlineValCount;
+
+                statusElm.innerHTML += msg;
+            }
+
+            
+            if(instanceTmpData.e) {
+                statusElm.innerHTML += ` ${instanceTmpData.e} exited `;
+                onlineVal -= instanceTmpData.e;
+            }
+
+            if(instanceTmpData.p) {
+                statusElm.innerHTML += ` ${instanceTmpData.p} pending `;
+                onlineVal -= instanceTmpData.p;
+            }
+            
+            if(instanceTmpData.w) {
+                statusElm.innerHTML += ` ${instanceTmpData.w} withdrawal `;
+                onlineVal -= instanceTmpData.w;
+            }
+            
+            statusElm.innerHTML += ` <span style="color:green">${onlineVal} online</span>`;
+
         }
         
         // 2nd iteration
         if(statusElm.innerHTML === "All online") {
-            statusElm.innerHTML = `${instance_data.total.val}/${instance_data.total.val} Val online`;
+            statusElm.innerHTML = `${instance_data.total.val} Val online`;
             return;
         } 
-
-        // 3rd iteration
-        if(instance_data.total.balance > 0){
-            let ticker = (chain === "gnosis") ? "GNO" : "ETH";
-            if(!offlineStateData[instanceId]){
-                statusElm.innerHTML = `${instance_data.total.balance} ${ticker} | ${instance_data.total.val}/${instance_data.total.val} Val online`;
-            } else if(offlineStateData[instanceId].e){
-                statusElm.innerHTML = `${instance_data.total.balance} ${ticker} | ${offlineStateData[instanceId].e} Val exited | ${instance_data.total.val - offlineStateData[instanceId].e} Val Online`;
-            } // else - offline val
-        }
     }
 
     function RenderInsightLinks(pubkeyElm, data){
