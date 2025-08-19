@@ -4,7 +4,7 @@
     overflow-wrap: break-word;
 }
 ul.img_marker li {
-    max-height: 75px;
+    max-height: 105px;
     overflow-y: clip;
 }
 </style>
@@ -96,13 +96,21 @@ ul.img_marker li {
 <script>
     /* In-page Offline / pending state data */
     var offlineStateData = {{{offlineStateData}}}; // offline data
+
     let asyncTasks = 2;
     let snapshots = {};
 
     /* Aggregated view */
-    function SectorState(pubIdsIncluded = false){ 
-        this.offline = 0; this.pending = 0; this.total = { val: 0, balance: 0 }
-        if(pubIdsIncluded) this.pubIds = [];
+    function SectorState(isInstance = false){ 
+        this.pubkeys = 0;
+        this.balance = 0;
+        if(isInstance) {
+            this.pubIds = [];
+        } else { // aggregation
+            this.offline = 0;
+            this.pending = 0;
+            this.withdrawal = 0;
+        }
     }
     let valcount_instance = { ethereum: {}, gnosis: {} };
 
@@ -123,12 +131,11 @@ ul.img_marker li {
                  // is defined = known issue on the instance
                 const offlineCount = (offlineStateData[instanceId].o) ? offlineStateData[instanceId].o.length : 0;
                 const pendingCount = (offlineStateData[instanceId].p) ? offlineStateData[instanceId].p : 0;
+                const withdrawalCount = (offlineStateData[instanceId].w) ? offlineStateData[instanceId].w : 0;
                
-                valcount_instance[chain][instanceId].offline = offlineCount;
                 valcount_instance[chain]["agg"].offline += offlineCount;
-                
-                valcount_instance[chain][instanceId].pending = pendingCount;
                 valcount_instance[chain]["agg"].pending += pendingCount;
+                valcount_instance[chain]["agg"].withdrawal += withdrawalCount;
             }
 
             RenderInstanceCountsView(instanceId, instanceElm, valcount_instance[chain][instanceId], chain, true);
@@ -188,8 +195,8 @@ ul.img_marker li {
                     valcount_instance[chain][instanceId].pubIds = pubkeys;
 
                     const validators_count = pubkeys.length;
-                    valcount_instance[chain][instanceId].total.val = validators_count; 
-                    valcount_instance[chain]["agg"].total.val += validators_count;
+                    valcount_instance[chain][instanceId].pubkeys = validators_count; 
+                    valcount_instance[chain]["agg"].pubkeys += validators_count;
 
                     RenderInstanceCountsView(instanceId, instanceElm, valcount_instance[chain][instanceId], chain, false);
                     //console.log("pubkeys:", validators_count);
@@ -207,7 +214,7 @@ ul.img_marker li {
         }
 
         // aggregation
-        RenderAccountCounts("val");
+        RenderAccountCounts("pubkeys");
 
         // UI level account (header)
         const stateCountOverviewElm = document.getElementById("overview").children[1];
@@ -234,10 +241,10 @@ ul.img_marker li {
                      // find val balance for each pubId in the instance list
                     for (const pubId of data.pubIds){
                         const pubIdBalance = snapshots[chain][snapshotKey].data[Number(pubId)];
-                        if(pubIdBalance) data.total.balance += pubIdBalance; 
+                        if(pubIdBalance) data.balance += pubIdBalance; 
                     }
                 }
-                valcount_instance[chain]["agg"].total.balance += valcount_instance[chain][instance_id].total.balance;
+                valcount_instance[chain]["agg"].balance += valcount_instance[chain][instance_id].balance;
                 
                 // Update 
                 RenderInstanceBalance(instance_id, data, chain);
@@ -251,9 +258,9 @@ ul.img_marker li {
         const instanceElm = document.querySelector('[data-iid="'+instanceId+'"]');
         if(!instanceElm) return;
        
-        if(instance_data.total.balance > 0){
+        if(instance_data.balance > 0){
             let ticker = (chain === "gnosis") ? "GNO" : "ETH";
-            instanceElm.children[1].innerHTML = `${instance_data.total.balance} ${ticker} | `;
+            instanceElm.children[1].innerHTML = `${instance_data.balance} ${ticker} | `;
         }
     }
 
@@ -298,7 +305,6 @@ ul.img_marker li {
                 statusElm.innerHTML += msg;
             }
 
-            
             if(instanceTmpData.e) {
                 statusElm.innerHTML += ` ${instanceTmpData.e} exited `;
                 onlineVal -= instanceTmpData.e;
@@ -315,12 +321,11 @@ ul.img_marker li {
             }
             
             statusElm.innerHTML += ` <span style="color:green">${onlineVal} online</span>`;
-
         }
         
         // 2nd iteration
         if(statusElm.innerHTML === "All online") {
-            statusElm.innerHTML = `${instance_data.total.val} Val online`;
+            statusElm.innerHTML = `${instance_data.pubkeys} Val online`;
             return;
         } 
     }
@@ -358,8 +363,8 @@ ul.img_marker li {
 
     function RenderAccountCounts(key){
         const acc_agg_ui = document.getElementsByClassName("account_validators")[0];
-        acc_agg_ui.children[0].innerHTML = valcount_instance["ethereum"]["agg"].total[key];
-        acc_agg_ui.children[1].innerHTML = valcount_instance["gnosis"]["agg"].total[key];
+        acc_agg_ui.children[0].innerHTML = valcount_instance["ethereum"]["agg"][key];
+        acc_agg_ui.children[1].innerHTML = valcount_instance["gnosis"]["agg"][key];
 
         if(key === "balance"){
             document.getElementById("amount_identifier").innerHTML = "Assets:";
