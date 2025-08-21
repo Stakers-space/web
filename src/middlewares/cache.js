@@ -26,7 +26,7 @@ function getOfflineState(instanceIds){
             stateSnap[instanceId] = offlineStates[instanceId];
         }
     }
-    if(process.env.PORT !== undefined) console.log("get cached states for instances:", instanceIds, "→", stateSnap);
+    //if(process.env.PORT !== undefined) console.log("get cached states for instances:", instanceIds, "→", stateSnap);
     return stateSnap;
 }
 function getOfflineStatesAlertType(){
@@ -59,7 +59,7 @@ function updateOfflineStates(data){
     // chain not needed as is based on instance id
     // iterate and update offline states
     offlineStates = data;
-    if(Object.keys(offlineStates).length > 0) console.log("cached offline states:", offlineStates); 
+    //if(Object.keys(offlineStates).length > 0) console.log("cached offline states:", offlineStates); 
     
 }
 function setLastReportSent(accountId, timestamp){ lastReportSent[accountId] = timestamp; }

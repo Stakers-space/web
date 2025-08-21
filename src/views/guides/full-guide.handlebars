@@ -356,7 +356,7 @@ sudo reboot</code></pre>
 								<p><a href="#ssh-install">If you have <code>SSH</code> installed and running on your server</a>, you must either disable ports for SSH traffic, disable SSH or remove it. If <code>SSH</code> is not installed on your machine, you can skip this step - ssh access is not possible already.</p>
 								<ul class="list-disc my-4">
 									<li><h4>Option 1: Stop and disable the ssh service</h4>
-										<pre><code>sudo systemctl stop ssh
+										<pre class="no-pseudo"><code>sudo systemctl stop ssh
 sudo systemctl disable ssh</code></pre>
 										<p>If preferred, you can remove the SSH server client from the machine</p>
 										<pre><code>sudo apt remove openssh-server</code></pre>
