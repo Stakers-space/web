@@ -5,14 +5,19 @@ const MailService = require('../services/customMailing');
 const cache = require('../middlewares/cache');
 const MailMessage = require('../models/emailMessage/validators_alert.js');
 
-let noIncominMessageTimer = null;
+let noIncominMessageTimer = {
+	gnosis: null,
+	ethereum: null
+};
 
 /**
  * Update validators state and trigger alert if needed
 */
 exports.UpdateValidatorsState = (req,res) => {
 	// validate queries
-	if(!req.query.n) return res.status(400).send('Missing network parameter');
+	const network = req.query.n;
+	if(!network) return res.status(400).send('Missing network parameter');
+	if(network !== "gnosis" && network !== "ethereum") return res.status(400).send('Invalid network parameter');
 	if(!req.query.t) return res.status(400).send('Missing token parameter');
 	
 	/**
@@ -31,15 +36,15 @@ exports.UpdateValidatorsState = (req,res) => {
 	}
 
 	// check received epoch (same or higher than known)
-	if(data.e < cache.getLastEpochReported()[req.query.n]) {
-		console.log(`[API]/validator-state | Outdated data received from ${req.query.s} | ${req.query.n} | Epoch ${data.e}:`, data, req.query.t);
+	if(data.e < cache.getLastEpochReported()[network]) {
+		console.log(`[API]/validator-state | Outdated data received from ${req.query.s} | ${network} | Epoch ${data.e}:`, data, req.query.t);
 		return res.status(200).send("ignored:outdated data");
 	}
 	// Update last Epoch Reported Number
-	cache.updateLastEpochReported(req.query.n, data.e);
+	cache.updateLastEpochReported(network, data.e);
 
 	//console.log("/api/validator-state", req.headers['content-type'], decryptedData);
-	console.log(`[API]/validator-state | ${req.query.s} | ${req.query.n} | Epoch ${data.e}`/*, data, req.query.t*/);
+	console.log(`[API]/validator-state | ${req.query.s} | ${network} | Epoch ${data.e}`/*, data, req.query.t*/);
 	
 	// incoming - main key = instanceId (instance StringId as a meta information (Instances ids are known on the dashboard load))
 	/**
@@ -112,14 +117,15 @@ exports.UpdateValidatorsState = (req,res) => {
 	}
 
 	// no incomming message alert
-	cache.getSetValidatorsStateSynced(true);
-	clearTimeout(noIncominMessageTimer);
+	cache.getSetValidatorsStateSynced(network, true);
+	clearTimeout(noIncominMessageTimer[network]);
 	//console.log("UpdateValidatorsState | Clearing and reActivating noIncominMessageTimer");
-	noIncominMessageTimer = setTimeout(() => {
+	const timeoutMinutes = (network === "gnosis") ? 5 : 30; // gnosis has longer block time, so longer timeout for no incoming message alert
+	noIncominMessageTimer[network] = setTimeout(() => {
 		console.log(new Date(), "UpdateValidatorState | Triggering No incoming message alert!!!");
-		cache.getSetValidatorsStateSynced(false);
+		cache.getSetValidatorsStateSynced(network, false);
 		if(process.env.PORT !== undefined) MailService.SendMail(null, "stakersspace@proton.me", "No incoming message alert", "No incoming message alert");
-	}, 300000);
+	}, (timeoutMinutes * 60 * 1000));
 
 	// completing
 	res.send("ok");

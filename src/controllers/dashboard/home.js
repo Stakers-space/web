@@ -39,8 +39,8 @@ exports.Dashboard = (req,res,next) => {
     mysqlInst.GetValidatorsForAccount(user.id, function(err, data_instances){
         if(err){ res.locals.err = err; next(); }
         instances_arr = data_instances;
-        res.locals.lastEpochReported = cache.getLastEpochReported().gnosis; // last epoch reported
-        res.locals.lastEpochNotSynced = !cache.getSetValidatorsStateSynced(); // last epoch is up to date
+        res.locals.lastEpochReported = cache.getLastEpochReported(); // last epoch reported
+        res.locals.lastEpocSyncState = cache.getSetValidatorsStateSynced(); // last epoch is up to date
         OnTaskCompleted();
     });
 

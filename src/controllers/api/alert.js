@@ -9,7 +9,8 @@ exports.ReturnAlertState = (req, res, next) => {
     // add account id and api token
     
     let responseState = 0;
-    if(!cache.getSetValidatorsStateSynced()) {
+    const validatorStateSynced = cache.getSetValidatorsStateSynced();
+    if(!validatorStateSynced.gnosis || !validatorStateSynced.ethereum) {
         responseState = 2;
     } else {
         responseState = cache.getOfflineStatesAlertType();

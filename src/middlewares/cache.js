@@ -1,4 +1,9 @@
-let lastEpochReported = { gnosis: 0, ethereum: 0 };
+function ChainsList(defaultvalue){
+    this.ethereum = defaultvalue;
+    this.gnosis = defaultvalue;
+}
+
+let lastEpochReported = new ChainsList(0);
 let offlineStates = {}; // chain is not needed as is based on instance id
 /**
  * {
@@ -15,7 +20,7 @@ let pubkeysQueue = {
 /**
  * Track whether the app has up to date data about validator states
  */
-let validatorsStateSynced = true;
+let validatorsStateSynced = new ChainsList(true);
 
 function getLastEpochReported() { return lastEpochReported; }
 function getOfflineState(instanceIds){ 
@@ -33,8 +38,10 @@ function getOfflineStatesAlertType(){
     let notifyState = 0; // 0 = no notification | 1 = standard notification | 2 = critical notification
     for (const key of Object.keys(offlineStates)) {
         const offlinePercentage = offlineStates[key].o.length / offlineStates[key].v;
+        
         if(offlinePercentage > 0.05) { // instance is offline
             notifyState = 1;
+            console.log(`instance ${key}: offlinePercentage: ${offlinePercentage} | ${offlineStates[key].o.length}/${offlineStates[key].v}`);
             if(offlinePercentage > 0.25) {
                 notifyState = 2;
                 break;
@@ -82,8 +89,8 @@ function getPubkeyFromQueue(chain){
     return firstValue;
 }
 
-function getSetValidatorsStateSynced(state = null){
-    if(state) validatorsStateSynced = state;
+function getSetValidatorsStateSynced(chain = null, state = null){
+    if(state && chain) validatorsStateSynced[chain] = state;
     return validatorsStateSynced;
 }
 
