@@ -4,17 +4,45 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
+{{#if customServiceName}}
+User=<mark class="instance_su" data-client="prysm">{{customServiceName}}</mark>
+Group=<mark class="instance_su" data-client="prysm">{{customServiceName}}</mark>
+{{else}}
 User=<mark class="instance_su" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid" data-client="prysm">1</span></mark>
 Group=<mark class="instance_su" data-client="prysm">{{servicePrefix}}prysm-vi<span class="instance_pid" data-client="prysm">1</span></mark>
+{{/if}}
 Type=simple
 Restart=always
 RestartSec=5
+{{#if isRocketpool}}
+EnvironmentFile=/srv/rocketpool/data/validators/rp-fee-recipient-env.txt
+{{/if}}
 ExecStart=/usr/local/bin/validator \
+{{#if customServiceDatadir}}
+  --datadir=<mark class="instance_dp" data-client="prysm">{{customServiceDatadir}}</mark> \
+{{else}}
   --datadir=<mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid" data-client="prysm">1</span></mark> \
+{{/if}}
+{{#if isRocketpool}}
+  --wallet-dir=/srv/rocketpool/data/validators/prysm-non-hd \
+  --wallet-password-file=/srv/rocketpool/data/validators/prysm-non-hd/direct/accounts/secret \
+  --suggested-fee-recipient=<mark>${FEE_RECIPIENT}</mark> \
+  --enable-builder \
+  --local-block-value-boost 0 \
+  --graffiti "Rocketpool | <mark class="ec_name">Nethermind</mark>+Prysm" \
+{{else}}
   --wallet-dir=<mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid" data-client="prysm">1</span></mark> \
   --wallet-password-file=<mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid" data-client="prysm">1</span></mark>/password.txt \
-  --suggested-fee-recipient=<mark class="instance_frw" data-client="lighthouse">0xXXXXXXXXXXXXXXXX</mark> \
+{{/if}}
+{{#if isLido}}
+  --suggested-fee-recipient=<mark data-client="prysm"><a href="https://etherscan.io/address/0x388C818CA8B9251b393131C08a736A67ccB19297" target="_blank">0x388C818CA8B9251b393131C08a736A67ccB19297</a></mark> \
+  --enable-builder \
+  --local-block-value-boost 0 \
+  --graffiti "Lido CSM | <mark class="ec_name">Nethermind</mark>+Prysm" \
+{{else}}
+  --suggested-fee-recipient=<mark class="instance_frw" data-client="prysm">0xXXXXXXXXXXXXXXXX</mark> \
   --graffiti="<mark class="ec_name">Nethermind</mark>+Prysm" \
+{{/if}}
   --accept-terms-of-use
 
 [Install]

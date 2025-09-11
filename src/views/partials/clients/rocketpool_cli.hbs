@@ -198,8 +198,7 @@ journalctl -u rp-watchtower -b -f</code></pre>
     </li>
     <li>
         <h3 class="mt-4">Configurate a validator service for validators controlled by Rocketpool</h3>
-        <p>Validator service controlled by Rocketpol is same as Solo validator, only with Rocketpool data placed in its config file.</p>
-        
+        <p>Validator service controlled by Rocketpol is same as Solo validator, only with Rocketpool data placed in its config file.</p>    
         <div class="tabselector mt-6 bg-gray-100 p-10 pt-5 rounded-xl shadow-md">
 			<nav class="mb-5">
                 <button class="tab selected" data-tabpanel="1">Prysm</button>
@@ -208,25 +207,25 @@ journalctl -u rp-watchtower -b -f</code></pre>
 				<button class="tab" data-tabpanel="4">Teku</button>
 			</nav>
             <div class="tabpanel selected">
-                <p><label>Validator service name</label>: <input type="text" class="interactive-element rpl_validator" data-class="rpl_validator" value="rocketpool-validator"></p>
-                <p><label>Validator service direcotry</label>: <input type="text" class="interactive-element validator_snd" data-class="validator_snd" value="/var/lib/ethereum/prysm"></p>
+                <p><label>Validator service name</label>: <input type="text" class="interactive-element instance_su" data-class="instance_su" value="rocketpool-validator"></p>
+                <p><label>Validator service directory</label>: <input type="text" class="interactive-element instance_dp" data-class="instance_dp" value="/var/lib/ethereum/rocketpool-validator"></p>
                 <ul class="list-disc my-4">
                     <li><h4>Create a new rocketpool validator user</h4>
-                        <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="rpl_validator">rocketpool-validator</mark></code></pre>
+                        <pre><code>sudo useradd --system --no-create-home --shell /bin/false <mark class="instance_su">rocketpool-validator</mark></code></pre>
                     </li>
                     <li><h4>Add validator user into <code>rocketpool</code> user group</h4>
-                        <pre><code>sudo usermod -aG <mark class="rocketpool_su">rocketpool</mark> <mark class="rpl_validator">rocketpool-validator</mark></code></pre>
+                        <pre><code>sudo usermod -aG <mark class="rocketpool_su">rocketpool</mark> <mark class="instance_su">rocketpool-validator</mark></code></pre>
                     </li>
                     <li><h4>Create a directory for the validator data</h4>
-                        <pre><code>sudo mkdir <mark class="validator_snd">/var/lib/ethereum/prysm/<span class="rpl_validator">rocketpool-validator</span></mark></code></pre>
+                        <pre><code>sudo mkdir <mark class="instance_dp">/var/lib/ethereum/prysm/<span class="instance_su">rocketpool-validator</span></mark></code></pre>
                     </li>
                     <li><h4>Set permissions for the directory</h4>
-                        <pre><code>sudo chown -R <mark class="rpl_validator">rocketpool-validator</mark>:<mark class="rpl_validator">rocketpool-validator</mark> <mark class="validator_snd">/var/lib/ethereum/prysm/<span class="rpl_validator">rocketpool-validator</span></mark></code></pre>
+                        <pre><code>sudo chown -R <mark class="instance_su">rocketpool-validator</mark>:<mark class="instance_su">rocketpool-validator</mark> <mark class="instance_dp">/var/lib/ethereum/prysm/<span class="instance_su">rocketpool-validator</span></mark></code></pre>
                     </li>
                     <li><h4>Define <code>rocketpool-validator.service</code> file</h4>
-                        <pre><code>sudo nano /etc/systemd/system/<mark class="rpl_validator">rocketpool-validator</mark>.service</code></pre>
+                        <pre><code>sudo nano /etc/systemd/system/<mark class="instance_su">rocketpool-validator</mark>.service</code></pre>
                         <p>Copy the configuration below into the <code>prysmvalidator-rp.service</code> service file</p>
-{{> clients/config/ethrpl-prysmvalidator }}
+{{> clients/config/eth-prysmvalidator isRocketpool=true customServiceName="rocketpool-validator" customServiceDatadir="/var/lib/ethereum/rocketpool-validator"}}
                         <p>Save and Exit the file by pressing <code>ctrl</code>+<code>x</code>, then <code>y</code>.</p>
                     </li>
                     <li><h4>Create additional directories</h4>
@@ -283,7 +282,7 @@ journalctl -u rp-watchtower -b -f</code></pre>
                         <p>Open the file</p>
                         <pre><code>sudo nano /srv/rocketpool/stop-validator.sh</code></pre>
                         <p>Replace <code>#sudo systemctl restart lighthouse-validator</code> at the last line for:</p>
-                        <pre><code>sudo systemctl restart <mark class="rpl_validator">rocketpool-validator</mark></code></pre>
+                        <pre><code>sudo systemctl restart <mark class="instance_su">rocketpool-validator</mark></code></pre>
                         <p>Do not forget remove <code>#</code> at the start. Save and Exit the file by pressing
                             <code>ctrl</code>+<code>x</code>, then <code>y</code>.</p>
                     </li>
@@ -301,7 +300,7 @@ journalctl -u rp-watchtower -b -f</code></pre>
                         <p>Open the file</p>
                         <pre><code>sudo nano /srv/rocketpool/stop-validator.sh</code></pre>
                         <p>Replace <code>#sudo systemctl stop lighthouse-validator</code> at the last line for:</p>
-                        <pre><code>sudo systemctl stop <mark class="rpl_validator">rocketpool-validator</mark></code></pre>
+                        <pre><code>sudo systemctl stop <mark class="instance_su">rocketpool-validator</mark></code></pre>
                         <p>Do not forget remove <code>#</code> at the start. Save and Exit the file by pressing
                             <code>ctrl</code>+<code>x</code>, then <code>y</code>.</p>
                     </li>
@@ -315,8 +314,8 @@ journalctl -u rp-watchtower -b -f</code></pre>
         <ul class="list-disc my-4 pl-6">
             <li>Request <code>sudo visudo -f /etc/sudoers.d/rocketpool</code> to open the configuration file
                 <p>Place the code below into the file</p>
-                <pre><code>Cmnd_Alias RP_RESTART = /usr/bin/systemctl restart <mark class="rpl_validator">rocketpool-validator</mark>
-Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="rpl_validator">rocketpool-validator</mark>
+                <pre><code>Cmnd_Alias RP_RESTART = /usr/bin/systemctl restart <mark class="instance_su">rocketpool-validator</mark>
+Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="instance_su">rocketpool-validator</mark>
 <mark class="rocketpool_su">rocketpool</mark>    ALL=(ALL) NOPASSWD: RP_RESTART, RP_STOP</code></pre>
             </li>
         </ul>
@@ -408,17 +407,17 @@ Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="rpl_validator">rocketp
     <li><h3>Launch Rocketpool services</h3>
         <ul class="list-disc my-4 pl-6">
             <li>
-                <pre><code>sudo systemctl start rp-node rp-watchtower <mark class="rpl_validator">rocketpool-validator</mark></code></pre>
+                <pre><code>sudo systemctl start rp-node rp-watchtower <mark class="instance_su">rocketpool-validator</mark></code></pre>
             </li>
             <li><h4>Check Rocketpool services</h4>
-                <pre><code>systemctl status rp-node rp-watchtower <mark class="rpl_validator">rocketpool-validator</mark></code></pre>
+                <pre><code>systemctl status rp-node rp-watchtower <mark class="instance_su">rocketpool-validator</mark></code></pre>
                 <p>The VC will fail to start until you make a new Rocket Pool minipool (described later in the guides)
                     because these files won't be created until that time, but the Beacon Node will be able to sync
                     properly.</p>
             </li>
             <li><h4>Monitor services</h4>
                 <pre><code>journalctl -f -u rp-node -u rp-watchtower</code></pre>
-                <pre><code>journalctl -f -u <mark class="rpl_validator">rocketpool-validator</mark></code></pre>
+                <pre><code>journalctl -f -u <mark class="instance_su">rocketpool-validator</mark></code></pre>
             </li>
         </ul>
     </li>
@@ -438,8 +437,8 @@ Cmnd_Alias RP_STOP = /usr/bin/systemctl stop <mark class="rpl_validator">rocketp
     <li><h3>Create a rocketpool validator</h3>
         <a href="https://docs.rocketpool.net/guides/node/create-validator.html" target="_blank" rel="nofollow noopener noreferrer">guides/node/create-validator</a>
         <ul class="list-disc my-4 pl-6">
-            <li>Stake RPL - <a href="https://stake.rocketpool.net/stake-behalf" target="_blank"
-                    rel="nofollow noopener noreferrer">/stake-behalf</a></li>
+            <li>Manage node / Stake RPL - <a href="https://node.rocketpool.net/" target="_blank"
+                    rel="nofollow noopener noreferrer">https://node.rocketpool.net/</a></li>
             <li>$<code>rocketpool node deposit</code></li>
         </ul>
     </li>

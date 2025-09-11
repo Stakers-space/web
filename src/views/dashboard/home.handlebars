@@ -26,7 +26,7 @@ ul.img_marker li {
             <div>
                 Data for epoch: 
                 <ul style="display:inline-flex;list-style: none;gap:0.75rem;margin: 0;padding:0">
-                    <li>E: <a href="https://beaconcha.in/epochs" target="_blank" rel="nofollow noopener noreferrer" {{#if lastEpocSyncState.ethereum}}{{else}}style="color:orange" title="Warning: Data are not up do date"{{/if}}>{{lastEpochReported.gnosis}}</a></li>
+                    <li>E: <a href="https://beaconcha.in/epochs" target="_blank" rel="nofollow noopener noreferrer" {{#if lastEpocSyncState.ethereum}}{{else}}style="color:orange" title="Warning: Data are not up do date"{{/if}}>{{lastEpochReported.ethereum}}</a></li>
                     <li>G: <a href="https://gnosischa.in/epochs" target="_blank" rel="nofollow noopener noreferrer" {{#if lastEpocSyncState.gnosis}}{{else}}style="color:orange" title="Warning: Data are not up do date"{{/if}}>{{lastEpochReported.gnosis}}</a></li>
                 </ul>
             </div>
@@ -282,7 +282,7 @@ ul.img_marker li {
             const offlineValCount = instanceTmpData.o.length;
             if(offlineValCount > 0){
                 for(const obj of instanceTmpData.o){
-                    if(offlineIds.length < 100) { // limit at 100
+                    if(offlineIds.length < 20) { // limit at 20
                         offlineIds.push(obj.i); 
                     } else {
                         break;
@@ -293,7 +293,7 @@ ul.img_marker li {
                 if(offlineIds.length > 0) {
                     let link = (chain === "gnosis") ? "https://gnosischa.in" : "https://beaconcha.in";
                     let stArr = offlineIds.toString();
-                    msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 100 offline ids" style="color:red">'+offlineValCount+' Offline</a> ';
+                    msg += '<a href="'+link+'/dashboard?validators='+stArr+'" target="_blank" rel="nofollow noopener noreferrer" title="View first up to 20 offline ids" style="color:red">'+offlineValCount+' Offline</a> ';
                 }
 
                 onlineVal -= offlineValCount;
@@ -327,7 +327,7 @@ ul.img_marker li {
     }
 
     function RenderInsightLinks(pubkeyElm, chain, instanceId){
-        const chunks = splitArrayIntoChunks(valcount_instance[chain][instanceId].pubIds, 100);
+        const chunks = splitArrayIntoChunks(valcount_instance[chain][instanceId].pubIds, 20);
         let output = "Insight: ";
         const explorerUrl = (chain === "gnosis") ? "gnosischa.in" : "beaconcha.in";
          // link to explorer

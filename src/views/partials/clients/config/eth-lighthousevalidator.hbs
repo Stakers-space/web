@@ -11,12 +11,14 @@ RestartSec=5
 ExecStart=/usr/local/bin/lighthouse vc \
   --network mainnet \
   --datadir <mark class="instance_dp" data-client="lighthouse">/var/lib{{slashChain}}/lighthouse/vi<span class="instance_pid" data-client="lighthouse">1</span></mark> \
-  --suggested-fee-recipient <mark class="instance_frw" data-client="lighthouse">0xXXXXXXXXXXXXXXXX</mark> \
   --beacon-nodes http://localhost:<mark class="consensus-endpoint">5052</mark> \
 {{#if isLido}}
+  --suggested-fee-recipient <mark data-client="lighthouse"><a href="https://etherscan.io/address/0x388C818CA8B9251b393131C08a736A67ccB19297" target="_blank">0x388C818CA8B9251b393131C08a736A67ccB19297</a></mark> \
+  --builder-proposals \
   --builder-boost-factor 100 \
   --graffiti "Lido CSM | <mark class="ec_name">Nethermind</mark>+Lighthouse"
 {{else}}
+  --suggested-fee-recipient <mark class="instance_frw" data-client="lighthouse">0xXXXXXXXXXXXXXXXX</mark> \
   --graffiti "<mark class="ec_name">Nethermind</mark>+Lighthouse"
 {{/if}}
 [Install]

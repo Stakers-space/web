@@ -104,9 +104,28 @@
 							</div>
 							<div class="min-w-0">
 								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+									Free space for new kays in Lido CSM
+								</h3>
+								<p class="mt-1 text-gray-300">
+									Lido CSM has a limit of maximum nukber of active validator keys in CSM. Be sure, there is a free space for more keys. This can be check after signing in to <a href="https://csm.lido.fi/">Lido CSM</a>.
+								</p>
+								<div>
+									<img src="/img/pages/guides/lido/lido-queue.webp" alt="Lido Queue" class="mt-4">
+								</div>
+							</div>
+						</li>
+						
+						<li class="p-6 md:p-8 flex gap-5">
+							<div class="flex-shrink-0">
+								<span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white font-bold shadow">
+								2
+								</span>
+							</div>
+							<div class="min-w-0">
+								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
 									Installed and synced Execution and Consensus client
 								</h3>
-								<p class="mt-1 text-gray-600 dark:text-gray-300">
+								<p class="mt-1 text-gray-300">
 									Prepare Execution and Consensus client for {{chainName}} staking. Check out the recommended options and instructions.
 								</p>
 								<a href="/{{chainUrl}}/full-guide"
@@ -122,14 +141,14 @@
 						<li class="p-6 md:p-8 flex gap-5">
 							<div class="flex-shrink-0">
 								<span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white font-bold shadow">
-								2
+								3
 								</span>
 							</div>
 							<div class="min-w-0">
 								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
 									Consensus client configured for Lido
 								</h3>
-								<p class="mt-1 text-gray-600 dark:text-gray-300">
+								<p class="mt-1 text-gray-300">
 									Modify default consensus client configuration to contain following flag.
 								</p>
 								<div class="mt-10 dark:text-white">
@@ -152,17 +171,38 @@
 													Teku <strong>Consensus Client</strong> (action: set to 100), <a href="https://docs.teku.consensys.io/reference/cli#builder-bid-compare-factor" target="_blank" rel="nofollow noopener noreferrer">Source</a>
 													<pre><code>--builder-bid-compare-factor 100</code></pre>
 													<p>*A default builder bid comparison factor of 90 means the builder's payload is chosen when its value is at least 10% greater than what can be built locally. That's why factor <code>100</code> must be set.</p>
+													<a href="/teku/install#service" target="_blank"
+														class="mt-4 inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+														Check Teku Beacon Service guide
+														<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+														</svg>
+													</a>
 												</div>
 												<div class="tabpanel">
 													<p>For Nimbus, which setting has the priority - depends where the validators live (which component owns the private keys). If they're in the VC, then the VC determines it. if in the BN, then the BN does</p>
 													<p>Nimbus CL (action: set to 0), <a href="https://nimbus.guide/external-block-builder.html" target="_blank" rel="nofollow noopener noreferrer">Source</a>, <a href="https://nimbus.guide/options.html" target="_blank" rel="nofollow noopener noreferrer">Source 2</a></p>
 													<pre><code>--local-block-value-boost 0</code></pre>
 													<p>Default value <code>10</code>. Increase execution layer block values for builder bid comparison by a percentage. Default value of <code>10</code> must be rewritten with <code>0</code>.</p>
+													<a href="/nimbus/install#service" target="_blank"
+														class="mt-4 inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+														Check Nimbus Beacon Service guide
+														<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+														</svg>
+													</a>
 												</div>
 												<div class="tabpanel">
 													<p>Prysm CL (action: set to 0), <a href="https://docs.prylabs.network/docs/prysm-usage/parameters#client-stats-flags" target="_blank" rel="nofollow noopener noreferrer">Source</a></p>
 													<pre><code>--local-block-value-boost 0</code></pre>
 													<p>Use builder block if: <code>builder_bid_value * 100 &gt; local_block_value * (local-block-value-boost + 100)</code>. Default value: <code>10</code> must be overwritten with <code>0</code>.</p>
+													<a href="/prysm/install#service" target="_blank"
+														class="mt-4 inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+														Check Prysm Beacon Service guide
+														<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+														</svg>
+													</a>
 												</div>
 											</div>
 											<p>* Validator clients configurations must be added after validator client definition made in the next step.</p>
@@ -172,14 +212,14 @@
 						<li class="p-6 md:p-8 flex gap-5">
 							<div class="flex-shrink-0">
 								<span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white font-bold shadow">
-								3
+								4
 								</span>
 							</div>
 							<div class="min-w-0">
 								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
 									Installed Mev-boost client with proper Lido configuration
 								</h3>
-								<p class="mt-1 text-gray-600 dark:text-gray-300">
+								<p class="mt-1 text-gray-300">
 									Installed Mev-boost client with <code>-min-bid</code> set maximally to <code>0.07</code> and set list of LIDO Vetted MEV-Boost Relayes
 								</p>
 								<a href="/mev-boost"
@@ -203,14 +243,14 @@
 						<li class="p-6 md:p-8 flex gap-5">
 							<div class="flex-shrink-0">
 								<span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white font-bold shadow">
-								4
+								5
 								</span>
 							</div>
 							<div class="min-w-0">
 								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
 									Validator keys with Lido withdrawal wallet
 								</h3>
-								<p class="mt-1 text-gray-600 dark:text-gray-300">
+								<p class="mt-1 text-gray-300">
 									Generated validator keys with withdrawal wallet set to <code><a href="https://etherscan.io/address/0xb9d7934878b5fb9610b3fe8a5e441e8fad7e293f" target="_blank" rel="nofollow noopener noreferrer">0xB9D7934878B5FB9610B3fE8A5e441e8fad7E293f</a></code>
 								</p>
 								<a href="/ethereum-staking/keystores"
@@ -226,14 +266,14 @@
 						<li class="p-6 md:p-8 flex gap-5">
 							<div class="flex-shrink-0">
 								<span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white font-bold shadow">
-								5
+								6
 								</span>
 							</div>
 							<div class="min-w-0">
 								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
 									Sufficient capital
 								</h3>
-								<p class="mt-1 text-gray-600 dark:text-gray-300">
+								<p class="mt-1 text-gray-300">
 									Validator activation is associated with capital locking
 								</p>
 							</div>
@@ -301,6 +341,15 @@
 
 		<section id="fund" class="mt-8 max-w-6xl mx-auto px-4">
 			<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+				Go through Checklist for a new CSM node operator
+			</h2>
+			<p>Be sure you are familiar with everything needed.</p>
+			<a href="https://operatorportal.lido.fi/modules/community-staking-module#block-519f860734374da38a6709b57b79a22f" target="_blank">CSM New Operator Checklist</a>
+		</section>
+
+
+		<section id="fund" class="mt-8 max-w-6xl mx-auto px-4">
+			<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
 				Fund the validators
 			</h2>
 				<mark class="block m-10 p-5">The Guide is under construction. Do not use!!!</mark>
@@ -319,6 +368,16 @@
 			</h2>
 					<p>As a regular member securying the network and processing blockchain operations on it, you need to keep your software up to date to avoid penalties and earning rewards for the work.</p>
 					<a href="/{{chainUrl}}/maintenance" class="btn btn-black btn-rounded">Guides for regular maintenance</a>
+			</section>
+
+			<section id="maintenance" class="mt-8 max-w-6xl mx-auto px-4">
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Exiting Lido CSM Validator
+				</h2>
+				<ul>
+					<li>Voluntary Exits: <a href="https://docs.lido.fi/run-on-lido/csm/lido-csm-widget/exiting-csm-validators/" target="_blank">Exiting CSM Validators</a></li>
+					<li>Protocol-initiated exits: <a href="https://github.com/lidofinance/validator-ejector" target="_blank">Lido Validator Ejector</a></li>
+				</ul>
 			</section>
 			
 			<aside id="alternatives" class="mt-8 max-w-6xl mx-auto px-4 mb-10">

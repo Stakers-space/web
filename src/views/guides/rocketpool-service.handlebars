@@ -61,6 +61,7 @@
 			<p class="mt-2 text-gray-600 mb-8">
 				Rocketpool allows multiple ways of installation, <a href="https://docs.rocketpool.net/guides" target="_blank">see the documentation</a>. Within this guide, there is used a <a href="https://docs.rocketpool.net/guides/node/native" target="_blank"><strong>native type of installation</strong></a> that operates rocketpool clients above standard consensus and execution client you know from <a href="/ethereum-staking/full-guide">Solo Staking guide</a>. It's a type of open implementation within which Rocketpool can be configured simultaneously with other clients (<a href="/ethereum-staking/full-guide/solo">solo validators</a>, <a href="/ethereum-staking/full-guide/stakewise">stakewise validators</a>, and so on). In other words, this implementation allows to get the most out of staking opportunities within a single staking machine.
 			</p>
+			<p>As Rocketpool is a <a href="/bonded-validators">bonded type of validator</a>, be sure there is enough unbounded ETH in the queue that can be bonded to your Rocketpool validator - <a href="https://dune.com/rp_community/saturnqueues" target="_blank" rel="nofollow noopener noreferrer">https://dune.com/rp_community/saturnqueues</a></p>
 		</section>
 
 		<section id="prerequisites">
@@ -69,7 +70,7 @@
 					Prerequisites
 				</span>
 				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
-					Prerequisites for {{chainName}} staking
+					Prerequisites for {{chainName}} Rocketpool staking
 				</h2>
 				<p class="mt-2 text-gray-600 mb-8">
 					Before you start, make sure you have these three things ready.
@@ -87,7 +88,7 @@
 								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
 									Installed and synced Execution and Consensus client
 								</h3>
-								<p class="mt-1 text-gray-600 dark:text-gray-300">
+								<p class="mt-1 text-gray-300">
 									Prepare Execution and Consensus client for {{chainName}} staking. Check out the recommended options and instructions.
 								</p>
 								<a href="/{{chainUrl}}/full-guide"
@@ -110,7 +111,7 @@
 								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
 									Installed Mev-boost client with <code>-min-bid</code> set to <code>0</code>
 								</h3>
-								<p class="mt-1 text-gray-600 dark:text-gray-300">
+								<p class="mt-1 text-gray-300">
 									Be sure you configured Mev-boost configuration with <code>-min-bid</code> set to <code>0</code>
 								</p>
 								<a href="/mev-boost"
@@ -133,7 +134,7 @@
 								<h3 class="text-lg font-semibold text-gray-900 dark:text-white">
 									Sufficient capital
 								</h3>
-								<p class="mt-1 text-gray-600 dark:text-gray-300">
+								<p class="mt-1 text-gray-300">
 									Validator activation is associated with capital locking
 								</p>
 							</div>

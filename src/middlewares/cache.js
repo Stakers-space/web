@@ -42,7 +42,7 @@ function getOfflineStatesAlertType(){
         if(offlinePercentage > 0.05) { // instance is offline
             notifyState = 1;
             console.log(`instance ${key}: offlinePercentage: ${offlinePercentage} | ${offlineStates[key].o.length}/${offlineStates[key].v}`);
-            if(offlinePercentage > 0.25) {
+            if(offlinePercentage > 0.3) {
                 notifyState = 2;
                 break;
             }

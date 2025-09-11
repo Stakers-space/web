@@ -4,9 +4,9 @@
             "name": "Nethermind",
             "link": "https://nethermind.io/",
             "github": "https://github.com/NethermindEth/nethermind",
-            "latestVer": "1.32.4-1c4c7c0a",
-            "latestVerClean":"1.32.4",
-            "release_time": "2025-07-31T11:18:00Z",
+            "latestVer": "1.33.1-cda59e5b",
+            "latestVerClean":"1.33.1",
+            "release_time": "2025-09-04T12:04:00Z",
             "social":[
                 {
                 "name": "Discord",
@@ -298,9 +298,9 @@
             "name": "Teku",
             "link": "https://docs.teku.consensys.net/",
             "github": "https://github.com/ConsenSys/teku",
-            "latestVer": "25.7.1",
+            "latestVer": "25.9.2",
             "jdkVer": "24",
-            "release_time": "2025-07-28T01:10:00Z",
+            "release_time": "2025-09-09T13:00:00Z",
             "prerequisity": "jdk v21+",
             "social":[
                 {
