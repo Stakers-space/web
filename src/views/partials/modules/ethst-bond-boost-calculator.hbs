@@ -1,0 +1,242 @@
+  	<div class="grid grid-cols-1 lg:grid-cols-[25fr_75fr] gap-8 container">
+		<div>
+			<!-- Header -->
+			<div class="my-4">
+				<h2 class="text-3xl font-semibold mb-6">
+					<span>Solo vs <a href="/bonded-validators" class="text-green-600 hover:underline">bonded</a></span> validators
+				</h2>
+				<p class="mt-2 text-gray-700">
+					Bonded ETH is external ETH on your node, earning you a share of its rewards.
+				</p>
+				<p class="mt-2 text-gray-700">
+					This calculator illustrates the <strong>revenue boost of bonded ETH comapred to Solo staking.</strong>
+				</p>
+			</div>
+
+			<!-- Inputs -->
+			<div class="rounded-2xl bg-white border border-gray-200 shadow p-3 mt-2 mb-4">
+				<label for="capEth" class="block text-sm font-medium text-gray-700 mb-2">Your capital (Non-ETH bond)</label>
+				<input id="capEth" type="number" min="0" step="0.1"
+					class="w-full rounded-lg border-gray-300 focus:ring-emerald-500 focus:border-emerald-500"
+					value="32" />
+			</div>
+
+			<div class="rounded-2xl bg-white border border-gray-200 shadow p-3 mb-2">
+				<label for="soloApr" class="block text-sm font-medium text-gray-700 mb-2">Staking Reward p.a. %</label>
+				<input id="soloApr" type="number" min="0" step="0.1"
+					class="w-full rounded-lg border-gray-300 focus:ring-emerald-500 focus:border-emerald-500"
+					value="2.5" />
+			</div>
+		</div>
+		<div class="mb-8">
+			<div class="my-4 overflow-x-auto">
+				<table class="w-full border-collapse rounded-2xl overflow-hidden" id="bondboost-output">
+					<thead>
+						<tr class="bg-gray-100 text-gray-600 uppercase text-xs">
+							<th class="px-4 py-3 text-left"></th>
+							<th class="px-4 py-3 text-left"># 32ETH Validators</th>
+							<th class="px-4 py-3 text-left">ETH Bond</th>
+							<th class="px-4 py-3 text-left">ETH pa Return</th>
+							<th class="px-4 py-3 text-left">APR / VS Base APR</th>
+							<th>Unstaked ETH</th>
+						</tr>
+					</thead>
+					<tbody class="bg-white text-gray-800 text-sm">
+						<!-- SOLO -->
+						<tr class="border-t" id="solo">
+							<th class="px-4 py-3 font-semibold"><a href="/ethereum-staking/full-guide/solo">Solo</a></th>
+							<td class="px-4 py-3">1</td>
+							<td class="px-4 py-3">0</td>
+							<td class="px-4 py-3"><span class="inline-flex items-center rounded-full bg-gray-50 text-gray-700 ring-1 ring-gray-200 px-2 py-0.5 text-xs font-semibold"></span></td>
+							<td class="px-4 py-3">
+								<span class="inline-flex items-center rounded-full bg-gray-50 text-gray-700 ring-1 ring-gray-200 px-2 py-0.5 text-xs font-semibold">100%</span> / 
+								<span class="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200 px-2 py-0.5 text-xs font-semibold">100%</span>
+							</td>
+							<td class="px-4 py-3 text-gray-700">–</td>
+						</tr>
+
+						<!-- ROCKETPOOL -->
+						<tr class="border-t" id="rocketpool">
+							<th class="px-4 py-3 font-semibold"><a href="/ethereum-staking/full-guide/rocketpool">Rocketpool</a></th>
+							<td class="px-4 py-3">4</td>
+							<td class="px-4 py-3">-</td>
+							<td class="px-4 py-3">
+								<span id="rpPct" class="inline-flex items-center rounded-full bg-gray-50 text-gray-700 ring-1 ring-gray-200 px-2 py-0.5 text-xs font-semibold">130–142%</span>
+								<div>
+									<div class="flex items-center justify-between mt-2">
+										<label for="rplCov" class="block text-sm font-medium text-gray-700"><a href="https://rpips.rocketpool.net/tokenomics-explainers/005-rework-prelude" target="_blank">RPL coverage</a></label>
+										<span id="rplCovVal" class="text-sm font-semibold text-emerald-700">50%</span>
+									</div>
+									<input id="rplCov" type="range" min="0" max="100" step="1"
+										class="w-full mt-2"
+										value="0" />
+								</div>
+							</td>
+							<td class="px-4 py-3 text-gray-700">
+								<span class="inline-flex items-center rounded-full bg-gray-50 text-gray-700 ring-1 ring-gray-200 px-2 py-0.5 text-xs font-semibold">100%</span> / 
+								<span class="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200 px-2 py-0.5 text-xs font-semibold">100%</span>
+							</td>
+							<td class="px-4 py-3 text-gray-700"></td>
+						</tr>
+
+						<!-- LIDO -->
+						<tr class="border-t" id="lidocsm">
+							<th class="px-4 py-3 font-semibold"><a href="/ethereum-staking/full-guide/lido">Lido</a></th>
+							<td class="px-4 py-3"></td>
+							<td class="px-4 py-3">–</td>
+							<td class="px-4 py-3">
+								<span class="inline-flex items-center rounded-full bg-gray-50 text-gray-700 ring-1 ring-gray-200 px-2 py-0.5 text-xs font-semibold"></span>
+							</td>
+							<td class="px-4 py-3">
+								<span class="inline-flex items-center rounded-full bg-gray-50 text-gray-700 ring-1 ring-gray-200 px-2 py-0.5 text-xs font-semibold">100%</span> / 
+								<span class="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200 px-2 py-0.5 text-xs font-semibold">100%</span>
+							</td>
+							<td class="px-4 py-3 text-gray-700"></td>
+						</tr>
+
+						<!-- STADER -->
+						<tr class="border-t" id="stader">
+							<th class="px-4 py-3 font-semibold">Stader</th>
+							<td class="px-4 py-3"></td>
+							<td class="px-4 py-3">
+								<span>–</span>
+							</td>
+							<td class="px-4 py-3">
+								<span class=""></span>
+							</td>
+							<td class="px-4 py-3">
+								
+							</td>
+							<td class="px-4 py-3 text-gray-700"></td>
+						</tr>
+
+						<!-- STAKEWISE -->
+						<tr class="border-t" id="stakewise">
+							<th class="px-4 py-3 font-semibold"><a href="/ethereum-staking/full-guide/stakewise">StakeWise</a></th>
+							<td class="px-4 py-3"></td>
+							<td class="px-4 py-3"><span>–</span></td>
+							<td class="px-4 py-3">
+								<span class=""></span>
+							</td>
+							<td class="px-4 py-3"></td>
+							<td class="px-4 py-3 text-gray-700"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="italic mt-3 text-gray-700 text-xs">
+				*Detailed fees/commissions/protocol incentives are not included. You can fine-tune exact values with your own spreadsheet. This calculator is for illustrative purposes only. It simplifies protocol mechanics and does not represent financial advice.
+			</p>
+		</div>
+  </div>
+
+  <script>
+    (function () {
+		const bondBoost = document.getElementById("bondboost-output");
+		if(!bondBoost) return;
+      	const $ = (sel) => bondBoost.querySelector(sel);
+
+		function formatETH(x) {
+			if (!isFinite(x)) return "–";
+			// present nice small decimals
+			const n = Math.abs(x) < 1 ? 4 : (Math.abs(x) < 10 ? 3 : 2);
+			return (Math.round(x * Math.pow(10, n)) / Math.pow(10, n)).toFixed(n) + " ETH";
+		}
+
+		function formatPercents(x) {
+			// present nice small decimals
+			const n = Math.abs(x) < 1 ? 4 : (Math.abs(x) < 10 ? 3 : 2);
+			return (Math.round(x * Math.pow(10, n)) / Math.pow(10, n)).toFixed(n) + " %";
+		}
+
+      	function plural(n, word) { return n + " " + (n === 1 ? word : word + "s"); }
+
+		function interpRP(RP_MIN, RP_MAX, coverage01) {
+			// Linear interpolation between 1.30 and 1.42
+			return RP_MIN + (RP_MAX - RP_MIN) * coverage01;
+		}
+
+		function UpdateRow(rowId, capital, baseApr){
+			const row = $(`#${rowId}`);
+			//console.log("UpdateRow", rowId, row, baseApr);
+			let validators = 0;
+			let bondedEth = 0;
+			let unstaked = 0;
+			let EthRewardPa = 0;
+			let bondRewardShare = 0;
+			let apr = { absolute:0, relativeToSolo: 0 }
+			if(rowId === "lidocsm"){
+				bondRewardShare = 0.06;
+				// first val 2,4, next 1,3
+				let cap10 = capital * 10;
+				if(cap10 >= 24) {
+					validators++;
+					bondedEth+=29.6;
+					cap10 -= 24;
+					let smlVals = Math.floor(cap10 / 13);
+					validators += smlVals;
+					bondedEth+=smlVals*30.7;
+					unstaked = (cap10 % 13) / 10;
+				}
+				EthRewardPa = (capital * baseApr) + (bondedEth * bondRewardShare * baseApr);
+				apr.absolute = EthRewardPa / capital;
+				apr.relativeToSolo = apr.absolute / baseApr;
+
+			} else if(rowId === "stakewise"){
+				validators = "0 - ∞";
+				bondedEth = `0 - ∞`;
+			} else {
+				let EthPerVal = 0;
+				switch(rowId){
+					case "solo":
+						EthPerVal = 32;
+					break;
+					case "rocketpool":
+						EthPerVal = 8;
+						const covPct = Math.min(100, Math.max(0, parseFloat(rplCov.value || "0")));
+						bondRewardShare = interpRP(0.1,0.14, covPct / 100);
+						$(`#rplCovVal`).textContent = covPct.toFixed(0) + "%";
+					break;
+					case "stader":
+						EthPerVal = 4;
+					break;
+				}
+				validators = Math.floor(capital / EthPerVal);
+				unstaked = capital % EthPerVal;
+				bondedEth = validators * (32 - EthPerVal);
+				EthRewardPa = (validators * EthPerVal * baseApr) + (bondedEth * bondRewardShare * baseApr);
+
+				apr.absolute = EthRewardPa / capital;
+				apr.relativeToSolo = apr.absolute / baseApr;
+			}
+
+			row.children[1].textContent = validators;
+			row.children[2].textContent = (rowId !== "stakewise") ? formatETH(bondedEth) : bondedEth;
+			if(rowId !== "stader" && rowId !== "stakewise") {
+				row.children[3].children[0].textContent = formatETH(EthRewardPa);
+				row.children[4].children[0].textContent = formatPercents(apr.absolute * 100);
+				row.children[4].children[1].textContent = formatPercents(apr.relativeToSolo * 100);
+				row.children[5].textContent = formatETH(unstaked);		
+			}
+			
+		}
+
+      function update() {
+        const cap = Math.max(0, parseFloat(capEth.value || "0"));
+		const aprPct = Math.max(0, parseFloat(soloApr.value || "0")); // e.g. 4.5 %
+        const baseApr = aprPct / 100;
+		//console.log(`UPDATE | ETH capital: ${cap} | pa: ${baseApr}`)
+		for(let r=0; r<bondBoost.children[1].children.length;r++){
+			UpdateRow(bondBoost.children[1].children[r].id, cap, baseApr);
+		}
+      }
+
+      ["input", "change"].forEach(evt => {
+        capEth.addEventListener(evt, update);
+        soloApr.addEventListener(evt, update);
+        rplCov.addEventListener(evt, update);
+      });
+
+      update();
+    })();
+  </script>

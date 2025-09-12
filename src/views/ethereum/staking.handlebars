@@ -103,7 +103,8 @@
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-					<a href="/charts/ethereum-staking-apy" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
+					{{!<a href="/charts/ethereum-staking-apy" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">}}
+					<a href="https://staking.ethermine.org/statistics" target="_blank" rel="nofollow noopener noreferrer" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
 						<div class="mb-4">
 							<h2 class="text-xl font-semibold">~ {{{indicators.aprLastDay.value}}} ETH APY</h2>
 							<div class="dynamic-label px-1 py-1 bg-green-100 text-green-700 rounded px-2 py-1 w-[170px] h-[21px] overflow-hidden text-xs">
@@ -466,70 +467,8 @@
 
 	<section class="py-20 bg-white border-t border-gray-200">
 		<!-- Solo vs Bonded validators -->
-		<div class="container mx-auto px-6 mb-20">
-			<h2 class="text-3xl font-semibold mb-8">
-				<span>Solo vs <a href="/bonded-validators" class="text-blue-600 hover:underline">bonded</a></span> validators
-			</h2>
-			<div class="overflow-x-auto bg-gray-50 rounded-lg shadow">
-				<table class="w-full text-sm text-left text-gray-700 border-collapse">
-					<thead class="bg-gray-100 text-gray-600 uppercase text-xs">
-					<tr>
-						<th class="px-4 py-3 text-center">Option</th>
-						<th class="px-4 py-3 text-center">Service</th>
-						<th class="px-4 py-3">ETH bond</th>
-						<th class="px-4 py-3">ETH matched</th>
-						<th class="px-4 py-3">Non-ETH bond</th>
-						<th class="px-4 py-3">Fee %</th>
-						<th class="px-4 py-3">Note</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr class="border-t">
-						<th colspan="2" class="px-4 py-3 text-center">Solo</th>
-						<td class="px-4 py-3">32</td>
-						<td class="px-4 py-3">0</td>
-						<td class="px-4 py-3">None</td>
-						<td class="px-4 py-3">None</td>
-						<td class="px-4 py-3">No bond</td>
-					</tr>
-					<tr class="border-t">
-						<td rowspan="4" class="px-4 py-3 align-middle">
-							<a href="/bonded-validators" class="text-blue-600 hover:underline">Bonded</a>
-						</td>
-						<th class="px-4 py-3">Lido</th>
-						<td class="px-4 py-3">2</td>
-						<td class="px-4 py-3">32</td>
-						<td class="px-4 py-3">None</td>
-						<td class="px-4 py-3">8% out of 10% total</td>
-						<td class="px-4 py-3">Bond provided in stETH which also accrues rewards</td>
-					</tr>
-					<tr class="border-t bg-gray-50">
-						<th class="px-4 py-3">Rocketpool</th>
-						<td class="px-4 py-3">8</td>
-						<td class="px-4 py-3">24</td>
-						<td class="px-4 py-3">2.4 ETH worth of RPL</td>
-						<td class="px-4 py-3">14% out of 14% total</td>
-						<td class="px-4 py-3">8% APR on RPL staked</td>
-					</tr>
-					<tr class="border-t">
-						<th class="px-4 py-3">Stader</th>
-						<td class="px-4 py-3">4</td>
-						<td class="px-4 py-3">28</td>
-						<td class="px-4 py-3">0.4 ETH worth of SD</td>
-						<td class="px-4 py-3">6% out of 10% total</td>
-						<td class="px-4 py-3">7.97% APR on SD staked</td>
-					</tr>
-					<tr class="border-t">
-						<th class="px-4 py-3">StakeWise</th>
-						<td class="px-4 py-3">0</td>
-						<td class="px-4 py-3">Up to 32</td>
-						<td class="px-4 py-3">-</td>
-						<td class="px-4 py-3">-</td>
-						<td class="px-4 py-3">-</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
+		<div class="container mx-auto px-6 mb-10">
+			{{> modules/ethst-bond-boost-calculator }}
 		</div>
 	</section>
 	
