@@ -15,12 +15,14 @@ ExecStart=/usr/local/bin/beacon-chain \
   --execution-endpoint=http://127.0.0.1:<mark class="execution-endpoint">8551</mark> \
   --jwt-secret=/var/lib/jwtsecret/ethereum.hex \
   --suggested-fee-recipient=<mark>FeeRecipientAddress</mark> \
-  #--<a href="https://docs.prylabs.network/docs/prysm-usage/parameters#client-stats-flags" target="_blank" rel="nofollow noopener noreferrer">local-block-value-boost</a>=<mark title="Required for Lido">0</mark> \
+  # For Rocketpool / Lido / Forced MEV-boost
+  #--<a href="https://docs.prylabs.network/docs/prysm-usage/parameters#client-stats-flags" target="_blank" rel="nofollow noopener noreferrer">local-block-value-boost</a>=<mark title="Required for Lido & Rocketpool">0</mark> \
   --checkpoint-sync-url=<mark>CheckpointSyncURL</mark> \
   --genesis-beacon-api-url=<mark>CheckpointSyncURL</mark> \
   --accept-terms-of-use
 
 [Install]
 WantedBy=multi-user.target</code></pre>
-<p>NOTE: Be sure to set the FeeRecipientAddress above to a valid Ethereum address within your control to receive the validator fees. For example: --suggested-fee-recipient=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045</p>
+<p>All Prysm Beacon node flags: <a href="https://prysm.offchainlabs.com/docs/configure-prysm/parameters/#beacon-node-flags" target="_blank">https://prysm.offchainlabs.com/docs/configure-prysm/parameters/#beacon-node-flags</a></p>
+<p>NOTE: Be sure to set the <code>FeeRecipientAddress</code> above to a valid Ethereum address within your control to receive the validator fees.</p>
 <p>NOTE: Be sure to set the CheckpointSyncURL above (both occurrences) to a valid checkpoint sync URL. <code>--checkpoint-sync-url</code> and <code>--genesis-beacon-api-url</code> Enables the Checkpoint Sync feature to greatly speed up the Beacon Chain Node sync. More information <a href="https://docs.prylabs.network/docs/prysm-usage/checkpoint-sync" rel="noopener noreferrer nofollow" target="_blank">here</a>. Provide a URL to a synced Beacon Chain Node for the sync. You can get one <a href="https://eth-clients.github.io/checkpoint-sync-endpoints/" rel="noopener noreferrer nofollow" target="_blank">here</a>.</p>

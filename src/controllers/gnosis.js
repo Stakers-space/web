@@ -233,7 +233,7 @@ GnosisController.prototype.Keystores = function(req,res,next){
     res.locals.metaDescription = `Complete indotrduction to validator keystores for staking on ${res.locals.chainName} chain.`;
     res.locals.page_hbs = "guides/keystores";
     res.locals.layout_hbs = "standard";
-    res.locals.css_file = "docs";
+    res.locals.css_file = "guides";
     next();
 };
 

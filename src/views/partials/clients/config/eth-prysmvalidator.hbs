@@ -28,7 +28,6 @@ ExecStart=/usr/local/bin/validator \
   --wallet-password-file=/srv/rocketpool/data/validators/prysm-non-hd/direct/accounts/secret \
   --suggested-fee-recipient=<mark>${FEE_RECIPIENT}</mark> \
   --enable-builder \
-  --local-block-value-boost 0 \
   --graffiti "Rocketpool | <mark class="ec_name">Nethermind</mark>+Prysm" \
 {{else}}
   --wallet-dir=<mark class="instance_dp" data-client="prysm">/var/lib{{slashChain}}/prysm/vi<span class="instance_pid" data-client="prysm">1</span></mark> \
@@ -37,7 +36,6 @@ ExecStart=/usr/local/bin/validator \
 {{#if isLido}}
   --suggested-fee-recipient=<mark data-client="prysm"><a href="https://etherscan.io/address/0x388C818CA8B9251b393131C08a736A67ccB19297" target="_blank">0x388C818CA8B9251b393131C08a736A67ccB19297</a></mark> \
   --enable-builder \
-  --local-block-value-boost 0 \
   --graffiti "Lido CSM | <mark class="ec_name">Nethermind</mark>+Prysm" \
 {{else}}
   --suggested-fee-recipient=<mark class="instance_frw" data-client="prysm">0xXXXXXXXXXXXXXXXX</mark> \
@@ -47,3 +45,4 @@ ExecStart=/usr/local/bin/validator \
 
 [Install]
 WantedBy=multi-user.target</code></pre>
+<p>All Prysm Validator flags:<a href="https://prysm.offchainlabs.com/docs/configure-prysm/parameters/#validator-flags" target="_blank">https://prysm.offchainlabs.com/docs/configure-prysm/parameters/#validator-flags</a></p>

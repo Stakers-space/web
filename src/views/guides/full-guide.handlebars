@@ -461,6 +461,7 @@ sudo systemctl disable ssh</code></pre>
 								<li><code>NTP service</code> must be <code>active</code>. If not, run <code>sudo timedatectl set-ntp on</code></li>
 								<li><code>System clock synchronized</code> must be <code>yes</code>. If not, and you have active VPN client, <a href="https://github.com/Stakers-space/staking-scripts/tree/main/mullvad/split-tunnel" target="_blank">set a split tunnel for <code>timedatectl</code> service.</a></li>
 							</ul>
+							<p>Note: There's possible to use also more advanced NTP tools for time synchronization such as <a href="https://chrony-project.org/" target="_blank">Chrony</a>.</p>
 						</li>
 						<li>Create <code>downloads</code> directory in your machine
 							<pre><code>mkdir ~/downloads</code></pre>
