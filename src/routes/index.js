@@ -227,6 +227,14 @@ router.get('/tools', function(req,res,next){
     next();
 }, Response);
 
+router.get('/dashboards', function(req,res,next){
+    res.locals.page_hbs = 'pages/dashboards';
+    res.locals.layout_hbs = 'amp';
+    res.locals.title = `Crypto Dashboards List | Stakers.space`;
+    res.locals.metaDescription = "List of crypto related Dashboards.";
+    next();
+}, Response);
+
 router.get('/knowledge-sources', function(req,res,next){
     res.locals.page_hbs = 'pages/knowledge-sources';
     res.locals.layout_hbs = 'amp';
