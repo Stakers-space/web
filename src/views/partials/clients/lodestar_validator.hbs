@@ -66,7 +66,7 @@
                         <p>Copy the configuration below into the file.</p>
                         <ul class="list-disc mt-4 mb-2">
                             <li><p><label>Installed NodeJs version on the server</label>: <input data-type="text" value="{{consensusClients.lodestar.nodejsVer}}" class="interactive-element nodejsVer" data-class="nodejsVer" style="width:75px">
-                                <br><i>This can be get with command <code>node version</code></i></p>
+                                <br><i>This can be get with command <code>node -v</code></i></p>
                             </li>
                             <li><label>What's fee recipient wallet?</label> <input type="text" class="interactive-element instance_frw" data-class="instance_frw" value="0xXXXXXXXXXXXXXXXX"></li>
                             <li><label>What's your execution client?</label> <input type="text" class="interactive-element ec_name" data-class="ec_name" value="Nethermind"></li>
@@ -212,8 +212,7 @@
                             <li>Open Start with delay util
                                 <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
                             </li>
-                            <li>Place new services (validator isntance and validator instance monitor) into the file
-                                <pre><code><mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark></code></pre>
+                            <li>Place validator logmonitor service into the file
                                 <pre><code><mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark>_logmonitor</code></pre>
                             </li>
                             <li>Place command to start all validator services, if not attached yet

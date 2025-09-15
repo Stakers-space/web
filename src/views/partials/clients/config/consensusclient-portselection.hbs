@@ -145,3 +145,14 @@
         ie.classList.remove("hide");
     }
 }</script>
+<script>
+    // get client
+    if(document.location.pathname.indexOf("/lodestar/") > -1){
+        const elms = document.getElementsByClassName("consensus-endpoint");
+        for(elm of elms){
+            console.log(elm);
+            elm.innerHTML = 9596;
+            elm.value = 9596;
+        }
+    }
+</script>

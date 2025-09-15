@@ -14,6 +14,7 @@ ExecStart=/usr/local/bin/lodestar/lodestar validator \
   --network mainnet \
   --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/validators/i<span class="instance_pid" data-client="lodestar">1</span></mark> \
   --force \
+  --beaconNodes http://127.0.0.1:<mark class="consensus-endpoint">9596</mark> \
 {{#if isLido}}
   --suggestedFeeRecipient <mark data-client="lighthouse"><a href="https://etherscan.io/address/0x388C818CA8B9251b393131C08a736A67ccB19297" target="_blank">0x388C818CA8B9251b393131C08a736A67ccB19297</a></mark> \
   --builder \

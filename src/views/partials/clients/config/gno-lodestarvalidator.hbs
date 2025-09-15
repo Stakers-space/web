@@ -14,7 +14,7 @@ ExecStart=/usr/local/bin/lodestar/lodestar validator \
   --network gnosis \
   --dataDir <mark class="instance_dp" data-client="lodestar">/var/lib{{slashChain}}/lodestar/validators/i<span class="instance_pid" data-client="lodestar">1</span></mark> \
   --suggestedFeeRecipient <mark class="instance_frw" data-client="lodestar">0xXXXXXXXXXXXXXXXX</mark> \
-  # ToDo: Add Beacon API URL
+  --beaconNodes http://127.0.0.1:<mark class="consensus-endpoint">9596</mark> \
   --force \
   --graffiti "<mark class="ec_name">Nethermind</mark>+Lodestar"
 [Install]
