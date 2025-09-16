@@ -28,12 +28,14 @@
       <h4 class="text-lg font-medium mb-2">Rocketpool Rescue Node</h4>
       <p>Stats of secured fallback node for emergencies and maintenance.</p>
     </a>
+    
     <a href="https://gaslimit.pics/" 
        target="_blank"
        class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
       <h4 class="text-lg font-medium mb-2">GasLimit.Pics</h4>
       <p>Gas Limit Signaling by Validators.</p>
     </a>
+
     <a href="https://dashboard.etherealize.com/" 
        target="_blank"
        class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
@@ -66,13 +68,36 @@
       <p>1000+ dApps, tools, and services across Ethereum and its Layer 2s.</p>
     </a>
 
-    <a href="https://swiss-knife.xyz/" 
-       target="_blank"
-       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
-      <h4 class="text-lg font-medium mb-2">Swiss Knife</h4>
-      <p>Ethereum dev tools at one place.</p>
-    </a>
+    <div class="rounded-xl bg-gray-100 shadow hover:shadow-lg transition overflow-hidden text-left">
+        <!-- header -->
+        <div class="px-6 py-4 border-b border-gray-200">
+          <h4 class="text-lg font-medium">Dev tools — Wiki / Sources</h4>
+          <p class="text-sm text-gray-600 mt-1">Useful links for debugging and rollups.</p>
+        </div>
 
+          <!-- links -->
+          <ul role="list" class="divide-y divide-gray-200">
+            <li>
+              <a href="https://swiss-knife.xyz/" target="_blank"
+                class="flex items-center justify-between px-6 py-3 hover:bg-white transition">
+                <span class="text-blue-600 hover:underline">Swiss Knife</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.rollup.codes/" target="_blank"
+                class="flex items-center justify-between px-6 py-3 hover:bg-white transition">
+                <span class="text-blue-600 hover:underline">rollup.codes</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+    </div>
+    
     {{!--<a href="https://mempool.pics/" 
        target="_blank"
        class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
@@ -125,6 +150,7 @@
       <h4 class="text-lg font-medium mb-2">Rollup.wtf</h4>
       <p>Real-time rollups visualization on Ethereum.</p>
     </a>
+
     <a href="https://eth-blocks.vercel.app/" 
        target="_blank"
        class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
@@ -144,18 +170,45 @@
       <p>Ethereum Roadmap state overview.</p>
     </a>
 
-    <div class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
-      <h4 class="text-lg font-medium mb-2">Blob stats</h4>
-      <a href="https://dune.com/0xRob/blobs" target="_blank">0xRob's Blobs</a>
-      <a href="https://dune.com/hildobby/blobs" target="_blank">Hildobby's Blobs</a>
-      <a href="https://migalabs.io/blobs" target="_blank">migalabs.io/blobs</a>
-    </div>
-
+	<div class="rounded-xl bg-gray-100 shadow hover:shadow-lg transition text-left">
+		<div class="px-6 py-4 border-b border-gray-200">
+			<h4 class="text-lg font-medium">Blob stats</h4>
+			<p class="text-sm text-gray-600 mt-1">Popular blob dashboards & datasets.</p>
+		</div>
+		<div class="p-4 grid grid-cols-2 gap-2">
+			<a href="https://blobscan.com/" target="_blank"
+			class="inline-flex items-center justify-center rounded-lg border bg-white px-3 py-2 text-sm hover:shadow">
+			BlobScan
+			</a>
+			<a href="https://migalabs.io/blobs" target="_blank"
+			class="inline-flex items-center justify-center rounded-lg border bg-white px-3 py-2 text-sm hover:shadow">
+			migalabs.io
+			</a>
+			<a href="https://blobs.guru/" target="_blank"
+			class="inline-flex items-center justify-center rounded-lg border bg-white px-3 py-2 text-sm hover:shadow">
+			blobs.guru
+			</a>
+			<a href="https://www.blobspace.fun/" target="_blank"
+			class="inline-flex items-center justify-center rounded-lg border bg-white px-3 py-2 text-sm hover:shadow">
+			blobspace.fun
+			</a>
+			<a href="https://dune.com/0xRob/blobs" target="_blank"
+			class="inline-flex items-center justify-center rounded-lg border bg-white px-3 py-2 text-sm hover:shadow">
+			0xRob’s Blobs
+			</a>
+			<a href="https://dune.com/hildobby/blobs" target="_blank"
+			class="inline-flex items-center justify-center rounded-lg border bg-white px-3 py-2 text-sm hover:shadow">
+			Hildobby’s Blobs
+			</a>
+		</div>
+		</div>
 
     <div class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
       <h4 class="text-lg font-medium mb-2">Fees info</h4>
       <a href="https://l2fees.info/" target="_blank">L2Fees.info</a>
       <a href="https://www.gasfees.io/" target="_blank">GasFees.io</a>
+      <a href="https://eth-blocks.vercel.app/" target="_blank">L1 fees - eth-blocks.vercel.app</a>
+      <a href="https://www.blocknative.com/gas-estimator" target="_blank">L1 gas estimator</a>
     </div>
 
     <a href="https://ethproofs.org/" 
@@ -189,15 +242,31 @@
     <a href="https://ethereumadoption.com/" 
        target="_blank"
        class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
-      <h4 class="text-lg font-medium mb-2">Ethereum Adoption</h4>
+      <h4 class="text-lg font-medium mb-2">EthereumAdoption.com</h4>
       <p>A list of entities building on Ethereum.</p>
     </a>
 
-    <a href="https://mevwatch.info/" 
+    <a href="https://ethereumdashboards.com/" 
        target="_blank"
        class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
-      <h4 class="text-lg font-medium mb-2">MEV Watch</h4>
-      <p>MEV-Boost relays watch.</p>
+      <h4 class="text-lg font-medium mb-2">EthereumDashboards.com</h4>
+      <p>A list of Dashboards for Ethereum.</p>
+    </a>
+
+    <div class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Mev-boost relays</h4>
+      <a href="https://mevwatch.info/" target="_blank">MEVWatch.info</a>
+      <a href="https://dune.com/ChainsightAnalytics/mev-after-ethereum-merge" target="_blank">MEV-Boost Dashboard</a>
+      <a href="https://beaconcha.in/relays" target="_blank">MEV-Boost Relays</a>
+      <a href="https://mevboost.pics/" target="_blank">MEV-Boost Dashboard</a>
+      <a href="https://www.inclusion.watch/" target="_blank">inclusion.watch</a>
+    </div>
+
+    <a href="https://luckystaker.com/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">LuckyStaker.com</h4>
+      <p>Block proposal probability.</p>
     </a>
 
     <div class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
@@ -206,6 +275,11 @@
       <a href="https://monitoreth.io/nodes" target="_blank">Monitoreth.io/nodes</a>--}}
       <a href="https://migalabs.io/execution-layer" target="_blank">Execution Layer</a>
       <a href="https://migalabs.io/consensus-layer" target="_blank">Consensus Layer</a>
+      <a href="https://nodewatch.io/" target="_blank">nodewatch.io</a>
+      <a href="https://chainbound.grafana.net/public-dashboards/d001850804e1454fa24852c9dd82db97" target="_blank">Network Topology Explorer</a>
+      <a href="https://geographicdiversity.org/" target="_blank">GeographicDiversity.org</a>
+      <a href="https://clientdiversity.org/" target="_blank">GeographicDiversity.org</a>
+      <a href="https://www.ethernets.io/" target="_blank">ethernets.io</a>
     </div>
 
     <a href="https://eipsinsight.com/resources" 
@@ -220,6 +294,166 @@
        class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
       <h4 class="text-lg font-medium mb-2">RWA.xyz</h4>
       <p>Analytics on Tokenized Real-World Assets.</p>
+    </a>
+
+    <a href="https://makerburn.com/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">MakerBurn</h4>
+      <p>DAI/USDS minting and MKR/SKY token burning in real time.</p>
+    </a>
+
+    <div class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">ERC-4337 Account abstraction</h4>
+      <a href="https://jiffyscan.xyz/?network=mainnet" target="_blank">Jiffyscan</a>
+      <a href="https://www.bundlebear.com/erc4337-overview/all" target="_blank">BundleBear</a>
+    </div>
+
+    <a href="https://chains.blockscout.com/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">blockscout.com</h4>
+      <p>Chain explorers.</p>
+    </a>
+
+    <a href="https://www.validatorqueue.com/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Validator Queue</h4>
+      <p>Real time Validator Queue.</p>
+    </a>
+
+    <a href="https://beaconcha.in/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">beaconcha.in</h4>
+      <p>Ethereum Beacon Chain explorer.</p>
+    </a>
+
+    <a href="https://ipv6eth.info/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">ipv6eth.info</h4>
+      <p>IPv6 support state within the Ethereum network.</p>
+    </a>
+
+    <a href="https://ethtools.com/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">ethtools.com</h4>
+      <p>Tools for interacting with the Ethereum blockchain.</p>
+    </a>
+
+    <a href="https://explorer.rated.network/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">rated.network</h4>
+      <p>Rated.network validators explorer.</p>
+    </a>
+
+    <a href="https://ultrasound.money/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">ultrasound.money</h4>
+      <p>Ethereum Ultrasound money meme tracker.</p>
+    </a>
+
+    <a href="https://feed.defillama.com/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">feed.defillama.com</h4>
+      <p>A customizable crypto news aggregator.</p>
+    </a>
+
+    <a href="https://explorer.web3privacy.info/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Web3Privacy</h4>
+      <p>Web3 Privacy ranking system.</p>
+    </a>
+
+    <a href="https://timing.pics/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Ethereum Timing Dashboard</h4>
+      <p>Comparative visualizations on block proposal timings and missed slots.</p>
+    </a>
+
+    <a href="https://reorg.pics/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Ethereum Reorg Dashboard</h4>
+      <p>Comparative visualizations on reorged blocks on Ethereum.</p>
+    </a>
+
+    <a href="https://grafana.gcp.obol.tech/d/bdsj3pnif435se/obol-ecosystem-dashboard?orgId=6&from=now-28d%2Fd&to=now%2Fd&timezone=browser" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Obol Metrics</h4>
+      <p>Key metrics around the adoption of Obol.</p>
+    </a>
+
+    <a href="https://aave.tokenlogic.xyz/treasury" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Aave Analytics</h4>
+      <p>Aave protocol analytics and insights.</p>
+    </a>
+
+    <a href="https://gearbox.tokenlogic.xyz/treasury" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Gearbox Analytics</h4>
+      <p>Gearbox analytics and insights.</p>
+    </a>
+
+    <a href="https://l2safety.info/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">L2Safety</h4>
+      <p>A simplified view of Ethereum Layer 2 risks sourced.</p>
+    </a>
+
+    <a href="https://l2beat.com/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">L2BEAT</h4>
+      <p>Ethereum layer 2 scaling website.</p>
+    </a>
+
+    <a href="https://www.builder.love/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Builder Love</h4>
+      <p>A look into Ethereum's development stats.</p>
+    </a>
+
+    <a href="https://www.assemblytheory.xyz/ethereum/simulator/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Ethereum Assembly Simulator</h4>
+      <p>Ecosystem evolution through the lens of combinatorial complexity.</p>
+    </a>
+
+    <a href="https://eigenphi.io/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">EigenPhi</h4>
+      <p>Full-scale DeFi in-depth data platform.</p>
+    </a>
+
+    <a href="https://ethsunshine.com/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">ETH Sunshine</h4>
+      <p>A dashboard to measure the health of Ethereum's decentralization.</p>
+    </a>
+
+    <a href="https://ethereumobituaries.com/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Ethereum Obituaries</h4>
+      <p>A list and chart of all the times Ethereum was declared dead.</p>
     </a>
   </div>
 
@@ -262,11 +496,27 @@
       <h4 class="text-lg font-medium mb-2">Rotki</h4>
       <p>Open source portfolio tracker.</p>
     </a>
+    <a href="https://analytics.vaults.fyi/vaults" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">vaults.fyi</h4>
+      <p>Onchain yield across DeFi platforms Overview.</p>
+    </a>
+    <a href="https://www.stablewatch.io/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Stablewatch</h4>
+      <p>Historical APY performance of yield-bearing stablecoins.</p>
+    </a>
   </div>
-
 
   <h2 class="text-4xl lg:text-5xl font-bold mb-10">Analytics platforms</h2>
   <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+    <a href="https://tokenterminal.com/explorer" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">TokenTerminal.com</h4>
+    </a>
     <a href="https://app.nansen.ai/macro/blockchains" 
        target="_blank"
        class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
@@ -281,6 +531,11 @@
        target="_blank"
        class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
       <h4 class="text-lg font-medium mb-2">Alphaday.com</h4>
+    </a>
+    <a href="https://dappradar.com/" 
+       target="_blank"
+       class="bg-gray-100 rounded-xl p-6 items-center justify-center shadow hover:shadow-lg transition text-center">
+      <h4 class="text-lg font-medium mb-2">Dappradar.com</h4>
     </a>
   </div>
 </main>
