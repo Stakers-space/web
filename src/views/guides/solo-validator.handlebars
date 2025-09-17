@@ -44,10 +44,10 @@
 						<li><a href="/{{chainUrl}}#config">Basic configuration</a></li>
 						<li><a href="/{{chainUrl}}#jwt">Jwtsecret</a></li>
 						<li>Install & configure clients
-							<ul class="list-disc my-4">
+							<ul class="list-disc">
 								<li><a href="/{{chainUrl}}#execution">Execution client</a></li>
 								<li><a href="/{{chainUrl}}#consensus">Consensus client</a>
-									<ul class="list-disc my-4">
+									<ul class="list-disc">
 										<li><a href="/{{chainUrl}}#beacon">Beacon</a></li>
 										<li><a href="/{{chainUrl}}#validator">Validator</a></li>
 									</ul>
@@ -272,6 +272,28 @@
 				</a>
 			</section>
 
+			<section id="exit" class="my-20 max-w-6xl mx-auto px-4">
+				<span class="mt-10 mb-3 inline-flex items-center text-white text-xs font-semibold tracking-wide">
+					<span class="rounded-l-full bg-emerald-600 px-3 py-1 shadow">
+						Validator
+					</span>
+					<span class="rounded-r-full bg-gray-300 text-gray-800 px-3 py-1 shadow">
+						Exit
+					</span>
+				</span>
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Exiting validators
+				</h2>
+				<p>You can exit the validator and withdraw the funds anytime.</p>
+				<a href="/{{chainUrl}}/emergency#exit"
+					class="mt-5 inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+					Exit validator
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+					<path fill-rule="evenodd" d="M12.293 4.293a1 1 0 011.414 0L18 8.586a2 2 0 010 2.828l-4.293 4.293a1 1 0 01-1.414-1.414L14.586 12H4a1 1 0 110-2h10.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+					</svg>
+				</a>
+			</section>
+
 			<section id="actions" class="my-20 max-w-6xl mx-auto px-4">
 				<span class="mt-10 mb-3 inline-flex items-center text-white text-xs font-semibold tracking-wide">
 					<span class="rounded-l-full bg-emerald-600 px-3 py-1 shadow">
@@ -288,6 +310,28 @@
 				<a href="/{{chainUrl}}/validator-actions"
 					class="mt-5 inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
 					See Validator actions
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+					<path fill-rule="evenodd" d="M12.293 4.293a1 1 0 011.414 0L18 8.586a2 2 0 010 2.828l-4.293 4.293a1 1 0 01-1.414-1.414L14.586 12H4a1 1 0 110-2h10.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+					</svg>
+				</a>
+			</section>
+
+			<section id="emergency" class="my-20 max-w-6xl mx-auto px-4">
+				<span class="mt-10 mb-3 inline-flex items-center text-white text-xs font-semibold tracking-wide">
+					<span class="rounded-l-full bg-emerald-600 px-3 py-1 shadow">
+						Staking
+					</span>
+					<span class="rounded-r-full bg-gray-300 text-gray-800 px-3 py-1 shadow">
+						Emergency
+					</span>
+				</span>
+				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+					Staking emergency
+				</h2>
+				<p>Does anything go wrong with your validator?</p>
+				<a href="/{{chainUrl}}/emergency"
+					class="mt-5 inline-flex items-center gap-2 rounded-full bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+					Check emergency guide
 					<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
 					<path fill-rule="evenodd" d="M12.293 4.293a1 1 0 011.414 0L18 8.586a2 2 0 010 2.828l-4.293 4.293a1 1 0 01-1.414-1.414L14.586 12H4a1 1 0 110-2h10.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
 					</svg>

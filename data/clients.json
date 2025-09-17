@@ -49,8 +49,8 @@
             "name": "Erigon",
             "link": "https://erigon.tech/",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "3.0.15",
-            "release_time": "2025-07-25T12:38:00Z",
+            "latestVer": "3.1.0",
+            "release_time": "2025-09-17T09:38:00Z",
             "social":[
                 {
                     "name": "X",
@@ -185,12 +185,12 @@
             "system-requirements": "",
             "ilink":"reth"
         },
-        "ethereumjs": {
-            "name": "EthereumJS",
-            "link": "https://github.com/ethereumjs/ethereumjs-monorepo",
-            "github": "https://github.com/ethereumjs/ethereumjs-monorepo",
-            "latestVer": "10.0.0",
-            "release_time": "2025-04-29T10:31:00Z",
+        "silkworm": {
+            "name": "Silkworm (pre-alpha)",
+            "link": "https://github.com/erigontech/silkworm#about-silkworm",
+            "github": "https://github.com/erigontech/silkworm#about-silkworm",
+            "latestVer": "0.23.0",
+            "release_time": "2025-02-01T16:38:00Z",
             "social":[],
             "chain":{
                 "ethereum":{
@@ -202,14 +202,14 @@
                     "share": null
                 }
             },
-            "language": "TypeScript",
+            "language": "C++",
             "os": {
-                "linux": true,
-                "windows": true,
-                "macos": true
+                "linux": null,
+                "windows": null,
+                "macos": null
             },
             "system-requirements": "",
-            "ilink":"ethereumjs"
+            "ilink":"silkworm"
         }
     },
     "consensusLayer": {
@@ -418,8 +418,8 @@
             "name": "Caplin",
             "link": "https://erigon.tech/",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "3.0.15",
-            "release_time": "2025-07-25T12:38:00Z",
+            "latestVer": "3.1.0",
+            "release_time": "2025-09-17T09:38:00Z",
             "social":[
                 {
                     "name": "X",
@@ -446,6 +446,72 @@
             },
             "system-requirements": "https://github.com/ledgerwatch/erigon#system-requirements",
             "ilink":"caplin"
+        },
+        "grandine": {
+            "name": "Grandine",
+            "link": "https://grandine.io/",
+            "github": "https://github.com/grandinetech/grandine",
+            "latestVer": "1.1.5",
+            "release_time": "2025-09-03T15:17:00Z",
+            "social":[
+                {
+                    "name": "X",
+                    "icon": "x.png",
+                    "link": "https://x.com/grandineio"
+                },
+                {
+                    "name": "Discord",
+                    "icon": "discord.png",
+                    "link": "https://discord.gg/H9XCdUSyZd"
+                }
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": true,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": true,
+                    "share": null,
+                    "link": "https://docs.gnosischain.com/node/manual/execution/erigon"
+                }
+            },
+            "language": "Rust",
+            "os": {
+                "linux": true,
+                "windows": true,
+                "macos": true
+            },
+            "system-requirements": "https://github.com/ledgerwatch/erigon#system-requirements",
+            "ilink":"caplin"
+        },
+        "lambda": {
+            "name": "Lambda (Pre-Alpha)",
+            "link": "https://github.com/lambdaclass/lambda_ethereum_consensus",
+            "github": "https://github.com/lambdaclass/lambda_ethereum_consensus",
+            "latestVer": "0.1.0",
+            "release_time": "2025-04-24T11:12:00Z",
+            "social":[
+                
+            ],
+            "chain":{
+                "ethereum":{
+                    "supported": false,
+                    "share": null
+                },
+                "gnosis":{
+                    "supported": false,
+                    "share": null
+                }
+            },
+            "language": "Elixir",
+            "os": {
+                "linux": null,
+                "windows": null,
+                "macos": null
+            },
+            "system-requirements": "",
+            "ilink":"lambda"
         }
     },
     "mevLayer":{
@@ -481,8 +547,8 @@
             "name": "RocketPool",
             "link": "https://rocketpool.net/",
             "github": "https://github.com/rocket-pool/smartnode/releases",
-            "latestVer": "1.17.2",
-            "release_time": "2025-08-20T20:46:00Z",
+            "latestVer": "1.17.3",
+            "release_time": "2025-09-10T20:46:00Z",
             "social":[
                 {
                     "name": "Discord",
