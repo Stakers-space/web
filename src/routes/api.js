@@ -13,7 +13,6 @@ const ProtonVPN = require('../controllers/proton-vpn-servers.js');
 /*router.use(bodyParser.urlencoded({
     extended: true
 }));*/
-router.use(express.text());
 const config = require('../config/config.secret.json');
 
 // account-based authentization
@@ -31,6 +30,30 @@ router.use(passport.initialize());
 router.use(passport.authenticate('session'));
 router.use(passport.session());
 
+// log all requests
+  
+const MAX_LEN = 15 * 1024 * 1024;
+router.use((req, res, next) => {
+    req.app.set("trust proxy", true);
+
+    const lenHeader = req.headers['content-length'];
+    const len = lenHeader ? parseInt(lenHeader, 10) : 0;
+
+    console.log('[INCOMING]', {
+        ip: req.ip, method: req.method, url: req.originalUrl,
+        contentLength: lenHeader, contentType: req.headers['content-type'],
+        ua: req.headers['user-agent']
+    });
+
+    if (len && len > MAX_LEN) {
+        console.warn('[REJECT length]', { ip: req.ip, url: req.originalUrl, len });
+        return res.status(413).send('Payload too large');
+    }
+
+  next();
+});
+
+//router.use(express.text());
 router.use(bodyParser.text({ type: 'text/plain', limit: '15mb' }));
 router.use(bodyParser.urlencoded({ limit: '15mb', extended: true }));
 router.use(bodyParser.json( {limit: '15mb'} ));
@@ -119,5 +142,19 @@ router.get('/account', function(req,res){
 router.get('/alert', AlertController.ReturnAlertState);
 router.get('/node-snapshot', Controller.UpdateNodeState);
 router.get('/get-proton-vpn-servers-load', ProtonVPN.GetServers);
+
+router.use((err, req, res, next) => {
+  if (err.type === "entity.too.large") {
+    console.error("[PAYLOAD TOO LARGE]", {
+      ip: req.ip,
+      url: req.originalUrl,
+      contentLength: req.headers["content-length"],
+      contentType: req.headers["content-type"],
+      userAgent: req.headers["user-agent"]
+    });
+    return res.status(413).send("Payload too large");
+  }
+  next(err);
+});
 
 module.exports = router;
