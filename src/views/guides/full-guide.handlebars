@@ -448,20 +448,28 @@ sudo systemctl disable ssh</code></pre>
 				<h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
 					Check / set basic config for your staking node
 				</h2>
-					<ul class="list-disc my-4 space-y-2 pl-6">
+					<ul class="list-disc my-4 space-y-4 pl-6">
 						<li>Check, you are not logged in as <code>root</code>. If so, create a new user with <code>sudo</code>, see section <a href="/{{chainUrl}}/staking-hardware">Staking on rented hardware</a></li>
 						<li>Check a <code>swap</code> space 
 							<pre><code>free -h</code></pre>
 							<p>If there's no <code>swap</code> space created on your node, <a href="#">configurate a swap space</a>.</p>
 						</li>
-						<li>Check <code>timedatectl</code> service for option to synchronize time
-							<p>Check current state:</p>
+						<li>Verify system time synchronization using <code>timedatectl</code>
+							<p>A validator needs accurate system time to operate correctly. Check the current synchronization state:</p>
 							<pre><code>timedatectl status</code></pre>
 							<ul class="list-disc pl-6">
-								<li><code>NTP service</code> must be <code>active</code>. If not, run <code>sudo timedatectl set-ntp on</code></li>
-								<li><code>System clock synchronized</code> must be <code>yes</code>. If not, and you have active VPN client, <a href="https://github.com/Stakers-space/staking-scripts/tree/main/mullvad/split-tunnel" target="_blank">set a split tunnel for <code>timedatectl</code> service.</a></li>
+								<li><code>NTP service</code> must be show <code>active</code>.</li>
+								<li><code>System clock synchronized</code> must show  <code>yes</code>.</li>
 							</ul>
-							<p>Note: There's possible to use also more advanced NTP tools for time synchronization such as <a href="https://chrony-project.org/" target="_blank">Chrony</a>.</p>
+							<p>
+								If the system time is not being updated — either right after startup or during operation — your network or VPN may be blocking standard NTP traffic (UDP/123), or the default <code>systemd-timesyncd</code> service may not be running reliably.
+							</p>
+							<p class="text-sm text-gray-700 mt-2">
+								For detailed troubleshooting steps for <code>systemd-timesyncd</code> as well as switching at alternative synchronization util <a href="https://chrony-project.org/" target="_blank">Chrony</a>, see the guide below.
+							</p>
+							<a href="https://vrealmatic.com/ubuntu-server/time-synchronization" target="_blank" class="inline-block mt-3 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700">
+								Troubleshooting Time Synchronization
+							</a>
 						</li>
 						<li>Create <code>downloads</code> directory in your machine
 							<pre><code>mkdir ~/downloads</code></pre>

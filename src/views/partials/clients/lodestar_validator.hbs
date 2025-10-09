@@ -152,7 +152,7 @@
     </li>
     <li class="mt-8">
         <h4>Other configurations</h4>
-        <div class="tabselector mt-6 bg-gray-200 rounded-xl shadow-md p-4">
+        <div class="tabselector mt-6 p-4">
 			<nav>
 				<button class="tab selected" data-tabpanel="1">Standard configuration</button>
 				<button class="tab" data-tabpanel="2">Stakers.space configuration</button>
@@ -173,55 +173,31 @@
                 </div>
             </div>
 			<div class="tabpanel">
-                <ul class="list-disc my-4 pl-10">
-                    <li><h4 class="text-xl">Configurate Lodestar validator Log monitor service</h4>
-                        <p>Log monitor service monitors the service log and process defined action (fixes) in a case of any issue detected.</p>
-                        <ol class="list-decimal pl-6">
-                            <li>Check, whether the logmonitor util is installed:
-                                <pre><code>/usr/local/bin/logmonitor.sh version</code></pre>
-                                <p>If the util is not installed, <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lodestar/validator_log_monitor" target="_blank">install Lodestar validator Log monitor from GitHub</a>.</p>
-                            </li>
-                            <li>Check defined Errors list for lodestarvalidator service
-                                <pre><code>sudo nano /usr/local/etc/lodestarvalidator_tracking_records.txt</code></pre>
-                                <p>If not available, <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lodestar/validator_log_monitor" target="_blank">download it from GitHub</a>. You can also modifiy it, if needed.</p>
-                            </li>
-                            <li>Configurate the validator log monitor for service <code class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></code>, see <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lodestar/validator_log_monitor" target="_blank">guide on Github</a>.</li>
-                        </ol>
+                {{> clients/config/staking-manager MarkClass="instance_sn" servicesCategory="validator" ClientName="lodestar" ServiceName="lodestar-vi1" }}
+
+                <h4 class="text-xl mt-4">Configurate Lodestar validator Log monitor service</h4>
+                <p>Log monitor service monitors the service log and process defined action (fixes) in a case of any issue detected.</p>
+                <ol class="list-decimal pl-6">
+                    <li>Check, whether the logmonitor util is installed:
+                        <pre><code>/usr/local/bin/logmonitor.sh version</code></pre>
+                        <p>If the util is not installed, <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lodestar/validator_log_monitor" target="_blank">install Lodestar validator Log monitor from GitHub</a>.</p>
                     </li>
-                    <li><h4 class="text-xl">Activate service to start automatically on OS startup</h4>
-                        <p>Our guide uses a custom util for launching services. It has following benefits:</p>
-                        <ul class="list-disc my-4 pl-10">
-                            <li>It allows set delay for starting services. It eliminates slashing risk in the following scenario:
-                                <ol class="list-decimal pl-6">
-                                    <li>A database corruption occures</li>
-                                    <li>Lodestar Log monitor detects it, stopping the validator instance and clearing broken database</li>
-                                    <li>Very quick power failure happens while the staking node starts immediately automatically</li>
-                                    <li>As the database with last attestation is removed now, we need to prevent start of the validator instance to avoid double attestation / block proposal within the same slot.</li>
-                                </ol>
-                            </li>
-                            <li>It allows starting services through a shared script
-                                <p>Starting all services through the <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a> util and its command <code>/usr/local/bin/staking.sh start validators</code> prevents a human error when there is forgotten set of <code>sudo systemctl enable ...</code> for any staking-related service.</p>
-                                <h4>Extend Staking manager clients.conf</h4>
-                                Insert <code class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></code> into clients.conf file that is used by <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking Manager</a>.
-                                <pre><code>sudo nano /usr/local/etc/staking/config/clients.conf</code></pre>
-                            </li>
-                        </ul>
-                        <p>There's a <code>Start with delay</code> util to manage this.</p>
-                        <ol class="list-decimal space-y-3 pl-10">
-                            <li>Install <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">Start with delay util from GitHub</a>, if not installed yet.</li>
-                            <li>Open Start with delay util
+                    <li>Check defined Errors list for lodestarvalidator service
+                        <pre><code>sudo nano /usr/local/etc/lodestarvalidator_tracking_records.txt</code></pre>
+                        <p>If not available, <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lodestar/validator_log_monitor" target="_blank">download it from GitHub</a>. You can also modifiy it, if needed.</p>
+                    </li>
+                    <li>Configurate the validator log monitor for service <code class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></code>, see <a href="https://github.com/Stakers-space/staking-scripts/tree/main/lodestar/validator_log_monitor" target="_blank">guide on Github</a>.</li>
+                    <li>Place validator logmonitor service into <code>/usr/local/bin/delayed-start.sh</code> util to start it automatically on system startup
+                        <ol class="list-decimal pl-6">
+                            <li>Open <code>delayed-start.sh</code>
                                 <pre><code>sudo nano /usr/local/bin/delayed-start.sh</code></pre>
                             </li>
                             <li>Place validator logmonitor service into the file
-                                <pre><code><mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark>_logmonitor</code></pre>
+                                <pre><code>systemctl start <mark class="instance_sn" data-client="lodestar">{{servicePrefix}}lodestar-vi<span class="instance_pid">1</span></mark>_logmonitor</code></pre>
                             </li>
-                            <li>Place command to start all validator services, if not attached yet
-                                <pre><code>/usr/local/bin/staking.sh start validators</code></pre>
-                            </li>
-                            <li>Verify, that a service `delayed-start.service` exists and is automatically launched on system start. See <a href="https://github.com/Stakers-space/staking-scripts/tree/main/utils/start_with_delay" target="_blank">GitHub for a guide to do that</a>.</li>
                         </ol>
                     </li>
-                </ul>
+                </ol>
 			</div>
 		</div>
     </li>

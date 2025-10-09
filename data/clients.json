@@ -4,9 +4,9 @@
             "name": "Nethermind",
             "link": "https://nethermind.io/",
             "github": "https://github.com/NethermindEth/nethermind",
-            "latestVer": "1.33.1-cda59e5b",
-            "latestVerClean":"1.33.1",
-            "release_time": "2025-09-04T12:04:00Z",
+            "latestVer": "1.34.1-c4238a37",
+            "latestVerClean":"1.34.1",
+            "release_time": "2025-10-06T15:40:00Z",
             "social":[
                 {
                 "name": "Discord",
@@ -49,8 +49,8 @@
             "name": "Erigon",
             "link": "https://erigon.tech/",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "3.1.0",
-            "release_time": "2025-09-17T09:38:00Z",
+            "latestVer": "3.2.0",
+            "release_time": "2025-10-02T09:38:00Z",
             "social":[
                 {
                     "name": "X",
@@ -256,10 +256,10 @@
             "name": "Lodestar",
             "link": "https://lodestar.chainsafe.io/",
             "github": "https://github.com/chainsafe/lodestar",
-            "latestVer": "1.34.1",
+            "latestVer": "1.35.0",
             "nodejsVer": "22.16.0",
             "nvmVer": "0.40.1",
-            "release_time": "2025-09-11T06:08:00Z",
+            "release_time": "2025-10-09T01:08:00Z",
             "prerequisity": "NodeJS v22+",
             "social":[
                 {
@@ -418,8 +418,8 @@
             "name": "Caplin",
             "link": "https://erigon.tech/",
             "github": "https://github.com/ledgerwatch/erigon",
-            "latestVer": "3.1.0",
-            "release_time": "2025-09-17T09:38:00Z",
+            "latestVer": "3.2.0",
+            "release_time": "2025-10-02T09:38:00Z",
             "social":[
                 {
                     "name": "X",
@@ -578,8 +578,8 @@
             "name": "StakeWise",
             "link": "https://www.stakewise.io/",
             "github": "https://github.com/stakewise/v3-operator/releases/",
-            "latestVer": "3.1.10",
-            "release_time": "2025-07-17T16:42:00Z",
+            "latestVer": "4.0.1",
+            "release_time": "2025-010-02T10:22:00Z",
             "social":[
                 {
                     "name": "Discord",

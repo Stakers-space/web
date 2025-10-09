@@ -12,9 +12,9 @@
           <a href="https://x.com/StakersSpace" target="_blank" rel="nofollow noopener noreferrer">
             <img src="/img/icons/x.png" alt="X.com" class="w-5 h-5 hover:opacity-80 transition" title="X / (Former Twitter)">
           </a>
-          <a href="https://www.reddit.com/r/stakersspace" target="_blank" rel="nofollow noopener noreferrer">
+          {{!--<a href="https://www.reddit.com/r/stakersspace" target="_blank" rel="nofollow noopener noreferrer">
             <img src="/img/icons/reddit.png" alt="Reddit" class="w-5 h-5 hover:opacity-80 transition">
-          </a>
+          </a>--}}
           <a href="https://discord.gg/RMyEwQEVKE" target="_blank" rel="nofollow noopener noreferrer">
             <img src="/img/icons/discord.png" alt="Discord" class="w-5 h-5 hover:opacity-80 transition">
           </a>
@@ -38,4 +38,33 @@
          class="text-emerald-400 hover:underline">download it and run locally or in free Azure webapp service</a>.
     </p>
   </section>
+
+  	<div id="share-nudge"
+     class="fixed bottom-5 right-5 z-40 max-w-xs rounded-lg border bg-white/95 backdrop-blur p-3 shadow-lg hidden">
+  <div class="flex items-start gap-3">
+    <div class="mt-0.5 text-emerald-600" aria-hidden="true">🙏</div>
+    <div class="text-sm text-gray-700">
+      If Stakers.space helps you, a tiny favor:
+      <a href="/about#support" class="text-emerald-600 hover:underline">share how others can find it</a>.
+    </div>
+    <button type="button" id="share-nudge-close" class="ml-1 text-gray-400 hover:text-gray-600" aria-label="Close">×</button>
+  </div>
+</div>
+<script>
+  (function () {
+    try {
+      const KEY = "hideShareNudge";
+      if (localStorage.getItem(KEY) === "1") return;
+      const el = document.getElementById("share-nudge");
+      const btn = document.getElementById("share-nudge-close");
+      if (!el || !btn) return;
+      // show after a short delay so it feels gentle
+      setTimeout(() => el.classList.remove("hidden"), 10000);
+      btn.addEventListener("click", () => {
+        el.classList.add("hidden");
+        localStorage.setItem(KEY, "1");
+      });
+    } catch (e) { /* no-op */ }
+  })();
+</script>
 </footer>

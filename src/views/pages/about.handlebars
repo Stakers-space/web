@@ -1,7 +1,7 @@
 <body id="body" class="bg-white text-gray-900">
 {{> header_amp}}
 
-<main class="container mx-auto px-6 lg:px-20 py-12">
+<main class="container mx-auto px-6 lg:px-20 py-10">
  <ul class="broadcrumbs mt-15" vocab="https://schema.org/" typeof="BreadcrumbList">
 			<li property="itemListElement" typeof="ListItem">
 				<a property="item" typeof="Thing" href="/" class="hover:underline">
@@ -16,99 +16,128 @@
 				<meta property="position" content="2">
 			</li>
 		</ul>
-  <h1 class="text-4xl lg:text-5xl font-bold mb-10">About Stakers.space</h1>
+    
+    <p class="mb-6 mt-10">Hey everyone! 👋</p>
+    <h1 class="text-4xl lg:text-5xl font-bold mb-10">Welcome to Stakers.space</h1>
+    <p class="text-lg text-gray-700 mb-10 max-w-3xl">A community <strong>project focused on safe, practical staking.</strong> Open guides, hands‑on scripts, and a privacy‑first dashboard for monitoring your validators and keeping track of your nodes — all for free.</p>
 
-  <p class="mb-6">Hey everyone! 👋</p>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
+<div class="rounded-2xl border p-6">
+<h3 class="text-xl font-semibold mb-2">Open Resources</h3>
+<p class="text-gray-700">Step‑by‑step guides, emergency checklists, and automation scripts gathered from real ops. Ethereum, Gnosis, and more minority chains.</p>
+<a href="https://github.com/Stakers-space/staking-scripts" target="_blank" class="inline-block mt-4 text-emerald-700 hover:underline">GitHub →</a>
+</div>
+<div class="rounded-2xl border p-6">
+<h3 class="text-xl font-semibold mb-2">Privacy‑First Dashboard</h3>
+<p class="text-gray-700">Client‑side encrypted profile (your password = your key). Monitor validators, track nodes, and store configuration notes without exposing your data to our servers.</p>
+<a href="/account" class="inline-block mt-4 text-emerald-700 hover:underline">Open your dashboard →</a>
+</div>
+<div class="rounded-2xl border p-6">
+<h3 class="text-xl font-semibold mb-2">Free for the Community</h3>
+<p class="text-gray-700">The core site and dashboard are free to use. We also offer optional paid services tailored for teams and institutions.</p>
+<a href="/pricing" class="inline-block mt-4 text-emerald-700 hover:underline">See services →</a>
+</div>
+</div>
 
-  <p class="mb-6">
-    I would like to introduce you to a new project I’ve started around staking — 
-    the <a href="https://stakers.space" class="text-emerald-700 hover:underline">stakers.space</a>. 
-    Here’s what it’s all about and why I’ve created it:
-  </p>
+<h2 class="text-2xl font-semibold mt-12 mb-4">🔹 Staking Resources</h2>
+<p class="mb-6">Years of staking led to a library of scripts and notes I originally built for myself. I’m now sharing them with the community here. <a href="/guides" target="_blank">Browse the site</a> and the public repo:
+<a href="https://github.com/Stakers-space/staking-scripts" target="_blank" class="text-emerald-700 hover:underline">github.com/Stakers-space/staking-scripts</a>
+</p>
 
-  <h2 class="text-2xl font-semibold mt-12 mb-4">🔹 Staking Resources</h2>
-  <p class="mb-6">
-    Over the years of staking, I’ve gathered a lot of hands-on experience and created various scripts and materials for my own use.
-    Now, I’m starting to share these resources with the community through the website. 
-    You can check GitHub: 
-    <a href="https://github.com/Stakers-space/staking-scripts" target="_blank" class="text-emerald-700 hover:underline">
-      https://github.com/Stakers-space/staking-scripts
-    </a>.
-  </p>
+<h2 class="text-2xl font-semibold mt-12 mb-4">🔹 Guides including also minority chains (e.g., <a href="/gnosis" target="_blank" class="text-emerald-700 hover:underline">Gnosis</a>)</h2>
+<p class="mb-6"><a href="/ethereum" target="_blank" class="text-emerald-700 hover:underline">Ethereum</a> is well‑documented; smaller ecosystems are not. Stakers.space fills that gap with clear, practical walk‑throughs. For example, Gnosis staking can be tricky to test due to limited client support / supported client features — our guides call out the gotchas.</p>
 
-  <h2 class="text-2xl font-semibold mt-12 mb-4">
-    🔹 Guides and materials also for minority chains such as 
-    <a href="https://www.gnosis.io/" target="_blank" class="text-emerald-700 hover:underline">Gnosis</a> and others
-  </h2>
-  <p class="mb-6">
-    While there’s extensive guidance for Ethereum staking, e.g. Gnosis staking resources are limited.
-    Even though there are similarities, specific guides can really help beginners build confidence in staking on Gnosis and others.
-    Also, for example testing Gnosis staking setups can be challenging due to limited client support for Chiado testnet.
-  </p>
 
-  <h2 class="text-2xl font-semibold mt-12 mb-4">🔹 The Goal</h2>
-  <p class="mb-4">My goal with Stakers.space is to collect all essential information about staking in one place, making it easier for everyone to get started and stay safe. Here’s what’s currently available:</p>
+<h2 class="text-2xl font-semibold mt-12 mb-4">🔹 The Goal</h2>
+<p class="mb-4">Put essential staking knowledge in one place, focused on safety and simplicity. What you’ll find:</p>
+<ul class="list-disc list-inside space-y-2 mb-10">
+<li><strong>Step‑by‑step guides</strong> — 1‑page "from zero to running" and deeper, <a href="/clients" class="text-emerald-700 hover:underline">client‑specific guides</a>. See <a href="/ethereum-staking/full-guide" class="text-emerald-700 hover:underline">Ethereum</a> and <a href="/gnosis-staking/full-guide" class="text-emerald-700 hover:underline">Gnosis</a>.</li>
+<li><strong>Multi‑chain & multi‑service setups</strong> — e.g., Ethereum + Gnosis on a single staking node; Solo Staking + StakeWise + Rocket Pool and so on.</li>
+<li><strong>Client overviews</strong> — compatibility overviews for <a href="/ethereum-staking/clients" class="text-emerald-700 hover:underline">Ethereum</a> and <a href="/gnosis-staking/clients" class="text-emerald-700 hover:underline">Gnosis</a>.</li>
+<li><strong>Emergency procedures</strong> — proven steps for common incident scenarios.</li>
+<li><strong>Client‑side encrypted Account</strong> — monitor validators and keep node details private: <a href="/account" class="text-emerald-700 hover:underline">stakers.space/account</a>.</li>
+<li><strong>Automation scripts</strong> — hard‑earned fixes to recurring issues.</li>
+</ul>
 
-  <ul class="list-disc list-inside space-y-2 mb-10">
-    <li>
-      <strong>Step-by-step guides</strong> with a focus on simplicity and security, available as 
-      1-page complete guide as well as 
-      <a href="/clients" class="text-emerald-700 hover:underline">client-specific guides</a>. 
-      Example guides for 
-      <a href="/ethereum-staking/full-guide" class="text-emerald-700 hover:underline">Ethereum</a> and 
-      <a href="/gnosis-staking/full-guide" class="text-emerald-700 hover:underline">Gnosis</a>.
-    </li>
-    <li>
-      <strong>Guides for multi-chain setups</strong> (e.g., Ethereum + Gnosis) 
-      and <strong>multi-service configurations</strong> 
-      (e.g., Solo Staking + StakeWise + Rocketpool) on a single node.
-    </li>
-    <li>
-      <strong>Overview of compatible clients</strong> for 
-      <a href="/ethereum-staking/clients" class="text-emerald-700 hover:underline">Ethereum</a> and 
-      <a href="/gnosis-staking/clients" class="text-emerald-700 hover:underline">Gnosis staking</a>
-    </li>
-    <li><strong>Emergency procedures</strong> to troubleshoot issues as they arise.</li>
-    <li>
-      <strong>Client-based encrypted Account section</strong> for monitoring staking and securely storing server settings: 
-      <a href="/account" class="text-emerald-700 hover:underline">https://stakers.space/account</a>
-    </li>
-    <li><strong>Automated scripts and instructions</strong> to address common issues.</li>
-  </ul>
+<section class="rounded-2xl border p-6 mb-12">
+<h3 class="text-xl font-semibold mb-3">About the Dashboard</h3>
+<ul class="list-disc list-inside space-y-2 text-gray-800">
+<li><strong>What it tracks:</strong> validator statuses, node inventory, service configs, notes, and URLs you rely on.</li>
+<li><strong>Encryption:</strong> all sensitive fields are encrypted locally in your browser using your password before anything is saved. We can’t read your stored data.</li>
+<li><strong>Portability:</strong> of your encrypted data so you can move between machines safely.</li>
+<li><strong>No tracking:</strong> no analytics; only technical cookies for sign‑in/session.</li>
+</ul>
+<div class="mt-4">
+<a href="/account" class="inline-flex items-center gap-2 rounded-xl border px-4 py-2 hover:bg-emerald-50">
+Open dashboard
+<span aria-hidden>→</span>
+</a>
+</div>
+</section>
 
-  <h2 class="text-2xl font-semibold mt-12 mb-4">🔹 Open Source and Offline Availability</h2>
-  <p class="mb-6">
-    The project is designed to ensure that all key informational content is independent of a database structure.
-    Anyone will have an option to download the entire website as an open-source package and access all guides locally —
-    ensuring the content remains accessible even if something happens to the site.
-  </p>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4">🔹 Open Source & Offline Access</h2>
+  <p class="mb-6">All key guides live as static content so they remain usable without a database. <a href="https://github.com/Stakers-space/web" target="_blank" class="text-emerald-700 hover:underline">You can download the site as an open‑source package</a> and read everything locally if needed.</p>
+
 
   <h2 class="text-2xl font-semibold mt-12 mb-4">⚠️ Project Status</h2>
-  <p class="mb-10">
-    This project is still in beta, so it’s a work in progress.
-    I’m continuously working to improve the UX, simplify the design, and add new tools and resources that will make Gnosis staking even more accessible.
-    Also, I need to review the text and correct errors.
-  </p>
+  <p class="mb-10">We’re in beta. The UX is evolving, copy is being refined, and new tools land regularly.</p>
 
-  <p class="mt-20 mb-16">Thanks for checking it out, and I’m looking forward to any feedback or questions you might have!</p>
+<aside class="border-t pt-12" id="support">
+<h2 class="text-2xl font-semibold mb-4">Support Stakers.space</h2>
 
-  <!-- Support Section -->
-  <aside class="mt-24 border-t pt-12">
-    <h2 class="text-2xl font-semibold mb-4">Support Stakers.space</h2>
-    <p class="mb-4">You can support Stakers.space by using its services:</p>
-    <ul class="list-disc list-inside space-y-2">
-      <li>Using Stakers.space vaults (in progress)</li>
-      <li>Using Stakers.space smoothing pool (in progress)</li>
-      <li>
-        <a href="/cloud-node" class="text-emerald-700 hover:underline">Renting a staking server</a>
-      </li>
-      <li>
-        Using other <a href="/pricing" class="text-emerald-700 hover:underline">paid services</a> under 
-        <a href="/account" class="text-emerald-700 hover:underline">account</a> or tailored tools development
-      </li>
-      <li>Using referral links to exchanges and eshops</li>
-    </ul>
-  </aside>
+
+<!-- Share request callout -->
+<div class="mb-8 rounded-2xl border-2 border-emerald-600 bg-emerald-50 p-6">
+<h3 class="text-xl font-semibold mb-2">🙏 Please Share</h3>
+<p class="text-gray-800 mb-3">Traditional channels for sharing staking resources are limited: search engines often fail to index staking content, YouTube accounts cannot be created for this topic, and Reddit blocks new staking groups (and existing ones like ethstaker do not allow links to new projects). If Stakers.space helps you, the best support is simple <strong>word of mouth</strong> — please share it:</p>
+<ul class="list-disc list-inside space-y-2 text-gray-800">
+<li>Post a link on <strong>X / Mastodon</strong> with a short comment why it’s useful.</li>
+<li>Share it in relevant <strong>Telegram / Discord</strong> groups (local ETH/Gnosis communities, staking channels).</li>
+<li>Add the link to a <strong>README</strong> on GitHub, project documentation, or a <strong>resources</strong> section.</li>
+<li>Mention Stakers.space in a <strong>newsletter / blog post</strong> or internal wiki.</li>
+<li>Star the repo <a href="https://github.com/Stakers-space/staking-scripts" target="_blank" class="text-emerald-700 hover:underline">staking-scripts</a> and open issues with ideas.</li>
+<li>Recommend it directly to another staker — <strong>personal recommendations</strong> work best.</li>
+</ul>
+
+<!-- Ready-to-share snippets -->
+<div class="mt-5 grid grid-cols-1 lg:grid-cols-2 gap-4">
+<div class="rounded-xl border bg-white p-4">
+<div class="text-sm text-gray-500 mb-2">Short text (EN)</div>
+<textarea readonly class="w-full h-28 bg-white text-sm leading-relaxed outline-none" onclick="this.select()">Stakers.space — practical staking guides (ETH, Gnosis, more) + a privacy‑first dashboard (client‑side encrypted; your password = your key). Free for the community. https://stakers.space</textarea>
+</div>
+</div>
+</div>
+
+
+<p class="mb-4">You can also support the project by using its services or partnering for bespoke tooling:</p>
+<ul class="list-disc list-inside space-y-2">
+<li>Stakers.space vaults</li>
+<li>
+<a href="/cloud-node" class="text-emerald-700 hover:underline">Rent a staking server</a>
+</li>
+<li>
+Other <a href="/pricing" class="text-emerald-700 hover:underline">paid services</a> via the <a href="/account" class="text-emerald-700 hover:underline">account</a> or custom tools
+</li>
+</ul>
+<div class="mt-16 text-center">
+<h3 class="text-2xl font-bold mb-6">Follow Us</h3>
+<div class="flex justify-center gap-6">
+<a href="https://x.com/StakersSpace" target="_blank" rel="nofollow noopener noreferrer"
+class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-black hover:bg-gray-800 transition">
+<amp-img alt="X / (Former Twitter)" src="/img/icons/x.png" width="24" height="24" layout="fixed"></amp-img>
+</a>
+{{!--<a href="https://www.reddit.com/r/stakersspace" target="_blank" rel="nofollow noopener noreferrer"
+class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-orange-500 hover:bg-orange-600 transition">
+<amp-img alt="Reddit" src="/img/icons/reddit.png" width="24" height="24" layout="fixed"></amp-img>
+</a>--}}
+<a href="https://discord.gg/RMyEwQEVKE" target="_blank" rel="nofollow noopener noreferrer"
+class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-indigo-600 hover:bg-indigo-700 transition">
+<amp-img alt="Discord" src="/img/icons/discord.png" width="24" height="24" layout="fixed"></amp-img>
+</a>
+</div>
+</div>
+</aside>
 </main>
 
 {{> footer_amp_tailwind}}

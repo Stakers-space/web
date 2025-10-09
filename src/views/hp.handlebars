@@ -1,7 +1,7 @@
 <body id="body" data-amp-auto-lightbox-disable>
 {{> header}}
 <main>
-	<section class="relative bg-white py-16 lg:py-24 bg-gradient-to-b from-white to-gray-50">
+	<section class="relative bg-white py-16 lg:pt-24 bg-gradient-to-b from-white to-gray-50">
 		<div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 			<div>
 				<h1 class="text-4xl lg:text-6xl font-extrabold leading-tight text-gray-900 mb-6">
@@ -28,7 +28,7 @@
 						<ul class="space-y-3 max-h-64 overflow-y-auto">
 							{{#each newsfeed.all}}
 							<li>
-								<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer" class="text-gray-700 hover:text-emerald-600 transition">{{{this.m}}}</a> <span class="block text-sm text-gray-400" title="{{{this.ht}}}">{{{this.ta}}}</span>
+								<a href="{{this.a}}" target="_blank" rel="nofollow noopener" class="text-gray-700 hover:text-emerald-600 transition">{{{this.m}}}</a> <span class="block text-sm text-gray-400" title="{{{this.ht}}}">{{{this.ta}}}</span>
 							</li>
 							{{/each}}
 						</ul>
@@ -37,7 +37,7 @@
 						<ul class="space-y-3 max-h-64 overflow-y-auto">
 							{{#each newsfeed.fundamental}}
 							<li>
-								<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer" class="text-gray-700 hover:text-emerald-600 transition"><img src="/logo/{{this.img}}.svg" alt="{{this.img}} logo" width="25" height="25"> {{{this.m}}}</a> 
+								<a href="{{this.a}}" target="_blank" rel="nofollow noopener" class="text-gray-700 hover:text-emerald-600 transition"><img src="/logo/{{this.img}}.svg" alt="{{this.img}} logo" width="25" height="25"> {{{this.m}}}</a> 
 								<span class="block text-sm text-gray-400" title="{{{this.ht}}}">{{{this.ta}}}</span>
 							</li>
 							{{/each}}
@@ -47,7 +47,7 @@
 						<ul class="space-y-3 max-h-64 overflow-y-auto">
 							{{#each newsfeed.clients}}
 							<li>
-								<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer" class="text-gray-700 hover:text-emerald-600 transition">{{{this.m}}}</a> 
+								<a href="{{this.a}}" target="_blank" rel="nofollow noopener" class="text-gray-700 hover:text-emerald-600 transition">{{{this.m}}}</a> 
 								<span class="block text-sm text-gray-400" title="{{{this.ht}}}">{{{this.ta}}}</span>
 							</li>
 							{{/each}}

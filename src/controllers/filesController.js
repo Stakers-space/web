@@ -60,10 +60,14 @@ exports.UpdateValidatorsBalancesFile = async (req,res) => {
                 return res.status(400).send('Checksum mismatch');
             }
 
+            //let validatorsCountInSnapshot = null;
             // 6) Content validation: try JSON.parse
             try {
                 const text = await fs.promises.readFile(tmpDest, 'utf8');
-                JSON.parse(text); // pokud spadne, není to platný JSON
+                /*const spanshotData = */JSON.parse(text); // if crash, not a valid json
+
+                // get length → Write to DB
+                //validatorsCountInSnapshot = Object.keys(snapshotData.data).length;
             } catch (e) {
                 try { await fs.promises.unlink(tmpDest); } catch {}
                 return res.status(400).send('Invalid JSON content');

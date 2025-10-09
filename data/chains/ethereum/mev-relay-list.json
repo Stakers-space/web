@@ -47,7 +47,7 @@
             "dashboard_link": "https://bloxroute.max-profit.blxrbdn.com/",
             "strategy": "Maximize validator payout without including transactions and bundles sent from/to wallet addresses that are sanctioned by OFAC",
             "profit_share": "Unknown",
-            "filter": "Filters out OFAC sanctioned addresses as of <a href='https://twitter.com/bloXrouteLabs/note/1736819783520092357'  target='_blank' rel='nofollow noopener noreferrer'>Dec 2023</a> (Called Max profit in the <a href='https://docs.bloxroute.com/the-merge-eth2.0/mev-relay-instructions-for-validators' target='_blank' rel='nofollow noopener noreferrer'>documentation</a>)",
+            "filter": "Filters out OFAC sanctioned addresses as of <a href='https://twitter.com/bloXrouteLabs/note/1736819783520092357'  target='_blank' rel='nofollow noopener'>Dec 2023</a> (Called Max profit in the <a href='https://docs.bloxroute.com/the-merge-eth2.0/mev-relay-instructions-for-validators' target='_blank' rel='nofollow noopener'>documentation</a>)",
             "builder": "Internal and external builders. External searchers.",
             "software": "bloXroute’s fork of mev-boost-relay",
             "software_link": "https://github.com/bloXroute-Labs/mev-relay",
@@ -67,7 +67,7 @@
             "dashboard_link": "https://bloxroute.regulated.blxrbdn.com/",
             "strategy": "Maximize validator payout without including transactions and bundles sent from/to wallet addresses that are sanctioned by OFAC",
             "profit_share": "Unknown",
-            "filter": "Filters out OFAC sanctioned addresses (Called Regulated in the <a href='https://docs.bloxroute.com/the-merge-eth2.0/mev-relay-instructions-for-validators' target='_blank' rel='nofollow noopener noreferrer'>documentation</a>)",
+            "filter": "Filters out OFAC sanctioned addresses (Called Regulated in the <a href='https://docs.bloxroute.com/the-merge-eth2.0/mev-relay-instructions-for-validators' target='_blank' rel='nofollow noopener'>documentation</a>)",
             "builder": "Internal and external builders. External searchers.",
             "software": "bloXroute’s fork of mev-boost-relay",
             "software_link": "https://github.com/bloXroute-Labs/mev-relay",
@@ -127,7 +127,7 @@
             "dashboard_link": "https://boost-relay.flashbots.net/",
             "strategy": "Maximize validator payout without including transactions and bundles sent from/to wallet addresses that are sanctioned by OFAC",
             "profit_share": "Specific to builder of bid with highest validator value. 100% to validator from Flashbots builders.",
-            "filter": "Filters out OFAC sanctioned addresses (<a href='https://twitter.com/bantg/note/1559948198508118016' target='_blank' rel='nofollow noopener noreferrer'>Source</a>)",
+            "filter": "Filters out OFAC sanctioned addresses (<a href='https://twitter.com/bantg/note/1559948198508118016' target='_blank' rel='nofollow noopener'>Source</a>)",
             "builder": "Internal and external builders. Permissionless.",
             "software": "mev-boost-relay",
             "software_link": "https://github.com/flashbots/mev-boost-relay",
@@ -158,7 +158,7 @@
                 "x": null,
                 "discord": null
             },
-            "note": "This relay had a major issue on October 15th 2022 (<a href='https://research.lido.fi/t/lido-on-ethereum-relay-voting-proposal/3135/11' target='_blank' rel='nofollow noopener noreferrer'>1</a> , <a href='https://hackmd.io/@manifoldx/2022-10-15' target='_blank' rel='nofollow noopener noreferrer'>2</a>)."
+            "note": "This relay had a major issue on October 15th 2022 (<a href='https://research.lido.fi/t/lido-on-ethereum-relay-voting-proposal/3135/11' target='_blank' rel='nofollow noopener'>1</a> , <a href='https://hackmd.io/@manifoldx/2022-10-15' target='_blank' rel='nofollow noopener'>2</a>)."
         },
         {
             "name": "Ultra Sound",
