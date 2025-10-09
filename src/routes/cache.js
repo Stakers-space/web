@@ -34,38 +34,24 @@ class CacheReGenerate {
     }
 
     Regenerate(cb){
-        // reload queue - WHERE c.partitionKey = "eth-valcount"
-        /*azureCosmosDB.queryContainer("data",'SELECT * FROM c WHERE c.partitionKey = @partitionKey', "validatorqueue", function(err,currentQueueData){
-            if(err) {
-                console.error(err);
-                return;
-            }
-        })*/
 
-        azureCosmosDB.queryContainer("data",'SELECT * FROM c WHERE c.partitionKey = @partitionKey', "validatorqueue", function(err,currentQueueData){
-            if(err) {
-                console.error(err);
-                return;
-            }
+        function removeMess(obj){
+            delete obj.id;
+            delete obj.time;
+            delete obj._rid;
+            delete obj._self;
+            delete obj._etag;
+            delete obj._attachments;
+            delete obj._ts;
+            delete obj.partitionKey;
+            return obj;
+        }
 
-            for (const obj of currentQueueData) {
-                delete obj._rid;
-                delete obj._self;
-                delete obj._etag;
-                delete obj._attachments;
-                delete obj._ts;
-                delete obj.partitionKey;
-                switch(obj.id){
-                    case "current_queue_eth":
-                        ValidatorCacheMiddleware.setValidatorQueue("ethereum", obj);
-                        break;
-                    case "current_queue_gno":
-                        ValidatorCacheMiddleware.setValidatorQueue("gnosis", obj);
-                        break;
-                    default:
-                        console.warn("Unknown validatorqueue id");
-                }
-            }
+        azureCosmosDB.queryContainer("data",'SELECT TOP 1 c FROM c WHERE c.partitionKey = @partitionKey ORDER BY c._ts DESC', "eth-valcount", function(err,data){
+            if(!err && data.length > 0) ValidatorCacheMiddleware.setValidatorQueue("ethereum", removeMess(data[0]?.c));
+        });
+        azureCosmosDB.queryContainer("data",'SELECT TOP 1 c FROM c WHERE c.partitionKey = @partitionKey ORDER BY c._ts DESC', "gno-valcount", function(err,data){
+            if(!err && data.length > 0) ValidatorCacheMiddleware.setValidatorQueue("gnosis", removeMess(data[0]?.c)); 
         });
 
         new NewsController().RegenerateCacheFiles(); // Reload news ()

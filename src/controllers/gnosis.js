@@ -86,7 +86,6 @@ GnosisController.prototype.Request = function(req,res, next){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
         } else {
-            //console.log("cache.ValidatorQueue: ", cache_validatorQueue.getValidatorQueue("gnosis"));
             let model = new ValidatorQueueModel();
             res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue("gnosis"), res.locals.chain, JSON.parse(data));
             //console.log(res.locals.queue);

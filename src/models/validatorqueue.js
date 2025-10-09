@@ -82,15 +82,18 @@ class ValidatorQueue {
         //console.log("GetSnapshot",chain, currentQueue);
         if(!currentQueue) return {current: null, schedule: listSchedule, rangeIndex: null };
 
-        const rangeResp = findRange(listSchedule, currentQueue.validatorscount);
+        const rangeResp = findRange(listSchedule, currentQueue.stateCount.active_ongoing?.validators);
         currentQueue.range = rangeResp.range;
         
+        const entry_queue = (currentQueue?.stateCount?.pending_initialized?.validators ?? 0) + (currentQueue?.stateCount?.pending_queued?.validators ?? 0);
+        const exit_queue = currentQueue?.stateCount?.active_exiting?.validators ?? 0;
+
         // calculate time
-        currentQueue.activation = getState(currentQueue.beaconchain_entering, currentQueue.range.churnEpoch, chain);
-        currentQueue.exiting = getState(currentQueue.beaconchain_exiting, currentQueue.range.churnEpoch, chain);
-        currentQueue.beaconchain_entering_hr = numeral(currentQueue.beaconchain_entering).format('0,0');
-        currentQueue.beaconchain_exiting_hr = numeral(currentQueue.beaconchain_exiting).format('0,0');
-        currentQueue.validatorscount_hr = numeral(currentQueue.validatorscount).format('0,0')
+        currentQueue.activation = getState(entry_queue, currentQueue.range.churnEpoch, chain);
+        currentQueue.exiting = getState(exit_queue, currentQueue.range.churnEpoch, chain);
+        currentQueue.beaconchain_entering_hr = numeral(entry_queue).format('0,0');
+        currentQueue.beaconchain_exiting_hr = numeral(exit_queue).format('0,0');
+        currentQueue.validatorscount_hr = numeral(currentQueue.stateCount.active_ongoing.validators).format('0,0');
         return {current: currentQueue, schedule: listSchedule, rangeIndex: rangeResp.index};
     
         function findRange(listArr, value) { 
