@@ -40,6 +40,11 @@ class ExecutionChainData {
             transactions: []
         };
 
+        if(!Array.isArray(etherchainArr)){
+            console.warn("Missing etherchainArr data");
+            return chartsArray;
+        }
+
         const arrSize = etherchainArr.length;
         if(startIndex < 0) startIndex = arrSize + startIndex;
         for(var i=startIndex;i<arrSize;i++){

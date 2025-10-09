@@ -84,6 +84,8 @@ class ValidatorQueue {
 
         const rangeResp = findRange(listSchedule, currentQueue.validatorscount);
         currentQueue.range = rangeResp.range;
+        
+        // calculate time
         currentQueue.activation = getState(currentQueue.beaconchain_entering, currentQueue.range.churnEpoch, chain);
         currentQueue.exiting = getState(currentQueue.beaconchain_exiting, currentQueue.range.churnEpoch, chain);
         currentQueue.beaconchain_entering_hr = numeral(currentQueue.beaconchain_entering).format('0,0');

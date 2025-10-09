@@ -83,10 +83,14 @@ function updatePubkeystoQueue(chain, instanceId,pubkeys,indexes,password, activa
 }
 
 function getPubkeyFromQueue(chain){
-    const firstKey = Object.keys(pubkeysQueue[chain])[0];
-    const firstValue = pubkeysQueue[chain][firstKey];
-    delete pubkeysQueue[chain][firstKey];
-    return firstValue;
+    const instancesArr = Object.keys(pubkeysQueue[chain]);
+    if(instancesArr.length > 0){
+        const firstInstance = instancesArr[0];
+        let data = pubkeysQueue[chain][firstInstance];
+        delete pubkeysQueue[chain][firstInstance];
+        return data;
+    }
+    return null;
 }
 
 function getSetValidatorsStateSynced(chain = null, state = null){

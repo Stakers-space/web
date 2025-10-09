@@ -34,7 +34,14 @@ class CacheReGenerate {
     }
 
     Regenerate(cb){
-        // reload queue
+        // reload queue - WHERE c.partitionKey = "eth-valcount"
+        /*azureCosmosDB.queryContainer("data",'SELECT * FROM c WHERE c.partitionKey = @partitionKey', "validatorqueue", function(err,currentQueueData){
+            if(err) {
+                console.error(err);
+                return;
+            }
+        })*/
+
         azureCosmosDB.queryContainer("data",'SELECT * FROM c WHERE c.partitionKey = @partitionKey', "validatorqueue", function(err,currentQueueData){
             if(err) {
                 console.error(err);

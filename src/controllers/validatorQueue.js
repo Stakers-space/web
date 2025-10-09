@@ -56,7 +56,6 @@ class ValidatorQueue {
     }
 
     Calculate(chain, cb){
-        let par
         // get churn schedule
         fs.readFile(path.join(__dirname, '..', '..', app.dataFile.ethereum.validatorQueue), 'utf8', (err, data) => {
             if(err){

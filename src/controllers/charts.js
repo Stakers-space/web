@@ -159,19 +159,33 @@ ChartsPagePresenter.prototype.Response = function(req,res){
 ChartsPagePresenter.prototype.CacheData = function(cb){
     //console.log(`${new Date()} GnosisController.prototype.CacheIndexPageData`);
 
-    var callbacks = 7;
+    var callbacks = 9;
 
     var ethereum_srcData = {
         storeData: null,
         beaconData: null,
-        chainData: null
+        chainData: null,
+        valcount: null
     };
     var gnosis_srcData = {
         beaconData: null,
         chainData: null,
         valuationData: null,
-        circulationData: null
+        circulationData: null,
+        valcount: null
     };
+
+    // valcount data
+    azureCosmosDB.queryContainer("data",'SELECT TOP 1 c FROM c WHERE c.partitionKey = @partitionKey ORDER BY c._ts DESC', "eth-valcount", function(err,data){
+        if(!err && data.length > 0) ethereum_srcData.valcount = data[0]?.c;
+        //console.log("eth-valcount", ethereum_srcData.valcount);
+        taskCompleted(err, "eth-valcount");
+    });
+    azureCosmosDB.queryContainer("data",'SELECT TOP 1 c FROM c WHERE c.partitionKey = @partitionKey ORDER BY c._ts DESC', "gno-valcount", function(err,data){
+        if(!err && data.length > 0) gnosis_srcData.valcount = data[0]?.c;
+        //console.log("gno-valcount", gnosis_srcData.valcount);
+        taskCompleted(err, "gno-valcount");
+    });
 
     // get ethstore data
     azureCosmosDB.queryContainer("data",'SELECT * FROM c WHERE c.partitionKey = @partitionKey ORDER BY c.days', "ethstore", function(err,data){
@@ -1019,13 +1033,15 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
             beaconData: new EthBeaconChainData().ConvertToChartsArray(ethereum_srcData.beaconData, 0),
             chainData: new EtherchainData().ConvertToChartsArray(ethereum_srcData.chainData, 0),
             ethStore: new EthStoreDataModel().ConvertToChartsArray(ethereum_srcData.storeData, 0),
+            valcount: ethereum_srcData.valcount
         };
 
         const gnosis_arrData = {
             beaconData: new GnoBeaconChainData().ConvertToChartsArray(gnosis_srcData.beaconData, 0),
             chainData: new GnosischainData().ConvertToChartsArray(gnosis_srcData.chainData, 0),
-            valuationData: gnosis_srcData.valuationData//,
+            valuationData: gnosis_srcData.valuationData,//,
             //circulationData: gnosis_srcData.circulationData
+            valcount: gnosis_srcData.valcount
         };
 
          // Ethereum
@@ -1124,7 +1140,7 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
                         hr_value: numeral(stakedGno).format('0.00a')
                     },
                     tvl: {
-                        value: stakedGno * gnosis_srcData.valuationData.gnoPrice,
+                        value: stakedGno * gnosis_srcData.valuationData?.gnoPrice,
                         value_hr: numeral(stakedGno * gnosis_srcData.valuationData.gnoPrice).format('$0.00a')/*,
                         increments: CalculateTimeChange(gnosis_arrData.beaconData.tvl, '$0,0')*/
                     },

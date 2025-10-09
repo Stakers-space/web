@@ -61,6 +61,11 @@ class EthStore {
             validators_count: []
         }
 
+        if(!Array.isArray(ethStoreArr)){
+            console.warn("Missing ethStoreArr data");
+            return chartsArray;
+        }
+
         const arrSize = ethStoreArr.length;
         if(startIndex < 0) startIndex = arrSize + startIndex;
         for (var d=startIndex;d<arrSize;d++){

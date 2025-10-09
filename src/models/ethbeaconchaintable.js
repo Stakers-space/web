@@ -52,6 +52,11 @@ class BeaconChainData {
             tvl_change:[] // filled later, from aggregation function
         };
 
+        if(!Array.isArray(beaconchainArr)){
+            console.warn("Missing beaconchainArr data");
+            return chartsArray;
+        }
+
         const arrSize = beaconchainArr.length;
         if(startIndex < 0) startIndex = arrSize + startIndex;
         for(var i=startIndex;i<arrSize;i++){

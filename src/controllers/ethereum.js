@@ -67,7 +67,6 @@ EthereumController.prototype.Request = function(req,res, next){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
         } else {
-            //console.log("cache.ValidatorQueue: ", cache_validatorQueue.getValidatorQueue("ethereum"));
             let model = new ValidatorQueueModel();
             res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue("ethereum"), res.locals.chain, JSON.parse(data));
             //console.log(res.locals.queue);
@@ -220,7 +219,8 @@ EthereumController.prototype.CacheIndexData = function(cb){
         validatorHostingServicesData = null,
         beaconchainData = null,
         etherchainData = null,
-        indicators = null;
+        indicators = null,
+        valcount = null;
 
     fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
         if(!err) {
@@ -229,6 +229,7 @@ EthereumController.prototype.CacheIndexData = function(cb){
             beaconchainData = parsedChartsDataCache.beaconData;
             etherchainData = parsedChartsDataCache.chainData;
             indicators = parsedChartsDataCache.indicators;
+            valcount = parsedChartsDataCache.valcount;
         }
         taskCompleted(err, "chartsCache");
     });
@@ -295,7 +296,8 @@ EthereumController.prototype.CacheIndexData = function(cb){
             // last 30 days display
             beaconData: reduceObjectArray(beaconchainData, -30),
             chainData: reduceObjectArray(etherchainData, -30),
-            ethStore: reduceObjectArray(ethStoreData, -30)
+            ethStore: reduceObjectArray(ethStoreData, -30),
+            valcount
         };
         //console.log(aggregaredData.beaconChain);
 

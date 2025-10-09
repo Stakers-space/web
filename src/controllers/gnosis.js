@@ -250,7 +250,8 @@ GnosisController.prototype.CacheIndexData = function(cb){
         valuationData = null,
         circulationData = null, // Circulation due to BuyBacks from API
         indicators = null,
-        depositContract = null;
+        depositContract = null,
+        valcount = null;
 
     fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
         if(!err) {
@@ -261,6 +262,7 @@ GnosisController.prototype.CacheIndexData = function(cb){
                 indicators = parsedChartsDataCache.indicators;
                 valuationData = parsedChartsDataCache.valuationData;
                 circulationData = parsedChartsDataCache.circulationData;
+                valcount = parsedChartsDataCache.valcount;
             } catch(e){
                 console.error(e);
             }
@@ -413,7 +415,8 @@ GnosisController.prototype.CacheIndexData = function(cb){
             chainData: reduceObjectArray(chainData, -30),
             valuationData: valuationData,
             circulationData: circulationData,
-            depositContract: depositContract
+            depositContract: depositContract,
+            valcount
             /*,
             ethStore: new EthStoreData().ConvertToChartsArray(ethStoreData, -30)*/
         };

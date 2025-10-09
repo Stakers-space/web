@@ -115,40 +115,40 @@ HomePagePresenter.prototype.CacheIndexData = function(cb){
 
 		//console.log(ethStoreData, beaconchainData, etherchainData);
         const ethPrice = ethereumData.chainData.price.slice(-1)[0];
-        let stakedEth;
-        let index = -1;
+        let stakedEth = ethereumData.valcount.total.effective_balance;
+        /*let index = -1;
         while (!stakedEth) {
             stakedEth = ethereumData.beaconData.stakedTokens.slice(index)[0];
             if (!stakedEth) {
                 console.log(`Warn: No stakedEth value for day ${index} → Checking value in day ${index - 1}`);
                 index--;
             }
-        }
+        }*/
         
         const gnoPrice = 0//;gnosisData.gnoDashboard.generalHealthOverview.gnoPrice;
-        let stakedGno;
-        index = -1;
+        let stakedGno = gnosisData.valcount.total.effective_balance;
+        /*index = -1;
         while (!stakedGno) {
             stakedGno = gnosisData.beaconData.stakedTokens.slice(index)[0];
             if (!stakedGno) {
                 console.log(`Warn: No stakedGno value for day ${index} → Checking value in day ${index - 1}`);
                 index--;
             }
-        }
+        }*/
         //console.log("stakedRatio calc | stakedEth:", stakedEth, "ethPrice:");
 
         var aggregaredData = {
             ethereum: {
                 price: numeral(ethPrice).format('$0,00'),
                 apr: new EthStoreData().GetApr(ethereumData.ethStore.apr.slice(-1)[0]),
-                validators: numeral(ethereumData.beaconData.validators.slice(-1)[0]).format('0,0'),
+                validators: numeral(ethereumData.valcount.stateCount.active_ongoing.validators).format('0,0'),
                 tvl: numeral(stakedEth * ethPrice).format('$0.00a'),
                 stakedRatio: numeral(stakedEth / ethereumData.chainData.totalSupply.slice(-1)[0]).format('0.00%') 
             },
             gnosis: {
                 price: numeral(gnoPrice).format('$0,00'),
                 apr: new EthStoreData().GetApr(0 * 100),
-                validators: numeral(gnosisData.beaconData.validators.slice(-1)[0]).format('0,0'),
+                validators: numeral(gnosisData.valcount.stateCount.active_ongoing.validators).format('0,0'),
                 tvl: numeral(stakedGno * gnoPrice).format('$0.00a'),
                 stakedRatio: numeral(stakedGno / gnosisData.indicators.supply.value).format('0.00%')
             }
