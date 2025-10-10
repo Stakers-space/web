@@ -66,7 +66,7 @@
 				<div class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
 					<div class="flex items-center mb-6">
 						<h2 class="text-xl font-semibold mr-4">
-							<a href="/ethereum-staking/validators">{{{queue.current.validatorscount_hr}}} active validators</a>
+							<a href="/ethereum-staking/validators">{{{formatNumber queue.current.stateCount.active_ongoing.validators '0,0'}}} active validators</a>
 						</h2>
 						<div class="bg-green-100 text-green-700 rounded px-2 py-1 text-xs w-[170px] h-[21px] overflow-hidden dynamic-label">
 							<span class="item visible">{{{indicators.validators.increments.day}}} in the last day</span>
@@ -85,14 +85,14 @@
 					</div>
 					<div class="space-y-4 text-sm">
 						<div>
-						<strong>{{queue.current.beaconchain_entering_hr}} Validators in 
+						<strong>{{formatNumber queue.current.help.entryQueue.validators '0,0'}} Validators in 
 							<a class="text-green-600 hover:underline" href="/ethereum-staking/validators#entry-queue">Entry Queue</a>
 						</strong>
 						<p class="mt-0">Wait Time: {{queue.current.activation.waitingTimeHours}} hours,
 							{{queue.current.activation.waitingTimeMinutes}} minutes</p>
 						</div>
 						<div>
-						<strong>{{queue.current.beaconchain_exiting_hr}} validators in 
+						<strong>{{formatNumber queue.current.stateCount.active_exiting.validators '0,0'}} validators in 
 							<a class="text-red-600 hover:underline" href="/ethereum-staking/validators#exit-queue">Exit Queue</a>
 						</strong>
 						<p class="mt-0">Wait Time: {{queue.current.exiting.waitingTimeHours}} hours,
@@ -175,7 +175,7 @@
 					<div class="mb-4">
 					<h2 class="text-xl font-semibold" 
 						title="{{{indicators.stakedTokens.supplyShare}}} of all ETH in circulation">
-						{{{indicators.stakedTokens.hr_value}}} staked ETH
+						{{{formatNumber indicators.stakedTokens.value '0.00a'}}} staked ETH
 					</h2>
 					<div class="bg-green-100 text-green-700 rounded px-2 py-1 w-[230px] h-[21px] overflow-hidden text-xs dynamic-label">
 						<span class="item visible">{{{indicators.stakedTokens.increments.day}}} ETH in the last day</span>
@@ -194,7 +194,7 @@
 				<a href="/charts/ethereum-staking-tvl" class="relative block bg-white rounded-lg shadow hover:shadow-lg transition p-4">
 					<div class="mb-4">
 					<h2 class="text-xl font-semibold">
-						{{{indicators.tvl.value_hr}}} locked in ETH staking
+						{{{formatNumber indicators.tvl.value '$0.00a'}}} locked in ETH staking
 					</h2>
 					</div>
 					<canvas id="tvlbalance_chart" name="lazy-canvas" class="w-full h-40"></canvas>

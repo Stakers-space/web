@@ -3,7 +3,6 @@ var app = null;
 const fs = require('fs'),
     path = require('path'),
     numeral = require('numeral');
-    //httpXmlModule = require('../utils/xmlhttps');
 const cache_validatorQueue = require('../middlewares/cache/validatorqueue');
 
 const azureCosmosDB = require('../services/azureCosmosDB');
@@ -22,7 +21,7 @@ function GnosisController(){
 }
 
 GnosisController.prototype.Request = function(req,res, next){
-    res.locals.page_hbs = 'gnosis/gnosis-staking';
+    res.locals.page_hbs = 'gnosis/staking';
     res.locals.layout_hbs = "standard";
     res.locals.css_file = 'chainpage';
     res.locals.title = `All around Gnosis Staking at one place.`;
@@ -88,7 +87,7 @@ GnosisController.prototype.Request = function(req,res, next){
         } else {
             let model = new ValidatorQueueModel();
             res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue("gnosis"), res.locals.chain, JSON.parse(data));
-            //console.log(res.locals.queue);
+            console.log("GNO | res.locals.queue:", res.locals.queue);
             taskCompleted();
         }
     });
@@ -143,7 +142,7 @@ GnosisController.prototype.Validators = function(req,res,next){
 
     let tasks = 3;
     // validators count
-    fs.readFile(app.dataFile.pagecache.charts, 'utf8', (err, fileContent) => {
+    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -275,11 +274,9 @@ GnosisController.prototype.CacheIndexData = function(cb){
         //console.log(data);
         let chartData = new ValidatorQueueModel();
         chartData = chartData.ConvertToChartsArray(data, 0);
-        fs.writeFile(app.dataFile.pagecache.validatorqueue.gnosis, JSON.stringify(chartData, null, 2), 'utf8', (err) => {
-            if (err) {
-                console.error('Error writing file:', err);
-                taskCompleted(err, "validatorqueue");
-            }
+        fs.writeFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.validatorqueue.gnosis), JSON.stringify(chartData, null, 2), 'utf8', (err) => {
+            if (err) console.error('Error writing file:', err);
+            
             //console.log('File successfully updated.');
             taskCompleted(err, "validatorqueue");
         });

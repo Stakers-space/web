@@ -22,12 +22,7 @@
     <section class="grid">
 		<h1>{{chainName}} Validator Queue</h1>
         <p>Enterance and exit queues are validators waiting to begin staking or to unstake.</p>
-        <p>Data provided by 
-        {{#if isEthereum}}
-			<a href="https://beaconcha.in/">beaconcha.in</a>.
-		{{else}}
-            <a href="https://gnosischa.in/">gnosischa.in</a>.
-{{/if}} Last Update: {{queue.current.time}}</p>
+        <p>Last Update: {{queue.current.updatedOn}}</p>
 	</section>
 
     <section class="grid">
@@ -37,7 +32,7 @@
                 <table>
                     <tr>
                         <td>Validators:</td>
-                        <td>{{queue.current.beaconchain_entering}}</td>  
+                        <td>{{formatNumber queue.current.help.entryQueue.validators '0,0'}}</td>
                     </tr>
                     <tr>
                         <td>Wait:</td>
@@ -55,7 +50,7 @@
                 <table>
                     <tr>
                         <td>Validators:</td>
-                        <td>{{queue.current.beaconchain_exiting}}</td>
+                        <td>{{formatNumber queue.current.stateCount.active_exiting.validators '0,0'}}</td>
                     </tr>
                     <tr>
                         <td>Wait:</td>

@@ -1,0 +1,537 @@
+{{> header}}
+<main>
+	<section class="py-12 container mx-auto px-6">
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-15">	
+			<div class="grid items-center">
+				<div>
+					<ul class="broadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+							<li property="itemListElement" typeof="ListItem">
+								<a property="item" typeof="Thing" href="/"><span property="name">Stakers.space</span></a>
+								<meta property="position" content="1">
+							</li>
+							<li property="itemListElement" typeof="ListItem">
+								<a property="item" typeof="Thing" href="/gnosis"><span property="name">Gnosis</span></a>
+								<meta property="position" content="2">
+							</li>
+							<li property="itemListElement" typeof="ListItem">
+								<a property="item" typeof="Thing" href="/gnosis-staking"><span property="name">Staking</span></a>
+								<meta property="position" content="3">
+							</li>
+						</ul>
+						<h1 class="text-5xl font-bold leading-tight mb-8">
+							All around<br><span class="text-emerald-600">Gnosis staking</span>
+						</h1>
+
+						<p class="text-2xl"><strong>Earn 24/7</strong> while <br>securing a new era of  <span class="dynamic-title" data-text="Internet"></span></p>
+						
+						<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+							<a href="/gnosis" 
+								class="inline-block bg-gray-300 rounded-lg px-5 py-2 text-center hover:bg-gray-800 hover:text-white transition">
+								About Gnosis
+							</a>
+							<a href="#operate" 
+								class="inline-block bg-black text-white rounded-lg px-5 py-2 text-center hover:bg-gray-800 transition">
+								Operate node
+							</a>
+							<a href="#delegate" 
+								class="inline-block bg-black text-white rounded-lg px-5 py-2 text-center hover:bg-gray-800 transition">
+								Delegate funds
+							</a>
+						</div>
+				</div>
+			</div>
+
+			<div class="grid items-center">
+				<p class="mb-2 text-gray-500 text-center">Latest news</p>
+				<ul class="space-y-3">
+					{{#each newsfeed.clients}}
+					<li class="flex justify-between text-sm">
+						<a href="{{this.a}}" target="_blank" rel="nofollow noopener noreferrer"
+						class="text-blue-600 hover:underline">{{{this.m}}}</a>
+						<span class="text-gray-500" title="{{{this.ht}}}">{{{this.ta}}}</span>
+					</li>
+					{{/each}}
+				</ul>
+				<a href="/gnosis-staking/news" 
+					class="mt-6 px-5 py-2 transition underline text-center">
+					View all news
+				</a>
+			</div>
+		</div>
+	</section>
+
+		<section class="border-t border-gray-200 py-12">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 container mx-auto px-6">
+
+				<div class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
+					<div class="flex items-center mb-6">
+						<h2 class="text-xl font-semibold mr-4">
+							<a href="/gnosis-staking/validators">{{{formatNumber queue.current.stateCount.active_ongoing.validators '0,0'}}} active validators</a>
+						</h2>
+						<div class="bg-green-100 text-green-700 rounded px-2 py-1 text-xs w-[170px] h-[21px] overflow-hidden dynamic-label">
+							<span class="item visible">{{{indicators.validators.increments.day}}} in the last day</span>
+							<span class="item hidden">{{{indicators.validators.increments.week}}} in the last week</span>
+							<span class="item hidden">{{{indicators.validators.increments.month}}} in the last month</span>
+							<span class="item hidden">{{{indicators.validators.increments.year}}} in the last year</span>
+						</div>
+					</div>
+					<div class="grid grid-cols-[66fr_34fr] gap-6">
+					<div class="relative">
+						<canvas id="ethvalidators_chart" name="lazy-canvas" class="max-h-[240px] w-full"></canvas>
+						<div class="chart-legend">
+							<span class="black-line">Validators</span>
+							<span class="balance-bar">Daily change</span>
+						</div>
+					</div>
+					<div class="space-y-4 text-sm">
+						<div>
+						<strong>{{formatNumber queue.current.help.entryQueue.validators '0,0'}} Validators in 
+							<a class="text-green-600 hover:underline" href="/ethereum-staking/validators#entry-queue">Entry Queue</a>
+						</strong>
+						<p class="mt-0">Wait Time: {{queue.current.activation.waitingTimeHours}} hours,
+							{{queue.current.activation.waitingTimeMinutes}} minutes</p>
+						</div>
+						<div>
+						<strong>{{formatNumber queue.current.stateCount.active_exiting.validators '0,0'}} validators in 
+							<a class="text-red-600 hover:underline" href="/ethereum-staking/validators#exit-queue">Exit Queue</a>
+						</strong>
+						<p class="mt-0">Wait Time: {{queue.current.exiting.waitingTimeHours}} hours,
+							{{queue.current.exiting.waitingTimeMinutes}} minutes</p>
+						</div>
+					</div>
+					</div>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<a href="/gnosis-staking/deposit-contract-balance" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
+						<div class="mb-4">
+							<h2 class="text-xl font-semibold">{{depositContract.lastState.gno_balance}} GNO in deposit contract balance</h2>
+						</div>
+						<canvas id="depositcontractbalance_chart" name="lazy-canvas"></canvas>
+					</a>
+
+					<a href="/charts/gnosis-blocks" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
+						<div class="mb-4">
+							<h2 class="text-xl font-semibold">Blocks</h2>
+						</div>
+						<canvas id="blocks_chart" name="lazy-canvas" class="w-full h-40"></canvas>
+						<div class="chart-legend">
+							<span class="green-bar">Proposed blockes</span>
+							<span class="red-bar">Missed blocks</span>
+						</div>
+					</a>
+				</div>
+			</div>
+  	</section>
+
+	<section class="bg-gradient-to-b from-white to-gray-50 py-16 px-6 lg:px-20">
+		<div class="max-w-5xl mx-auto text-center">
+			<h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+			What is <span class="text-emerald-600">Gnosis</span>?
+			</h2>
+			<p class="text-lg text-gray-700 leading-relaxed mb-8">Gnosis is a <strong>Layer 1 blockchain compatible with Ethereum, designed to offer efficient, secure, and decentralized solutions.</strong> It supports staking, allowing users to help secure the network and earn rewards. Built for compatibility with Ethereum tools and applications, Gnosis provides a versatile ecosystem for developers and users, while benefiting from the robustness and scalability of its Proof of Stake consensus mechanism.
+			</p>
+			<a href="/gnosis" 
+			class="inline-block bg-black text-white rounded-lg px-6 py-3 hover:bg-gray-800 transition">
+			Learn more about Gnosis
+			</a>
+		</div>
+	</section>
+
+	<section class="bg-gray-50 border-gray-200 py-16">
+		<div class="grid grid-cols-1 lg:grid-cols-[33fr_67fr] gap-6 container mx-auto px-6">
+			<div class="lg:pr-10 grid items-center">
+				<div class="mb-8">
+					<h2 class="text-3xl font-semibold mb-4">
+					<span>What's Gnosis Staking?</span>
+					</h2>
+					<p class="text-gray-700 leading-relaxed">
+						Staking is the <strong>process of locking up GNO to support the operations and security of a blockchain network. By staking, you help validate transactions and maintain the network's integrity while earning rewards in return.</strong> It’s a key feature of Gnosis’s Proof of Stake system.
+					</p>
+				</div>
+			</div>
+
+			<div class="grid grid-cols-1 gap-6 pr-8">
+
+				<a href="/charts/gno-staked" class="relative block bg-white rounded-lg shadow hover:shadow-lg transition p-4">
+					<div class="mb-4">
+					<h2 class="text-xl font-semibold" 
+						title="{{{indicators.stakedTokens.supplyShare}}} of all GNO in circulation">
+						{{{formatNumber indicators.stakedTokens.value '0.00a'}}} staked GNO
+					</h2>
+					<div class="bg-green-100 text-green-700 rounded px-2 py-1 w-[230px] h-[21px] overflow-hidden text-xs dynamic-label">
+						<span class="item visible">{{{indicators.stakedTokens.increments.day}}} GNO in the last day</span>
+						<span class="item hidden">{{{indicators.stakedTokens.increments.week}}} GNO in the last week</span>
+						<span class="item hidden">{{{indicators.stakedTokens.increments.month}}} GNO in the last month</span>
+						<span class="item hidden">{{{indicators.stakedTokens.increments.year}}} GNO in the last year</span>
+					</div>
+					</div>
+					<canvas id="stakedbalance_chart" name="lazy-canvas" class="w-full h-40"></canvas>
+					<div class="chart-legend">
+						<span class="black-line">Staked GNO</span>
+						<span class="balance-bar">Daily change</span>
+					</div>
+				</a>
+			</div>
+		</div>
+	</section>
+	
+	<section class="border-t border-gray-200 py-20 bg-white">
+		<div class="container mx-auto px-6">
+			<div class="mb-12">
+				<h2 class="text-3xl font-semibold leading-tight">
+					<span>Participate in <span class="text-emerald-600">GNO</span>sis staking</span> 
+					<span class="block text-gray-700 text-xl mt-2">By using SAAS (Stake As a Service)</span>
+				</h2>
+			</div>
+
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+				<!-- Liquid Staking -->
+				<div>
+					<h2 class="text-2xl font-semibold mb-4"><a href="/gnosis-staking/liquid-staking" class="underline">Liquid Staking</a></h2>
+					<p class="text-gray-700 mb-6 pr-6">
+						Stake your GNO and get a "confirmation" token in exchange that can be used as collateral.
+					</p>
+					<div class="bg-gray-50 rounded-lg shadow max-h-72 overflow-y-auto lg:overflow-x-hidden">
+						<table class="w-full text-sm text-left text-gray-700 border-collapse" id="liquid-vs">
+							<thead class="bg-gray-100 text-gray-600 uppercase text-xs sticky top-0">
+								<tr>
+									<th class="px-4 py-3">Service</th>
+									<th class="px-4 py-3">Min Stake</th>
+									<th class="px-4 py-3">Fee</th>
+									<th class="px-4 py-3">Liquid Token</th>
+									<th class="px-4 py-3">Pool token</th>
+								</tr>
+							</thead>
+							<tbody>
+							{{#each vaultServices}}
+								
+								<tr class="border-t">
+								<td class="px-4 py-3">
+									<a href="{{this.link}}" target="_blank" rel="nofollow noopener" 
+									class="text-blue-600 hover:underline">
+									{{this.service}}
+									</a>
+								</td>
+								<td class="px-4 py-3">{{this.min_stake}} {{this.stake_unit}}</td>
+								<td class="px-4 py-3">{{this.fee}}{{this.fee_note}}</td>
+								<td class="px-4 py-3">
+									<a href="{{this.liquid_token.link}}" target="_blank" rel="nofollow noopener noreferrer" 
+									class="flex items-center space-x-2">
+									{{#if this.liquid_token.icon}}
+										<img src="{{this.liquid_token.icon}}" alt="{{this.liquid_token.ticker}}" class="w-5 h-5">
+									{{/if}}
+									<span>{{this.liquid_token.ticker}}</span>
+									</a>
+								</td>
+								<td class="px-4 py-3">
+									{{#if this.pool_token}}
+									<a href="{{this.pool_token.link}}" target="_blank" rel="nofollow noopener noreferrer"
+										class="flex items-center space-x-2">
+										{{#if this.pool_token.icon}}
+										<img src="{{this.pool_token.icon}}" alt="{{this.pool_token.ticker}}" class="w-5 h-5">
+										{{/if}}
+										<span>{{this.pool_token.ticker}}</span>
+									</a>
+									{{else}}
+									{{this.pool_token}}
+									{{/if}}
+								</td>
+								</tr>
+								
+							{{/each}}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Hosted validator staking -->
+				<div>
+					<h2 class="text-2xl font-semibold mb-4"><a href="/ethereum-staking/validators-saas" class="underline">Hosted validator staking</a></h2>
+					<p class="text-gray-700 mb-6 pr-6">
+						Launch a solo validator by locking 1 GNO into a smart contract and operate the validator on hosted server.
+					</p>
+					<div class="bg-gray-50 rounded-lg shadow max-h-72 overflow-y-auto lg:overflow-x-hidden">
+						<table class="w-full text-sm text-left text-gray-700 border-collapse" id="hosted-vs">
+							<thead class="bg-gray-100 text-gray-600 uppercase text-xs sticky top-0">
+							<tr>
+								<th class="px-4 py-3">Service</th>
+								<th class="px-4 py-3">Min Stake</th>
+								<th class="px-4 py-3">Fee</th>
+							</tr>
+							</thead>
+							<tbody>
+							{{#each hostingServices}}
+							<tr class="border-t">
+								<td class="px-4 py-3">
+								<a href="{{this.link}}" target="_blank" rel="nofollow noopener" 
+									class="text-blue-600 hover:underline">{{this.service}}</a>
+								</td>
+								<td class="px-4 py-3">{{this.min_stake}} {{this.stake_unit}}</td>
+								<td class="px-4 py-3">{{this.fee}}{{this.fee_note}}</td>
+							</tr>
+							{{/each}}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 bg-white border-t border-gray-200">
+		<div class="container mx-auto px-6">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+				<div class="lg:pr-10">
+					<div class="sticky top-24">
+						<div class="mb-8">
+							<h2 class="text-3xl font-semibold mb-4">
+								<strong class="text-emerald-600">Get Extra revenue</strong> by operating own node
+							</h2>
+							<p class="text-gray-700 mb-6">Pay no fees to anyone, instead get the fees from the others.</p>
+							<ul class="list-disc pl-5 space-y-2 text-gray-700">
+								<li>operate various staking services simultaneously within a single staking server</li>
+								<li>perform staking from node at home as well as from a server house or cloud</li>
+							</ul>
+						</div>
+
+						<div>
+							<h3 class="text-2xl font-semibold mt-12 mb-4"><strong>Boost</strong> the staking node revenue</h3>
+							<p class="text-gray-700 mb-6">There's possible to use a "leverage" in a form of bonded staking to maximalize staking revenue.</p>
+							<div class="flex flex-wrap gap-4">
+								<a href="/bonded-validators" class="flex-1 min-w-[200px] bg-gray-50 rounded-lg border px-5 py-4 text-center hover:shadow transition">
+									<h3 class="text-lg font-semibold">Bonded Staking</h3>
+									<p class="text-sm text-gray-600">Leverage your stake</p>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+					<a href="/custom-node" class="relative group rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+						<img src="/devices/customnode.webp" alt="Custom Node" class="w-full h-48 object-cover">
+						<div class="absolute inset-0 bg-black/40 flex flex-col justify-end p-4">
+							<h3 class="text-white text-lg font-semibold">Build Custom Node</h3>
+							<p class="text-gray-200 text-sm mb-3">Build your node</p>
+							<button class="bg-white text-black rounded px-4 py-2 text-sm font-medium text-center opacity-0 group-hover:opacity-100 transition">
+								Build
+							</button>
+						</div>
+					</a>
+
+					<a href="/staking-node" class="relative group rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+						<img src="/devices/dappnode.webp" alt="Dapp Node" class="w-full h-48 object-cover">
+						<div class="absolute inset-0 bg-black/40 flex flex-col justify-end p-4">
+						<h3 class="text-white text-lg font-semibold">Buy ready-to-use Node</h3>
+						<p class="text-gray-200 text-sm mb-3">Buy plug-n-play staking node.</p>
+						<button class="bg-white text-black rounded px-4 py-2 text-sm font-medium text-center opacity-0 group-hover:opacity-100 transition">
+							Buy
+						</button>
+						</div>
+					</a>
+
+					<a href="/cloud-node" class="relative group rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+						<img src="/devices/cloudnode.webp" alt="Cloud Node" class="w-full h-48 object-cover">
+						<div class="absolute inset-0 bg-black/40 flex flex-col justify-end p-4">
+							<h3 class="text-white text-lg font-semibold">Rent Cloud Node</h3>
+							<p class="text-gray-200 text-sm mb-3">Rent ready-to-use cloud node</p>
+							<button class="bg-white text-black rounded px-4 py-2 text-sm font-medium text-center opacity-0 group-hover:opacity-100 transition">
+								Rent
+							</button>
+						</div>
+					</a>
+
+					<a href="/managed-node" class="relative group rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+						<img src="/devices/managed-node.webp" alt="Managed Node" class="w-full h-48 object-cover opacity-50">
+						<div class="absolute inset-0 bg-black/40 flex flex-col justify-end p-4">
+							<h3 class="text-white text-lg font-semibold">Order Managed Node</h3>
+							<p class="text-gray-200 text-sm mb-3">Order a managed node for placement in your home or in the cloud</p>
+							<button class="bg-white text-black rounded px-4 py-2 text-sm font-medium text-center opacity-0 group-hover:opacity-100 transition cursor-pointer">
+								Order
+							</button>
+						</div>
+					</a>
+				</div>
+			</div>
+  		</div>
+	</section>
+
+	<section class="py-20 bg-white border-t border-gray-200">
+		<!-- Solo vs Bonded validators -->
+		<div class="container mx-auto px-6 mb-20">
+			<h2 class="text-3xl font-semibold mb-8">
+				<span>Solo vs <a href="/bonded-validators" class="text-blue-600 hover:underline">bonded</a></span> validators
+			</h2>
+			<div class="overflow-x-auto bg-gray-50 rounded-lg shadow">
+				<table class="w-full text-sm text-left text-gray-700 border-collapse">
+					<thead class="bg-gray-100 text-gray-600 uppercase text-xs">
+					<tr>
+						<th class="px-4 py-3 text-center">Option</th>
+						<th class="px-4 py-3 text-center">Service</th>
+						<th class="px-4 py-3">ETH bond</th>
+						<th class="px-4 py-3">ETH matched</th>
+						<th class="px-4 py-3">Non-ETH bond</th>
+						<th class="px-4 py-3">Fee %</th>
+						<th class="px-4 py-3">Note</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr class="border-t">
+						<th colspan="2" class="px-4 py-3 text-center">Solo</th>
+						<td class="px-4 py-3">1</td>
+						<td class="px-4 py-3">0</td>
+						<td class="px-4 py-3">None</td>
+						<td class="px-4 py-3">None</td>
+						<td class="px-4 py-3">No bond</td>
+					</tr>
+					<tr class="border-t">
+						<td class="px-4 py-3 align-middle">
+							<a href="/bonded-validators" class="text-blue-600 hover:underline">Bonded</a>
+						</td>
+						<th class="px-4 py-3">StakeWise</th>
+						<td class="px-4 py-3">0</td>
+						<td class="px-4 py-3">Up to 1</td>
+						<td class="px-4 py-3">-</td>
+						<td class="px-4 py-3">From 0%</td>
+						<td class="px-4 py-3">-</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	
+	<section class="container mx-auto px-6 mb-20">
+		<div class="grid grid-cols-1 lg:grid-cols-6 gap-10">
+
+			<div class="lg:col-span-2">
+				<h2 class="text-3xl font-semibold mb-4">
+					Interactive single-page <span class="text-green-600">staking guides</span>
+				</h2>
+				<p class="text-gray-700 mb-6">
+					Build your own custom node from scratch with our interactive step-by-step guides.
+				</p>
+				<a href="/gnosis-staking/schema" target="_blank"
+					class="inline-block bg-black text-white rounded-lg px-5 py-3 hover:bg-gray-800 transition">
+					Staking schema
+				</a>
+			</div>
+
+			<div class="lg:col-span-4 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+			
+				<div class="h-full flex flex-col">
+					<div class="p-6 bg-emerald-600 text-white rounded-xl shadow-lg h-full flex flex-col justify-center">
+						<h3 class="text-2xl font-bold mb-4">Execution & Consensus Layer</h3>
+						<p class="text-emerald-100 mb-6 text-sm">
+							The foundation of Gnosis staking. Set up your base node before choosing a validator type.
+						</p>
+						<a href="/gnosis-staking/full-guide"
+							class="inline-block bg-white text-emerald-700 font-semibold rounded-lg px-4 py-2 hover:bg-gray-100 transition">
+							Get Started
+						</a>
+					</div>
+					<p class="text-center text-gray-700 mt-2">Base node</p>
+				</div>
+				<div>
+					<div class="grid grid-cols-2 gap-6">
+						<a href="/gnosis-staking/full-guide/solo" 
+						class="border rounded-lg p-6 text-center hover:shadow transition">
+						<img src="/logo/ethereum.svg" alt="Ethereum" class="mx-auto mb-3 w-12">
+						<h5 class="font-medium">Solo</h5>
+						</a>
+						<a href="/gnosis-staking/full-guide/stakewise" 
+						class="border rounded-lg p-6 text-center hover:shadow transition">
+						<img src="/logo/stakewise.svg" alt="Stakewise" class="mx-auto mb-3 w-12">
+						<h5 class="font-medium">Stakewise</h5>
+						</a>
+						
+					</div>
+					<p class="text-center text-gray-700 mt-2">Validator type</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="container mx-auto px-6 mb-20">
+		<h2 class="text-3xl font-semibold mb-4">
+			Client-based interactive <span class="text-green-600">guides</span>
+		</h2>
+		<p class="text-gray-700 leading-relaxed">
+			Get help with installation, updates, maintenance, and issue-solving for staking clients.  
+			Explore our <a href="/gnosis-staking/clients" target="_blank" 
+			class="text-emerald-600 font-medium hover:underline">detailed overview of Gnosis clients</a>.
+		</p>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+				<div>
+					<h3 class="font-semibold mb-3">Execution clients</h3>
+					<div class="flex flex-wrap gap-2">
+					<a href="/nethermind" class="border rounded px-4 py-2 hover:shadow">Nethermind</a>
+					<a href="/erigon" class="border rounded px-4 py-2 hover:shadow">Erigon</a>
+					<a href="/reth" class="border rounded px-4 py-2 hover:shadow">Reth</a>
+					</div>
+				</div>
+				<div>
+					<h3 class="font-semibold mb-3">Consensus clients</h3>
+					<div class="flex flex-wrap gap-2">
+					<a href="/lighthouse" class="border rounded px-4 py-2 hover:shadow">Lighthouse</a>
+					<a href="/lodestar" class="border rounded px-4 py-2 hover:shadow">Lodestar</a>
+					<a href="/teku" class="border rounded px-4 py-2 hover:shadow">Teku</a>
+					</div>
+				</div>
+		</div>
+	</section>
+
+	<section class="container mx-auto px-6 mb-20">
+
+			<h2 class="text-3xl font-semibold mb-6">
+			Looking for a <span class="text-green-600">simpler way?</span>
+			</h2>
+			<p class="text-gray-700 mb-6">
+			There are toolkits that simplifies the process of setting up and maintaining an Ethereum Node.
+			</p>
+			<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+				<a href="https://docs.dappnode.io/docs/user/install/overview/" target="_blank" class="border rounded px-4 py-3 text-center hover:shadow">DAppNode OS</a>
+			</div>
+	</section>
+
+	<section class="bg-black text-white py-20">
+		<div class="container mx-auto px-6">
+			<div class="max-w-3xl mx-auto text-center">
+			<h2 class="text-3xl font-bold mb-6">
+				Gnosis staking <span class="text-emerald-400">Emergency guide</span>
+			</h2>
+			<p class="text-lg leading-relaxed mb-8">
+				<strong>Did something go wrong during Gnosis staking?</strong> 
+				Stay calm and open our emergency guide, which will walk you through the situation —
+				from analyzing the issue to choosing the best possible steps to resolve it.
+			</p>
+			<a href="/gnosis-staking/emergency"
+				class="inline-block bg-white text-black font-semibold rounded-full px-8 py-3 text-lg shadow-md 
+						hover:bg-gray-200 hover:shadow-lg transition">
+					Gnosis staking Emergency guide
+			</a>
+			</div>
+		</div>
+	</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
+<script>var beaconchainData = {{{beaconData}}};</script>
+<script>var etherchainData = {{{chainData}}};</script>
+<script>var dashboardData={{{valuationData}}};</script>
+<script>var circulationData={{{circulationData}}};</script>
+<script>var depositContract = {{{depositContract.chart}}};</script>
+<script>var chartsUIconfig = {{{chartsUIconfig}}};</script>
+<script type="text/javascript" src="/js/chart-presenter.js"></script>
+<script type="text/javascript" src="/js/charts/validators.js"></script>
+<script type="text/javascript" src="/js/charts/staked-balance.js"></script>
+<script type="text/javascript" src="/js/charts/depositcontractbalance.js"></script>
+<script type="text/javascript" src="/js/charts/blocks.js"></script>
+<script>charts.ActivateLazyLoad();</script>
+</main>
+{{> footer_tailwind}}

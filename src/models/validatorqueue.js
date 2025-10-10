@@ -91,9 +91,6 @@ class ValidatorQueue {
         // calculate time
         currentQueue.activation = getState(entry_queue, currentQueue.range.churnEpoch, chain);
         currentQueue.exiting = getState(exit_queue, currentQueue.range.churnEpoch, chain);
-        currentQueue.beaconchain_entering_hr = numeral(entry_queue).format('0,0');
-        currentQueue.beaconchain_exiting_hr = numeral(exit_queue).format('0,0');
-        currentQueue.validatorscount_hr = numeral(currentQueue.stateCount.active_ongoing.validators).format('0,0');
         return {current: currentQueue, schedule: listSchedule, rangeIndex: rangeResp.index};
     
         function findRange(listArr, value) { 

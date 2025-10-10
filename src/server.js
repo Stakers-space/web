@@ -7,6 +7,7 @@ const express = require('express'),
 	  app = express(),
 	  path = require('path'),
 	  fs = require('fs');
+const numeral = require('numeral');
 	
 module.exports = {
 	create: function(appName, port, staticFilesUrl){
@@ -62,6 +63,11 @@ function registerHelpers(){
             return new handlebars.SafeString('');
         }
     });
+
+	handlebars.registerHelper('formatNumber', function (number, format) {
+		if(!number) return "??";
+		return numeral(number).format(format);
+	});
 }
 
 function normalizePort(val) {

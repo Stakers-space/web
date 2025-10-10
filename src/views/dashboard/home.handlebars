@@ -12,7 +12,6 @@ ul.img_marker li {
 <main class="mt-20">
     {{> sections/encryptionPassword }}
     <div class="grid">
-        
         <div id="overview" class="egrid egrid-3">
             <div>
                 <ul class="img_marker account_validators" style="display:ruby;">
@@ -256,7 +255,7 @@ ul.img_marker li {
        
         if(instance_data.balance > 0){
             let ticker = (chain === "gnosis") ? "GNO" : "ETH";
-            instanceElm.children[1].innerHTML = `${instance_data.balance} ${ticker} | `;
+            instanceElm.children[1].innerHTML = `${Math.trunc(instance_data.balance * 100) / 100} ${ticker} | `;
         }
     }
 
@@ -368,16 +367,24 @@ ul.img_marker li {
         }
 
         const acc_agg_ui = document.getElementsByClassName("account_validators")[0];
+        let elmIndex = null;
+        let ticker = null;
         if(chain === "ethereum"){
-            acc_agg_ui.children[0].innerHTML =  `${valcount_instance["ethereum"]["agg"][key]} ${(key === "pubkeys") ? "Val" : "ETH"}`;
+            elmIndex = 0;
+            ticker = " ETH";
         } else if(chain === "gnosis"){
-            acc_agg_ui.children[1].innerHTML = `${valcount_instance["gnosis"]["agg"][key]} ${(key === "pubkeys") ? "Val" : "GNO"}`;
+            elmIndex = 1;
+            ticker = " GNO";
         } else {
             console.warn("Unknown chain:", chain);
             return;
         }
-    }
 
+        let value = valcount_instance[chain]["agg"][key];
+        value = (key === "pubkeys") ? (value.toString() + " Val") : ((Math.trunc(value * 100) / 100).toString() + ticker);
+        //console.log("RenderAccountCounts", key, chain, "→", value);
+        acc_agg_ui.children[elmIndex].innerHTML = value;
+    }
 </script>
 {{> scripts/security-guard}}
 {{> footer}}

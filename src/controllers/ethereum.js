@@ -69,7 +69,7 @@ EthereumController.prototype.Request = function(req,res, next){
         } else {
             let model = new ValidatorQueueModel();
             res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue("ethereum"), res.locals.chain, JSON.parse(data));
-            //console.log(res.locals.queue);
+            //console.log("res.locals.queue", res.locals.queue);
             taskCompleted();
         }
     });
@@ -150,7 +150,7 @@ EthereumController.prototype.Validators = function(req,res,next){
 
     let tasks = 3;
     // validators count
-    fs.readFile(app.dataFile.pagecache.charts, 'utf8', (err, fileContent) => {
+    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -178,7 +178,7 @@ EthereumController.prototype.Validators = function(req,res,next){
         } else {
             let model = new ValidatorQueueModel();
             res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue("ethereum"), res.locals.chain, JSON.parse(data));
-            //console.log(res.locals.queue);
+            //console.log("ETH | res.locals.queue:", res.locals.queue);
             OnTaskCompleted();
         }
     });
@@ -240,11 +240,8 @@ EthereumController.prototype.CacheIndexData = function(cb){
         //console.log(data);
         let chartData = new ValidatorQueueModel();
         chartData = chartData.ConvertToChartsArray(data, 0);
-        fs.writeFile(app.dataFile.pagecache.validatorqueue.ethereum, JSON.stringify(chartData, null, 2), 'utf8', (err) => {
-            if (err) {
-                console.error('Error writing file:', err);
-                taskCompleted(err, "validatorqueue");
-            }
+        fs.writeFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.validatorqueue.ethereum), JSON.stringify(chartData, null, 2), 'utf8', (err) => {
+            if (err) console.error('Error writing file:', err);
             //console.log('File successfully updated.');
             taskCompleted(err, "validatorqueue");
         });

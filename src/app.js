@@ -4,7 +4,6 @@ class StakersSpace {
 	constructor() {
 		/**
 		 * Define server
-		 * http://localhost:3011
 		 */
 		this.app = require('./server.js').create("--- Stakers.space ---",8080,"public");
 

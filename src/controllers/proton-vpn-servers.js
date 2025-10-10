@@ -1,6 +1,6 @@
 
 const cache = require('../middlewares/cache/cache-timestamps'),
-    httpXmlModule = require('../utils/xmlhttps');
+    { getJson } = require('../libs/http-request');
 
 exports.GetServers = function(req,res){
     const now = new Date().getTime();
@@ -17,19 +17,9 @@ exports.GetServers = function(req,res){
         for(countryCode of filter.whitelistedCountryCodes){ acceptedServers[countryCode] = []; }
 
         // recache and return
-        new httpXmlModule().HttpsRequest({
-            hostname: 'api.protonmail.ch',
-            path: '/vpn/logicals',
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-            }
-        }, null, function(err,jsonData){
-            if(err){
-                console.log(err);
-            } else {
-                const parsedResponse = JSON.parse(jsonData);
-                const code = parsedResponse.Code;
+        getJson(`https://api.protonmail.ch/vpn/logicals`) 
+        .then((parsedResponse) => {
+            const code = parsedResponse.Code;
                 const servers = parsedResponse.LogicalServers,
                       servers_count = servers.length;
                 console.log("api.protonmail.ch API | Returned servers:", servers_count);
@@ -52,7 +42,9 @@ exports.GetServers = function(req,res){
                 for(countryCode of filter.whitelistedCountryCodes){ 
                     console.log(countryCode, acceptedServers[countryCode].length, acceptedServers[countryCode]);
                 }
-            }
+        })
+        .catch(err => {
+            console.log(err);
         });
     }
     

@@ -34,10 +34,8 @@ class CacheReGenerate {
     }
 
     Regenerate(cb){
-
         function removeMess(obj){
             delete obj.id;
-            delete obj.time;
             delete obj._rid;
             delete obj._self;
             delete obj._etag;
