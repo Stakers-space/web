@@ -4,6 +4,7 @@ const fs = require('fs'),
     path = require('path');/*,
     numeral = require('numeral');*/
 const cache_validatorQueue = require('../middlewares/cache/validatorqueue');
+const cache_assetPrice = require('../middlewares/cache/asset-price.js'); 
 
 const azureCosmosDB = require('../services/azureCosmosDB');
 const reduceObjectArray = require('../utils/reduceObjectArray');
@@ -22,6 +23,8 @@ EthereumController.prototype.Request = function(req,res, next){
     res.locals.css_file = 'chainpage';
     res.locals.title = `All around Ethereum Staking at one place.`;
     res.locals.metaDescription = `Stakers.space is a space full of guides, tools and advices targeted at Ethereum staking.`;
+
+    res.locals.ethPrice = cache_assetPrice.Get().eth_usd;
 
     var tasks = 3;
     

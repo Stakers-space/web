@@ -9,6 +9,7 @@ const NewsController = require('../controllers/news');
 const cacheRegenerateToken = require('../config/config.secret.json').cacheRegenerateToken;
 const azureCosmosDB = require('../services/azureCosmosDB');
 const ValidatorCacheMiddleware = require('../middlewares/cache/validatorqueue');
+const assetPriceCache = require('../middlewares/cache/asset-price.js'); 
 
 /**
  * Recreate cached files (rewrite files that were deployed from the localhost)
@@ -51,6 +52,8 @@ class CacheReGenerate {
         azureCosmosDB.queryContainer("data",'SELECT TOP 1 c FROM c WHERE c.partitionKey = @partitionKey ORDER BY c._ts DESC', "gno-valcount", function(err,data){
             if(!err && data.length > 0) ValidatorCacheMiddleware.setValidatorQueue("gnosis", removeMess(data[0]?.c)); 
         });
+
+        assetPriceCache.UpdatePrice();
 
         new NewsController().RegenerateCacheFiles(); // Reload news ()
 

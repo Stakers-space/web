@@ -4,6 +4,7 @@ const fs = require('fs'),
     path = require('path'),
     numeral = require('numeral');
 const cache_validatorQueue = require('../middlewares/cache/validatorqueue');
+const cache_assetPrice = require('../middlewares/cache/asset-price.js'); 
 
 const azureCosmosDB = require('../services/azureCosmosDB');
 /*const BeaconChainData = require('../models/gnobeaconchaintable'),
@@ -47,6 +48,8 @@ GnosisController.prototype.Request = function(req,res, next){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
         } else {
+            const {gno_usd} = cache_assetPrice.Get();
+
             const parsedData = JSON.parse(fileContent);
             res.locals.indicators = parsedData.indicators;
             res.locals.vaultServices = parsedData.vaultServices;
@@ -55,7 +58,7 @@ GnosisController.prototype.Request = function(req,res, next){
             res.locals.chainData = JSON.stringify(parsedData.chainData);
 
             //console.log(parsedData.valuationData);
-            res.locals.gnoPrice = numeral(parsedData.valuationData.gnoPrice.at(-1)).format('$0,0');
+            res.locals.gnoPrice = gno_usd;
             res.locals.valuationData = JSON.stringify(parsedData.valuationData);
             res.locals.circulationData = JSON.stringify(parsedData.circulationData);
 
@@ -87,7 +90,7 @@ GnosisController.prototype.Request = function(req,res, next){
         } else {
             let model = new ValidatorQueueModel();
             res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue("gnosis"), res.locals.chain, JSON.parse(data));
-            console.log("GNO | res.locals.queue:", res.locals.queue);
+            //console.log("GNO | res.locals.queue:", res.locals.queue.current.stateCount);
             taskCompleted();
         }
     });
@@ -170,7 +173,6 @@ GnosisController.prototype.Validators = function(req,res,next){
         } else {
             let model = new ValidatorQueueModel();
             res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue("gnosis"), res.locals.chain, JSON.parse(data));
-            //console.log(res.locals.queue);
             OnTaskCompleted();
         }
     });

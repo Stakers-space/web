@@ -65,7 +65,11 @@ function registerHelpers(){
     });
 
 	handlebars.registerHelper('formatNumber', function (number, format) {
-		if(!number) return "??";
+		const isNumber = v => typeof v === 'number' && Number.isFinite(v);
+		if(!isNumber(number)) {
+			console.warn("formatNumber", number);
+			return "??";
+		};
 		return numeral(number).format(format);
 	});
 }

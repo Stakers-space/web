@@ -68,10 +68,10 @@
 				<h2 class="text-2xl font-semibold"><a href="/ethereum" class="text-emerald-600">Ethereum</a> Staking</h2>
 			</div>
 			<div class="flex flex-wrap gap-3 text-sm text-gray-600 mb-4">
-				<span class="px-3 py-1 bg-gray-100 rounded"><a href="/ethereum-staking/validators">{{ethereum.validators}} Validators</a></span>
-				<span class="px-3 py-1 bg-gray-100 rounded">{{ethereum.stakedRatio}} ETH Staked</span>
-				<span class="px-3 py-1 bg-gray-100 rounded">1 ETH = {{ethereum.price}}</span>
-				<span class="px-3 py-1 bg-gray-100 rounded">TVL {{ethereum.tvl}}</span>
+				<span class="px-3 py-1 bg-gray-100 rounded"><a href="/ethereum-staking/validators">{{formatNumber ethereum.validators '0,0'}} Validators</a></span>
+				<span class="px-3 py-1 bg-gray-100 rounded">{{formatNumber ethereum.stakedRatio '0.00%'}} ETH Staked</span>
+				<span class="px-3 py-1 bg-gray-100 rounded">1 ETH = {{formatNumber ethereum.price '$0,0'}}</span>
+				<span class="px-3 py-1 bg-gray-100 rounded">TVL {{formatNumber ethereum.tvl '$0.00a'}}</span>
 			</div>
 			<table class="w-full text-sm text-gray-700">
 				<tbody>
@@ -97,10 +97,10 @@
 				<h2 class="text-2xl font-semibold"><a href="/gnosis" class="text-emerald-600">Gnosis</a> Staking</h2>
 			</div>
 			<div class="flex flex-wrap gap-3 text-sm text-gray-600 mb-4">
-				<span class="px-3 py-1 bg-gray-100 rounded"><a href="/gnosis-staking/validators">{{gnosis.validators}} Validators</a></span>
-				<span class="px-3 py-1 bg-gray-100 rounded">{{gnosis.stakedRatio}} GNO Staked</span>
-				<span class="px-3 py-1 bg-gray-100 rounded">1 GNO = {{gnosis.price}}</span>
-				<span class="px-3 py-1 bg-gray-100 rounded">TVL {{gnosis.tvl}}</span>
+				<span class="px-3 py-1 bg-gray-100 rounded"><a href="/gnosis-staking/validators">{{formatNumber gnosis.validators '0,0'}} Validators</a></span>
+				<span class="px-3 py-1 bg-gray-100 rounded">{{formatNumber gnosis.stakedRatio '0.00%'}} GNO Staked</span>
+				<span class="px-3 py-1 bg-gray-100 rounded">1 GNO = {{formatNumber gnosis.price '$0,0'}}</span>
+				<span class="px-3 py-1 bg-gray-100 rounded">TVL {{formatNumber gnosis.tvl '$0.00a'}}</span>
 			</div>
 			<table class="w-full text-sm text-gray-700">
 				<tbody>

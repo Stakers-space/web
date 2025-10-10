@@ -13,6 +13,7 @@ function getValidatorQueue(chain){
 
     const pending_initializedVal = (obj.stateCount.pending_initialized) ? obj.stateCount.pending_initialized.validators : 0;
     const pending_queuedVal = (obj.stateCount.pending_queued) ? obj.stateCount.pending_queued.validators : 0;
+    
     if(!obj.stateCount.active_exiting) obj.stateCount.active_exiting = { validators: 0 };
 
     obj.help = { entryQueue: { validators: (pending_initializedVal + pending_queuedVal) } }

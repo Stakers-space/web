@@ -3,8 +3,8 @@ var app = null;
 const fs = require('fs'),
       path = require('path');//,
 	  //azureCosmosDB = require('../services/azureCosmosDB');
-const EthStoreData = require('../models/ethstoretable'),
-      numeral = require('numeral');
+const EthStoreData = require('../models/ethstoretable');
+const cache_assetPrice = require('../middlewares/cache/asset-price.js'); 
 
 function HomePagePresenter(){
 	this.dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
@@ -113,44 +113,24 @@ HomePagePresenter.prototype.CacheIndexData = function(cb){
             return;
         }
 
-		//console.log(ethStoreData, beaconchainData, etherchainData);
-        const ethPrice = ethereumData.chainData.price.slice(-1)[0];
-        let stakedEth = ethereumData.valcount.total.effective_balance;
-        /*let index = -1;
-        while (!stakedEth) {
-            stakedEth = ethereumData.beaconData.stakedTokens.slice(index)[0];
-            if (!stakedEth) {
-                console.log(`Warn: No stakedEth value for day ${index} → Checking value in day ${index - 1}`);
-                index--;
-            }
-        }*/
-        
-        const gnoPrice = 0//;gnosisData.gnoDashboard.generalHealthOverview.gnoPrice;
-        let stakedGno = gnosisData.valcount.total.effective_balance;
-        /*index = -1;
-        while (!stakedGno) {
-            stakedGno = gnosisData.beaconData.stakedTokens.slice(index)[0];
-            if (!stakedGno) {
-                console.log(`Warn: No stakedGno value for day ${index} → Checking value in day ${index - 1}`);
-                index--;
-            }
-        }*/
-        //console.log("stakedRatio calc | stakedEth:", stakedEth, "ethPrice:");
+        const {eth_usd, gno_usd} = cache_assetPrice.Get();
+        const stakedEth = ethereumData.valcount.total.effective_balance;
+        const stakedGno = gnosisData.valcount.total.effective_balance;
 
         var aggregaredData = {
             ethereum: {
-                price: numeral(ethPrice).format('$0,00'),
+                price: eth_usd,
                 apr: new EthStoreData().GetApr(ethereumData.ethStore.apr.slice(-1)[0]),
-                validators: numeral(ethereumData.valcount.stateCount.active_ongoing.validators).format('0,0'),
-                tvl: numeral(stakedEth * ethPrice).format('$0.00a'),
-                stakedRatio: numeral(stakedEth / ethereumData.chainData.totalSupply.slice(-1)[0]).format('0.00%') 
+                validators: ethereumData.valcount.stateCount.active_ongoing.validators,
+                tvl: stakedEth * eth_usd,
+                stakedRatio: stakedEth / ethereumData.chainData.totalSupply.slice(-1)[0]
             },
             gnosis: {
-                price: numeral(gnoPrice).format('$0,00'),
+                price: gno_usd,
                 apr: new EthStoreData().GetApr(0 * 100),
-                validators: numeral(gnosisData.valcount.stateCount.active_ongoing.validators).format('0,0'),
-                tvl: numeral(stakedGno * gnoPrice).format('$0.00a'),
-                stakedRatio: numeral(stakedGno / gnosisData.indicators.supply.value).format('0.00%')
+                validators: gnosisData.valcount.stateCount.active_ongoing.validators,
+                tvl: stakedGno * gno_usd,
+                stakedRatio: stakedGno / gnosisData.indicators.supply.value
             }
         }
 

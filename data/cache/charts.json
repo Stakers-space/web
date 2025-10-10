@@ -123638,7 +123638,7 @@
         "delegator": "2.58%"
       },
       "validators": {
-        "count": "1,035,361",
+        "count": 1035361,
         "increments": {
           "day": "-421",
           "week": "-2,663",
@@ -123677,8 +123677,8 @@
     },
     "valcount": {
       "total": {
-        "balance": 36070598.71243415,
-        "effective_balance": 36007974
+        "balance": 36072893.41476661,
+        "effective_balance": 36010784
       },
       "stateCount": {
         "pending_initialized": {
@@ -123692,39 +123692,39 @@
           "eff_balance": 1536
         },
         "active_exiting": {
-          "validators": 55604,
-          "balance": 2370807.541221021,
-          "eff_balance": 2369786
+          "validators": 55567,
+          "balance": 2369637.484026461,
+          "eff_balance": 2368605
         },
         "active_ongoing": {
-          "validators": 977443,
-          "balance": 33395103.237520766,
-          "eff_balance": 33334501
+          "validators": 977451,
+          "balance": 33395354.81290477,
+          "eff_balance": 33334780
         },
         "exited_unslashed": {
-          "validators": 2207,
-          "balance": 70703.90092480498,
-          "eff_balance": 70624
+          "validators": 2236,
+          "balance": 71643.63657867606,
+          "eff_balance": 71552
         },
         "withdrawal_done": {
-          "validators": 1066414,
-          "balance": 154.40613695999988,
+          "validators": 1066551,
+          "balance": 154.3370253659999,
           "eff_balance": 0
         },
         "withdrawal_possible": {
-          "validators": 7195,
-          "balance": 231026.62663060622,
-          "eff_balance": 230270
+          "validators": 7282,
+          "balance": 233300.14423133738,
+          "eff_balance": 233054
         }
       },
-      "id": "eth-valcount-399139",
+      "id": "eth-valcount-399167",
       "partitionKey": "eth-valcount",
-      "time": 1760094049,
-      "_rid": "VPZWAPgLfun0MwAAAAAAAA==",
-      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfun0MwAAAAAAAA==/",
-      "_etag": "\"1200d7ff-0000-1600-0000-68e8e7670000\"",
+      "time": 1760104853,
+      "_rid": "VPZWAPgLfun7MwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfun7MwAAAAAAAA==/",
+      "_etag": "\"1300d231-0000-1600-0000-68e911950000\"",
       "_attachments": "attachments/",
-      "_ts": 1760094055
+      "_ts": 1760104853
     }
   },
   "gnosis": {
@@ -189935,9 +189935,6 @@
     },
     "valuationData": {
       "gnoPrice": [
-        149.413,
-        149.345,
-        149.025,
         148.528,
         148.734,
         148.751,
@@ -190434,13 +190431,13 @@
         144.295,
         144.089,
         144.856,
-        145.257
+        145.257,
+        145.485,
+        145.754,
+        146.192
       ],
       "bookValueTime": {
         "date": [
-          "2025-09-19T02:00:00.000Z",
-          "2025-09-19T03:00:00.000Z",
-          "2025-09-19T04:00:00.000Z",
           "2025-09-19T05:00:00.000Z",
           "2025-09-19T06:00:00.000Z",
           "2025-09-19T07:00:00.000Z",
@@ -190937,12 +190934,12 @@
           "2025-10-10T06:00:00.000Z",
           "2025-10-10T07:00:00.000Z",
           "2025-10-10T08:00:00.000Z",
-          "2025-10-10T09:00:00.000Z"
+          "2025-10-10T09:00:00.000Z",
+          "2025-10-10T10:00:00.000Z",
+          "2025-10-10T11:00:00.000Z",
+          "2025-10-10T12:00:00.000Z"
         ],
         "book_ratio": [
-          1.876,
-          1.876,
-          1.876,
           1.881,
           1.876,
           1.878,
@@ -191439,12 +191436,12 @@
           2.184,
           2.177,
           2.192,
-          2.183
+          2.183,
+          2.181,
+          2.182,
+          2.187
         ],
         "market_cap": [
-          229640454.06,
-          229534611.12,
-          229043703.02,
           228279566.61,
           228595516.08,
           228621699.59,
@@ -191941,12 +191938,12 @@
           224408178.11,
           224088552.19,
           225281318.01,
-          225904864.25
+          225904864.25,
+          226258591.41,
+          226677643.89,
+          227358661.45
         ],
         "book_value": [
-          122381660.2,
-          122377191.71,
-          122059631.66,
           121347106.73,
           121855009.67,
           121762073.49,
@@ -192443,12 +192440,12 @@
           102754188.18,
           102930423.24,
           102762921.69,
-          103467050.74
+          103467050.74,
+          103725748.48,
+          103872587.27,
+          103954769.34
         ],
         "margin_of_safety": [
-          -87.6,
-          -87.6,
-          -87.6,
           -88.1,
           -87.6,
           -87.79999999999998,
@@ -192945,7 +192942,10 @@
           -118.40000000000002,
           -117.7,
           -119.20000000000002,
-          -118.29999999999998
+          -118.29999999999998,
+          -118.10000000000001,
+          -118.19999999999999,
+          -118.69999999999999
         ]
       }
     },
@@ -192954,16 +192954,16 @@
         "total_minted": 3000000,
         "dao_gno_buyback": 184152.97,
         "outstanding_tokens": 1555205.5583963804,
-        "marketCap": 225904864.24594703,
-        "bookValueRatio": 2.1833507636292477,
-        "bookValueUsd": 103467050.7410543,
+        "marketCap": 227358661.45328316,
+        "bookValueRatio": 2.187092164239007,
+        "bookValueUsd": 103954769.33748332,
         "formated": {
-          "bookValueUsd": "$ 103,467,050.74",
-          "marketCap": "$ 225,904,864.25",
-          "bookValueRatio": "2.18",
+          "bookValueUsd": "$ 103,954,769.34",
+          "marketCap": "$ 227,358,661.45",
+          "bookValueRatio": "2.19",
           "outstanding_tokens": "1,555,206"
         },
-        "gnoPrice": 145.2572382,
+        "gnoPrice": 146.19203244599998,
         "gno_in_dao_holdings": 1444794.4416036196
       },
       "buybacks_sum": {
@@ -193736,8 +193736,8 @@
     },
     "valcount": {
       "total": {
-        "balance": 360355.58340319834,
-        "effective_balance": 360121.71875
+        "balance": 360688.570688918,
+        "effective_balance": 360454.625
       },
       "stateCount": {
         "pending_initialized": {
@@ -193746,34 +193746,34 @@
           "eff_balance": 0.25
         },
         "active_ongoing": {
-          "validators": 300372,
-          "balance": 359210.04820143414,
-          "eff_balance": 358983.3125
+          "validators": 300352,
+          "balance": 359523.05932597426,
+          "eff_balance": 359296.21875
         },
         "exited_unslashed": {
-          "validators": 159,
-          "balance": 159.06736099803138,
-          "eff_balance": 159
+          "validators": 97,
+          "balance": 97.04398029274998,
+          "eff_balance": 97
         },
         "withdrawal_done": {
           "validators": 247623,
-          "balance": 0.03583963781250002,
+          "balance": 0,
           "eff_balance": 0
         },
         "withdrawal_possible": {
-          "validators": 268,
-          "balance": 986.148001128406,
-          "eff_balance": 979.15625
+          "validators": 350,
+          "balance": 1068.183382651,
+          "eff_balance": 1061.15625
         }
       },
-      "id": "gno-valcount-1513712",
+      "id": "gno-valcount-1513892",
       "partitionKey": "gno-valcount",
-      "time": 1760090418,
-      "_rid": "VPZWAPgLfunyMwAAAAAAAA==",
-      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunyMwAAAAAAAA==/",
-      "_etag": "\"12000bef-0000-1600-0000-68e8d9320000\"",
+      "time": 1760104817,
+      "_rid": "VPZWAPgLfun6MwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfun6MwAAAAAAAA==/",
+      "_etag": "\"1300a931-0000-1600-0000-68e911710000\"",
       "_attachments": "attachments/",
-      "_ts": 1760090418
+      "_ts": 1760104817
     }
   }
 }
