@@ -270,8 +270,8 @@ exports.OnLinkInstance = function(req,res){
 };
 
 exports.OnRemoveInstance = function(req, res){
-    console.log("OnRemoveInstance", req.query);
-    if(req.query.confirm_phrase !== "Remove Instance") return res.redirect('/dashboard?failure=InvalidConfirmPhrase');
+    console.log("OnRemoveInstance", req.query, req.body);
+    if(req.body.confirm_phrase !== "Remove Instance") return res.redirect('/dashboard?failure=InvalidConfirmPhrase');
     // get instance info
     //res.redirect('/dashboard/?removeInstance&success=featureUnderDevelpment');
     const mysql = new mysqlSrv();

@@ -108,6 +108,7 @@ ul.img_marker li {
         this.balance = 0;
         if(isInstance) {
             this.pubIds = [];
+            this.pubIds_filter = { active_ongoing: [] }
         } else { // aggregation
             this.offline = 0;
             this.pending = 0;
@@ -237,7 +238,10 @@ ul.img_marker li {
                  // find val balance for each pubId in the instance list
                 for (const pubId of data.pubIds){
                     const pubIdBalance = snapshots[chain][snapshotKey].data[Number(pubId)];
-                    if(pubIdBalance) data.balance += pubIdBalance; 
+                    if(pubIdBalance) {
+                        data.balance += pubIdBalance;
+                        if(data.pubIds_filter[snapshotKey]) data.pubIds_filter[snapshotKey].push(pubId);
+                    }
                 }
             }
             valcount_instance[chain]["agg"].balance += valcount_instance[chain][instance_id].balance;

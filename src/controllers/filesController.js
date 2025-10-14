@@ -7,7 +7,7 @@ const dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
 exports.UpdateValidatorsBalancesFile = async (req,res) => {
     const DATA_DIR = path.join(__dirname, '..', '..', dataFile.validatorsSnapshot);
     const TMP_DIR  = path.join('/tmp', 'validators_snapshot_uploads');
-    const MAX_BYTES = 20 * 1024 * 1024; // 20 MB
+    const MAX_BYTES = 50 * 1024 * 1024; // 50 MB
 	
     try {
         // file name validation
