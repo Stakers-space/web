@@ -28,9 +28,9 @@
 	}
 	.h-logo span {
 		position: absolute;
-		bottom: 29px;
+		bottom: -6px;
 		font-size: 0.8rem;
-		left: 74px;
+		left: 61px;
 		color: #00ca72;
 	}
 	.h-dashboard {

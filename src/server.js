@@ -72,6 +72,20 @@ function registerHelpers(){
 		};
 		return numeral(number).format(format);
 	});
+
+	handlebars.registerHelper('formatDate', function (value, format) {
+		const d = new Date(value);
+		if (isNaN(d)) return value;
+
+		switch (format) {
+			case 'date':
+			return new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(d);
+			case 'time':
+			return new Intl.DateTimeFormat('en-US', { timeStyle: 'short' }).format(d);
+			default:
+			return new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(d);
+		}
+	});
 }
 
 function normalizePort(val) {

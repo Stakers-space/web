@@ -1,22 +1,28 @@
 {{> header_dashboard}}
-<main class="grid mt-100 mb-100">
+<main class="mx-auto max-w-[1600px] px-5 md:px-10 my-10 grid gap-8">
     {{#if editingView}}
         {{> sections/encryptionPassword }}
-        <p class="text-center"><i>This may be a separated password used only for the instance, as the instance view may be shared with a client you manage the instance for.</i></p>
+        <p class="text-center text-sm text-neutral-600"><i>This may be a separated password used only for the instance, as the instance view may be shared with a client you manage the instance for.</i></p>
     {{/if}}
-    <h1>{{formTitle}}</h1>
+    
+    <h1 class="text-2xl font-semibold">{{formTitle}}</h1>
 
-    <section class="grey">
-        <form method="post" action="{{forms.metadata.submitLink}}" id="defineInstanceForm">
+    <section class="rounded-2xl border bg-neutral-50 p-5 md:p-6">
+        <form method="post" action="{{forms.metadata.submitLink}}" id="defineInstanceForm" class="space-y-6">
             {{#unless editingView}}
-            <div>
-                <h4>Generate credentials for validator instance number <code class="vi_pid">{{instance.vi_pid}}</code></h4>
-                <label for="vi_pid">Validator Instance Numer</label>: <input type="number" name="vi_pid" min="1" value="{{instance.vi_pid}}" required class="interactive-element vi_pid" data-class="vi_pid" onchange="OnPidChanged(this.value)">
-                <i>NOTE: It's required to have unique Instance Number accross all defined instances (it helps in prevention before slashing on moving validator instances between various controlled servers)</i>
+            <div class="space-y-2">
+                <h4 class="text-lg font-semibold">Generate credentials for validator instance number <code class="vi_pid">{{instance.vi_pid}}</code></h4>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                    <label for="vi_pid" class="text-sm font-medium">Validator Instance Numer</label>: 
+                    <input type="number" name="vi_pid" min="1" value="{{instance.vi_pid}}" required class="interactive-element vi_pid sm:flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" data-class="vi_pid" onchange="OnPidChanged(this.value)">
+                    <p class="text-sm text-neutral-600">
+                        <i>NOTE: It's required to have unique Instance Number accross all defined instances (it helps in prevention before slashing on moving validator instances between various controlled servers)</i>
+                    </p>
+                </div>
             </div>
-             <div id="name">
-                <label for="name">Instance name</label>
-                <input type="text" name="name" class="instance_name" required="required" value="{{server.consensus.0.client}}-i{{instance.vi_pid}}" maxlength="25">
+            <div id="name" class="grid items-center gap-3 grid-cols-[max-content_1fr]">
+                <label for="name" class="text-sm font-medium">Instance name</label>
+                <input type="text" name="name" class="instance_name w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" required="required" value="{{server.consensus.0.client}}-i{{instance.vi_pid}}" maxlength="25">
             </div>
             <script>
                 const clientName="{{server.consensus.0.client}}";
@@ -33,29 +39,33 @@
                     <button class="tab" data-tabpanel="2" type="button">Virtual instance</button>
                 </nav>
             </div>--}}
-            <div class="egrid egrid-2">
-                <div>
-                    <h2>Stakers.space dashboard</h2>
-                    <p><label>Consensus client</label>: <strong><a href="/{{server.consensus.0.client}}" target="_blank">{{server.consensus.0.client}}</a></strong></p>
-                    <div id="name">
-                        <label for="name">Instance name</label>
-                        <input type="text" name="name" class="instance_name" required="required" value="{{instance.instance}}" maxlength="25" placeholder="validators-vi{{instance.vi_pid}}">
+            <div class="grid gap-6 md:grid-cols-2">
+                <div class="space-y-4">
+                    <h2 class="text-xl font-semibold">Stakers.space dashboard</h2>
+                    <p>
+                        <label class="font-medium">Consensus client</label>: <strong><a href="/{{server.consensus.0.client}}" target="_blank" class="underline underline-offset-2 hover:no-underline">{{server.consensus.0.client}}</a></strong>
+                    </p>
+                    <div id="name" class="grid items-center gap-3 grid-cols-[max-content_1fr]">
+                        <label for="name" class="text-sm font-medium">Instance name</label>
+                        <input type="text" name="name" class="instance_name w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" required="required" value="{{instance.instance}}" maxlength="25" placeholder="validators-vi{{instance.vi_pid}}">
                     </div>
-                    <br>
-                    <div>
-                        <label for="note">Instance Note</label>
-                        <input type="text" name="note" value="{{instance.note}}" maxlength="100" id="note" class="encrypted_value">
+                     <div class="grid items-center gap-3 grid-cols-[max-content_1fr]">
+                        <label for="note" class="text-sm font-medium">Instance Note</label>
+                        <input type="text" name="note" value="{{instance.note}}" maxlength="100" id="note" class="encrypted_value w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                     </div>
                 </div>
-                <div>
-                    <h2>Configuration on server</h2>
-                    <ul class="list-disc my-4">
-                        <li><label for="fee_recipient">Fee recipient wallet</label>: <input type="text" name="fee_recipient" value="{{instance.fee_recipient}}" id="fee_recipient"  class="encrypted_value"></li>
-                        <li>Instance customizations
-                            <ul class="list-disc my-4">
-                                <li><label>Name</label>: <input type="text" name="vi_sname" value="{{instance.vi_sname}}" class="interactive-element instance_sn" data-class="instance_sn"></li>
-                                <li><label>User</label>:  <input type="text" name="vi_suser" value="{{instance.vi_suser}}" class="interactive-element instance_su" data-class="instance_su"></li>
-                                <li><label>Data</label>: <input type="text" name="vi_sdata" value="{{instance.vi_sdata}}" class="interactive-element instance_dp" data-class="instance_dp"></li>
+                <div class="space-y-4">
+                    <h2 class="text-xl font-semibold">Configuration on server</h2>
+                    <ul class="list-disc pl-5 space-y-3">
+                        <li class="flex items-center gap-3">
+                            <label for="fee_recipient" class="text-sm font-medium">Fee recipient wallet</label>: <input type="text" name="fee_recipient" value="{{instance.fee_recipient}}" id="fee_recipient"  class="encrypted_value flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
+                        </li>
+                        <li>
+                            <h3 class="font-medium mb-2">Instance customizations</h3>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li class="flex items-center gap-3"><label class="text-sm">Name</label>: <input type="text" name="vi_sname" value="{{instance.vi_sname}}" class="interactive-element instance_sn flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" data-class="instance_sn"></li>
+                                <li class="flex items-center gap-3"><label class="text-sm">User</label>:  <input type="text" name="vi_suser" value="{{instance.vi_suser}}" class="interactive-element instance_su flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" data-class="instance_su"></li>
+                                <li class="flex items-center gap-3"><label class="text-sm">Data</label>: <input type="text" name="vi_sdata" value="{{instance.vi_sdata}}" class="interactive-element instance_dp flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" data-class="instance_dp"></li>
                             </ul>
                         </li>
                     </ul>
@@ -63,14 +73,14 @@
             </div>
             {{/if}}
             {{#if failureCallback}}
-                <p class="login-error">{{{failureCallback}}}</p>
+                <p class="login-error text-red-600">{{{failureCallback}}}</p>
             {{/if}}
-            <div class="mt-20 text-center">
+            <div class="mt-6 text-center space-y-3">
                 {{#if editingView}} 
-                <label>Encryption password</label>
-                <input type="text" placeholder="Encryption password" class="encryption-password" id="encryption_psw_matadata">
+                <label class="text-sm font-medium">Encryption password</label>
+                <input type="text" placeholder="Encryption password" class="encryption-password  w-full max-w-xs rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" id="encryption_psw_matadata">
+                <input type="submit" class="submit inline-flex items-center rounded-lg bg-black px-5 py-2 text-white hover:opacity-90 cursor-pointer" id="submitForm" value="{{forms.metadata.submitText}}">
                 {{/if}}
-                <input type="submit" class="submit btn btn-black btn-rounded" id="submitForm" value="{{forms.metadata.submitText}}">
             </div>
         </form>
         <script>
@@ -109,45 +119,45 @@
     </section>
 
     {{#if editingView}} 
-    <section class="grey mt-100 mb-100">
-        <form method="post" action="{{forms.monitor.submitLink}}" id="instanceTrackingForm">
-            <div class="egrid egrid-2">
-                <div>
-                    <h2>Validators monitoring configuration</h2>
-                    <div>
-                        <label>Chain selection</label>
-                        <select name="chain">
+    <section class="rounded-2xl border bg-neutral-50 p-5 md:p-6">
+        <form method="post" action="{{forms.monitor.submitLink}}" id="instanceTrackingForm" class="space-y-6">
+            <div class="grid gap-6 md:grid-cols-2">
+                <div class="space-y-4">
+                    <h2 class="text-xl font-semibold">Validators monitoring configuration</h2>
+                    <div class="grid items-center gap-3 grid-cols-[max-content_1fr]">
+                        <label class="text-sm font-medium">Chain selection</label>
+                        <select name="chain" class="w-full rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                             <option value="ethereum" selected>Ethereum</option>
                             <option value="gnosis">Gnosis</option>
                         </select>
                     </div>
-                    <div>
-                        <label>Monitoring</label>:
-                        <label>
+                    <div class="space-y-1">
+                        <span class="text-sm font-medium">Monitoring:</span>
+                        <label class="inline-flex items-center gap-2">
                             <input type="radio" name="pubkey_monitoring" value="1" checked>
                             Enabled
                         </label>
-                        <label>
+                         <label class="inline-flex items-center gap-2">
                             <input type="radio" name="pubkey_monitoring" value="0">
                             Disabled
                         </label>
                     </div>
-                    <p class="mt-15"><strong>Load pubkeys from deposit file for adding / modifying validators data</strong></p>
-                    <div id="deposit-file">
-                        <label for="deposit-file">Deposit file</label>
-                        <input type="file" id="fileInput" accept=".json">
+                    <p class="mt-4 font-semibold"><strong>Load pubkeys from deposit file for adding / modifying validators data</strong></p>
+                    <div id="deposit-file" class="grid items-center gap-3 grid-cols-[max-content_1fr]">
+                        <label for="deposit-file" class="text-sm font-medium">Deposit data file</label>
+                        <input type="file" id="fileInput" accept=".json" class="block w-full rounded-lg border text-sm file:mr-4 file:rounded-lg file:border-0 file:bg-black file:px-4 file:py-2 file:text-white hover:file:opacity-90 file:cursor-pointer">
                     </div>
-                    <input class="hide" type="text" name="dd_filename" id="dd_filename">
+                    <input class="hidden" type="text" name="dd_filename" id="dd_filename">
                 </div>
-                <div class="mt-20">
-                    <label for="pubkeys">Pubkeys (comma separated pub indexes or deposit file content)</label><br>
-                    <textarea type="text" id="pubkeys" name="pubkeys" rows="3" required class="encrypted_value">{{instance.data}}</textarea>
+                <div class="space-y-2">
+                    <label for="pubkeys" class="text-sm font-medium">Pubkeys (comma separated pub indexes or deposit file content)</label><br>
+                    <textarea type="text" id="pubkeys" name="pubkeys" rows="8" required class="encrypted_value w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">{{instance.data}}</textarea>
                 </div>
             </div>
-            <div class="mt-20 text-center" id="submit-monitoring">
-                <label>Encryption password</label>
-                <input type="text" placeholder="Encryption password" name="psw"  class="encryption-password" id="encryption_psw_pubkeys">
-                <input type="submit" class="submit btn btn-black btn-rounded" id="submitForm" value="{{forms.monitor.submitText}}">
+            <div class="mt-6 text-center space-y-3" id="submit-monitoring">
+                <label class="text-sm font-medium">Encryption password</label>
+                <input type="text" placeholder="Encryption password" name="psw"  class="encryption-password w-full max-w-xs rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" id="encryption_psw_pubkeys">
+                <input type="submit" class="submit inline-flex items-center rounded-lg bg-black px-5 py-2 text-white hover:opacity-90 cursor-pointer" id="submitForm" value="{{forms.monitor.submitText}}">
             </div>
         </form>
         <script>
@@ -229,55 +239,53 @@
             }
         </script>
     </section>
-    <section class="grey mt-60">
-        <h2>Link validators instance to account</h2>
-        <p>Accounts with access: {{#each accountsWithAccess}}<code>{{this.email}}</code>{{/each}}</p>
-        <form method="post" action="{{forms.link.submitLink}}">
-            <div id="email" class="login-item">
-                <div>
-                    <label for="email">Account email</label>
-                    <input type="text" id="email" name="email" value="" required>
-                </div>
+    <section class="rounded-2xl border bg-neutral-50 p-5 md:p-6">
+        <h2 class="text-xl font-semibold">Link validators instance to account</h2>
+        <p class="mt-1">Accounts with access: {{#each accountsWithAccess}}<code class="mr-1">{{this.email}}</code>{{/each}}</p>
+        
+        <form method="post" action="{{forms.link.submitLink}}" class="mt-4 space-y-4">
+            <div id="email" class="login-item items-center gap-3">
+                <label for="email" class="text-sm font-medium">Account email</label>
+                <input type="text" id="email" name="email" value="" required class="w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
             </div>
             {{#if failureCallback}}
-                <p class="dashboard-error">{{{failureCallback}}}</p>
+                <p class="dashboard-error text-red-600">{{{failureCallback}}}</p>
             {{/if}}
-            <div class="login-action mt-20" id="login-action">
-                <input type="submit" class="submit btn btn-black btn-rounded" id="submit" value="{{forms.link.submitText}}">
+            <div class="login-action text-center" id="login-action">
+                <input type="submit" class="submit inline-flex items-center rounded-lg bg-black px-5 py-2 text-white hover:opacity-90 cursor-pointer" id="submit" value="{{forms.link.submitText}}">
             </div>
         </form>
     </section>
-    <section class="grey mt-60">
-        <h2>Move instance to different server</h2>
-        <form method="post" action="{{forms.linkserver.submitLink}}">
-            <label>Choose new instance location</label>:
-            <select name="server_id">
+    <section class="rounded-2xl border bg-neutral-50 p-5 md:p-6">
+        <h2 class="text-xl font-semibold">Move instance to different server</h2>
+        <form method="post" action="{{forms.linkserver.submitLink}}" class="mt-3 space-y-4">
+            <label class="text-sm font-medium">Choose new instance location</label>:
+            <select name="server_id" class="w-full rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                 {{#each servers}}<option value="{{this.id}}">{{this.name}}</option>{{/each}}
             </select>
             {{#if failureCallback}}
-                <p class="dashboard-error">{{{failureCallback}}}</p>
+                <p class="dashboard-error text-red-600">{{{failureCallback}}}</p>
             {{/if}}
-            <div class="login-action mt-20" id="login-action">
-                <input type="submit" class="submit btn btn-black btn-rounded" id="submit" value="{{forms.linkserver.submitText}}">
+            <div class="login-action text-center" id="login-action">
+                <input type="submit" class="submit inline-flex items-center rounded-lg bg-black px-5 py-2 text-white hover:opacity-90 cursor-pointer" id="submit" value="{{forms.linkserver.submitText}}">
             </div>
         </form>
     </section>
-    <section class="grey mt-60">
-        <h2>Remove instance</h2>
-        <p>This will remove the instance, including all associated data. The action is irreversible.</p>
-        <form method="post" action="{{forms.removeInstance.submitLink}}">
+     <section class="rounded-2xl border bg-neutral-50 p-5 md:p-6">
+        <h2 class="text-xl font-semibold">Remove instance</h2>
+        <p class="text-neutral-700">This will remove the instance, including all associated data. The action is irreversible.</p>
+        <form method="post" action="{{forms.removeInstance.submitLink}}" class="mt-3 space-y-4">
             <strong>Past "Remove Instance" phrase to confirm the action</strong>:
-            <div class="login-item">
-                <div>
-                    <label for="confirm_phrase">Confirm phrase</label>
-                    <input type="text" id="confirm_phrase" name="confirm_phrase" value="" required>
-                </div>
+            <div class="login-item grid items-center gap-3 grid-cols-[max-content_1fr]">
+                <label for="confirm_phrase" class="text-sm font-medium">Confirm phrase</label>
+                <input type="text" id="confirm_phrase" name="confirm_phrase" value="" required class="w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
+                
             </div>
             {{#if failureCallback}}
-                <p class="dashboard-error">{{{failureCallback}}}</p>
+                <p class="dashboard-error text-red-600">{{{failureCallback}}}</p>
             {{/if}}
-            <div class="login-action mt-20" id="login-action">
-                <input type="submit" class="submit btn btn-black btn-rounded" id="submit" value="{{forms.removeInstance.submitText}}">
+            <div class="login-action text-center" id="login-action">
+                <input type="submit" class="submit inline-flex items-center rounded-lg bg-black px-5 py-2 text-white hover:opacity-90 cursor-pointer" id="submit" value="{{forms.removeInstance.submitText}}">
             </div>
         </form>
     </section>
@@ -331,4 +339,4 @@
 {{> scripts/cryptography}}
 {{> scripts/security-guard}}
 {{> scripts/tabselector}}
-{{> footer}}
+{{> footer_tailwind}}

@@ -32,10 +32,6 @@ router.use('/authentization', require('./authentization'));
  */
 class DashboardRouter {
     constructor(){
-        /** Authentization */
-
-
-
         router.get('/', this.DashboardBtn, Controller.Dashboard, this.Render);
         
         // Server-related

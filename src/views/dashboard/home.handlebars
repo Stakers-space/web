@@ -3,95 +3,109 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-ul.img_marker li {
+ul.img-marker li {
     max-height: 105px;
     overflow-y: clip;
 }
 </style>
 {{> header_dashboard}}
-<main class="mt-20">
+<main class="mt-5">
     {{> sections/encryptionPassword }}
-    <div class="grid">
-        <div id="overview" class="egrid egrid-3">
+    <div class="mx-auto px-5 md:px-15 xl:px-24 mt-10">
+        <div id="overview" class="grid gap-6 md:grid-cols-3">
             <div>
-                <ul class="img_marker account_validators" style="display:ruby;">
-                    <li style="--marker-image: url('/logo/ethereum.svg')" class="f-bold">??</li>
-                    <li style="--marker-image: url('/logo/gnosis.svg');margin-left: 50px" class="f-bold"> ??</li>
+                <ul class="img-marker inline-flex gap-12 m-0 p-0 account_validators">
+                    <li style="--marker-image: url('/logo/ethereum.svg')" class="font-bold">??</li>
+                    <li style="--marker-image: url('/logo/gnosis.svg')" class="font-bold ml-12"> ??</li>
                 </ul>
             </div>
             <div>
                 {{{offlineStateInfo}}}
             </div>
-            <div>
+            <div class="flex items-center gap-3 flex-wrap">
                 Data for epoch: 
-                <ul style="display:inline-flex;list-style: none;gap:0.75rem;margin: 0;padding:0">
-                    <li>E: <a href="https://beaconcha.in/epochs" target="_blank" rel="nofollow noopener noreferrer" {{#if lastEpocSyncState.ethereum}}{{else}}style="color:orange" title="Warning: Data are not up do date"{{/if}}>{{lastEpochReported.ethereum}}</a></li>
-                    <li>G: <a href="https://gnosischa.in/epochs" target="_blank" rel="nofollow noopener noreferrer" {{#if lastEpocSyncState.gnosis}}{{else}}style="color:orange" title="Warning: Data are not up do date"{{/if}}>{{lastEpochReported.gnosis}}</a></li>
+                <ul class="inline-flex list-none gap-3 m-0 p-0">
+                    <li>E: <a href="https://beaconcha.in/epochs" target="_blank" rel="nofollow noopener noreferrer" class="underline underline-offset-2 hover:no-underline {{#unless lastEpocSyncState.ethereum}}text-orange-500 underline-offset-2{{/unless}}" title="{{#unless lastEpocSyncState.ethereum}}Warning: Data are not up to date{{/unless}}">{{lastEpochReported.ethereum}}</a></li>
+                    <li>G: <a href="https://gnosischa.in/epochs" target="_blank" rel="nofollow noopener noreferrer" class="underline underline-offset-2 hover:no-underline {{#unless lastEpocSyncState.gnosis}}text-orange-500 underline-offset-2{{/unless}}" title="{{#unless lastEpocSyncState.gnosis}}Warning: Data are not up to date{{/unless}}">{{lastEpochReported.gnosis}}</a></li>
                 </ul>
             </div>
         </div>
         
         {{#each servers}}
-            <section class="egrid servers-destination">
-                <div class="header">
-                    <h2>{{this.location}}</h2>
-                    <i class="encrypted_value">{{this.location_note}}</i>
-                    <ul class="list-disc my-4">
+            <section class="grid md:grid-cols-[250px_1fr] bg-neutral-100 rounded-2xl my-5 p-4 gap-6 servers-destination">
+                <div class="md:sticky md:top-0 h-fit">
+                    <h2 class="text-xl font-semibold">{{this.location}}</h2>
+                    <i class="text-xs block encrypted_value">{{this.location_note}}</i>
+                    <ul class="list-disc my-4 pl-5 space-y-1">
                         <li>Network: <span class="encrypted_value">{{this.network}}</span></li>
                         <li>validators
-                            <ul class="img_marker dest_validators">
+                            <ul class="dest_validators img-marker mt-2 space-y-1">
                                 <li style="--marker-image: url('/logo/ethereum.svg');">???</li>
                                 <li style="--marker-image: url('/logo/gnosis.svg');">???</li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <div class="egrid egrid-2">
+                <div class="grid md:grid-cols-2 gap-6">
                     {{#each this.servers}}
-                     <div class="destination-server">
-                        <h3 id="{{this.name}}"><a href="/dashboard/server-node/define?id={{this.sid}}">{{this.name}}</a></h3>
-                                <ul class="list-disc my-4">
-                                    {{!<li>Validators: <strong></strong></li>}}
-                                    <li>Clients: {{#each this.cliensList}}
-                                        <code {{#if this.rcm}}style="color:orange" title="{{this.rcm}}"{{/if}}><a href="/{{this.client}}/update?sid={{../this.sid}}" target="_blank">{{this.client}}</a> ({{this.ver}})</code>
+                     <div class="destination-server rounded-xl bg-white p-4 shadow-sm">
+                        <h3 id="{{this.name}}" class="text-lg font-semibold">
+                            <a href="/dashboard/server-node/define?id={{this.sid}}" class="underline underline-offset-2 hover:no-underline">{{this.name}}</a>
+                        </h3>
+                            <ul class="list-disc my-4 pl-5 space-y-1">
+                                <li>Clients: 
+                                    {{#each this.cliensList}}
+                                    <span class="mr-2 {{#if this.rcm}}text-orange-500{{/if}}" title="{{this.rcm}}">
+                                        <a href="/{{this.client}}?sid={{../this.sid}}" target="_blank"  class="underline underline-offset-2 hover:no-underline text-black">{{this.client}}</a> ({{this.ver}})
+                                    </span>
                                     {{/each}}
-                                    {{!<li>SSD: </li>}}
-                                    <li>{{#if this.brand_name}}Operated by {{#if this.brand_link}}<a href="{{this.brand_link}}" target="_blank">{{this.brand_name}}</a>{{else}}{{this.brand_name}}{{/if}}{{/if}} | Last Login <code style="color:{{this.login.color}}">{{this.login.time}}</code></li>
-                                    <li>
-                                        <ul class="img_marker server_validators" style="display:flex;">
-                                            <li style="--marker-image: url('/logo/ethereum.svg');">???</li>
-                                            <li style="--marker-image: url('/logo/gnosis.svg');margin-left: 50px;">???</li>
-                                        </ul>
+                                <li>{{#if this.brand_name}}
+                                    Operated by 
+                                        {{#if this.brand_link}}<a href="{{this.brand_link}}" target="_blank" class="underline underline-offset-2 hover:no-underline">{{this.brand_name}}</a>
+                                        {{else}}{{this.brand_name}}{{/if}}
+                                    {{/if}} | 
+                                    Last Login <code class="text-[color:{{this.login.color}}]" title="en-USA time zone">{{formatDate this.login.time}}</code></li>
+                                <li>
+                                    <ul class="img-marker inline-flex gap-12 server_validators">
+                                        <li style="--marker-image: url('/logo/ethereum.svg')">???</li>
+                                        <li style="--marker-image: url('/logo/gnosis.svg')" class="ml-12">???</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <h3 class="text-base font-semibold mb-2">Validation instances</h3>
+                            <ul class="img-marker server_instances space-y-2">
+                                {{#each this.instances}}
+                                    <li data-iid="{{this.id}}" data-chain="{{this.chain}}" class="val_instance" style="--marker-image: url('/logo/{{#ifEqual this.chain "gnosis"}}gnosis{{else}}{{#ifEqual this.chain "ethereum"}}ethereum{{/ifEqual}}{{/ifEqual}}.svg');">
+                                        {{#ifEqual isOwner "true"}}
+                                        <a href="/dashboard/server-node/define-instance?sid={{../this.sid}}&iid={{this.id}}" class="iname underline underline-offset-2 hover:no-underline">{{this.instance}}</a>
+                                        {{else}}
+                                        <span>{{this.instance}}</span>
+                                        {{/ifEqual}} | 
+                                        <span class="instance_balance"></span><span class="instance_status"></span><br>
+                                        
+                                        <i class="encrypted_value instance_note block max-w-[90%] overflow-hidden text-xs text-neutral-900 leading-snug break-words">{{this.note}}</i>
+                                        <i class="text-xs text-neutral-900 leading-snug">
+                                            {{#if this.fee_recipient}}Wlt: <a href="#" target="_blank" rel="nofollow noopener noreferrer" class="encrypted_value instance_fwlt underline underline-offset-2 hover:no-underline">{{this.fee_recipient}}</a> | {{/if}}
+                                            <span class="encrypted_value instance_insight">{{this.data}}</span>
+                                        </i>
                                     </li>
-                                </ul>
-                                <h3>Validation instances | </h3>
-                                <ul class="img_marker server_instances">
-                                    {{#each this.instances}}
-                                        <li data-iid="{{this.id}}" data-chain="{{this.chain}}" class="val_instance" style="--marker-image: url('/logo/{{#ifEqual this.chain "gnosis"}}gnosis{{else}}{{#ifEqual this.chain "ethereum"}}ethereum{{/ifEqual}}{{/ifEqual}}.svg');">
-                                            {{#ifEqual isOwner "true"}}<a href="/dashboard/server-node/define-instance?sid={{../this.sid}}&iid={{this.id}}" class="iname">{{this.instance}}</a>{{else}}<span>{{this.instance}}</span>{{/ifEqual}} | 
-                                            <span class="instance_balance"></span><span class="instance_status"></span><br>
-                                            <i class="encrypted_value instance_note" style="max-width:90%;overflow:hidden;display:block">{{this.note}}</i>
-                                            <i>
-                                                {{#if this.fee_recipient}}Wlt: <a href="#" target="_blank" rel="nofollow noopener noreferrer" class="encrypted_value instance_fwlt">{{this.fee_recipient}}</a> | {{/if}}
-                                                <span class="encrypted_value instance_insight">{{this.data}}</span>
-                                            </i>
-                                        </li>
-                                    {{/each}}
-                                </ul>
-                                {{#ifEqual isOwner "true"}}<a href="/dashboard/server-node/define-instance?sid={{this.sid}}" class="btn btn-black btn-rounded">Add Instance</a>{{/ifEqual}}
-                            </div>
+                                {{/each}}
+                            </ul>
+                            {{#ifEqual isOwner "true"}}<a href="/dashboard/server-node/define-instance?sid={{this.sid}}" class="inline-flex items-center rounded-lg bg-black text-white px-4 py-2 mt-3 hover:opacity-90">Add Instance</a>{{/ifEqual}}
+                        </div>
                     {{/each}}
                 </div>
             </section>
         {{/each}}
     </div>
     
-    <section class="text-center mt-30 mb-80">
-        <a href="/dashboard/server-node/define" class="btn btn-black btn-rounded">Define own server node</a>
-        <a href="/dashboard/server-node/order" class="btn btn-black btn-rounded">Order server as a service</a>
-        <a href="/dashboard/api" class="btn btn-black btn-rounded">API access</a>
-        <a href="/dashboard/servers-resources" class="btn btn-black btn-rounded">Servers resources</a>
+    <section class="text-center my-10 space-x-2">
+        <a href="/dashboard/server-node/define" class="inline-flex items-center rounded-lg bg-black text-white px-4 py-2 hover:opacity-90">Define own server node</a>
+        <a href="/dashboard/server-node/order" class="inline-flex items-center rounded-lg bg-black text-white px-4 py-2 hover:opacity-90">Order server as a service</a>
+        <a href="/dashboard/api" class="inline-flex items-center rounded-lg bg-black text-white px-4 py-2 hover:opacity-90">API access</a>
+        <a href="/dashboard/servers-resources" class="inline-flex items-center rounded-lg bg-black text-white px-4 py-2 hover:opacity-90">Servers resources</a>
     </section>
+
     {{#if adminPanel}}{{{adminPanel}}}{{/if}}
 </main>
 {{> scripts/cryptography}}
@@ -391,4 +405,4 @@ ul.img_marker li {
     }
 </script>
 {{> scripts/security-guard}}
-{{> footer}}
+{{> footer_tailwind }}

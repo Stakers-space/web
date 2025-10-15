@@ -8,7 +8,8 @@
     "build:chainpage": "npx @tailwindcss/cli -c tailwind.chainpage.config.js -i ./src/css/chainpage.css -o ./public/css/chainpage.css --watch",
     "build:pages": "npx @tailwindcss/cli -c tailwind.pages.config.js -i ./src/css/pages.css -o ./public/css/pages.css --watch",
     "build:news": "npx @tailwindcss/cli -c tailwind.news.config.js -i ./src/css/news.css -o ./public/css/news.css --watch",
-    "build:guides": "npx @tailwindcss/cli -c tailwind.guides.config.js -i ./src/css/guides.css -o ./public/css/guides.css --watch"
+    "build:guides": "npx @tailwindcss/cli -c tailwind.guides.config.js -i ./src/css/guides.css -o ./public/css/guides.css --watch",
+    "build:dashboard": "npx @tailwindcss/cli -c tailwind.dashboard.config.js -i ./src/css/dashboard.css -o ./public/css/dashboard.css --watch"
   },
   "dependencies": {
     "@azure/cosmos": "^4.0.0",

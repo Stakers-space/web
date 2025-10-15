@@ -8,10 +8,12 @@ exports.Dashboard = (req,res,next) => {
     const user = req.user;
 
     if(user.role === 'admin'){
-        res.locals.adminPanel = `<div class="grid">
-        <h2 class="mt-40">Admin panel</h2>
-        <a href="/dashboard/admin/news" class="btn btn-black btn-rounded">News management</a>
-        <a href="/dashboard/admin/clients" class="btn btn-black btn-rounded">Clients management</a>
+        res.locals.adminPanel = `<div class="gap-4 text-center mb-10">
+            <h2 class="mt-10 mb-5 text-2xl font-semibold">Admin panel</h2>
+            <div>
+                <a href="/dashboard/admin/news" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-white hover:opacity-90">News management</a>
+                <a href="/dashboard/admin/clients" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-white hover:opacity-90">Clients management</a>
+            </div>
         </div>`;
     };
     // Get Servers the user has access to

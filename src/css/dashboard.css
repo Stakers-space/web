@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "./components/header.css";
+@import "./components/footer.css";
+@import "./components/tabpanel.css";
+@import "./components/code.css";
+
+@layer utilities {
+    .img-marker { @apply pl-10 m-0; }
+    .img-marker li { @apply list-none relative; }
+    .img-marker li::before {
+        content: "";
+        @apply absolute left-[-30px] top-[2px] w-5 h-5 bg-no-repeat bg-contain;
+        background-image: var(--marker-image);
+    }
+    .server-instances li::before { @apply top-[6px]; }
+    /*.hide { display: none; }*/
+}

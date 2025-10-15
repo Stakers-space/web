@@ -1,225 +1,252 @@
 {{> header_dashboard}}
-<main>
+<main class="mx-auto max-w-[1600px] px-5 md:px-10">
     {{#if failureCallback}}
-        <p>{{{failureCallback}}}</p>
+        <p class="my-4 text-red-600">{{{failureCallback}}}</p>
     {{/if}}
 
     {{> sections/encryptionPassword }}
 
     {{#if isOwner}}
-    <div class="grid egrid egrid-2">
-        <section class="mb-100 grey" style="margin-top:1rem">
-            <h1>{{formTitle}}</h1>
-            <form method="post" action="{{submitLink}}" id="serverDefinition">
-                <ul class="list-disc my-4">
-                    <li>
-                        <label for="server-name">Server name</label>
-                        <input type="text" id="server-name" name="server-name" required="required" value="{{server.serverName}}">
+    <div class="grid gap-8 md:grid-cols-2 mt-10">
+        <section class="mt-4 rounded-2xl border bg-neutral-50 p-5 md:p-6">
+            <h1 class="mb-4 text-2xl font-semibold">{{formTitle}}</h1>
+            <form method="post" action="{{submitLink}}" id="serverDefinition" class="space-y-6">
+                <ul class="list-disc space-y-4 pl-5">
+                    <li class="inline-flex w-full">
+                        <label for="server-name" class="block text-sm font-medium">Server name</label>
+                        <input type="text" id="server-name" name="server-name" required="required" value="{{server.serverName}}" class="w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                     </li>
                     {{#if editingView}}
-                    <li>
-                        <label for="server-location">Server Location (Optional).</label>
-                        <input type="text" id="server-location" name="server-location" value="{{server.serverLocation}}"><br>
-                        <label for="server-location">Server Location Note (Optional, Encrypted).</label>
-                        <input type="text" id="server-location" name="server-location-note" class="encrypted_value" value="{{server.serverLocation_note}}">
+                    <li class="inline-flex w-full">
+                        <label for="server-location" class="text-sm font-medium pr-2">Server Location (Optional)</label>
+                        <input type="text" id="server-location" name="server-location" value="{{server.serverLocation}}" class="w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30"><br>
+                        <label for="server-location" class="text-sm font-medium ml-5 pr-2">Server Location Note (Optional, Encrypted)</label>
+                        <input type="text" id="server-location" name="server-location-note" class="encrypted_value w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" value="{{server.serverLocation_note}}">
                     </li>
-                    <li>
-                        <label for="server-network">Server Network (Optional, encrypted).</label>
-                        <input type="text" id="server-network" name="server-network" class="encrypted_value" value="{{server.serverNetwork}}">
+                    <li class="inline-flex w-full">
+                        <label for="server-network" class="block text-sm font-medium">Server Network (Optional, encrypted).</label>
+                        <input type="text" id="server-network" name="server-network" class="encrypted_value w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" value="{{server.serverNetwork}}">
                     </li>
-                    <li>
-                        <label for="server-cpu">Server CPU Type</label>
-                        <select id="server-cpu" name="server-cpu">
+                    <li class="inline-flex w-full">
+                        <label for="server-cpu" class="block text-sm font-medium">Server CPU Type</label>
+                        <select id="server-cpu" name="server-cpu" class="w-full rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                             <option value="amd" selected>Amd</option>
                         </select>
                     </li>
-                    <li>
-                        <label for="server-user">Server User (Optional, encrypted)</label>
-                        <input type="text" id="server-user" name="server-user" value="{{server.serverUser}}" class="encrypted_value">
+                    <li class="inline-flex w-full">
+                        <label for="server-user" class="block text-sm font-medium">Server User (Optional, encrypted)</label>
+                        <input type="text" id="server-user" name="server-user" value="{{server.serverUser}}" class="encrypted_value w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                     </li>
-                    <li>
-                        <label for="ssh-port">SSH Port (Optional, encrypted)</label>
-                        <input type="text" id="ssh-port" name="ssh-port" value="{{server.sshPort}}" class="encrypted_value">
+                    <li class="inline-flex w-full">
+                        <label for="ssh-port" class="block text-sm font-medium">SSH Port (Optional, encrypted)</label>
+                        <input type="text" id="ssh-port" name="ssh-port" value="{{server.sshPort}}" class="encrypted_value w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                     </li>
-                    <li>
-                        <label for="operation-start">Operation Start:</label>
-                        <input type="date" name="operation-start" id="operation-start" value="{{server.operationStart}}">
+                    <li class="inline-flex w-full">
+                        <label for="operation-start" class="block text-sm font-medium">Operation Start:</label>
+                        <input type="date" name="operation-start" id="operation-start" value="{{server.operationStart}}" class="w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                     </li>
-                    <li>
-                        <label for="vpn-id">VPN ID.</label>
-                        <input type="text" id="vpn-id" name="vpn-id" value="{{server.vpnId}}">
-                        <label for="vpn-expiration">Expiration:</label>
-                        <input type="date" name="vpn-expiration" id="vpn-expiration" value="{{server.vpnExpiration}}">
+                    <li class="inline-flex w-full">
+                        <label for="vpn-id" class="block text-sm font-medium pr-2">VPN ID.</label>
+                        <input type="text" id="vpn-id" name="vpn-id" value="{{server.vpnId}}" class="w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
+                        <label for="vpn-expiration" class="block text-sm font-medium ml-5 pr-2">Expiration:</label>
+                        <input type="date" name="vpn-expiration" id="vpn-expiration" value="{{server.vpnExpiration}}" class="w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                     </li>
                     {{/if}}
                 </ul>
                 {{#if editingView}}
-                <div><h4>Staking clients selection</h4>
-                    <ul class="list-disc my-4">
-                        <li>Execution client(s)
-                            <ol class="list-decimal space-y-2 pl-6">
+                <div class="space-y-6 mt-15">
+                    <h4 class="text-lg font-semibold">Staking clients selection</h4>
+                    <ul class="list-disc space-y-6 pl-5">
+                        <li>
+                            <div class="mb-2 font-medium">Execution client(s)</div>
+                            <ol class="list-decimal space-y-3 pl-6">
                                 {{#each server.execution}}
-                                <li><label for="ec_1">Execution Client</label>
-                                    <select id="ec_1" name="ec_1" onchange="OnClientChanged('ec_1')">
+                                <li><label for="ec_1" class="text-sm">Execution Client</label>
+                                    <select id="ec_1" name="ec_1" onchange="OnClientChanged('ec_1')" class="rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                                         <option value="nethermind" {{#ifEqual this.client "nethermind"}}selected{{/ifEqual}}>Nethermind</option>
                                         <option value="erigon"{{#ifEqual this.client "erigon"}}selected{{/ifEqual}}>Erigon</option>
-                                        <option value="geth" {{#ifEqual this.client "geth"}}selected{{/ifEqual}} class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">Geth (Ethereum only)</option>
+                                        <option value="geth" {{#ifEqual this.client "geth"}}selected{{/ifEqual}} class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hidden{{/ifEqual}} ethereum-chain">Geth (Ethereum only)</option>
                                     </select>
-                                    {{#if ../editingView}}<label for="ec_1_ver">Version </label> <input type="text" id="ec_1_ver" name="ec_1_ver" placeholder="1.25" value="{{this.ver}}" style="width:50px">{{/if}}
+                                    {{#if ../editingView}}<label for="ec_1_ver" class="ml-3 text-sm">Version </label> <input type="text" id="ec_1_ver" name="ec_1_ver" placeholder="1.25" value="{{this.ver}}" class="w-[70px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30">{{/if}}
                                 </li>
                                 {{/each}}
                             </ol>
-                            <p><i>* Support for defining more consensus clients will be added later</i></p>
+                            <p  class="mt-2 text-sm italic text-neutral-900">* Support for defining more consensus clients will be added later</p>
                         </li>
-                        <li>Consensus client(s)
-                            <ol class="list-decimal space-y-2 pl-6">
+                        <li><div class="mb-2 font-medium">Consensus client(s)</div>
+                            <ol class="list-decimal space-y-3 pl-6">
                                 {{#each server.consensus}}
-                                <li>
-                                    <label for="cc_1">Consensus Client</label>
-                                    <select id="cc_1" name="cc_1" onchange="OnClientChanged('cc_1')">
+                                <li class="flex flex-wrap items-center gap-2">
+                                    <label for="cc_1" class="text-sm">Consensus Client</label>
+                                    <select id="cc_1" name="cc_1" onchange="OnClientChanged('cc_1')" class="rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                                         <option value="lighthouse" {{#ifEqual this.client "lighthouse"}}selected{{/ifEqual}}>Lighthouse</option>
                                         <option value="lodestar" {{#ifEqual this.client "lodestar"}}selected{{/ifEqual}}>Lodestar</option>
                                         <option value="teku" {{#ifEqual this.client "teku"}}selected{{/ifEqual}}>Teku</option>
-                                        <option value="prysm" {{#ifEqual this.client "prysm"}}selected{{/ifEqual}} class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">Prysm (Ethereum only)</option>
+                                        <option value="prysm" {{#ifEqual this.client "prysm"}}selected{{/ifEqual}} class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hidden{{/ifEqual}} ethereum-chain">Prysm (Ethereum only)</option>
                                     </select>
-                                    <label for="cc_1_ver">Version</label> <input type="text" id="cc_1_ver" name="cc_1_ver" placeholder="5.3.0" value="{{this.ver}}" style="width:50px">
+                                    <label for="cc_1_ver" class="ml-3 text-sm">Version</label> <input type="text" id="cc_1_ver" name="cc_1_ver" placeholder="{{this.ver}}" value="{{this.ver}}" class="w-[80px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30">
                                 </li>
                                 {{/each}}
                             </ol>
-                            <p><i>* Support for defining more consensus clients will be added later</i></p>
+                            <p class="mt-2 text-sm italic text-neutral-900">* Support for defining more consensus clients will be added later</p>
                         </li>
-                        <li><h4>Client-based technologies</h4>
+                        <li>
+                            <h4 class="mb-2 text-lg font-semibold">Client-based technologies</h4>
                             <div class="client-oriented" data-client="lighthouse">
-                                <p>No technology required</p>
+                                <p class="text-sm text-neutral-900">No technology required</p>
                             </div>
-                            <div class="hide client-oriented" data-client="lodestar">
-                                <label for="nodejs_ver">NodeJs ver</label>
-                                <input type="text" id="nodejs_ver" name="nodejs_ver" value="{{../server.nodejs_ver}}">
+                            <div class="client-oriented mt-2 space-y-2 hidden" data-client="lodestar">
+                                <label for="nodejs_ver" class="text-sm font-medium pr-2">NodeJs ver</label>
+                                <input type="text" id="nodejs_ver" name="nodejs_ver" value="{{../server.nodejs_ver}}" class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30">
                             </div>
-                            <div class="hide client-oriented" data-client="teku">
-                                <label for="jdk_ver">jdk ver</label>
-                                <input type="number" id="jdk_ver" name="jdk_ver" value="{{../server.jdk_ver}}">
+                            <div class="client-oriented mt-2 space-y-2 hidden" data-client="teku">
+                                <label for="jdk_ver" class="text-sm font-medium pr-2">jdk ver</label>
+                                <input type="number" id="jdk_ver" name="jdk_ver" value="{{../server.jdk_ver}}" class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30">
                             </div>
                         </li>
                         <li>
-                            <h4>Chains configuration</h4>
-                            <div class="tabselector">
-                                <nav class="egrid egrid-2">
-                                    <button class="tab selected" data-tabpanel="1" type="button">Ethereum chain</button>
-                                    <button class="tab" data-tabpanel="2" type="button">Gnosis chain</button>
+                            <h4 class="mb-3 text-lg font-semibold">Chains configuration</h4>
+                            <div class="tabselector bg-gray-200 p-5 pt-5 rounded-xl shadow-md">
+                                <nav class="mb-5 grid gap-2 md:grid-cols-2">
+                                    <button class="w-full tab selected px-3 py-2 text-xl" data-tabpanel="1" type="button">Ethereum chain</button>
+                                    <button class="w-full tab px-3 py-2 text-xl" data-tabpanel="2" type="button">Gnosis chain</button>
                                 </nav>
-                                <div class="tabpanel selected">
-                                    <label>
+                                <div class="tabpanel selected mt-4 space-y-4">
+                                    <label class="inline-flex items-center gap-2">
                                         <input {{#if server.chains.ethereum}}checked{{/if}} type="checkbox" name="ethereum" value="ethereum" onclick="toggleSelect('ethereum-chain')" class="checkbox-required" data-checkbox="chain"> Active
                                     </label>
                                     {{#each server.execution}}
                                     {{!--#each this.ports--}}
-                                    <div class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
-                                        <h4>Execution client service (Ethereum)</h4>
-                                        <label for="ethereum_ec_1_sn">Execution client Service name for Ethereum</label>
-                                        <input type="text" id="ethereum_ec_1_sn" name="ethereum_ec_1_sn" value="{{../server.portsByChain.execution.ethereum.0.service_name}}"><br>
-                                        <label for="ethereum_cc_1_sn">Execution client Data for Ethereum</label>
-                                        <input type="text" id="ethereum_ec_1_sdp" name="ethereum_ec_1_sdp" value="{{../server.portsByChain.execution.ethereum.0.data_path}}">
-                                        <h5>Ports for Ethereum chain</h5>
-                                        <label for="ethereum_ec_1_p">Main port</label>
-                                        <input type="number" id="ethereum_ec_1_p" name="ethereum_ec_1_p" value="{{../server.portsByChain.execution.ethereum.0.port}}"> (Default: <code>8545</code>)<br>
-                                        <label for="ethereum_ec_1_p_c">P2P port</label>
-                                        <input type="number" id="ethereum_ec_1_p_c" name="ethereum_ec_1_p_c" value="{{../server.portsByChain.execution.ethereum.0.p2p_port}}"> (Default: <code>30303</code>)<br>
-                                        <label for="ethereum_ec_1_p_r">RCP port</label>
-                                        <input type="number" id="ethereum_ec_1_p_r" name="ethereum_ec_1_p_r" value="{{../server.portsByChain.execution.ethereum.0.port_2}}"> (Default: <code>8551</code>)
+                                    <div class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hidden{{/ifEqual}} ethereum-chain space-y-2">
+                                        <h4 class="font-semibold">Execution client service (Ethereum)</h4>
+                                        <div class="flex items-center gap-3">
+                                            <label for="ethereum_ec_1_sn" class="block text-sm font-medium shrink-0">Execution client Service name for Ethereum</label>
+                                            <input type="text" id="ethereum_ec_1_sn" name="ethereum_ec_1_sn" value="{{../server.portsByChain.execution.ethereum.0.service_name}}" class="flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30"><br>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <label for="ethereum_cc_1_sn" class="block text-sm font-medium shrink-0">Execution client Data for Ethereum</label>
+                                            <input type="text" id="ethereum_ec_1_sdp" name="ethereum_ec_1_sdp" value="{{../server.portsByChain.execution.ethereum.0.data_path}}" class="flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
+                                        </div>
+                                        
+                                        <h5 class="pt-2 font-medium">Ports for Ethereum chain</h5>
+                                        <label for="ethereum_ec_1_p" class="mr-2 text-sm">Main port</label>
+                                        <input type="number" id="ethereum_ec_1_p" name="ethereum_ec_1_p" value="{{../server.portsByChain.execution.ethereum.0.port}}" class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30"> (Default: <code>8545</code>)<br>
+                                        <label for="ethereum_ec_1_p_c" class="mr-2 text-sm">P2P port</label>
+                                        <input type="number" id="ethereum_ec_1_p_c" name="ethereum_ec_1_p_c" value="{{../server.portsByChain.execution.ethereum.0.p2p_port}}" class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30"> (Default: <code>30303</code>)<br>
+                                        <label for="ethereum_ec_1_p_r" class="mr-2 text-sm">RCP port</label>
+                                        <input type="number" id="ethereum_ec_1_p_r" name="ethereum_ec_1_p_r" value="{{../server.portsByChain.execution.ethereum.0.port_2}}" class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30"> (Default: <code>8551</code>)
                                     </div>
                                     {{!--/each--}}
                                     {{/each}}
                                     {{#each server.consensus}}
                                     {{!--#each this.ports--}}
-                                    <div class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
-                                        <h4>Consensus client service (Ethereum)</h4>
-                                        <label for="ethereum_cc_1_sn">Consensus client Service name for Ethereum</label>
-                                        <input type="text" id="ethereum_cc_1_sn" name="ethereum_cc_1_sn" value="{{../server.portsByChain.consensus.ethereum.0.service_name}}"><br>
-                                        <label for="ethereum_cc_1_sn">Consensus client Data for Ethereum</label>
-                                        <input type="text" id="ethereum_cc_1_sdp" name="ethereum_cc_1_sdp" value="{{../server.portsByChain.consensus.ethereum.0.data_path}}">
-                                        <h5>Ports for Ethereum chain</h5>
-                                        <label for="ethereum_cc_1_p">Main port</label>
-                                        <input type="number" id="ethereum_cc_1_p" name="ethereum_cc_1_p" value="{{../server.portsByChain.consensus.ethereum.0.port}}"><br>
-                                        <label for="ethereum_cc_1_p_c">P2P port</label>
-                                        <input type="number" id="ethereum_cc_1_p_c" name="ethereum_cc_1_p_c" value="{{../server.portsByChain.consensus.ethereum.0.p2p_port}}"><br>
-                                        <label for="ethereum_cc_1_p_q">Quic port</label>
-                                        <input type="number" id="ethereum_cc_1_p_q" name="ethereum_cc_1_p_q" value="{{../server.portsByChain.consensus.ethereum.0.port_2}}">
+                                    <div class="{{#ifEqual ../server.chains.ethereum "true"}}{{else}}hidden{{/ifEqual}} ethereum-chain space-y-2">
+                                        <h4 class="font-semibold">Consensus client service (Ethereum)</h4>
+                                        <div class="flex items-center gap-3">
+                                            <label for="ethereum_cc_1_sn" class="text-sm font-medium shrink-0">Consensus client Service name for Ethereum</label>
+                                            <input type="text" id="ethereum_cc_1_sn" name="ethereum_cc_1_sn" value="{{../server.portsByChain.consensus.ethereum.0.service_name}}" class="flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30"><br>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <label for="ethereum_cc_1_sn" class="text-sm font-medium shrink-0">Consensus client Data for Ethereum</label>
+                                            <input type="text" id="ethereum_cc_1_sdp" name="ethereum_cc_1_sdp" value="{{../server.portsByChain.consensus.ethereum.0.data_path}}" class="flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
+                                        </div>
+                                        
+                                        <h5 class="pt-2 font-medium">Ports for Ethereum chain</h5>
+                                        <label for="ethereum_cc_1_p" class="mr-2 text-sm">Main port</label>
+                                        <input type="number" id="ethereum_cc_1_p" name="ethereum_cc_1_p" value="{{../server.portsByChain.consensus.ethereum.0.port}}" class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30"><br>
+                                        <label for="ethereum_cc_1_p_c" class="mr-2 text-sm">P2P port</label>
+                                        <input type="number" id="ethereum_cc_1_p_c" name="ethereum_cc_1_p_c" value="{{../server.portsByChain.consensus.ethereum.0.p2p_port}}" class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30"><br>
+                                        <label for="ethereum_cc_1_p_q" class="mr-2 text-sm">Quic port</label>
+                                        <input type="number" id="ethereum_cc_1_p_q" name="ethereum_cc_1_p_q" value="{{../server.portsByChain.consensus.ethereum.0.port_2}}" class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30">
                                     </div>
                                     {{!--/each--}}
                                     {{/each}}
                                 </div>
-                                <div class="tabpanel">
-                                    <label>
+                                <div class="tabpanel mt-4 space-y-4">
+                                    <label class="inline-flex items-center gap-2">
                                         <input {{#if server.chains.gnosis}}checked{{/if}} type="checkbox" name="gnosis" value="gnosis" onclick="toggleSelect('gnosis-chain')" class="checkbox-required" data-checkbox="chain"> Active
                                     </label>
                                     {{#each server.execution}}
                                     {{!--#each this.ports--}}
-                                    <div class="{{#ifEqual ../server.chains.gnosis "true"}}{{else}}hide{{/ifEqual}} gnosis-chain">
-                                        <h4>Execution client service (Gnosis)</h4>
-                                        <label for="gnosis_ec_1_sn">Execution client Service name for Gnosis</label>
-                                        <input type="text" id="gnosis_ec_1_sn" name="gnosis_ec_1_sn" value="{{../server.portsByChain.execution.gnosis.0.service_name}}"><br>
-                                        <label for="gnosis_cc_1_sn">Execution client Data for Gnosis</label>
-                                        <input type="text" id="gnosis_ec_1_sdp" name="gnosis_ec_1_sdp" value="{{../server.portsByChain.execution.gnosis.0.data_path}}">
-                                        <h5>Ports for Gnosis chain</h5>
-                                        <label for="gnosis_ec_1_p">Main port</label>
-                                        <input type="number" id="gnosis_ec_1_p" name="gnosis_ec_1_p" value="{{../server.portsByChain.execution.gnosis.0.port}}"> (Default: <code>8545</code>)<br>
-                                        <label for="ec_1_p_c">P2P port</label>
-                                        <input type="number" id="gnosis_ec_1_p_c" name="gnosis_ec_1_p_c" value="{{../server.portsByChain.execution.gnosis.0.p2p_port}}"> (Default: <code>30303</code>)<br>
-                                        <label for="gnosis_ec_1_p_r">RCP port</label>
-                                        <input type="number" id="gnosis_ec_1_p_r" name="gnosis_ec_1_p_r" value="{{../server.portsByChain.execution.gnosis.0.port_2}}"> (Default: <code>8551</code>)
+                                    <div class="{{#ifEqual ../server.chains.gnosis "true"}}{{else}}hidden{{/ifEqual}} gnosis-chain space-y-2">
+                                        <h4 class="font-semibold">Execution client service (Gnosis)</h4>
+                                        <div class="flex items-center gap-3">
+                                            <label for="gnosis_ec_1_sn" class="text-sm font-medium shrink-0">Execution client Service name for Gnosis</label>
+                                            <input type="text" id="gnosis_ec_1_sn" name="gnosis_ec_1_sn" value="{{../server.portsByChain.execution.gnosis.0.service_name}}" class="flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30"><br>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <label for="gnosis_cc_1_sn" class="text-sm font-medium shrink-0">Execution client Data for Gnosis</label>
+                                            <input type="text" id="gnosis_ec_1_sdp" name="gnosis_ec_1_sdp" value="{{../server.portsByChain.execution.gnosis.0.data_path}}" class="flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
+                                        </div>
+
+                                        <h5 class="pt-2 font-medium">Ports for Gnosis chain</h5>
+                                        <label for="gnosis_ec_1_p" class="mr-2 text-sm">Main port</label>
+                                        <input type="number" id="gnosis_ec_1_p" name="gnosis_ec_1_p" value="{{../server.portsByChain.execution.gnosis.0.port}}" class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30"> (Default: <code>8545</code>)<br>
+                                        <label for="ec_1_p_c" class="mr-2 text-sm">P2P port</label>
+                                        <input type="number" id="gnosis_ec_1_p_c" name="gnosis_ec_1_p_c" value="{{../server.portsByChain.execution.gnosis.0.p2p_port}}" class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30"> (Default: <code>30303</code>)<br>
+                                        <label for="gnosis_ec_1_p_r" class="mr-2 text-sm">RCP port</label>
+                                        <input type="number" id="gnosis_ec_1_p_r" name="gnosis_ec_1_p_r" value="{{../server.portsByChain.execution.gnosis.0.port_2}}" class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30"> (Default: <code>8551</code>)
                                     </div>
                                     {{!--/each--}}
                                     {{/each}}
                                     {{#each server.consensus}}
-                                    <div class="{{#ifEqual ../server.chains.gnosis "true"}}{{else}}hide{{/ifEqual}} gnosis-chain">
-                                        <h4>Consensus client service (Gnosis)</h4>
-                                        <label for="gnosis_cc_1_sn">Consensus client Service name for Gnosis</label>
-                                        <input type="text" id="gnosis_cc_1_sn" name="gnosis_cc_1_sn" value="{{../server.portsByChain.consensus.gnosis.0.service_name}}"><br>
-                                        <label for="gnosis_cc_1_sn">Consensus client Data for Gnosis</label>
-                                        <input type="text" id="gnosis_cc_1_sdp" name="gnosis_cc_1_sdp" value="{{../server.portsByChain.consensus.gnosis.0.data_path}}">
-                                        <h5>Ports for Gnosis chain</h5>
-                                        <label for="gnosis_cc_1_p">Main port</label>
-                                        <input type="number" id="gnosis_cc_1_p" name="gnosis_cc_1_p" value="{{../server.portsByChain.consensus.gnosis.0.port}}"><br>
-                                        <label for="gnosis_cc_1_p_c">P2P port</label>
-                                        <input type="number" id="gnosis_cc_1_p_c" name="gnosis_cc_1_p_c" value="{{../server.portsByChain.consensus.gnosis.0.p2p_port}}"><br>
-                                        <label for="gnosis_cc_1_p_q">Quic port</label>
-                                        <input type="number" id="gnosis_cc_1_p_q" name="gnosis_cc_1_p_q" value="{{../server.portsByChain.consensus.gnosis.0.port_2}}">
+                                    <div class="{{#ifEqual ../server.chains.gnosis "true"}}{{else}}hidden{{/ifEqual}} gnosis-chain space-y-2">
+                                        <h4 class="font-semibold">Consensus client service (Gnosis)</h4>
+                                        <div class="flex items-center gap-3">
+                                            <label for="gnosis_cc_1_sn" class="text-sm font-medium shrink-0">Consensus client Service name for Gnosis</label>
+                                            <input type="text" id="gnosis_cc_1_sn" name="gnosis_cc_1_sn" value="{{../server.portsByChain.consensus.gnosis.0.service_name}}" class="flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30"><br>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <label for="gnosis_cc_1_sn" class="text-sm font-medium shrink-0">Consensus client Data for Gnosis</label>
+                                            <input type="text" id="gnosis_cc_1_sdp" name="gnosis_cc_1_sdp" value="{{../server.portsByChain.consensus.gnosis.0.data_path}}" class="flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
+                                        </div>
+                                        
+                                        <h5 class="pt-2 font-medium">Ports for Gnosis chain</h5>
+                                        <label for="gnosis_cc_1_p" class="mr-2 text-sm">Main port</label>
+                                        <input type="number" id="gnosis_cc_1_p" name="gnosis_cc_1_p" value="{{../server.portsByChain.consensus.gnosis.0.port}}"class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30"><br>
+                                        <label for="gnosis_cc_1_p_c" class="mr-2 text-sm">P2P port</label>
+                                        <input type="number" id="gnosis_cc_1_p_c" name="gnosis_cc_1_p_c" value="{{../server.portsByChain.consensus.gnosis.0.p2p_port}}"class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30"><br>
+                                        <label for="gnosis_cc_1_p_q" class="mr-2 text-sm">Quic port</label>
+                                        <input type="number" id="gnosis_cc_1_p_q" name="gnosis_cc_1_p_q" value="{{../server.portsByChain.consensus.gnosis.0.port_2}}"class="w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30">
                                     </div>
                                     {{/each}}
                                 </div>
                             </div>
-                            Check port availability: <code>sudo ss -tulpn | grep ':PORT'</code>
+                            <p class="mt-4 text-sm">Check port availability: <code>sudo ss -tulpn | grep ':PORT'</code></p>
                         </li>
-                        <li><h4>Service-based clients</h4>
-                            <ul class="list-disc my-4">
-                                <li class="{{#ifEqual server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
-                                    <label for="mb_1">MEV Client</label>
-                                    <select id="mb_1" name="mb_1">
+                        <li>
+                            <h4 class="mb-2 text-lg font-semibold">Service-based clients</h4>
+                            <ul  class="list-disc space-y-3 pl-5">
+                                <li class="{{#ifEqual server.chains.ethereum "true"}}{{else}}hidden{{/ifEqual}} ethereum-chain space-y-2">
+                                    <label for="mb_1" class="text-sm">MEV Client</label>
+                                    <select id="mb_1" name="mb_1" class="rounded-lg border bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
                                         <option value="mevboost" selected>MEV-Boost (Ethereum only)</option>
                                     </select>
-                                    <label for="mb_1_ver">Ver </label><input type="text" id="mb_1_ver" name="mb_1_ver" placeholder="1.8" value="{{server.mev.0.ver}}">
+                                    <label for="mb_1_ver" class="ml-2 text-sm">Ver </label><input type="text" id="mb_1_ver" name="mb_1_ver" placeholder="{{server.mev.0.ver}}" value="{{server.mev.0.ver}}" class="w-[80px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30">
                                 </li>
-                                <li class="{{#ifEqual server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
-                                    <label>Rocketpool</label>: <input type="text" name="sc_rocketpool_ver" placeholder="" value="{{server.service_obj.rocketpool.ver}}">
+                                <li class="{{#ifEqual server.chains.ethereum "true"}}{{else}}hidden{{/ifEqual}} ethereum-chain space-y-2">
+                                    <label class="text-sm">Rocketpool</label>: <input type="text" name="sc_rocketpool_ver" placeholder="" value="{{server.service_obj.rocketpool.ver}}" class="ml-1 w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30">
                                 </li>
                                 <li>
-                                    <label>Stakewise</label>: <input type="text" name="sc_stakewise_ver" placeholder="" value="{{server.service_obj.stakewise.ver}}">
+                                    <label class="text-sm">Stakewise</label>: <input type="text" name="sc_stakewise_ver" placeholder="" value="{{server.service_obj.stakewise.ver}}" class="ml-1 w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30">
                                 </li>
-                                <li class="{{#ifEqual server.chains.ethereum "true"}}{{else}}hide{{/ifEqual}} ethereum-chain">
-                                    <label>Lido</label>: <input type="text" name="sc_lido_ver" value="{{server.service_obj.lido.ver}}">
+                                <li class="{{#ifEqual server.chains.ethereum "true"}}{{else}}hidden{{/ifEqual}} ethereum-chain space-y-2">
+                                    <label class="text-sm">Lido</label>: <input type="text" name="sc_lido_ver" value="{{server.service_obj.lido.ver}}" class="ml-1 w-[120px] rounded-lg border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-black/30">
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
                 {{/if}} {{! Editing view end}}
-                <div class="mt-20 text-center">
+
+                <div class="mt-10 text-center space-y-3">
                     {{#if editingView}}
-                    <label>Encryption password</label>
-                    <input type="text" placeholder="Encryption password" class="encryption-password" id="encryption_psw_metadata">
+                    
+                        <label class="text-sm font-medium">Encryption password</label>
+                        <input type="text" placeholder="Encryption password" id="encryption_psw_metadata" class="encryption-password w-full max-w-xs rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">
+                    
+                    <input type="submit" class="submit inline-flex items-center rounded-lg bg-black px-5 py-2 mt-5 text-white hover:opacity-90 cursor-pointer" id="submit-server" value="{{formSubmit}}">
                     {{/if}}
-                    <input type="submit" class="submit btn btn-black btn-rounded" id="submit-server" value="{{formSubmit}}">
                 </div>
             </form>
 
@@ -230,7 +257,7 @@
                     var elms = document.getElementsByClassName(selectId);
                     for(var elm of elms){
                         console.log("toggleSelect elements:", elm);
-                        elm.classList.toggle("hide");
+                        elm.classList.toggle("hidden");
                     }
                 }
                 const clientsDB = {{{clients}}};
@@ -242,9 +269,9 @@
                     for(const elm of document.getElementsByClassName("client-oriented")){
                         console.log(elm, elm.dataset.client, clientSelected);
                         if(elm.dataset.client === clientSelected) {
-                            elm.classList.remove("hide");
-                        } else if(!elm.classList.contains("hide")){
-                            elm.classList.add("hide");
+                            elm.classList.remove("hidden");
+                        } else if(!elm.classList.contains("hidden")){
+                            elm.classList.add("hidden");
                         }
                     }
 
@@ -350,27 +377,27 @@
 
         {{#if editingView}}
         <section>
-            <div style="margin:1rem;" class="grey">
-                <h2>API credentials</h2>
-                <ul class="list-disc my-4">
+            <div class="mt-4 rounded-2xl border bg-neutral-50 p-5 md:p-6">
+                <h2 class="text-xl font-semibold">API credentials</h2>
+                <ul class="list-disc my-4 pl-5 space-y-1">
                     <li>Account ID: <code>{{account.id}}</code></li>
                     <li>SERVER ID: <code>{{server.id}}</code></li>
                     <li>API TOKEN: {{#if account.api_token}}
                         <code>{{account.api_token}}</code>
                         {{else}}
-                        <button><a href="/contact" target="_blank">Get Token</a></button>
+                        <button><a href="/contact" target="_blank" class="inline-flex items-center rounded-lg border px-3 py-1 hover:bg-neutral-50">Get Token</a></button>
                         {{/if}}
                     </li>
                 </ul>
             </div>
-            <div class="mt-1" style="margin:1rem">
-                <h2>Server notes (internal, encrypted)</h2>
-                <form method="post" action="{{submitNoteLink}}" id="editServerNote">
-                    <textarea type="text" id="server-note" name="note" rows="20" cols="100" class="encrypted_value">{{{server.serverNote}}}</textarea>
-                    <div class="mt-20 text-center"></div>
-                        <label>Encryption password</label>
-                        <input type="text" placeholder="Encryption password" class="encryption-password" id="encryption_psw_notes">
-                        <input type="submit" class="submit btn btn-black btn-rounded" value="Update">
+            <div class="mt-4 rounded-2xl border bg-neutral-50 p-5 md:p-6">
+                <h2 class="text-xl font-semibold">Server notes (internal, encrypted)</h2>
+                <form method="post" action="{{submitNoteLink}}" id="editServerNote" class="mt-3 space-y-4">
+                    <textarea type="text" id="server-note" name="note" rows="12" class="encrypted_value w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30">{{{server.serverNote}}}</textarea>
+                    <div class="pt-2 text-center"></div>
+                        <label class="text-sm font-medium" for="encryption_psw_notes">Encryption password</label>
+                        <input type="text" placeholder="Encryption password" class="encryption-password mt-1 w-full max-w-xs rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" id="encryption_psw_notes">
+                        <input type="submit" class="submit inline-flex items-center rounded-lg bg-black px-5 py-2 mt-5 text-white hover:opacity-90 cursor-pointer" value="Update">
                     </div>
                 </form>
                 <script>
@@ -403,11 +430,11 @@
     </div>
     {{/if}}
 	
-    <section class="grid">
-        <h2 class="mt-1">Server Actions (Unencrypted)</h2>
+    <section class="my-10">
+        <h2 class="mb-2 text-xl font-semibold">Server Actions (Unencrypted)</h2>
         <ol class="list-decimal space-y-2 pl-6">
              {{#each actions}}
-            <li>[{{this.timestamp}}] {{{this.action}}}</a></li>
+            <li>[{{formatDate this.timestamp}}] {{{this.action}}}</a></li>
             {{/each}}
         </ol>
         {{#if isOwner}}
@@ -426,4 +453,4 @@
 {{> scripts/cryptography}}
 {{> scripts/security-guard}}
 {{> scripts/tabselector}}
-{{> footer}}
+{{> footer_tailwind}}
