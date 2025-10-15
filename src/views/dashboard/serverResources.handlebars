@@ -1,12 +1,14 @@
-<body id="body">
+<main class="mx-auto max-w-[1700px] px-5 md:px-10">
 {{> header_dashboard}}
-<main>
-	<section class="grid mt-100 mb-100">
-        <h1>Server Resources</h1>
-        <div class="egrid">
+	<section class="grid gap-6 my-10">
+        <h1 class="text-2xl font-semibold">Server Resources</h1>
+        <div class="grid gap-6">
             {{#each resourcesByServer}}
-                <h2>Server {{this.[1].name}}</h2>
-                <canvas id="srv_{{this.[0]}}" name="lazy-canvas"></canvas>
+            <div class="block rounded-lg shadow-sm p-5">
+                <h2 class="mb-3 text-lg font-semibold">Server {{this.[1].name}}</h2>
+                <canvas id="srv_{{this.[0]}}" name="lazy-canvas" class="w-full h-full"></canvas>
+            </div>
+                
             {{/each}}
         </div>
     </section>

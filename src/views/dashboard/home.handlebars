@@ -48,7 +48,7 @@ ul.img-marker li {
                 </div>
                 <div class="grid md:grid-cols-2 gap-6">
                     {{#each this.servers}}
-                     <div class="destination-server rounded-xl bg-white p-4 shadow-sm">
+                     <div class="destination-server">
                         <h3 id="{{this.name}}" class="text-lg font-semibold">
                             <a href="/dashboard/server-node/define?id={{this.sid}}" class="underline underline-offset-2 hover:no-underline">{{this.name}}</a>
                         </h3>

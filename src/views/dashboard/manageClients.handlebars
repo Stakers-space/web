@@ -1,23 +1,22 @@
 {{> header_dashboard}}
-<main>
-	<section class="grid mt-100 mb-100">
-        <h1>{{formTitle}}</h1>
-        <ul class="list-disc my-4">
-            <li><a href="https://stakers.space/clients" target="_blank">https://stakers.space/clients</a></li>
-            <li><a href="https://beaconcha.in/ethClients" target="_blank">https://beaconcha.in/ethClients</a></li>
+<main class="mx-auto max-w-[1600px] px-5 md:px-10">
+	<section class="grid gap-6 my-10">
+        <h1 class="text-2xl font-semibold">{{formTitle}}</h1>
+        <ul class="list-disc pl-5 space-y-1">
+            <li><a href="https://stakers.space/clients" target="_blank" class="underline underline-offset-2 hover:no-underline">https://stakers.space/clients</a></li>
+            <li><a href="https://beaconcha.in/ethClients" target="_blank" class="underline underline-offset-2 hover:no-underline">https://beaconcha.in/ethClients</a></li>
         </ul>
         
-
-        <form method="post" action="{{submitLink}}">
-            <div id="json">
-                <label for="json" class="hide">JSON</label>
-                <textarea type="text" id="json" name="json" rows="65" cols="100" required>{{{clientsData}}}</textarea>
+        <form method="post" action="{{submitLink}}" id="clientsForm" class="space-y-4">
+            <div id="json" class="space-y-2">
+                <label for="json" class="hidden">JSON</label>
+                <textarea type="text" id="json" name="json" rows="65" required class="w-full min-h-[60vh] rounded-lg border px-3 py-2 font-mono text-sm outline-none focus:ring-2 focus:ring-black/30">{{{clientsData}}}</textarea>
             </div>
             {{#if failureCallback}}
-                <p class="login-error">{{{failureCallback}}}</p>
+                <p class="login-error text-red-600">{{{failureCallback}}}</p>
             {{/if}}
-            <div class="login-action mt-20" id="login-action">
-                <input type="submit" class="submit btn btn-black btn-rounded" id="submit" value="Submit">
+            <div class="login-action pt-2" id="login-action">
+                <input type="submit" class="submit inline-flex items-center rounded-lg bg-black px-5 py-2 text-white hover:opacity-90 cursor-pointer" id="submit" value="Submit">
             </div>
         </form>
     <script>
@@ -46,4 +45,4 @@
     </section>
 </main>
 {{> scripts/security-guard}}
-{{> footer}}
+{{> footer_tailwind}}

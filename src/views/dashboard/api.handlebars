@@ -1,19 +1,18 @@
-<body id="body">
 {{> header_dashboard}}
-<main>
-	<section class="grid mt-100 mb-100">
-        <h1>API credentials</h1>
-        <ul class="list-disc my-4">
+<main class="mx-auto max-w-[1600px] px-5 md:px-10">
+	<section class="grid gap-6 mt-24 mb-24">
+        <h1 class="text-2xl font-semibold">API credentials</h1>
+        <ul class="list-disc pl-5 space-y-1">
             <li><code>Account ID</code>: <code>{{account_id}}</code></li>
             <li><code>API token</code>: <code>{{account_api_token}}</code></li>
         </ul>
-        <h2 class="mt-30">API services</h2>
-        <ul class="list-disc my-4">
-            <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/monitor/validators_state" target="_blank">Validators state monitor through own server</a></li>
-            <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/monitor/hw_sources" target="_blank">PC resources monitor</a></li>
+        <h2 class="mt-6 text-xl font-semibold">API services</h2>
+        <ul class="list-disc pl-5 space-y-1">
+            <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/monitor/validators_state" target="_blank" class="underline underline-offset-2 hover:no-underline">Validators state monitor through own server</a></li>
+            <li><a href="https://github.com/Stakers-space/staking-scripts/tree/main/monitor/hw_sources" target="_blank" class="underline underline-offset-2 hover:no-underline">PC resources monitor</a></li>
             <li>Custom notifications sender - send any notification from your staking server(s)</li>
         </ul>
         
-        <p class="mt-20">API access is charged starts at $5 per month. Contact <a href="mailto:stakersspace@proton.me">stakersspace@proton.me</a> for the offer.</p>
+        <p class="mt-6 text-neutral-700">API access is charged starts at $5 per month. Contact <a href="mailto:stakersspace@proton.me" class="underline underline-offset-2 hover:no-underline">stakersspace@proton.me</a> for the offer.</p>
     </section>
 </main>
