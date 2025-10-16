@@ -210,11 +210,14 @@ GnosisController.prototype.DepositContract = function(req,res,next){
             // deposit contract
             res.locals.depositContract.lastState = depositContract.lastState;
             //res.locals.current.time = 
- 
-            res.locals.depositContract.chart = JSON.stringify(depositContract.historicalChart);
-            res.locals.depositContract.beaconchain_distribution = JSON.stringify(depositContract.lastState.beaconchain_distribution);
-            res.locals.depositContract.unclaimedgno_distribution = JSON.stringify(depositContract.lastState.unclaimedgno_distribution); 
-
+            try {
+                res.locals.depositContract.chart = JSON.stringify(depositContract.historicalChart);
+                res.locals.depositContract.beaconchain_distribution = JSON.stringify(depositContract.lastState.beaconchain_distribution);
+                res.locals.depositContract.unclaimedgno_distribution = JSON.stringify(depositContract.lastState.unclaimedgno_distribution); 
+            } catch(e){
+                console.error(e);
+            }
+            
             res.locals.chartsUIconfig = JSON.stringify({
                 apr:{legend:false,xaxis:false,yaxis:false},
                 validators:{legend:false,xaxis:false,yaxis:false},

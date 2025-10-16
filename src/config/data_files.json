@@ -25,5 +25,6 @@
             "gnosis": "data/cache/gnosis_validatorqueue.json"
         }
     },
-    "validatorsSnapshot": "data/cache/validators_snapshot"
+    "validatorsSnapshot": "data/cache/validators_snapshot",
+    "validatorWalletSnapshot": "data/cache/validators_snapshot_wlt"
 }

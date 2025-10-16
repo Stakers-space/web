@@ -105,7 +105,7 @@
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<a href="/gnosis-staking/deposit-contract-balance" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
 						<div class="mb-4">
-							<h2 class="text-xl font-semibold">{{depositContract.lastState.gno_balance}} GNO in deposit contract balance</h2>
+							<h2 class="text-xl font-semibold">{{formatNumber depositContract.lastState.gno_balance '0,0'}} GNO in deposit contract balance</h2>
 						</div>
 						<canvas id="depositcontractbalance_chart" name="lazy-canvas"></canvas>
 					</a>

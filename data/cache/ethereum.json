@@ -2543,53 +2543,53 @@
   },
   "valcount": {
     "total": {
-      "balance": 36098621.54446209,
-      "effective_balance": 36037625
+      "balance": 36110659.49047511,
+      "effective_balance": 36049666
     },
     "stateCount": {
       "pending_initialized": {
-        "validators": 1021,
-        "balance": 1269,
-        "eff_balance": 1259
+        "validators": 1022,
+        "balance": 1270,
+        "eff_balance": 1260
       },
       "pending_queued": {
-        "validators": 41,
-        "balance": 2280,
-        "eff_balance": 2280
+        "validators": 48,
+        "balance": 1536,
+        "eff_balance": 1536
       },
       "active_exiting": {
-        "validators": 55333,
-        "balance": 2340789.1611874844,
-        "eff_balance": 2339792
+        "validators": 54972,
+        "balance": 2329269.552829378,
+        "eff_balance": 2328247
       },
       "active_ongoing": {
-        "validators": 967470,
-        "balance": 33412315.968397394,
-        "eff_balance": 33353171
+        "validators": 967821,
+        "balance": 33438053.1882035,
+        "eff_balance": 33378940
       },
       "exited_unslashed": {
-        "validators": 2566,
-        "balance": 82131.26139443873,
-        "eff_balance": 82112
+        "validators": 2146,
+        "balance": 68690.09927936702,
+        "eff_balance": 68672
       },
       "withdrawal_done": {
-        "validators": 1076996,
-        "balance": 94.31851760700008,
+        "validators": 1077420,
+        "balance": 96.23617839300024,
         "eff_balance": 0
       },
       "withdrawal_possible": {
-        "validators": 7914,
-        "balance": 259741.83496515974,
-        "eff_balance": 259011
+        "validators": 8289,
+        "balance": 271744.41398447385,
+        "eff_balance": 271011
       }
     },
-    "id": "eth-valcount-400517",
+    "id": "eth-valcount-400564",
     "partitionKey": "eth-valcount",
-    "time": 1760623253,
-    "_rid": "VPZWAPgLfukkNQAAAAAAAA==",
-    "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukkNQAAAAAAAA==/",
-    "_etag": "\"1c00528a-0000-1600-0000-68f0fa950000\"",
+    "time": 1760641254,
+    "_rid": "VPZWAPgLfukuNQAAAAAAAA==",
+    "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukuNQAAAAAAAA==/",
+    "_etag": "\"1c0057dd-0000-1600-0000-68f140e60000\"",
     "_attachments": "attachments/",
-    "_ts": 1760623253
+    "_ts": 1760641254
   }
 }

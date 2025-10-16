@@ -4,31 +4,46 @@ const crypto = require('crypto');
 const { pipeline } = require('stream');
 const dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
 
-exports.UpdateValidatorsBalancesFile = async (req,res) => {
-    const DATA_DIR = path.join(__dirname, '..', '..', dataFile.validatorsSnapshot);
-    const TMP_DIR  = path.join('/tmp', 'validators_snapshot_uploads');
-    const MAX_BYTES = 50 * 1024 * 1024; // 50 MB
-	
-    try {
-        // file name validation
-         const rawFileName = (req.headers['x-filename'] || '').toString().trim();
-        if (!rawFileName) return res.status(400).send('Missing X-Filename header');
-
-		let base = path.basename(rawFileName);
-        if (!base.toLowerCase().endsWith('.json'))  return res.status(415).send('Only .json files are allowed');
-        if (!/^[a-zA-Z0-9._-]+\.json$/.test(base)) return res.status(400).send('Invalid filename');
+exports.FileValidation = (req, res, next) => {
+    // file name validation
+    const rawFileName = (req.headers['x-filename'] || '').toString().trim();
+    if (!rawFileName) return res.status(400).send('Missing X-Filename header');
     
-        // content-type header validation
-        const ct = (req.headers['content-type'] || '').toLowerCase();
-        if (!ct.includes('application/json') && !ct.includes('application/octet-stream')) {
-            return res.status(415).send('Expected Content-Type: application/json or application/octet-stream');
-        }
+    let base = path.basename(rawFileName);
+    if (!base.toLowerCase().endsWith('.json'))  return res.status(415).send('Only .json files are allowed');
+    if (!/^[a-zA-Z0-9._-]+\.json$/.test(base)) return res.status(400).send('Invalid filename');
+        
+    // content-type header validation
+    const ct = (req.headers['content-type'] || '').toLowerCase();
+    if (!ct.includes('application/json') && !ct.includes('application/octet-stream')) {
+        return res.status(415).send('Expected Content-Type: application/json or application/octet-stream');
+    }
+    next();
+}
 
+exports.PutValidatorsBalancesFile = async (req,res, next) => {
+    res.locals.DATA_DIR = path.join(__dirname, '..', '..', dataFile.validatorsSnapshot);
+    res.locals.TMP_DIR  = path.join('/tmp', 'validators_snapshot_uploads');
+    res.locals.MAX_BYTES = 50 * 1024 * 1024; // 50 MB
+    res.locals.FNAME = "UpdateValidatorsBalancesFile";
+	next();
+};
+
+exports.PutWalletsBalanceFile = async (req,res, next) => {
+    res.locals.DATA_DIR = path.join(__dirname, '..', '..', dataFile.validatorWalletSnapshot);
+    res.locals.TMP_DIR  = path.join('/tmp', 'validators_wlt_snapshot_uploads');
+    res.locals.MAX_BYTES = 30 * 1024 * 1024; // 30 MB
+    res.locals.FNAME = "UpdateWalletsBalanceFile";
+    next();
+}
+
+exports.UpdateFile = async(req, res) => {
+    try {
         // directories preparation
-        await fs.promises.mkdir(TMP_DIR,  { recursive: true });
-        await fs.promises.mkdir(DATA_DIR, { recursive: true });
+        await fs.promises.mkdir(res.locals.TMP_DIR,  { recursive: true });
+        await fs.promises.mkdir(res.locals.DATA_DIR, { recursive: true });
 
-        const tmpDest  = path.join(TMP_DIR, `${Date.now()}-${crypto.randomUUID()}.tmp`);
+        const tmpDest  = path.join(res.locals.TMP_DIR, `${Date.now()}-${crypto.randomUUID()}.tmp`);
         const tmpWrite = fs.createWriteStream(tmpDest, { flags: 'w' });
 
         // stream
@@ -38,8 +53,8 @@ exports.UpdateValidatorsBalancesFile = async (req,res) => {
 
         req.on('data', (chunk) => {
             total += chunk.length;
-            if (total > MAX_BYTES) {
-                console.error("Accept Validators balance file API | Payload too large");
+            if (total > res.locals.MAX_BYTES) {
+                console.error(`Accept ${res.locals.FNAME} file API | Payload too large`);
                 req.destroy(new Error('Payload too large'));
             }
             hash.update(chunk);
@@ -74,7 +89,9 @@ exports.UpdateValidatorsBalancesFile = async (req,res) => {
             }
 
             // 7) move to DATA_DIR (EXDEV-safe)
-            const finalPath = path.join(DATA_DIR, base);
+            const rawFileName = (req.headers['x-filename'] || '').toString().trim();
+            const base = path.basename(rawFileName);
+            const finalPath = path.join(res.locals.DATA_DIR, base);
             try {
                 await moveFileAtomicAcrossFS(tmpDest, finalPath);
             } catch (e) {
@@ -88,10 +105,12 @@ exports.UpdateValidatorsBalancesFile = async (req,res) => {
         console.error(e);
         return res.status(500).send('Server error');
     }
-};
+}
 
+exports.ReturnStateBalanceFile = (req, res, next) => { res.locals.DATA_DIR = dataFile.validatorsSnapshot; next();}
+exports.ReturnWalletsBalanceFile = (req, res, next) => { res.locals.DATA_DIR = dataFile.validatorWalletSnapshot; next();}
 exports.ReturnFile = async(req,res) => {
-    const DATA_DIR = path.join(__dirname, '..', '..', dataFile.validatorsSnapshot);
+    const DATA_DIR = path.join(__dirname, '..', '..', res.locals.DATA_DIR);
     try {
         const name = String(req.query.f);
         if (!/^[a-zA-Z0-9._-]+\.json$/.test(name)) {
@@ -124,7 +143,7 @@ async function moveFileAtomicAcrossFS(src, dest) {
         if (!e || e.code !== 'EXDEV') throw e; // jiná chyba
     }
 
-    // Fallback: zkopíruj a smaž zdroj
+    // Fallback: copy and remove source
     await new Promise((resolve, reject) => {
         const rd = fs.createReadStream(src);
         const wr = fs.createWriteStream(dest, { flags: 'w' });
@@ -134,7 +153,7 @@ async function moveFileAtomicAcrossFS(src, dest) {
         rd.pipe(wr);
     });
 
-    // volitelně fsync souboru (většinou není nutné)
+    // optional fsync of file (usually not necessary)
     try {
         const fh = await fs.promises.open(dest, 'r');
         await fh.sync();

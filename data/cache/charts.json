@@ -123737,54 +123737,54 @@
     },
     "valcount": {
       "total": {
-        "balance": 36098621.54446209,
-        "effective_balance": 36037625
+        "balance": 36110659.49047511,
+        "effective_balance": 36049666
       },
       "stateCount": {
         "pending_initialized": {
-          "validators": 1021,
-          "balance": 1269,
-          "eff_balance": 1259
+          "validators": 1022,
+          "balance": 1270,
+          "eff_balance": 1260
         },
         "pending_queued": {
-          "validators": 41,
-          "balance": 2280,
-          "eff_balance": 2280
+          "validators": 48,
+          "balance": 1536,
+          "eff_balance": 1536
         },
         "active_exiting": {
-          "validators": 55333,
-          "balance": 2340789.1611874844,
-          "eff_balance": 2339792
+          "validators": 54972,
+          "balance": 2329269.552829378,
+          "eff_balance": 2328247
         },
         "active_ongoing": {
-          "validators": 967470,
-          "balance": 33412315.968397394,
-          "eff_balance": 33353171
+          "validators": 967821,
+          "balance": 33438053.1882035,
+          "eff_balance": 33378940
         },
         "exited_unslashed": {
-          "validators": 2566,
-          "balance": 82131.26139443873,
-          "eff_balance": 82112
+          "validators": 2146,
+          "balance": 68690.09927936702,
+          "eff_balance": 68672
         },
         "withdrawal_done": {
-          "validators": 1076996,
-          "balance": 94.31851760700008,
+          "validators": 1077420,
+          "balance": 96.23617839300024,
           "eff_balance": 0
         },
         "withdrawal_possible": {
-          "validators": 7914,
-          "balance": 259741.83496515974,
-          "eff_balance": 259011
+          "validators": 8289,
+          "balance": 271744.41398447385,
+          "eff_balance": 271011
         }
       },
-      "id": "eth-valcount-400517",
+      "id": "eth-valcount-400564",
       "partitionKey": "eth-valcount",
-      "time": 1760623253,
-      "_rid": "VPZWAPgLfukkNQAAAAAAAA==",
-      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukkNQAAAAAAAA==/",
-      "_etag": "\"1c00528a-0000-1600-0000-68f0fa950000\"",
+      "time": 1760641254,
+      "_rid": "VPZWAPgLfukuNQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukuNQAAAAAAAA==/",
+      "_etag": "\"1c0057dd-0000-1600-0000-68f140e60000\"",
       "_attachments": "attachments/",
-      "_ts": 1760623253
+      "_ts": 1760641254
     }
   },
   "gnosis": {
@@ -189995,11 +189995,6 @@
     },
     "valuationData": {
       "gnoPrice": [
-        133.47,
-        133.376,
-        132.816,
-        133.12,
-        133.163,
         132.898,
         132.494,
         132.136,
@@ -190494,15 +190489,15 @@
         133.158,
         132.839,
         133.285,
-        132.544
+        132.544,
+        132.137,
+        130.305,
+        128.668,
+        128.734,
+        127.949
       ],
       "bookValueTime": {
         "date": [
-          "2025-09-25T05:00:00.000Z",
-          "2025-09-25T06:00:00.000Z",
-          "2025-09-25T07:00:00.000Z",
-          "2025-09-25T08:00:00.000Z",
-          "2025-09-25T09:00:00.000Z",
           "2025-09-25T10:00:00.000Z",
           "2025-09-25T11:00:00.000Z",
           "2025-09-25T12:00:00.000Z",
@@ -190997,14 +190992,14 @@
           "2025-10-16T09:00:00.000Z",
           "2025-10-16T10:00:00.000Z",
           "2025-10-16T11:00:00.000Z",
-          "2025-10-16T12:00:00.000Z"
+          "2025-10-16T12:00:00.000Z",
+          "2025-10-16T13:00:00.000Z",
+          "2025-10-16T14:00:00.000Z",
+          "2025-10-16T15:00:00.000Z",
+          "2025-10-16T16:00:00.000Z",
+          "2025-10-16T17:00:00.000Z"
         ],
         "book_ratio": [
-          1.962,
-          1.958,
-          1.951,
-          1.95,
-          1.954,
           1.952,
           1.943,
           1.943,
@@ -191499,14 +191494,14 @@
           2.329,
           2.324,
           2.325,
-          2.332
+          2.332,
+          2.335,
+          2.374,
+          2.3,
+          2.323,
+          2.314
         ],
         "market_cap": [
-          205231597.1,
-          205086013.39,
-          204225328.31,
-          204693473.92,
-          204759962.38,
           204351537.4,
           203825529.76,
           203275057.7,
@@ -192001,14 +191996,14 @@
           207075156.89,
           206578886.87,
           207273325.46,
-          206120997.98
+          206120997.98,
+          205488373.68,
+          202638712.83,
+          200093756.27,
+          200196511.06,
+          198974660.96
         ],
         "book_value": [
-          104603194.3,
-          104767190.71,
-          104653491.35,
-          104956163.62,
-          104766446.36,
           104697169.95,
           104913990.16,
           104596698.51,
@@ -192503,14 +192498,14 @@
           88896270.35,
           88893570.19,
           89138079.62,
-          88370467.6
+          88370467.6,
+          88012175.87,
+          85370892.85,
+          87011309.25,
+          86196018.25,
+          86001203.89
         ],
         "margin_of_safety": [
-          -96.2,
-          -95.8,
-          -95.10000000000001,
-          -95,
-          -95.39999999999999,
           -95.19999999999999,
           -94.30000000000001,
           -94.30000000000001,
@@ -193005,7 +193000,12 @@
           -132.9,
           -132.39999999999998,
           -132.50000000000003,
-          -133.2
+          -133.2,
+          -133.5,
+          -137.4,
+          -129.99999999999997,
+          -132.29999999999998,
+          -131.4
         ]
       }
     },
@@ -193014,16 +193014,16 @@
         "total_minted": 3000000,
         "dao_gno_buyback": 184152.97,
         "outstanding_tokens": 1555112.6908961125,
-        "marketCap": 206120997.97695628,
-        "bookValueRatio": 2.3324647200630544,
-        "bookValueUsd": 88370467.60192117,
+        "marketCap": 198974660.96041644,
+        "bookValueRatio": 2.313626460512542,
+        "bookValueUsd": 86001203.89197883,
         "formated": {
-          "bookValueUsd": "$ 88,370,467.60",
-          "marketCap": "$ 206,120,997.98",
-          "bookValueRatio": "2.33",
+          "bookValueUsd": "$ 86,001,203.89",
+          "marketCap": "$ 198,974,660.96",
+          "bookValueRatio": "2.31",
           "outstanding_tokens": "1,555,113"
         },
-        "gnoPrice": 132.544090974,
+        "gnoPrice": 127.9487088783,
         "gno_in_dao_holdings": 1444887.3091038875
       },
       "buybacks_sum": {
@@ -193796,8 +193796,8 @@
     },
     "valcount": {
       "total": {
-        "balance": 372558.3087084881,
-        "effective_balance": 371978.5
+        "balance": 373004.17320235085,
+        "effective_balance": 372085.03125
       },
       "stateCount": {
         "pending_initialized": {
@@ -193805,19 +193805,24 @@
           "balance": 0.28400000000000003,
           "eff_balance": 0.25
         },
+        "active_exiting": {
+          "validators": 324,
+          "balance": 324.14347361718745,
+          "eff_balance": 324
+        },
         "active_ongoing": {
-          "validators": 285547,
-          "balance": 369178.8801221056,
-          "eff_balance": 368610.40625
+          "validators": 281530,
+          "balance": 368879.964253094,
+          "eff_balance": 367973.9375
         },
         "exited_unslashed": {
-          "validators": 3274,
-          "balance": 3275.292962031753,
-          "eff_balance": 3274
+          "validators": 3693,
+          "balance": 3694.619751372194,
+          "eff_balance": 3693
         },
         "withdrawal_done": {
-          "validators": 259507,
-          "balance": 3.2029829713750044,
+          "validators": 262781,
+          "balance": 4.513082888062513,
           "eff_balance": 0
         },
         "withdrawal_possible": {
@@ -193826,14 +193831,14 @@
           "eff_balance": 93.84375
         }
       },
-      "id": "gno-valcount-1520372",
+      "id": "gno-valcount-1520597",
       "partitionKey": "gno-valcount",
-      "time": 1760623217,
-      "_rid": "VPZWAPgLfukjNQAAAAAAAA==",
-      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukjNQAAAAAAAA==/",
-      "_etag": "\"1c00268a-0000-1600-0000-68f0fa710000\"",
+      "time": 1760641216,
+      "_rid": "VPZWAPgLfuktNQAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfuktNQAAAAAAAA==/",
+      "_etag": "\"1c002ddd-0000-1600-0000-68f140c10000\"",
       "_attachments": "attachments/",
-      "_ts": 1760623217
+      "_ts": 1760641217
     }
   }
 }
