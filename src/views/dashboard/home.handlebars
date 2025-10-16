@@ -104,6 +104,21 @@ ul.img-marker li {
             </section>
         {{/each}}
     </div>
+
+    <section class="my-10 text-center">
+        <h2 class="text-xl font-semibold">Withdrawal wallets snapshot for epoch <code id="withdrawal_wallets_info_epoch"></code></h2>
+        <div class="mt-4 overflow-x-auto">
+            <table class="mx-auto text-sm border rounded-lg overflow-hidden">
+                <thead class="bg-neutral-50 text-neutral-900">
+                    <th class="px-4 py-2 text-left font-semibold">Wallet</th>
+                    <th class="px-4 py-2 text-left font-semibold">Validators</th>
+                    <th class="px-4 py-2 text-left font-semibold">Balance</th>
+                    <th class="px-4 py-2 text-left font-semibold">Unclaimed</th>
+                </thead>
+                <tbody id="withdrawal_wallets_info"></tbody>
+            </table>
+        </div>
+    </section>
     
     <section class="text-center my-10 space-x-2">
         <a href="/dashboard/server-node/define" class="inline-flex items-center rounded-lg bg-black text-white px-4 py-2 hover:opacity-90">Define own server node</a>
@@ -122,6 +137,7 @@ ul.img-marker li {
     var offlineStateData = {{{offlineStateData}}}; // offline data
 
     let snapshots = {};
+    let withdrawal_wallets = new Set();
 
     /* Aggregated view */
     function SectorState(isInstance = false){ 
@@ -207,6 +223,7 @@ ul.img-marker li {
                     const feeWltC = instanceElm.getElementsByClassName("instance_fwlt");
                     if(feeWltC.length > 0){
                         const feeWlt = feeWltC[0];
+                        withdrawal_wallets.add(feeWlt.innerHTML);
                         // set ahref
                         const explorerurl = (chain === "gnosis") ? "https://gnosischa.in/address/" : "https://beaconcha.in/address/"
                         feeWlt.href = explorerurl+feeWlt.innerHTML;
@@ -254,7 +271,10 @@ ul.img-marker li {
         if(valcount_instance["ethereum"]["agg"].pending > 0) stateCountOverviewElm.innerHTML += `| Pending: ${valcount_instance["ethereum"]["agg"].pending} Ethereum Val`;
 
         
-        if(valcount_instance["gnosis"]["agg"].pubkeys > 0) GetValidatorsSnapshot("gnosis", "active_ongoing", OnSnapshotReceived);
+        if(valcount_instance["gnosis"]["agg"].pubkeys > 0) {
+            GetValidatorsSnapshot("gnosis", "active_ongoing", OnSnapshotReceived);
+            GetWalletBalances("gnosis","active_ongoing", [...withdrawal_wallets])
+        }
         if(valcount_instance["ethereum"]["agg"].pubkeys > 0) GetValidatorsSnapshot("ethereum", "active_ongoing", OnSnapshotReceived);
     }
 
@@ -437,6 +457,39 @@ ul.img-marker li {
             }
         }
     }
+
+    function GetWalletBalances(chain, state, wallets){
+        xmlHttpRequest({type:"GET", url:`/api/validators-wallet-snapshot?chain=${chain}&state=${state}`/*&wallets=${wallets}*/, credentials:false, data:null },
+        function(err,data){ 
+            if(err) {
+                return console.error(err);
+            }
+            const pData = JSON.parse(data);
+            document.getElementById("withdrawal_wallets_info_epoch").innerHTML = pData.epoch;
+
+            for(const wlt of wallets){
+                if(!pData.data) continue;
+                const wdata = pData.data[wlt.toLowerCase()];
+                if(wdata){
+                    document.getElementById("withdrawal_wallets_info").innerHTML += `<tr class="odd:bg-white even:bg-neutral-50">
+                    <td class="px-4 py-2 font-mono break-all text-left">${wlt}</td>
+                    <td class="px-4 py-2 text-right">${wdata.validators}</td>
+                    <td class="px-4 py-2 text-right">${(Math.trunc(wdata.balance * 100) / 100).toString()}</td>
+                    <td class="px-4 py-2 text-right">${(Math.trunc(wdata.unclaimed_balance * 100) / 100).toString()}</td>
+                    </tr>`;
+                }
+            }
+
+            /*for (const [wlt, wdata] of Object.entries(pData.data)) {
+                document.getElementById("withdrawal_wallets_info").innerHTML += `<tr class="odd:bg-white even:bg-neutral-50">
+                <td class="px-4 py-2 font-mono break-all text-left">${wlt}</td>
+                <td class="px-4 py-2 text-right">${wdata.validators}</td>
+                <td class="px-4 py-2 text-right">${(Math.trunc(wdata.balance * 100) / 100).toString()}</td>
+                <td class="px-4 py-2 text-right">${(Math.trunc(wdata.unclaimed_balance * 100) / 100).toString()}</td>
+                </tr>`;
+            }*/
+        });   
+    };
 
     function RenderAccountCounts(key, chain){
         if(chain === null){

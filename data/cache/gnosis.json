@@ -1228,8 +1228,6 @@
   },
   "valuationData": {
     "gnoPrice": [
-      132.898,
-      132.494,
       132.136,
       132.572,
       132.168,
@@ -1727,12 +1725,12 @@
       130.305,
       128.668,
       128.734,
-      127.949
+      127.949,
+      127.176,
+      126.57
     ],
     "bookValueTime": {
       "date": [
-        "2025-09-25T10:00:00.000Z",
-        "2025-09-25T11:00:00.000Z",
         "2025-09-25T12:00:00.000Z",
         "2025-09-25T13:00:00.000Z",
         "2025-09-25T14:00:00.000Z",
@@ -2230,11 +2228,11 @@
         "2025-10-16T14:00:00.000Z",
         "2025-10-16T15:00:00.000Z",
         "2025-10-16T16:00:00.000Z",
-        "2025-10-16T17:00:00.000Z"
+        "2025-10-16T17:00:00.000Z",
+        "2025-10-16T18:00:00.000Z",
+        "2025-10-16T19:00:00.000Z"
       ],
       "book_ratio": [
-        1.952,
-        1.943,
         1.943,
         1.936,
         1.939,
@@ -2732,11 +2730,11 @@
         2.374,
         2.3,
         2.323,
-        2.314
+        2.314,
+        2.322,
+        2.327
       ],
       "market_cap": [
-        204351537.4,
-        203825529.76,
         203275057.7,
         203945457.68,
         203324710.11,
@@ -3234,11 +3232,11 @@
         202638712.83,
         200093756.27,
         200196511.06,
-        198974660.96
+        198974660.96,
+        197772521.86,
+        196829963.4
       ],
       "book_value": [
-        104697169.95,
-        104913990.16,
         104596698.51,
         105364606.05,
         104879383.42,
@@ -3736,11 +3734,11 @@
         85370892.85,
         87011309.25,
         86196018.25,
-        86001203.89
+        86001203.89,
+        85174139.04,
+        84591744.94
       ],
       "margin_of_safety": [
-        -95.19999999999999,
-        -94.30000000000001,
         -94.30000000000001,
         -93.6,
         -93.9,
@@ -4238,7 +4236,9 @@
         -137.4,
         -129.99999999999997,
         -132.29999999999998,
-        -131.4
+        -131.4,
+        -132.20000000000002,
+        -132.7
       ]
     }
   },
@@ -4247,16 +4247,16 @@
       "total_minted": 3000000,
       "dao_gno_buyback": 184152.97,
       "outstanding_tokens": 1555112.6908961125,
-      "marketCap": 198974660.96041644,
-      "bookValueRatio": 2.313626460512542,
-      "bookValueUsd": 86001203.89197883,
+      "marketCap": 196829963.39672983,
+      "bookValueRatio": 2.3268223575996263,
+      "bookValueUsd": 84591744.94084784,
       "formated": {
-        "bookValueUsd": "$ 86,001,203.89",
-        "marketCap": "$ 198,974,660.96",
-        "bookValueRatio": "2.31",
+        "bookValueUsd": "$ 84,591,744.94",
+        "marketCap": "$ 196,829,963.40",
+        "bookValueRatio": "2.33",
         "outstanding_tokens": "1,555,113"
       },
-      "gnoPrice": 127.9487088783,
+      "gnoPrice": 126.5695820946,
       "gno_in_dao_holdings": 1444887.3091038875
     },
     "buybacks_sum": {
@@ -7853,48 +7853,54 @@
   },
   "valcount": {
     "total": {
-      "balance": 373004.17320235085,
-      "effective_balance": 372085.03125
+      "balance": 373170.41513079085,
+      "effective_balance": 372106.875
     },
     "stateCount": {
       "pending_initialized": {
         "validators": 4,
         "balance": 0.28400000000000003,
-        "eff_balance": 0.25
+        "eff_balance": 0.25,
+        "wallets": 1
       },
       "active_exiting": {
-        "validators": 324,
-        "balance": 324.14347361718745,
-        "eff_balance": 324
+        "validators": 85,
+        "balance": 85.04152373884376,
+        "eff_balance": 85,
+        "wallets": 2
       },
       "active_ongoing": {
-        "validators": 281530,
-        "balance": 368879.964253094,
-        "eff_balance": 367973.9375
+        "validators": 281527,
+        "balance": 369395.34828272526,
+        "eff_balance": 368344.78125,
+        "wallets": 1911
       },
       "exited_unslashed": {
-        "validators": 3693,
-        "balance": 3694.619751372194,
-        "eff_balance": 3693
+        "validators": 3520,
+        "balance": 3521.5574666138814,
+        "eff_balance": 3520,
+        "wallets": 2
       },
       "withdrawal_done": {
-        "validators": 262781,
-        "balance": 4.513082888062513,
-        "eff_balance": 0
+        "validators": 263133,
+        "balance": 4.509423408906255,
+        "eff_balance": 0,
+        "wallets": 1529
       },
       "withdrawal_possible": {
-        "validators": 94,
-        "balance": 100.64864137943746,
-        "eff_balance": 93.84375
+        "validators": 157,
+        "balance": 163.67443430399996,
+        "eff_balance": 156.84375,
+        "wallets": 96
       }
     },
-    "id": "gno-valcount-1520597",
+    "id": "gno-valcount-1520687",
     "partitionKey": "gno-valcount",
-    "time": 1760641216,
-    "_rid": "VPZWAPgLfuktNQAAAAAAAA==",
-    "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfuktNQAAAAAAAA==/",
-    "_etag": "\"1c002ddd-0000-1600-0000-68f140c10000\"",
+    "time": 1760648420,
+    "_rid": "VPZWAPgLfukxNQAAAAAAAA==",
+    "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukxNQAAAAAAAA==/",
+    "_etag": "\"1c004cfe-0000-1600-0000-68f15ce60000\"",
     "_attachments": "attachments/",
-    "_ts": 1760641217
+    "_ts": 1760648422
   }
 }

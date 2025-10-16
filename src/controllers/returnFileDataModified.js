@@ -7,6 +7,7 @@ const SUPPORTED_STATES = ["pending_initialized", "pending_queued", "active_exiti
 exports.ReturnWalletSnapshotMinified = async(req, res) => {
     const chain = String(req.query.chain || '').toLowerCase();
     const state = String(req.query.state || '').toLowerCase();
+    let wallets = String(req.query.wallets || '').toLowerCase();
 
     if (!chain || !SUPPORTED_CHAINS.includes(chain)) {
         return res.status(400).json({ error: 'Chain is not within supported list', supported: SUPPORTED_CHAINS });
@@ -26,15 +27,29 @@ exports.ReturnWalletSnapshotMinified = async(req, res) => {
         }
 
         if (parsed?.data && typeof parsed.data === 'object') {
-            for (const [wallet, wdata] of Object.entries(parsed.data)) {
-                if (wdata && Array.isArray(wdata.validators)) {
-                    wdata.validators = wdata.validators.length;
+            if(wallets) {
+                let filtered = {
+                    epoch: parsed?.epoch,
+                    data: {}
+                };
+                wallets = wallets.split(",");
+                for(const wallet of wallets){
+                    if(parsed.data[wallet]){
+                        filtered.data[wallet] = parsed.data[wallet];
+                        filtered.data[wallet].validators = filtered.data[wallet]?.validators?.length;
+                    }
                 }
+                return res.json(filtered);
+            } else {
+                for (const [wallet, wdata] of Object.entries(parsed.data)) {
+                    if (wdata && Array.isArray(wdata.validators)) {
+                        wdata.validators = wdata.validators.length;
+                    }
+                }
+                return res.json(parsed);
             }
         }
-
         return res.json(parsed);
-
     } catch (err) {
         if (err.code === 'ENOENT') {
             return res.status(404).json({ error: 'Snapshot not found' });

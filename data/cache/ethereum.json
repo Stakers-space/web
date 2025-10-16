@@ -2543,53 +2543,60 @@
   },
   "valcount": {
     "total": {
-      "balance": 36110659.49047511,
-      "effective_balance": 36049666
+      "balance": 36115533.28330964,
+      "effective_balance": 36054546
     },
     "stateCount": {
       "pending_initialized": {
         "validators": 1022,
         "balance": 1270,
-        "eff_balance": 1260
+        "eff_balance": 1260,
+        "wallets": 148
       },
       "pending_queued": {
         "validators": 48,
         "balance": 1536,
-        "eff_balance": 1536
+        "eff_balance": 1536,
+        "wallets": 1
       },
       "active_exiting": {
-        "validators": 54972,
-        "balance": 2329269.552829378,
-        "eff_balance": 2328247
+        "validators": 55396,
+        "balance": 2342853.593942229,
+        "eff_balance": 2341817,
+        "wallets": 3802
       },
       "active_ongoing": {
-        "validators": 967821,
-        "balance": 33438053.1882035,
-        "eff_balance": 33378940
+        "validators": 967397,
+        "balance": 33427453.24767245,
+        "eff_balance": 33368362,
+        "wallets": 47647
       },
       "exited_unslashed": {
-        "validators": 2146,
-        "balance": 68690.09927936702,
-        "eff_balance": 68672
+        "validators": 2053,
+        "balance": 65714.02705786002,
+        "eff_balance": 65696,
+        "wallets": 579
       },
       "withdrawal_done": {
-        "validators": 1077420,
-        "balance": 96.23617839300024,
-        "eff_balance": 0
+        "validators": 1077513,
+        "balance": 96.91128193000021,
+        "eff_balance": 0,
+        "wallets": 97156
       },
       "withdrawal_possible": {
-        "validators": 8289,
-        "balance": 271744.41398447385,
-        "eff_balance": 271011
+        "validators": 8441,
+        "balance": 276609.5033551736,
+        "eff_balance": 275875,
+        "wallets": 2098
       }
     },
-    "id": "eth-valcount-400564",
+    "id": "eth-valcount-400583",
     "partitionKey": "eth-valcount",
-    "time": 1760641254,
-    "_rid": "VPZWAPgLfukuNQAAAAAAAA==",
-    "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukuNQAAAAAAAA==/",
-    "_etag": "\"1c0057dd-0000-1600-0000-68f140e60000\"",
+    "time": 1760648454,
+    "_rid": "VPZWAPgLfukyNQAAAAAAAA==",
+    "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfukyNQAAAAAAAA==/",
+    "_etag": "\"1c0075fe-0000-1600-0000-68f15d060000\"",
     "_attachments": "attachments/",
-    "_ts": 1760641254
+    "_ts": 1760648454
   }
 }
