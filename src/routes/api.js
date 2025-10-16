@@ -9,6 +9,7 @@ const InstanceModel = require('../models/dashboard/instance');
 const cache = require('../middlewares/cache');
 const bodyParser = require('body-parser');
 const ProtonVPN = require('../controllers/proton-vpn-servers.js');
+const ReturnDataController = require('../controllers/returnFileDataModified.js');
 
 /*router.use(bodyParser.urlencoded({
     extended: true
@@ -142,6 +143,8 @@ router.get('/account', function(req,res){
 router.get('/alert', AlertController.ReturnAlertState);
 router.get('/node-snapshot', Controller.UpdateNodeState);
 router.get('/get-proton-vpn-servers-load', ProtonVPN.GetServers);
+
+router.get('/validators-wallet-snapshot', ReturnDataController.ReturnWalletSnapshotMinified);
 
 router.use((err, req, res, next) => {
   if (err.type === "entity.too.large") {
