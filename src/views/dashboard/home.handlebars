@@ -44,11 +44,17 @@ ul.img-marker li {
                                 <li style="--marker-image: url('/logo/gnosis.svg');">???</li>
                             </ul>
                         </li>
+                        <li>Assets
+                            <ul class="dest_assets img-marker mt-2 space-y-1">
+                                <li style="--marker-image: url('/logo/ethereum.svg');">???</li>
+                                <li style="--marker-image: url('/logo/gnosis.svg');">???</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="grid md:grid-cols-2 gap-6">
                     {{#each this.servers}}
-                     <div class="destination-server">
+                     <div class="destination-server" data-id="{{this.sid}}">
                         <h3 id="{{this.name}}" class="text-lg font-semibold">
                             <a href="/dashboard/server-node/define?id={{this.sid}}" class="underline underline-offset-2 hover:no-underline">{{this.name}}</a>
                         </h3>
@@ -111,6 +117,7 @@ ul.img-marker li {
 {{> scripts/cryptography}}
 {{> scripts/utils/xmlhttp}}
 <script>
+    const ramOptimized = false;
     /* In-page Offline / pending state data */
     var offlineStateData = {{{offlineStateData}}}; // offline data
 
@@ -128,6 +135,8 @@ ul.img-marker li {
             this.pending = 0;
             this.withdrawal = 0;
         }
+        this.serverIndex = null;
+        this.destinationIndex = null;
     }
     let valcount_instance = { ethereum: {}, gnosis: {} };
 
@@ -177,16 +186,22 @@ ul.img-marker li {
 
     /* callback from cryptography util */
     function OnDecryptionProcessComplted(){
+        let destinationIndex = 0;
+        let serverIndex = 0;
         // parse pubkeys
         for(const serverDestination of document.getElementsByClassName("servers-destination")){
             //console.log("destination:", serverDestination);
-            let dest_agg_validators = {gnosis:0,ethereum:0}
+            let dest_agg_validators = {gnosis:0,ethereum:0};
             for(const server of serverDestination.getElementsByClassName("destination-server")){
-                let srv_agg_validators = {gnosis:0,ethereum:0} 
+                //const serverId = Number(server.dataset.id);
+                let srv_agg_validators = {gnosis:0,ethereum:0};
                 for(const instanceElm of server.getElementsByClassName("val_instance")){
                     const instanceId = instanceElm.dataset.iid;
                     const chain = instanceElm.dataset.chain;
                     const statusElm = instanceElm.children[1];
+
+                    valcount_instance[chain][instanceId].destinationIndex = destinationIndex;
+                    valcount_instance[chain][instanceId].serverIndex = serverIndex;
                     
                     // update fee wlt
                     const feeWltC = instanceElm.getElementsByClassName("instance_fwlt");
@@ -204,9 +219,8 @@ ul.img-marker li {
                     if(pubkeyElm.innerHTML.indexOf("Processing") > -1) continue;
 
                     const pubkeys = pubkeyElm.innerHTML.split(",");
-                    
                     valcount_instance[chain][instanceId].pubIds = pubkeys;
-
+                    
                     const validators_count = pubkeys.length;
                     valcount_instance[chain][instanceId].pubkeys = validators_count; 
                     valcount_instance[chain]["agg"].pubkeys += validators_count;
@@ -219,11 +233,14 @@ ul.img-marker li {
                     RenderInsightLinks(pubkeyElm, chain, instanceId);
                 }
 
-                RenderServerCounts(server, srv_agg_validators);
+                serverIndex += 1;
+
+                RenderServerCounts(server, srv_agg_validators, "validators");
             }
 
             // dest level ui
-            RenderDestinationCounts(serverDestination, dest_agg_validators);
+            RenderDestinationCounts(serverDestination, dest_agg_validators, "validators");
+            destinationIndex += 1;
         }
 
         // aggregation
@@ -244,27 +261,50 @@ ul.img-marker li {
     function CalculateBalances(chain){
         if(!snapshots[chain]) return;
 
+        let aggObj = {}; // destination:server
+
         const snapshotKeys = Object.keys(snapshots[chain]);
         for (const [instance_id, data] of Object.entries(valcount_instance[chain])) {
             if(instance_id === "agg") continue;
-				
+
+            if(!aggObj[data.destinationIndex]) aggObj[data.destinationIndex] = { agg: 0 };
+            if(!aggObj[data.destinationIndex][data.serverIndex]) aggObj[data.destinationIndex][data.serverIndex] = 0;
+            
             for(const snapshotKey of snapshotKeys){
                  // find val balance for each pubId in the instance list
                 for (const pubId of data.pubIds){
                     const pubIdBalance = snapshots[chain][snapshotKey].data[Number(pubId)];
                     if(pubIdBalance) {
                         data.balance += pubIdBalance;
+                        aggObj[data.destinationIndex].agg += pubIdBalance;
+                        aggObj[data.destinationIndex][data.serverIndex] += pubIdBalance;
                         if(data.pubIds_filter[snapshotKey]) data.pubIds_filter[snapshotKey].push(pubId);
                     }
                 }
             }
             valcount_instance[chain]["agg"].balance += valcount_instance[chain][instance_id].balance;
-                
+            
             // Update 
             RenderInstanceBalance(instance_id, data, chain);
+
+            if(ramOptimized) delete data.pubIds;
 		};
 
         RenderAccountCounts("balance", chain);
+
+        try {
+            const destinations = document.getElementsByClassName("servers-destination");
+            const servers = document.getElementsByClassName("destination-server");  
+            for (const [destinationIndex, data] of Object.entries(aggObj)) {
+                RenderDestinationCounts(destinations[destinationIndex], Math.trunc(data.agg * 100) / 100, `balance_${chain}`);
+                for (const [serverIndex, sdata] of Object.entries(data)) {
+                    if(serverIndex === "agg") continue;
+                    RenderServerCounts(servers[serverIndex], Math.trunc(sdata * 100) / 100, `balance_${chain}`);
+                }
+            }
+        } catch(e){
+            console.error(e);
+        }
     }
 
     function RenderInstanceBalance(instanceId, instance_data, chain){
@@ -365,16 +405,37 @@ ul.img-marker li {
         }
     }
 
-    function RenderServerCounts(serverElm, count){
+    function RenderServerCounts(serverElm, count, key){
         const srv_agg_ui = serverElm.getElementsByClassName("server_validators")[0];
-        srv_agg_ui.children[0].innerHTML = count.ethereum;
-        srv_agg_ui.children[1].innerHTML = count.gnosis;
+        if(key === "validators"){
+            srv_agg_ui.children[0].innerHTML = `${count.ethereum} Val`;
+            srv_agg_ui.children[1].innerHTML = `${count.gnosis} Val`;
+        } else {
+            if(key === "balance_ethereum"){
+                srv_agg_ui.children[0].innerHTML += ` / ${count} ETH`;
+            } else if(key === "balance_gnosis"){
+                srv_agg_ui.children[1].innerHTML += ` / ${count} GNO`;
+            } else {
+                console.warn("RenderDestinationCounts | unknown key", key);
+            }
+        }
     }
 
-    function RenderDestinationCounts(serverDestinationElm, count){
-        const dest_agg_ui = serverDestinationElm.getElementsByClassName("dest_validators")[0];
-        dest_agg_ui.children[0].innerHTML = count.ethereum;
-        dest_agg_ui.children[1].innerHTML = count.gnosis;
+    function RenderDestinationCounts(serverDestinationElm, count, key){
+        if(key === "validators"){
+            const dest_val_agg_ui = serverDestinationElm.getElementsByClassName("dest_validators")[0];
+            dest_val_agg_ui.children[0].innerHTML = count.ethereum;
+            dest_val_agg_ui.children[1].innerHTML = count.gnosis;
+        } else {
+            const dest_val_agg_ui = serverDestinationElm.getElementsByClassName("dest_assets")[0];
+            if(key === "balance_ethereum"){
+                dest_val_agg_ui.children[0].innerHTML = count;
+            } else if(key === "balance_gnosis"){
+                dest_val_agg_ui.children[1].innerHTML = count;
+            } else {
+                console.warn("RenderDestinationCounts | unknown key", key);
+            }
+        }
     }
 
     function RenderAccountCounts(key, chain){

@@ -25,20 +25,20 @@
 		<div class="egrid egrid-4">
             <div>
                 <h2>GNO holded by Validators on Beaconchain</h2>
-                <div>{{depositContract.lastState.gno_validators}}</div>
+                <div>{{formatNumber depositContract.lastState.gno_validators '0,0'}}</div>
             </div>
             <div>
                 <h2>Unclaimed GNO by Validators</h2>
-                <div>{{depositContract.lastState.gno_unclaimed}}</div>
+                <div>{{formatNumber depositContract.lastState.gno_unclaimed '0,0'}}</div>
             </div>
             <div>
                 <h2>GNO in deposit contract</h2>
-                <div>{{depositContract.lastState.gno_contract}}</div>
+                <div>{{formatNumber depositContract.lastState.gno_contract '0,0'}}</div>
             </div>
             <div>
                 <h2>GNO balance</h2>
-                <div>{{depositContract.lastState.gno_balance}}</div>
-                <span>{{depositContract.lastState.gno_24h_difference}} Last 24 hours</span>
+                <div>{{formatNumber depositContract.lastState.gno_balance '0,0'}}</div>
+                <span>{{formatNumber depositContract.lastState.gno_24h_difference '0,0'}} Last 24 hours</span>
             </div>
         </div>
 	</section>
