@@ -10,6 +10,9 @@ class StakersSpace {
 		// http listener - pages
 		this.app.use(require('./controllers/wwwRemovalController').wwwRemoval);
 
+		// Update cache files
+		// require('../static/update-cache-files.js'); // Process before deploy
+
 		/*
 		* Define routes - list of pages
 		* ( url mapping for containers )

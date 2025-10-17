@@ -1,21 +1,17 @@
 "use strict";
 const router = require('express').Router();
-const EthereumController = require('../controllers/ethereum');
-const GuidePageController = require('../controllers/guidePage')
-//const FundamentalsController = require('../controllers/fundamentalsPage');
-const ChartsController = require('../controllers/charts');
-const StakingSchema = require('../controllers/stakingSchema');
-const Chain = require('../middlewares/SetChain');
-const NewsPageSchema = require('../controllers/newsPage');
-const ClientsController = require('../controllers/clientPage');
-const ValidatorQueueController = require('../controllers/validatorQueue');
+const EthereumController = require('../controllers/ethereum.js');
+const GuidePageController = require('../controllers/guidePage.js')
+const StakingSchema = require('../controllers/stakingSchema.js');
+const Chain = require('../middlewares/SetChain.js');
+const NewsPageSchema = require('../controllers/newsPage.js');
+const ClientsController = require('../controllers/clientPage.js');
+const ValidatorQueueController = require('../controllers/validatorQueue.js');
+const Explorer = require('../controllers/explorer.js');
 
 class EthereumRouter {
     constructor(){
-        this.chainController = new EthereumController();
         this.GuidePage = new GuidePageController();
-        //this.fundamentals = new FundamentalsController();
-        this.ChartsPage = new ChartsController();
         this.StakingSchema = new StakingSchema();
         this.NewsPage = new NewsPageSchema();
         this.ClientsPage = new ClientsController();
@@ -24,32 +20,9 @@ class EthereumRouter {
     }
 
     httpListener(){
-        router.get('/', Chain.Ethereum, this.chainController.Request, this.Response); // homepage staking
-
-        router.get('/liquid-staking', Chain.Ethereum, this.chainController.RequestLiquid, this.Response); // homepage
-        router.get('/validators-saas', Chain.Ethereum, this.chainController.RequestSaas, this.Response); // homepage
-        router.get('/smoothing-pools', Chain.Ethereum, this.chainController.SmoothingPools, this.Response);
-        router.get('/mev-relay-list', Chain.Ethereum, this.chainController.RelayList, this.Response);
-        
-        // topic-based
-        router.get('/validators', Chain.Ethereum, this.chainController.Validators, this.Response);
-        router.get('/keystores', Chain.Ethereum, this.chainController.Keystores, this.Response);
-        router.get('/maintenance', Chain.Ethereum, this.GuidePage.Maintenance, this.Response);
-        router.get('/emergency', Chain.Ethereum, this.GuidePage.Emergency, this.Response);
-        router.get('/validator-queue', Chain.Ethereum, this.ValidatorQueue.Page, this.Response);
-
-        router.get('/validator-actions', Chain.Ethereum, this.GuidePage.ValidatorActions, this.Response);
-        router.get('/staking-hardware', Chain.Ethereum, this.GuidePage.Hardware, this.Response);
-        router.get('/full-guide', Chain.Ethereum, this.GuidePage.Base, this.Response); // gudide - run execution and consensus layer clients
-        router.get('/full-guide/solo', Chain.Ethereum, this.GuidePage.Solo, this.Response);
-        router.get('/full-guide/rocketpool', Chain.Ethereum, this.GuidePage.Rocketpool, this.Response);
-        router.get('/full-guide/stakewise', Chain.Ethereum, this.GuidePage.Stakewise, this.Response);
-        router.get('/full-guide/lido', Chain.Ethereum, this.GuidePage.Lido, this.Response);
-        //router.get('/fundamentals', Chain.Ethereum, this.fundamentals.Request, this.Response); // fundamentals
-        //router.get('/charts', Chain.Ethereum, this.ChartsPage.Request, this.ChartsPage.Response);
-        router.get('/schema', Chain.Ethereum, this.StakingSchema.Request, this.Response);
-        router.get('/clients', Chain.Ethereum, this.ClientsPage.ClientsOverview, this.Response);
-        router.get('/news', Chain.Ethereum, this.NewsPage.Request, this.Response);
+        router.get('/', Chain.Ethereum, EthereumController.HOME, this.Response); // homepage staking
+        router.get('/wallet/:path(*)?', Chain.Ethereum, Explorer.Wallet, this.Response);  // wallets explorer
+        router.get('/validator/:path(*)?', Chain.Ethereum, Explorer.Validator, this.Response); // validator explorer
     }
 
     Response(req,res){

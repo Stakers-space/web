@@ -1,8 +1,7 @@
 const fs = require('node:fs/promises');
 const path = require('path');
 const dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
-const SUPPORTED_CHAINS = ["gnosis", "ethereum"];
-const SUPPORTED_STATES = ["pending_initialized", "pending_queued", "active_exiting", "active_ongoing", "exited_unslashed", "withdrawal_done", "withdrawal_possible"];
+const { SUPPORTED_STATES, SUPPORTED_CHAINS } = require('../config/definition.js');
 
 exports.ReturnWalletSnapshotMinified = async(req, res) => {
     const chain = String(req.query.chain || '').toLowerCase();

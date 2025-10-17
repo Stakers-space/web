@@ -12,26 +12,21 @@ const azureCosmosDB = require('../services/azureCosmosDB');
 const reduceObjectArray = require('../utils/reduceObjectArray');
 const ValidatorQueueModel = require('../models/validatorqueue.js');
 
-function GnosisController(){
-    this.dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
-    //this.validatorHostingServicesData = path.join(__dirname, '..', '..', this.dataFile.gnosis.validatorHostingServices);
-    this.cachedDataFile = path.join(__dirname, '..', '..',  this.dataFile.pagecache.gnosis);
-    this.newsDataFile = path.join(__dirname, '..', '..',  this.dataFile.pagecache.news.gnosis);
+const dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
+const cachedDataFile = path.join(__dirname, '..', '..',  dataFile.pagecache.gnosis);
+const newsDataFile = path.join(__dirname, '..', '..',  dataFile.pagecache.news.gnosis);
 
-    app = this;
-}
-
-GnosisController.prototype.Request = function(req,res, next){
-    res.locals.page_hbs = 'gnosis/staking';
+exports.HOME = function(req,res, next){
+    res.locals.page_hbs = 'gnosis/index';
     res.locals.layout_hbs = "standard";
     res.locals.css_file = 'chainpage';
-    res.locals.title = `All around Gnosis Staking at one place.`;
+    res.locals.title = `Gnosis (GNO) Network Overwiew | Stakers.space`;
     res.locals.metaDescription = `Stakers.space is a space full of guides, tools and advices targeted at Gnosis staking.`;
     
-    var tasks = 3;
+    var tasks = 2;
 
     // load newsfeed
-	fs.readFile(app.newsDataFile, 'utf8', (err, data) => {
+	fs.readFile(newsDataFile, 'utf8', (err, data) => {
 		if(!err) {
             try {
                 const jsonData = JSON.parse(data);
@@ -43,7 +38,7 @@ GnosisController.prototype.Request = function(req,res, next){
 		taskCompleted(err);
 	});
 
-    fs.readFile(app.cachedDataFile, 'utf8', (err, fileContent) => {
+    fs.readFile(cachedDataFile, 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -83,7 +78,75 @@ GnosisController.prototype.Request = function(req,res, next){
         }
     });
 
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.gnosis.validatorQueue), 'utf8', (err, data) => {
+    function taskCompleted(){
+        tasks--;
+        if(tasks === 0) next();
+    }
+}
+
+exports.STAKING = function(req,res, next){
+    res.locals.page_hbs = 'gnosis/staking';
+    res.locals.layout_hbs = "standard";
+    res.locals.css_file = 'chainpage';
+    res.locals.title = `All around Gnosis Staking at one place.`;
+    res.locals.metaDescription = `Stakers.space is a space full of guides, tools and advices targeted at Gnosis staking.`;
+    
+    var tasks = 3;
+
+    // load newsfeed
+	fs.readFile(newsDataFile, 'utf8', (err, data) => {
+		if(!err) {
+            try {
+                const jsonData = JSON.parse(data);
+                res.locals.newsfeed = jsonData;
+            } catch (err) {
+                console.error(err);
+            }
+		}
+		taskCompleted(err);
+	});
+
+    fs.readFile(cachedDataFile, 'utf8', (err, fileContent) => {
+        if(err){
+            console.error(err);
+            return res.status(500).send({ error: 'Something went wrong!' });
+        } else {
+            const {gno_usd} = cache_assetPrice.Get();
+
+            const parsedData = JSON.parse(fileContent);
+            res.locals.indicators = parsedData.indicators;
+            res.locals.vaultServices = parsedData.vaultServices;
+            res.locals.hostingServices = parsedData.hostingServices;
+            res.locals.beaconData = JSON.stringify(parsedData.beaconData);
+            res.locals.chainData = JSON.stringify(parsedData.chainData);
+
+            //console.log(parsedData.valuationData);
+            res.locals.gnoPrice = gno_usd;
+            res.locals.valuationData = JSON.stringify(parsedData.valuationData);
+            res.locals.circulationData = JSON.stringify(parsedData.circulationData);
+
+            //res.locals.ethStoreData = JSON.stringify(parsedData.ethStore);
+            
+            // deposit contract
+            let depositContract = parsedData.depositContract;
+            res.locals.depositContract = {};
+            res.locals.depositContract.lastState = depositContract.lastState;
+            res.locals.depositContract.chart = JSON.stringify(depositContract.historicalChart);
+            //res.locals.depositContract.distribution = JSON.stringify(depositContract.lastState.distribution);
+            //console.log(res.locals.depositContract);
+            
+            res.locals.chartsUIconfig = JSON.stringify({
+                apr:{legend:false,xaxis:false,yaxis:false},
+                validators:{legend:false,xaxis:false,yaxis:false},
+                supply:{legend:false,xaxis:false,yaxis:false},
+                balance:{legend:false,xaxis:false,yaxis:false,detailed:false}
+            });
+
+            taskCompleted();
+        }
+    });
+
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.gnosis.validatorQueue), 'utf8', (err, data) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -101,10 +164,10 @@ GnosisController.prototype.Request = function(req,res, next){
     }
 };
 
-GnosisController.prototype.RequestLiquid = function(req,res,next){
+exports.RequestLiquid = function(req,res,next){
     res.locals.title = `${res.locals.chainName} Liquid staking services list`;
     res.locals.metaDescription = `List of Liquid staking services on ${res.locals.chainName} chain.`;
-    fs.readFile(app.cachedDataFile, 'utf8', (err, fileContent) => {
+    fs.readFile(cachedDataFile, 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -118,10 +181,10 @@ GnosisController.prototype.RequestLiquid = function(req,res,next){
         }
     });
 };
-GnosisController.prototype.RequestSaas = function(req,res,next){
+exports.RequestSaas = function(req,res,next){
     res.locals.title = `${res.locals.chainName} SAAS (Staking as a service) services list`;
     res.locals.metaDescription = `List SAAS (Staking as a service) services on ${res.locals.chainName} chain.`;
-    fs.readFile(app.cachedDataFile, 'utf8', (err, fileContent) => {
+    fs.readFile(cachedDataFile, 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -136,71 +199,17 @@ GnosisController.prototype.RequestSaas = function(req,res,next){
     });
 };
 
-GnosisController.prototype.Validators = function(req,res,next){
-    res.locals.page_hbs = "shared_ethgno/validators";
-    res.locals.layout_hbs = "standard";
-    res.locals.css_file = "chain";
-    res.locals.title = `Validator charts on ${res.locals.chainName} chain`;
-    res.locals.metaDescription = `Charts related to validators on  ${res.locals.chainName} chain`;
-
-    let tasks = 3;
-    // validators count
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
-        if(err){
-            console.error(err);
-            return res.status(500).send({ error: 'Something went wrong!' });
-        } else {
-            res.locals.parsedData = JSON.parse(fileContent);
-            // default values
-            res.locals.ethStoreData = JSON.stringify(null);
-            res.locals.beaconData = JSON.stringify(null);
-            res.locals.chainData = JSON.stringify(null);
-            res.locals.chartsUIconfig = JSON.stringify(null);
-            res.locals.valuationData = JSON.stringify(null);
-            
-            const parsedData = (res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
-            res.locals.beaconData = JSON.stringify(parsedData.beaconData);
-            res.locals.jsController = 'validators';
-            OnTaskCompleted();
-        }
-    });
-
-    // validator current queue
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.gnosis.validatorQueue), 'utf8', (err, data) => {
-        if(err){
-            console.error(err);
-            return res.status(500).send({ error: 'Something went wrong!' });
-        } else {
-            let model = new ValidatorQueueModel();
-            res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue("gnosis"), res.locals.chain, JSON.parse(data));
-            OnTaskCompleted();
-        }
-    });
-    
-    // validator history queue
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.validatorqueue.gnosis), 'utf8', (err, data) => {
-        if(err){
-            console.error(err);
-            return res.status(500).send({ error: 'Something went wrong!' });
-        } else {
-            res.locals.queueChart = JSON.stringify(JSON.parse(data));
-            OnTaskCompleted();
-        }
-    });
-
-    function OnTaskCompleted(){
-        tasks--;
-        if(tasks === 0) next();
-    }
+exports.OVERVIEW = function(req, res, next){
+    next();
 };
 
-GnosisController.prototype.DepositContract = function(req,res,next){
+exports.DepositContract = function(req,res,next){
     res.locals.page_hbs = "gnosis/deposit-contract-balance";
     res.locals.layout_hbs = "standard";
     res.locals.css_file = "chain";
     res.locals.title = `Gnosis Deposit contract tracker`;
     res.locals.metaDescription = `Gnosis Deposit contract tracker track wealth of the Gnosis chain.`;
-    fs.readFile(app.cachedDataFile, 'utf8', (err, fileContent) => {
+    fs.readFile(cachedDataFile, 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -231,7 +240,7 @@ GnosisController.prototype.DepositContract = function(req,res,next){
 };
 
 
-GnosisController.prototype.Keystores = function(req,res,next){
+exports.Keystores = function(req,res,next){
     res.locals.title = `Guide to generate abd deposit Validator keys for ${res.locals.chainName} staking`;
     res.locals.metaDescription = `Complete indotrduction to validator keystores for staking on ${res.locals.chainName} chain.`;
     res.locals.page_hbs = "guides/keystores";
@@ -241,7 +250,7 @@ GnosisController.prototype.Keystores = function(req,res,next){
 };
 
 
-GnosisController.prototype.CacheIndexData = function(cb){
+exports.CacheIndexData = function(cb){
     //console.log(`${new Date()} GnosisController.prototype.CacheIndexPageData`);
 
     var callbacks = 5;
@@ -254,9 +263,10 @@ GnosisController.prototype.CacheIndexData = function(cb){
         circulationData = null, // Circulation due to BuyBacks from API
         indicators = null,
         depositContract = null,
-        valcount = null;
+        valcount = null,
+        valcount_history = null;
 
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
         if(!err) {
             try {
                 const parsedChartsDataCache = JSON.parse(fileContent).gnosis;
@@ -266,6 +276,7 @@ GnosisController.prototype.CacheIndexData = function(cb){
                 valuationData = parsedChartsDataCache.valuationData;
                 circulationData = parsedChartsDataCache.circulationData;
                 valcount = parsedChartsDataCache.valcount;
+                valcount_history = parsedChartsDataCache.valcount_history;
             } catch(e){
                 console.error(e);
             }
@@ -279,7 +290,7 @@ GnosisController.prototype.CacheIndexData = function(cb){
         //console.log(data);
         let chartData = new ValidatorQueueModel();
         chartData = chartData.ConvertToChartsArray(data, 0);
-        fs.writeFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.validatorqueue.gnosis), JSON.stringify(chartData, null, 2), 'utf8', (err) => {
+        fs.writeFile(path.join(__dirname, '..', '..', dataFile.pagecache.validatorqueue.gnosis), JSON.stringify(chartData, null, 2), 'utf8', (err) => {
             if (err) console.error('Error writing file:', err);
             
             //console.log('File successfully updated.');
@@ -348,11 +359,13 @@ GnosisController.prototype.CacheIndexData = function(cb){
                 depositContract.lastState.beaconchain_distribution.validators_count = numeral(dbData[i].validators).format('0,0');
 
                 // beaconchian holdings
-                const beaconchain_entries = Object.entries(dbData[i].beaconchain_distribution);
-                beaconchain_entries.sort((a, b) => parseFloat(a[0]) - parseFloat(b[0]));
-                depositContract.lastState.beaconchain_distribution.holdings = beaconchain_entries.map(entry => entry[0]);
-                depositContract.lastState.beaconchain_distribution.validators = beaconchain_entries.map(entry => entry[1]);
-
+                if(dbData[i].beaconchain_distribution){
+                    const beaconchain_entries = Object.entries(dbData[i].beaconchain_distribution);
+                    beaconchain_entries.sort((a, b) => parseFloat(a[0]) - parseFloat(b[0]));
+                    depositContract.lastState.beaconchain_distribution.holdings = beaconchain_entries.map(entry => entry[0]);
+                    depositContract.lastState.beaconchain_distribution.validators = beaconchain_entries.map(entry => entry[1]);
+                }
+                
                 // unclaimed gno holdings
                 if(dbData[i].unclaimed_distribution){
                     const unclaimedgno_entries = Object.entries(dbData[i].unclaimed_distribution);
@@ -360,6 +373,7 @@ GnosisController.prototype.CacheIndexData = function(cb){
                     depositContract.lastState.unclaimedgno_distribution.holdings = unclaimedgno_entries.map(entry => entry[0]);
                     depositContract.lastState.unclaimedgno_distribution.wallets = unclaimedgno_entries.map(entry => entry[1]);
                 }
+
             }
 
             depositContract.historicalChart.date.push(dbData[i].date);
@@ -393,14 +407,14 @@ GnosisController.prototype.CacheIndexData = function(cb){
     
 
     // Get Vault services data
-    // console.log("Getting vauld services:", app.vaultServicesData);
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.gnosis.vaultServices), 'utf8', (err, fileContent) => {
+    // console.log("Getting vauld services:", vaultServicesData);
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.gnosis.vaultServices), 'utf8', (err, fileContent) => {
         if(!err) vaultServicesData = JSON.parse(fileContent);
         taskCompleted(err, "vaultServices");
     });
 
     // Get validator hosting services data
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.gnosis.validatorHostingServices), 'utf8', (err, fileContent) => {
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.gnosis.validatorHostingServices), 'utf8', (err, fileContent) => {
         if(!err) validatorHostingServicesData = JSON.parse(fileContent);
         taskCompleted(err, "hostingtServices");
     });
@@ -438,7 +452,7 @@ GnosisController.prototype.CacheIndexData = function(cb){
         aggregaredData = JSON.stringify(aggregaredData, null, 2);
 
         // Post data to the file
-        fs.writeFile(app.cachedDataFile, aggregaredData, 'utf8', (err) => {
+        fs.writeFile(cachedDataFile, aggregaredData, 'utf8', (err) => {
             if (err) {
                 console.error('Error writing file:', err);
                 return cb(err);
@@ -448,5 +462,3 @@ GnosisController.prototype.CacheIndexData = function(cb){
         });
     }
 };
-
-module.exports = GnosisController;

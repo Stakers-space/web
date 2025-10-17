@@ -8,6 +8,7 @@ function Ethereum(req,res,next){
     res.locals.chainUrl = "ethereum-staking";
     res.locals.isEthereum = true;
     res.locals.network = "mainnet";
+    res.locals.explorer = "https://etherscan.io";
     next();
 }
 
@@ -21,6 +22,7 @@ function Gnosis(req,res,next){
     res.locals.chainUrl = "gnosis-staking";
     res.locals.isGnosis = true;
     res.locals.network = "gnosis";
+    res.locals.explorer = "https://https://gnosisscan.io";
     next();
 }
 

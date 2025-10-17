@@ -1,24 +1,24 @@
 {
   "ethereum": {
-    "price": 3877.14,
+    "price": 3799.48,
     "apr": {
-      "value": "2.97%",
-      "operator": "2.97%",
-      "delegator": "2.67%"
+      "value": "3.08%",
+      "operator": "3.08%",
+      "delegator": "2.77%"
     },
-    "validators": 967397,
-    "tvl": 139788522478.44,
-    "stakedRatio": 0.29450023655958457
+    "validators": 966996,
+    "tvl": 137144996621.44,
+    "stakedRatio": 0.29479443240773234
   },
   "gnosis": {
-    "price": 126.95,
+    "price": 123.4,
     "apr": {
       "value": "0.00%",
       "operator": "0.00%",
       "delegator": "0.00%"
     },
-    "validators": 281527,
-    "tvl": 47238967.78125,
-    "stakedRatio": 0.2392796851175965
+    "validators": 281816,
+    "tvl": 46031512.518750004,
+    "stakedRatio": 0.23992364706066363
   }
 }

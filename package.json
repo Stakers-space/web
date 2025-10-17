@@ -1,6 +1,6 @@
 {
   "name": "stakers.space",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node src/app",
@@ -9,7 +9,8 @@
     "build:pages": "npx @tailwindcss/cli -c tailwind.pages.config.js -i ./src/css/pages.css -o ./public/css/pages.css --watch",
     "build:news": "npx @tailwindcss/cli -c tailwind.news.config.js -i ./src/css/news.css -o ./public/css/news.css --watch",
     "build:guides": "npx @tailwindcss/cli -c tailwind.guides.config.js -i ./src/css/guides.css -o ./public/css/guides.css --watch",
-    "build:dashboard": "npx @tailwindcss/cli -c tailwind.dashboard.config.js -i ./src/css/dashboard.css -o ./public/css/dashboard.css --watch"
+    "build:dashboard": "npx @tailwindcss/cli -c tailwind.dashboard.config.js -i ./src/css/dashboard.css -o ./public/css/dashboard.css --watch",
+    "build:charts": "npx @tailwindcss/cli -c tailwind.charts.config.js -i ./src/css/charts.css -o ./public/css/charts.css --watch"
   },
   "dependencies": {
     "@azure/cosmos": "^4.0.0",

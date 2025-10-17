@@ -1,5 +1,4 @@
 "use strict";
-var app = null;
 const fs = require('fs'),
     path = require('path');/*,
     numeral = require('numeral');*/
@@ -10,26 +9,23 @@ const azureCosmosDB = require('../services/azureCosmosDB');
 const reduceObjectArray = require('../utils/reduceObjectArray');
 const ValidatorQueueModel = require('../models/validatorqueue');
 
-function EthereumController(){
-    this.dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
-    this.cachedDataFile = path.join(__dirname, '..', '..',  this.dataFile.pagecache.ethereum);
-    this.newsDataFile = path.join(__dirname, '..', '..',  this.dataFile.pagecache.news.ethereum);
-    app = this;
-}
+const dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
+const cachedDataFile = path.join(__dirname, '..', '..',  dataFile.pagecache.ethereum);
+const newsDataFile = path.join(__dirname, '..', '..',  dataFile.pagecache.news.ethereum);
 
-EthereumController.prototype.Request = function(req,res, next){
-    res.locals.page_hbs = 'ethereum/staking';
+exports.HOME = (req, res, next) => {
+    res.locals.page_hbs = 'ethereum/index';
     res.locals.layout_hbs = "standard";
     res.locals.css_file = 'chainpage';
-    res.locals.title = `All around Ethereum Staking at one place.`;
+    res.locals.title = `Ethereum (ETH) Network Overwiew | Stakers.space`;
     res.locals.metaDescription = `Stakers.space is a space full of guides, tools and advices targeted at Ethereum staking.`;
 
     res.locals.ethPrice = cache_assetPrice.Get().eth_usd;
 
-    var tasks = 3;
+    var tasks = 2;
     
     // load newsfeed → move to DB (or regenerate the file from db)
-	fs.readFile(app.newsDataFile, 'utf8', (err, data) => {
+	fs.readFile(newsDataFile, 'utf8', (err, data) => {
 		if(!err) {
             try {
                 const jsonData = JSON.parse(data);
@@ -41,7 +37,60 @@ EthereumController.prototype.Request = function(req,res, next){
 		taskCompleted(err);
 	});
 
-    fs.readFile(app.cachedDataFile, 'utf8', (err, fileContent) => {
+    fs.readFile(cachedDataFile, 'utf8', (err, fileContent) => {
+        if(err){
+            console.error(err);
+            return res.status(500).send({ error: 'Something went wrong!' });
+        } else {
+            const parsedData = JSON.parse(fileContent);
+            res.locals.vaultServices = parsedData.vaultServices;
+            res.locals.hostingServices = parsedData.hostingServices;
+            res.locals.indicators = parsedData.indicators;
+            res.locals.beaconData = JSON.stringify(parsedData.beaconData);
+            res.locals.chainData = JSON.stringify(parsedData.chainData);
+            res.locals.ethStoreData = JSON.stringify(parsedData.ethStore);
+            res.locals.chartsUIconfig = JSON.stringify({
+                apr:{legend:false,xaxis:false,yaxis:false},
+                validators:{legend:false,xaxis:false,yaxis:false},
+                supply:{legend:false,xaxis:false,yaxis:false},
+                balance:{legend:false,xaxis:false,yaxis:false,detailed:false}
+            });
+            
+            taskCompleted();
+        }
+    });
+
+    function taskCompleted(){
+        tasks--;
+        if(tasks === 0) next();
+    }
+}
+
+exports.STAKING = (req, res, next) => {
+    res.locals.page_hbs = 'ethereum/staking';
+    res.locals.layout_hbs = "standard";
+    res.locals.css_file = 'chainpage';
+    res.locals.title = `All around Ethereum Staking at one place.`;
+    res.locals.metaDescription = `Stakers.space is a space full of guides, tools and advices targeted at Ethereum staking.`;
+
+    res.locals.ethPrice = cache_assetPrice.Get().eth_usd;
+
+    var tasks = 3;
+    
+    // load newsfeed → move to DB (or regenerate the file from db)
+	fs.readFile(newsDataFile, 'utf8', (err, data) => {
+		if(!err) {
+            try {
+                const jsonData = JSON.parse(data);
+                res.locals.newsfeed = jsonData;
+            } catch (err) {
+                console.error(err);
+            }
+		}
+		taskCompleted(err);
+	});
+
+    fs.readFile(cachedDataFile, 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -65,7 +114,7 @@ EthereumController.prototype.Request = function(req,res, next){
     });
 
     // validator current queue
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.ethereum.validatorQueue), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.ethereum.validatorQueue), 'utf8', (err, data) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -81,13 +130,17 @@ EthereumController.prototype.Request = function(req,res, next){
         tasks--;
         if(tasks === 0) next();
     }
+}
+
+exports.OVERVIEW = function(req, res, next){
+    next();
 };
 
-EthereumController.prototype.RequestLiquid = function(req,res,next){
+exports.RequestLiquid = function(req,res,next){
     res.locals.title = `${res.locals.chainName} Liquid staking services list`;
     res.locals.metaDescription = `List of Liquid staking services on ${res.locals.chainName} chain.`;
 
-    fs.readFile(app.cachedDataFile, 'utf8', (err, fileContent) => {
+    fs.readFile(cachedDataFile, 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -101,10 +154,10 @@ EthereumController.prototype.RequestLiquid = function(req,res,next){
         }
     });
 };
-EthereumController.prototype.RequestSaas = function(req,res,next){
+exports.RequestSaas = function(req,res,next){
     res.locals.title = `${res.locals.chainName} SAAS (Staking as a service) services list`;
     res.locals.metaDescription = `List SAAS (Staking as a service) services on ${res.locals.chainName} chain.`;
-    fs.readFile(app.cachedDataFile, 'utf8', (err, fileContent) => {
+    fs.readFile(cachedDataFile, 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -118,7 +171,7 @@ EthereumController.prototype.RequestSaas = function(req,res,next){
         }
     });
 };
-EthereumController.prototype.SmoothingPools = function(req,res,next){
+exports.SmoothingPools = function(req,res,next){
     res.locals.page_hbs = "ethereum/smoothing-pools";
     res.locals.layout_hbs = "amp";
     res.locals.css_file = "chain";
@@ -126,10 +179,10 @@ EthereumController.prototype.SmoothingPools = function(req,res,next){
     res.locals.metaDescription = `List of smoothing pools on ${res.locals.chainName} chain.`;
     next();
 };
-EthereumController.prototype.RelayList = function(req,res,next){
+exports.RelayList = function(req,res,next){
     res.locals.title = `${res.locals.chainName} MEV-relay list`;
     res.locals.metaDescription = `MEV-relay list of services on ${res.locals.chainName} chain.`;
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.ethereum.mevRelayList), 'utf8', (err, fileContent) => {
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.ethereum.mevRelayList), 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -144,66 +197,8 @@ EthereumController.prototype.RelayList = function(req,res,next){
         }
     });
 };
-EthereumController.prototype.Validators = function(req,res,next){
-    res.locals.page_hbs = "shared_ethgno/validators";
-    res.locals.layout_hbs = "standard";
-    res.locals.css_file = "chain";
-    res.locals.title = `Validator charts on ${res.locals.chainName} chain`;
-    res.locals.metaDescription = `Charts related to validators on  ${res.locals.chainName} chain`;
 
-    let tasks = 3;
-    // validators count
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
-        if(err){
-            console.error(err);
-            return res.status(500).send({ error: 'Something went wrong!' });
-        } else {
-            res.locals.parsedData = JSON.parse(fileContent);
-            // default values
-            res.locals.ethStoreData = JSON.stringify(null);
-            res.locals.beaconData = JSON.stringify(null);
-            res.locals.chainData = JSON.stringify(null);
-            res.locals.chartsUIconfig = JSON.stringify(null);
-            res.locals.dashboardData = JSON.stringify(null);
-            
-            const parsedData = (res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
-            res.locals.beaconData = JSON.stringify(parsedData.beaconData);
-            res.locals.jsController = 'validators';
-            OnTaskCompleted();
-        }
-    });
-
-    // validator current queue
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.ethereum.validatorQueue), 'utf8', (err, data) => {
-        if(err){
-            console.error(err);
-            return res.status(500).send({ error: 'Something went wrong!' });
-        } else {
-            let model = new ValidatorQueueModel();
-            res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue("ethereum"), res.locals.chain, JSON.parse(data));
-            //console.log("ETH | res.locals.queue:", res.locals.queue);
-            OnTaskCompleted();
-        }
-    });
-    
-    // validator history queue
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.validatorqueue.ethereum), 'utf8', (err, data) => {
-        if(err){
-            console.error(err);
-            return res.status(500).send({ error: 'Something went wrong!' });
-        } else {
-            res.locals.queueChart = JSON.stringify(JSON.parse(data));
-            OnTaskCompleted();
-        }
-    });
-
-    function OnTaskCompleted(){
-        tasks--;
-        if(tasks === 0) next();
-    }
-};
-
-EthereumController.prototype.Keystores = function(req,res,next){
+exports.Keystores = function(req,res,next){
     res.locals.title = `Guide to generate abd deposit Validator keys for ${res.locals.chainName} staking`;
     res.locals.metaDescription = `Complete indotrduction to validator keystores for staking on ${res.locals.chainName} chain.`;
     res.locals.page_hbs = "guides/keystores";
@@ -212,7 +207,7 @@ EthereumController.prototype.Keystores = function(req,res,next){
     next();
 };
 
-EthereumController.prototype.CacheIndexData = function(cb){
+exports.CacheIndexData = function(cb){
     //console.log(`${new Date()} EthereumController.prototype.CacheIndexPageData`);
 
     var callbacks = 4/*5*/;
@@ -223,9 +218,10 @@ EthereumController.prototype.CacheIndexData = function(cb){
         beaconchainData = null,
         etherchainData = null,
         indicators = null,
-        valcount = null;
+        valcount = null,
+        valcount_history = null;
 
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
         if(!err) {
             const parsedChartsDataCache = JSON.parse(fileContent).ethereum;
             ethStoreData = parsedChartsDataCache.ethStore;
@@ -233,6 +229,7 @@ EthereumController.prototype.CacheIndexData = function(cb){
             etherchainData = parsedChartsDataCache.chainData;
             indicators = parsedChartsDataCache.indicators;
             valcount = parsedChartsDataCache.valcount;
+            valcount_history = parsedChartsDataCache.valcount_history;
         }
         taskCompleted(err, "chartsCache");
     });
@@ -243,7 +240,7 @@ EthereumController.prototype.CacheIndexData = function(cb){
         //console.log(data);
         let chartData = new ValidatorQueueModel();
         chartData = chartData.ConvertToChartsArray(data, 0);
-        fs.writeFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.validatorqueue.ethereum), JSON.stringify(chartData, null, 2), 'utf8', (err) => {
+        fs.writeFile(path.join(__dirname, '..', '..', dataFile.pagecache.validatorqueue.ethereum), JSON.stringify(chartData, null, 2), 'utf8', (err) => {
             if (err) console.error('Error writing file:', err);
             //console.log('File successfully updated.');
             taskCompleted(err, "validatorqueue");
@@ -269,14 +266,14 @@ EthereumController.prototype.CacheIndexData = function(cb){
     });*/
 
     // Get Vault services data
-    // console.log("Getting vauld services:", app.vaultServicesData);
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.ethereum.vaultServices), 'utf8', (err, fileContent) => {
+    // console.log("Getting vauld services:", vaultServicesData);
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.ethereum.vaultServices), 'utf8', (err, fileContent) => {
         if(!err) vaultServicesData = JSON.parse(fileContent);
         taskCompleted(err, "vaultServices");
     });
 
     // Get validator hosting services data
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.ethereum.validatorHostingServices), 'utf8', (err, fileContent) => {
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.ethereum.validatorHostingServices), 'utf8', (err, fileContent) => {
         if(!err) validatorHostingServicesData = JSON.parse(fileContent);
         taskCompleted(err, "hostingtServices");
     });
@@ -304,7 +301,7 @@ EthereumController.prototype.CacheIndexData = function(cb){
         aggregaredData = JSON.stringify(aggregaredData, null, 2);
 
         // Post data to the file
-        fs.writeFile(app.cachedDataFile, aggregaredData, 'utf8', (err) => {
+        fs.writeFile(cachedDataFile, aggregaredData, 'utf8', (err) => {
             if (err) {
                 console.error('Error writing file:', err);
                 return cb(err);
@@ -314,5 +311,3 @@ EthereumController.prototype.CacheIndexData = function(cb){
         });
     }
 };
-
-module.exports = EthereumController;

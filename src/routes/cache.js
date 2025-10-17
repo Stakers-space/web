@@ -57,16 +57,16 @@ class CacheReGenerate {
 
         new NewsController().RegenerateCacheFiles(); // Reload news ()
 
-        new ChartController().CacheData(function(err){ // Cache all DB data into file
+        ChartController.CacheData(function(err){ // Cache all DB data into file
             console.log((err) ? err : "└── Chart Data were succesfully cached | Caching pages-related data");
             var callbacks = 3;
             // Use the data from the file
-            new EthereumController().CacheIndexData(function(err){
+            EthereumController.CacheIndexData(function(err){
                 console.log((err) ? err : " ├─ Ethereum Data were succesfully cached");
                 PageCached();
             });
 
-            new GnosisController().CacheIndexData(function(err){
+            GnosisController.CacheIndexData(function(err){
                 console.log((err) ? err : " ├─ Gnosis Data were succesfully cached");
                 PageCached();
             });

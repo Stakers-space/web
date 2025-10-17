@@ -94,10 +94,10 @@
 					<a href="/charts/eth-circulation-supply" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
 						<div class="mb-4">
 							<h2 class="text-xl font-semibold">
-								{{{indicators.supply.value}}} ETH circ supply
+								{{{formatNumber indicators.supply.value '0.00a'}}} ETH circ supply
 							</h2>
 							<div class="bg-green-100 text-green-700 rounded px-2 py-1 w-[170px] h-[21px] overflow-hidden text-xs">
-								<span class="block">{{{indicators.supply.increments.day}}} in the last day</span>
+								<span class="block">{{{formatNumber indicators.supply.increments.day '0,0'}}} in the last day</span>
 							</div>
 						</div>
 						<canvas id="ethsupply_chart" name="lazy-canvas" class="w-full h-40"></canvas>

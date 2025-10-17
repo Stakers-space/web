@@ -34,10 +34,10 @@ router.use('/', require('./homepage'));
         cssFile: "chainpage"
     });
 });*/
-router.use('/ethereum', require('./ethereum-tailwind'));
-router.use('/ethereum-staking', require('./ethereum'));
-router.use('/gnosis', require('./gnosis-tailwind'));
-router.use('/gnosis-staking', require('./gnosis'));
+router.use('/ethereum', require('./ethereum'));
+router.use('/ethereum-staking', require('./ethereum-staking'));
+router.use('/gnosis', require('./gnosis'));
+router.use('/gnosis-staking', require('./gnosis-staking'));
 router.use('/api', require('./api_raw'));
 router.use('/api', require('./api')); // body parser
 

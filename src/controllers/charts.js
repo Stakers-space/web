@@ -1,5 +1,4 @@
 "use strict";
-var app = null;
 const fs = require('fs'),
       path = require('path'),
       { getJson } = require('../libs/http-request.js'),
@@ -13,16 +12,16 @@ const fs = require('fs'),
 const azureCosmosDB = require('../services/azureCosmosDB'),
       MySqlService = require('../services/mysqlDB.js');
 
+const { ReadStateFiles } = require('../utils/filesystem-utils.js');
+const ValidatorQueueModel = require('../models/validatorqueue');
+const cache_validatorQueue = require('../middlewares/cache/validatorqueue');
+
 const assetPriceCache = require('../middlewares/cache/asset-price.js'); 
+const dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
+const cachedDataFile = path.join(__dirname, '..', '..', dataFile.pagecache.charts);
 
-function ChartsPagePresenter(){ 
-    this.dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
-    this.cachedDataFile = path.join(__dirname, '..', '..',  this.dataFile.pagecache.charts);
-    app = this;
-}
-
-ChartsPagePresenter.prototype.GetData = function(req, res, next){
-    fs.readFile(path.join(__dirname, '..', '..', app.dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
+exports.GetData = function(req, res, next){
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
         if(err){
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
@@ -39,7 +38,132 @@ ChartsPagePresenter.prototype.GetData = function(req, res, next){
     });
 };
 
-ChartsPagePresenter.prototype.GnoCirculationSupply = function(req,res,next){
+exports.validators_overview = (req,res,next) => {
+    res.locals.page_hbs = "shared_ethgno/validators";
+    res.locals.layout_hbs = "standard";
+    res.locals.css_file = "charts";
+    res.locals.title = `Validator charts on ${res.locals.chainName} chain`;
+    res.locals.metaDescription = `Charts related to validators on ${res.locals.chainName} chain`;
+
+    // add validators and wallets snapshots data
+    res.locals.walletsSnapshot = [];
+    res.locals.walletsSnapshotDist = {};
+    let tasks = 4;
+    ReadStateFiles(dataFile.validatorWalletSnapshot, res.locals.chain)
+    .then((data) => {
+        const arrOrder = {
+            pending_initialized: 2,
+            pending_queued: 1,
+            active_exiting: 3,
+            active_ongoing: 0,
+            exited_unslashed: 5,
+            withdrawal_done: 4,
+            withdrawal_possible: 6
+        }
+        // distribution - rounded Balance by number of wallets
+         for(const stateResp of data){
+            if(stateResp.error) continue;
+            const stateData = stateResp.value;
+
+            const walletsObj = stateData.json?.data || {};
+            const rows = Object.entries(walletsObj).map(([address, v]) => ({
+                address,
+                balance: Number(v?.balance ?? 0),
+                validatorsCount: Array.isArray(v?.validators) ? v.validators.length : 0,
+                unclaimed: Number(v?.unclaimed_balance ?? 0),
+            }));
+            
+            const topWlts = rows.sort((a, b) => b.balance - a.balance).slice(0, 10);
+
+            const distMap = rows.reduce((acc, r) => {
+                const bucket = (Math.round(r.balance/* * 10*/)/* / 10*/)/*.toFixed(1)*/;
+                acc[bucket] = (acc[bucket] || 0) + 1;
+                return acc;
+            }, {});
+
+            const entries = Object.entries(distMap)
+            .map(([bucket, count]) => [parseFloat(bucket), Number(count)])
+            .sort((a, b) => a[0] - b[0]);
+
+            res.locals.walletsSnapshot[arrOrder[stateData.key]] = {
+                key: stateData.key,
+                epoch: stateData.json.epoch,
+                topWlts
+            };
+
+            res.locals.walletsSnapshotDist[stateData.key] = {
+                balance: entries.map(([bucket]) => bucket),
+                wallets: entries.map(([, count]) => count),
+            }
+        }
+        res.locals.walletsSnapshotDist = JSON.stringify(res.locals.walletsSnapshotDist);
+        OnTaskCompleted();
+    })
+    .catch((err) => {
+        console.error(err);
+        return res.status(500).send({ error: 'Something went wrong!' });
+    });
+    //const snapshots_validatorData = await ReadStateFiles(dataFile.validatorSnapshot, res.locals.chain);
+    
+    // validators count
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
+        if(err){
+            console.error(err);
+            return res.status(500).send({ error: 'Something went wrong!' });
+        } else {
+            res.locals.parsedData = JSON.parse(fileContent);
+            // default values
+            res.locals.ethStoreData = JSON.stringify(null);
+            res.locals.beaconData = JSON.stringify(null);
+            res.locals.chainData = JSON.stringify(null);
+            res.locals.chartsUIconfig = JSON.stringify(null);
+            res.locals.dashboardData = JSON.stringify(null);
+            
+            if(!res.locals.parsedData){
+                console.error("Validators | res.locals.parsedData is null");
+                return res.status(500).send({ error: 'Something went wrong!' });
+            }
+            const parsedData = res.locals.parsedData[res.locals.chain]; //(res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
+            res.locals.beaconData = JSON.stringify(parsedData.beaconData);
+            res.locals.jsController = 'validators';
+            res.locals.valcount = parsedData.valcount_history[parsedData.valcount_history.length - 1];
+            res.locals.valcount.time = new Date(res.locals.valcount.time * 1000);
+            res.locals.valcount_history = JSON.stringify(parsedData.valcount_history);
+            OnTaskCompleted();
+        }
+    });
+
+    // validator current queue
+    fs.readFile(path.join(__dirname, '..', '..', dataFile[res.locals.chain].validatorQueue), 'utf8', (err, data) => {
+        if(err){
+            console.error(err);
+            return res.status(500).send({ error: 'Something went wrong!' });
+        } else {
+            let model = new ValidatorQueueModel();
+            res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue(res.locals.chain), res.locals.chain, JSON.parse(data));
+            //console.log("ETH | res.locals.queue:", res.locals.queue);
+            OnTaskCompleted();
+        }
+    });
+    
+    // validator history queue
+    fs.readFile(path.join(__dirname, '..', '..', dataFile.pagecache.validatorqueue[res.locals.chain]), 'utf8', (err, data) => {
+        if(err){
+            console.error(err);
+            return res.status(500).send({ error: 'Something went wrong!' });
+        } else {
+            res.locals.queueChart = JSON.stringify(JSON.parse(data));
+            OnTaskCompleted();
+        }
+    });
+
+    function OnTaskCompleted(){
+        tasks--;
+        if(tasks === 0) next();
+    }
+};
+
+exports.GnoCirculationSupply = function(req,res,next){
     const gnovaluationData = res.locals.parsedData.gnosis.gnoDashboard;
     console.log("GnoCirculationSupply | gnovaluationData:", gnovaluationData);
     res.locals.valuationData = JSON.stringify(gnovaluationData);
@@ -59,7 +183,7 @@ ChartsPagePresenter.prototype.GnoCirculationSupply = function(req,res,next){
     next();
 };
 
-ChartsPagePresenter.prototype.Validators = function(req,res,next){
+exports.Validators = function(req,res,next){
     const parsedData = (res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
     res.locals.beaconData = JSON.stringify(parsedData.beaconData);
     res.locals.chartId = 'ethvalidators_chart';
@@ -69,7 +193,7 @@ ChartsPagePresenter.prototype.Validators = function(req,res,next){
     next();
 };
 
-ChartsPagePresenter.prototype.StakingApy = function(req,res,next){
+exports.StakingApy = function(req,res,next){
     const parsedData = (res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
     res.locals.ethStoreData = JSON.stringify(parsedData.ethStore);
     res.locals.chartId = 'ethstakingapr_chart';
@@ -78,7 +202,7 @@ ChartsPagePresenter.prototype.StakingApy = function(req,res,next){
     res.locals.metaDescription = `View current and historical ${res.locals.chainName} Staking APRs`;
     next();
 };
-ChartsPagePresenter.prototype.StakedTokens = function(req,res,next){
+exports.StakedTokens = function(req,res,next){
     const parsedData = (res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
     res.locals.beaconData = JSON.stringify(parsedData.beaconData);
     res.locals.chainData = JSON.stringify(parsedData.chainData);
@@ -88,7 +212,7 @@ ChartsPagePresenter.prototype.StakedTokens = function(req,res,next){
     res.locals.metaDescription = `View current and historical amount of staked ${res.locals.chainTokenUpr} on ${res.locals.chainName} chain.`;
     next();
 };
-ChartsPagePresenter.prototype.TVL = function(req,res,next){
+exports.TVL = function(req,res,next){
     const parsedData = (res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
     res.locals.beaconData = JSON.stringify(parsedData.beaconData);
     res.locals.chainData = JSON.stringify(parsedData.chainData);
@@ -98,7 +222,7 @@ ChartsPagePresenter.prototype.TVL = function(req,res,next){
     res.locals.metaDescription = `View total current and historical value locked (TVL) in ${res.locals.chainName} staking`;
     next();
 };
-ChartsPagePresenter.prototype.CirculationSupply = function(req,res,next){
+exports.CirculationSupply = function(req,res,next){
     const parsedData = (res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
     res.locals.beaconData = JSON.stringify(parsedData.beaconData);
     res.locals.chainData = JSON.stringify(parsedData.chainData);
@@ -108,7 +232,7 @@ ChartsPagePresenter.prototype.CirculationSupply = function(req,res,next){
     res.locals.metaDescription = `View current and historical circulation supply on ${res.locals.chainName} chain.`;
     next();
 };
-ChartsPagePresenter.prototype.MarketCap = function(req,res,next){
+exports.MarketCap = function(req,res,next){
     const parsedData = (res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
     res.locals.beaconData = JSON.stringify(parsedData.beaconData);
     res.locals.chainData = JSON.stringify(parsedData.chainData);
@@ -119,7 +243,7 @@ ChartsPagePresenter.prototype.MarketCap = function(req,res,next){
     res.locals.metaDescription = `View current and historical ${res.locals.chainTokenUpr} token Market Cap.`;
     next();
 };
-ChartsPagePresenter.prototype.Transactions = function(req,res,next){
+exports.Transactions = function(req,res,next){
     const parsedData = (res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
     res.locals.chainData = JSON.stringify(parsedData.chainData);
     res.locals.chartId = 'transactions_chart';
@@ -129,7 +253,7 @@ ChartsPagePresenter.prototype.Transactions = function(req,res,next){
     res.locals.metaDescription = `View current and historical numbers of transactions on ${res.locals.chainName} chain.`;
     next();
 };
-ChartsPagePresenter.prototype.Blocks = function(req,res,next){
+exports.Blocks = function(req,res,next){
     const parsedData = (res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
     res.locals.beaconData = JSON.stringify(parsedData.beaconData);
     //res.locals.chainData = JSON.stringify(parsedData.chainData);
@@ -141,7 +265,7 @@ ChartsPagePresenter.prototype.Blocks = function(req,res,next){
     next();
 };
 
-ChartsPagePresenter.prototype.Response = function(req,res){   
+exports.Response = function(req,res){   
     res.render("chart", {
 		layout: "standard",
 		pageUrl: 'https://stakers.space',//('https://' + req.appData.host + req.canonicalUrl),
@@ -158,7 +282,7 @@ ChartsPagePresenter.prototype.Response = function(req,res){
 };
 
 
-ChartsPagePresenter.prototype.CacheData = function(cb){
+exports.CacheData = function(cb){
     //console.log(`${new Date()} GnosisController.prototype.CacheIndexPageData`);
 
     var callbacks = 4;
@@ -167,14 +291,16 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
         storeData: null,
         beaconData: null,
         chainData: null,
-        valcount: null
+        valcount: null,
+        valcount_history: null
     };
     var gnosis_srcData = {
         beaconData: null,
         chainData: null,
         valuationData: null,
         circulationData: null,
-        valcount: null
+        valcount: null,
+        valcount_history: null
     };
 
     const qc = (containerId, query, partitionKey) => new Promise((resolve, reject) => {
@@ -185,11 +311,14 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
     });
     const getLast = (pk) => qc("data", "SELECT TOP 1 VALUE c FROM c WHERE c.partitionKey = @partitionKey ORDER BY c._ts DESC", pk).then(rows => rows?.[0] ?? null);
     const getAllByDays = (pk) => qc("data", "SELECT * FROM c WHERE c.partitionKey = @partitionKey ORDER BY c.days", pk);
+    const getAllByEpochs = (pk) => qc("data", "SELECT * FROM c WHERE c.partitionKey = @partitionKey ORDER BY c._ts", pk);
 
     const jobs = [
         // valcount data
         getLast("eth-valcount").then(doc => { if (doc) ethereum_srcData.valcount = doc; }).catch(err => { console.error(err)}),
         getLast("gno-valcount").then(doc => { if (doc) gnosis_srcData.valcount = doc; }).catch(err => { console.error(err)}),
+        getAllByEpochs("eth-valcount").then(doc => { if (doc) ethereum_srcData.valcount_history = doc; }).catch(err => { console.error(err)}),
+        getAllByEpochs("gno-valcount").then(doc => { if (doc) gnosis_srcData.valcount_history = doc; }).catch(err => { console.error(err)}),
         
         getAllByDays("ethstore").then(rows => { ethereum_srcData.storeData = rows; }).catch(err => { console.error(err)}),
         getAllByDays("beaconchain").then(rows => { ethereum_srcData.beaconData = rows; }).catch(err => { console.error(err)}),
@@ -315,23 +444,24 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
                     aprLastDay: new EthStoreDataModel().GetApr(ethereum_arrData.ethStore.apr[ethereum_arrData.ethStore.apr.length - 1]),
                     validators: {
                         count: ethereum_arrData.beaconData.validators[ethereum_arrData.beaconData.validators.length - 1],
-                        increments: CalculateTimeChange(ethereum_arrData.beaconData.validators, '0,0')
+                        increments: CalculateTimeChange(ethereum_arrData.beaconData.validators)
                     },
                     stakedTokens: {
                         value: stakedEth,
                         supplyShare: numeral(ethereum_arrData.beaconData.stakedTokens[ethereum_arrData.beaconData.stakedTokens.length - 1] / ethereum_arrData.chainData.totalSupply[ethereum_arrData.chainData.totalSupply.length - 1]).format('0.00%'),
-                        increments: CalculateTimeChange(ethereum_arrData.beaconData.stakedTokens, '0,0')
+                        increments: CalculateTimeChange(ethereum_arrData.beaconData.stakedTokens)
                     },
                     tvl: {
                         value: tvlEth,
-                        increments: CalculateTimeChange(ethereum_arrData.beaconData.tvl, '$0,0')
+                        increments: CalculateTimeChange(ethereum_arrData.beaconData.tvl)
                     },
                     supply: {
-                        value: numeral(ethereum_arrData.chainData.totalSupply[ethereum_arrData.chainData.totalSupply.length - 1]).format('0.00a'),
-                        increments: CalculateTimeChange(ethereum_arrData.chainData.totalSupply, '0,0')
+                        value: ethereum_arrData.chainData.totalSupply[ethereum_arrData.chainData.totalSupply.length - 1],
+                        increments: CalculateTimeChange(ethereum_arrData.chainData.totalSupply)
                     }
                 },
-                valcount: ethereum_srcData.valcount
+                valcount: ethereum_srcData.valcount,
+                valcount_history: ethereum_srcData.valcount_history
             },
             gnosis: { 
                 beaconData: gnosis_arrData.beaconData,
@@ -340,24 +470,24 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
                 circulationData: gnosis_srcData.circulationData,
                 indicators: {
                     validators: {
-                        value: numeral(gnosis_arrData.beaconData.validators[gnosis_arrData.beaconData.validators.length - 1]).format('0,0'),
-                        increments: CalculateTimeChange(gnosis_arrData.beaconData.validators, '0,0')
+                        value: gnosis_arrData.beaconData.validators[gnosis_arrData.beaconData.validators.length - 1],
+                        increments: CalculateTimeChange(gnosis_arrData.beaconData.validators)
                     },
                     stakedTokens: {
                         value: stakedGno,
-                        supplyShare: numeral(gnosis_arrData.beaconData.stakedTokens[gnosis_arrData.beaconData.stakedTokens.length - 1] / gnosis_srcData.circulationData.generalHealthOverview.outstanding_tokens).format('0.00%'),
-                        increments: CalculateTimeChange(gnosis_arrData.beaconData.stakedTokens, '0,0')
+                        supplyShare: gnosis_arrData.beaconData.stakedTokens[gnosis_arrData.beaconData.stakedTokens.length - 1] / gnosis_srcData.circulationData.generalHealthOverview.outstanding_tokens,
+                        increments: CalculateTimeChange(gnosis_arrData.beaconData.stakedTokens)
                     },
                     tvl: {
                         value: stakedGno * gnosis_srcData.valuationData?.gnoPrice/*,
-                        increments: CalculateTimeChange(gnosis_arrData.beaconData.tvl, '$0,0')*/
+                        increments: CalculateTimeChange(gnosis_arrData.beaconData.tvl)*/
                     },
                     supply: {
-                        value: gnosis_srcData.circulationData.generalHealthOverview.outstanding_tokens,//0,//gnosis_srcData.gnovaluationData.generalHealthOverview.outstanding_tokens,
-                        value_formated: gnosis_srcData.circulationData.generalHealthOverview.formated.outstanding_tokens
+                        value: gnosis_srcData.circulationData.generalHealthOverview.outstanding_tokens//0,//gnosis_srcData.gnovaluationData.generalHealthOverview.outstanding_tokens,
                     }
                 },
-                valcount: gnosis_srcData.valcount
+                valcount: gnosis_srcData.valcount,
+                valcount_history: gnosis_srcData.valcount_history
             }
         };
 
@@ -367,13 +497,9 @@ ChartsPagePresenter.prototype.CacheData = function(cb){
         aggregaredData = JSON.stringify(aggregaredData, null, 2);
 
         // Post data to the file
-        fs.writeFile(app.cachedDataFile, aggregaredData, 'utf8', (err) => {
+        fs.writeFile(cachedDataFile, aggregaredData, 'utf8', (err) => {
             //if (!err) console.log('File successfully updated.');
             return cb(err);
         });
     }
 };
-
-// new ChartsPagePresenter().CacheData(function(err){ console.log(err, "data cached"); })
-
-module.exports = ChartsPagePresenter;

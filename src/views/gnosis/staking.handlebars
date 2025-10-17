@@ -69,10 +69,10 @@
 							<a href="/gnosis-staking/validators">{{{formatNumber queue.current.stateCount.active_ongoing.validators '0,0'}}} active validators</a>
 						</h2>
 						<div class="bg-green-100 text-green-700 rounded px-2 py-1 text-xs w-[170px] h-[21px] overflow-hidden dynamic-label">
-							<span class="item visible">{{{indicators.validators.increments.day}}} in the last day</span>
-							<span class="item hidden">{{{indicators.validators.increments.week}}} in the last week</span>
-							<span class="item hidden">{{{indicators.validators.increments.month}}} in the last month</span>
-							<span class="item hidden">{{{indicators.validators.increments.year}}} in the last year</span>
+							<span class="item visible">{{{formatNumber indicators.validators.increments.day '0,0'}}} in the last day</span>
+							<span class="item hidden">{{{formatNumber indicators.validators.increments.week '0,0'}}} in the last week</span>
+							<span class="item hidden">{{{formatNumber indicators.validators.increments.month '0,0'}}} in the last month</span>
+							<span class="item hidden">{{{formatNumber indicators.validators.increments.year '0,0'}}} in the last year</span>
 						</div>
 					</div>
 					<div class="grid grid-cols-[66fr_34fr] gap-6">
@@ -156,14 +156,14 @@
 				<a href="/charts/gno-staked" class="relative block bg-white rounded-lg shadow hover:shadow-lg transition p-4">
 					<div class="mb-4">
 					<h2 class="text-xl font-semibold" 
-						title="{{{indicators.stakedTokens.supplyShare}}} of all GNO in circulation">
+						title="{{{formatNumber indicators.stakedTokens.supplyShare '0.00%'}}} of all GNO in circulation">
 						{{{formatNumber indicators.stakedTokens.value '0.00a'}}} staked GNO
 					</h2>
 					<div class="bg-green-100 text-green-700 rounded px-2 py-1 w-[230px] h-[21px] overflow-hidden text-xs dynamic-label">
-						<span class="item visible">{{{indicators.stakedTokens.increments.day}}} GNO in the last day</span>
-						<span class="item hidden">{{{indicators.stakedTokens.increments.week}}} GNO in the last week</span>
-						<span class="item hidden">{{{indicators.stakedTokens.increments.month}}} GNO in the last month</span>
-						<span class="item hidden">{{{indicators.stakedTokens.increments.year}}} GNO in the last year</span>
+						<span class="item visible">{{{formatNumber indicators.stakedTokens.increments.day '0,0'}}} GNO in the last day</span>
+						<span class="item hidden">{{{formatNumber indicators.stakedTokens.increments.week '0,0'}}} GNO in the last week</span>
+						<span class="item hidden">{{{formatNumber indicators.stakedTokens.increments.month '0,0'}}} GNO in the last month</span>
+						<span class="item hidden">{{{formatNumber indicators.stakedTokens.increments.year '0,0'}}} GNO in the last year</span>
 					</div>
 					</div>
 					<canvas id="stakedbalance_chart" name="lazy-canvas" class="w-full h-40"></canvas>

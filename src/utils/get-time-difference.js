@@ -1,12 +1,10 @@
-const numeral = require('numeral');
-
-function GetTimeDifferences(dataArr, format){
+function GetTimeDifferences(dataArr){
     const lastValue = dataArr[dataArr.length-1];
     return {
-        day:   numeral(lastValue - dataArr[dataArr.length-2]).format(format),
-        week:  numeral(lastValue - dataArr[dataArr.length-7]).format(format),
-        month: numeral(lastValue - dataArr[dataArr.length-30]).format(format),
-        year:  numeral(lastValue - dataArr[dataArr.length-365]).format(format),
+        day:   lastValue - dataArr[dataArr.length-2],
+        week:  lastValue - dataArr[dataArr.length-7],
+        month: lastValue - dataArr[dataArr.length-30],
+        year:  lastValue - dataArr[dataArr.length-365]
     }
 }
 module.exports = GetTimeDifferences;
