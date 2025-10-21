@@ -171,7 +171,7 @@
                                 {{#each topWlts}}
                                 <tr>
                                     <td class="px-3 py-2 text-right tabular-nums">{{plus1 @index}}</td>
-                                    <td class="font-mono break-all text-left"><a href="{{../../explorer}}/address/{{address}}" target="_blank" rel="noopener nofollow" class="underline">{{short address start=8 end=8}}</a></td>
+                                    <td class="font-mono break-all text-left"><a href="{{../../explorer}}/address/{{address}}" target="_blank" rel="noopener nofollow" class="underline">{{shortAddress address start=8 end=8}}</a></td>
                                     <td class="text-right">{{formatNumber validatorsCount '0,0'}}</td>
                                     <td class="text-right">{{formatNumber balance '0,0.0'}}</td>
                                     {{#ifEqual ../../chain "gnosis"}}

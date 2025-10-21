@@ -218,8 +218,7 @@ exports.CacheIndexData = function(cb){
         beaconchainData = null,
         etherchainData = null,
         indicators = null,
-        valcount = null,
-        valcount_history = null;
+        valcount = null;
 
     fs.readFile(path.join(__dirname, '..', '..', dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
         if(!err) {
@@ -229,7 +228,6 @@ exports.CacheIndexData = function(cb){
             etherchainData = parsedChartsDataCache.chainData;
             indicators = parsedChartsDataCache.indicators;
             valcount = parsedChartsDataCache.valcount;
-            valcount_history = parsedChartsDataCache.valcount_history;
         }
         taskCompleted(err, "chartsCache");
     });

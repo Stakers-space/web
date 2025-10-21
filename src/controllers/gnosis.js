@@ -263,8 +263,7 @@ exports.CacheIndexData = function(cb){
         circulationData = null, // Circulation due to BuyBacks from API
         indicators = null,
         depositContract = null,
-        valcount = null,
-        valcount_history = null;
+        valcount = null;
 
     fs.readFile(path.join(__dirname, '..', '..', dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
         if(!err) {
@@ -276,7 +275,6 @@ exports.CacheIndexData = function(cb){
                 valuationData = parsedChartsDataCache.valuationData;
                 circulationData = parsedChartsDataCache.circulationData;
                 valcount = parsedChartsDataCache.valcount;
-                valcount_history = parsedChartsDataCache.valcount_history;
             } catch(e){
                 console.error(e);
             }

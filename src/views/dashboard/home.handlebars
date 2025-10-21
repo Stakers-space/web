@@ -227,7 +227,7 @@ ul.img-marker li {
                         // set ahref
                         const explorerurl = (chain === "gnosis") ? "https://gnosischa.in/address/" : "https://beaconcha.in/address/"
                         feeWlt.href = explorerurl+feeWlt.innerHTML;
-                        feeWlt.innerHTML = "..."+feeWlt.innerHTML.slice(-3);
+                        feeWlt.innerHTML = shortAddress(feeWlt.innerHTML, {start:0, end:3, sep: '…'});
                     }
 
                     const pubkeyElm = instanceElm.getElementsByClassName("instance_insight")[0];
@@ -472,7 +472,7 @@ ul.img-marker li {
                 const wdata = pData.data[wlt.toLowerCase()];
                 if(wdata){
                     document.getElementById("withdrawal_wallets_info").innerHTML += `<tr class="odd:bg-white even:bg-neutral-50">
-                    <td class="px-4 py-2 font-mono break-all text-left">${wlt}</td>
+                    <td class="px-4 py-2 font-mono break-all text-left"><a href="https://gnosisscan.io/address/${wlt}" target="_blank" rel="nofollow noopener noreferrer" class="underline">${shortAddress(wlt, {"start":8, "end":8 })}</td>
                     <td class="px-4 py-2 text-right">${wdata.validators}</td>
                     <td class="px-4 py-2 text-right">${(Math.trunc(wdata.balance * 100) / 100).toString()}</td>
                     <td class="px-4 py-2 text-right">${(Math.trunc(wdata.unclaimed_balance * 100) / 100).toString()}</td>
@@ -517,6 +517,16 @@ ul.img-marker li {
         //console.log("RenderAccountCounts", key, chain, "→", value);
         acc_agg_ui.children[elmIndex].innerHTML = value;
     }
+
+    function shortAddress(value, opts){
+		const s = value == null ? '' : String(value);
+        const start = Number(opts?.start ?? 6);
+        const end   = Number(opts?.end   ?? 4);
+        const sep   = String(opts?.sep   ?? '……');
+
+        if (s.length <= start + end + sep.length) return s;
+        return s.slice(0, start) + sep + s.slice(-end);
+	};
 </script>
 {{> scripts/security-guard}}
 {{> footer_tailwind }}

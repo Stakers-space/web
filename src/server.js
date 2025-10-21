@@ -86,6 +86,16 @@ function registerHelpers(){
 			return new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(d);
 		}
 	});
+
+	handlebars.registerHelper('shortAddress', function(value, opts){
+		const s = value == null ? '' : String(value);
+        const start = Number(opts?.hash?.start ?? 6);
+        const end   = Number(opts?.hash?.end   ?? 4);
+        const sep   = String(opts?.hash?.sep   ?? '……');
+
+        if (s.length <= start + end + sep.length) return s;
+        return s.slice(0, start) + sep + s.slice(-end);
+	});
 }
 
 function normalizePort(val) {

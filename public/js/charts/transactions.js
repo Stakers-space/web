@@ -12,6 +12,16 @@ TransactionsChart.prototype.Init = function(){
 };
 
 TransactionsChart.prototype.ConfigurateChart = function(){
+    let feeLabelTitle = "Fees ";
+    if(document.location.pathname === "/gnosis"){
+        feeLabelTitle += "(xDai)";
+    } else if(document.location.pathname === "/ethereum"){
+        feeLabelTitle += "(ETH)";
+    } else {
+        feeLabelTitle += "(xDai/ETH)";
+    }
+
+    const feeTicker = (document.location.pathname === "/gnosis") ? "xDai" : "ETH";
     var chartdata = {
         labels: etherchainData.date,
         datasets: [
@@ -31,7 +41,7 @@ TransactionsChart.prototype.ConfigurateChart = function(){
                 //fill: false,
             },
             {
-                label: 'Fees (xDai/ETH)',
+                label: feeLabelTitle,
                 data: etherchainData.dailyTxRewards,
                 borderColor: "green",
                 backgroundColor: 'green',

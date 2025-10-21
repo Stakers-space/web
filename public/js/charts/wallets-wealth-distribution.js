@@ -50,7 +50,7 @@ WalletsWealthDistributionChart.prototype.ConfigurateChart = function(inst){
                 },
                 y1: {
                     display: (chartsUIconfig) ? chartsUIconfig.validators.yaxis : true,
-                    type: 'logarithmic',
+                    type: ((inst.dataKey.includes("pending")) ? 'linear' : 'logarithmic'),
                     position: 'left',
                     title: {
                         display: true,

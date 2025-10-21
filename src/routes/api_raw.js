@@ -17,4 +17,6 @@ router.get('/state-balances', Controller.ReturnStateBalanceFile, Controller.Retu
 router.put('/wallets_balances', tokenAuth, Controller.FileValidation, Controller.PutWalletsBalanceFile, Controller.UpdateFile);
 router.get('/wallets-balances', Controller.ReturnWalletsBalanceFile, Controller.ReturnFile);
 
+router.get('/clients-datafile', Controller.ReturnClientsFile, Controller.ReturnFile);
+
 module.exports = router;

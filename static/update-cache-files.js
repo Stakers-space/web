@@ -39,6 +39,23 @@ class UpdateCacheFiles{
                 }
             }
         }
+
+        // Update clients file
+        try {
+            // get file
+            const clientsDataFile = await getJson(`https://stakers.space/api/clients-datafile`);
+            // save on disc
+            console.log("Updating clients-datafile");
+            await SaveJson({
+                outPath: 'data',
+                filename: `clients.json`,
+                json: clientsDataFile,
+                atomic: true,
+                space: 0
+            });
+        } catch(e){
+            console.error(e);
+        }
     }
 }
 

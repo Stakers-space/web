@@ -109,6 +109,10 @@ exports.UpdateFile = async(req, res) => {
 
 exports.ReturnStateBalanceFile = (req, res, next) => { res.locals.DATA_DIR = dataFile.validatorsSnapshot; next();}
 exports.ReturnWalletsBalanceFile = (req, res, next) => { res.locals.DATA_DIR = dataFile.validatorWalletSnapshot; next();}
+exports.ReturnClientsFile = (req, res, next) => { 
+    req.query.f = 'clients.json';
+    res.locals.DATA_DIR = 'data';
+    next();}
 exports.ReturnFile = async(req,res) => {
     const DATA_DIR = path.join(__dirname, '..', '..', res.locals.DATA_DIR);
     try {

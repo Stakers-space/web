@@ -30,20 +30,36 @@
     {{/or}}
   </ul>
 
-  <!-- Title -->
-  <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-10">{{chainName}} Staking clients</h1>
+  	<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-10">
+		<h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-0">
+			{{chainName}} Staking clients
+		</h1>
 
-  <!-- Disclaimer -->
-  <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-12 text-sm text-yellow-800 shadow">
-    <h3 class="text-lg font-semibold mb-2">Disclaimer</h3>
-    <p>This page is for informational purposes only. The author nor website owner does not guarantee accuracy of the
-       information in this guide and is not responsible for any damages or losses incurred by following the guide.</p>
-  </div>
+		<div class="bg-yellow-50 border border-yellow-200 rounded-lg px-4 py-2 text-xs text-yellow-800 shadow-sm max-w-xs sm:ml-6">
+			<h3 class="text-sm font-semibold mb-1">Disclaimer</h3>
+			<p class="leading-snug">
+			This page is for informational purposes only. No guarantee of accuracy. Use at your own risk. <a href="http://localhost:8080/disclaimer" target="_blank" class="underline">See more.</a>
+			</p>
+		</div>
+	</div>
+
+	<section id="intro" class="my-10">
+		<p>
+			Staking clients are the core software components that run validator nodes on the {{#or isEthereum isGnosis}}{{{chainName}}}{{else}}Ethereum and Gnosis{{/or}} networks.
+			They are responsible for both the <a href="#execution" class="underline font-bold">execution layer</a> (handling transactions and smart contracts)
+			and the <a href="#consensus" class="underline font-bold">consensus layer</a> (managing validator duties, attestations and block proposals).
+		</p>
+		<p class="mt-5">
+			<strong>Choosing a reliable client is critical for validator performance, network health, and decentralization.</strong>
+			Each client is developed by an independent team with different programming languages and architectural approaches,
+			ensuring diversity and resilience of the ecosystem.
+		</p>
+	</section>
 
   <!-- Navigation (only if not Ethereum or Gnosis) -->
   {{#or isEthereum isGnosis}}
   {{else}}
-  <section class="mb-12">
+  <section class="mb-12 mt-10">
     <h2 class="font-semibold mb-4">Navigation:</h2>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
       <a href="#clients" class="bg-white rounded-xl border border-gray-200 shadow hover:shadow-md p-5 text-center transition">
@@ -63,7 +79,8 @@
   <section id="clients">
     <div class="max-w-full overflow-x-auto">
       <!-- Execution Clients -->
-      <h2 class="text-2xl font-semibold mb-6">Execution layer clients</h2>
+      <h2 class="text-2xl font-semibold mb-4" id="execution">Execution layer clients</h2>
+	  <p class="mb-4">Execution clients <strong>handle smart contracts and transactions.</strong></p>
       <table class="w-full border border-gray-200 rounded-xl shadow text-sm text-left">
         <thead class="bg-gray-100 text-gray-700">
           <tr>
@@ -175,7 +192,8 @@
       {{/or}}
 
       <!-- Consensus Clients -->
-      <h2 class="text-2xl font-semibold mt-12 mb-6">Consensus layer clients</h2>
+      <h2 class="text-2xl font-semibold mt-12 mb-4" id="consensus">Consensus layer clients</h2>
+	  <p class="mb-4">Consensus clients <strong>coordinate validators and finality</strong>.</p>
       <table class="w-full border border-gray-200 rounded-xl shadow text-sm text-left">
         <thead class="bg-gray-100 text-gray-700">
           <tr>
@@ -241,7 +259,7 @@
 								{{/and}}
 							{{else}}
 							<tr>
-								<td><a href="/{{this.ilink}}"><strong>{{this.name}}</strong></a>
+								<td><a href="/{{this.ilink}}" class="font-bold">{{this.name}}</a>
 									<span style="float:right">
 										{{#if this.chain.ethereum.link}}<a href="{{this.chain.ethereum.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/gnosis.png" alt="Gnosis" width="25"></a>{{/if}}
 										<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/code.png" alt="Developer" width="25"></a>
@@ -271,7 +289,8 @@
       </table>
 
       <!-- MEV Clients -->
-      <h2 class="text-2xl font-semibold mt-12 mb-6">MEV clients</h2>
+      <h2 class="text-2xl font-semibold mt-12 mb-4" id="mev">MEV clients</h2>
+	  <p class="mb-4">MEV clients <strong>optimize block building for maximal value extraction.</strong></p>
       <table class="w-full border border-gray-200 rounded-xl shadow text-sm text-left">
         <thead class="bg-gray-100 text-gray-700">
           <tr>
@@ -291,7 +310,7 @@
 								{{#or ../isEthereum ../isGnosis}}
 									{{#and this.chain.ethereum.supported ../isEthereum}}
 										<tr>
-											<td><a href="/{{this.ilink}}">{{this.name}}</a>
+											<td><a href="/{{this.ilink}}" class="font-bold">{{this.name}}</a>
 												<span style="float:right">
 													{{#if this.chain.ethereum.link}}<a href="{{this.chain.ethereum.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/ethereum.png" alt="Gnosis" width="25"></a>{{/if}}
 													<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/code.png" alt="Developer" width="25"></a>
@@ -314,7 +333,7 @@
 									{{/and}}
 									{{#and this.chain.gnosis.supported ../isGnosis }}
 											<tr>
-												<td><a href="/{{this.ilink}}">{{this.name}}</a>
+												<td><a href="/{{this.ilink}}" class="font-bold">{{this.name}}</a>
 													<span style="float:right">
 														{{#if this.chain.gnosis.link}}<a href="{{this.chain.gnosis.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/gnosis.png" alt="Gnosis" width="25"></a>{{/if}}
 														<a href="{{this.link}}" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/icons/code.png" alt="Developer" width="25"></a>
@@ -337,7 +356,7 @@
 									{{/and}}
 								{{else}}
 								<tr>
-											<td><a href="/{{this.ilink}}">{{this.name}}</a></td>
+											<td><a href="/{{this.ilink}}" class="font-bold">{{this.name}}</a></td>
 											<td class="flex items-center gap-2">
 												{{#if this.chain.ethereum.supported}}<img src="/img/icons/ethereum.png" alt="Linux" width="25">{{/if}}
 												{{#if this.chain.gnosis.supported}}<img src="/img/icons/gnosis.png" alt="Linux" width="25">{{/if}}
@@ -362,7 +381,8 @@
       </table>
 
       <!-- Service Clients -->
-      <h2 class="text-2xl font-semibold mt-12 mb-6">Service-based clients</h2>
+      <h2 class="text-2xl font-semibold mt-12 mb-4" id="service">Service-based clients</h2>
+	  <p class="mb-4">Service-based clients <strong>offer simplified deployment or managed infrastructure.</strong></p>
       <table class="w-full border border-gray-200 rounded-xl shadow text-sm text-left">
         <thead class="bg-gray-100 text-gray-700">
           <tr>
@@ -382,7 +402,7 @@
 								{{#or ../isEthereum ../isGnosis}}
 									{{#and this.chain.ethereum.supported ../isEthereum }}
 									<tr>
-										<td><a href="/{{this.ilink}}">{{this.name}}</a></td>
+										<td><a href="/{{this.ilink}}" class="font-bold">{{this.name}}</a></td>
 										<td>{{this.language}}</td>
 										<td>{{this.prerequisity}}</td>
 										<td class="flex items-center gap-2">
@@ -400,7 +420,7 @@
 									{{/and}}
 									{{#and this.chain.gnosis.supported ../isGnosis }}
 										<tr>
-											<td><a href="/{{this.ilink}}">{{this.name}}</a></td>
+											<td><a href="/{{this.ilink}}" class="font-bold">{{this.name}}</a></td>
 											<td>{{this.language}}</td>
 											<td>{{this.prerequisity}}</td>
 											<td class="flex items-center gap-2">
@@ -418,7 +438,7 @@
 									{{/and}}
 								{{else}}
 								<tr>
-										<td><a href="/{{this.ilink}}">{{this.name}}</a></td>
+										<td><a href="/{{this.ilink}}" class="font-bold">{{this.name}}</a></td>
 										<td class="flex items-center gap-2">
 											{{#if this.chain.ethereum.supported}}<img src="/img/icons/ethereum.png" alt="Linux" width="25">{{/if}}
 											{{#if this.chain.gnosis.supported}}<img src="/img/icons/gnosis.png" alt="Linux" width="25">{{/if}}
