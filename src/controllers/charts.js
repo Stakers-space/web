@@ -12,6 +12,8 @@ const fs = require('fs'),
 const azureCosmosDB = require('../services/azureCosmosDB'),
       MySqlService = require('../services/mysqlDB.js');
 
+const { validatorsViewChartConfig } = require('./chart_configs.js');
+
 const { ReadStateFiles } = require('../utils/filesystem-utils.js');
 const ValidatorQueueModel = require('../models/validatorqueue');
 const cache_validatorQueue = require('../middlewares/cache/validatorqueue');
@@ -111,6 +113,7 @@ exports.validators_overview = (req,res,next) => {
             console.error(err);
             return res.status(500).send({ error: 'Something went wrong!' });
         } else {
+            res.locals.charts = {};
             res.locals.parsedData = JSON.parse(fileContent);
             // default values
             res.locals.ethStoreData = JSON.stringify(null);
@@ -123,11 +126,16 @@ exports.validators_overview = (req,res,next) => {
                 console.error("Validators | res.locals.parsedData is null");
                 return res.status(500).send({ error: 'Something went wrong!' });
             }
-            const parsedData = res.locals.parsedData[res.locals.chain]; //(res.locals.chain === "gnosis") ? res.locals.parsedData.gnosis : res.locals.parsedData.ethereum;
+            const parsedData = res.locals.parsedData[res.locals.chain]; // chain selection
             res.locals.beaconData = JSON.stringify(parsedData.beaconData);
             res.locals.jsController = 'validators';
             res.locals.valcount = parsedData.valcount_history[parsedData.valcount_history.length - 1];
             res.locals.valcount.time = new Date(res.locals.valcount.time * 1000);
+            const validatorsOverviewChart = validatorsViewChartConfig(res.locals.chainTokenUpr, parsedData.valcount_history, parsedData.beaconData);
+            res.locals.charts['validators_overview'] = validatorsOverviewChart.overview;
+            res.locals.charts['validators_overview'].syncScaleWith = 'validators_overview_diff';
+            res.locals.charts['validators_overview_diff'] = validatorsOverviewChart.overview_diff;
+            res.locals.charts['validators_overview_diff'].syncScaleWith = 'validators_overview';
             res.locals.valcount_history = JSON.stringify(parsedData.valcount_history);
             OnTaskCompleted();
         }
@@ -309,16 +317,16 @@ exports.CacheData = function(cb){
             else resolve(data);
         });
     });
-    const getLast = (pk) => qc("data", "SELECT TOP 1 VALUE c FROM c WHERE c.partitionKey = @partitionKey ORDER BY c._ts DESC", pk).then(rows => rows?.[0] ?? null);
+    //const getLast = (pk) => qc("data", "SELECT TOP 1 VALUE c FROM c WHERE c.partitionKey = @partitionKey ORDER BY c._ts DESC", pk).then(rows => rows?.[0] ?? null);
     const getAllByDays = (pk) => qc("data", "SELECT * FROM c WHERE c.partitionKey = @partitionKey ORDER BY c.days", pk);
-    const getAllByEpochs = (pk) => qc("data", "SELECT * FROM c WHERE c.partitionKey = @partitionKey ORDER BY c._ts", pk);
+    const getAllByTime = (pk) => qc("data", "SELECT * FROM c WHERE c.partitionKey = @partitionKey ORDER BY c.time", pk);
 
     const jobs = [
         // valcount data
-        getLast("eth-valcount").then(doc => { if (doc) ethereum_srcData.valcount = doc; }).catch(err => { console.error(err)}),
-        getLast("gno-valcount").then(doc => { if (doc) gnosis_srcData.valcount = doc; }).catch(err => { console.error(err)}),
-        getAllByEpochs("eth-valcount").then(doc => { if (doc) ethereum_srcData.valcount_history = doc; }).catch(err => { console.error(err)}),
-        getAllByEpochs("gno-valcount").then(doc => { if (doc) gnosis_srcData.valcount_history = doc; }).catch(err => { console.error(err)}),
+        /*getLast("eth-valcount").then(doc => { if (doc) ethereum_srcData.valcount = doc; }).catch(err => { console.error(err)}),
+        getLast("gno-valcount").then(doc => { if (doc) gnosis_srcData.valcount = doc; }).catch(err => { console.error(err)}),*/
+        getAllByTime("eth-valcount").then(doc => { if (doc) ethereum_srcData.valcount_history = doc; }).catch(err => { console.error(err)}),
+        getAllByTime("gno-valcount").then(doc => { if (doc) gnosis_srcData.valcount_history = doc; }).catch(err => { console.error(err)}),
         
         getAllByDays("ethstore").then(rows => { ethereum_srcData.storeData = rows; }).catch(err => { console.error(err)}),
         getAllByDays("beaconchain").then(rows => { ethereum_srcData.beaconData = rows; }).catch(err => { console.error(err)}),
@@ -332,6 +340,10 @@ exports.CacheData = function(cb){
 
     Promise.allSettled(jobs).then((results) => {
         const firstErr = results.find(r => r.status === 'rejected')?.reason || null;
+
+        ethereum_srcData.valcount = ethereum_srcData.valcount_history[ethereum_srcData.valcount_history.length - 1];
+        gnosis_srcData.valcount = gnosis_srcData.valcount_history[gnosis_srcData.valcount_history.length - 1];
+
         taskCompleted(firstErr, "cosmosDB");
     });
 
@@ -460,7 +472,7 @@ exports.CacheData = function(cb){
                         increments: CalculateTimeChange(ethereum_arrData.chainData.totalSupply)
                     }
                 },
-                valcount: ethereum_srcData.valcount,
+                valcount: ethereum_srcData.valcount, // ?? duplicity
                 valcount_history: ethereum_srcData.valcount_history
             },
             gnosis: { 

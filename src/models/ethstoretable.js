@@ -87,9 +87,9 @@ class EthStore {
 
     GetApr(defaultApr){
         return {
-            value: numeral(defaultApr / 100).format('0.00%'),
-            operator: numeral(defaultApr / 100).format('0.00%'),
-            delegator: numeral(defaultApr * 0.9 / 100).format('0.00%')
+            value: defaultApr / 100,
+            operator: defaultApr / 100,
+            delegator: defaultApr * 0.9 / 100
         }          
     }
 

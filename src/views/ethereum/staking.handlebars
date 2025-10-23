@@ -61,47 +61,9 @@
 		</div>
 	</section>
 	<section class="border-t border-gray-200 py-12">
-			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 container mx-auto px-6">
-
-				<div class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
-					<div class="flex items-center mb-6">
-						<h2 class="text-xl font-semibold mr-4">
-							<a href="/ethereum-staking/validators">{{{formatNumber queue.current.stateCount.active_ongoing.validators '0,0'}}} active validators</a>
-						</h2>
-						<div class="bg-green-100 text-green-700 rounded px-2 py-1 text-xs w-[170px] h-[21px] overflow-hidden dynamic-label">
-							<span class="item visible">{{{formatNumber indicators.validators.increments.day '0,0'}}} in the last day</span>
-							<span class="item hidden">{{{formatNumber indicators.validators.increments.week '0,0'}}} in the last week</span>
-							<span class="item hidden">{{{formatNumber indicators.validators.increments.month '0,0'}}} in the last month</span>
-							<span class="item hidden">{{{formatNumber indicators.validators.increments.year '0,0'}}} in the last year</span>
-						</div>
-					</div>
-					<div class="grid grid-cols-[66fr_34fr] gap-6">
-					<div class="relative">
-						<canvas id="ethvalidators_chart" name="lazy-canvas" class="max-h-[240px] w-full"></canvas>
-						<div class="chart-legend">
-							<span class="black-line">Validators</span>
-							<span class="balance-bar">Daily change</span>
-						</div>
-					</div>
-					<div class="space-y-4 text-sm">
-						<div>
-						<strong>{{formatNumber queue.current.help.entryQueue.validators '0,0'}} Validators in 
-							<a class="text-green-600 hover:underline" href="/ethereum-staking/validators#entry-queue">Entry Queue</a>
-						</strong>
-						<p class="mt-0">Wait Time: {{queue.current.activation.waitingTimeHours}} hours,
-							{{queue.current.activation.waitingTimeMinutes}} minutes</p>
-						</div>
-						<div>
-						<strong>{{formatNumber queue.current.stateCount.active_exiting.validators '0,0'}} validators in 
-							<a class="text-red-600 hover:underline" href="/ethereum-staking/validators#exit-queue">Exit Queue</a>
-						</strong>
-						<p class="mt-0">Wait Time: {{queue.current.exiting.waitingTimeHours}} hours,
-							{{queue.current.exiting.waitingTimeMinutes}} minutes</p>
-						</div>
-					</div>
-					</div>
-				</div>
-
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 container mx-auto px-6">
+			{{> boxes/active-validators}}
+			
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 					{{!<a href="/charts/ethereum-staking-apy" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">}}
 					<a href="https://staking.ethermine.org/statistics" target="_blank" rel="nofollow noopener noreferrer" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
@@ -131,7 +93,7 @@
 						</div>
 					</a>
 				</div>
-			</div>
+		</div>
   	</section>
 
 	<section class="bg-gradient-to-b from-white to-gray-50 py-16 px-6 lg:px-20">

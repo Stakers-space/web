@@ -49,6 +49,9 @@ exports.HOME = (req, res, next) => {
             res.locals.beaconData = JSON.stringify(parsedData.beaconData);
             res.locals.chainData = JSON.stringify(parsedData.chainData);
             res.locals.ethStoreData = JSON.stringify(parsedData.ethStore);
+            //const valcount_history = parsedData.valcount_history;
+            //res.locals.valcount = valcount_history[valcount_history.length - 1];
+            //res.locals.valcount_history = JSON.stringify(parsedData.valcount_history);
             res.locals.chartsUIconfig = JSON.stringify({
                 apr:{legend:false,xaxis:false,yaxis:false},
                 validators:{legend:false,xaxis:false,yaxis:false},
@@ -102,6 +105,10 @@ exports.STAKING = (req, res, next) => {
             res.locals.beaconData = JSON.stringify(parsedData.beaconData);
             res.locals.chainData = JSON.stringify(parsedData.chainData);
             res.locals.ethStoreData = JSON.stringify(parsedData.ethStore);
+            
+            //const valcount_history = parsedData.valcount_history;
+            //res.locals.valcount = valcount_history[valcount_history.length - 1]; // generate chart output right on server?
+
             res.locals.chartsUIconfig = JSON.stringify({
                 apr:{legend:false,xaxis:false,yaxis:false},
                 validators:{legend:false,xaxis:false,yaxis:false},
@@ -120,7 +127,7 @@ exports.STAKING = (req, res, next) => {
             return res.status(500).send({ error: 'Something went wrong!' });
         } else {
             let model = new ValidatorQueueModel();
-            res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue("ethereum"), res.locals.chain, JSON.parse(data));
+            res.locals.queue = model.GetSnapshot(cache_validatorQueue.getValidatorQueue("ethereum"), res.locals.chain, JSON.parse(data)); // most up to date data
             //console.log("res.locals.queue", res.locals.queue);
             taskCompleted();
         }
@@ -218,7 +225,7 @@ exports.CacheIndexData = function(cb){
         beaconchainData = null,
         etherchainData = null,
         indicators = null,
-        valcount = null;
+        valcount_history = null;
 
     fs.readFile(path.join(__dirname, '..', '..', dataFile.pagecache.charts), 'utf8', (err, fileContent) => {
         if(!err) {
@@ -227,7 +234,7 @@ exports.CacheIndexData = function(cb){
             beaconchainData = parsedChartsDataCache.beaconData;
             etherchainData = parsedChartsDataCache.chainData;
             indicators = parsedChartsDataCache.indicators;
-            valcount = parsedChartsDataCache.valcount;
+            valcount_history = parsedChartsDataCache.valcount_history;
         }
         taskCompleted(err, "chartsCache");
     });
@@ -292,7 +299,7 @@ exports.CacheIndexData = function(cb){
             beaconData: reduceObjectArray(beaconchainData, -30),
             chainData: reduceObjectArray(etherchainData, -30),
             ethStore: reduceObjectArray(ethStoreData, -30),
-            valcount
+            valcount_history
         };
         //console.log(aggregaredData.beaconChain);
 

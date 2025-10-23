@@ -15,8 +15,15 @@
 					<meta property="position" content="3">
 				</li>
 			</ul>
-		 <h1 class="text-2xl font-semibold mt-4">{{chainName}} Validators Overview</h1>
-		<canvas id="ethvalidators_chart" name="lazy-canvas" class="mt-5"></canvas>
+		<h1 class="text-2xl font-semibold mt-4">{{chainName}} Validators Overview</h1>
+        <div class="space-y-0">
+            <div class="h-60 md:h-80 lg:h-140">
+                <canvas id="validators_overview" class="w-full h-full chart_canvas" name="lazy-canvas"></canvas>
+            </div>
+            <div class="h-36 md:h-44 lg:h-52">
+                <canvas id="validators_overview_diff" class="w-full h-full chart_canvas" name="lazy-canvas"></canvas>
+            </div>
+        </div>
 	</section>
 
      <section class="mt-10">
@@ -41,7 +48,7 @@
                         </tr>
                         <tr>
                             <td class="px-3 py-2 text-neutral-600">Churn:</td>
-                            <td class="px-3 py-2 text-right">{{queue.current.activation.rate_per_epoch}} / epoch</td>  
+                            <td class="px-3 py-2 text-right">{{queue.current.activation.rate_per_epoch}} / epoch</td>
                         </tr>
                     </tbody>
                 </table>
@@ -190,11 +197,15 @@
     
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+
+<script>var chartConfig = {{{json charts}}};</script>
 <script>var ethStoreData = {{{ethStoreData}}}, beaconchainData = {{{beaconData}}}, etherchainData = {{{chainData}}}, dashboardData={{{dashboardData}}}, chartsUIconfig = {{{chartsUIconfig}}}, queue = {{{queueChart}}}, valcount_history={{{valcount_history}}}, walletsSnapshotDist={{{walletsSnapshotDist}}};</script>
 <script type="text/javascript" src="/js/chart-presenter.js"></script>
 <script type="text/javascript" src="/js/charts/{{jsController}}.js"></script>
 <script type="text/javascript" src="/js/charts/queue.js"></script>
 <script type="text/javascript" src="/js/charts/wallets-wealth-distribution.js"></script>
+<script type="text/javascript" src="/js/charts/sc-chart.js"></script>
 <script>charts.ActivateLazyLoad();</script>
 </main>
 {{> footer_tailwind}}

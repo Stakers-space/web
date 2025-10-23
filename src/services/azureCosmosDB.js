@@ -131,10 +131,12 @@ async function createFamilyItem(containerId, itemBody, cb) {
       .container(containerId)
       .items.upsert(itemBody)
     console.log(`Created family item with id: ${itemBody.id}\n`);
-    cb(null, item);
+    if(cb) return cb(null, item);
+    return item;
   } catch(error) {
     console.error('Error creating family item:', error);
-    cb(error);
+    if(cb) return cb(error);
+    throw error;
   } 
 }
 
@@ -203,11 +205,13 @@ async function queryContainer(containerId, query, partitionKey, cb) {
         let resultString = JSON.stringify(queryResult)
         //console.log(`\tQuery returned ${resultString}\n`)
       }*/
-      return cb(null, results);
-
+      if (typeof cb === 'function') return cb(null, results);
+      return results;
+    
   } catch(error) {
     console.error('Error querying family item:', error);
-    return cb(error);
+    if (typeof cb === 'function') return cb(error);
+    return error;
   } 
 }
   

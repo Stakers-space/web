@@ -93,6 +93,9 @@ class ValidatorQueue {
         currentQueue.exiting = getState(exit_queue, currentQueue.range.churnEpoch, chain);
         return {current: currentQueue, schedule: listSchedule, rangeIndex: rangeResp.index};
     
+
+
+        
         function findRange(listArr, value) { 
             const index = listArr.findIndex( range => value >= range.min && (range.max === null || value < range.max) );
             if (index === -1) return { range: null, index: -1 };

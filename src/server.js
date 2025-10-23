@@ -67,7 +67,7 @@ function registerHelpers(){
 	handlebars.registerHelper('formatNumber', function (number, format) {
 		const isNumber = v => typeof v === 'number' && Number.isFinite(v);
 		if(!isNumber(number)) {
-			console.warn("formatNumber", number);
+			console.warn("WARN: formatNumber", number);
 			return "??";
 		};
 		return numeral(number).format(format);
@@ -95,6 +95,13 @@ function registerHelpers(){
 
         if (s.length <= start + end + sep.length) return s;
         return s.slice(0, start) + sep + s.slice(-end);
+	});
+
+	handlebars.registerHelper('json', function(obj){
+		const s = JSON.stringify(obj)
+		.replace(/</g, '\\u003c')   // protection agains </script>
+		.replace(/-->/g, '--\\>');  // for sure
+		return s;
 	});
 }
 
