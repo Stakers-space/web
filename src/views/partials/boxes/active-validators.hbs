@@ -19,9 +19,14 @@
     </div>
     <div class="grid grid-cols-[66fr_34fr] gap-6">
 		<div class="relative">
-			<canvas id="ethvalidators_chart" name="lazy-canvas" class="max-h-[240px] w-full"></canvas>
+			 <div class="h-20 md:h-25 lg:h-30">
+                <canvas id="validators_overview" class="w-full h-full chart_canvas" name="lazy-canvas"></canvas>
+            </div>
+            <div class="h-15 md:h-20 lg:h-25">
+                <canvas id="validators_overview_diff" class="w-full h-full chart_canvas" name="lazy-canvas"></canvas>
+            </div>
+			
 			<div class="chart-legend">
-				<span class="black-line">Validators</span>
 				<span class="balance-bar">Daily change</span>
 			</div>
 					</div>

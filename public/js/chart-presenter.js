@@ -74,7 +74,7 @@ ChartPresenter.prototype.ActivateLazyLoad = function(){
 
 ChartPresenter.prototype.InitChart = function(elm){
     console.log("[ChartPresenter] Init chart ", elm.id);
-    charts[elm.id].Init();
+    if(charts[elm.id]) charts[elm.id].Init();
 };
 
 ChartPresenter.prototype.GetZoomOption = function(optionId,elmId,zoomWheel = false){

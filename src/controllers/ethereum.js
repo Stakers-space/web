@@ -6,8 +6,9 @@ const cache_validatorQueue = require('../middlewares/cache/validatorqueue');
 const cache_assetPrice = require('../middlewares/cache/asset-price.js'); 
 
 const azureCosmosDB = require('../services/azureCosmosDB');
-const reduceObjectArray = require('../utils/reduceObjectArray');
+const { reduceObjectArray } = require('../utils/reduceObjectArray');
 const ValidatorQueueModel = require('../models/validatorqueue');
+const { validatorsViewChartConfig } = require('./chart_configs.js');
 
 const dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
 const cachedDataFile = path.join(__dirname, '..', '..',  dataFile.pagecache.ethereum);
@@ -106,15 +107,17 @@ exports.STAKING = (req, res, next) => {
             res.locals.chainData = JSON.stringify(parsedData.chainData);
             res.locals.ethStoreData = JSON.stringify(parsedData.ethStore);
             
-            //const valcount_history = parsedData.valcount_history;
-            //res.locals.valcount = valcount_history[valcount_history.length - 1]; // generate chart output right on server?
-
             res.locals.chartsUIconfig = JSON.stringify({
                 apr:{legend:false,xaxis:false,yaxis:false},
                 validators:{legend:false,xaxis:false,yaxis:false},
                 supply:{legend:false,xaxis:false,yaxis:false},
                 balance:{legend:false,xaxis:false,yaxis:false,detailed:false}
             });
+
+            res.locals.charts = {};
+            const validatorsOverviewChart = validatorsViewChartConfig(res.locals.chainTokenUpr, parsedData.valcount_history, {LIMIT_DESC: 30, overview:{ plugins:{legend: {display: false}}}});
+            res.locals.charts['validators_overview'] = validatorsOverviewChart.overview;
+            res.locals.charts['validators_overview_diff'] = validatorsOverviewChart.overview_diff;
             
             taskCompleted();
         }

@@ -1,4 +1,5 @@
 const mysqlSrv = require('../../services/mysqlDB');
+const cache_systemClock = require('../../middlewares/cache/system-clock-sync.js');
 
 exports.ServerResources = function(req,res,next){
     let resourcesByServer = {};
@@ -9,7 +10,8 @@ exports.ServerResources = function(req,res,next){
         for (const mark of data.resources) {
             if(!resourcesByServer[mark.server_id]) resourcesByServer[mark.server_id] = {
                 name: data.servers[mark.server_id],
-                data: []
+                clock_sync: cache_systemClock.getServerClockSync(mark.server_id),
+                data: [],
             };
             resourcesByServer[mark.server_id].data.push(mark);
         }

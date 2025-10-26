@@ -884,52 +884,44 @@
   ],
   "indicators": {
     "aprLastDay": {
-      "value": 0.0284341803132849,
-      "operator": 0.0284341803132849,
-      "delegator": 0.025590762281956413
+      "value": 0.0284713629587924,
+      "operator": 0.0284713629587924,
+      "delegator": 0.025624226662913162
     },
     "validators": {
-      "count": 1018371,
+      "count": 959266,
       "increments": {
-        "day": -1754,
-        "week": -9401,
-        "month": -26206,
-        "year": -54824
+        "day": 0,
+        "week": -1023583,
+        "month": -1042364,
+        "year": -1073362
       }
     },
     "stakedTokens": {
-      "value": 35713514,
+      "value": 33275636,
       "supplyShare": "0.00%",
       "increments": {
         "day": 0,
-        "week": -35712645,
-        "month": -35714472,
-        "year": -34349108
+        "week": -35713688,
+        "month": -35712542,
+        "year": -34379060
       }
     },
     "tvl": {
-      "value": 8189376611.555,
+      "value": 136041115415.16,
       "increments": {
         "day": 0,
-        "week": -8103242005.674,
-        "month": -7421035731.73,
-        "year": -9180808556.173878
+        "week": -8317137587.7699995,
+        "month": -7256654612.367499,
+        "year": -9854915119.691668
       }
     },
     "supply": {
-      "value": 122451843.42361,
-      "increments": {
-        "day": 2720.8090900033712,
-        "week": 16374.429989993572,
-        "month": 77084.9265500009,
-        "year": 270648.9255799949
-      }
+      "value": 122462855.53543
     }
   },
   "beaconData": {
     "day": [
-      1755,
-      1756,
       1757,
       1758,
       1759,
@@ -955,13 +947,13 @@
       1779,
       1780,
       1781,
-      1782,
-      1783,
-      1784
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "timestamp": [
-      1758412800000,
-      1758499200000,
       1758585600000,
       1758672000000,
       1758758400000,
@@ -987,13 +979,13 @@
       1760486400000,
       1760572800000,
       1760659200000,
-      1760745600000,
-      1760832000000,
-      1760918400000
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "date": [
-      "9/21/2025",
-      "9/22/2025",
       "9/23/2025",
       "9/24/2025",
       "9/25/2025",
@@ -1019,13 +1011,13 @@
       "10/15/2025",
       "10/16/2025",
       "10/17/2025",
-      "10/18/2025",
-      "10/19/2025",
-      "10/20/2025"
+      "1/1/1970",
+      "1/1/1970",
+      "1/1/1970",
+      "1/1/1970",
+      "1/1/1970"
     ],
     "validators": [
-      1044577,
-      1043163,
       1042364,
       1042125,
       1041726,
@@ -1051,13 +1043,13 @@
       1026132,
       1023583,
       1022837,
-      1021814,
-      1020125,
-      1018371
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "validators_change": [
-      -1727,
-      -1414,
       -799,
       -239,
       -399,
@@ -1083,21 +1075,13 @@
       -1640,
       -2549,
       -746,
-      -1023,
-      -1689,
-      -1754
+      -1022837,
+      0,
+      0,
+      0,
+      0
     ],
     "blocks": [
-      {
-        "proposed": 7146,
-        "missed": 48,
-        "orphaned": 6
-      },
-      {
-        "proposed": 7150,
-        "missed": 44,
-        "orphaned": 6
-      },
       {
         "proposed": 7167,
         "missed": 28,
@@ -1228,12 +1212,28 @@
         "missed": 47,
         "orphaned": 7
       },
-      null,
-      null
+      {
+        "proposed": 7152,
+        "missed": 41,
+        "orphaned": 7
+      },
+      {
+        "proposed": 7123,
+        "missed": 59,
+        "orphaned": 18
+      },
+      {
+        "proposed": 7122,
+        "missed": 68,
+        "orphaned": 10
+      },
+      {
+        "proposed": 7130,
+        "missed": 49,
+        "orphaned": 21
+      }
     ],
     "stakedTokens": [
-      35714472,
-      35711682,
       35712542,
       35714436,
       35711638,
@@ -1259,13 +1259,13 @@
       35687813,
       35713688,
       35713940,
-      35713514,
+      null,
+      null,
+      null,
       null,
       null
     ],
     "stakedTokens_change": [
-      12,
-      -2790,
       860,
       1894,
       -2798,
@@ -1291,13 +1291,13 @@
       -24832,
       25875,
       252,
-      -426,
-      -35713514,
+      -35713940,
+      0,
+      0,
+      0,
       0
     ],
     "validatorBalance": [
-      34.27616182152,
-      34.30168052556444,
       34.32534482854667,
       34.33327746038667,
       34.35135892083111,
@@ -1323,7 +1323,9 @@
       34.89342601628,
       34.95297199184889,
       34.98612374944,
-      35.03685004619555,
+      null,
+      null,
+      null,
       null,
       null
     ],
@@ -1360,8 +1362,6 @@
       3
     ],
     "participationRate": [
-      0.995624453491635,
-      0.995102642377218,
       0.99584843132231,
       0.995741413699256,
       0.995929268201192,
@@ -1388,12 +1388,12 @@
       0.993822295930651,
       0.994990133444468,
       0.995624857213762,
-      null,
-      null
+      0.995909760263231,
+      0.995136648813883,
+      0.995661056571537,
+      0.994416404830085
     ],
     "stakeEffectiveness": [
-      0.9982704224548405,
-      0.9982696786651377,
       0.998269123137142,
       0.9982679637476094,
       0.9982678112381655,
@@ -1420,20 +1420,12 @@
       0.9983165931638825,
       0.9983202342251295,
       0.9983204079041806,
-      null,
-      null
+      0.9983203562897836,
+      0.9983192335159694,
+      0.9983174582422388,
+      0.998314491295194
     ],
     "deposits": [
-      {
-        "consensus": 0,
-        "executionSucceed": 81217.285,
-        "executionFailed": 209.191897243
-      },
-      {
-        "consensus": 0,
-        "executionSucceed": 9737.52506304,
-        "executionFailed": 200.77
-      },
       {
         "consensus": 0,
         "executionSucceed": 23177,
@@ -1564,12 +1556,28 @@
         "executionSucceed": 11648,
         "executionFailed": 31.11536886
       },
-      null,
-      null
+      {
+        "consensus": 0,
+        "executionSucceed": 5627,
+        "executionFailed": 66.003071982
+      },
+      {
+        "consensus": 0,
+        "executionSucceed": 38068,
+        "executionFailed": 198.86753956
+      },
+      {
+        "consensus": 0,
+        "executionSucceed": 41089,
+        "executionFailed": 1108.86607351
+      },
+      {
+        "consensus": 0,
+        "executionSucceed": 63683.5,
+        "executionFailed": 801.31795023
+      }
     ],
     "withdrawals": [
-      0.000061242519857074,
-      0.000058773276115722,
       0.0001158028850879,
       0.000031185757036238,
       0.000027562356925574,
@@ -1596,12 +1604,12 @@
       0.00000434942002657,
       0.000007844653679841,
       0.00005245170085267,
-      null,
-      null
+      0.000078530300267965,
+      0.000043794208025558,
+      0.000111446469217829,
+      0.00009269870632232
     ],
     "tvl": [
-      7421035731.73,
-      7394431115.185,
       7256654612.367499,
       7216905368.61,
       7312714967.225599,
@@ -1627,13 +1635,13 @@
       8324821788.899584,
       8317137587.7699995,
       8291348310.4,
-      8189376611.555,
+      0,
+      0,
+      0,
       0,
       0
     ],
     "tvl_change": [
-      164422938.6800003,
-      -26604616.544999123,
       -137776502.81750107,
       -39749243.757499695,
       95809598.61559963,
@@ -1659,17 +1667,15 @@
       221579783.22558403,
       -7684201.129584312,
       -25789277.369999886,
-      -101971698.84499931,
-      -8189376611.555,
+      -8291348310.4,
+      0,
+      0,
+      0,
       0
     ]
   },
   "chainData": {
     "day": [
-      3700,
-      3701,
-      3702,
-      3703,
       3704,
       3705,
       3706,
@@ -1695,13 +1701,13 @@
       3726,
       3727,
       3728,
-      3729
+      3729,
+      3730,
+      3731,
+      3732,
+      3733
     ],
     "timestamp": [
-      1758240000000,
-      1758326400000,
-      1758412800000,
-      1758499200000,
       1758585600000,
       1758672000000,
       1758758400000,
@@ -1727,13 +1733,13 @@
       1760486400000,
       1760572800000,
       1760659200000,
-      1760745600000
+      1760745600000,
+      1760832000000,
+      1760918400000,
+      1761004800000,
+      1761091200000
     ],
     "date": [
-      "9/19/2025",
-      "9/20/2025",
-      "9/21/2025",
-      "9/22/2025",
       "9/23/2025",
       "9/24/2025",
       "9/25/2025",
@@ -1759,13 +1765,13 @@
       "10/15/2025",
       "10/16/2025",
       "10/17/2025",
-      "10/18/2025"
+      "10/18/2025",
+      "10/19/2025",
+      "10/20/2025",
+      "10/21/2025",
+      "10/22/2025"
     ],
     "totalSupply": [
-      122374758.49706,
-      122377472.04333,
-      122380189.66752,
-      122382986.74133,
       122385711.64793,
       122388511.34073,
       122391148.12785,
@@ -1791,13 +1797,13 @@
       122443723.59813,
       122446455.46045,
       122449122.61452,
-      122451843.42361
+      122451843.42361,
+      122454587.77533,
+      122457341.54664999,
+      122460087.94398001,
+      122462855.53543
     ],
     "marketCap": [
-      547207198477.23456,
-      546586804770.5924,
-      511402691485.2015,
-      513236307667.2674,
       511960237394.2513,
       489734933641.5915,
       475294029421.9763,
@@ -1823,13 +1829,13 @@
       495326492820.4602,
       466367937234.9908,
       475498593757.90533,
-      480519767256.8822
+      480519767256.8822,
+      494583689544.6188,
+      479746907926.34064,
+      470710028709.5777,
+      471856730149.3331
     ],
     "marketCap_change": [
-      -5461713638.073181,
-      -620393706.6421509,
-      -35184113285.39093,
-      1833616182.065918,
       -1276070273.0161133,
       -22225303752.65979,
       -14440904219.615173,
@@ -1855,13 +1861,13 @@
       -6901991959.396545,
       -28958555585.46942,
       9130656522.91455,
-      5021173498.976868
+      5021173498.976868,
+      14063922287.736572,
+      -14836781618.278137,
+      -9036879216.76294,
+      1146701439.7554321
     ],
     "price": [
-      4471.56917976987,
-      4466.400519999819,
-      4178.802900000154,
-      4193.690000000157,
       4183.169999999836,
       4001.4779841399322,
       3883.401999999897,
@@ -1887,13 +1893,13 @@
       4045.340000000008,
       3808.7500000000155,
       3883.233980000121,
-      3924.1529880001212
+      3924.1529880001212,
+      4038.9151483000524,
+      3917.6655467698647,
+      3843.7831999998757,
+      3853.0599999999117
     ],
     "blockGasUsage": [
-      22769240.369717326,
-      22726014.29286713,
-      22711676.795311846,
-      22745566.534422565,
       22723293.7115277,
       22672564.299594007,
       22716403.75426335,
@@ -1918,14 +1924,14 @@
       22712935.098193023,
       22721922.690888766,
       22797401.13951861,
+      22821153.404362418,
+      22789318.82830268,
+      22775606.470935132,
+      22760457.16732118,
       null,
       null
     ],
     "totalGasUsage": [
-      162351414988,
-      162472781769,
-      162708991682,
-      162491002194,
       162774587592,
       162881001953,
       162426103450,
@@ -1951,13 +1957,13 @@
       162639336496,
       162147643666,
       162598078776,
-      162910228543
+      162910228543,
+      163216889148,
+      162328318014,
+      162207869286,
+      162282059603
     ],
     "dailyTxRewards": [
-      148.63,
-      129.199,
-      209.909,
-      142.839,
       116.073,
       88.534,
       89.6,
@@ -1983,13 +1989,13 @@
       266.109,
       216.146,
       173.468,
-      198.844
+      198.844,
+      160.904,
+      171.803,
+      218.316,
+      85.433
     ],
     "emission": [
-      2703.470750004053,
-      2713.5462699979544,
-      2717.62419000268,
-      2797.0738099962473,
       2724.906599998474,
       2799.69280000031,
       2636.787119999528,
@@ -2015,7 +2021,11 @@
       2727.1473399996758,
       2731.8623199909925,
       2667.154070004821,
-      2720.8090900033712
+      2720.8090900033712,
+      2744.351720005274,
+      2753.7713199853897,
+      2746.3973300158978,
+      2767.5914499908686
     ],
     "burnedFees": [
       null,
@@ -2082,10 +2092,6 @@
       null
     ],
     "blockTime": [
-      12.07,
-      12.08,
-      12.09,
-      12.08,
       12.05,
       12.07,
       12.09,
@@ -2111,13 +2117,13 @@
       12.09,
       12.1,
       12.07,
-      12.09
+      12.09,
+      12.08,
+      12.13,
+      12.13,
+      12.12
     ],
     "blockGasLimit": [
-      44981189.1620487,
-      44983748.5772028,
-      44984037.53606809,
-      44985457.37438905,
       44985212.67067711,
       44984334.52204956,
       44987103.277467154,
@@ -2142,14 +2148,14 @@
       44986373.7107438,
       44990691.405254334,
       44988750.32395746,
+      44990829.076761745,
+      44991367.03888811,
+      44986182.95843864,
+      44989911.61823282,
       null,
       null
     ],
     "avgBlockUsage": [
-      50.61947181451591,
-      50.52049909505406,
-      50.48830216074242,
-      50.56204351802808,
       50.5128071259281,
       50.40102191237442,
       50.49536889306984,
@@ -2174,14 +2180,14 @@
       50.48847734257061,
       50.50360859365486,
       50.6735594462123,
+      50.72401169897487,
+      50.65264811492575,
+      50.62800391839605,
+      50.59013531846364,
       null,
       null
     ],
     "transactions": [
-      1722713,
-      1589832,
-      1418165,
-      1588339,
       1687485,
       1598706,
       1623462,
@@ -2207,14 +2213,15 @@
       1634772,
       1568991,
       1649158,
-      1358115
+      1358115,
+      1276412,
+      1453192,
+      1560917,
+      1545378
     ]
   },
   "ethStore": {
     "day": [
-      1756,
-      1757,
-      1758,
       1759,
       1760,
       1761,
@@ -2241,12 +2248,12 @@
       1782,
       1783,
       1784,
-      1785
+      1785,
+      1786,
+      1787,
+      1788
     ],
     "apr": [
-      2.85208137259525,
-      2.90506434671855,
-      2.88085451464941,
       2.91019338358401,
       2.86431487047675,
       2.81344926282397,
@@ -2273,12 +2280,12 @@
       2.81682473456996,
       2.81122739852708,
       2.86268165892186,
-      2.8434180313284902
+      2.8434180313284902,
+      2.85234692134363,
+      2.85154102807896,
+      2.84713629587924
     ],
     "cl_apr": [
-      2.72437629532579,
-      2.72105108311286,
-      2.72921394429404,
       2.7167590625026,
       2.72308599649333,
       2.7140264791481803,
@@ -2305,12 +2312,12 @@
       2.71735299216566,
       2.69668975079979,
       2.7466031250139,
-      2.67693887830678
+      2.67693887830678,
+      2.69731977960803,
+      2.7008203898967,
+      2.71909919755704
     ],
     "el_apr": [
-      0.12770507726947,
-      0.18401326360569,
-      0.15164057035537,
       0.19343432108140998,
       0.14122887398342,
       0.09942278367579001,
@@ -2337,12 +2344,12 @@
       0.0994717424043,
       0.11453764772728,
       0.11607853390796,
-      0.1664791530217
+      0.1664791530217,
+      0.1550271417356,
+      0.15072063818227,
+      0.12803709832219
     ],
     "avgapr31d": [
-      2.869666345231835,
-      2.8717131545555894,
-      2.869728456576196,
       2.869118839434967,
       2.8683334675094834,
       2.8644383973586063,
@@ -2369,7 +2376,10 @@
       2.9039386600375643,
       2.902037572546393,
       2.903048856756952,
-      2.9045949243961817
+      2.9045949243961817,
+      2.9031558400109474,
+      2.90313840954268,
+      2.9012697627414115
     ],
     "day_start": [
       null,
@@ -2436,9 +2446,6 @@
       null
     ],
     "total_rewards_wei": [
-      2.785934573035355e+21,
-      2.83755773488237e+21,
-      2.8141919358180267e+21,
       2.8426568845221387e+21,
       2.7978196045726797e+21,
       2.7480918343981476e+21,
@@ -2465,12 +2472,12 @@
       2.7516180202027604e+21,
       2.7461602695593433e+21,
       2.795927138250817e+21,
-      2.7771843865290856e+21
+      2.7771843865290856e+21,
+      2.7856668649717136e+21,
+      2.7850378569685753e+21,
+      2.780929612484736e+21
     ],
     "cl_trprc": [
-      95.52239012194612,
-      93.6657766698509,
-      94.73626420271263,
       93.35321418251634,
       95.06936631027882,
       96.46616041776437,
@@ -2497,12 +2504,12 @@
       96.46865702421893,
       95.92570676469285,
       95.94511204044682,
-      94.14510454715206
+      94.14510454715206,
+      94.56492684758793,
+      94.71441453241869,
+      95.50295156197782
     ],
     "el_trprc": [
-      4.477609878054245,
-      6.334223330149102,
-      5.263735797287359,
       6.646785817483666,
       4.930633689721172,
       3.5338395822356303,
@@ -2529,7 +2536,10 @@
       3.5313429757810675,
       4.074293235306795,
       4.054887959553189,
-      5.854895452847582
+      5.854895452847582,
+      5.435073152412075,
+      5.2855854675816545,
+      4.497048438021832
     ],
     "validators_count": []
   },
@@ -52913,6 +52923,3597 @@
       "_etag": "\"0100341d-0000-1600-0000-68fab3a50000\"",
       "_attachments": "attachments/",
       "_ts": 1761260453
+    },
+    {
+      "total": {
+        "balance": 36092530.16092125
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2073,
+          "eff_balance": 2063,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 832,
+          "eff_balance": 832,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 51108,
+          "balance": 2203913.9330546083,
+          "eff_balance": 2202945,
+          "wallets": 2562
+        },
+        "active_ongoing": {
+          "validators": 960315,
+          "balance": 33570934.6769536,
+          "eff_balance": 33503366,
+          "wallets": 47293
+        },
+        "exited_unslashed": {
+          "validators": 2016,
+          "balance": 64529.10427632099,
+          "eff_balance": 64512,
+          "wallets": 484
+        },
+        "withdrawal_done": {
+          "validators": 1091289,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 99826
+        },
+        "withdrawal_possible": {
+          "validators": 7653,
+          "balance": 250244.9603365402,
+          "eff_balance": 249518,
+          "wallets": 953
+        }
+      },
+      "id": "eth-valcount-402186",
+      "partitionKey": "eth-valcount",
+      "time": 1761264052,
+      "_rid": "VPZWAPgLfulaQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulaQwAAAAAAAA==/",
+      "_etag": "\"0100e444-0000-1600-0000-68fac1b40000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761264052
+    },
+    {
+      "total": {
+        "balance": 36092570.67091295
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 51119,
+          "balance": 2204272.403652569,
+          "eff_balance": 2203297,
+          "wallets": 2562
+        },
+        "active_ongoing": {
+          "validators": 960233,
+          "balance": 33570138.42247416,
+          "eff_balance": 33502572,
+          "wallets": 47292
+        },
+        "exited_unslashed": {
+          "validators": 2018,
+          "balance": 64593.092931668994,
+          "eff_balance": 64576,
+          "wallets": 474
+        },
+        "withdrawal_done": {
+          "validators": 1091418,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 99948
+        },
+        "withdrawal_possible": {
+          "validators": 7596,
+          "balance": 250403.2655543793,
+          "eff_balance": 249677,
+          "wallets": 843
+        }
+      },
+      "id": "eth-valcount-402195",
+      "partitionKey": "eth-valcount",
+      "time": 1761267655,
+      "_rid": "VPZWAPgLfulcQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulcQwAAAAAAAA==/",
+      "_etag": "\"01009c8f-0000-1600-0000-68facfc70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761267655
+    },
+    {
+      "total": {
+        "balance": 36093345.553830095
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2368,
+          "eff_balance": 2368,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 51232,
+          "balance": 2207894.0706525017,
+          "eff_balance": 2206913,
+          "wallets": 2563
+        },
+        "active_ongoing": {
+          "validators": 960042,
+          "balance": 33566107.26242806,
+          "eff_balance": 33498548,
+          "wallets": 47292
+        },
+        "exited_unslashed": {
+          "validators": 2018,
+          "balance": 64593.04205125295,
+          "eff_balance": 64576,
+          "wallets": 469
+        },
+        "withdrawal_done": {
+          "validators": 1091468,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 99954
+        },
+        "withdrawal_possible": {
+          "validators": 7626,
+          "balance": 251363.6923981024,
+          "eff_balance": 250637,
+          "wallets": 844
+        }
+      },
+      "id": "eth-valcount-402205",
+      "partitionKey": "eth-valcount",
+      "time": 1761271256,
+      "_rid": "VPZWAPgLfuleQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfuleQwAAAAAAAA==/",
+      "_etag": "\"0100a3b9-0000-1600-0000-68faddd90000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761271257
+    },
+    {
+      "total": {
+        "balance": 36096009.95452034
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 51260,
+          "balance": 2208905.346545075,
+          "eff_balance": 2207811,
+          "wallets": 2560
+        },
+        "active_ongoing": {
+          "validators": 959945,
+          "balance": 33565999.87232929,
+          "eff_balance": 33498556,
+          "wallets": 47290
+        },
+        "exited_unslashed": {
+          "validators": 2018,
+          "balance": 64593.029353727965,
+          "eff_balance": 64576,
+          "wallets": 473
+        },
+        "withdrawal_done": {
+          "validators": 1091470,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 99956
+        },
+        "withdrawal_possible": {
+          "validators": 7696,
+          "balance": 253604.21999206336,
+          "eff_balance": 252877,
+          "wallets": 843
+        }
+      },
+      "id": "eth-valcount-402214",
+      "partitionKey": "eth-valcount",
+      "time": 1761274855,
+      "_rid": "VPZWAPgLfulgQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulgQwAAAAAAAA==/",
+      "_etag": "\"010027e2-0000-1600-0000-68faebe80000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761274856
+    },
+    {
+      "total": {
+        "balance": 36097365.17517823
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2329,
+          "eff_balance": 2319,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 51284,
+          "balance": 2209679.511301428,
+          "eff_balance": 2208581,
+          "wallets": 2560
+        },
+        "active_ongoing": {
+          "validators": 959874,
+          "balance": 33565556.68761004,
+          "eff_balance": 33498111,
+          "wallets": 47291
+        },
+        "exited_unslashed": {
+          "validators": 1995,
+          "balance": 63856.97294312296,
+          "eff_balance": 63840,
+          "wallets": 473
+        },
+        "withdrawal_done": {
+          "validators": 1091510,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 99994
+        },
+        "withdrawal_possible": {
+          "validators": 7736,
+          "balance": 254884.51702346336,
+          "eff_balance": 254157,
+          "wallets": 806
+        }
+      },
+      "id": "eth-valcount-402223",
+      "partitionKey": "eth-valcount",
+      "time": 1761278455,
+      "_rid": "VPZWAPgLfuliQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfuliQwAAAAAAAA==/",
+      "_etag": "\"02009b08-0000-1600-0000-68faf9f70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761278455
+    },
+    {
+      "total": {
+        "balance": 36097594.7063458
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2144,
+          "eff_balance": 2144,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 51250,
+          "balance": 2208594.3731591012,
+          "eff_balance": 2207493,
+          "wallets": 2559
+        },
+        "active_ongoing": {
+          "validators": 959830,
+          "balance": 33566454.90004915,
+          "eff_balance": 33499014,
+          "wallets": 47290
+        },
+        "exited_unslashed": {
+          "validators": 1995,
+          "balance": 63857.17598720492,
+          "eff_balance": 63840,
+          "wallets": 474
+        },
+        "withdrawal_done": {
+          "validators": 1091562,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100023
+        },
+        "withdrawal_possible": {
+          "validators": 7756,
+          "balance": 255524.7708501582,
+          "eff_balance": 254797,
+          "wallets": 777
+        }
+      },
+      "id": "eth-valcount-402233",
+      "partitionKey": "eth-valcount",
+      "time": 1761282057,
+      "_rid": "VPZWAPgLfulkQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulkQwAAAAAAAA==/",
+      "_etag": "\"0200fb2f-0000-1600-0000-68fb08090000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761282057
+    },
+    {
+      "total": {
+        "balance": 36097568.3872676
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2368,
+          "eff_balance": 2368,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 51192,
+          "balance": 2206743.451532881,
+          "eff_balance": 2205639,
+          "wallets": 2558
+        },
+        "active_ongoing": {
+          "validators": 959818,
+          "balance": 33568151.284550615,
+          "eff_balance": 33500713,
+          "wallets": 47290
+        },
+        "exited_unslashed": {
+          "validators": 1995,
+          "balance": 63857.4769860749,
+          "eff_balance": 63840,
+          "wallets": 475
+        },
+        "withdrawal_done": {
+          "validators": 1091637,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100075
+        },
+        "withdrawal_possible": {
+          "validators": 7753,
+          "balance": 255428.68789785408,
+          "eff_balance": 254701,
+          "wallets": 725
+        }
+      },
+      "id": "eth-valcount-402242",
+      "partitionKey": "eth-valcount",
+      "time": 1761285656,
+      "_rid": "VPZWAPgLfulmQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulmQwAAAAAAAA==/",
+      "_etag": "\"0200a558-0000-1600-0000-68fb16180000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761285656
+    },
+    {
+      "total": {
+        "balance": 36097087.32242915
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 51116,
+          "balance": 2204315.2270082347,
+          "eff_balance": 2203209,
+          "wallets": 2558
+        },
+        "active_ongoing": {
+          "validators": 959817,
+          "balance": 33571218.41363731,
+          "eff_balance": 33503791,
+          "wallets": 47291
+        },
+        "exited_unslashed": {
+          "validators": 1995,
+          "balance": 63857.59856202692,
+          "eff_balance": 63840,
+          "wallets": 475
+        },
+        "withdrawal_done": {
+          "validators": 1091710,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100110
+        },
+        "withdrawal_possible": {
+          "validators": 7760,
+          "balance": 255620.5969214001,
+          "eff_balance": 254893,
+          "wallets": 690
+        }
+      },
+      "id": "eth-valcount-402252",
+      "partitionKey": "eth-valcount",
+      "time": 1761289255,
+      "_rid": "VPZWAPgLfuloQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfuloQwAAAAAAAA==/",
+      "_etag": "\"02008789-0000-1600-0000-68fb24270000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761289255
+    },
+    {
+      "total": {
+        "balance": 36093759.98317749
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2073,
+          "eff_balance": 2063,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 832,
+          "eff_balance": 832,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 51051,
+          "balance": 2202239.671018861,
+          "eff_balance": 2201132,
+          "wallets": 2557
+        },
+        "active_ongoing": {
+          "validators": 959812,
+          "balance": 33573368.08576187,
+          "eff_balance": 33505939,
+          "wallets": 47291
+        },
+        "exited_unslashed": {
+          "validators": 1995,
+          "balance": 63857.5023812959,
+          "eff_balance": 63840,
+          "wallets": 475
+        },
+        "withdrawal_done": {
+          "validators": 1091870,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100154
+        },
+        "withdrawal_possible": {
+          "validators": 7672,
+          "balance": 251387.2377152882,
+          "eff_balance": 250660,
+          "wallets": 643
+        }
+      },
+      "id": "eth-valcount-402261",
+      "partitionKey": "eth-valcount",
+      "time": 1761292855,
+      "_rid": "VPZWAPgLfulqQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulqQwAAAAAAAA==/",
+      "_etag": "\"02000db8-0000-1600-0000-68fb32370000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761292855
+    },
+    {
+      "total": {
+        "balance": 36091232.02305577
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50985,
+          "balance": 2200130.616209945,
+          "eff_balance": 2199022,
+          "wallets": 2557
+        },
+        "active_ongoing": {
+          "validators": 959808,
+          "balance": 33575070.8193954,
+          "eff_balance": 33507645,
+          "wallets": 47291
+        },
+        "exited_unslashed": {
+          "validators": 1995,
+          "balance": 63857.276382633936,
+          "eff_balance": 63840,
+          "wallets": 475
+        },
+        "withdrawal_done": {
+          "validators": 1091979,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100195
+        },
+        "withdrawal_possible": {
+          "validators": 7635,
+          "balance": 249009.82476761442,
+          "eff_balance": 248316,
+          "wallets": 601
+        }
+      },
+      "id": "eth-valcount-402270",
+      "partitionKey": "eth-valcount",
+      "time": 1761296458,
+      "_rid": "VPZWAPgLfulsQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulsQwAAAAAAAA==/",
+      "_etag": "\"020079e4-0000-1600-0000-68fb404a0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761296458
+    },
+    {
+      "total": {
+        "balance": 36089580.0601113
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2368,
+          "eff_balance": 2368,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 50932,
+          "balance": 2198437.0501506934,
+          "eff_balance": 2197328,
+          "wallets": 2582
+        },
+        "active_ongoing": {
+          "validators": 959783,
+          "balance": 33576360.60276038,
+          "eff_balance": 33508933,
+          "wallets": 47267
+        },
+        "exited_unslashed": {
+          "validators": 1995,
+          "balance": 63857.26628890499,
+          "eff_balance": 63840,
+          "wallets": 475
+        },
+        "withdrawal_done": {
+          "validators": 1092106,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100319
+        },
+        "withdrawal_possible": {
+          "validators": 7588,
+          "balance": 247537.6546111394,
+          "eff_balance": 246812,
+          "wallets": 476
+        }
+      },
+      "id": "eth-valcount-402280",
+      "partitionKey": "eth-valcount",
+      "time": 1761300054,
+      "_rid": "VPZWAPgLfuluQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfuluQwAAAAAAAA==/",
+      "_etag": "\"0300cf21-0000-1600-0000-68fb4e560000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761300054
+    },
+    {
+      "total": {
+        "balance": 36077708.001147576
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50862,
+          "balance": 2196202.6593516245,
+          "eff_balance": 2195092,
+          "wallets": 2582
+        },
+        "active_ongoing": {
+          "validators": 959784,
+          "balance": 33571331.18922597,
+          "eff_balance": 33512072,
+          "wallets": 47267
+        },
+        "exited_unslashed": {
+          "validators": 1995,
+          "balance": 63857.150020343004,
+          "eff_balance": 63840,
+          "wallets": 476
+        },
+        "withdrawal_done": {
+          "validators": 1092281,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100426
+        },
+        "withdrawal_possible": {
+          "validators": 7485,
+          "balance": 244241.51624945464,
+          "eff_balance": 243516,
+          "wallets": 365
+        }
+      },
+      "id": "eth-valcount-402289",
+      "partitionKey": "eth-valcount",
+      "time": 1761303655,
+      "_rid": "VPZWAPgLfulwQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulwQwAAAAAAAA==/",
+      "_etag": "\"0300de4c-0000-1600-0000-68fb5c670000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761303655
+    },
+    {
+      "total": {
+        "balance": 36080918.621035606
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2073,
+          "eff_balance": 2063,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 832,
+          "eff_balance": 832,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50844,
+          "balance": 2195633.002876786,
+          "eff_balance": 2194519,
+          "wallets": 2582
+        },
+        "active_ongoing": {
+          "validators": 959782,
+          "balance": 33573575.18743208,
+          "eff_balance": 33514318,
+          "wallets": 47268
+        },
+        "exited_unslashed": {
+          "validators": 1945,
+          "balance": 62256.776752245045,
+          "eff_balance": 62240,
+          "wallets": 477
+        },
+        "withdrawal_done": {
+          "validators": 1092289,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100434
+        },
+        "withdrawal_possible": {
+          "validators": 7557,
+          "balance": 246546.1676743106,
+          "eff_balance": 245820,
+          "wallets": 357
+        }
+      },
+      "id": "eth-valcount-402298",
+      "partitionKey": "eth-valcount",
+      "time": 1761307257,
+      "_rid": "VPZWAPgLfulyQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfulyQwAAAAAAAA==/",
+      "_etag": "\"0300dd79-0000-1600-0000-68fb6a790000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761307257
+    },
+    {
+      "total": {
+        "balance": 36081441.504260026
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2144,
+          "eff_balance": 2144,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50768,
+          "balance": 2193205.259550402,
+          "eff_balance": 2192089,
+          "wallets": 2581
+        },
+        "active_ongoing": {
+          "validators": 959780,
+          "balance": 33575341.21234433,
+          "eff_balance": 33516079,
+          "wallets": 47268
+        },
+        "exited_unslashed": {
+          "validators": 1945,
+          "balance": 62256.914832566,
+          "eff_balance": 62240,
+          "wallets": 476
+        },
+        "withdrawal_done": {
+          "validators": 1092332,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100464
+        },
+        "withdrawal_possible": {
+          "validators": 7586,
+          "balance": 247474.63123254565,
+          "eff_balance": 246748,
+          "wallets": 328
+        }
+      },
+      "id": "eth-valcount-402308",
+      "partitionKey": "eth-valcount",
+      "time": 1761310855,
+      "_rid": "VPZWAPgLful1QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLful1QwAAAAAAAA==/",
+      "_etag": "\"03003eac-0000-1600-0000-68fb78870000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761310855
+    },
+    {
+      "total": {
+        "balance": 36082071.43348845
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2368,
+          "eff_balance": 2368,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 50715,
+          "balance": 2191514.086340247,
+          "eff_balance": 2190396,
+          "wallets": 2585
+        },
+        "active_ongoing": {
+          "validators": 959763,
+          "balance": 33576861.968640745,
+          "eff_balance": 33517620,
+          "wallets": 47265
+        },
+        "exited_unslashed": {
+          "validators": 1945,
+          "balance": 62257.047253393,
+          "eff_balance": 62240,
+          "wallets": 475
+        },
+        "withdrawal_done": {
+          "validators": 1092382,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100481
+        },
+        "withdrawal_possible": {
+          "validators": 7608,
+          "balance": 248050.8449538907,
+          "eff_balance": 247452,
+          "wallets": 311
+        }
+      },
+      "id": "eth-valcount-402317",
+      "partitionKey": "eth-valcount",
+      "time": 1761314457,
+      "_rid": "VPZWAPgLful3QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLful3QwAAAAAAAA==/",
+      "_etag": "\"03002fe0-0000-1600-0000-68fb86990000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761314457
+    },
+    {
+      "total": {
+        "balance": 36083299.27101783
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50638,
+          "balance": 2189052.997730488,
+          "eff_balance": 2187933,
+          "wallets": 2586
+        },
+        "active_ongoing": {
+          "validators": 959758,
+          "balance": 33579814.29785348,
+          "eff_balance": 33520575,
+          "wallets": 47265
+        },
+        "exited_unslashed": {
+          "validators": 1950,
+          "balance": 62416.996266825,
+          "eff_balance": 62400,
+          "wallets": 444
+        },
+        "withdrawal_done": {
+          "validators": 1092407,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 7663,
+          "balance": 249939.49286685677,
+          "eff_balance": 249212,
+          "wallets": 332
+        }
+      },
+      "id": "eth-valcount-402327",
+      "partitionKey": "eth-valcount",
+      "time": 1761318057,
+      "_rid": "VPZWAPgLful5QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLful5QwAAAAAAAA==/",
+      "_etag": "\"0400ce19-0000-1600-0000-68fb94a90000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761318057
+    },
+    {
+      "total": {
+        "balance": 36086507.374731444
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2073,
+          "eff_balance": 2063,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 832,
+          "eff_balance": 832,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50566,
+          "balance": 2186749.8800121015,
+          "eff_balance": 2185631,
+          "wallets": 2585
+        },
+        "active_ongoing": {
+          "validators": 959760,
+          "balance": 33582188.5625508,
+          "eff_balance": 33522949,
+          "wallets": 47266
+        },
+        "exited_unslashed": {
+          "validators": 1950,
+          "balance": 62417.17296560998,
+          "eff_balance": 62400,
+          "wallets": 381
+        },
+        "withdrawal_done": {
+          "validators": 1092407,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 7735,
+          "balance": 252244.27290275667,
+          "eff_balance": 251516,
+          "wallets": 396
+        }
+      },
+      "id": "eth-valcount-402336",
+      "partitionKey": "eth-valcount",
+      "time": 1761321657,
+      "_rid": "VPZWAPgLful7QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLful7QwAAAAAAAA==/",
+      "_etag": "\"0400464b-0000-1600-0000-68fba2b90000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761321657
+    },
+    {
+      "total": {
+        "balance": 36088660.244576596
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50523,
+          "balance": 2185369.220542082,
+          "eff_balance": 2184255,
+          "wallets": 2584
+        },
+        "active_ongoing": {
+          "validators": 959733,
+          "balance": 33583161.384896345,
+          "eff_balance": 33523912,
+          "wallets": 47266
+        },
+        "exited_unslashed": {
+          "validators": 1950,
+          "balance": 62417.268173592005,
+          "eff_balance": 62400,
+          "wallets": 340
+        },
+        "withdrawal_done": {
+          "validators": 1092407,
+          "balance": 2.486300175999999,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 7807,
+          "balance": 254548.88466439865,
+          "eff_balance": 253820,
+          "wallets": 437
+        }
+      },
+      "id": "eth-valcount-402345",
+      "partitionKey": "eth-valcount",
+      "time": 1761325255,
+      "_rid": "VPZWAPgLful9QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLful9QwAAAAAAAA==/",
+      "_etag": "\"04002c84-0000-1600-0000-68fbb0c70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761325255
+    },
+    {
+      "total": {
+        "balance": 36091038.972317286
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2368,
+          "eff_balance": 2368,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 50446,
+          "balance": 2182910.0403610114,
+          "eff_balance": 2181791,
+          "wallets": 2585
+        },
+        "active_ongoing": {
+          "validators": 959731,
+          "balance": 33585182.47935255,
+          "eff_balance": 33525932,
+          "wallets": 47267
+        },
+        "exited_unslashed": {
+          "validators": 1951,
+          "balance": 62449.36999369197,
+          "eff_balance": 62432,
+          "wallets": 341
+        },
+        "withdrawal_done": {
+          "validators": 1092407,
+          "balance": 2.484986182999999,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 7887,
+          "balance": 257109.5976238476,
+          "eff_balance": 256380,
+          "wallets": 437
+        }
+      },
+      "id": "eth-valcount-402355",
+      "partitionKey": "eth-valcount",
+      "time": 1761328855,
+      "_rid": "VPZWAPgLful-QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLful-QwAAAAAAAA==/",
+      "_etag": "\"040054b9-0000-1600-0000-68fbbed70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761328855
+    },
+    {
+      "total": {
+        "balance": 36092936.2270935
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50376,
+          "balance": 2180675.285189985,
+          "eff_balance": 2179552,
+          "wallets": 2587
+        },
+        "active_ongoing": {
+          "validators": 959732,
+          "balance": 33588321.67309996,
+          "eff_balance": 33529072,
+          "wallets": 47266
+        },
+        "exited_unslashed": {
+          "validators": 1951,
+          "balance": 62449.295622996,
+          "eff_balance": 62432,
+          "wallets": 274
+        },
+        "withdrawal_done": {
+          "validators": 1092407,
+          "balance": 2.484986182999999,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 7959,
+          "balance": 259414.48819437955,
+          "eff_balance": 258684,
+          "wallets": 503
+        }
+      },
+      "id": "eth-valcount-402364",
+      "partitionKey": "eth-valcount",
+      "time": 1761332455,
+      "_rid": "VPZWAPgLfumBQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumBQwAAAAAAAA==/",
+      "_etag": "\"0400c7f2-0000-1600-0000-68fbcce70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761332455
+    },
+    {
+      "total": {
+        "balance": 36096338.86804148
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50346,
+          "balance": 2179720.1361156483,
+          "eff_balance": 2178595,
+          "wallets": 2589
+        },
+        "active_ongoing": {
+          "validators": 959711,
+          "balance": 33589798.99896448,
+          "eff_balance": 33530549,
+          "wallets": 47265
+        },
+        "exited_unslashed": {
+          "validators": 1927,
+          "balance": 61680.88941388096,
+          "eff_balance": 61664,
+          "wallets": 195
+        },
+        "withdrawal_done": {
+          "validators": 1092412,
+          "balance": 2.3334549559999993,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8039,
+          "balance": 261975.5100925095,
+          "eff_balance": 261244,
+          "wallets": 583
+        }
+      },
+      "id": "eth-valcount-402373",
+      "partitionKey": "eth-valcount",
+      "time": 1761336054,
+      "_rid": "VPZWAPgLfumDQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumDQwAAAAAAAA==/",
+      "_etag": "\"05003325-0000-1600-0000-68fbdaf60000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761336054
+    },
+    {
+      "total": {
+        "balance": 36098300.8492495
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2144,
+          "eff_balance": 2144,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50296,
+          "balance": 2178126.3307966846,
+          "eff_balance": 2176999,
+          "wallets": 2589
+        },
+        "active_ongoing": {
+          "validators": 959683,
+          "balance": 33591113.77041151,
+          "eff_balance": 33531866,
+          "wallets": 47265
+        },
+        "exited_unslashed": {
+          "validators": 1925,
+          "balance": 61617.05249095997,
+          "eff_balance": 61600,
+          "wallets": 123
+        },
+        "withdrawal_done": {
+          "validators": 1092414,
+          "balance": 2.341238690999999,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8111,
+          "balance": 264280.3543116605,
+          "eff_balance": 263548,
+          "wallets": 655
+        }
+      },
+      "id": "eth-valcount-402383",
+      "partitionKey": "eth-valcount",
+      "time": 1761339655,
+      "_rid": "VPZWAPgLfumFQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumFQwAAAAAAAA==/",
+      "_etag": "\"1200e8a4-0000-1600-0000-68fbe9070000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761339655
+    },
+    {
+      "total": {
+        "balance": 36100678.43781974
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2368,
+          "eff_balance": 2368,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 50227,
+          "balance": 2175917.728071755,
+          "eff_balance": 2174791,
+          "wallets": 2590
+        },
+        "active_ongoing": {
+          "validators": 959682,
+          "balance": 33593167.935933866,
+          "eff_balance": 33533915,
+          "wallets": 47264
+        },
+        "exited_unslashed": {
+          "validators": 1925,
+          "balance": 61620.316453853964,
+          "eff_balance": 61600,
+          "wallets": 52
+        },
+        "withdrawal_done": {
+          "validators": 1092414,
+          "balance": 2.3370597689999992,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8183,
+          "balance": 266585.12030050147,
+          "eff_balance": 265852,
+          "wallets": 727
+        }
+      },
+      "id": "eth-valcount-402392",
+      "partitionKey": "eth-valcount",
+      "time": 1761343254,
+      "_rid": "VPZWAPgLfumHQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumHQwAAAAAAAA==/",
+      "_etag": "\"1200eaa4-0000-1600-0000-68fbf7160000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761343254
+    },
+    {
+      "total": {
+        "balance": 36101307.16621971
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50147,
+          "balance": 2173359.0182506274,
+          "eff_balance": 2172233,
+          "wallets": 2590
+        },
+        "active_ongoing": {
+          "validators": 959685,
+          "balance": 33595747.47034543,
+          "eff_balance": 33537156,
+          "wallets": 47265
+        },
+        "exited_unslashed": {
+          "validators": 1955,
+          "balance": 62582.16231320799,
+          "eff_balance": 62560,
+          "wallets": 27
+        },
+        "withdrawal_done": {
+          "validators": 1092465,
+          "balance": 2.3373762659999993,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8213,
+          "balance": 267543.17793417635,
+          "eff_balance": 266812,
+          "wallets": 754
+        }
+      },
+      "id": "eth-valcount-402402",
+      "partitionKey": "eth-valcount",
+      "time": 1761346854,
+      "_rid": "VPZWAPgLfumJQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumJQwAAAAAAAA==/",
+      "_etag": "\"1200eca4-0000-1600-0000-68fc05260000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761346854
+    },
+    {
+      "total": {
+        "balance": 36104354.50534776
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50075,
+          "balance": 2171056.109366272,
+          "eff_balance": 2169930,
+          "wallets": 2590
+        },
+        "active_ongoing": {
+          "validators": 959687,
+          "balance": 33597865.407481395,
+          "eff_balance": 33539279,
+          "wallets": 47266
+        },
+        "exited_unslashed": {
+          "validators": 1962,
+          "balance": 62807.09540372203,
+          "eff_balance": 62784,
+          "wallets": 27
+        },
+        "withdrawal_done": {
+          "validators": 1092477,
+          "balance": 1.6554771840000009,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8273,
+          "balance": 269463.2376191824,
+          "eff_balance": 268732,
+          "wallets": 754
+        }
+      },
+      "id": "eth-valcount-402411",
+      "partitionKey": "eth-valcount",
+      "time": 1761350455,
+      "_rid": "VPZWAPgLfumLQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumLQwAAAAAAAA==/",
+      "_etag": "\"1200efa4-0000-1600-0000-68fc13370000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761350455
+    },
+    {
+      "total": {
+        "balance": 36105935.21974416
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 50010,
+          "balance": 2168977.5477407784,
+          "eff_balance": 2167850,
+          "wallets": 2589
+        },
+        "active_ongoing": {
+          "validators": 959672,
+          "balance": 33599478.836388394,
+          "eff_balance": 33540882,
+          "wallets": 47266
+        },
+        "exited_unslashed": {
+          "validators": 1973,
+          "balance": 63155.889356509986,
+          "eff_balance": 63136,
+          "wallets": 28
+        },
+        "withdrawal_done": {
+          "validators": 1092495,
+          "balance": 0.9567603049999991,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8327,
+          "balance": 271160.9894981723,
+          "eff_balance": 270460,
+          "wallets": 754
+        }
+      },
+      "id": "eth-valcount-402420",
+      "partitionKey": "eth-valcount",
+      "time": 1761354055,
+      "_rid": "VPZWAPgLfumNQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumNQwAAAAAAAA==/",
+      "_etag": "\"1200f1a4-0000-1600-0000-68fc21470000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761354055
+    },
+    {
+      "total": {
+        "balance": 36104597.64772344
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2368,
+          "eff_balance": 2368,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 49949,
+          "balance": 2166893.290354387,
+          "eff_balance": 2165901,
+          "wallets": 2589
+        },
+        "active_ongoing": {
+          "validators": 959668,
+          "balance": 33601439.5729751,
+          "eff_balance": 33542844,
+          "wallets": 47267
+        },
+        "exited_unslashed": {
+          "validators": 1960,
+          "balance": 62740.530861847,
+          "eff_balance": 62720,
+          "wallets": 27
+        },
+        "withdrawal_done": {
+          "validators": 1092608,
+          "balance": 0.9212555129999993,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8294,
+          "balance": 270138.3322765893,
+          "eff_balance": 269404,
+          "wallets": 754
+        }
+      },
+      "id": "eth-valcount-402430",
+      "partitionKey": "eth-valcount",
+      "time": 1761357656,
+      "_rid": "VPZWAPgLfumPQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumPQwAAAAAAAA==/",
+      "_etag": "\"1200f3a4-0000-1600-0000-68fc2f580000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761357656
+    },
+    {
+      "total": {
+        "balance": 36106370.77165318
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49887,
+          "balance": 2164913.4949551644,
+          "eff_balance": 2163917,
+          "wallets": 2588
+        },
+        "active_ongoing": {
+          "validators": 959658,
+          "balance": 33604199.67490301,
+          "eff_balance": 33545637,
+          "wallets": 47268
+        },
+        "exited_unslashed": {
+          "validators": 1963,
+          "balance": 62836.76424029701,
+          "eff_balance": 62816,
+          "wallets": 27
+        },
+        "withdrawal_done": {
+          "validators": 1092611,
+          "balance": 0.9212555129999993,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8363,
+          "balance": 272346.9162991912,
+          "eff_balance": 271612,
+          "wallets": 754
+        }
+      },
+      "id": "eth-valcount-402439",
+      "partitionKey": "eth-valcount",
+      "time": 1761361256,
+      "_rid": "VPZWAPgLfumRQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumRQwAAAAAAAA==/",
+      "_etag": "\"1200c8a5-0000-1600-0000-68fc3d680000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761361256
+    },
+    {
+      "total": {
+        "balance": 36109833.67313241
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2073,
+          "eff_balance": 2063,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 832,
+          "eff_balance": 832,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49817,
+          "balance": 2162682.5153515846,
+          "eff_balance": 2161677,
+          "wallets": 2588
+        },
+        "active_ongoing": {
+          "validators": 959658,
+          "balance": 33606500.84046311,
+          "eff_balance": 33547949,
+          "wallets": 47268
+        },
+        "exited_unslashed": {
+          "validators": 1963,
+          "balance": 62836.87261514199,
+          "eff_balance": 62816,
+          "wallets": 28
+        },
+        "withdrawal_done": {
+          "validators": 1092611,
+          "balance": 0.9212555129999993,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8443,
+          "balance": 274907.52344705805,
+          "eff_balance": 274172,
+          "wallets": 755
+        }
+      },
+      "id": "eth-valcount-402448",
+      "partitionKey": "eth-valcount",
+      "time": 1761364855,
+      "_rid": "VPZWAPgLfumTQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumTQwAAAAAAAA==/",
+      "_etag": "\"1200caa5-0000-1600-0000-68fc4b770000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761364855
+    },
+    {
+      "total": {
+        "balance": 36111442.582710296
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 1888,
+          "eff_balance": 1888,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49747,
+          "balance": 2160448.721031618,
+          "eff_balance": 2159439,
+          "wallets": 2588
+        },
+        "active_ongoing": {
+          "validators": 959650,
+          "balance": 33608102.65169126,
+          "eff_balance": 33549558,
+          "wallets": 47269
+        },
+        "exited_unslashed": {
+          "validators": 1962,
+          "balance": 62805.28085575699,
+          "eff_balance": 62784,
+          "wallets": 28
+        },
+        "withdrawal_done": {
+          "validators": 1092613,
+          "balance": 0.9353433399999993,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8514,
+          "balance": 277179.9937883201,
+          "eff_balance": 276444,
+          "wallets": 755
+        }
+      },
+      "id": "eth-valcount-402458",
+      "partitionKey": "eth-valcount",
+      "time": 1761368457,
+      "_rid": "VPZWAPgLfumVQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumVQwAAAAAAAA==/",
+      "_etag": "\"1200cda5-0000-1600-0000-68fc59890000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761368457
+    },
+    {
+      "total": {
+        "balance": 36114070.840790994
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2624,
+          "eff_balance": 2624,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 49900,
+          "balance": 2500820.4225304513,
+          "eff_balance": 2499642,
+          "wallets": 2589
+        },
+        "active_ongoing": {
+          "validators": 959426,
+          "balance": 33267286.60050434,
+          "eff_balance": 33208918,
+          "wallets": 47265
+        },
+        "exited_unslashed": {
+          "validators": 1963,
+          "balance": 62837.44907422199,
+          "eff_balance": 62816,
+          "wallets": 35
+        },
+        "withdrawal_done": {
+          "validators": 1092613,
+          "balance": 0.9353433399999993,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8586,
+          "balance": 279484.43333864026,
+          "eff_balance": 278748,
+          "wallets": 757
+        }
+      },
+      "id": "eth-valcount-402467",
+      "partitionKey": "eth-valcount",
+      "time": 1761372055,
+      "_rid": "VPZWAPgLfumXQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumXQwAAAAAAAA==/",
+      "_etag": "\"1200e6a6-0000-1600-0000-68fc67970000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761372055
+    },
+    {
+      "total": {
+        "balance": 36116037.11202387
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49817,
+          "balance": 2498170.6732755965,
+          "eff_balance": 2496992,
+          "wallets": 2576
+        },
+        "active_ongoing": {
+          "validators": 959426,
+          "balance": 33269885.798633493,
+          "eff_balance": 33211525,
+          "wallets": 47265
+        },
+        "exited_unslashed": {
+          "validators": 1992,
+          "balance": 63765.79191882902,
+          "eff_balance": 63744,
+          "wallets": 41
+        },
+        "withdrawal_done": {
+          "validators": 1092613,
+          "balance": 0.9353433399999993,
+          "eff_balance": 0,
+          "wallets": 100491
+        },
+        "withdrawal_possible": {
+          "validators": 8643,
+          "balance": 281308.9128526074,
+          "eff_balance": 280572,
+          "wallets": 760
+        }
+      },
+      "id": "eth-valcount-402477",
+      "partitionKey": "eth-valcount",
+      "time": 1761375655,
+      "_rid": "VPZWAPgLfumZQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumZQwAAAAAAAA==/",
+      "_etag": "\"1200d0a7-0000-1600-0000-68fc75a70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761375655
+    },
+    {
+      "total": {
+        "balance": 36118301.02260541
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2329,
+          "eff_balance": 2319,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49745,
+          "balance": 2495795.82124164,
+          "eff_balance": 2494691,
+          "wallets": 2576
+        },
+        "active_ongoing": {
+          "validators": 959428,
+          "balance": 33271776.48226881,
+          "eff_balance": 33213420,
+          "wallets": 47266
+        },
+        "exited_unslashed": {
+          "validators": 1992,
+          "balance": 63766.03383853902,
+          "eff_balance": 63744,
+          "wallets": 39
+        },
+        "withdrawal_done": {
+          "validators": 1092614,
+          "balance": 0.4264320920000001,
+          "eff_balance": 0,
+          "wallets": 100492
+        },
+        "withdrawal_possible": {
+          "validators": 8714,
+          "balance": 283577.2588243243,
+          "eff_balance": 282844,
+          "wallets": 760
+        }
+      },
+      "id": "eth-valcount-402486",
+      "partitionKey": "eth-valcount",
+      "time": 1761379255,
+      "_rid": "VPZWAPgLfumbQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumbQwAAAAAAAA==/",
+      "_etag": "\"1200efa8-0000-1600-0000-68fc83b70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761379255
+    },
+    {
+      "total": {
+        "balance": 36120153.461578
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49680,
+          "balance": 2493721.388264676,
+          "eff_balance": 2492614,
+          "wallets": 2574
+        },
+        "active_ongoing": {
+          "validators": 959423,
+          "balance": 33273782.222995166,
+          "eff_balance": 33215570,
+          "wallets": 47266
+        },
+        "exited_unslashed": {
+          "validators": 1992,
+          "balance": 63766.47822474303,
+          "eff_balance": 63744,
+          "wallets": 40
+        },
+        "withdrawal_done": {
+          "validators": 1092619,
+          "balance": 0.4264320920000001,
+          "eff_balance": 0,
+          "wallets": 100493
+        },
+        "withdrawal_possible": {
+          "validators": 8781,
+          "balance": 285721.9456613184,
+          "eff_balance": 284988,
+          "wallets": 760
+        }
+      },
+      "id": "eth-valcount-402495",
+      "partitionKey": "eth-valcount",
+      "time": 1761382855,
+      "_rid": "VPZWAPgLfumdQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumdQwAAAAAAAA==/",
+      "_etag": "\"1200f9a8-0000-1600-0000-68fc91c70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761382855
+    },
+    {
+      "total": {
+        "balance": 36122053.53322218
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 1888,
+          "eff_balance": 1888,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 49601,
+          "balance": 2491197.7321576974,
+          "eff_balance": 2490087,
+          "wallets": 2574
+        },
+        "active_ongoing": {
+          "validators": 959424,
+          "balance": 33275900.936924074,
+          "eff_balance": 33217683,
+          "wallets": 47266
+        },
+        "exited_unslashed": {
+          "validators": 1992,
+          "balance": 63766.780154343025,
+          "eff_balance": 63744,
+          "wallets": 42
+        },
+        "withdrawal_done": {
+          "validators": 1092619,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100493
+        },
+        "withdrawal_possible": {
+          "validators": 8861,
+          "balance": 288282.6734920635,
+          "eff_balance": 287548,
+          "wallets": 761
+        }
+      },
+      "id": "eth-valcount-402505",
+      "partitionKey": "eth-valcount",
+      "time": 1761386455,
+      "_rid": "VPZWAPgLfumfQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumfQwAAAAAAAA==/",
+      "_etag": "\"120006a9-0000-1600-0000-68fc9fd70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761386455
+    },
+    {
+      "total": {
+        "balance": 36124398.07671686
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49530,
+          "balance": 2488932.4153081565,
+          "eff_balance": 2487817,
+          "wallets": 2573
+        },
+        "active_ongoing": {
+          "validators": 959426,
+          "balance": 33278814.121835727,
+          "eff_balance": 33220600,
+          "wallets": 47267
+        },
+        "exited_unslashed": {
+          "validators": 1992,
+          "balance": 63766.744362746,
+          "eff_balance": 63744,
+          "wallets": 41
+        },
+        "withdrawal_done": {
+          "validators": 1092620,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100493
+        },
+        "withdrawal_possible": {
+          "validators": 8932,
+          "balance": 290555.3847162186,
+          "eff_balance": 289820,
+          "wallets": 761
+        }
+      },
+      "id": "eth-valcount-402514",
+      "partitionKey": "eth-valcount",
+      "time": 1761390055,
+      "_rid": "VPZWAPgLfumhQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumhQwAAAAAAAA==/",
+      "_etag": "\"12000da9-0000-1600-0000-68fcade70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761390055
+    },
+    {
+      "total": {
+        "balance": 36127765.95107738
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2073,
+          "eff_balance": 2063,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 832,
+          "eff_balance": 832,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49462,
+          "balance": 2486763.0496441117,
+          "eff_balance": 2485643,
+          "wallets": 2573
+        },
+        "active_ongoing": {
+          "validators": 959424,
+          "balance": 33281310.444798883,
+          "eff_balance": 33223100,
+          "wallets": 47268
+        },
+        "exited_unslashed": {
+          "validators": 1992,
+          "balance": 63767.08467502,
+          "eff_balance": 63744,
+          "wallets": 43
+        },
+        "withdrawal_done": {
+          "validators": 1092623,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100494
+        },
+        "withdrawal_possible": {
+          "validators": 9009,
+          "balance": 293019.9614653578,
+          "eff_balance": 292284,
+          "wallets": 761
+        }
+      },
+      "id": "eth-valcount-402523",
+      "partitionKey": "eth-valcount",
+      "time": 1761393659,
+      "_rid": "VPZWAPgLfumjQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumjQwAAAAAAAA==/",
+      "_etag": "\"120013a9-0000-1600-0000-68fcbbfb0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761393659
+    },
+    {
+      "total": {
+        "balance": 36129408.85249089
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 1888,
+          "eff_balance": 1888,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49403,
+          "balance": 2484882.33990526,
+          "eff_balance": 2483761,
+          "wallets": 2571
+        },
+        "active_ongoing": {
+          "validators": 959405,
+          "balance": 33282529.133576233,
+          "eff_balance": 33224325,
+          "wallets": 47268
+        },
+        "exited_unslashed": {
+          "validators": 1992,
+          "balance": 63767.388734118984,
+          "eff_balance": 63744,
+          "wallets": 43
+        },
+        "withdrawal_done": {
+          "validators": 1092623,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100494
+        },
+        "withdrawal_possible": {
+          "validators": 9081,
+          "balance": 295324.57978127274,
+          "eff_balance": 294588,
+          "wallets": 761
+        }
+      },
+      "id": "eth-valcount-402533",
+      "partitionKey": "eth-valcount",
+      "time": 1761397256,
+      "_rid": "VPZWAPgLfumnQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumnQwAAAAAAAA==/",
+      "_etag": "\"120039a9-0000-1600-0000-68fcca080000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761397256
+    },
+    {
+      "total": {
+        "balance": 36132041.76131866
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2624,
+          "eff_balance": 2624,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 49338,
+          "balance": 2482808.8180505447,
+          "eff_balance": 2481683,
+          "wallets": 2572
+        },
+        "active_ongoing": {
+          "validators": 959400,
+          "balance": 33284194.448934957,
+          "eff_balance": 33225994,
+          "wallets": 47267
+        },
+        "exited_unslashed": {
+          "validators": 1992,
+          "balance": 63767.802152542965,
+          "eff_balance": 63744,
+          "wallets": 42
+        },
+        "withdrawal_done": {
+          "validators": 1092623,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100494
+        },
+        "withdrawal_possible": {
+          "validators": 9153,
+          "balance": 297629.2816866018,
+          "eff_balance": 296892,
+          "wallets": 762
+        }
+      },
+      "id": "eth-valcount-402542",
+      "partitionKey": "eth-valcount",
+      "time": 1761400855,
+      "_rid": "VPZWAPgLfumpQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumpQwAAAAAAAA==/",
+      "_etag": "\"120086a9-0000-1600-0000-68fcd8170000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761400855
+    },
+    {
+      "total": {
+        "balance": 36133759.04399507
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49260,
+          "balance": 2480319.188786717,
+          "eff_balance": 2479188,
+          "wallets": 2572
+        },
+        "active_ongoing": {
+          "validators": 959401,
+          "balance": 33287439.779379934,
+          "eff_balance": 33229392,
+          "wallets": 47266
+        },
+        "exited_unslashed": {
+          "validators": 2035,
+          "balance": 65145.18220630498,
+          "eff_balance": 65120,
+          "wallets": 43
+        },
+        "withdrawal_done": {
+          "validators": 1092624,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100495
+        },
+        "withdrawal_possible": {
+          "validators": 9189,
+          "balance": 298781.4831281099,
+          "eff_balance": 298044,
+          "wallets": 761
+        }
+      },
+      "id": "eth-valcount-402552",
+      "partitionKey": "eth-valcount",
+      "time": 1761404456,
+      "_rid": "VPZWAPgLfumrQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumrQwAAAAAAAA==/",
+      "_etag": "\"12009ba9-0000-1600-0000-68fce6280000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761404456
+    },
+    {
+      "total": {
+        "balance": 36135382.639837004
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2073,
+          "eff_balance": 2063,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 832,
+          "eff_balance": 832,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49250,
+          "balance": 2480005.7236480596,
+          "eff_balance": 2478869,
+          "wallets": 2632
+        },
+        "active_ongoing": {
+          "validators": 959341,
+          "balance": 33286239.712433245,
+          "eff_balance": 33228198,
+          "wallets": 47206
+        },
+        "exited_unslashed": {
+          "validators": 2042,
+          "balance": 65369.508138334015,
+          "eff_balance": 65344,
+          "wallets": 44
+        },
+        "withdrawal_done": {
+          "validators": 1092624,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100495
+        },
+        "withdrawal_possible": {
+          "validators": 9254,
+          "balance": 300862.2851233551,
+          "eff_balance": 300124,
+          "wallets": 762
+        }
+      },
+      "id": "eth-valcount-402561",
+      "partitionKey": "eth-valcount",
+      "time": 1761408055,
+      "_rid": "VPZWAPgLfumtQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumtQwAAAAAAAA==/",
+      "_etag": "\"1200a5a9-0000-1600-0000-68fcf4370000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761408055
+    },
+    {
+      "total": {
+        "balance": 36137536.24144842
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49182,
+          "balance": 2477836.039940005,
+          "eff_balance": 2476695,
+          "wallets": 2632
+        },
+        "active_ongoing": {
+          "validators": 959338,
+          "balance": 33287963.28784097,
+          "eff_balance": 33229925,
+          "wallets": 47206
+        },
+        "exited_unslashed": {
+          "validators": 2043,
+          "balance": 65408.536020400046,
+          "eff_balance": 65382,
+          "wallets": 47
+        },
+        "withdrawal_done": {
+          "validators": 1092624,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100495
+        },
+        "withdrawal_possible": {
+          "validators": 9326,
+          "balance": 303166.9671530331,
+          "eff_balance": 302428,
+          "wallets": 762
+        }
+      },
+      "id": "eth-valcount-402570",
+      "partitionKey": "eth-valcount",
+      "time": 1761411655,
+      "_rid": "VPZWAPgLfumvQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumvQwAAAAAAAA==/",
+      "_etag": "\"1200e1a9-0000-1600-0000-68fd02470000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761411655
+    },
+    {
+      "total": {
+        "balance": 36139658.952192806
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2112,
+          "eff_balance": 2112,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 49106,
+          "balance": 2475411.1234004516,
+          "eff_balance": 2474264,
+          "wallets": 2636
+        },
+        "active_ongoing": {
+          "validators": 959336,
+          "balance": 33289981.596820228,
+          "eff_balance": 33231947,
+          "wallets": 47203
+        },
+        "exited_unslashed": {
+          "validators": 2043,
+          "balance": 65409.15287312602,
+          "eff_balance": 65382,
+          "wallets": 47
+        },
+        "withdrawal_done": {
+          "validators": 1092624,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100495
+        },
+        "withdrawal_possible": {
+          "validators": 9406,
+          "balance": 305727.6686049922,
+          "eff_balance": 304988,
+          "wallets": 762
+        }
+      },
+      "id": "eth-valcount-402580",
+      "partitionKey": "eth-valcount",
+      "time": 1761415257,
+      "_rid": "VPZWAPgLfumxQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumxQwAAAAAAAA==/",
+      "_etag": "\"1200f0a9-0000-1600-0000-68fd10590000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761415257
+    },
+    {
+      "total": {
+        "balance": 36141716.63836934
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2144,
+          "eff_balance": 2144,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 49034,
+          "balance": 2473107.875882037,
+          "eff_balance": 2471964,
+          "wallets": 2635
+        },
+        "active_ongoing": {
+          "validators": 959338,
+          "balance": 33292261.55047333,
+          "eff_balance": 33234226,
+          "wallets": 47204
+        },
+        "exited_unslashed": {
+          "validators": 2038,
+          "balance": 65249.169980808045,
+          "eff_balance": 65222,
+          "wallets": 45
+        },
+        "withdrawal_done": {
+          "validators": 1092632,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100495
+        },
+        "withdrawal_possible": {
+          "validators": 9475,
+          "balance": 307936.63153915905,
+          "eff_balance": 307196,
+          "wallets": 762
+        }
+      },
+      "id": "eth-valcount-402589",
+      "partitionKey": "eth-valcount",
+      "time": 1761418858,
+      "_rid": "VPZWAPgLfumzQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfumzQwAAAAAAAA==/",
+      "_etag": "\"12000faa-0000-1600-0000-68fd1e6a0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761418858
+    },
+    {
+      "total": {
+        "balance": 36145116.181122236
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2073,
+          "eff_balance": 2063,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 832,
+          "eff_balance": 832,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 48962,
+          "balance": 2470801.020312671,
+          "eff_balance": 2469662,
+          "wallets": 2635
+        },
+        "active_ongoing": {
+          "validators": 959341,
+          "balance": 33295662.82393914,
+          "eff_balance": 33237690,
+          "wallets": 47205
+        },
+        "exited_unslashed": {
+          "validators": 2038,
+          "balance": 65249.45142275504,
+          "eff_balance": 65222,
+          "wallets": 44
+        },
+        "withdrawal_done": {
+          "validators": 1092632,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100495
+        },
+        "withdrawal_possible": {
+          "validators": 9555,
+          "balance": 310497.47495366004,
+          "eff_balance": 309756,
+          "wallets": 762
+        }
+      },
+      "id": "eth-valcount-402598",
+      "partitionKey": "eth-valcount",
+      "time": 1761422454,
+      "_rid": "VPZWAPgLfum1QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfum1QwAAAAAAAA==/",
+      "_etag": "\"120043aa-0000-1600-0000-68fd2c760000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761422454
+    },
+    {
+      "total": {
+        "balance": 36146913.814130045
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2144,
+          "eff_balance": 2144,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 48895,
+          "balance": 2468636.577023844,
+          "eff_balance": 2467520,
+          "wallets": 2637
+        },
+        "active_ongoing": {
+          "validators": 959330,
+          "balance": 33297159.973382074,
+          "eff_balance": 33239165,
+          "wallets": 47203
+        },
+        "exited_unslashed": {
+          "validators": 2038,
+          "balance": 65249.672700440075,
+          "eff_balance": 65222,
+          "wallets": 44
+        },
+        "withdrawal_done": {
+          "validators": 1092635,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100495
+        },
+        "withdrawal_possible": {
+          "validators": 9624,
+          "balance": 312706.18052967504,
+          "eff_balance": 311964,
+          "wallets": 763
+        }
+      },
+      "id": "eth-valcount-402608",
+      "partitionKey": "eth-valcount",
+      "time": 1761426054,
+      "_rid": "VPZWAPgLfum3QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfum3QwAAAAAAAA==/",
+      "_etag": "\"120045aa-0000-1600-0000-68fd3a860000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761426054
+    },
+    {
+      "total": {
+        "balance": 36149258.976991735
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2368,
+          "eff_balance": 2368,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 48823,
+          "balance": 2466356.8346561776,
+          "eff_balance": 2465251,
+          "wallets": 2636
+        },
+        "active_ongoing": {
+          "validators": 959332,
+          "balance": 33299320.037705474,
+          "eff_balance": 33241317,
+          "wallets": 47204
+        },
+        "exited_unslashed": {
+          "validators": 2037,
+          "balance": 65217.518113502054,
+          "eff_balance": 65190,
+          "wallets": 45
+        },
+        "withdrawal_done": {
+          "validators": 1092637,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100496
+        },
+        "withdrawal_possible": {
+          "validators": 9695,
+          "balance": 314979.17602257174,
+          "eff_balance": 314236,
+          "wallets": 762
+        }
+      },
+      "id": "eth-valcount-402617",
+      "partitionKey": "eth-valcount",
+      "time": 1761429656,
+      "_rid": "VPZWAPgLfum5QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfum5QwAAAAAAAA==/",
+      "_etag": "\"12006baa-0000-1600-0000-68fd48980000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761429656
+    },
+    {
+      "total": {
+        "balance": 36151089.67576022
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 48743,
+          "balance": 2463773.598668473,
+          "eff_balance": 2462693,
+          "wallets": 2636
+        },
+        "active_ongoing": {
+          "validators": 959335,
+          "balance": 33301908.9411173,
+          "eff_balance": 33243912,
+          "wallets": 47205
+        },
+        "exited_unslashed": {
+          "validators": 2056,
+          "balance": 65825.90941440409,
+          "eff_balance": 65798,
+          "wallets": 45
+        },
+        "withdrawal_done": {
+          "validators": 1092645,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100498
+        },
+        "withdrawal_possible": {
+          "validators": 9748,
+          "balance": 316675.8160660357,
+          "eff_balance": 315932,
+          "wallets": 759
+        }
+      },
+      "id": "eth-valcount-402627",
+      "partitionKey": "eth-valcount",
+      "time": 1761433258,
+      "_rid": "VPZWAPgLfum7QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfum7QwAAAAAAAA==/",
+      "_etag": "\"12007aaa-0000-1600-0000-68fd56aa0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761433258
+    },
+    {
+      "total": {
+        "balance": 36153426.168814406
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2329,
+          "eff_balance": 2319,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 48671,
+          "balance": 2461445.7692076317,
+          "eff_balance": 2460394,
+          "wallets": 2636
+        },
+        "active_ongoing": {
+          "validators": 959337,
+          "balance": 33303820.414347317,
+          "eff_balance": 33245807,
+          "wallets": 47206
+        },
+        "exited_unslashed": {
+          "validators": 2056,
+          "balance": 65826.16065164607,
+          "eff_balance": 65798,
+          "wallets": 45
+        },
+        "withdrawal_done": {
+          "validators": 1092646,
+          "balance": 0.41049400400000013,
+          "eff_balance": 0,
+          "wallets": 100498
+        },
+        "withdrawal_possible": {
+          "validators": 9819,
+          "balance": 318948.4141138066,
+          "eff_balance": 318204,
+          "wallets": 761
+        }
+      },
+      "id": "eth-valcount-402636",
+      "partitionKey": "eth-valcount",
+      "time": 1761436855,
+      "_rid": "VPZWAPgLfum9QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfum9QwAAAAAAAA==/",
+      "_etag": "\"12009aaa-0000-1600-0000-68fd64b70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761436855
+    },
+    {
+      "total": {
+        "balance": 36155034.662620254
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 48602,
+          "balance": 2459221.9698271845,
+          "eff_balance": 2458187,
+          "wallets": 2636
+        },
+        "active_ongoing": {
+          "validators": 959336,
+          "balance": 33306115.54019649,
+          "eff_balance": 33248087,
+          "wallets": 47206
+        },
+        "exited_unslashed": {
+          "validators": 2056,
+          "balance": 65826.79388415407,
+          "eff_balance": 65798,
+          "wallets": 46
+        },
+        "withdrawal_done": {
+          "validators": 1092663,
+          "balance": 0.39640617700000014,
+          "eff_balance": 0,
+          "wallets": 100514
+        },
+        "withdrawal_possible": {
+          "validators": 9874,
+          "balance": 320708.9623062543,
+          "eff_balance": 319964,
+          "wallets": 745
+        }
+      },
+      "id": "eth-valcount-402645",
+      "partitionKey": "eth-valcount",
+      "time": 1761440455,
+      "_rid": "VPZWAPgLfum-QwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfum-QwAAAAAAAA==/",
+      "_etag": "\"1200a7aa-0000-1600-0000-68fd72c70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761440455
+    },
+    {
+      "total": {
+        "balance": 36155717.86850676
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2368,
+          "eff_balance": 2368,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 48532,
+          "balance": 2456978.5608127844,
+          "eff_balance": 2455948,
+          "wallets": 2634
+        },
+        "active_ongoing": {
+          "validators": 959335,
+          "balance": 33308177.781763036,
+          "eff_balance": 33250141,
+          "wallets": 47207
+        },
+        "exited_unslashed": {
+          "validators": 2049,
+          "balance": 65600.58889595505,
+          "eff_balance": 65574,
+          "wallets": 47
+        },
+        "withdrawal_done": {
+          "validators": 1092716,
+          "balance": 0.39640617700000014,
+          "eff_balance": 0,
+          "wallets": 100519
+        },
+        "withdrawal_possible": {
+          "validators": 9901,
+          "balance": 321575.54062881443,
+          "eff_balance": 320828,
+          "wallets": 740
+        }
+      },
+      "id": "eth-valcount-402655",
+      "partitionKey": "eth-valcount",
+      "time": 1761444056,
+      "_rid": "VPZWAPgLfunBQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunBQwAAAAAAAA==/",
+      "_etag": "\"120011ab-0000-1600-0000-68fd80d80000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761444056
+    },
+    {
+      "total": {
+        "balance": 36157487.56481236
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 48462,
+          "balance": 2454745.2925686445,
+          "eff_balance": 2453710,
+          "wallets": 2634
+        },
+        "active_ongoing": {
+          "validators": 959336,
+          "balance": 33311316.27516672,
+          "eff_balance": 33253281,
+          "wallets": 47208
+        },
+        "exited_unslashed": {
+          "validators": 2049,
+          "balance": 65601.04309821104,
+          "eff_balance": 65574,
+          "wallets": 47
+        },
+        "withdrawal_done": {
+          "validators": 1092720,
+          "balance": 0.39640617700000014,
+          "eff_balance": 0,
+          "wallets": 100519
+        },
+        "withdrawal_possible": {
+          "validators": 9969,
+          "balance": 323751.5575726131,
+          "eff_balance": 323004,
+          "wallets": 740
+        }
+      },
+      "id": "eth-valcount-402664",
+      "partitionKey": "eth-valcount",
+      "time": 1761447653,
+      "_rid": "VPZWAPgLfunDQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunDQwAAAAAAAA==/",
+      "_etag": "\"120045ab-0000-1600-0000-68fd8ee50000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761447653
+    },
+    {
+      "total": {
+        "balance": 36160566.43802794
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2073,
+          "eff_balance": 2063,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 832,
+          "eff_balance": 832,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 48390,
+          "balance": 2452766.4600546886,
+          "eff_balance": 2451728,
+          "wallets": 2634
+        },
+        "active_ongoing": {
+          "validators": 959338,
+          "balance": 33313685.466925237,
+          "eff_balance": 33255656,
+          "wallets": 47209
+        },
+        "exited_unslashed": {
+          "validators": 2039,
+          "balance": 65279.79110371404,
+          "eff_balance": 65254,
+          "wallets": 44
+        },
+        "withdrawal_done": {
+          "validators": 1092742,
+          "balance": 0.4292327780000001,
+          "eff_balance": 0,
+          "wallets": 100521
+        },
+        "withdrawal_possible": {
+          "validators": 10037,
+          "balance": 325929.2907115246,
+          "eff_balance": 325180,
+          "wallets": 738
+        }
+      },
+      "id": "eth-valcount-402673",
+      "partitionKey": "eth-valcount",
+      "time": 1761451255,
+      "_rid": "VPZWAPgLfunFQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunFQwAAAAAAAA==/",
+      "_etag": "\"120047ab-0000-1600-0000-68fd9cf70000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761451255
+    },
+    {
+      "total": {
+        "balance": 36160223.992166705
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2144,
+          "eff_balance": 2144,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 48323,
+          "balance": 2450622.1983620534,
+          "eff_balance": 2449585,
+          "wallets": 2634
+        },
+        "active_ongoing": {
+          "validators": 959327,
+          "balance": 33315167.86904168,
+          "eff_balance": 33257131,
+          "wallets": 47209
+        },
+        "exited_unslashed": {
+          "validators": 2041,
+          "balance": 65343.128867098996,
+          "eff_balance": 65318,
+          "wallets": 43
+        },
+        "withdrawal_done": {
+          "validators": 1092812,
+          "balance": 0.4240202290000001,
+          "eff_balance": 0,
+          "wallets": 100585
+        },
+        "withdrawal_possible": {
+          "validators": 10037,
+          "balance": 325929.3718756465,
+          "eff_balance": 325180,
+          "wallets": 675
+        }
+      },
+      "id": "eth-valcount-402683",
+      "partitionKey": "eth-valcount",
+      "time": 1761454854,
+      "_rid": "VPZWAPgLfunHQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunHQwAAAAAAAA==/",
+      "_etag": "\"120049ab-0000-1600-0000-68fdab060000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761454854
+    },
+    {
+      "total": {
+        "balance": 36161845.8279007
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 2,
+          "balance": 2368,
+          "eff_balance": 2368,
+          "wallets": 2
+        },
+        "active_exiting": {
+          "validators": 48253,
+          "balance": 2448388.755502309,
+          "eff_balance": 2447346,
+          "wallets": 2636
+        },
+        "active_ongoing": {
+          "validators": 959327,
+          "balance": 33316942.633940723,
+          "eff_balance": 33258913,
+          "wallets": 47208
+        },
+        "exited_unslashed": {
+          "validators": 2049,
+          "balance": 65599.13548203402,
+          "eff_balance": 65574,
+          "wallets": 41
+        },
+        "withdrawal_done": {
+          "validators": 1092826,
+          "balance": 0.42421009000000015,
+          "eff_balance": 0,
+          "wallets": 100588
+        },
+        "withdrawal_possible": {
+          "validators": 10087,
+          "balance": 327529.87876554544,
+          "eff_balance": 326780,
+          "wallets": 674
+        }
+      },
+      "id": "eth-valcount-402692",
+      "partitionKey": "eth-valcount",
+      "time": 1761458454,
+      "_rid": "VPZWAPgLfunJQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunJQwAAAAAAAA==/",
+      "_etag": "\"12004bab-0000-1600-0000-68fdb9160000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761458454
+    },
+    {
+      "total": {
+        "balance": 36163582.76482934
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 48212,
+          "balance": 2447081.687504537,
+          "eff_balance": 2446036,
+          "wallets": 2636
+        },
+        "active_ongoing": {
+          "validators": 959291,
+          "balance": 33318898.092462853,
+          "eff_balance": 33260874,
+          "wallets": 47209
+        },
+        "exited_unslashed": {
+          "validators": 2049,
+          "balance": 65599.37693289298,
+          "eff_balance": 65574,
+          "wallets": 41
+        },
+        "withdrawal_done": {
+          "validators": 1092831,
+          "balance": 0.16870314499999983,
+          "eff_balance": 0,
+          "wallets": 100589
+        },
+        "withdrawal_possible": {
+          "validators": 10162,
+          "balance": 329930.43922590435,
+          "eff_balance": 329180,
+          "wallets": 673
+        }
+      },
+      "id": "eth-valcount-402702",
+      "partitionKey": "eth-valcount",
+      "time": 1761462055,
+      "_rid": "VPZWAPgLfunLQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunLQwAAAAAAAA==/",
+      "_etag": "\"120050ab-0000-1600-0000-68fdc7270000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761462055
+    },
+    {
+      "total": {
+        "balance": 36166502.87696578
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 48140,
+          "balance": 2444782.6829674803,
+          "eff_balance": 2443734,
+          "wallets": 2635
+        },
+        "active_ongoing": {
+          "validators": 959293,
+          "balance": 33321012.285738945,
+          "eff_balance": 33262992,
+          "wallets": 47210
+        },
+        "exited_unslashed": {
+          "validators": 2049,
+          "balance": 65599.46562478901,
+          "eff_balance": 65574,
+          "wallets": 38
+        },
+        "withdrawal_done": {
+          "validators": 1092840,
+          "balance": 0.16870314499999983,
+          "eff_balance": 0,
+          "wallets": 100590
+        },
+        "withdrawal_possible": {
+          "validators": 10225,
+          "balance": 331947.2739314233,
+          "eff_balance": 331196,
+          "wallets": 673
+        }
+      },
+      "id": "eth-valcount-402711",
+      "partitionKey": "eth-valcount",
+      "time": 1761465655,
+      "_rid": "VPZWAPgLfunNQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunNQwAAAAAAAA==/",
+      "_etag": "\"12007cab-0000-1600-0000-68fdd5370000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761465655
+    },
+    {
+      "total": {
+        "balance": 36168336.73692015
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 1849,
+          "eff_balance": 1839,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1312,
+          "eff_balance": 1312,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 48071,
+          "balance": 2442576.8899455117,
+          "eff_balance": 2441526,
+          "wallets": 2634
+        },
+        "active_ongoing": {
+          "validators": 959292,
+          "balance": 33323099.50054603,
+          "eff_balance": 33265077,
+          "wallets": 47210
+        },
+        "exited_unslashed": {
+          "validators": 2048,
+          "balance": 65567.23872595899,
+          "eff_balance": 65542,
+          "wallets": 35
+        },
+        "withdrawal_done": {
+          "validators": 1092851,
+          "balance": 0.17247586599999987,
+          "eff_balance": 0,
+          "wallets": 100591
+        },
+        "withdrawal_possible": {
+          "validators": 10287,
+          "balance": 333931.9352267772,
+          "eff_balance": 333180,
+          "wallets": 676
+        }
+      },
+      "id": "eth-valcount-402720",
+      "partitionKey": "eth-valcount",
+      "time": 1761469258,
+      "_rid": "VPZWAPgLfunPQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunPQwAAAAAAAA==/",
+      "_etag": "\"120085ab-0000-1600-0000-68fde34a0000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761469258
+    },
+    {
+      "total": {
+        "balance": 36170136.4377515
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 5,
+          "balance": 2464,
+          "eff_balance": 2464,
+          "wallets": 3
+        },
+        "active_exiting": {
+          "validators": 47993,
+          "balance": 2440086.089042713,
+          "eff_balance": 2439032,
+          "wallets": 2635
+        },
+        "active_ongoing": {
+          "validators": 959292,
+          "balance": 33325373.587317683,
+          "eff_balance": 33267351,
+          "wallets": 47209
+        },
+        "exited_unslashed": {
+          "validators": 2042,
+          "balance": 65375.23090416593,
+          "eff_balance": 65350,
+          "wallets": 27
+        },
+        "withdrawal_done": {
+          "validators": 1092878,
+          "balance": 0.2200518010000004,
+          "eff_balance": 0,
+          "wallets": 100595
+        },
+        "withdrawal_possible": {
+          "validators": 10346,
+          "balance": 335820.31043513335,
+          "eff_balance": 335068,
+          "wallets": 680
+        }
+      },
+      "id": "eth-valcount-402730",
+      "partitionKey": "eth-valcount",
+      "time": 1761472855,
+      "_rid": "VPZWAPgLfunRQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunRQwAAAAAAAA==/",
+      "_etag": "\"12008bab-0000-1600-0000-68fdf1570000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761472855
+    },
+    {
+      "total": {
+        "balance": 36171903.97221359
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1017,
+          "balance": 1017,
+          "eff_balance": 1007,
+          "wallets": 150
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 47921,
+          "balance": 2437784.0908803297,
+          "eff_balance": 2436729,
+          "wallets": 2635
+        },
+        "active_ongoing": {
+          "validators": 959298,
+          "balance": 33328674.519220833,
+          "eff_balance": 33270653,
+          "wallets": 47210
+        },
+        "exited_unslashed": {
+          "validators": 2042,
+          "balance": 65375.068845034926,
+          "eff_balance": 65350,
+          "wallets": 23
+        },
+        "withdrawal_done": {
+          "validators": 1092882,
+          "balance": 0.2142563410000004,
+          "eff_balance": 0,
+          "wallets": 100597
+        },
+        "withdrawal_possible": {
+          "validators": 10414,
+          "balance": 337997.0790110552,
+          "eff_balance": 337244,
+          "wallets": 682
+        }
+      },
+      "id": "eth-valcount-402739",
+      "partitionKey": "eth-valcount",
+      "time": 1761476457,
+      "_rid": "VPZWAPgLfunTQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunTQwAAAAAAAA==/",
+      "_etag": "\"120092ab-0000-1600-0000-68fdff690000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761476457
+    },
+    {
+      "total": {
+        "balance": 36173512.139908895
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2073,
+          "eff_balance": 2063,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 832,
+          "eff_balance": 832,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 47857,
+          "balance": 2435739.5840464453,
+          "eff_balance": 2434683,
+          "wallets": 2638
+        },
+        "active_ongoing": {
+          "validators": 959291,
+          "balance": 33329478.377502833,
+          "eff_balance": 33271455,
+          "wallets": 47207
+        },
+        "exited_unslashed": {
+          "validators": 2042,
+          "balance": 65374.61028929692,
+          "eff_balance": 65350,
+          "wallets": 22
+        },
+        "withdrawal_done": {
+          "validators": 1092899,
+          "balance": 0.2142563410000004,
+          "eff_balance": 0,
+          "wallets": 100601
+        },
+        "withdrawal_possible": {
+          "validators": 10477,
+          "balance": 340014.3538139866,
+          "eff_balance": 339260,
+          "wallets": 680
+        }
+      },
+      "id": "eth-valcount-402748",
+      "partitionKey": "eth-valcount",
+      "time": 1761480055,
+      "_rid": "VPZWAPgLfunVQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunVQwAAAAAAAA==/",
+      "_etag": "\"12009dab-0000-1600-0000-68fe0d770000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761480055
+    },
+    {
+      "total": {
+        "balance": 36176914.44578728
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2329,
+          "eff_balance": 2319,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 1056,
+          "eff_balance": 1056,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 47802,
+          "balance": 2433985.6217842437,
+          "eff_balance": 2432924,
+          "wallets": 2639
+        },
+        "active_ongoing": {
+          "validators": 959269,
+          "balance": 33331881.844204728,
+          "eff_balance": 33273861,
+          "wallets": 47206
+        },
+        "exited_unslashed": {
+          "validators": 2042,
+          "balance": 65374.36330933795,
+          "eff_balance": 65350,
+          "wallets": 21
+        },
+        "withdrawal_done": {
+          "validators": 1092900,
+          "balance": 0.2142563410000004,
+          "eff_balance": 0,
+          "wallets": 100601
+        },
+        "withdrawal_possible": {
+          "validators": 10548,
+          "balance": 342287.4022326287,
+          "eff_balance": 341532,
+          "wallets": 682
+        }
+      },
+      "id": "eth-valcount-402758",
+      "partitionKey": "eth-valcount",
+      "time": 1761483657,
+      "_rid": "VPZWAPgLfunZQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunZQwAAAAAAAA==/",
+      "_etag": "\"1200a3ab-0000-1600-0000-68fe1b890000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761483657
+    },
+    {
+      "total": {
+        "balance": 36179066.50834422
+      },
+      "stateCount": {
+        "pending_initialized": {
+          "validators": 1018,
+          "balance": 2329,
+          "eff_balance": 2319,
+          "wallets": 151
+        },
+        "pending_queued": {
+          "validators": 1,
+          "balance": 832,
+          "eff_balance": 832,
+          "wallets": 1
+        },
+        "active_exiting": {
+          "validators": 47735,
+          "balance": 2432286.1566998838,
+          "eff_balance": 2431222,
+          "wallets": 2640
+        },
+        "active_ongoing": {
+          "validators": 959266,
+          "balance": 33333652.59365014,
+          "eff_balance": 33275636,
+          "wallets": 47205
+        },
+        "exited_unslashed": {
+          "validators": 2042,
+          "balance": 65374.572437260926,
+          "eff_balance": 65350,
+          "wallets": 22
+        },
+        "withdrawal_done": {
+          "validators": 1092900,
+          "balance": 0.2142563410000004,
+          "eff_balance": 0,
+          "wallets": 100601
+        },
+        "withdrawal_possible": {
+          "validators": 10620,
+          "balance": 344591.9713005918,
+          "eff_balance": 343836,
+          "wallets": 682
+        }
+      },
+      "id": "eth-valcount-402767",
+      "partitionKey": "eth-valcount",
+      "time": 1761487256,
+      "_rid": "VPZWAPgLfunbQwAAAAAAAA==",
+      "_self": "dbs/VPZWAA==/colls/VPZWAPgLfuk=/docs/VPZWAPgLfunbQwAAAAAAAA==/",
+      "_etag": "\"1200c9ab-0000-1600-0000-68fe29980000\"",
+      "_attachments": "attachments/",
+      "_ts": 1761487256
     }
   ]
 }

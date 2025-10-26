@@ -39,13 +39,12 @@ curl -LO https://github.com/flashbots/mev-boost/releases/download/v<mark class="
         <p>Open Systemd unit file for mevboost</p>
         <pre><code>sudo nano /etc/systemd/system/mevboost.service</code></pre>
         <p>And copy sample configuration below into it.</p>
-        <div class="tabselector" data-client="nimbus">
+        <div class="tabselector">
                 <nav class="egrid egrid-2">
                 <button class="tab selected" data-tabpanel="1">Ethereum</button>
                 <button class="tab" data-tabpanel="2">Gnosis</button>
               </nav>
-              <div class="tabpanel selected">
-<pre class="no-pseudo"><code>[Unit]
+<div class="tabpanel selected"><pre class="no-pseudo"><code>[Unit]
 Description=MEV-Boost Service for Ethereum Mainnet
 Wants=network-online.target
 After=network-online.target
@@ -217,9 +216,6 @@ Extend its <code>ExecStart</code> for following flag:
             </ul>
         </div>
     </div>
-
-
-    
 </li>
 
 {{/if}}

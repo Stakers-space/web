@@ -5,7 +5,17 @@
         <div class="grid gap-6">
             {{#each resourcesByServer}}
             <div class="block rounded-lg shadow-sm p-5">
-                <h2 class="mb-3 text-lg font-semibold">Server {{this.[1].name}}</h2>
+                <div class="flex items-center gap-2 mb-3">
+                    <h2 class="text-lg font-semibold m-0">
+                        Server {{this.[1].name}}
+                    </h2>
+
+                    {{#if this.[1].clock_sync}}
+                    <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded">
+                        {{this.[1].clock_sync}}
+                    </span>
+                    {{/if}}
+                </div>
                 <canvas id="srv_{{this.[0]}}" name="lazy-canvas" class="w-full h-full"></canvas>
             </div>
                 

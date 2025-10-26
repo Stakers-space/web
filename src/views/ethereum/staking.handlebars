@@ -68,7 +68,7 @@
 					{{!<a href="/charts/ethereum-staking-apy" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">}}
 					<a href="https://staking.ethermine.org/statistics" target="_blank" rel="nofollow noopener noreferrer" class="relative block bg-gray-50 rounded-lg shadow hover:shadow-lg transition p-4">
 						<div class="mb-4">
-							<h2 class="text-xl font-semibold">~ {{{indicators.aprLastDay.value}}} ETH APY</h2>
+							<h2 class="text-xl font-semibold">~ {{{formatNumber indicators.aprLastDay.value '0.00%'}}} ETH APY</h2>
 							<div class="dynamic-label px-1 py-1 bg-green-100 text-green-700 rounded px-2 py-1 w-[170px] h-[21px] overflow-hidden text-xs">
 								<span class="item visible">~ {{{indicators.aprLastDay.operator}}} Operator</span>
 								<span class="item hidden">~ {{{indicators.aprLastDay.delegator}}} Delegator</span>
@@ -592,15 +592,14 @@
   </div>
 </section>
 
-	
 {{> scripts/dynamic-label}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.0/chartjs-plugin-annotation.min.js"></script>
+<script>var chartConfig = {{{json charts}}};</script>
 <script>var ethStoreData = {{{ethStoreData}}}, beaconchainData = {{{beaconData}}}, etherchainData = {{{chainData}}}, chartsUIconfig = {{{chartsUIconfig}}};</script>
 <script type="text/javascript" src="/js/chart-presenter.js"></script>
-{{!--<script type="text/javascript" src="/js/charts/eth-overview.js"></script>--}}
+<script type="text/javascript" src="/js/charts/sc-chart.js"></script>
 <script type="text/javascript" src="/js/charts/eth-stakingapr.js"></script>
-<script type="text/javascript" src="/js/charts/validators.js"></script>
 <script type="text/javascript" src="/js/charts/staked-balance.js"></script>
 <script type="text/javascript" src="/js/charts/tvl-balance.js"></script>
 <script type="text/javascript" src="/js/charts/blocks.js"></script>

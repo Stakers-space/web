@@ -11,7 +11,7 @@ function labelFromTs(ms, locale = 'en-US', timeZone = TZ) {
     return new Intl.DateTimeFormat(locale, { timeZone, dateStyle: 'medium' }).format(ms);
 }
 
-exports.validatorsViewChartConfig = (tokenSymbol, data) => {
+exports.validatorsViewChartConfig = (tokenSymbol, data, opts = {}) => {
     //console.log("validatorsViewChartConfig", data);
     const byDay = new Map();
     let prevDay = null;
@@ -37,7 +37,14 @@ exports.validatorsViewChartConfig = (tokenSymbol, data) => {
         }
     }
 
-    const days = Array.from(byDay.values()).sort((a, b) => a.timeMs - b.timeMs);
+    let days = Array.from(byDay.values()).sort((a, b) => a.timeMs - b.timeMs);
+
+    // ---  LIMIT_DESC ---
+    if (opts.LIMIT_DESC && opts.LIMIT_DESC > 0 && days.length > opts.LIMIT_DESC) {
+        const startIndex = Math.max(0, days.length - opts.LIMIT_DESC);
+        days = days.slice(startIndex);
+    }
+
     const labels = days.map(d => labelFromTs(d.timeMs));     // labels
     const activeWallets = days.map(d => d.wallets);
     const activeValidators = days.map(d => d.validators);
@@ -111,7 +118,7 @@ exports.validatorsViewChartConfig = (tokenSymbol, data) => {
             maintainAspectRatio: false,
             plugins: {
                 title: { display: false, text: `${tokenSymbol.toUpperCase()} Validators number`},
-                legend: { display: true, position: 'top' },
+                legend: { display: opts["overview"]?.plugins?.legend?.display ?? true, position: 'top' },
                 tooltip: { enabled: true }
             },
             scales: {

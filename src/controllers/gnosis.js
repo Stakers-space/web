@@ -9,8 +9,9 @@ const cache_assetPrice = require('../middlewares/cache/asset-price.js');
 const azureCosmosDB = require('../services/azureCosmosDB');
 /*const BeaconChainData = require('../models/gnobeaconchaintable'),
       GnosischainData = require('../models/gnosischaintable');*/
-const reduceObjectArray = require('../utils/reduceObjectArray');
+const { reduceObjectArray } = require('../utils/reduceObjectArray');
 const ValidatorQueueModel = require('../models/validatorqueue.js');
+const { validatorsViewChartConfig } = require('./chart_configs.js');
 
 const dataFile = require(path.join(__dirname, '..', 'config/data_files.json'));
 const cachedDataFile = path.join(__dirname, '..', '..',  dataFile.pagecache.gnosis);
@@ -141,6 +142,11 @@ exports.STAKING = function(req,res, next){
                 supply:{legend:false,xaxis:false,yaxis:false},
                 balance:{legend:false,xaxis:false,yaxis:false,detailed:false}
             });
+
+            res.locals.charts = {};
+            const validatorsOverviewChart = validatorsViewChartConfig(res.locals.chainTokenUpr, parsedData.valcount_history, {LIMIT_DESC: 30, overview:{ plugins:{legend: {display: false}}}});
+            res.locals.charts['validators_overview'] = validatorsOverviewChart.overview;
+            res.locals.charts['validators_overview_diff'] = validatorsOverviewChart.overview_diff;
 
             taskCompleted();
         }

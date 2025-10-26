@@ -131,7 +131,7 @@ exports.validators_overview = (req,res,next) => {
             res.locals.jsController = 'validators';
             res.locals.valcount = parsedData.valcount_history[parsedData.valcount_history.length - 1];
             res.locals.valcount.time = new Date(res.locals.valcount.time * 1000);
-            const validatorsOverviewChart = validatorsViewChartConfig(res.locals.chainTokenUpr, parsedData.valcount_history, parsedData.beaconData);
+            const validatorsOverviewChart = validatorsViewChartConfig(res.locals.chainTokenUpr, parsedData.valcount_history);
             res.locals.charts['validators_overview'] = validatorsOverviewChart.overview;
             res.locals.charts['validators_overview'].syncScaleWith = 'validators_overview_diff';
             res.locals.charts['validators_overview_diff'] = validatorsOverviewChart.overview_diff;
@@ -311,6 +311,8 @@ exports.CacheData = function(cb){
         valcount_history: null
     };
 
+    let assetPrices = null;
+
     const qc = (containerId, query, partitionKey) => new Promise((resolve, reject) => {
         azureCosmosDB.queryContainer(containerId, query, partitionKey, (err, data) => {
             if (err) reject(err);
@@ -344,11 +346,14 @@ exports.CacheData = function(cb){
         ethereum_srcData.valcount = ethereum_srcData.valcount_history[ethereum_srcData.valcount_history.length - 1];
         gnosis_srcData.valcount = gnosis_srcData.valcount_history[gnosis_srcData.valcount_history.length - 1];
 
+        // remove mid-items in ethereum_srcData.valcount_history, gnosis_srcData.valcount_history - keep only day-close marks
+        
+
         taskCompleted(firstErr, "cosmosDB");
     });
 
     //assetPriceWorker.ActivateCron();
-    assetPriceCache.UpdatePrice().then(resp => { taskCompleted(null, "assetPriceCache"); }).catch(err => { return taskCompleted(err, "assetPriceCache"); })
+    assetPriceCache.UpdatePrice().then(resp => { assetPrices = resp; taskCompleted(null, "assetPriceCache"); }).catch(err => { return taskCompleted(err, "assetPriceCache"); })
 
     // Get Gnosis valuation_metrics data
     new MySqlService().GetValuationMetrics(500,function(err,data){
@@ -416,36 +421,9 @@ exports.CacheData = function(cb){
             ethereum_arrData.beaconData.tvl_change.push(currentTVL - ((i===0) ? 0 : ethereum_arrData.beaconData.tvl[i - 1]));
             ethereum_arrData.beaconData.tvl.push(currentTVL);
         }
-        let stakedEth;
-        let index = -1;
-        while (!stakedEth) {
-            stakedEth = ethereum_arrData.beaconData.stakedTokens.slice(index)[0];
-            if (!stakedEth) {
-                console.log(`Warn: No stakedEth value for day ${index} → Checking value in day ${index - 1}`);
-                index--;
-            }
-        }
 
-        let tvlEth = 0;
-        index = -1;
-        while (tvlEth === 0) {
-            tvlEth = ethereum_arrData.beaconData.tvl.slice(index)[0];
-            if (tvlEth === 0) {
-                console.log(`Warn: No tvlEth value for day ${index} → Checking value in day ${index - 1}`);
-                index--;
-            }
-        }
-
-        // Gnosis        
-        let stakedGno;
-        index = -1;
-        while (!stakedGno) {
-            stakedGno = gnosis_arrData.beaconData.stakedTokens.slice(index)[0];
-            if (!stakedGno) {
-                console.log(`Warn: No stakedGno value for day ${index} → Checking value in day ${index - 1}`);
-                index--;
-            }
-        }
+        const stakedEth = ethereum_srcData.valcount.stateCount.active_ongoing.eff_balance;
+        const stakedGno = gnosis_srcData.valcount.stateCount.active_ongoing.eff_balance;
 
         var aggregaredData = {
             ethereum: {
@@ -455,21 +433,21 @@ exports.CacheData = function(cb){
                 indicators: {
                     aprLastDay: new EthStoreDataModel().GetApr(ethereum_arrData.ethStore.apr[ethereum_arrData.ethStore.apr.length - 1]),
                     validators: {
-                        count: ethereum_arrData.beaconData.validators[ethereum_arrData.beaconData.validators.length - 1],
-                        increments: CalculateTimeChange(ethereum_arrData.beaconData.validators)
+                        count: ethereum_srcData.valcount.stateCount.active_ongoing.validators,
+                        increments: CalculateTimeChange(ethereum_srcData.valcount_history, "stateCount", "active_ongoing.validators")
                     },
                     stakedTokens: {
                         value: stakedEth,
                         supplyShare: numeral(ethereum_arrData.beaconData.stakedTokens[ethereum_arrData.beaconData.stakedTokens.length - 1] / ethereum_arrData.chainData.totalSupply[ethereum_arrData.chainData.totalSupply.length - 1]).format('0.00%'),
-                        increments: CalculateTimeChange(ethereum_arrData.beaconData.stakedTokens)
+                        increments: CalculateTimeChange(ethereum_srcData.valcount_history, "stateCount", "active_ongoing.eff_balance")
                     },
                     tvl: {
-                        value: tvlEth,
-                        increments: CalculateTimeChange(ethereum_arrData.beaconData.tvl)
+                        value: stakedEth * assetPrices.eth_usd,
+                        //increments: CalculateTimeChange(ethereum_arrData.beaconData.tvl)
                     },
                     supply: {
                         value: ethereum_arrData.chainData.totalSupply[ethereum_arrData.chainData.totalSupply.length - 1],
-                        increments: CalculateTimeChange(ethereum_arrData.chainData.totalSupply)
+                        //increments: CalculateTimeChange(ethereum_arrData.chainData.totalSupply)
                     }
                 },
                 valcount: ethereum_srcData.valcount, // ?? duplicity
@@ -482,13 +460,13 @@ exports.CacheData = function(cb){
                 circulationData: gnosis_srcData.circulationData,
                 indicators: {
                     validators: {
-                        value: gnosis_arrData.beaconData.validators[gnosis_arrData.beaconData.validators.length - 1],
-                        increments: CalculateTimeChange(gnosis_arrData.beaconData.validators)
+                        value: gnosis_srcData.valcount.stateCount.active_ongoing.validators,
+                        increments: CalculateTimeChange(gnosis_srcData.valcount_history, "stateCount", "active_ongoing.validators")//CalculateTimeChange(gnosis_arrData.beaconData.validators)
                     },
                     stakedTokens: {
                         value: stakedGno,
                         supplyShare: gnosis_arrData.beaconData.stakedTokens[gnosis_arrData.beaconData.stakedTokens.length - 1] / gnosis_srcData.circulationData.generalHealthOverview.outstanding_tokens,
-                        increments: CalculateTimeChange(gnosis_arrData.beaconData.stakedTokens)
+                        increments: CalculateTimeChange(gnosis_srcData.valcount_history, "stateCount", "active_ongoing.eff_balance")//CalculateTimeChange(gnosis_arrData.beaconData.stakedTokens)
                     },
                     tvl: {
                         value: stakedGno * gnosis_srcData.valuationData?.gnoPrice/*,

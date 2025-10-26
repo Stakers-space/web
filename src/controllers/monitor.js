@@ -3,6 +3,7 @@ const cryptoConf = require('../config/config.secret.json').crypto["validator-api
 const mysqlSrv = require('../services/mysqlDB');
 const MailService = require('../services/customMailing');
 const cache = require('../middlewares/cache');
+const cache_systemClock = require('../middlewares/cache/system-clock-sync.js');
 const MailMessage = require('../models/emailMessage/validators_alert.js');
 
 let noIncominMessageTimer = {
@@ -142,7 +143,8 @@ exports.UpdateNodeState = (req,res) => {
 	const vpn_status = (req.query.vpn_s && req.query.vpn_s !== "N/A" && req.query.vpn_s !== "Unknown") ? req.query.vpn_s.toLowerCase() : null;	
 	const vpn_connection = (req.query.vpn && req.query.vpn !== "N/A") ? req.query.vpn : null; // cz-prg-wg-101
 	const cl_peers = (req.query.peer && req.query.peer !== "N/A") ? req.query.peer : null;
-
+	const clock_time_sync = req.query.cs;
+	
     if (!account_id || !api_token) return res.status(400).send('Missing account_id or api_token');
     
     console.log(`/api/hw-report> Account ID: ${account_id} | ServerId: ${server_id} | Disk Usage: ${disk_usage}% | RAM Usage: ${ram_usage}% | Swap Usage: ${swap_usage}% | CL peers: ${cl_peers} | VPN: ${vpn_status} / ${vpn_connection}`);
@@ -156,4 +158,8 @@ exports.UpdateNodeState = (req,res) => {
         if(err) console.log(err);
         res.status(200).send((err) ? err : 'Data received');
     });
+
+	// save to tmp cache
+	if(clock_time_sync) cache_systemClock.setServerClockSync(server_id, clock_time_sync);
+	
 };

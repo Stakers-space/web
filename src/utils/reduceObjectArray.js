@@ -8,4 +8,11 @@ function reduceObjectArray(obj, limit){
     return result;
 }
 
-module.exports = reduceObjectArray;
+function keepDayCloseMarksOnly(objArr){
+
+}
+
+module.exports = {
+    reduceObjectArray,
+    keepDayCloseMarksOnly
+};
