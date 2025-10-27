@@ -13,6 +13,7 @@ const azureCosmosDB = require('../services/azureCosmosDB'),
       MySqlService = require('../services/mysqlDB.js');
 
 const { validatorsViewChartConfig } = require('./chart_configs.js');
+const { keepDayCloseMarksOnly } = require('../utils/reduceObjectArray.js');
 
 const { ReadStateFiles } = require('../utils/filesystem-utils.js');
 const ValidatorQueueModel = require('../models/validatorqueue');
@@ -129,13 +130,16 @@ exports.validators_overview = (req,res,next) => {
             const parsedData = res.locals.parsedData[res.locals.chain]; // chain selection
             res.locals.beaconData = JSON.stringify(parsedData.beaconData);
             res.locals.jsController = 'validators';
+            
             res.locals.valcount = parsedData.valcount_history[parsedData.valcount_history.length - 1];
             res.locals.valcount.time = new Date(res.locals.valcount.time * 1000);
             const validatorsOverviewChart = validatorsViewChartConfig(res.locals.chainTokenUpr, parsedData.valcount_history);
-            res.locals.charts['validators_overview'] = validatorsOverviewChart.overview;
-            res.locals.charts['validators_overview'].syncScaleWith = 'validators_overview_diff';
-            res.locals.charts['validators_overview_diff'] = validatorsOverviewChart.overview_diff;
-            res.locals.charts['validators_overview_diff'].syncScaleWith = 'validators_overview';
+            if(validatorsOverviewChart){
+                 res.locals.charts['validators_overview'] = validatorsOverviewChart.overview;
+                res.locals.charts['validators_overview'].syncScaleWith = 'validators_overview_diff';
+                res.locals.charts['validators_overview_diff'] = validatorsOverviewChart.overview_diff;
+                res.locals.charts['validators_overview_diff'].syncScaleWith = 'validators_overview';
+            }
             res.locals.valcount_history = JSON.stringify(parsedData.valcount_history);
             OnTaskCompleted();
         }
@@ -327,8 +331,18 @@ exports.CacheData = function(cb){
         // valcount data
         /*getLast("eth-valcount").then(doc => { if (doc) ethereum_srcData.valcount = doc; }).catch(err => { console.error(err)}),
         getLast("gno-valcount").then(doc => { if (doc) gnosis_srcData.valcount = doc; }).catch(err => { console.error(err)}),*/
-        getAllByTime("eth-valcount").then(doc => { if (doc) ethereum_srcData.valcount_history = doc; }).catch(err => { console.error(err)}),
-        getAllByTime("gno-valcount").then(doc => { if (doc) gnosis_srcData.valcount_history = doc; }).catch(err => { console.error(err)}),
+        getAllByTime("eth-valcount").then(doc => { 
+            if (doc) {
+                ethereum_srcData.valcount = doc[doc.length - 1];
+                ethereum_srcData.valcount_history = keepDayCloseMarksOnly(doc);
+            }
+        }).catch(err => { console.error(err)}),
+        getAllByTime("gno-valcount").then(doc => { 
+            if (doc) {
+                gnosis_srcData.valcount = doc[doc.length - 1];
+                gnosis_srcData.valcount_history = keepDayCloseMarksOnly(doc);
+            }
+        }).catch(err => { console.error(err)}),
         
         getAllByDays("ethstore").then(rows => { ethereum_srcData.storeData = rows; }).catch(err => { console.error(err)}),
         getAllByDays("beaconchain").then(rows => { ethereum_srcData.beaconData = rows; }).catch(err => { console.error(err)}),
@@ -342,13 +356,6 @@ exports.CacheData = function(cb){
 
     Promise.allSettled(jobs).then((results) => {
         const firstErr = results.find(r => r.status === 'rejected')?.reason || null;
-
-        ethereum_srcData.valcount = ethereum_srcData.valcount_history[ethereum_srcData.valcount_history.length - 1];
-        gnosis_srcData.valcount = gnosis_srcData.valcount_history[gnosis_srcData.valcount_history.length - 1];
-
-        // remove mid-items in ethereum_srcData.valcount_history, gnosis_srcData.valcount_history - keep only day-close marks
-        
-
         taskCompleted(firstErr, "cosmosDB");
     });
 
@@ -422,8 +429,10 @@ exports.CacheData = function(cb){
             ethereum_arrData.beaconData.tvl.push(currentTVL);
         }
 
-        const stakedEth = ethereum_srcData.valcount.stateCount.active_ongoing.eff_balance;
-        const stakedGno = gnosis_srcData.valcount.stateCount.active_ongoing.eff_balance;
+        const stakedEth = ethereum_srcData?.valcount?.stateCount?.active_ongoing?.eff_balance;
+        const stakedGno = gnosis_srcData?.valcount?.stateCount?.active_ongoing?.eff_balance;
+     
+       // remove mid-items in ethereum_srcData.valcount_history, gnosis_srcData.valcount_history - keep only day-close marks
 
         var aggregaredData = {
             ethereum: {
@@ -433,13 +442,13 @@ exports.CacheData = function(cb){
                 indicators: {
                     aprLastDay: new EthStoreDataModel().GetApr(ethereum_arrData.ethStore.apr[ethereum_arrData.ethStore.apr.length - 1]),
                     validators: {
-                        count: ethereum_srcData.valcount.stateCount.active_ongoing.validators,
-                        increments: CalculateTimeChange(ethereum_srcData.valcount_history, "stateCount", "active_ongoing.validators")
+                        count: ethereum_srcData.valcount?.stateCount?.active_ongoing?.validators,
+                        increments: CalculateTimeChange(ethereum_srcData.valcount_history, "active_ongoing.validators")
                     },
                     stakedTokens: {
                         value: stakedEth,
                         supplyShare: numeral(ethereum_arrData.beaconData.stakedTokens[ethereum_arrData.beaconData.stakedTokens.length - 1] / ethereum_arrData.chainData.totalSupply[ethereum_arrData.chainData.totalSupply.length - 1]).format('0.00%'),
-                        increments: CalculateTimeChange(ethereum_srcData.valcount_history, "stateCount", "active_ongoing.eff_balance")
+                        increments: CalculateTimeChange(ethereum_srcData.valcount_history, "active_ongoing.staked")
                     },
                     tvl: {
                         value: stakedEth * assetPrices.eth_usd,
@@ -461,12 +470,12 @@ exports.CacheData = function(cb){
                 indicators: {
                     validators: {
                         value: gnosis_srcData.valcount.stateCount.active_ongoing.validators,
-                        increments: CalculateTimeChange(gnosis_srcData.valcount_history, "stateCount", "active_ongoing.validators")//CalculateTimeChange(gnosis_arrData.beaconData.validators)
+                        increments: CalculateTimeChange(gnosis_srcData.valcount_history, "active_ongoing.validators")//CalculateTimeChange(gnosis_arrData.beaconData.validators)
                     },
                     stakedTokens: {
                         value: stakedGno,
                         supplyShare: gnosis_arrData.beaconData.stakedTokens[gnosis_arrData.beaconData.stakedTokens.length - 1] / gnosis_srcData.circulationData.generalHealthOverview.outstanding_tokens,
-                        increments: CalculateTimeChange(gnosis_srcData.valcount_history, "stateCount", "active_ongoing.eff_balance")//CalculateTimeChange(gnosis_arrData.beaconData.stakedTokens)
+                        increments: CalculateTimeChange(gnosis_srcData.valcount_history, "active_ongoing.staked")//CalculateTimeChange(gnosis_arrData.beaconData.stakedTokens)
                     },
                     tvl: {
                         value: stakedGno * gnosis_srcData.valuationData?.gnoPrice/*,

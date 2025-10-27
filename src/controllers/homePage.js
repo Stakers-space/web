@@ -114,10 +114,10 @@ HomePagePresenter.prototype.CacheIndexData = function(cb){
         }
 
         const {eth_usd, gno_usd} = cache_assetPrice.Get();
-        const eth_valcount = ethereumData.valcount_history[ethereumData.valcount_history.length - 1];
-        const stakedEth = eth_valcount.stateCount.active_ongoing.balance;
-        const gno_valcount = gnosisData.valcount_history[gnosisData.valcount_history.length - 1];
-        const stakedGno = gno_valcount.stateCount.active_ongoing.balance;
+        const eth_valcount = ethereumData.valcount.stateCount;// ethereumData.valcount_history[ethereumData.valcount_history.length - 1]
+        const stakedEth = eth_valcount.active_ongoing.eff_balance;
+        const gno_valcount = gnosisData.valcount.stateCount;//gnosisData.valcount_history[gnosisData.valcount_history.length - 1];
+        const stakedGno = gno_valcount.active_ongoing.eff_balance;
 
         var aggregaredData = {
             ethereum: {

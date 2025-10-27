@@ -47,7 +47,7 @@ class UpdateCacheFiles{
             // save on disc
             console.log("Updating clients-datafile");
             await SaveJson({
-                outPath: 'data',
+                outPath: 'web/data',
                 filename: `clients.json`,
                 json: clientsDataFile,
                 atomic: true,

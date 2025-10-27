@@ -1,57 +1,33 @@
-const TZ = 'UTC';
-function dayKeyFromTs(ms, timeZone = TZ) {
-    const parts = new Intl.DateTimeFormat('en-CA', { // en-CA prints 2025-10-23
-        timeZone, year: 'numeric', month: '2-digit', day: '2-digit'
-    }).formatToParts(ms);
-    const get = (t) => parts.find(p => p.type === t).value;
-    return `${get('year')}-${get('month')}-${get('day')}`;
-}
-
-function labelFromTs(ms, locale = 'en-US', timeZone = TZ) {
+function labelFromTs(ms, locale = 'en-US', timeZone = 'UTC') {
     return new Intl.DateTimeFormat(locale, { timeZone, dateStyle: 'medium' }).format(ms);
 }
 
-exports.validatorsViewChartConfig = (tokenSymbol, data, opts = {}) => {
-    //console.log("validatorsViewChartConfig", data);
-    const byDay = new Map();
-    let prevDay = null;
-
-    for(const o of data){
-        const timeMs = o.time > 1e12 ? o.time : o.time * 1000;
-        const key = dayKeyFromTs(timeMs);
-        const s = o.stateCount?.active_ongoing;
-        if(!s) continue;
-        const prev = byDay.get(key);
-        if (!prev || timeMs >= prev.timeMs) {
-            byDay.set(key, {
-                timeMs,
-                wallets: s.wallets,
-                wallets_diff: (prevDay && prevDay.wallets) ? (s.wallets - prevDay.wallets) : null,
-                validators: s.validators,
-                validators_diff: (prevDay && prevDay.validators) ? (s.validators - prevDay.validators) : null,
-                staked: s.eff_balance,
-                staked_diff: (prevDay && prevDay.eff_balance) ? (s.eff_balance - prevDay.eff_balance) : null,
-            });
-            //console.log(s, prevDay, "→ ",byDay.get(key));
-            prevDay = s ?? null;
-        }
-    }
-
-    let days = Array.from(byDay.values()).sort((a, b) => a.timeMs - b.timeMs);
-
+exports.validatorsViewChartConfig = (tokenSymbol, days, opts = {}) => {
+    //console.log("validatorsViewChartConfig", days);
     // ---  LIMIT_DESC ---
     if (opts.LIMIT_DESC && opts.LIMIT_DESC > 0 && days.length > opts.LIMIT_DESC) {
         const startIndex = Math.max(0, days.length - opts.LIMIT_DESC);
         days = days.slice(startIndex);
     }
 
-    const labels = days.map(d => labelFromTs(d.timeMs));     // labels
-    const activeWallets = days.map(d => d.wallets);
-    const activeValidators = days.map(d => d.validators);
-    const stakedTokens = days.map(d => d.staked);
-    const walletsDiff      = days.map(d => d.wallets_diff);
-    const validatorsDiff   = days.map(d => d.validators_diff);
-    const stakedDiff       = days.map(d => d.staked_diff);
+    const labels =  []; //days.map(d => labelFromTs(d.timeMs));     // labels
+    const activeWallets = [];//days.active_ongoing.map(d => d.wallets);
+    const activeValidators = [];// days.active_ongoing.map(d => d.validators);
+    const stakedTokens = [];//days.active_ongoing.map(d => d.staked);
+    const walletsDiff      = [];// days.active_ongoing.map(d => d.wallets_diff);
+    const validatorsDiff   = [];// days.active_ongoing.map(d => d.validators_diff);
+    const stakedDiff       = [];// days.active_ongoing.map(d => d.staked_diff);
+
+    for (const o of days){
+        labels.push(labelFromTs(o.timeMs));
+        if(!o.active_ongoing) continue;
+        activeWallets.push(o.active_ongoing.wallets);
+        activeValidators.push(o.active_ongoing.validators);
+        stakedTokens.push(o.active_ongoing.staked);
+        walletsDiff.push(o.active_ongoing.wallets_diff);
+        validatorsDiff.push(o.active_ongoing.validators_diff);
+        stakedDiff.push(o.active_ongoing.staked_diff);
+    }
 
      const C = {
         wallets:   { bg: 'rgba(0, 0, 0, 1)', border: 'rgba(0, 0, 0, 1)' }, // sky-500

@@ -70,8 +70,8 @@
 						<div class="mb-4">
 							<h2 class="text-xl font-semibold">~ {{{formatNumber indicators.aprLastDay.value '0.00%'}}} ETH APY</h2>
 							<div class="dynamic-label px-1 py-1 bg-green-100 text-green-700 rounded px-2 py-1 w-[170px] h-[21px] overflow-hidden text-xs">
-								<span class="item visible">~ {{{indicators.aprLastDay.operator}}} Operator</span>
-								<span class="item hidden">~ {{{indicators.aprLastDay.delegator}}} Delegator</span>
+								<span class="item visible">~ {{{formatNumber indicators.aprLastDay.operator '0.00%'}}} Operator</span>
+								<span class="item hidden">~ {{{formatNumber  indicators.aprLastDay.delegator '0.00%'}}} Delegator</span>
 							</div>
 						</div>
 						<canvas id="ethstakingapr_chart" name="lazy-canvas" class="w-full h-40"></canvas>

@@ -1,6 +1,6 @@
-function GetTimeDifferences(dataArr, type, key){
+function GetTimeDifferences(dataArr, keyPath){
     let wDataArr = [];
-    if(type == "stateCount"){
+    if(keyPath){
         const keys = keyPath.split(".");
         for (const o of dataArr) {
             let value = o;
@@ -13,13 +13,14 @@ function GetTimeDifferences(dataArr, type, key){
     } else {
         wDataArr = dataArr;
     }
+   // console.log(keyPath, "wDataArr:", wDataArr);
+
     const lastValue = wDataArr[dataArr.length-1];
     return {
-        day:   lastValue - dataArr[dataArr.length-2],
-        week:  lastValue - dataArr[dataArr.length-7],
-        month: lastValue - dataArr[dataArr.length-30],
-        year:  lastValue - dataArr[dataArr.length-365]
+        day:   lastValue - wDataArr[dataArr.length-2],
+        week:  lastValue - wDataArr[dataArr.length-7],
+        month: lastValue - wDataArr[dataArr.length-30],
+        year:  lastValue - wDataArr[dataArr.length-365]
     }
-    
 }
 module.exports = GetTimeDifferences;
