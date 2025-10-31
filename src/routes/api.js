@@ -10,6 +10,7 @@ const cache = require('../middlewares/cache');
 const bodyParser = require('body-parser');
 const ProtonVPN = require('../controllers/proton-vpn-servers.js');
 const ReturnDataController = require('../controllers/returnFileDataModified.js');
+const { handleTelegramWebhook } = require('../controllers/telegram');
 
 /*router.use(bodyParser.urlencoded({
     extended: true
@@ -65,6 +66,7 @@ router.post('/validator-state', Controller.UpdateValidatorsState);
 
 router.use('/web/cache', require('./cache'));
 router.use('/alert', require('./alert')); // login to server alert
+router.post('/telegram', handleTelegramWebhook);
 
 //const azureCosmosDB = require('../services/azureCosmosDB');
 //const gnoDistributionToken = config.gnoDistributionToken;

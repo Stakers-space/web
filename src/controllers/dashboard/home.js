@@ -153,6 +153,11 @@ exports.Dashboard = (req,res,next) => {
     }
 };
 
+exports.Notifications = (req,res,next) => {
+    res.locals.hbs = "notifications";
+    next();
+};
+
 exports.GetDecryptedUserData = function(req,res,next){
     // Get decrypted 'data' for all instances assocaited with the user
 };

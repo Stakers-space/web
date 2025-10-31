@@ -5,6 +5,7 @@ const MailService = require('../services/customMailing');
 const cache = require('../middlewares/cache');
 const cache_systemClock = require('../middlewares/cache/system-clock-sync.js');
 const MailMessage = require('../models/emailMessage/validators_alert.js');
+const { sendTelegramMessage } = require('../services/telegramBot');
 
 let noIncominMessageTimer = {
 	gnosis: null,
@@ -101,12 +102,21 @@ exports.UpdateValidatorsState = (req,res) => {
 				for (const key in accounts){
 					if (accounts.hasOwnProperty(key)) {
 						const account = accounts[key];
+						const msg = MailMessage.OfflineAlert(account.instances);
 						let now = new Date().getTime();
 						if (now - cache.getLastReportSent(account.account_id) > 300000) {
-							const msg = MailMessage.OfflineAlert(account.instances);
 							console.log("Sending Email alert to ", account.email_alerts);
 							MailService.SendMail(null, account.email_alerts, msg.subject, msg.message);
 							cache.setLastReportSent(account.account_id, now);
+						}
+
+						try {
+							if(account.telegram_id){
+								console.log("Send Telegram Message", msg.message);
+								sendTelegramMessage(account.telegram_id, msg.message);
+							}
+						} catch(e){
+							console.log(e);
 						}
 					}
 				}

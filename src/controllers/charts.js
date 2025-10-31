@@ -132,7 +132,7 @@ exports.validators_overview = (req,res,next) => {
             res.locals.jsController = 'validators';
             
             res.locals.valcount = parsedData.valcount_history[parsedData.valcount_history.length - 1];
-            res.locals.valcount.time = new Date(res.locals.valcount.time * 1000);
+            //console.log("res.locals.valcount:", res.locals.valcount);
             const validatorsOverviewChart = validatorsViewChartConfig(res.locals.chainTokenUpr, parsedData.valcount_history);
             if(validatorsOverviewChart){
                  res.locals.charts['validators_overview'] = validatorsOverviewChart.overview;

@@ -33,6 +33,8 @@ router.use('/authentization', require('./authentization'));
 class DashboardRouter {
     constructor(){
         router.get('/', this.DashboardBtn, Controller.Dashboard, this.Render);
+
+        router.get('/notifications', this.DashboardBtn, Controller.Notifications, this.Render);
         
         // Server-related
         router.get('/server-node/define', this.Auth, Controller_Server.DefineServer, this.Render);

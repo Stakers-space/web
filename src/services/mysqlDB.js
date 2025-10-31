@@ -40,7 +40,7 @@ MySqlDBplatform.prototype.GetAccountContact = function(accountId, cb){
 MySqlDBplatform.prototype.GetAccountsForInstances = function(instanceIds_arr, cb){
     var MC = mySql.createConnection(mySqlCredentials);
     // option to add i.vi_pid yet
-    MC.query('SELECT i.id AS instance_id, i.instance, a.id AS account_id, a.email, a.email_subscriptions, a.email_alerts '+
+    MC.query('SELECT i.id AS instance_id, i.instance, a.id AS account_id, a.email, a.email_subscriptions, a.email_alerts, a.telegram_id '+
              'FROM stakersspace.instances i JOIN stakersspace.accounts a ON i.owner = a.id '+
              'WHERE i.id IN ('+MC.escape(instanceIds_arr)+')',
         function(err,rows) {

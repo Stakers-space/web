@@ -24,7 +24,8 @@
     "numeral": "^2.0.6",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "sanitize-html": "^2.13.0"
+    "sanitize-html": "^2.13.0",
+    "telegraf": "^4.16.3"
   },
   "engines": {
     "node": ">=22.17 <23",
