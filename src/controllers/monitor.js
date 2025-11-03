@@ -104,16 +104,17 @@ exports.UpdateValidatorsState = (req,res) => {
 						const account = accounts[key];
 						const msg = MailMessage.OfflineAlert(account.instances);
 						let now = new Date().getTime();
-						if (now - cache.getLastReportSent(account.account_id) > 300000) {
+						if (now - cache.getLastReportSent(account.account_id, "email") > 300000) {
 							console.log("Sending Email alert to ", account.email_alerts);
 							MailService.SendMail(null, account.email_alerts, msg.subject, msg.message);
-							cache.setLastReportSent(account.account_id, now);
+							cache.setLastReportSent(account.account_id, "email", now);
 						}
 
 						try {
-							if(account.telegram_id){
-								console.log("Send Telegram Message", msg.message);
-								sendTelegramMessage(account.telegram_id, msg.message);
+							if(account.telegram_id && now - cache.getLastReportSent(account.account_id, "telegram") > 60_000){
+								console.log("Send Telegram Message", account.instances);
+								sendTelegramMessage(account.telegram_id, formatTelegramMessage(account.instances));
+								cache.setLastReportSent(account.account_id, "telegram", now);
 							}
 						} catch(e){
 							console.log(e);
@@ -140,6 +141,25 @@ exports.UpdateValidatorsState = (req,res) => {
 
 	// completing
 	res.send("ok");
+
+
+	function escapeMarkdown(text) {
+		return text.replace(/([_*\[\]()~`>#+\-=|{}.!\\])/g, '\\$1');
+	}
+
+	function formatTelegramMessage(instances) {
+		let lines = ['*⚠️ Validators Offline Alert*', '━━━━━━━━━━━━━━━━━━━'];
+		
+		for (const [instance, info] of Object.entries(instances)) {
+			const [count, status] = info.split(' ');
+			lines.push(`🏷️ *${escapeMarkdown(instance)}*: ${escapeMarkdown(count)} ${escapeMarkdown(status)}`);
+		}
+
+		lines.push('━━━━━━━━━━━━━━━━━━━');
+		lines.push('_Check your dashboard for details._');
+		
+		return lines.join('\n');
+	}
 }
 
 exports.UpdateNodeState = (req,res) => {

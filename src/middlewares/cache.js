@@ -11,7 +11,10 @@ let offlineStates = {}; // chain is not needed as is based on instance id
     '2': { v: 5, o: [ [Object], [Object], [Object] ] }
  }
  */
-let lastReportSent = {};
+let lastReportSent = {
+    email: {},
+    telegram: {}
+};
 let pubkeysQueue = {
     gnosis: {},
     ethereum: {}
@@ -51,8 +54,8 @@ function getOfflineStatesAlertType(){
     return notifyState;
 }
 
-function getLastReportSent(accountId){
-    return (lastReportSent[accountId]) ? lastReportSent : 0;
+function getLastReportSent(accountId, channel){
+    return (lastReportSent[channel][accountId]) ? lastReportSent : 0;
 }
 /**
  * Set epoch number of last snapshot
@@ -69,7 +72,8 @@ function updateOfflineStates(data){
     //if(Object.keys(offlineStates).length > 0) console.log("cached offline states:", offlineStates); 
     
 }
-function setLastReportSent(accountId, timestamp){ lastReportSent[accountId] = timestamp; }
+function setLastReportSent(accountId, channel, timestamp){ 
+    lastReportSent[channel][accountId] = timestamp; }
 
 function updatePubkeystoQueue(chain, instanceId,pubkeys,indexes,password, activateMonitoring=false){
     console.log("updatePubkeystoQueue | instance:", instanceId, chain, "| activeMonitoring:", activateMonitoring);

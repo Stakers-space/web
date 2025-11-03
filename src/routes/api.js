@@ -41,11 +41,11 @@ router.use((req, res, next) => {
     const lenHeader = req.headers['content-length'];
     const len = lenHeader ? parseInt(lenHeader, 10) : 0;
 
-    console.log('[INCOMING]', {
+    /*console.log('[INCOMING]', {
         ip: req.ip, method: req.method, url: req.originalUrl,
         contentLength: lenHeader, contentType: req.headers['content-type'],
         ua: req.headers['user-agent']
-    });
+    });*/
 
     if (len && len > MAX_LEN) {
         console.warn('[REJECT length]', { ip: req.ip, url: req.originalUrl, len });

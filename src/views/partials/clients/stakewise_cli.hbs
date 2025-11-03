@@ -18,11 +18,12 @@
             </li>
             <li>
                 <h4>Download the binary file for your node</h4>
-                <pre><code>cd ~/downloads && curl -LO https://github.com/stakewise/v3-operator/releases/download/v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>/operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
+                <p>What's you Ubuntu version? <input type="text" value="24.04" class="interactive-element ubuntu_ver" data-class="ubuntu_ver"><br></p>
+                <pre><code>cd ~/downloads && curl -LO https://github.com/stakewise/v3-operator/releases/download/v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>/operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-ubuntu-<mark class="ubuntu_ver">24.04</mark>-amd64.tar.gz</code></pre>
             </li>
             <li>
                 <h4>Unpack the client and remove its packed file</h4>
-                <pre><code>tar xvf operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64.tar.gz && rm operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64.tar.gz</code></pre>
+                <pre><code>tar xvf operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-ubuntu-<mark class="ubuntu_ver">24.04</mark>-amd64.tar.gz && rm operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-ubuntu-<mark class="ubuntu_ver">24.04</mark>-amd64.tar.gz</code></pre>
             </li>
             {{#unless InstallationGuide}}
             <li>
@@ -48,7 +49,7 @@
             {{/unless}}
             <li>
                 <h4>Move the client to <code>/usr/local/bin</code></h4>
-                <pre><code>sudo cp ~/downloads/operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64/operator /usr/local/bin/stakewise-operator</code></pre>
+                <pre><code>sudo cp ~/downloads/operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-ubuntu-<mark class="ubuntu_ver">24.04</mark>-amd64/operator /usr/local/bin/stakewise-operator</code></pre>
             </li>
             {{#unless InstallationGuide}}
             <li>
@@ -86,7 +87,7 @@
             {{/unless}}
             <li>
                 <h4>Remove downloaded files</h4>
-                <pre><code>rm -r ~/downloads/operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-linux-amd64</code></pre>
+                <pre><code>rm -r ~/downloads/operator-v<mark class="stakewise_ver">{{serviceLayer.stakewise.latestVer}}</mark>-ubuntu-<mark class="ubuntu_ver">24.04</mark>-amd64</code></pre>
             </li>
         </ol>
     </li>

@@ -34,7 +34,11 @@ bot.on('text', (ctx) => {
 function sendTelegramMessage(acc_telegram_id, text) {
     // get chat id from DB
   if (acc_telegram_id) {
-    bot.telegram.sendMessage(acc_telegram_id, text);
+    try {
+      bot.telegram.sendMessage(acc_telegram_id, text, { parse_mode: 'MarkdownV2' });
+    } catch(err){
+      console.error('❌ TelegramBOT | Failed to send message:', err.message);
+    }
   } else {
     console.log('❌ TelegramBOT | Account telegram connection not found:');
   }

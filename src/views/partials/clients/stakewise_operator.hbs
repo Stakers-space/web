@@ -28,7 +28,7 @@
 				<button class="tab" data-tabpanel="2">Generate manually</button>
 			</nav>
 			<div class="tabpanel selected">
-				<p>Operator Service has in-built functionality to generate all of the above. If needed, you can check also original guide at <a href="https://docs.stakewise.io/for-operators/operator-service" target="_blank" rel="noopener noreferrer">https://docs.stakewise.io/for-operators/operator-service</a>.</p>
+				<p class="mt-3">Operator Service has in-built functionality to generate all of the above. If needed, you can check also original guide at <a href="https://docs.stakewise.io/for-operators/operator-service" target="_blank" rel="noopener noreferrer">https://docs.stakewise.io/for-operators/operator-service</a>.</p>
 				<ul class="list-disc my-4 pl-6">
 					<li><h4>Preparation for offline generation</h4>
 						<p>For security reasons, it is recommended to perform configuration and generation strictly offline.</p>
@@ -120,6 +120,10 @@ Done. The wallet and password saved to ./<mark class="stakewise_wlt_address">0xX
 		</div>
 	</li>
 	<li>
+		<h3>Set <code>Validators manager</code> role to the operation Wallet address</h3>
+		<p>Open Your <a href="#operator">StakeWise Vault</a> in browser, go to settings → tab Roles, and attach the created operator wallet address to <code>Validators manager</code>.</p>
+	</li>
+	<li>
 		<h3>Create a <code>StakeWise operator</code> service</h3>
 		<p>Create a node operator system service for running StakeWise validators and register keystores into it.</p>
 		<ul class="list-disc my-4 pl-6">
@@ -176,32 +180,32 @@ Done. The wallet and password saved to ./<mark class="stakewise_wlt_address">0xX
 <h4>Monitor the service</h4>
 <pre><code>journalctl -f -u <mark class="stakewise_service">{{servicePrefix}}stakewise-operator</mark></code></pre>
 <p>Output:</p>
-<pre><code>2024-07-27 17:20:45 INFO     Starting operator service, version v<span>{{serviceLayer.stakewise.latestVer}}</span>
+<pre><code>2025-11-03 16:45:29 INFO     Starting operator service, version v<span>{{serviceLayer.stakewise.latestVer}}</span>
 INFO     Checking connection to database...
 INFO     Connected to database /var/lib/{{servicePrefix}}stakewise/0xXXXX.../operator.db.
 INFO     Checking connection to consensus nodes...
 INFO     Connected to consensus node at http://127.0.0.1:9596. Finalized epoch: 1038841
 INFO     Checking connection to execution nodes...
 INFO     Connected to execution node at http://127.0.0.1:8545. Current block number: 35182233
+INFO     Checking consensus nodes network...
+INFO     Checking execution nodes network...
+INFO     Checking oracles config...
 INFO     Checking vault address <mark class="stakewise_wlt_address">0xXXXX...</mark>
 INFO     Vault withdrawable assets: 0.00 GNO
-INFO     Checking hot wallet balance <mark class="stakewise_wlt_address">0xXXXX...</mark> ...
+INFO     Checking wallet balance <mark class="stakewise_wlt_address">0xXXXX...</mark> ...
 INFO     Checking connection to ipfs nodes...
 
 INFO     Connected to ipfs nodes at https://{{servicePrefix}}stakewise-v3.infura-ipfs.io, http://cloudflare-ipfs.com, https://gateway.pinata.cloud, https://ipfs.io.
 INFO     Checking connection to oracles set...
 INFO     Connected to oracles at https://gno-stakewise-v3-oracle.pn.prod.fcstech.de, https://gnosis-oracle.stakewise.io, https://stakewise-oracle-gnosis.chorus.one, https://stakewise-oracle-gno-mainnet-1.gateway.fm, https://sw-oracle-gno.axol.io, https://stakewise-oracle-gc.gnosischain.com, https://gnosis-oracle.stakewise.dsrvlabs.net, https://gnosis-oracle-b.stakewise.io, https://stakewise-oracle-v3-gnosis.bitfly.at, https://stakewise-oracle-gc-2.gnosischain.com, https://stakewise-oracle-gnosis.senseinode.com
-INFO     Checking deposit data file...
-INFO     Found deposit data file /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/deposit_data.json
 INFO     Checking keystores dir...
 INFO     Found keystores dir
 INFO     Loading keys from /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/keystores...
-INFO     Loaded 8 keys
+INFO     Loaded XY keys
 INFO     Loaded deposit data file /srv/{{servicePrefix}}stakewise/<mark class="stakewise_wlt_address">0xXXXX...</mark>/deposit_data.json
 INFO     Syncing network validator events...
 INFO     Updating oracles cache...
-INFO     Started operator service
-</code></pre>
+<mark>INFO     Started operator service</mark></code></pre>
 	</li>
 	<li><h4>Enable auto launch on OS startup</h4>
 		<div class="tabselector mt-6 bg-gray-100 p-10 pt-5 rounded-xl shadow-md" data-client="stakewise">
