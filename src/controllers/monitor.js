@@ -104,14 +104,19 @@ exports.UpdateValidatorsState = (req,res) => {
 						const account = accounts[key];
 						const msg = MailMessage.OfflineAlert(account.instances);
 						let now = new Date().getTime();
-						if (now - cache.getLastReportSent(account.account_id, "email") > 300000) {
+						const lastEmailReportTimestamp = cache.getLastReportSent(account.account_id, "email");
+						const lastTelegramReportTimestamp = cache.getLastReportSent(account.account_id, "telegram");
+
+						console.log("Email alert check | lastCheck: email:", lastEmailReportTimestamp, "telegram:", lastTelegramReportTimestamp, "now:", now);
+
+						if (now - lastEmailReportTimestamp > 300_000) {
 							console.log("Sending Email alert to ", account.email_alerts);
 							MailService.SendMail(null, account.email_alerts, msg.subject, msg.message);
 							cache.setLastReportSent(account.account_id, "email", now);
 						}
 
 						try {
-							if(account.telegram_id && now - cache.getLastReportSent(account.account_id, "telegram") > 60_000){
+							if(account.telegram_id && now - lastTelegramReportTimestamp > 60_000){
 								console.log("Send Telegram Message", account.instances);
 								sendTelegramMessage(account.telegram_id, formatTelegramMessage(account.instances));
 								cache.setLastReportSent(account.account_id, "telegram", now);
@@ -125,7 +130,6 @@ exports.UpdateValidatorsState = (req,res) => {
 		});
 
 		// get instances names
-
 	}
 
 	// no incomming message alert
@@ -144,19 +148,21 @@ exports.UpdateValidatorsState = (req,res) => {
 
 
 	function escapeMarkdown(text) {
+		if (!text) return '';
+		text = String(text);
 		return text.replace(/([_*\[\]()~`>#+\-=|{}.!\\])/g, '\\$1');
 	}
 
 	function formatTelegramMessage(instances) {
-		let lines = ['*⚠️ Validators Offline Alert*', '━━━━━━━━━━━━━━━━━━━'];
+		let lines = ['*⚠️ Validators Offline Alert*', '━━━━━━━━━━━━━━'];
 		
 		for (const [instance, info] of Object.entries(instances)) {
 			const [count, status] = info.split(' ');
 			lines.push(`🏷️ *${escapeMarkdown(instance)}*: ${escapeMarkdown(count)} ${escapeMarkdown(status)}`);
 		}
 
-		lines.push('━━━━━━━━━━━━━━━━━━━');
-		lines.push('_Check your dashboard for details._');
+		lines.push('━━━━━━━━━━━━━━');
+		lines.push('_Check your dashboard for details\\._');
 		
 		return lines.join('\n');
 	}

@@ -14,11 +14,12 @@
                 <h4 class="text-lg font-semibold">Generate credentials for validator instance number <code class="vi_pid">{{instance.vi_pid}}</code></h4>
                 <div class="flex flex-col sm:flex-row sm:items-center gap-2">
                     <label for="vi_pid" class="text-sm font-medium">Validator Instance Numer</label>: 
-                    <input type="number" name="vi_pid" min="1" value="{{instance.vi_pid}}" required class="interactive-element vi_pid sm:flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" data-class="vi_pid" onchange="OnPidChanged(this.value)">
-                    <p class="text-sm text-neutral-600">
-                        <i>NOTE: It's required to have unique Instance Number accross all defined instances (it helps in prevention before slashing on moving validator instances between various controlled servers)</i>
-                    </p>
+                    <input type="number" name="vi_pid" min="1" value="{{instance.vi_pid}}" required 
+                        class="interactive-element vi_pid w-full sm:flex-1 min-w-0 rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" data-class="vi_pid" onchange="OnPidChanged(this.value)">
                 </div>
+                <p class="text-sm text-neutral-600">
+                    <i>NOTE: It's required to have unique Instance Number accross all defined instances (it helps in prevention before slashing on moving validator instances between various controlled servers)</i>
+                </p>
             </div>
             <div id="name" class="grid items-center gap-3 grid-cols-[max-content_1fr]">
                 <label for="name" class="text-sm font-medium">Instance name</label>
@@ -76,11 +77,9 @@
                 <p class="login-error text-red-600">{{{failureCallback}}}</p>
             {{/if}}
             <div class="mt-6 text-center space-y-3">
-                {{#if editingView}} 
                 <label class="text-sm font-medium">Encryption password</label>
                 <input type="text" placeholder="Encryption password" class="encryption-password  w-full max-w-xs rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/30" id="encryption_psw_matadata">
                 <input type="submit" class="submit inline-flex items-center rounded-lg bg-black px-5 py-2 text-white hover:opacity-90 cursor-pointer" id="submitForm" value="{{forms.metadata.submitText}}">
-                {{/if}}
             </div>
         </form>
         <script>

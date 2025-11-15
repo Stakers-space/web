@@ -55,7 +55,8 @@ function getOfflineStatesAlertType(){
 }
 
 function getLastReportSent(accountId, channel){
-    return (lastReportSent[channel][accountId]) ? lastReportSent : 0;
+    const value = lastReportSent[channel][accountId];
+    return (value) ? value : 0;
 }
 /**
  * Set epoch number of last snapshot

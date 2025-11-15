@@ -8,17 +8,14 @@
     </li>
     <li>
         <h4>Download Mev-boost version <code class="mevboostVer">{{mevClients.mevboost.latestVer}}</code> from GitHub</h4>
-<pre><code>cd ~/downloads
-curl -LO https://github.com/flashbots/mev-boost/releases/download/v<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>/mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
+<pre><code>cd ~/downloads && curl -LO https://github.com/flashbots/mev-boost/releases/download/v<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>/mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
         <p>Get hash of the downloaded file</p>
         <pre><code>sha256sum mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
-        <p>And compare it to content of https://github.com/flashbots/mev-boost/releases/download/v<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>/checksums.txt.</p>
+        <p>And compare it to content of <a href="https://github.com/flashbots/mev-boost/releases/download/v{{mevClients.mevboost.latestVer}}/checksums.txt" target="_blank" rel="nofollow noopener">https://github.com/flashbots/mev-boost/releases/download/v<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>/checksums.txt</a>.</p>
     </li>
     <li>
         <h4>Unpack mevboost</h4>
-<pre><code>tar xvf mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
-        <p>Remove downloaded + useless unpacked files</p>
-        <pre><code>rm LICENSE README.md mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
+        <pre><code>tar xvf mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
     </li>
     <li>
     {{#if InstallationGuide}}
@@ -217,6 +214,9 @@ Extend its <code>ExecStart</code> for following flag:
         </div>
     </div>
 </li>
-
 {{/if}}
+<li>
+    <h4>Remove downloaded and unpacked files</h4>
+    <pre><code>rm LICENSE README.md mev-boost mev-boost_<mark class="mevboostVer">{{mevClients.mevboost.latestVer}}</mark>_linux_amd64.tar.gz</code></pre>
+</li>
 </ul>

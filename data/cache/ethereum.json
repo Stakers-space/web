@@ -884,31 +884,31 @@
   ],
   "indicators": {
     "aprLastDay": {
-      "value": 0.029826794632030296,
-      "operator": 0.029826794632030296,
-      "delegator": 0.026844115168827266
+      "value": 0.0284033195061401,
+      "operator": 0.0284033195061401,
+      "delegator": 0.02556298755552609
     },
     "validators": {
-      "count": 949315,
+      "count": 955768,
       "increments": {
-        "day": -104,
-        "week": -10020,
-        "month": -88940,
-        "year": -128303
+        "day": 168,
+        "week": 1336,
+        "month": -13124,
+        "year": -123428
       }
     },
     "stakedTokens": {
-      "value": 33233820,
+      "value": 33623498,
       "supplyShare": "0.00%",
       "increments": {
-        "day": 35823,
-        "week": -10092,
-        "month": -2473388,
-        "year": -1244709
+        "day": 24239,
+        "week": 132408,
+        "month": 260488,
+        "year": -895278
       }
     },
     "tvl": {
-      "value": 128024650756.79999
+      "value": 105090242999
     },
     "supply": {
       "value": 122462855.53543
@@ -2216,20 +2216,6 @@
   },
   "ethStore": {
     "day": [
-      1764,
-      1765,
-      1766,
-      1767,
-      1768,
-      1769,
-      1770,
-      1771,
-      1772,
-      1773,
-      1774,
-      1775,
-      1776,
-      1777,
       1778,
       1779,
       1780,
@@ -2245,23 +2231,23 @@
       1790,
       1791,
       1792,
-      1793
+      1793,
+      1794,
+      1795,
+      1796,
+      1797,
+      1798,
+      1799,
+      1800,
+      1801,
+      1802,
+      1803,
+      1804,
+      1805,
+      1806,
+      1807
     ],
     "apr": [
-      2.8701297827100802,
-      2.8840921936994097,
-      2.85866736340191,
-      2.8655554153261797,
-      2.81044413893029,
-      2.8184869033986,
-      2.87460878052381,
-      2.8867852451741403,
-      2.86179103638931,
-      2.86142901745539,
-      3.8869061043301802,
-      2.90387159555898,
-      2.9324360716073703,
-      2.90880738470997,
       2.96731473353629,
       3.08208156021548,
       2.6522086978424197,
@@ -2277,23 +2263,23 @@
       2.8734355108908103,
       2.87749519397565,
       2.85280961780433,
-      2.98267946320303
+      2.98267946320303,
+      2.80544634014807,
+      2.84363683161779,
+      2.81295465758236,
+      2.8652625066676403,
+      3.02501355687214,
+      3.1155083275891102,
+      2.8884756304419,
+      3.04670907566733,
+      2.84027575269006,
+      2.82414056599151,
+      2.8596226848243402,
+      2.92625397955451,
+      2.86528150121175,
+      2.8403319506140097
     ],
     "cl_apr": [
-      2.72111491600469,
-      2.72613097782543,
-      2.72530778848841,
-      2.7344004546387897,
-      2.7029541290545698,
-      2.71154282772242,
-      2.71615861438154,
-      2.72547900198364,
-      2.71855680175863,
-      2.72837738752279,
-      2.71826713059168,
-      2.71559303953465,
-      2.71670954730521,
-      2.71445713790005,
       2.77537146063734,
       2.93043721193111,
       2.41810090816996,
@@ -2309,23 +2295,23 @@
       2.72476455177317,
       2.7183772753126103,
       2.7073743023720303,
-      2.77879439443665
+      2.77879439443665,
+      2.65114327258289,
+      2.71634371653318,
+      2.72092332918689,
+      2.72837114292549,
+      2.7230781804013797,
+      2.72217298257207,
+      2.72224458813289,
+      2.78874776770301,
+      2.6506110853446,
+      2.72029912019634,
+      2.72730387813148,
+      2.7160744490860402,
+      2.72705928454053,
+      2.6799561869866
     ],
     "el_apr": [
-      0.14901486670539,
-      0.15796121587398,
-      0.13335957491349001,
-      0.13115496068739,
-      0.10749000987572001,
-      0.10694407567618,
-      0.15845016614226998,
-      0.1613062431905,
-      0.14323423463068,
-      0.1330516299326,
-      1.1686389737385001,
-      0.18827855602433,
-      0.21572652430217001,
-      0.19435024680991,
       0.19194327289895,
       0.15164434828437,
       0.23410778967247,
@@ -2341,23 +2327,23 @@
       0.14867095911764,
       0.15911791866303002,
       0.14543531543229998,
-      0.20388506876638002
+      0.20388506876638002,
+      0.15430306756519,
+      0.12729311508461,
+      0.09203132839547,
+      0.13689136374214,
+      0.30193537647076,
+      0.39333534501704,
+      0.16623104230901,
+      0.25796130796432004,
+      0.18966466734546,
+      0.10384144579517,
+      0.13231880669286,
+      0.21017953046846,
+      0.13822221667122,
+      0.16037576362741
     ],
     "avgapr31d": [
-      2.8601083818057336,
-      2.8698569360731625,
-      2.8629636298622057,
-      2.862466971243763,
-      2.860642293119682,
-      2.8587230862831046,
-      2.858827168862503,
-      2.86119629570991,
-      2.8622340863036495,
-      2.8621333930683277,
-      2.896548615030291,
-      2.898844486937586,
-      2.9007814730507766,
-      2.9028275782688087,
       2.907271223130386,
       2.9149306583061536,
       2.908063749971537,
@@ -2373,7 +2359,21 @@
       2.8980706991197773,
       2.898495870845548,
       2.8997655597158825,
-      2.903664726087602
+      2.903664726087602,
+      2.8995507755931453,
+      2.898696164267587,
+      2.896401405038005,
+      2.8966141515949637,
+      2.9017579626125753,
+      2.9115987428918926,
+      2.9138564437642565,
+      2.919408066188241,
+      2.9179077599790775,
+      2.9166932286759226,
+      2.916634959881373,
+      2.8856461816628034,
+      2.8844013399096666,
+      2.8814302392324618
     ],
     "day_start": [
       null,
@@ -2440,20 +2440,6 @@
       null
     ],
     "total_rewards_wei": [
-      2.8034382675736417e+21,
-      2.81707671634059e+21,
-      2.791653699872502e+21,
-      2.797409131689924e+21,
-      2.744296216702447e+21,
-      2.7531373888375766e+21,
-      2.807907539726609e+21,
-      2.8197736270128517e+21,
-      2.794346383779768e+21,
-      2.793577793454385e+21,
-      3.795044030366225e+21,
-      2.835480248205383e+21,
-      2.864377202991794e+21,
-      2.841379316891916e+21,
       2.897498695633823e+21,
       3.008540392089837e+21,
       2.589336746389908e+21,
@@ -2469,23 +2455,23 @@
       2.806525085205507e+21,
       2.8103100171479773e+21,
       2.78611343003343e+21,
-      2.913129997218028e+21
+      2.913129997218028e+21,
+      2.739821800528592e+21,
+      2.777200983274631e+21,
+      2.747666211181628e+21,
+      2.798877278900826e+21,
+      2.9548557020424045e+21,
+      3.0430870988466076e+21,
+      2.8211606950784375e+21,
+      2.975671589501661e+21,
+      2.7741446396430023e+21,
+      2.758532221452674e+21,
+      2.793066886307819e+21,
+      2.858034260614822e+21,
+      2.798421452645217e+21,
+      2.7720184654226255e+21
     ],
     "cl_trprc": [
-      94.80807914669681,
-      94.52301780716087,
-      95.33490406680973,
-      95.4230527182996,
-      96.175337257668,
-      96.2056209824064,
-      94.48793981233867,
-      94.41225344143085,
-      94.99494432649433,
-      95.35016842560296,
-      69.93395409174957,
-      93.51629196303746,
-      92.64343641142318,
-      93.3185590826153,
       93.53141509629475,
       95.07980741840694,
       91.17310074946562,
@@ -2501,23 +2487,23 @@
       94.82602067963064,
       94.47026292185751,
       94.90203220976818,
-      93.16436542103547
+      93.16436542103547,
+      94.49987457051002,
+      95.52358044918869,
+      96.7283038797871,
+      95.22237967992127,
+      90.01870997289146,
+      87.37492236711763,
+      94.24502528056368,
+      91.53311650184986,
+      93.32231501938408,
+      96.32307799952893,
+      95.37285784606972,
+      92.81745426278866,
+      95.17596380625204,
+      94.3536260403387
     ],
     "el_trprc": [
-      5.191920853303182,
-      5.4769821928391265,
-      4.665095933189919,
-      4.576947281700393,
-      3.824662742331993,
-      3.7943790175935974,
-      5.512060187661337,
-      5.587746558569149,
-      5.005055673505674,
-      4.64983157439705,
-      30.066045908250423,
-      6.4837080369625415,
-      7.356563588577153,
-      6.681440917384367,
       6.4685849037052465,
       4.920192581593071,
       8.826899250534751,
@@ -2533,7 +2519,21 @@
       5.173979320369354,
       5.529737078142154,
       5.097967790231811,
-      6.835634578964532
+      6.835634578964532,
+      5.500125429490338,
+      4.4764195508113085,
+      3.2716961202128956,
+      4.777620320078368,
+      9.981290027108532,
+      12.625077632882359,
+      5.754974719436313,
+      8.466883498150146,
+      6.677684980615922,
+      3.6769220004710697,
+      4.627142153930284,
+      7.18254573721101,
+      4.82403619374797,
+      5.646373959661324
     ],
     "validators_count": []
   },
@@ -33527,7 +33527,7 @@
       }
     },
     {
-      "timeMs": 1761926455000,
+      "timeMs": 1761951653000,
       "pending_initialized": {
         "wallets": 150,
         "validators": 1017,
@@ -33539,32 +33539,565 @@
         "staked": 1056
       },
       "active_exiting": {
-        "wallets": 2430,
-        "validators": 49421,
-        "staked": 2470701
+        "wallets": 2399,
+        "validators": 49231,
+        "staked": 2457145
       },
       "active_ongoing": {
-        "wallets": 46983,
-        "validators": 949315,
-        "staked": 33233820,
-        "wallets_diff": 0,
-        "validators_diff": -3,
-        "staked_diff": 2024
+        "wallets": 46986,
+        "validators": 949202,
+        "staked": 33251382,
+        "wallets_diff": 1,
+        "validators_diff": -85,
+        "staked_diff": 396
       },
       "exited_unslashed": {
-        "wallets": 315,
-        "validators": 1852,
-        "staked": 68773
+        "wallets": 282,
+        "validators": 1500,
+        "staked": 65009
       },
       "withdrawal_done": {
-        "wallets": 101082,
-        "validators": 1106530,
+        "wallets": 101098,
+        "validators": 1106901,
         "staked": 0
       },
       "withdrawal_possible": {
-        "wallets": 458,
-        "validators": 6028,
-        "staked": 199327
+        "wallets": 494,
+        "validators": 6328,
+        "staked": 208927
+      }
+    },
+    {
+      "timeMs": 1762038059000,
+      "pending_initialized": {
+        "wallets": 150,
+        "validators": 1024,
+        "staked": 1262
+      },
+      "pending_queued": {
+        "wallets": 14,
+        "validators": 34,
+        "staked": 1526
+      },
+      "active_exiting": {
+        "wallets": 2343,
+        "validators": 48346,
+        "staked": 2428857
+      },
+      "active_ongoing": {
+        "wallets": 46975,
+        "validators": 948854,
+        "staked": 33280271,
+        "wallets_diff": 0,
+        "validators_diff": 80,
+        "staked_diff": 2726
+      },
+      "exited_unslashed": {
+        "wallets": 114,
+        "validators": 2039,
+        "staked": 65288
+      },
+      "withdrawal_done": {
+        "wallets": 101132,
+        "validators": 1107630,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 684,
+        "validators": 6851,
+        "staked": 242343
+      }
+    },
+    {
+      "timeMs": 1762124457000,
+      "pending_initialized": {
+        "wallets": 149,
+        "validators": 1023,
+        "staked": 1261
+      },
+      "pending_queued": {
+        "wallets": 2,
+        "validators": 48,
+        "staked": 1536
+      },
+      "active_exiting": {
+        "wallets": 2260,
+        "validators": 46970,
+        "staked": 2380146
+      },
+      "active_ongoing": {
+        "wallets": 46997,
+        "validators": 950241,
+        "staked": 33331902,
+        "wallets_diff": 1,
+        "validators_diff": 79,
+        "staked_diff": 2538
+      },
+      "exited_unslashed": {
+        "wallets": 140,
+        "validators": 1804,
+        "staked": 62583
+      },
+      "withdrawal_done": {
+        "wallets": 101306,
+        "validators": 1108805,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 569,
+        "validators": 7459,
+        "staked": 248213
+      }
+    },
+    {
+      "timeMs": 1762210859000,
+      "pending_initialized": {
+        "wallets": 151,
+        "validators": 1024,
+        "staked": 1262
+      },
+      "pending_queued": {
+        "wallets": 1,
+        "validators": 48,
+        "staked": 1536
+      },
+      "active_exiting": {
+        "wallets": 2146,
+        "validators": 45593,
+        "staked": 2334197
+      },
+      "active_ongoing": {
+        "wallets": 46997,
+        "validators": 951307,
+        "staked": 33376229,
+        "wallets_diff": 2,
+        "validators_diff": 15,
+        "staked_diff": 489
+      },
+      "exited_unslashed": {
+        "wallets": 220,
+        "validators": 1803,
+        "staked": 64489
+      },
+      "withdrawal_done": {
+        "wallets": 101341,
+        "validators": 1109102,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 611,
+        "validators": 8914,
+        "staked": 294628
+      }
+    },
+    {
+      "timeMs": 1762297260000,
+      "pending_initialized": {
+        "wallets": 153,
+        "validators": 1026,
+        "staked": 1264
+      },
+      "pending_queued": {
+        "wallets": 3,
+        "validators": 48,
+        "staked": 1536
+      },
+      "active_exiting": {
+        "wallets": 2085,
+        "validators": 45003,
+        "staked": 2315172
+      },
+      "active_ongoing": {
+        "wallets": 47001,
+        "validators": 951735,
+        "staked": 33393384,
+        "wallets_diff": 8,
+        "validators_diff": 76,
+        "staked_diff": 2438
+      },
+      "exited_unslashed": {
+        "wallets": 165,
+        "validators": 2067,
+        "staked": 66352
+      },
+      "withdrawal_done": {
+        "wallets": 101404,
+        "validators": 1110279,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 723,
+        "validators": 9291,
+        "staked": 313398
+      }
+    },
+    {
+      "timeMs": 1762344058000,
+      "pending_initialized": {
+        "wallets": 153,
+        "validators": 1027,
+        "staked": 1265
+      },
+      "pending_queued": {
+        "wallets": 1,
+        "validators": 48,
+        "staked": 1536
+      },
+      "active_exiting": {
+        "wallets": 2063,
+        "validators": 44318,
+        "staked": 2294619
+      },
+      "active_ongoing": {
+        "wallets": 47053,
+        "validators": 952412,
+        "staked": 33414393,
+        "wallets_diff": 0,
+        "validators_diff": 59,
+        "staked_diff": 562
+      },
+      "exited_unslashed": {
+        "wallets": 154,
+        "validators": 2057,
+        "staked": 66032
+      },
+      "withdrawal_done": {
+        "wallets": 101471,
+        "validators": 1112282,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 692,
+        "validators": 8266,
+        "staked": 280566
+      }
+    },
+    {
+      "timeMs": 1762556458000,
+      "pending_initialized": {
+        "wallets": 154,
+        "validators": 1021,
+        "staked": 1011
+      },
+      "pending_queued": {
+        "wallets": 1,
+        "validators": 1,
+        "staked": 1800
+      },
+      "active_exiting": {
+        "wallets": 1934,
+        "validators": 42373,
+        "staked": 2229178
+      },
+      "active_ongoing": {
+        "wallets": 47174,
+        "validators": 953174,
+        "staked": 33478071,
+        "wallets_diff": 0,
+        "validators_diff": 0,
+        "staked_diff": 1375
+      },
+      "exited_unslashed": {
+        "wallets": 117,
+        "validators": 1962,
+        "staked": 67033
+      },
+      "withdrawal_done": {
+        "wallets": 101609,
+        "validators": 1119037,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 658,
+        "validators": 6011,
+        "staked": 209205
+      }
+    },
+    {
+      "timeMs": 1762642858000,
+      "pending_initialized": {
+        "wallets": 155,
+        "validators": 1029,
+        "staked": 1267
+      },
+      "pending_queued": {
+        "wallets": 1,
+        "validators": 48,
+        "staked": 1536
+      },
+      "active_exiting": {
+        "wallets": 1975,
+        "validators": 42506,
+        "staked": 2217832
+      },
+      "active_ongoing": {
+        "wallets": 47162,
+        "validators": 954432,
+        "staked": 33491090,
+        "wallets_diff": -4,
+        "validators_diff": 76,
+        "staked_diff": 2438
+      },
+      "exited_unslashed": {
+        "wallets": 26,
+        "validators": 199,
+        "staked": 66656
+      },
+      "withdrawal_done": {
+        "wallets": 101676,
+        "validators": 1119959,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 637,
+        "validators": 6891,
+        "staked": 235457
+      }
+    },
+    {
+      "timeMs": 1762729257000,
+      "pending_initialized": {
+        "wallets": 155,
+        "validators": 1022,
+        "staked": 1012
+      },
+      "pending_queued": {
+        "wallets": 1,
+        "validators": 1,
+        "staked": 1600
+      },
+      "active_exiting": {
+        "wallets": 2091,
+        "validators": 43775,
+        "staked": 2204318
+      },
+      "active_ongoing": {
+        "wallets": 47049,
+        "validators": 954036,
+        "staked": 33503780,
+        "wallets_diff": 1,
+        "validators_diff": 1,
+        "staked_diff": 1609
+      },
+      "exited_unslashed": {
+        "wallets": 4,
+        "validators": 90,
+        "staked": 66339
+      },
+      "withdrawal_done": {
+        "wallets": 101712,
+        "validators": 1121439,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 576,
+        "validators": 5604,
+        "staked": 234431
+      }
+    },
+    {
+      "timeMs": 1762815658000,
+      "pending_initialized": {
+        "wallets": 158,
+        "validators": 1029,
+        "staked": 1267
+      },
+      "pending_queued": {
+        "wallets": 9,
+        "validators": 48,
+        "staked": 1536
+      },
+      "active_exiting": {
+        "wallets": 2116,
+        "validators": 43975,
+        "staked": 2153730
+      },
+      "active_ongoing": {
+        "wallets": 47066,
+        "validators": 955157,
+        "staked": 33552994,
+        "wallets_diff": -6,
+        "validators_diff": 54,
+        "staked_diff": 1734
+      },
+      "exited_unslashed": {
+        "wallets": 4,
+        "validators": 151,
+        "staked": 69288
+      },
+      "withdrawal_done": {
+        "wallets": 101754,
+        "validators": 1122308,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 503,
+        "validators": 4774,
+        "staked": 261041
+      }
+    },
+    {
+      "timeMs": 1762902059000,
+      "pending_initialized": {
+        "wallets": 154,
+        "validators": 1028,
+        "staked": 1266
+      },
+      "pending_queued": {
+        "wallets": 1,
+        "validators": 48,
+        "staked": 1536
+      },
+      "active_exiting": {
+        "wallets": 2150,
+        "validators": 44554,
+        "staked": 2116291
+      },
+      "active_ongoing": {
+        "wallets": 47094,
+        "validators": 956201,
+        "staked": 33591492,
+        "wallets_diff": -2,
+        "validators_diff": 65,
+        "staked_diff": 2093
+      },
+      "exited_unslashed": {
+        "wallets": 9,
+        "validators": 132,
+        "staked": 67729
+      },
+      "withdrawal_done": {
+        "wallets": 101901,
+        "validators": 1123513,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 331,
+        "validators": 3715,
+        "staked": 173305
+      }
+    },
+    {
+      "timeMs": 1762988457000,
+      "pending_initialized": {
+        "wallets": 155,
+        "validators": 1028,
+        "staked": 1266
+      },
+      "pending_queued": {
+        "wallets": 5,
+        "validators": 48,
+        "staked": 1536
+      },
+      "active_exiting": {
+        "wallets": 2220,
+        "validators": 46033,
+        "staked": 2134530
+      },
+      "active_ongoing": {
+        "wallets": 47067,
+        "validators": 955830,
+        "staked": 33574481,
+        "wallets_diff": 0,
+        "validators_diff": 44,
+        "staked_diff": 1727
+      },
+      "exited_unslashed": {
+        "wallets": 5,
+        "validators": 66,
+        "staked": 67042
+      },
+      "withdrawal_done": {
+        "wallets": 101935,
+        "validators": 1124305,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 291,
+        "validators": 3047,
+        "staked": 207693
+      }
+    },
+    {
+      "timeMs": 1763074855000,
+      "pending_initialized": {
+        "wallets": 166,
+        "validators": 1034,
+        "staked": 1633
+      },
+      "pending_queued": {
+        "wallets": 1,
+        "validators": 3,
+        "staked": 1365
+      },
+      "active_exiting": {
+        "wallets": 2289,
+        "validators": 46188,
+        "staked": 2084093
+      },
+      "active_ongoing": {
+        "wallets": 47030,
+        "validators": 955600,
+        "staked": 33599259,
+        "wallets_diff": 4,
+        "validators_diff": 11,
+        "staked_diff": 3511
+      },
+      "exited_unslashed": {
+        "wallets": 7,
+        "validators": 883,
+        "staked": 93084
+      },
+      "withdrawal_done": {
+        "wallets": 101972,
+        "validators": 1124747,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 245,
+        "validators": 2665,
+        "staked": 251544
+      }
+    },
+    {
+      "timeMs": 1763128857000,
+      "pending_initialized": {
+        "wallets": 161,
+        "validators": 1035,
+        "staked": 1273
+      },
+      "pending_queued": {
+        "wallets": 1,
+        "validators": 48,
+        "staked": 1536
+      },
+      "active_exiting": {
+        "wallets": 2309,
+        "validators": 46400,
+        "staked": 2055486
+      },
+      "active_ongoing": {
+        "wallets": 47044,
+        "validators": 955768,
+        "staked": 33623498,
+        "wallets_diff": 1,
+        "validators_diff": 54,
+        "staked_diff": 1731
+      },
+      "exited_unslashed": {
+        "wallets": 8,
+        "validators": 250,
+        "staked": 72919
+      },
+      "withdrawal_done": {
+        "wallets": 101979,
+        "validators": 1125719,
+        "staked": 0
+      },
+      "withdrawal_possible": {
+        "wallets": 239,
+        "validators": 2547,
+        "staked": 283089
       }
     }
   ]

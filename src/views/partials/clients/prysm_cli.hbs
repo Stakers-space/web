@@ -9,28 +9,28 @@
 
 <ol class="list-decimal space-y-4 pl-6">
     <li>
-                <span class="block font-bold">Find the latest stable version of Prysm on Github</span>
-                <ul class="list-disc my-4 pl-6">
-                    <li>Find latest Prysm version at <a href="https://github.com/prysmaticlabs/prysm/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/prysmaticlabs/prysm/releases</a></li>
-                    <li>
-                        Write latest stable Prysm version: <input type="text" value="{{consensusClients.prysm.latestVer}}" class="prysmVer-input"><br>
-                        <p>This will update the url links in the guide below.</p>
-                    </li>
-                </ul>
-            </li>
+        <span class="block font-bold">Find the latest stable version of Prysm on Github</span>
+        <ul class="list-disc my-4 pl-6">
+            <li>Find latest Prysm version at <a href="https://github.com/prysmaticlabs/prysm/releases" target="_blank" rel="nofollow noopener noreferrer">https://github.com/prysmaticlabs/prysm/releases</a></li>
             <li>
-                <span class="block font-bold">Download Prysm clients to your node</span>
-                <pre><code>cd ~/downloads && curl -LO https://github.com/prysmaticlabs/prysm/releases/download/v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>/beacon-chain-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-modern-linux-amd64</code></pre>
-                <pre><code>cd ~/downloads && curl -LO https://github.com/prysmaticlabs/prysm/releases/download/v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>/validator-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-linux-amd64</code></pre>
+                Write latest stable Prysm version: <input type="text" value="{{consensusClients.prysm.latestVer}}" class="prysmVer-input"><br>
+                <p>This will update the url links in the guide below.</p>
             </li>
-            <li>
-                <span class="block font-bold">Rename downloaded files</span>
-                <pre><code>mv beacon-chain-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-modern-linux-amd64 beacon-chain && mv validator-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-linux-amd64 validator</code></pre>
-            </li>
-            <li>
-                <span class="block font-bold">Set files permissions</span>
-                <pre><code>chmod +x beacon-chain && chmod +x validator</code></pre>
-            </li>
+        </ul>
+    </li>
+    <li>
+        <span class="block font-bold">Download Prysm clients to your node</span>
+        <pre><code>cd ~/downloads && curl -LO https://github.com/prysmaticlabs/prysm/releases/download/v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>/beacon-chain-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-modern-linux-amd64</code></pre>
+        <pre><code>cd ~/downloads && curl -LO https://github.com/prysmaticlabs/prysm/releases/download/v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>/validator-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-linux-amd64</code></pre>
+    </li>
+    <li>
+        <span class="block font-bold">Rename downloaded files</span>
+        <pre><code>mv beacon-chain-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-modern-linux-amd64 beacon-chain && mv validator-v<mark class="prysmVer">{{consensusClients.prysm.latestVer}}</mark>-linux-amd64 validator</code></pre>
+    </li>
+    <li>
+        <span class="block font-bold">Set files permissions</span>
+        <pre><code>chmod +x beacon-chain && chmod +x validator</code></pre>
+    </li>
     {{#unless InstallationGuide}}
     <li>
         <{{sectionHeader}}>Stop running clients</{{sectionHeader}}>
@@ -85,8 +85,6 @@ sudo systemctl start prysmbeacon</code></pre>
 			<div class="tabpanel">
                 <aside>NOTE: This section uses <a href="https://github.com/Stakers-space/staking-scripts/tree/main/manager" target="_blank">Staking manager script</a>.</aside>
 <pre><code>/usr/local/bin/staking.sh start consensus</code></pre>
-<p>Check the services status</p>
-<pre><code>/usr/local/bin/staking.sh check</code></pre>
 			</div>
 		</div>
     </li>

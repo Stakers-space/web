@@ -67,9 +67,7 @@
 										<label for="rplCov" class="block text-sm font-medium text-gray-700"><a href="https://rpips.rocketpool.net/tokenomics-explainers/005-rework-prelude" target="_blank">RPL coverage</a></label>
 										<span id="rplCovVal" class="text-sm font-semibold text-emerald-700">50%</span>
 									</div>
-									<input id="rplCov" type="range" min="0" max="100" step="1"
-										class="w-full mt-2"
-										value="0" />
+									<input id="rplCov" type="range" min="0" max="100" step="1" class="w-full mt-2" value="0" />
 								</div>
 							</td>
 							<td class="px-4 py-3 text-gray-700">
@@ -86,6 +84,13 @@
 							<td class="px-4 py-3">–</td>
 							<td class="px-4 py-3">
 								<span class="inline-flex items-center rounded-full bg-gray-50 text-gray-700 ring-1 ring-gray-200 px-2 py-0.5 text-xs font-semibold"></span>
+								<div>
+									<div class="flex items-center justify-between mt-2">
+										<label for="lidorr" class="block text-sm font-medium text-gray-700"><a href="https://operatorportal.lido.fi/modules/community-staking-module" target="_blank">Rewards Rate</a></label>
+										<span id="lidorrVal" class="text-sm font-semibold text-emerald-700">6%</span>
+									</div>
+									<input id="lidorr" type="range" min="3.5" max="6" step="0.1" class="w-full mt-2" value="3.5" />
+								</div>
 							</td>
 							<td class="px-4 py-3">
 								<span class="inline-flex items-center rounded-full bg-gray-50 text-gray-700 ring-1 ring-gray-200 px-2 py-0.5 text-xs font-semibold">100%</span> / 
@@ -166,7 +171,12 @@
 			let bondRewardShare = 0;
 			let apr = { absolute:0, relativeToSolo: 0 }
 			if(rowId === "lidocsm"){
-				bondRewardShare = 0.06;
+				const covPct = Math.min(6, Math.max(3.5, parseFloat(lidorr.value || 3.5)));
+				$(`#lidorrVal`).textContent = covPct.toFixed(1) + "%";
+				//const t = (covPct - 3.5) / (6 - 3.5);   // normalize to 0–1
+				bondRewardShare = covPct / 100; //interpRP(0.1, 0.14, t);
+				console.log("LidoCSM %:", bondRewardShare);
+				//bondRewardShare = 0.06; // reduced to → 3,5 - 6% // - take from ...
 				// first val 2,4, next 1,3
 				let cap10 = capital * 10;
 				if(cap10 >= 24) {
@@ -235,6 +245,7 @@
         capEth.addEventListener(evt, update);
         soloApr.addEventListener(evt, update);
         rplCov.addEventListener(evt, update);
+		lidorr.addEventListener(evt, update);
       });
 
       update();
