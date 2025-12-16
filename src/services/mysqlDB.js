@@ -484,8 +484,8 @@ MySqlDBplatform.prototype.UpdateClientsRecommendations = function(clients, serve
     const generateCaseForLayerAndClient = (layer, clients) => {
         let cases = '';
         for (const client in clients) {
-            const clientData = clients[client];
-            console.log("generateCaseForLayerAndClient |", layer, clients, "→", clientData);
+            let clientData = clients[client];
+            if(clientData.name.toLowerCase() === 'mev-boost') clientData.name = 'mevboost'; // adjust key name
             cases += `
                 WHEN layer = ${MC.escape(layer)} AND client = ${MC.escape(clientData.name.toLowerCase())} AND ver = ${MC.escape(clientData.latestVer)} AND rcm != '' 
                 THEN ''
@@ -509,6 +509,8 @@ MySqlDBplatform.prototype.UpdateClientsRecommendations = function(clients, serve
                       ELSE rcm
                   END
         WHERE ${whereQuery}`;
+
+    //console.log(query);
 
     MC.query(query, function(err, results) {
         if (err) {

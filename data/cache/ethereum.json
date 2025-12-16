@@ -889,26 +889,26 @@
       "delegator": 0.02527594620748416
     },
     "validators": {
-      "count": 970646,
+      "count": 970651,
       "increments": {
-        "day": 907,
-        "week": 4584,
-        "month": 11924,
-        "year": -94217
+        "day": 912,
+        "week": 4589,
+        "month": 11929,
+        "year": -94212
       }
     },
     "stakedTokens": {
-      "value": 34821910,
+      "value": 34822597,
       "supplyShare": "0.00%",
       "increments": {
-        "day": 36331,
-        "week": 263376,
-        "month": 1059153,
-        "year": 816833
+        "day": 37018,
+        "week": 264063,
+        "month": 1059840,
+        "year": 817520
       }
     },
     "tvl": {
-      "value": 101960990013.70001
+      "value": 102506930562.93001
     },
     "supply": {
       "value": 122462855.53543
@@ -35368,44 +35368,44 @@
       }
     },
     {
-      "timeMs": 1765893674000,
+      "timeMs": 1765908052000,
       "pending_initialized": {
         "wallets": 181,
         "validators": 1056,
         "staked": 1294
       },
       "pending_queued": {
-        "wallets": 2,
+        "wallets": 1,
         "validators": 48,
         "staked": 1536
       },
       "active_exiting": {
-        "wallets": 1484,
-        "validators": 22677,
-        "staked": 811051
+        "wallets": 1473,
+        "validators": 22669,
+        "staked": 810796
       },
       "active_ongoing": {
-        "wallets": 47228,
-        "validators": 970646,
-        "staked": 34821910,
-        "wallets_diff": -5,
-        "validators_diff": 67,
-        "staked_diff": 2318
+        "wallets": 47221,
+        "validators": 970651,
+        "staked": 34822597,
+        "wallets_diff": -2,
+        "validators_diff": -118,
+        "staked_diff": -3601
       },
       "exited_unslashed": {
-        "wallets": 93,
-        "validators": 2010,
-        "staked": 65825
+        "wallets": 71,
+        "validators": 2045,
+        "staked": 65445
       },
       "withdrawal_done": {
-        "wallets": 103290,
-        "validators": 1161805,
+        "wallets": 103302,
+        "validators": 1161956,
         "staked": 0
       },
       "withdrawal_possible": {
-        "wallets": 534,
-        "validators": 9529,
-        "staked": 305317
+        "wallets": 561,
+        "validators": 9644,
+        "staked": 310224
       }
     }
   ]
