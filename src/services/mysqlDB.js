@@ -3,7 +3,9 @@
 
 const mySqlCredentials = require('../config/config.secret.json').mysql;
 const mySqlGnoCredentials = require('../config/config.secret.json')["mysql-gnodb"];
-const mySql = require('mysql');
+const mySql = require('mysql2'); // callback (drop-in)
+const mySqlPromise = require('mysql2/promise'); // async / await
+
 
 function MySqlDBplatform(){ 
     /*this.pool = mySql.createPool({
@@ -331,6 +333,14 @@ MySqlDBplatform.prototype.GetServerClientsInfo  = function(serverId, cb){
         }
     );
 };
+
+MySqlDBplatform.prototype.GetNextValidatorInstancePID  = async function(ownerId){
+    const MC = await mySqlPromise.createConnection(mySqlCredentials);
+    const [rows] = await MC.execute(`SELECT COALESCE(MAX(vi_pid), 0) + 1 AS next_vi_pid FROM stakersspace.instances WHERE owner = ?`, [ownerId]);
+
+    await MC.end();
+    return rows[0].next_vi_pid;
+}
 
 MySqlDBplatform.prototype.GetClientsPorts  = function(clientIds, cb){
     var MC = mySql.createConnection(mySqlCredentials);

@@ -8,18 +8,20 @@ const cache = require('../../middlewares/cache');
 
 exports.DefineInstance = (req, res, next) => {
     // ToDo: Protection - Allow view for accounts with access only
-    
     const serverId = req.query.sid; // id, not name. → Get Server data?
     const instanceId = req.query.iid;
-    console.log("DefineInstance ",instanceId, "(Server Id:",serverId,")");
+    console.log("DefineInstance", req.method, "| iid:", instanceId, "(Server Id:",serverId,") |", req.query);
     
     const mysqlInst = new mysqlSrv();
-    mysqlInst.GetServerClientsInfo(serverId, function(err,result){ // does not need ports, nor client?
+    mysqlInst.GetServerClientsInfo(serverId, async function(err,result){ // does not need ports, nor client?
         if(err) return OnTaskCompleted(err);
         if(result.length === 0) return OnTaskCompleted("Unauthorized request: No server found");
+
+        //console.log("Server data:", result);
         
         const serverObj = new ServerModel();
         serverObj.GenerateFromMySqlStructure(result);
+
         // if there is no consensus client defined, use default "validator"
         if(serverObj.consensus.length === 0){ serverObj.AddClient(null, "consensus", "validators", null); }
 
@@ -51,8 +53,14 @@ exports.DefineInstance = (req, res, next) => {
         let scheduledInnerTasks = 1;
 
         if(!instanceId){
-            res.locals.instance = {vi_pid: 1};
-            return OnTaskCompleted(null);
+            // get next vi_pid
+            try {
+                const viPid = await mysqlInst.GetNextValidatorInstancePID(result[0].owner);
+                res.locals.instance = { vi_pid: viPid };
+                return OnTaskCompleted(null);
+            } catch (err) {
+                return OnTaskCompleted(err);
+            }      
         }
 
         // Edit instance
@@ -99,6 +107,7 @@ exports.DefineInstance = (req, res, next) => {
 
         function OnTaskCompleted(err){
             if(err) {
+                console.error(err);
                 res.locals.err = err;
                 return next();
             }
@@ -123,7 +132,7 @@ exports.DefineInstance = (req, res, next) => {
 
 exports.AddOrUpdateInstanceMetadata = (req, res) => {
     if(res.locals.isDemoAccount) return ThrowError("Action restricted for demo account",res);
-    console.log("AddOrUpdateInstance", req.body);
+    console.log("AddOrUpdateInstance |",req.method, req.body);
     const userId = req.user.id;
     const serverId = req.query.sid;
     let instanceId = req.query.iid;
@@ -145,7 +154,6 @@ exports.AddOrUpdateInstanceMetadata = (req, res) => {
         });
 
     } else { // add instance
-        
         mysqlInst.AddValidatorInstance(userId, serverId, instanceData, function(err,resp){
             if(err) return ThrowError(err,res);
 
