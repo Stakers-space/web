@@ -9,9 +9,21 @@ ul.img-marker li {
 }
 </style>
 {{> header_dashboard}}
-<main class="mt-5">
-    {{> sections/encryptionPassword }}
+<main class="mt-5">    
     <div class="mx-auto px-5 md:px-15 xl:px-24 mt-10">
+        <div class="grid gap-6 md:grid-cols-2 mb-6">
+            {{> sections/encryptionPassword }}
+            <div>
+                <label class="switch">
+                    <input type="checkbox" id="load-balances">
+                    <span class="slider">Load Balances</span>
+                </label><br>
+                <label class="switch">
+                    <input type="checkbox" id="load-wallets">
+                    <span class="slider">Load Wallets</span>
+                </label>
+            </div>
+        </div>
         <div id="overview" class="grid gap-6 md:grid-cols-3">
             <div>
                 <ul class="img-marker inline-flex gap-12 m-0 p-0 account_validators">
@@ -134,11 +146,109 @@ ul.img-marker li {
 {{> scripts/utils/xmlhttp}}
 <script>
     const ramOptimized = false;
+    
     /* In-page Offline / pending state data */
     var offlineStateData = {{{offlineStateData}}}; // offline data
 
     let snapshots = {};
     let withdrawal_wallets = new Set();
+
+    class SnapshotsLoader {
+        constructor(){
+            this.STORAGE_KEY = {
+                balance: 'loadBalancesEnabled',
+                wallet: 'loadWalletsEnabled'
+            };
+            this.CHECKBOX_ELM = {
+                balance: document.getElementById("load-balances"),
+                wallet: document.getElementById("load-wallets")
+            };
+            this.LOADED = {
+                balance: {
+                    ethereum: false,
+                    gnosis: false
+                },
+                wallet: {
+                    ethereum: false,
+                    gnosis: false
+                }
+            }
+        }
+
+        isEnabled(key){
+            return localStorage.getItem(this.STORAGE_KEY[key]) === 'true';
+        }
+
+        Initialize(){
+            for(const key of Object.keys(this.STORAGE_KEY)){
+               this.CHECKBOX_ELM[key].checked = this.isEnabled(key);
+
+               this.CHECKBOX_ELM[key].addEventListener('change', (event) => {
+                    const enabled = event.target.checked;
+                    localStorage.setItem(this.STORAGE_KEY[key], enabled ? 'true' : 'false');
+                    this.Load();
+                });
+            }
+        }
+
+        Load(){
+             if(valcount_instance["gnosis"]["agg"].pubkeys > 0){
+                this.GetValidatorsSnapshot("gnosis", "active_ongoing", this.OnSnapshotReceived);
+                this.GetWalletBalances("gnosis","active_ongoing", [...withdrawal_wallets])
+            }
+            if(valcount_instance["ethereum"]["agg"].pubkeys > 0) {
+                this.GetValidatorsSnapshot("ethereum", "active_ongoing", this.OnSnapshotReceived);
+            }
+        }
+
+        /** 
+        *  Request validators data
+        **/
+        GetValidatorsSnapshot(chain, state_snapshot){
+            if(!this.isEnabled("balance")) return;
+            if(this.LOADED.balance[chain]) return;
+            snapshots[chain] = {};
+            snapshots[chain][state_snapshot] = {};
+            xmlHttpRequest({type:"GET", url:`/api/state-balances?f=${chain}_${state_snapshot}.json`, credentials:false, data:null }, (err,data) => { return this.OnSnapshotReceived({chain, snapshot: state_snapshot}, err, data); });
+            this.LOADED.balance[chain] = true;
+        }
+
+        OnSnapshotReceived(cred, err, data){
+            //console.log("On Snapshot received", cred, err, data);
+            snapshots[cred.chain][cred.snapshot] = JSON.parse(data);
+            CalculateBalances(cred.chain);
+        }
+
+        GetWalletBalances(chain, state, wallets){
+            if(!this.isEnabled("wallet")) return;
+            if(this.LOADED.wallet[chain]) return;
+            this.LOADED.wallet[chain] = true;
+            xmlHttpRequest({type:"GET", url:`/api/validators-wallet-snapshot?chain=${chain}&state=${state}`/*&wallets=${wallets}*/, credentials:false, data:null },
+            function(err,data){ 
+                if(err) {
+                    return console.error(err);
+                }
+                const pData = JSON.parse(data);
+                document.getElementById("withdrawal_wallets_info_epoch").innerHTML = pData.epoch;
+                document.getElementById("withdrawal_wallets_info").innerHTML = "";
+                for(const wlt of wallets){
+                    if(!pData.data) continue;
+                    const wdata = pData.data[wlt.toLowerCase()];
+                    if(wdata){
+                        document.getElementById("withdrawal_wallets_info").innerHTML += `<tr class="odd:bg-white even:bg-neutral-50">
+                        <td class="px-4 py-2 font-mono break-all text-left"><a href="https://gnosisscan.io/address/${wlt}" target="_blank" rel="nofollow noopener noreferrer" class="underline">${shortAddress(wlt, {"start":8, "end":8 })}</td>
+                        <td class="px-4 py-2 text-right">${wdata.validators}</td>
+                        <td class="px-4 py-2 text-right">${(Math.trunc(wdata.balance * 100) / 100).toString()}</td>
+                        <td class="px-4 py-2 text-right">${(Math.trunc(wdata.unclaimed_balance * 100) / 100).toString()}</td>
+                        </tr>`;
+                    }
+                }
+            });   
+        };
+    }
+
+    const snapshotsLoader = new SnapshotsLoader();
+    snapshotsLoader.Initialize();
 
     /* Aggregated view */
     function SectorState(isInstance = false){ 
@@ -186,21 +296,6 @@ ul.img-marker li {
         }
     })();
 
-    /** 
-     *  Request validators data
-    **/
-    function GetValidatorsSnapshot(chain, state_snapshot){
-        snapshots[chain] = {};
-        snapshots[chain][state_snapshot] = {};
-        xmlHttpRequest({type:"GET", url:`/api/state-balances?f=${chain}_${state_snapshot}.json`, credentials:false, data:null }, function(err,data){ return OnSnapshotReceived({chain, snapshot: state_snapshot}, err, data); });    
-    }
-
-    function OnSnapshotReceived(cred, err, data){
-        //console.log("On Snapshot received", cred, err, data);
-        snapshots[cred.chain][cred.snapshot] = JSON.parse(data);
-        CalculateBalances(cred.chain);
-    }
-
     /* callback from cryptography util */
     function OnDecryptionProcessComplted(){
         let destinationIndex = 0;
@@ -217,9 +312,11 @@ ul.img-marker li {
                     const chain = instanceElm.dataset.chain;
                     const statusElm = instanceElm.children[1];
 
+                    if(!valcount_instance[chain]) continue;
+
                     valcount_instance[chain][instanceId].destinationIndex = destinationIndex;
                     valcount_instance[chain][instanceId].serverIndex = serverIndex;
-                    
+                   
                     // update fee wlt
                     const feeWltC = instanceElm.getElementsByClassName("instance_fwlt");
                     if(feeWltC.length > 0){
@@ -271,12 +368,7 @@ ul.img-marker li {
         if(valcount_instance["gnosis"]["agg"].pending > 0) stateCountOverviewElm.innerHTML += `| Pending: ${valcount_instance["gnosis"]["agg"].pending} Gnosis Val`;
         if(valcount_instance["ethereum"]["agg"].pending > 0) stateCountOverviewElm.innerHTML += `| Pending: ${valcount_instance["ethereum"]["agg"].pending} Ethereum Val`;
 
-        
-        if(valcount_instance["gnosis"]["agg"].pubkeys > 0) {
-            GetValidatorsSnapshot("gnosis", "active_ongoing", OnSnapshotReceived);
-            GetWalletBalances("gnosis","active_ongoing", [...withdrawal_wallets])
-        }
-        if(valcount_instance["ethereum"]["agg"].pubkeys > 0) GetValidatorsSnapshot("ethereum", "active_ongoing", OnSnapshotReceived);
+        snapshotsLoader.Load();
     }
 
     function CalculateBalances(chain){
@@ -458,39 +550,6 @@ ul.img-marker li {
             }
         }
     }
-
-    function GetWalletBalances(chain, state, wallets){
-        xmlHttpRequest({type:"GET", url:`/api/validators-wallet-snapshot?chain=${chain}&state=${state}`/*&wallets=${wallets}*/, credentials:false, data:null },
-        function(err,data){ 
-            if(err) {
-                return console.error(err);
-            }
-            const pData = JSON.parse(data);
-            document.getElementById("withdrawal_wallets_info_epoch").innerHTML = pData.epoch;
-
-            for(const wlt of wallets){
-                if(!pData.data) continue;
-                const wdata = pData.data[wlt.toLowerCase()];
-                if(wdata){
-                    document.getElementById("withdrawal_wallets_info").innerHTML += `<tr class="odd:bg-white even:bg-neutral-50">
-                    <td class="px-4 py-2 font-mono break-all text-left"><a href="https://gnosisscan.io/address/${wlt}" target="_blank" rel="nofollow noopener noreferrer" class="underline">${shortAddress(wlt, {"start":8, "end":8 })}</td>
-                    <td class="px-4 py-2 text-right">${wdata.validators}</td>
-                    <td class="px-4 py-2 text-right">${(Math.trunc(wdata.balance * 100) / 100).toString()}</td>
-                    <td class="px-4 py-2 text-right">${(Math.trunc(wdata.unclaimed_balance * 100) / 100).toString()}</td>
-                    </tr>`;
-                }
-            }
-
-            /*for (const [wlt, wdata] of Object.entries(pData.data)) {
-                document.getElementById("withdrawal_wallets_info").innerHTML += `<tr class="odd:bg-white even:bg-neutral-50">
-                <td class="px-4 py-2 font-mono break-all text-left">${wlt}</td>
-                <td class="px-4 py-2 text-right">${wdata.validators}</td>
-                <td class="px-4 py-2 text-right">${(Math.trunc(wdata.balance * 100) / 100).toString()}</td>
-                <td class="px-4 py-2 text-right">${(Math.trunc(wdata.unclaimed_balance * 100) / 100).toString()}</td>
-                </tr>`;
-            }*/
-        });   
-    };
 
     function RenderAccountCounts(key, chain){
         if(chain === null){

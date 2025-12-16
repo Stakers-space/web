@@ -93,9 +93,10 @@ MySqlDBplatform.prototype.AddServer = function(ownerId, serverData, cb){
     });
 };
 
-MySqlDBplatform.prototype.UpdateServer = function(serverId, ownerId, serverData, cb){
+MySqlDBplatform.prototype.UpdateServer = function(serverId, ownerId, d, cb){
     var MC = mySql.createConnection(mySqlCredentials);
-    MC.query('UPDATE servers SET name = ?, location = ?, location_note = ?, ip_network = ?, cpu_type = ?, server_user = ?, ssh_port = ?, operation_start = ?, vpn_id = ?, vpn_expiration = ?, nodejs_ver = ?, jdk_ver = ?, id = LAST_INSERT_ID(id) WHERE `id` = ? AND owner = ?',  [serverData.serverName, serverData.serverLocation, serverData.serverLocation_note, serverData.serverNetwork, serverData.serverCpu, serverData.serverUser, serverData.sshPort, serverData.operationStart, serverData.vpnId, serverData.vpnExpiration, serverData.nodejsVer, serverData.jdkVer, serverId, ownerId], function(err, result) {
+    MC.query('UPDATE servers SET name = ?, location = ?, location_note = ?, ip_network = ?, cpu_type = ?, server_user = ?, ssh_port = ?, operation_start = ?, vpn_id = ?, vpn_expiration = ?, nodejs_ver = ?, jdk_ver = ?, id = LAST_INSERT_ID(id) WHERE `id` = ? AND owner = ?', 
+                            [d.serverName, d.serverLocation, d.serverLocation_note, d.serverNetwork, d.serverCpu, d.serverUser, d.sshPort, d.operationStart, d.vpnId, d.vpnExpiration, d.nodejsVer, d.jdkVer, serverId, ownerId], function(err, result) {
         MC.end();
         return cb(err, result);
     });
@@ -484,6 +485,7 @@ MySqlDBplatform.prototype.UpdateClientsRecommendations = function(clients, serve
         let cases = '';
         for (const client in clients) {
             const clientData = clients[client];
+            console.log("generateCaseForLayerAndClient |", layer, clients, "→", clientData);
             cases += `
                 WHEN layer = ${MC.escape(layer)} AND client = ${MC.escape(clientData.name.toLowerCase())} AND ver = ${MC.escape(clientData.latestVer)} AND rcm != '' 
                 THEN ''

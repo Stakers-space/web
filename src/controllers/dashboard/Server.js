@@ -111,7 +111,8 @@ exports.DefineServer = (req, res, next) => {
 exports.AddOrUpdateServer = (req, res) => {
     if(res.locals.isDemoAccount) return ThrowError("Action restricted for demo account",res);
     var serverData = new ServerModel(req.body['server-name'], req.body['server-location'], req.body['server-location-note'], req.body['server-network'], req.body['server-cpu'], req.body["server-user"], req.body["ssh-port"], req.body["operation-start"], req.body["vpn-id"], req.body["vpn-expiration"], req.body["nodejs_ver"], req.body["jdk_ver"]);
-    //console.log("AddOrUpdateServer", req.body);
+    console.log("AddOrUpdateServer", req.body);
+    
     serverData.AddClient(null, "execution", req.body["ec_1"], req.body["ec_1_ver"]);
     serverData.AddClient(null, "consensus", req.body["cc_1"], req.body["cc_1_ver"]);
     if(req.body['ethereum']) {
